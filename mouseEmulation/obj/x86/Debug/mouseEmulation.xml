@@ -22,6 +22,11 @@ mouseEmulation
   重写当前线程的 CurrentUICulture 属性。
 </summary>
 </member>
+<member name="P:mouseEmulation.My.Resources.Resources.blankscreen">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
 <member name="P:mouseEmulation.My.Resources.Resources.click">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
@@ -38,6 +43,11 @@ mouseEmulation
 </summary>
 </member>
 <member name="P:mouseEmulation.My.Resources.Resources.disenable">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:mouseEmulation.My.Resources.Resources.openFolder">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>

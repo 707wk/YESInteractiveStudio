@@ -31,3 +31,9 @@ T:\mouseEmulation\mouseEmulation\bin\x86\Debug\Nova.Mars.SDK.MarsInterface.pdb
 T:\mouseEmulation\mouseEmulation\bin\x86\Debug\Nova.Mars.SDK.MarsInterface.xml
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.vbprojResolveAssemblyReference.cache
 T:\mouseEmulation\mouseEmulation\bin\x86\Debug\Newtonsoft.Json.dll
+T:\mouseEmulation\mouseEmulation\bin\x86\Debug\Interop.ShockwaveFlashObjects.dll
+T:\mouseEmulation\mouseEmulation\bin\x86\Debug\AxInterop.ShockwaveFlashObjects.dll
+T:\mouseEmulation\mouseEmulation\obj\x86\Debug\Interop.ShockwaveFlashObjects.dll
+T:\mouseEmulation\mouseEmulation\obj\x86\Debug\AxInterop.ShockwaveFlashObjects.dll
+T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.vbproj.ResolveComReference.cache
+T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormPlayFlash.resources

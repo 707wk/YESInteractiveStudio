@@ -39,6 +39,9 @@ Module ModuleSetting
 
         '接收卡信息列表
         Dim ScanBoardTable As Hashtable
+
+        '显示区域
+        Dim showFlash As FormPlayFlash
     End Structure
     Public screenMain As screenInfo
 
@@ -59,7 +62,7 @@ Module ModuleSetting
     'Public Port As Integer
     '连接变量
     'Public cliSocket As Socket()
-    '运行模式 0测试 1点击 2忽略
+    '运行模式 0点击 1测试 2黑屏 3 忽略
     Public runMode As Integer
 
     '输出日志

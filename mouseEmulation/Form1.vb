@@ -49,6 +49,8 @@ Public Class Form1
         Timer1.Interval = checkTime
         ToolStripTextBox1.Text = $"{checkTime}"
 
+        ToolStripButton1.Enabled = False
+
         '设置控制系统列表格式
         ListView1.View = View.Details
         ListView1.GridLines = True
@@ -88,6 +90,15 @@ Public Class Form1
         ListView4.Clear()
         ListView4.Columns.Add("控制器索引", 72, HorizontalAlignment.Left)
         ListView4.Columns.Add("IP", 100, HorizontalAlignment.Center)
+
+        '设置swf列表格式
+        ListView5.View = View.Details
+        ListView5.GridLines = True
+        ListView5.FullRowSelect = True
+        ListView5.CheckBoxes = False
+        ListView5.Clear()
+        ListView5.Columns.Add("FLASH文件", 200, HorizontalAlignment.Left)
+        ListView5.Columns.Add("路径", 500, HorizontalAlignment.Left)
     End Sub
 
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -150,6 +161,7 @@ Public Class Form1
             Dim d As New showListView2Callback(AddressOf showListView2)
             Me.Invoke(d, New Object() {text})
         Else
+            ToolStripButton1.Enabled = True
             ListView2.Enabled = True
         End If
     End Sub
@@ -182,8 +194,15 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        mainClass.UnInitialize()
-        rootClass.UnInitialize()
+        Try
+            mainClass.UnInitialize()
+        Catch ex As Exception
+        End Try
+
+        Try
+            rootClass.UnInitialize()
+        Catch ex As Exception
+        End Try
     End Sub
 
     '显示控制器列表
@@ -252,6 +271,16 @@ Public Class Form1
         screenMain.ScanBoardHeight = LEDScreenInfoList(LEDScreenIndex).ScanBoardInfoList(0).Height
         '接收卡索引表
         screenMain.ScanBoardTable = New Hashtable
+        '显示区域
+        If screenMain.showFlash IsNot Nothing Then
+            screenMain.showFlash.Close()
+        End If
+        screenMain.showFlash = New FormPlayFlash
+
+        'putlog($"screenMain{screenMain.index} {screenMain.x} {screenMain.y} {screenMain.width} {screenMain.height}")
+
+        screenMain.showFlash.setLocation(screenMain.x, screenMain.y, screenMain.width, screenMain.height)
+        screenMain.showFlash.Show()
 
         ListView2.Enabled = False
         ListView3.Items.Clear()
@@ -328,7 +357,10 @@ Public Class Form1
                     'MsgBox(ipStr)
                     If My.Computer.Network.Ping(ipStr, 500) = False Then
                         For ji As Integer = 0 To senderArray.Count - 1
-                            senderArray(ji).cliSocket.Close()
+                            Try
+                                senderArray(ji).cliSocket.Close()
+                            Catch ex As Exception
+                            End Try
                         Next
 
                         MsgBox(ipStr & " 未能连通", MsgBoxStyle.Information, "连接")
@@ -358,9 +390,15 @@ Public Class Form1
             ToolStripButton1.Image = My.Resources.disconnect
         Else
             '断开
-            For i As Integer = 0 To senderArray.Count - 1
-                senderArray(i).cliSocket.Close()
-            Next
+            Try
+                For i As Integer = 0 To senderArray.Count - 1
+                    Try
+                        senderArray(i).cliSocket.Close()
+                    Catch ex As Exception
+                    End Try
+                Next
+            Catch ex As Exception
+            End Try
 
             Timer1.Stop()
             ToolStripButton1.Text = "连接"
@@ -373,7 +411,7 @@ Public Class Form1
         Dim tmp As ScanBoardInfo = screenMain.ScanBoardTable.Item(key)
 
 
-        If runMode = 2 Then
+        If runMode <> 0 And runMode <> 1 Then
             Exit Sub
         End If
 
@@ -388,36 +426,36 @@ Public Class Form1
                     Continue For
                 End If
 
-                If runMode = 0 Then
-                    '测试
-                    ControlPaint.FillReversibleRectangle(
-                    New Rectangle(screenMain.x + tmp.X + j * w,
-                                  screenMain.y + tmp.Y + i * h,
-                                  w, h),
-                            Color.DarkRed)
-                    ControlPaint.FillReversibleRectangle(
-                    New Rectangle(screenMain.x + tmp.X + j * w,
-                                  screenMain.y + tmp.Y + i * h,
-                                  w, h),
-                            Color.DarkRed)
-                Else
-                    '点击
-                    Dim oldx As Integer = System.Windows.Forms.Control.MousePosition.X
-                    Dim oldy As Integer = System.Windows.Forms.Control.MousePosition.Y
+                'If runMode <> 0 And runMode <> 1 Then
+                '    '测试
+                '    ControlPaint.FillReversibleRectangle(
+                '    New Rectangle(screenMain.x + tmp.X + j * w,
+                '                  screenMain.y + tmp.Y + i * h,
+                '                  w, h),
+                '            Color.DarkRed)
+                '    ControlPaint.FillReversibleRectangle(
+                '    New Rectangle(screenMain.x + tmp.X + j * w,
+                '                  screenMain.y + tmp.Y + i * h,
+                '                  w, h),
+                '            Color.DarkRed)
+                'Else
+                '点击
+                Dim oldx As Integer = System.Windows.Forms.Control.MousePosition.X
+                Dim oldy As Integer = System.Windows.Forms.Control.MousePosition.Y
 
-                    '隐藏鼠标指针
-                    ShowCursor(False)
-                    '移动鼠标然后点击
-                    mouse_event(MouseEvent.AbsoluteLocation Or MouseEvent.Move Or MouseEvent.LeftButtonDown Or MouseEvent.LeftButtonUp,
+                '隐藏鼠标指针
+                ShowCursor(False)
+                '移动鼠标然后点击
+                mouse_event(MouseEvent.AbsoluteLocation Or MouseEvent.Move Or MouseEvent.LeftButtonDown Or MouseEvent.LeftButtonUp,
                                 (screenMain.x + tmp.X + j * w + screenMain.ScanBoardWidth / 4 / 2) * 65536 / Screen.PrimaryScreen.Bounds.Width,
                                 (screenMain.y + tmp.Y + i * h + screenMain.ScanBoardHeight / 4 / 2) * 65536 / Screen.PrimaryScreen.Bounds.Height, 0, 0)
-                    '回原位
-                    mouse_event(MouseEvent.AbsoluteLocation Or MouseEvent.Move,
+                '回原位
+                mouse_event(MouseEvent.AbsoluteLocation Or MouseEvent.Move,
                                 oldx * 65536 / Screen.PrimaryScreen.Bounds.Width,
                                 oldy * 65536 / Screen.PrimaryScreen.Bounds.Height, 0, 0)
-                    '显示鼠标指针
-                    ShowCursor(True)
-                End If
+                '显示鼠标指针
+                ShowCursor(True)
+                'End If
             Next
         Next
     End Sub
@@ -497,51 +535,96 @@ Public Class Form1
 
     End Sub
 
-    Private Sub 测试ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 测试ToolStripMenuItem.Click
-        ToolStripSplitButton1.Text = 测试ToolStripMenuItem.Text
-        ToolStripSplitButton1.Image = 测试ToolStripMenuItem.Image
-
-        runMode = 0
-    End Sub
-
     Private Sub 模拟点击ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 模拟点击ToolStripMenuItem.Click
         ToolStripSplitButton1.Text = 模拟点击ToolStripMenuItem.Text
         ToolStripSplitButton1.Image = 模拟点击ToolStripMenuItem.Image
 
+        runMode = 0
+        screenMain.showFlash.switchPlayMode()
+    End Sub
+
+    Private Sub 测试ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 测试ToolStripMenuItem.Click
+        ToolStripSplitButton1.Text = 测试ToolStripMenuItem.Text
+        ToolStripSplitButton1.Image = 测试ToolStripMenuItem.Image
+
         runMode = 1
+        screenMain.showFlash.switchTestMode(screenMain.ScanBoardWidth \ 4, screenMain.ScanBoardHeight \ 4)
+    End Sub
+
+    Private Sub 黑屏ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 黑屏ToolStripMenuItem.Click
+        ToolStripSplitButton1.Text = 黑屏ToolStripMenuItem.Text
+        ToolStripSplitButton1.Image = 黑屏ToolStripMenuItem.Image
+
+        runMode = 2
+        screenMain.showFlash.switchBlankScreenMode()
     End Sub
 
     Private Sub 忽略ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 忽略ToolStripMenuItem.Click
         ToolStripSplitButton1.Text = 忽略ToolStripMenuItem.Text
         ToolStripSplitButton1.Image = 忽略ToolStripMenuItem.Image
 
-        runMode = 2
+        runMode = 3
     End Sub
 
-    Private Sub ListView2_ItemMouseHover(sender As Object, e As ListViewItemMouseHoverEventArgs) Handles ListView2.ItemMouseHover
-        'Me.Text = e.Item.Text
-        Dim x As Integer = 0
-        Dim y As Integer = 0
-        Dim width As Integer = 0
-        Dim height As Integer = 0
-        '获取起始位置 大小
-        mainClass.GetScreenLocation(CInt(e.Item.Text), x, y, width, height)
+    'Private Sub ListView2_ItemMouseHover(sender As Object, e As ListViewItemMouseHoverEventArgs) Handles ListView2.ItemMouseHover
+    '    'Me.Text = e.Item.Text
+    '    Dim x As Integer = 0
+    '    Dim y As Integer = 0
+    '    Dim width As Integer = 0
+    '    Dim height As Integer = 0
+    '    '获取起始位置 大小
+    '    mainClass.GetScreenLocation(CInt(e.Item.Text), x, y, width, height)
 
-        ControlPaint.FillReversibleRectangle(
-            New Rectangle(x,
-                          y,
-                          width,
-                          height),
-            Color.DarkRed)
+    '    ControlPaint.FillReversibleRectangle(
+    '        New Rectangle(x,
+    '                      y,
+    '                      width,
+    '                      height),
+    '        Color.DarkRed)
 
-        'Thread.Sleep(200)
+    '    'Thread.Sleep(200)
 
-        'ControlPaint.DrawReversibleFrame(
-        '    New Rectangle(x,
-        '                  y,
-        '                  width,
-        '                  height),
-        '    Color.DarkRed,
-        '    FrameStyle.Thick)
+    '    'ControlPaint.DrawReversibleFrame(
+    '    '    New Rectangle(x,
+    '    '                  y,
+    '    '                  width,
+    '    '                  height),
+    '    '    Color.DarkRed,
+    '    '    FrameStyle.Thick)
+    'End Sub
+
+    '打开文件夹
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        FolderBrowserDialog1.SelectedPath = ""
+
+        FolderBrowserDialog1.ShowDialog()
+
+        If FolderBrowserDialog1.SelectedPath = "" Then
+            Exit Sub
+        End If
+
+        Dim dirs As String() = Directory.GetFiles(FolderBrowserDialog1.SelectedPath, "*.swf")
+
+        ListView5.Items.Clear()
+        For i As Integer = 0 To dirs.Count - 1
+            Dim qwe1 As Integer = InStrRev(dirs(i), "\") + 1
+            Dim qwe2 As Integer = Len(dirs(i)) - 4 - qwe1 + 1
+            Dim itm As ListViewItem = ListView5.Items.Add($"{Mid(dirs(i), qwe1, qwe2)}", 0)
+            itm.SubItems.Add($"{dirs(i)}")
+        Next
+    End Sub
+
+    Private Sub ListView5_DoubleClick(sender As Object, e As EventArgs) Handles ListView5.DoubleClick
+        If ListView5.SelectedItems.Count = 0 Then
+            Exit Sub
+        End If
+
+        If ToolStripButton1.Enabled = False Then
+            Exit Sub
+        End If
+
+        'Me.Text = ListView5.SelectedItems(0).SubItems(1).Text
+
+        screenMain.showFlash.play(ListView5.SelectedItems(0).SubItems(1).Text)
     End Sub
 End Class

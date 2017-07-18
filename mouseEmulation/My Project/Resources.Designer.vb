@@ -63,6 +63,16 @@ Namespace My.Resources
         '''<summary>
         '''  查找 System.Drawing.Bitmap 类型的本地化资源。
         '''</summary>
+        Friend ReadOnly Property blankscreen() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("blankscreen", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
+        '''</summary>
         Friend ReadOnly Property click() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("click", resourceCulture)
@@ -96,6 +106,16 @@ Namespace My.Resources
         Friend ReadOnly Property disenable() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("disenable", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
+        '''</summary>
+        Friend ReadOnly Property openFolder() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("openFolder", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
