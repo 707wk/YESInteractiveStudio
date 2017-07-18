@@ -54,12 +54,12 @@
         Me.Refresh()
 
         '显示播放控件
-        Try
-            playFlash1.Show()
-            playFlash1.Movie = playFlash1.Movie
-            playFlash1.Play()
-        Catch ex As Exception
-        End Try
+        'Try
+        playFlash1.Show()
+        playFlash1.Movie = playFlash1.Movie
+        playFlash1.Play()
+        'Catch ex As Exception
+        'End Try
 
         runMode = 0
     End Sub
@@ -72,12 +72,12 @@
         Me.Refresh()
 
         '隐藏播放控件
-        Try
-            playFlash1.Back()
-            'playFlash1.Stop()
-            playFlash1.Hide()
-        Catch ex As Exception
-        End Try
+        'Try
+        'playFlash1.Back()
+        'playFlash1.Stop()
+        playFlash1.Hide()
+        'Catch ex As Exception
+        'End Try
 
         Me.BackColor = Control.DefaultBackColor
 
@@ -89,12 +89,12 @@
         Me.Refresh()
 
         '隐藏播放控件
-        Try
-            playFlash1.Back()
-            'playFlash1.Stop()
-            playFlash1.Hide()
-        Catch ex As Exception
-        End Try
+        'Try
+        'playFlash1.Back()
+        'playFlash1.Stop()
+        playFlash1.Hide()
+        'Catch ex As Exception
+        'End Try
 
         Me.BackColor = Color.Black
 
