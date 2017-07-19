@@ -31,20 +31,20 @@ Partial Class Form1
         Me.ListView3 = New System.Windows.Forms.ListView()
         Me.ListView4 = New System.Windows.Forms.ListView()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.ListView5 = New System.Windows.Forms.ListView()
-        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
         Me.模拟点击ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.测试ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.黑屏ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.忽略ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.ListView5 = New System.Windows.Forms.ListView()
+        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -55,9 +55,9 @@ Partial Class Form1
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 430)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 296)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1000, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(920, 22)
         Me.StatusStrip1.TabIndex = 1
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -69,33 +69,35 @@ Partial Class Form1
         '
         'ListView1
         '
-        Me.ListView1.Location = New System.Drawing.Point(13, 28)
+        Me.ListView1.Location = New System.Drawing.Point(472, 28)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(150, 226)
+        Me.ListView1.Size = New System.Drawing.Size(150, 135)
         Me.ListView1.TabIndex = 2
         Me.ListView1.UseCompatibleStateImageBehavior = False
         '
         'ListView2
         '
-        Me.ListView2.Location = New System.Drawing.Point(169, 28)
+        Me.ListView2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ListView2.Location = New System.Drawing.Point(12, 28)
         Me.ListView2.Name = "ListView2"
-        Me.ListView2.Size = New System.Drawing.Size(256, 226)
+        Me.ListView2.Size = New System.Drawing.Size(256, 265)
         Me.ListView2.TabIndex = 3
         Me.ListView2.UseCompatibleStateImageBehavior = False
         '
         'ListView3
         '
-        Me.ListView3.Location = New System.Drawing.Point(707, 28)
+        Me.ListView3.Location = New System.Drawing.Point(628, 28)
         Me.ListView3.Name = "ListView3"
-        Me.ListView3.Size = New System.Drawing.Size(142, 226)
+        Me.ListView3.Size = New System.Drawing.Size(142, 135)
         Me.ListView3.TabIndex = 4
         Me.ListView3.UseCompatibleStateImageBehavior = False
         '
         'ListView4
         '
-        Me.ListView4.Location = New System.Drawing.Point(855, 28)
+        Me.ListView4.Location = New System.Drawing.Point(776, 28)
         Me.ListView4.Name = "ListView4"
-        Me.ListView4.Size = New System.Drawing.Size(132, 226)
+        Me.ListView4.Size = New System.Drawing.Size(132, 135)
         Me.ListView4.TabIndex = 5
         Me.ListView4.UseCompatibleStateImageBehavior = False
         '
@@ -104,9 +106,17 @@ Partial Class Form1
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.ToolStripLabel1, Me.ToolStripTextBox1, Me.ToolStripSeparator2, Me.ToolStripSplitButton1, Me.ToolStripButton2})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(1000, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(920, 25)
         Me.ToolStrip1.TabIndex = 6
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.Image = Global.mouseEmulation.My.Resources.Resources.connect
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(52, 22)
+        Me.ToolStripButton1.Text = "连接"
         '
         'ToolStripSeparator1
         '
@@ -122,37 +132,12 @@ Partial Class Form1
         'ToolStripTextBox1
         '
         Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
-        Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 25)
+        Me.ToolStripTextBox1.Size = New System.Drawing.Size(50, 25)
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(13, 260)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox1.Size = New System.Drawing.Size(412, 167)
-        Me.TextBox1.TabIndex = 7
-        '
-        'ListView5
-        '
-        Me.ListView5.Location = New System.Drawing.Point(431, 28)
-        Me.ListView5.Name = "ListView5"
-        Me.ListView5.Size = New System.Drawing.Size(166, 399)
-        Me.ListView5.TabIndex = 8
-        Me.ListView5.UseCompatibleStateImageBehavior = False
-        '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.Image = Global.mouseEmulation.My.Resources.Resources.connect
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(52, 22)
-        Me.ToolStripButton1.Text = "连接"
         '
         'ToolStripSplitButton1
         '
@@ -160,36 +145,36 @@ Partial Class Form1
         Me.ToolStripSplitButton1.Image = Global.mouseEmulation.My.Resources.Resources.click
         Me.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButton1.Name = "ToolStripSplitButton1"
-        Me.ToolStripSplitButton1.Size = New System.Drawing.Size(64, 22)
-        Me.ToolStripSplitButton1.Text = "点击"
+        Me.ToolStripSplitButton1.Size = New System.Drawing.Size(85, 22)
+        Me.ToolStripSplitButton1.Text = "点击(&F1)"
         '
         '模拟点击ToolStripMenuItem
         '
         Me.模拟点击ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.click
         Me.模拟点击ToolStripMenuItem.Name = "模拟点击ToolStripMenuItem"
-        Me.模拟点击ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.模拟点击ToolStripMenuItem.Text = "点击"
+        Me.模拟点击ToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
+        Me.模拟点击ToolStripMenuItem.Text = "点击(&F1)"
         '
         '测试ToolStripMenuItem
         '
         Me.测试ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.test
         Me.测试ToolStripMenuItem.Name = "测试ToolStripMenuItem"
-        Me.测试ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.测试ToolStripMenuItem.Text = "测试"
+        Me.测试ToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
+        Me.测试ToolStripMenuItem.Text = "测试(&F2)"
         '
         '黑屏ToolStripMenuItem
         '
         Me.黑屏ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.blankscreen
         Me.黑屏ToolStripMenuItem.Name = "黑屏ToolStripMenuItem"
-        Me.黑屏ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.黑屏ToolStripMenuItem.Text = "黑屏"
+        Me.黑屏ToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
+        Me.黑屏ToolStripMenuItem.Text = "黑屏(&F3)"
         '
         '忽略ToolStripMenuItem
         '
         Me.忽略ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.disenable
         Me.忽略ToolStripMenuItem.Name = "忽略ToolStripMenuItem"
-        Me.忽略ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.忽略ToolStripMenuItem.Text = "忽略"
+        Me.忽略ToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
+        Me.忽略ToolStripMenuItem.Text = "忽略(&F4)"
         '
         'ToolStripButton2
         '
@@ -199,11 +184,30 @@ Partial Class Form1
         Me.ToolStripButton2.Size = New System.Drawing.Size(88, 22)
         Me.ToolStripButton2.Text = "打开文件夹"
         '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(472, 169)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TextBox1.Size = New System.Drawing.Size(436, 124)
+        Me.TextBox1.TabIndex = 7
+        '
+        'ListView5
+        '
+        Me.ListView5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ListView5.Location = New System.Drawing.Point(274, 28)
+        Me.ListView5.Name = "ListView5"
+        Me.ListView5.Size = New System.Drawing.Size(166, 265)
+        Me.ListView5.TabIndex = 8
+        Me.ListView5.UseCompatibleStateImageBehavior = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1000, 452)
+        Me.ClientSize = New System.Drawing.Size(920, 318)
         Me.Controls.Add(Me.ListView5)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.ListView4)
@@ -212,6 +216,7 @@ Partial Class Form1
         Me.Controls.Add(Me.ListView1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.ToolStrip1)
+        Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.Text = "ME触摸地砖屏控制系统"
         Me.StatusStrip1.ResumeLayout(False)

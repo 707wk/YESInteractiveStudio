@@ -5,6 +5,16 @@ Imports System.Threading
 Imports Nova.Mars.SDK
 
 Public Class Form1
+    '声明注册热键API函数
+    Public Declare Function RegisterHotKey Lib "user32" (ByVal hWnd As Integer, ByVal id As Integer,
+                                                    ByVal fsModifiers As Integer, ByVal vk As Integer) As Integer
+    '声明注销热键API函数
+    Public Declare Function UnregisterHotKey Lib "user32" (ByVal hWnd As Integer, ByVal id As Integer) As Integer
+    Public Const WM_HOTKEY As Short = &H312S '热键消息ID，此值固定，不能修改
+    Public Const MOD_ALT As Short = &H1S  'ALT按键ID
+    Public Const MOD_CONTROL As Short = &H2S  'Ctrl
+    Public Const MOD_SHIFT As Short = &H4S  'Shift
+
     '鼠标模拟事件
     Private Declare Function mouse_event Lib "user32.dll" Alias "mouse_event" (ByVal dwFlags As MouseEvent, ByVal dX As Int32, ByVal dY As Int32, ByVal dwData As Int32, ByVal dwExtraInfo As Int32) As Boolean
     '鼠标操作
@@ -36,6 +46,10 @@ Public Class Form1
             Application.Exit()
             Exit Sub
         End If
+
+        '临时使用
+        Me.Width = ListView5.Location.X + ListView5.Width + 20
+        Me.Height = ListView5.Location.Y + ListView5.Height + 70
 
         '读取ini配置文件
         Dim tmp As New ClassIni
@@ -99,15 +113,28 @@ Public Class Form1
         ListView5.Clear()
         ListView5.Columns.Add("FLASH文件", 200, HorizontalAlignment.Left)
         ListView5.Columns.Add("路径", 500, HorizontalAlignment.Left)
+
+        '注册热键
+        RegisterHotKey(Me.Handle.ToInt32, 1, 0, Keys.F1)
+        RegisterHotKey(Me.Handle.ToInt32, 2, 0, Keys.F2)
+        RegisterHotKey(Me.Handle.ToInt32, 3, 0, Keys.F3)
+        RegisterHotKey(Me.Handle.ToInt32, 4, 0, Keys.F4)
     End Sub
 
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        'Dim tmp As New FormShowInfo
+        'tmp.setInfo("加载中")
+        'tmp.TopMost = True
+        'tmp.Show()
+
         rootClass = New MarsHardwareEnumerator
 
         If rootClass.Initialize() Then
             'TextBox1.AppendText($"连接Nova服务成功{vbCrLf}")
         Else
-            MsgBox($"连接Nova服务失败{vbCrLf}")
+            MsgBox($"连接Nova服务失败")
+            'Thread.Sleep(1000)
+            Application.Exit()
             Exit Sub
         End If
 
@@ -115,7 +142,9 @@ Public Class Form1
         If SystemCount Then
             'TextBox1.AppendText($"控制系统数:{rootClass.CtrlSystemCount()}{vbCrLf}")
         Else
-            MsgBox($"未找到控制系统{vbCrLf}")
+            MsgBox($"未找到控制系统")
+            'Thread.Sleep(1000)
+            Application.Exit()
             Exit Sub
         End If
 
@@ -123,25 +152,99 @@ Public Class Form1
 
         AddHandler mainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
 
-        Dim screenCount As Integer
-        Dim senderCount As Integer
+        'Dim screenCount As Integer
+        'Dim senderCount As Integer
         Dim tmpstr As String = Nothing
-        For i As Integer = 1 To SystemCount
-            tmpstr = Nothing
-            screenCount = 0
-            senderCount = 0
+        'For i As Integer = 1 To SystemCount
+        '    tmpstr = Nothing
+        '    screenCount = 0
+        '    senderCount = 0
 
-            Dim itm As ListViewItem = ListView1.Items.Add(i.ToString, 0)
+        '    Dim itm As ListViewItem = ListView1.Items.Add(i.ToString, 0)
 
-            rootClass.GetComNameOfControlSystem(i - 1, tmpstr)
-            itm.SubItems.Add(tmpstr)
+        rootClass.GetComNameOfControlSystem(0, tmpstr)
+        '    itm.SubItems.Add(tmpstr)
 
-            mainClass.Initialize(tmpstr, screenCount, senderCount)
-            mainClass.UnInitialize()
-            itm.SubItems.Add(screenCount)
-            itm.SubItems.Add(senderCount)
+        '    mainClass.Initialize(tmpstr, screenCount, senderCount)
+        '    mainClass.UnInitialize()
+        '    itm.SubItems.Add(screenCount)
+        '    itm.SubItems.Add(senderCount)
+        'Next
+
+        mainClass.Initialize(tmpstr, vbNull, vbNull)
+
+        ListView2.Items.Clear()
+
+        If mainClass.ReadLEDScreenInfo(LEDScreenInfoList) Then
+            MsgBox($"读显示屏信息失败")
+            'Thread.Sleep(1000)
+            Application.Exit()
+            Exit Sub
+        End If
+
+        '获取到的显示屏 X 偏移
+        Dim x As Integer
+        '获取到的显示屏 Y 偏移
+        Dim y As Integer
+        '获取到的显示屏宽度
+        Dim width As Integer
+        '获取到的显示屏高度
+        Dim height As Integer
+        '获取到的接收卡个数
+        'Dim scanBdCount As Integer
+
+        For i As Integer = 0 To LEDScreenInfoList.Count - 1
+            Dim itm As ListViewItem = ListView2.Items.Add($"{i}", 0)
+
+            mainClass.GetScreenLocation(i, x, y, width, height)
+
+            itm.SubItems.Add($"起始点:{x},{y} 宽:{width} 高:{height}")
+
+            'mainClass.GetScanBoardCount(i, scanBdCount)
+            'itm.SubItems.Add(scanBdCount)
         Next
 
+        'tmp.setInfo($"加载完成")
+        'Thread.Sleep(1000)
+        'tmp.Close()
+
+    End Sub
+
+    '窗体的消息处理函数
+    Protected Overrides Sub WndProc(ByRef m As Message)
+        If m.Msg = WM_HOTKEY And ToolStripButton1.Enabled = True Then '判断是否为热键消息
+            Me.Text = m.WParam.ToInt32
+            Select Case m.WParam.ToInt32 '判断热键消息的注册ID
+                Case 1
+                    模拟点击ToolStripMenuItem_Click(Nothing, Nothing)
+                Case 2
+                    测试ToolStripMenuItem_Click(Nothing, Nothing)
+                Case 3
+                    黑屏ToolStripMenuItem_Click(Nothing, Nothing)
+                Case 4
+                    忽略ToolStripMenuItem_Click(Nothing, Nothing)
+            End Select
+        End If
+
+        MyBase.WndProc(m) '循环监听消息
+    End Sub
+
+    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        '注销全局快捷键
+        UnregisterHotKey(Me.Handle.ToInt32, Keys.F1)
+        UnregisterHotKey(Me.Handle.ToInt32, Keys.F2)
+        UnregisterHotKey(Me.Handle.ToInt32, Keys.F3)
+        UnregisterHotKey(Me.Handle.ToInt32, Keys.F4)
+
+        Try
+            mainClass.UnInitialize()
+        Catch ex As Exception
+        End Try
+
+        Try
+            rootClass.UnInitialize()
+        Catch ex As Exception
+        End Try
     End Sub
 
     Public Delegate Sub showipCallback(ByVal recData As Byte())
@@ -193,57 +296,45 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        Try
-            mainClass.UnInitialize()
-        Catch ex As Exception
-        End Try
+    ''显示控制器列表
+    'Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
+    '    If ListView1.SelectedItems.Count = 0 Then
+    '        Exit Sub
+    '    End If
 
-        Try
-            rootClass.UnInitialize()
-        Catch ex As Exception
-        End Try
-    End Sub
+    '    mainClass.Initialize(ListView1.SelectedItems(0).SubItems(1).Text, vbNull, vbNull)
 
-    '显示控制器列表
-    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
-        If ListView1.SelectedItems.Count = 0 Then
-            Exit Sub
-        End If
+    '    ListView1.Enabled = False
+    '    ListView2.Items.Clear()
 
-        mainClass.Initialize(ListView1.SelectedItems(0).SubItems(1).Text, vbNull, vbNull)
+    '    If mainClass.ReadLEDScreenInfo(LEDScreenInfoList) Then
+    '        Exit Sub
+    '    End If
 
-        ListView1.Enabled = False
-        ListView2.Items.Clear()
+    '    '获取到的显示屏 X 偏移
+    '    Dim x As Integer
+    '    '获取到的显示屏 Y 偏移
+    '    Dim y As Integer
+    '    '获取到的显示屏宽度
+    '    Dim width As Integer
+    '    '获取到的显示屏高度
+    '    Dim height As Integer
+    '    '获取到的接收卡个数
+    '    'Dim scanBdCount As Integer
 
-        If mainClass.ReadLEDScreenInfo(LEDScreenInfoList) Then
-            Exit Sub
-        End If
+    '    For i As Integer = 0 To LEDScreenInfoList.Count - 1
+    '        Dim itm As ListViewItem = ListView2.Items.Add($"{i}", 0)
 
-        '获取到的显示屏 X 偏移
-        Dim x As Integer
-        '获取到的显示屏 Y 偏移
-        Dim y As Integer
-        '获取到的显示屏宽度
-        Dim width As Integer
-        '获取到的显示屏高度
-        Dim height As Integer
-        '获取到的接收卡个数
-        'Dim scanBdCount As Integer
+    '        mainClass.GetScreenLocation(i, x, y, width, height)
 
-        For i As Integer = 0 To LEDScreenInfoList.Count - 1
-            Dim itm As ListViewItem = ListView2.Items.Add($"{i}", 0)
+    '        itm.SubItems.Add($"起始点:{x},{y} 宽:{width} 高:{height}")
 
-            mainClass.GetScreenLocation(i, x, y, width, height)
+    '        'mainClass.GetScanBoardCount(i, scanBdCount)
+    '        'itm.SubItems.Add(scanBdCount)
+    '    Next
 
-            itm.SubItems.Add($"起始点:{x},{y} 宽:{width} 高:{height}")
-
-            'mainClass.GetScanBoardCount(i, scanBdCount)
-            'itm.SubItems.Add(scanBdCount)
-        Next
-
-        ListView1.Enabled = True
-    End Sub
+    '    ListView1.Enabled = True
+    'End Sub
 
     'mmp的NovaMarsSDK
     Dim SenderIndexlist As HashSet(Of Byte)
@@ -409,7 +500,6 @@ Public Class Form1
     '点击区域
     Private Sub getMouseClick(key As String, dataArray As Byte(), index As Integer)
         Dim tmp As ScanBoardInfo = screenMain.ScanBoardTable.Item(key)
-
 
         If runMode <> 0 And runMode <> 1 Then
             Exit Sub
