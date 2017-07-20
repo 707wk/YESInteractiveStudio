@@ -48,8 +48,8 @@ Public Class Form1
         End If
 
         '临时使用
-        Me.Width = ListView5.Location.X + ListView5.Width + 20
-        Me.Height = ListView5.Location.Y + ListView5.Height + 70
+        'Me.Width = ListView5.Location.X + ListView5.Width + 20
+        'Me.Height = ListView5.Location.Y + ListView5.Height + 70
 
         '读取ini配置文件
         Dim tmp As New ClassIni

@@ -23,6 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
@@ -55,9 +56,9 @@ Partial Class Form1
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 296)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 345)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(920, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1164, 22)
         Me.StatusStrip1.TabIndex = 1
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -69,7 +70,7 @@ Partial Class Form1
         '
         'ListView1
         '
-        Me.ListView1.Location = New System.Drawing.Point(472, 28)
+        Me.ListView1.Location = New System.Drawing.Point(719, 28)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(150, 135)
         Me.ListView1.TabIndex = 2
@@ -81,13 +82,13 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ListView2.Location = New System.Drawing.Point(12, 28)
         Me.ListView2.Name = "ListView2"
-        Me.ListView2.Size = New System.Drawing.Size(256, 265)
+        Me.ListView2.Size = New System.Drawing.Size(256, 314)
         Me.ListView2.TabIndex = 3
         Me.ListView2.UseCompatibleStateImageBehavior = False
         '
         'ListView3
         '
-        Me.ListView3.Location = New System.Drawing.Point(628, 28)
+        Me.ListView3.Location = New System.Drawing.Point(875, 28)
         Me.ListView3.Name = "ListView3"
         Me.ListView3.Size = New System.Drawing.Size(142, 135)
         Me.ListView3.TabIndex = 4
@@ -95,9 +96,9 @@ Partial Class Form1
         '
         'ListView4
         '
-        Me.ListView4.Location = New System.Drawing.Point(776, 28)
+        Me.ListView4.Location = New System.Drawing.Point(1023, 28)
         Me.ListView4.Name = "ListView4"
-        Me.ListView4.Size = New System.Drawing.Size(132, 135)
+        Me.ListView4.Size = New System.Drawing.Size(129, 135)
         Me.ListView4.TabIndex = 5
         Me.ListView4.UseCompatibleStateImageBehavior = False
         '
@@ -106,7 +107,7 @@ Partial Class Form1
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.ToolStripLabel1, Me.ToolStripTextBox1, Me.ToolStripSeparator2, Me.ToolStripSplitButton1, Me.ToolStripButton2})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(920, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1164, 25)
         Me.ToolStrip1.TabIndex = 6
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -186,11 +187,11 @@ Partial Class Form1
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(472, 169)
+        Me.TextBox1.Location = New System.Drawing.Point(517, 169)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox1.Size = New System.Drawing.Size(436, 124)
+        Me.TextBox1.Size = New System.Drawing.Size(635, 173)
         Me.TextBox1.TabIndex = 7
         '
         'ListView5
@@ -199,7 +200,7 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ListView5.Location = New System.Drawing.Point(274, 28)
         Me.ListView5.Name = "ListView5"
-        Me.ListView5.Size = New System.Drawing.Size(166, 265)
+        Me.ListView5.Size = New System.Drawing.Size(166, 314)
         Me.ListView5.TabIndex = 8
         Me.ListView5.UseCompatibleStateImageBehavior = False
         '
@@ -207,7 +208,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(920, 318)
+        Me.ClientSize = New System.Drawing.Size(1164, 367)
         Me.Controls.Add(Me.ListView5)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.ListView4)
@@ -216,6 +217,7 @@ Partial Class Form1
         Me.Controls.Add(Me.ListView1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.ToolStrip1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.Text = "ME触摸地砖屏控制系统"
