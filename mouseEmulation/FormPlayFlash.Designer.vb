@@ -28,7 +28,7 @@ Partial Class FormPlayFlash
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(318, 280)
+        Me.ClientSize = New System.Drawing.Size(221, 122)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FormPlayFlash"
         Me.ShowInTaskbar = False

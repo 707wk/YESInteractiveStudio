@@ -32,6 +32,11 @@ mouseEmulation
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
+<member name="P:mouseEmulation.My.Resources.Resources.clickWithMouse">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
 <member name="P:mouseEmulation.My.Resources.Resources.connect">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
@@ -53,6 +58,11 @@ mouseEmulation
 </summary>
 </member>
 <member name="P:mouseEmulation.My.Resources.Resources.test">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:mouseEmulation.My.Resources.Resources.testWithValue">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>

@@ -62,7 +62,13 @@ Module ModuleSetting
     'Public Port As Integer
     '连接变量
     'Public cliSocket As Socket()
-    '运行模式 0点击 1测试 2黑屏 3 忽略
+    '运行模式
+    '0点击
+    '1点击(捕获鼠标)
+    '2测试
+    '3测试(显示电容)
+    '4黑屏
+    '5忽略
     Public runMode As Integer
 
     '输出日志

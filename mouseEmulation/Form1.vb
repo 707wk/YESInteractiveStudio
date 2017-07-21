@@ -48,8 +48,8 @@ Public Class Form1
         End If
 
         '临时使用
-        'Me.Width = ListView5.Location.X + ListView5.Width + 20
-        'Me.Height = ListView5.Location.Y + ListView5.Height + 70
+        Me.Width = ListView5.Location.X + ListView5.Width + 20
+        Me.Height = ListView5.Location.Y + ListView5.Height + 70
 
         '读取ini配置文件
         Dim tmp As New ClassIni
@@ -80,9 +80,9 @@ Public Class Form1
         ListView2.View = View.Details
         ListView2.GridLines = True
         ListView2.FullRowSelect = True
-        ListView2.CheckBoxes = False
+        ListView2.CheckBoxes = True
         ListView2.Clear()
-        ListView2.Columns.Add("显示屏索引", 72, HorizontalAlignment.Left)
+        ListView2.Columns.Add("屏幕编号", 72, HorizontalAlignment.Left)
         ListView2.Columns.Add("信息", 200, HorizontalAlignment.Center)
 
         '设置接收卡列表格式
@@ -119,6 +119,8 @@ Public Class Form1
         RegisterHotKey(Me.Handle.ToInt32, 2, 0, Keys.F2)
         RegisterHotKey(Me.Handle.ToInt32, 3, 0, Keys.F3)
         RegisterHotKey(Me.Handle.ToInt32, 4, 0, Keys.F4)
+        RegisterHotKey(Me.Handle.ToInt32, 5, 0, Keys.F5)
+        RegisterHotKey(Me.Handle.ToInt32, 6, 0, Keys.F6)
     End Sub
 
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -173,6 +175,24 @@ Public Class Form1
 
         mainClass.Initialize(tmpstr, vbNull, vbNull)
 
+        'Dim sendByte As Byte()
+        'ReDim sendByte(16 - 1)
+        'For i As Integer = 0 To 16 - 1
+        '    sendByte(i) = i + i * &H10
+        'Next
+        'MsgBox($"发送：{mainClass.SetScanBoardData(0, 0, 0, sendByte)}")
+
+        'Thread.Sleep(1)
+
+        'Dim recByte As Byte() = Nothing
+        'Dim qwe = mainClass.GetScanBoardData(0, 0, 0, 16, recByte)
+        'Dim asd As String = Nothing
+        'For i As Integer = 0 To recByte.Length - 1
+        '    asd = asd & $"{recByte(i).ToString("X")} "
+        'Next
+
+        'MsgBox($"{qwe} {asd}")
+
         ListView2.Items.Clear()
 
         If mainClass.ReadLEDScreenInfo(LEDScreenInfoList) Then
@@ -181,6 +201,7 @@ Public Class Form1
             Application.Exit()
             Exit Sub
         End If
+
 
         '获取到的显示屏 X 偏移
         Dim x As Integer
@@ -213,15 +234,19 @@ Public Class Form1
     '窗体的消息处理函数
     Protected Overrides Sub WndProc(ByRef m As Message)
         If m.Msg = WM_HOTKEY And ToolStripButton1.Enabled = True Then '判断是否为热键消息
-            Me.Text = m.WParam.ToInt32
+            'Me.Text = m.WParam.ToInt32
             Select Case m.WParam.ToInt32 '判断热键消息的注册ID
                 Case 1
                     模拟点击ToolStripMenuItem_Click(Nothing, Nothing)
                 Case 2
-                    测试ToolStripMenuItem_Click(Nothing, Nothing)
+                    点击捕获鼠标F2ToolStripMenuItem_Click(Nothing, Nothing)
                 Case 3
-                    黑屏ToolStripMenuItem_Click(Nothing, Nothing)
+                    测试ToolStripMenuItem_Click(Nothing, Nothing)
                 Case 4
+                    测试显示电容F4ToolStripMenuItem_Click(Nothing, Nothing)
+                Case 5
+                    黑屏ToolStripMenuItem_Click(Nothing, Nothing)
+                Case 6
                     忽略ToolStripMenuItem_Click(Nothing, Nothing)
             End Select
         End If
@@ -235,6 +260,8 @@ Public Class Form1
         UnregisterHotKey(Me.Handle.ToInt32, Keys.F2)
         UnregisterHotKey(Me.Handle.ToInt32, Keys.F3)
         UnregisterHotKey(Me.Handle.ToInt32, Keys.F4)
+        UnregisterHotKey(Me.Handle.ToInt32, Keys.F5)
+        UnregisterHotKey(Me.Handle.ToInt32, Keys.F6)
 
         Try
             mainClass.UnInitialize()
@@ -366,7 +393,11 @@ Public Class Form1
         If screenMain.showFlash IsNot Nothing Then
             screenMain.showFlash.Close()
         End If
+
         screenMain.showFlash = New FormPlayFlash
+
+        screenMain.showFlash.touchPieceWidth = screenMain.ScanBoardWidth \ 4
+        screenMain.showFlash.touchPieceHeight = screenMain.ScanBoardHeight \ 4
 
         'putlog($"screenMain{screenMain.index} {screenMain.x} {screenMain.y} {screenMain.width} {screenMain.height}")
 
@@ -497,14 +528,18 @@ Public Class Form1
         End If
     End Sub
 
-    '点击区域
-    Private Sub getMouseClick(key As String, dataArray As Byte(), index As Integer)
-        Dim tmp As ScanBoardInfo = screenMain.ScanBoardTable.Item(key)
+    '移动鼠标点击区域
+    Private Sub getMouseClick(tmpScanBoard As ScanBoardInfo, tDataArray As Byte(), index As Integer)
+        'Dim tmp As ScanBoardInfo = screenMain.ScanBoardTable.Item(key)
 
-        If runMode <> 0 And runMode <> 1 Then
-            Exit Sub
-        End If
-
+        'If runMode <> 0 And runMode <> 1 Then
+        '    Exit Sub
+        'End If
+        'Dim qwe As String = Nothing
+        'For i As Integer = 0 To 16 - 1
+        '    qwe = qwe & tDataArray(index + i).ToString("X") & " "
+        'Next
+        'putlog(qwe)
         'putlog($"{key} {tmp.ConnectIndex}-{tmp.PortIndex}-{tmp.SenderIndex} {tmp.X} {tmp.Y}")
 
         Dim w As Integer = screenMain.ScanBoardWidth / 4
@@ -512,7 +547,7 @@ Public Class Form1
 
         For i As Integer = 0 To 4 - 1
             For j As Integer = 0 To 4 - 1
-                If dataArray(index + i * 4 + j) <> 1 Then
+                If (tDataArray(index + i * 4 + j) And &H80) <> &H80 Then
                     Continue For
                 End If
 
@@ -535,10 +570,12 @@ Public Class Form1
 
                 '隐藏鼠标指针
                 ShowCursor(False)
+
+                'screenMain.showFlash.capacitance = dataArray(index + i * 4 + j) And &H7F
                 '移动鼠标然后点击
                 mouse_event(MouseEvent.AbsoluteLocation Or MouseEvent.Move Or MouseEvent.LeftButtonDown Or MouseEvent.LeftButtonUp,
-                                (screenMain.x + tmp.X + j * w + screenMain.ScanBoardWidth / 4 / 2) * 65536 / Screen.PrimaryScreen.Bounds.Width,
-                                (screenMain.y + tmp.Y + i * h + screenMain.ScanBoardHeight / 4 / 2) * 65536 / Screen.PrimaryScreen.Bounds.Height, 0, 0)
+                                (screenMain.x + tmpScanBoard.X + j * w + screenMain.ScanBoardWidth / 4 / 2) * 65536 / Screen.PrimaryScreen.Bounds.Width,
+                                (screenMain.y + tmpScanBoard.Y + i * h + screenMain.ScanBoardHeight / 4 / 2) * 65536 / Screen.PrimaryScreen.Bounds.Height, 0, 0)
                 '回原位
                 mouse_event(MouseEvent.AbsoluteLocation Or MouseEvent.Move,
                                 oldx * 65536 / Screen.PrimaryScreen.Bounds.Width,
@@ -605,7 +642,23 @@ Public Class Form1
                             Continue For
                         End If
 
-                        getMouseClick($"{senderArray(index).index}-{bytes(j + 1)}-{(bytes(j + 2) * 256 + bytes(j + 3))}", bytes, j + 4)
+                        If runMode <> 0 And runMode <> 1 And runMode <> 2 And runMode <> 3 Then
+                            Exit For
+                        End If
+
+                        Dim tmp = screenMain.ScanBoardTable.Item($"{senderArray(index).index}-{bytes(j + 1)}-{(bytes(j + 2) * 256 + bytes(j + 3))}")
+                        If tmp Is Nothing Then
+                            putlog($"{senderArray(index).index}-{bytes(j + 1)}-{(bytes(j + 2) * 256 + bytes(j + 3))} nof found")
+                            Continue For
+                        End If
+
+                        'putlog($"{senderArray(index).index}-{bytes(j + 1)}-{(bytes(j + 2) * 256 + bytes(j + 3))} {tmp.X} {tmp.Y}")
+                        If runMode <> 1 Then
+                            screenMain.showFlash.MousesimulationClick(tmp.X, tmp.Y, bytes, j + 4)
+                        Else 'If runMode = 1 Then
+                            getMouseClick(tmp, bytes, j + 4)
+                        End If
+
                         tmpstr = $"{senderArray(index).index}-{bytes(j + 1)}-{(bytes(j + 2) * 256 + bytes(j + 3))}:"
                         '读取数据段
                         For k As Integer = 4 To 27
@@ -633,19 +686,35 @@ Public Class Form1
         screenMain.showFlash.switchPlayMode()
     End Sub
 
+    Private Sub 点击捕获鼠标F2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 点击捕获鼠标F2ToolStripMenuItem.Click
+        ToolStripSplitButton1.Text = 点击捕获鼠标F2ToolStripMenuItem.Text
+        ToolStripSplitButton1.Image = 点击捕获鼠标F2ToolStripMenuItem.Image
+
+        screenMain.showFlash.switchPlayMode()
+        runMode = 1
+    End Sub
+
     Private Sub 测试ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 测试ToolStripMenuItem.Click
         ToolStripSplitButton1.Text = 测试ToolStripMenuItem.Text
         ToolStripSplitButton1.Image = 测试ToolStripMenuItem.Image
 
-        runMode = 1
-        screenMain.showFlash.switchTestMode(screenMain.ScanBoardWidth \ 4, screenMain.ScanBoardHeight \ 4)
+        runMode = 2
+        screenMain.showFlash.switchTestMode()
+    End Sub
+
+    Private Sub 测试显示电容F4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 测试显示电容F4ToolStripMenuItem.Click
+        ToolStripSplitButton1.Text = 测试显示电容F4ToolStripMenuItem.Text
+        ToolStripSplitButton1.Image = 测试显示电容F4ToolStripMenuItem.Image
+
+        runMode = 3
+        screenMain.showFlash.switchTestModeWithValue()
     End Sub
 
     Private Sub 黑屏ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 黑屏ToolStripMenuItem.Click
         ToolStripSplitButton1.Text = 黑屏ToolStripMenuItem.Text
         ToolStripSplitButton1.Image = 黑屏ToolStripMenuItem.Image
 
-        runMode = 2
+        runMode = 4
         screenMain.showFlash.switchBlankScreenMode()
     End Sub
 
@@ -653,7 +722,7 @@ Public Class Form1
         ToolStripSplitButton1.Text = 忽略ToolStripMenuItem.Text
         ToolStripSplitButton1.Image = 忽略ToolStripMenuItem.Image
 
-        runMode = 3
+        runMode = 5
     End Sub
 
     'Private Sub ListView2_ItemMouseHover(sender As Object, e As ListViewItemMouseHoverEventArgs) Handles ListView2.ItemMouseHover
@@ -717,4 +786,5 @@ Public Class Form1
 
         screenMain.showFlash.play(ListView5.SelectedItems(0).SubItems(1).Text)
     End Sub
+
 End Class

@@ -32,20 +32,24 @@ Partial Class Form1
         Me.ListView3 = New System.Windows.Forms.ListView()
         Me.ListView4 = New System.Windows.Forms.ListView()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
-        Me.模拟点击ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.测试ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.黑屏ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.忽略ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ListView5 = New System.Windows.Forms.ListView()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
+        Me.模拟点击ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.点击捕获鼠标F2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.测试ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.测试显示电容F4ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.黑屏ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.忽略ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -82,7 +86,7 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ListView2.Location = New System.Drawing.Point(12, 28)
         Me.ListView2.Name = "ListView2"
-        Me.ListView2.Size = New System.Drawing.Size(256, 314)
+        Me.ListView2.Size = New System.Drawing.Size(256, 285)
         Me.ListView2.TabIndex = 3
         Me.ListView2.UseCompatibleStateImageBehavior = False
         '
@@ -111,14 +115,6 @@ Partial Class Form1
         Me.ToolStrip1.TabIndex = 6
         Me.ToolStrip1.Text = "ToolStrip1"
         '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.Image = Global.mouseEmulation.My.Resources.Resources.connect
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(52, 22)
-        Me.ToolStripButton1.Text = "连接"
-        '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
@@ -140,51 +136,6 @@ Partial Class Form1
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
         '
-        'ToolStripSplitButton1
-        '
-        Me.ToolStripSplitButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.模拟点击ToolStripMenuItem, Me.测试ToolStripMenuItem, Me.黑屏ToolStripMenuItem, Me.忽略ToolStripMenuItem})
-        Me.ToolStripSplitButton1.Image = Global.mouseEmulation.My.Resources.Resources.click
-        Me.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripSplitButton1.Name = "ToolStripSplitButton1"
-        Me.ToolStripSplitButton1.Size = New System.Drawing.Size(85, 22)
-        Me.ToolStripSplitButton1.Text = "点击(&F1)"
-        '
-        '模拟点击ToolStripMenuItem
-        '
-        Me.模拟点击ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.click
-        Me.模拟点击ToolStripMenuItem.Name = "模拟点击ToolStripMenuItem"
-        Me.模拟点击ToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
-        Me.模拟点击ToolStripMenuItem.Text = "点击(&F1)"
-        '
-        '测试ToolStripMenuItem
-        '
-        Me.测试ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.test
-        Me.测试ToolStripMenuItem.Name = "测试ToolStripMenuItem"
-        Me.测试ToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
-        Me.测试ToolStripMenuItem.Text = "测试(&F2)"
-        '
-        '黑屏ToolStripMenuItem
-        '
-        Me.黑屏ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.blankscreen
-        Me.黑屏ToolStripMenuItem.Name = "黑屏ToolStripMenuItem"
-        Me.黑屏ToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
-        Me.黑屏ToolStripMenuItem.Text = "黑屏(&F3)"
-        '
-        '忽略ToolStripMenuItem
-        '
-        Me.忽略ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.disenable
-        Me.忽略ToolStripMenuItem.Name = "忽略ToolStripMenuItem"
-        Me.忽略ToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
-        Me.忽略ToolStripMenuItem.Text = "忽略(&F4)"
-        '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.Image = Global.mouseEmulation.My.Resources.Resources.openFolder
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(88, 22)
-        Me.ToolStripButton2.Text = "打开文件夹"
-        '
         'TextBox1
         '
         Me.TextBox1.Location = New System.Drawing.Point(517, 169)
@@ -204,11 +155,98 @@ Partial Class Form1
         Me.ListView5.TabIndex = 8
         Me.ListView5.UseCompatibleStateImageBehavior = False
         '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.Image = Global.mouseEmulation.My.Resources.Resources.connect
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(52, 22)
+        Me.ToolStripButton1.Text = "连接"
+        '
+        'ToolStripSplitButton1
+        '
+        Me.ToolStripSplitButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.模拟点击ToolStripMenuItem, Me.点击捕获鼠标F2ToolStripMenuItem, Me.测试ToolStripMenuItem, Me.测试显示电容F4ToolStripMenuItem, Me.黑屏ToolStripMenuItem, Me.忽略ToolStripMenuItem})
+        Me.ToolStripSplitButton1.Image = Global.mouseEmulation.My.Resources.Resources.click
+        Me.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripSplitButton1.Name = "ToolStripSplitButton1"
+        Me.ToolStripSplitButton1.Size = New System.Drawing.Size(85, 22)
+        Me.ToolStripSplitButton1.Text = "点击(&F1)"
+        '
+        '模拟点击ToolStripMenuItem
+        '
+        Me.模拟点击ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.click
+        Me.模拟点击ToolStripMenuItem.Name = "模拟点击ToolStripMenuItem"
+        Me.模拟点击ToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.模拟点击ToolStripMenuItem.Text = "点击(&F1)"
+        '
+        '点击捕获鼠标F2ToolStripMenuItem
+        '
+        Me.点击捕获鼠标F2ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.clickWithMouse
+        Me.点击捕获鼠标F2ToolStripMenuItem.Name = "点击捕获鼠标F2ToolStripMenuItem"
+        Me.点击捕获鼠标F2ToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.点击捕获鼠标F2ToolStripMenuItem.Text = "点击(捕获鼠标)(&F2)"
+        '
+        '测试ToolStripMenuItem
+        '
+        Me.测试ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.test
+        Me.测试ToolStripMenuItem.Name = "测试ToolStripMenuItem"
+        Me.测试ToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.测试ToolStripMenuItem.Text = "测试(&F3)"
+        '
+        '测试显示电容F4ToolStripMenuItem
+        '
+        Me.测试显示电容F4ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.testWithValue
+        Me.测试显示电容F4ToolStripMenuItem.Name = "测试显示电容F4ToolStripMenuItem"
+        Me.测试显示电容F4ToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.测试显示电容F4ToolStripMenuItem.Text = "测试(显示电容)(&F4)"
+        '
+        '黑屏ToolStripMenuItem
+        '
+        Me.黑屏ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.blankscreen
+        Me.黑屏ToolStripMenuItem.Name = "黑屏ToolStripMenuItem"
+        Me.黑屏ToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.黑屏ToolStripMenuItem.Text = "黑屏(&F5)"
+        '
+        '忽略ToolStripMenuItem
+        '
+        Me.忽略ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.disenable
+        Me.忽略ToolStripMenuItem.Name = "忽略ToolStripMenuItem"
+        Me.忽略ToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.忽略ToolStripMenuItem.Text = "忽略(&F6)"
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.Image = Global.mouseEmulation.My.Resources.Resources.openFolder
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(88, 22)
+        Me.ToolStripButton2.Text = "打开文件夹"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(12, 319)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(91, 23)
+        Me.Button1.TabIndex = 9
+        Me.Button1.Text = "重置屏幕"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(177, 319)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(91, 23)
+        Me.Button2.TabIndex = 10
+        Me.Button2.Text = "显示选择屏幕"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1164, 367)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ListView5)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.ListView4)
@@ -220,6 +258,7 @@ Partial Class Form1
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "Form1"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "ME触摸地砖屏控制系统"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
@@ -251,4 +290,8 @@ Partial Class Form1
     Friend WithEvents ListView5 As ListView
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents 黑屏ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents 点击捕获鼠标F2ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents 测试显示电容F4ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class
