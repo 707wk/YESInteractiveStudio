@@ -4,6 +4,8 @@ Imports System.Net.Sockets
 Module ModuleSetting
     '接收卡信息
     Structure ScanBoardInfo
+        '屏幕索引
+        Dim ScreenIndex As Integer
         '控制器索引
         Dim SenderIndex As Integer
         '网口索引
@@ -16,6 +18,9 @@ Module ModuleSetting
         'Y偏移
         Dim Y As Integer
     End Structure
+
+    '接收卡信息索引表
+    Dim ScanBoardTable As Hashtable
 
     '显示屏信息
     Structure screenInfo
@@ -32,18 +37,15 @@ Module ModuleSetting
         '显示屏高度(单位像素)
         Dim height As Integer
 
-        '带载宽度(单位像素)
+        '触摸单元宽度(单位像素)
         Dim ScanBoardWidth As Integer
-        '带载高度(单位像素)
+        '触摸单元高度(单位像素)
         Dim ScanBoardHeight As Integer
 
-        '接收卡信息列表
-        Dim ScanBoardTable As Hashtable
-
-        '显示区域
-        Dim showFlash As FormPlayFlash
+        '播放窗体
+        Dim playDialog As FormPlay
     End Structure
-    Public screenMain As screenInfo
+    Public screenMain() As screenInfo
 
     '发送卡(控制器)信息
     Structure senderInfo
@@ -54,14 +56,10 @@ Module ModuleSetting
         '连接变量
         Dim cliSocket As Socket
     End Structure
-    Public senderArray As senderInfo()
+    Public senderArray() As senderInfo
 
     '查询时间间隔
     Public checkTime As Integer
-    '端口号
-    'Public Port As Integer
-    '连接变量
-    'Public cliSocket As Socket()
     '运行模式
     '0点击
     '1点击(捕获鼠标)

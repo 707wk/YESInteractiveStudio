@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{795A9C42-E1A4-4CFC-BC86-7AD71DB35003}</ProjectGuid>
+    <ProjectGuid>{F2DE68F3-8701-422F-A153-705A45253EB8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <StartupObject>mouseEmulation.My.MyApplication</StartupObject>
     <RootNamespace>mouseEmulation</RootNamespace>
@@ -46,6 +46,9 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>main.ico</ApplicationIcon>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
@@ -68,9 +71,6 @@
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>main.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Nova.Mars.SDK.MarsInterface">
@@ -101,6 +101,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutBox1.Designer.vb">
+      <DependentUpon>AboutBox1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AboutBox1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ClassIni.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
@@ -109,10 +115,40 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPlayFlash.Designer.vb">
-      <DependentUpon>FormPlayFlash.vb</DependentUpon>
+    <Compile Include="FormAddFile.Designer.vb">
+      <DependentUpon>FormAddFile.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormPlayFlash.vb">
+    <Compile Include="FormAddFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCheckVersions.Designer.vb">
+      <DependentUpon>FormCheckVersions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormCheckVersions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormControlOption.Designer.vb">
+      <DependentUpon>FormControlOption.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormControlOption.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditFile.Designer.vb">
+      <DependentUpon>FormEditFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEditFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPlay.Designer.vb">
+      <DependentUpon>FormPlay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPlay.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormScreenOption.Designer.vb">
+      <DependentUpon>FormScreenOption.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormScreenOption.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ModuleSetting.vb" />
@@ -133,11 +169,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AboutBox1.resx">
+      <DependentUpon>AboutBox1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPlayFlash.resx">
-      <DependentUpon>FormPlayFlash.vb</DependentUpon>
+    <EmbeddedResource Include="FormAddFile.resx">
+      <DependentUpon>FormAddFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCheckVersions.resx">
+      <DependentUpon>FormCheckVersions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControlOption.resx">
+      <DependentUpon>FormControlOption.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEditFile.resx">
+      <DependentUpon>FormEditFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPlay.resx">
+      <DependentUpon>FormPlay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormScreenOption.resx">
+      <DependentUpon>FormScreenOption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -159,21 +213,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\connect.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\disconnect.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\click.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\test.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\disenable.png" />
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="AxShockwaveFlashObjects">
       <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -193,15 +232,28 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\openFolder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\blankscreen.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="main.ico" />
+    <None Include="res\update.png" />
+    <None Include="res\treeSwf.png" />
+    <None Include="res\treeScreen.png" />
     <None Include="res\testWithValue.png" />
+    <None Include="res\test.png" />
+    <None Include="res\subtract.png" />
+    <None Include="res\screen.png" />
+    <None Include="res\save.png" />
+    <None Include="res\question.png" />
+    <None Include="res\plus.png" />
+    <None Include="res\player.png" />
+    <None Include="res\openFolder.png" />
+    <None Include="res\main.png" />
+    <None Include="res\disenable.png" />
+    <None Include="res\disconnect.png" />
+    <None Include="res\control.png" />
+    <None Include="res\connect.png" />
     <None Include="res\clickWithMouse.png" />
+    <None Include="res\click.png" />
+    <None Include="res\blankscreen.png" />
+    <None Include="res\aboutInfo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

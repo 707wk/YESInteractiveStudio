@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FormPlayFlash
+Partial Class FormPlay
     Inherits System.Windows.Forms.Form
 
     'Form 重写 Dispose，以清理组件列表。
@@ -24,16 +24,16 @@ Partial Class FormPlayFlash
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'FormPlayFlash
+        'FormPlay
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(221, 122)
+        Me.ClientSize = New System.Drawing.Size(332, 231)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Name = "FormPlayFlash"
+        Me.Name = "FormPlay"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.Text = "FormPlayFlash"
+        Me.Text = "FormPlay"
         Me.ResumeLayout(False)
 
     End Sub
