@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
+Imports Nova.Mars.SDK
 
 Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -76,6 +77,9 @@ Public Class Form1
         '清空日志文件
         Dim sw As StreamWriter = New StreamWriter（"log.txt", False)
         sw.Close（）
+
+        '绑定设置到ip事件
+        'AddHandler mainClass.GetEquipmentIPDataEvent, AddressOf SendEquipmentIPData
     End Sub
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
@@ -114,6 +118,16 @@ Public Class Form1
         Dim tmp2 As New ClassIni
         tmp2.WriteINI("SYS", "x", Me.Location.X, ".\setting.ini")
         tmp2.WriteINI("SYS", "y", Me.Location.Y, ".\setting.ini")
+
+        If mainClass Is Nothing Then
+        Else
+            mainClass.UnInitialize()
+        End If
+        If rootClass Is Nothing Then
+        Else
+            rootClass.UnInitialize()
+        End If
+
     End Sub
 
     '添加文件
@@ -127,9 +141,35 @@ Public Class Form1
         tmpDialog.ShowDialog()
     End Sub
 
+    'Dim senderArrayIndex As Integer = 0
+    ''设置ip通知
+    'Private Sub SendEquipmentIPData(sender As Object, e As MarsEquipmentIPEventArgs)
+    '    If e.IsExecResult Then
+    '        senderArray(senderArrayIndex).ipDate = senderArray(senderArrayIndex).tmpIpData
+
+    '        senderArrayIndex += 1
+    '        If senderArrayIndex < senderArray.Length Then
+    '            mainClass.SetEquipmentIP(senderArrayIndex, senderArray(senderArrayIndex).tmpIpData)
+    '        Else
+    '            MsgBox("ip设置成功")
+    '        End If
+    '    Else
+    '        MsgBox($"控制器{senderArrayIndex}设置IP数据失败！请检查设备后，重新发送！")
+    '    End If
+    'End Sub
+
     Private Sub 控制器设置ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 控制器设置ToolStripMenuItem.Click
+        '绑定设置到ip事件
+        'AddHandler mainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
+
         Dim tmpDialog As New FormControlOption
         tmpDialog.ShowDialog()
+        'If tmpDialog.ShowDialog() <> DialogResult.OK Then
+        '    Exit Sub
+        'End If
+
+        'senderArrayIndex = 0
+        'mainClass.SetEquipmentIP(0, senderArray(senderArrayIndex).tmpIpData)
     End Sub
 
     Private Sub 版本检测ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 版本检测ToolStripMenuItem.Click
@@ -151,4 +191,15 @@ Public Class Form1
             End If
         End If
     End Sub
+
+    Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Dim tmpDialog As New FormNovaInit
+        tmpDialog.ShowDialog()
+
+        Try
+            Me.ToolStripStatusLabel1.Text = $"屏幕数：{screenMain.Length} | 控制器数：{senderArray.Length} | "
+        Catch ex As Exception
+        End Try
+    End Sub
+
 End Class

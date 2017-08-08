@@ -87,8 +87,8 @@ Partial Class Form1
         Me.播放ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.编辑ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.删除ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -459,7 +459,7 @@ Partial Class Form1
         Me.ToolStripButton7.Image = Global.mouseEmulation.My.Resources.Resources.openFolder
         Me.ToolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton7.Name = "ToolStripButton7"
-        Me.ToolStripButton7.Size = New System.Drawing.Size(76, 21)
+        Me.ToolStripButton7.Size = New System.Drawing.Size(76, 22)
         Me.ToolStripButton7.Text = "添加文件"
         '
         'GroupBox2
@@ -486,7 +486,7 @@ Partial Class Form1
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 342)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(529, 22)
@@ -515,7 +515,7 @@ Partial Class Form1
         '
         Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.播放ToolStripMenuItem1, Me.编辑ToolStripMenuItem, Me.删除ToolStripMenuItem})
         Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(153, 92)
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(101, 70)
         '
         '播放ToolStripMenuItem1
         '
@@ -526,7 +526,7 @@ Partial Class Form1
         '编辑ToolStripMenuItem
         '
         Me.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem"
-        Me.编辑ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.编辑ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.编辑ToolStripMenuItem.Text = "编辑"
         '
         '删除ToolStripMenuItem
@@ -541,6 +541,12 @@ Partial Class Form1
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
         Me.ImageList1.Images.SetKeyName(0, "treeScreen.png")
         Me.ImageList1.Images.SetKeyName(1, "treeSwf.png")
+        '
+        'ToolStripStatusLabel2
+        '
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(134, 17)
+        Me.ToolStripStatusLabel2.Text = "ToolStripStatusLabel2"
         '
         'Form1
         '
@@ -638,6 +644,6 @@ Partial Class Form1
     Friend WithEvents 播放ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents 编辑ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents 删除ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents ImageList1 As ImageList
+    Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
 End Class

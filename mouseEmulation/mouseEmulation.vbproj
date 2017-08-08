@@ -139,6 +139,12 @@
     <Compile Include="FormEditFile.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormNovaInit.Designer.vb">
+      <DependentUpon>FormNovaInit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormNovaInit.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormPlay.Designer.vb">
       <DependentUpon>FormPlay.vb</DependentUpon>
     </Compile>
@@ -186,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEditFile.resx">
       <DependentUpon>FormEditFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNovaInit.resx">
+      <DependentUpon>FormNovaInit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPlay.resx">
       <DependentUpon>FormPlay.vb</DependentUpon>

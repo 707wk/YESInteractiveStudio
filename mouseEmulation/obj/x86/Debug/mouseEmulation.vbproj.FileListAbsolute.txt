@@ -43,3 +43,4 @@ T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormControlOption.
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormEditFile.resources
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormScreenOption.resources
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormPlay.resources
+T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormNovaInit.resources

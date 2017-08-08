@@ -1,9 +1,10 @@
 ﻿Imports System.IO
 Imports System.Net.Sockets
+Imports Nova.Mars.SDK
 
 Module ModuleSetting
     '接收卡信息
-    Structure ScanBoardInfo
+    Public Structure ScanBoardInfo
         '屏幕索引
         Dim ScreenIndex As Integer
         '控制器索引
@@ -20,12 +21,17 @@ Module ModuleSetting
     End Structure
 
     '接收卡信息索引表
-    Dim ScanBoardTable As Hashtable
+    Public ScanBoardTable As Hashtable
 
     '显示屏信息
-    Structure screenInfo
+    <Serializable()>
+    Public Structure screenInfo
         '显示屏索引
         Dim index As Integer
+        '备注
+        Dim remark As String
+        '是否显示
+        Dim showFlage As Boolean
 
         '显示屏 X 偏移(单位像素)
         Dim x As Integer
@@ -37,26 +43,30 @@ Module ModuleSetting
         '显示屏高度(单位像素)
         Dim height As Integer
 
-        '触摸单元宽度(单位像素)
+        '屏幕单元宽度(单位像素)
         Dim ScanBoardWidth As Integer
-        '触摸单元高度(单位像素)
+        '屏幕单元高度(单位像素)
         Dim ScanBoardHeight As Integer
 
         '播放窗体
         Dim playDialog As FormPlay
     End Structure
-    Public screenMain() As screenInfo
+    Public screenMain As screenInfo()
 
     '发送卡(控制器)信息
-    Structure senderInfo
+    Public Structure senderInfo
         '控制器索引
         Dim index As Integer
+        '是否连接
+        Dim link As Boolean
         'IP信息
         Dim ipDate As Byte()
+        '修改后的IP信息
+        Dim tmpIpData As Byte()
         '连接变量
         Dim cliSocket As Socket
     End Structure
-    Public senderArray() As senderInfo
+    Public senderArray As senderInfo()
 
     '查询时间间隔
     Public checkTime As Integer
@@ -68,6 +78,10 @@ Module ModuleSetting
     '4黑屏
     '5忽略
     Public runMode As Integer
+
+    'Nova服务
+    Public rootClass As MarsHardwareEnumerator
+    Public mainClass As MarsControlSystem
 
     '输出日志
     Public Sub putlog(str As String)
