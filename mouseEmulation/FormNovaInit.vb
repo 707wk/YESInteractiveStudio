@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Threading
 Imports Nova.Mars.SDK
 
@@ -10,6 +11,7 @@ Public Class FormNovaInit
     End Sub
 
     Private Sub FormNovaInit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Width = Me.Width
         'Dim tmpProcessHwnd As Process = Process.Start($".\Server\MarsServerProvider.exe")
         'Me.TextBox1.AppendText($"启动Nova服务：{If(tmpProcessHwnd.Handle, True, False)}")
 
@@ -26,7 +28,7 @@ Public Class FormNovaInit
         Static Dim senderArrayIndex As Integer = 0
         If e.IsExecResult Then
 
-            senderArray(senderArrayIndex).index = senderArrayIndex
+            'senderArray(senderArrayIndex).index = senderArrayIndex
             senderArray(senderArrayIndex).ipDate = e.Data
 
             showinfo($"控制器{senderArrayIndex}")
@@ -39,9 +41,13 @@ Public Class FormNovaInit
                 mainClass.GetEquipmentIP(senderArrayIndex)
             Else
                 showinfo($"加载完成")
+                '移除事件
+                RemoveHandler mainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
                 Me.closeDialog("真是哔了狗了，这个事件居然是另一个线程触发的")
             End If
         Else
+            '移除事件
+            RemoveHandler mainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
             showinfo("ERROR:获取设备IP失败！请检查设备后，重新启动程序")
         End If
     End Sub
@@ -70,7 +76,7 @@ Public Class FormNovaInit
                 Exit Sub
             End If
 
-            MsgBox($"{text}")
+            MsgBox($"{text}", MsgBoxStyle.Information, Me.Text)
 
             Me.Close()
             Form1.Close()
@@ -162,23 +168,30 @@ Public Class FormNovaInit
                 mainClass.GetScreenLocation(LEDScreenIndex, x, y, width, height)
 
                 '屏幕索引
-                screenMain(LEDScreenIndex).index = LEDScreenIndex
+                'screenMain(LEDScreenIndex).index = LEDScreenIndex
                 '获取起始位置 大小
                 mainClass.GetScreenLocation(LEDScreenIndex,
                                             screenMain(LEDScreenIndex).x,
                                             screenMain(LEDScreenIndex).y,
                                             screenMain(LEDScreenIndex).width,
                                             screenMain(LEDScreenIndex).height)
-                '带载宽度
+                '屏幕单元宽度
                 screenMain(LEDScreenIndex).ScanBoardWidth = LEDScreenInfoList(LEDScreenIndex).ScanBoardInfoList(0).Width
-                '带载高度
+                '屏幕单元高度
                 screenMain(LEDScreenIndex).ScanBoardHeight = LEDScreenInfoList(LEDScreenIndex).ScanBoardInfoList(0).Height
+                '创建上次点击状态缓存
+                ReDim screenMain(LEDScreenIndex).clickHistoryArray((screenMain(LEDScreenIndex).height \ screenMain(LEDScreenIndex).ScanBoardHeight) * 4,
+                                                                   (screenMain(LEDScreenIndex).width \ screenMain(LEDScreenIndex).ScanBoardWidth) * 4)
 
-                showinfo($">>>>显示屏{screenMain(LEDScreenIndex).index}: start[{screenMain(LEDScreenIndex).x},{screenMain(LEDScreenIndex).y}] size[{screenMain(LEDScreenIndex).width},{screenMain(LEDScreenIndex).height}] touch[{screenMain(LEDScreenIndex).ScanBoardWidth},{screenMain(LEDScreenIndex).ScanBoardHeight}]")
+                'putlog($"{LEDScreenIndex}:{(screenMain(LEDScreenIndex).height \ screenMain(LEDScreenIndex).ScanBoardHeight) * 4},{(screenMain(LEDScreenIndex).width \ screenMain(LEDScreenIndex).ScanBoardWidth) * 4}")
+
+                showinfo($">>>>显示屏{LEDScreenIndex}: start[{screenMain(LEDScreenIndex).x},{screenMain(LEDScreenIndex).y}] size[{screenMain(LEDScreenIndex).width},{screenMain(LEDScreenIndex).height}] touch[{screenMain(LEDScreenIndex).ScanBoardWidth},{screenMain(LEDScreenIndex).ScanBoardHeight}]")
                 showinfo($"        屏幕块[{LEDScreenInfoList(LEDScreenIndex).ScanBoardInfoList.Count}]")
+
+                screenMain(LEDScreenIndex).Senderlist = New List(Of Integer)
                 '遍历屏幕
                 For Each i In LEDScreenInfoList(LEDScreenIndex).ScanBoardInfoList
-                    'SenderIndexlist.Add(i.SenderIndex)
+                    screenMain(LEDScreenIndex).Senderlist.Add(i.SenderIndex)
 
                     'Dim itm As ListViewItem = ListView3.Items.Add($"{LEDScreenIndex} {i.SenderIndex}", 0)
                     'itm.SubItems.Add($"{i.PortIndex}")
@@ -195,8 +208,9 @@ Public Class FormNovaInit
                     '接收卡索引
                     tmpScanBoardInfo.ConnectIndex = i.ConnectIndex
                     '屏幕块位置
-                    tmpScanBoardInfo.X = i.X
-                    tmpScanBoardInfo.Y = i.Y
+                    tmpScanBoardInfo.X = (i.X \ screenMain(LEDScreenIndex).ScanBoardWidth) * 4
+                    tmpScanBoardInfo.Y = (i.Y \ screenMain(LEDScreenIndex).ScanBoardHeight) * 4
+                    'putlog($"{tmpScanBoardInfo.ConnectIndex}:{tmpScanBoardInfo.Y},{tmpScanBoardInfo.X}")
 
                     ScanBoardTable.Add($"{i.SenderIndex}-{i.PortIndex}-{i.ConnectIndex}", tmpScanBoardInfo)
 
@@ -216,6 +230,51 @@ Public Class FormNovaInit
             'MsgBox("加载完成")
             'Thread.Sleep(1000)
             'Me.Close()
+
+            '反序列化
+            Dim fStream As FileStream = Nothing
+            Dim sfFormatter As New System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+
+            Try
+                fStream = New FileStream("screen.ini", FileMode.Open)
+            Catch ex As Exception
+                'screen.ini不存在会引发异常，但没关系
+            End Try
+
+            Try
+                If fStream IsNot Nothing Then
+                    systeminfo = sfFormatter.Deserialize(fStream)
+                End If
+            Catch ex As Exception
+                showinfo($"ERROR:文件读取失败")
+                putlog(ex.Message)
+                '打开版本不同或错误的文件则无法读取
+            End Try
+
+            Try
+                fStream.Close()
+            Catch ex As Exception
+            End Try
+
+            If systeminfo.playList IsNot Nothing Then
+                For i As Integer = 0 To systeminfo.playList.Length - 1
+                    '判断设置屏幕索引是否超过读取到的屏幕索引最大值
+                    If i > screenMain.Length - 1 Then
+                        Exit For
+                    End If
+
+                    '赋值上次关闭前数据
+                    screenMain(i).showFlage = systeminfo.playList(i).showFlage
+                    screenMain(i).remark = systeminfo.playList(i).remark
+                    'screenMain(i).filePath = systeminfo.playList(i).filePath
+                Next
+            End If
+
+            '多余的
+            'If systeminfo.filesList IsNot Nothing Then
+            '    playFilesList = systeminfo.filesList
+            'End If
+
         End If
     End Sub
 

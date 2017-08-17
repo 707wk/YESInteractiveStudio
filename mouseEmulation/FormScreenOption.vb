@@ -4,7 +4,7 @@
     Private Sub FormScreenOption_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         For i As Integer = 0 To screenMain.Length - 1
             DataGridView1.Rows.Add(screenMain(i).showFlage,
-                                   screenMain(i).index,
+                                   i,
                                    screenMain(i).remark,
                                    $"起始点:{screenMain(i).x},{screenMain(i).y}  size:[{screenMain(i).width},{screenMain(i).height}]")
         Next
@@ -85,8 +85,8 @@
         mpen.Color = Color.Red
         mpen.Width = 3
         For i As Integer = 0 To dataRow.Length - 1
-            Dim tmpX As Integer = (dataRow(i).Item(4) \ screenMain(selectScreenId).ScanBoardWidth) * 21 + 10
-            Dim tmpY As Integer = (dataRow(i).Item(5) \ screenMain(selectScreenId).ScanBoardHeight) * 21 + 10
+            Dim tmpX As Integer = (dataRow(i).Item(4) \ 4) * 21 + 10
+            Dim tmpY As Integer = (dataRow(i).Item(5) \ 4) * 21 + 10
 
             If dataRow(i).Item(1) = lastSenderIndex And dataRow(i).Item(2) = lastPortIndex Then
                 g.DrawLine(mpen, lastX, lastY, tmpX, tmpY)
@@ -103,4 +103,29 @@
         Next
     End Sub
 
+    '保存修改
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        For i As Integer = 0 To DataGridView1.Rows.Count - 1
+            screenMain(i).remark = $"{DataGridView1.Rows(i).Cells(2).Value}"
+            screenMain(i).showFlage = DataGridView1.Rows(i).Cells(0).Value
+        Next
+    End Sub
+
+    '全选
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        For i As Integer = 0 To DataGridView1.Rows.Count - 1
+            DataGridView1.Rows(i).Cells(0).Value = True
+        Next
+    End Sub
+
+    '反选
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        For i As Integer = 0 To DataGridView1.Rows.Count - 1
+            If DataGridView1.Rows(i).Cells(0).Value Then
+                DataGridView1.Rows(i).Cells(0).Value = False
+            Else
+                DataGridView1.Rows(i).Cells(0).Value = True
+            End If
+        Next
+    End Sub
 End Class

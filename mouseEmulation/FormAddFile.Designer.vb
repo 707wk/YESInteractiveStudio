@@ -127,7 +127,7 @@ Partial Class FormAddFile
         Me.Name = "FormAddFile"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "添加文件"
+        Me.Text = "添加文件[废弃]"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

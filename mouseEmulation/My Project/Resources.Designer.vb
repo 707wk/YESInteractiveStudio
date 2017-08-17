@@ -103,6 +103,16 @@ Namespace My.Resources
         '''<summary>
         '''  查找 System.Drawing.Bitmap 类型的本地化资源。
         '''</summary>
+        Friend ReadOnly Property cn() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("cn", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
+        '''</summary>
         Friend ReadOnly Property connect() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("connect", resourceCulture)
@@ -136,6 +146,26 @@ Namespace My.Resources
         Friend ReadOnly Property disenable() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("disenable", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
+        '''</summary>
+        Friend ReadOnly Property en() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("en", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
+        '''</summary>
+        Friend ReadOnly Property language() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("language", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -236,6 +266,16 @@ Namespace My.Resources
         Friend ReadOnly Property testWithValue() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("testWithValue", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
+        '''</summary>
+        Friend ReadOnly Property touch() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("touch", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

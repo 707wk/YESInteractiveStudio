@@ -6,7 +6,7 @@ Imports Nova.Mars.SDK
 Public Class FormControlOption
     Private Sub FormControlOption_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         For i As Integer = 0 To senderArray.Length - 1
-            DataGridView1.Rows.Add(senderArray(i).index,
+            DataGridView1.Rows.Add(i,
                                    $"{senderArray(i).ipDate(3)}.{senderArray(i).ipDate(2)}.{senderArray(i).ipDate(1)}.{senderArray(i).ipDate(0)}",
                                    $"{senderArray(i).ipDate(7)}.{senderArray(i).ipDate(6)}.{senderArray(i).ipDate(5)}.{senderArray(i).ipDate(4)}",
                                    $"{senderArray(i).ipDate(11)}.{senderArray(i).ipDate(10)}.{senderArray(i).ipDate(9)}.{senderArray(i).ipDate(8)}")
@@ -70,7 +70,7 @@ Public Class FormControlOption
 
         '判断长度
         If ipDataStrArr.Length <> 4 Then
-            MsgBox("非法参数")
+            MsgBox("非法参数", MsgBoxStyle.Information, Me.Text)
             updataIp(e.RowIndex)
             Exit Sub
         End If
@@ -82,7 +82,7 @@ Public Class FormControlOption
 
             If m.Success Then
             Else
-                MsgBox("非法参数")
+                MsgBox("非法参数", MsgBoxStyle.Information, Me.Text)
                 updataIp(e.RowIndex)
                 Exit Sub
             End If
@@ -90,7 +90,7 @@ Public Class FormControlOption
             Dim tmpNum As Integer = CInt(m.Value)
 
             If tmpNum > 255 Then
-                MsgBox("非法参数")
+                MsgBox("非法参数", MsgBoxStyle.Information, Me.Text)
                 updataIp(e.RowIndex)
                 Exit Sub
             End If

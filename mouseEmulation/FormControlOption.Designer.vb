@@ -41,7 +41,7 @@ Partial Class FormControlOption
         Me.GroupBox1.Controls.Add(Me.DataGridView1)
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(485, 275)
+        Me.GroupBox1.Size = New System.Drawing.Size(485, 255)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "控制器列表"
@@ -59,7 +59,7 @@ Partial Class FormControlOption
         Me.DataGridView1.Location = New System.Drawing.Point(3, 16)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(479, 256)
+        Me.DataGridView1.Size = New System.Drawing.Size(479, 236)
         Me.DataGridView1.TabIndex = 0
         '
         'Column1
@@ -90,7 +90,7 @@ Partial Class FormControlOption
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(398, 281)
+        Me.Button1.Location = New System.Drawing.Point(398, 261)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 2
@@ -101,7 +101,7 @@ Partial Class FormControlOption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(485, 316)
+        Me.ClientSize = New System.Drawing.Size(485, 296)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GroupBox1)
         Me.MaximizeBox = False

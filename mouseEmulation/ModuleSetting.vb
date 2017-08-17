@@ -14,9 +14,9 @@ Module ModuleSetting
         '连接序号
         Dim ConnectIndex As Integer
 
-        'X偏移
+        'X轴索引
         Dim X As Integer
-        'Y偏移
+        'Y轴索引
         Dim Y As Integer
     End Structure
 
@@ -24,14 +24,15 @@ Module ModuleSetting
     Public ScanBoardTable As Hashtable
 
     '显示屏信息
-    <Serializable()>
     Public Structure screenInfo
         '显示屏索引
-        Dim index As Integer
+        'Dim index As Integer
         '备注
         Dim remark As String
         '是否显示
         Dim showFlage As Boolean
+        '播放文件路径
+        Dim filePath As String
 
         '显示屏 X 偏移(单位像素)
         Dim x As Integer
@@ -47,6 +48,11 @@ Module ModuleSetting
         Dim ScanBoardWidth As Integer
         '屏幕单元高度(单位像素)
         Dim ScanBoardHeight As Integer
+        '上次点击状态
+        Dim clickHistoryArray(,) As Integer
+
+        '屏幕所在的发送卡序列
+        Dim SenderList As List(Of Integer)
 
         '播放窗体
         Dim playDialog As FormPlay
@@ -56,28 +62,57 @@ Module ModuleSetting
     '发送卡(控制器)信息
     Public Structure senderInfo
         '控制器索引
-        Dim index As Integer
-        '是否连接
+        'Dim index As Integer
+        '是否需要连接
         Dim link As Boolean
         'IP信息
         Dim ipDate As Byte()
-        '修改后的IP信息
+        '临时保存修改后的IP信息
         Dim tmpIpData As Byte()
         '连接变量
         Dim cliSocket As Socket
     End Structure
     Public senderArray As senderInfo()
 
+    '屏幕播放信息
+    <Serializable()>
+    Public Structure screenPlayInfo
+        '屏幕索引
+        'Dim screenIndex As Integer
+        '备注
+        Dim remark As String
+        '是否显示
+        Dim showFlage As Boolean
+        '播放文件路径
+        'Dim filePath As String
+    End Structure
+    '播放相关信息
+    <Serializable()>
+    Public Structure playInfoSave
+        '屏幕播放信息列表
+        Dim playList As screenPlayInfo()
+
+        '播放列表
+        Dim filesList As Hashtable
+    End Structure
+    Public systeminfo As playInfoSave
+
+    '播放列表[废弃]
+    'Public playFilesList As Hashtable
+
     '查询时间间隔
     Public checkTime As Integer
     '运行模式
     '0点击
-    '1点击(捕获鼠标)
-    '2测试
-    '3测试(显示电容)
-    '4黑屏
-    '5忽略
+    '1测试
+    '2黑屏
+    '3忽略
+    '4测试(显示电容)
     Public runMode As Integer
+
+    '记录数据标记
+    Public recordDataFlage As Boolean
+    Public recordDataFile As StreamWriter
 
     'Nova服务
     Public rootClass As MarsHardwareEnumerator

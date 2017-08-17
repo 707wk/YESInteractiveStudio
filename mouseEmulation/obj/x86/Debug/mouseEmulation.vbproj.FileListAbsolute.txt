@@ -44,3 +44,4 @@ T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormEditFile.resou
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormScreenOption.resources
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormPlay.resources
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormNovaInit.resources
+T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormTouchSetting.resources

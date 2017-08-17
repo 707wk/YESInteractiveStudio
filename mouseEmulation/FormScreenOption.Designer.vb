@@ -46,7 +46,7 @@ Partial Class FormScreenOption
         Me.GroupBox1.Controls.Add(Me.DataGridView1)
         Me.GroupBox1.Location = New System.Drawing.Point(3, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(420, 241)
+        Me.GroupBox1.Size = New System.Drawing.Size(361, 241)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "屏幕列表"
@@ -64,7 +64,7 @@ Partial Class FormScreenOption
         Me.DataGridView1.Location = New System.Drawing.Point(3, 16)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(414, 222)
+        Me.DataGridView1.Size = New System.Drawing.Size(355, 222)
         Me.DataGridView1.TabIndex = 1
         '
         'Column1
@@ -75,6 +75,7 @@ Partial Class FormScreenOption
         '
         'Column2
         '
+        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.Column2.HeaderText = "屏幕序号"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
@@ -84,12 +85,14 @@ Partial Class FormScreenOption
         '
         'Column3
         '
+        Me.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.Column3.HeaderText = "备注"
         Me.Column3.Name = "Column3"
         Me.Column3.Width = 56
         '
         'Column4
         '
+        Me.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.Column4.HeaderText = "详细信息"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
@@ -98,7 +101,7 @@ Partial Class FormScreenOption
         'Button3
         '
         Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button3.Location = New System.Drawing.Point(267, 259)
+        Me.Button3.Location = New System.Drawing.Point(205, 259)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 27)
         Me.Button3.TabIndex = 8
@@ -108,7 +111,7 @@ Partial Class FormScreenOption
         'Button2
         '
         Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button2.Location = New System.Drawing.Point(186, 259)
+        Me.Button2.Location = New System.Drawing.Point(124, 259)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 27)
         Me.Button2.TabIndex = 7
@@ -119,7 +122,7 @@ Partial Class FormScreenOption
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Button1.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.Button1.Location = New System.Drawing.Point(348, 259)
+        Me.Button1.Location = New System.Drawing.Point(286, 259)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 27)
         Me.Button1.TabIndex = 6
@@ -132,9 +135,9 @@ Partial Class FormScreenOption
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.Controls.Add(Me.PictureBox1)
-        Me.GroupBox2.Location = New System.Drawing.Point(429, 12)
+        Me.GroupBox2.Location = New System.Drawing.Point(367, 12)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(290, 274)
+        Me.GroupBox2.Size = New System.Drawing.Size(325, 274)
         Me.GroupBox2.TabIndex = 9
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "屏幕走线"
@@ -144,7 +147,7 @@ Partial Class FormScreenOption
         Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PictureBox1.Location = New System.Drawing.Point(3, 16)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(284, 255)
+        Me.PictureBox1.Size = New System.Drawing.Size(319, 255)
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
@@ -152,7 +155,7 @@ Partial Class FormScreenOption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(731, 298)
+        Me.ClientSize = New System.Drawing.Size(704, 298)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
@@ -173,13 +176,13 @@ Partial Class FormScreenOption
 
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Column1 As DataGridViewCheckBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Button3 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Column1 As DataGridViewCheckBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
 End Class

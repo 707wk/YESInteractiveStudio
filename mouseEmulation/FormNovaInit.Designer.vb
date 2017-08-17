@@ -37,7 +37,7 @@ Partial Class FormNovaInit
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
         Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox1.Size = New System.Drawing.Size(419, 176)
+        Me.TextBox1.Size = New System.Drawing.Size(364, 135)
         Me.TextBox1.TabIndex = 1
         '
         'BackgroundWorker1
@@ -47,7 +47,7 @@ Partial Class FormNovaInit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 176)
+        Me.ClientSize = New System.Drawing.Size(364, 135)
         Me.ControlBox = False
         Me.Controls.Add(Me.TextBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog

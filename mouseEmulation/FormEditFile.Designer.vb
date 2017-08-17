@@ -127,7 +127,7 @@ Partial Class FormEditFile
         Me.Name = "FormEditFile"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "编辑文件"
+        Me.Text = "编辑文件[废弃]"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
