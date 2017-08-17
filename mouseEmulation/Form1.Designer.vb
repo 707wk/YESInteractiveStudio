@@ -78,12 +78,6 @@ Partial Class Form1
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.播放ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.播放ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.编辑ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.删除ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ListView1 = New System.Windows.Forms.ListView()
@@ -97,11 +91,12 @@ Partial Class Form1
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.语言选择LToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.中文ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
-        Me.ContextMenuStrip1.SuspendLayout()
-        Me.ContextMenuStrip2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -309,7 +304,7 @@ Partial Class Form1
         '
         '工具TToolStripMenuItem
         '
-        Me.工具TToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.屏幕设置ToolStripMenuItem, Me.控制器设置ToolStripMenuItem, Me.灵敏度调节ToolStripMenuItem, Me.版本检测ToolStripMenuItem})
+        Me.工具TToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.屏幕设置ToolStripMenuItem, Me.控制器设置ToolStripMenuItem, Me.灵敏度调节ToolStripMenuItem, Me.版本检测ToolStripMenuItem, Me.语言选择LToolStripMenuItem})
         Me.工具TToolStripMenuItem.Name = "工具TToolStripMenuItem"
         Me.工具TToolStripMenuItem.Size = New System.Drawing.Size(59, 21)
         Me.工具TToolStripMenuItem.Text = "工具(&T)"
@@ -461,42 +456,6 @@ Partial Class Form1
         Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(46, 17)
         Me.ToolStripStatusLabel2.Text = "Label2"
         '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.播放ToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(101, 26)
-        '
-        '播放ToolStripMenuItem
-        '
-        Me.播放ToolStripMenuItem.Name = "播放ToolStripMenuItem"
-        Me.播放ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
-        Me.播放ToolStripMenuItem.Text = "播放"
-        '
-        'ContextMenuStrip2
-        '
-        Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.播放ToolStripMenuItem1, Me.编辑ToolStripMenuItem, Me.删除ToolStripMenuItem})
-        Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(101, 70)
-        '
-        '播放ToolStripMenuItem1
-        '
-        Me.播放ToolStripMenuItem1.Name = "播放ToolStripMenuItem1"
-        Me.播放ToolStripMenuItem1.Size = New System.Drawing.Size(100, 22)
-        Me.播放ToolStripMenuItem1.Text = "播放"
-        '
-        '编辑ToolStripMenuItem
-        '
-        Me.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem"
-        Me.编辑ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
-        Me.编辑ToolStripMenuItem.Text = "编辑"
-        '
-        '删除ToolStripMenuItem
-        '
-        Me.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem"
-        Me.删除ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
-        Me.删除ToolStripMenuItem.Text = "删除"
-        '
         'ImageList1
         '
         Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -622,6 +581,28 @@ Partial Class Form1
         Me.Label1.TabIndex = 24
         Me.Label1.Text = "屏幕"
         '
+        '语言选择LToolStripMenuItem
+        '
+        Me.语言选择LToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.中文ToolStripMenuItem, Me.EnglishToolStripMenuItem})
+        Me.语言选择LToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.language
+        Me.语言选择LToolStripMenuItem.Name = "语言选择LToolStripMenuItem"
+        Me.语言选择LToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.语言选择LToolStripMenuItem.Text = "语言选择(&L)"
+        '
+        '中文ToolStripMenuItem
+        '
+        Me.中文ToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.cn
+        Me.中文ToolStripMenuItem.Name = "中文ToolStripMenuItem"
+        Me.中文ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.中文ToolStripMenuItem.Text = "中文"
+        '
+        'EnglishToolStripMenuItem
+        '
+        Me.EnglishToolStripMenuItem.Image = Global.mouseEmulation.My.Resources.Resources.en
+        Me.EnglishToolStripMenuItem.Name = "EnglishToolStripMenuItem"
+        Me.EnglishToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.EnglishToolStripMenuItem.Text = "English"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -643,8 +624,6 @@ Partial Class Form1
         Me.ToolStrip1.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
-        Me.ContextMenuStrip1.ResumeLayout(False)
-        Me.ContextMenuStrip2.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
@@ -693,12 +672,6 @@ Partial Class Form1
     Friend WithEvents ToolStripMenuItem7 As ToolStripMenuItem
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
-    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
-    Friend WithEvents 播放ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
-    Friend WithEvents 播放ToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents 编辑ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents 删除ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImageList1 As ImageList
     Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
     Friend WithEvents ToolStripMenuItem15 As ToolStripMenuItem
@@ -726,4 +699,7 @@ Partial Class Form1
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents ToolStripButton2 As ToolStripButton
     Friend WithEvents 灵敏度调节ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents 语言选择LToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents 中文ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EnglishToolStripMenuItem As ToolStripMenuItem
 End Class

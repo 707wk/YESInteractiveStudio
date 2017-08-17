@@ -114,6 +114,11 @@ Module ModuleSetting
     Public recordDataFlage As Boolean
     Public recordDataFile As StreamWriter
 
+    '更改语言
+    '0:中文
+    '1:English
+    Public selectLanguageId As Integer
+
     'Nova服务
     Public rootClass As MarsHardwareEnumerator
     Public mainClass As MarsControlSystem

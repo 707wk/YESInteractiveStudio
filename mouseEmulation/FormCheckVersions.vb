@@ -14,10 +14,10 @@ Public Class FormCheckVersions
         ListView1.CheckBoxes = False
         ListView1.ShowItemToolTips = True
         ListView1.Clear()
-        ListView1.Columns.Add("控制器号", 75, HorizontalAlignment.Left)
-        ListView1.Columns.Add("网口号", 70, HorizontalAlignment.Left)
-        ListView1.Columns.Add("接收卡号", 75, HorizontalAlignment.Left)
-        ListView1.Columns.Add("程序版本", 70, HorizontalAlignment.Left)
+        ListView1.Columns.Add($"{If(selectLanguageId = 0, "控制器号", "Sender Id")}", 75, HorizontalAlignment.Left)
+        ListView1.Columns.Add($"{If(selectLanguageId = 0, "网口号", "Port Id")}", 70, HorizontalAlignment.Left)
+        ListView1.Columns.Add($"{If(selectLanguageId = 0, "接收卡号", "ScanBoard Id")}", 75, HorizontalAlignment.Left)
+        ListView1.Columns.Add($"{If(selectLanguageId = 0, "程序版本", "Version")}", 70, HorizontalAlignment.Left)
 
         TextBox1.Text = $"{verSion(0)}.{verSion(1)}.{verSion(2)}"
 
@@ -32,6 +32,7 @@ Public Class FormCheckVersions
         TextBox2.Text = $"{infoReader.Length / 1024} KB"
         binLength = infoReader.Length
 
+        changeLanguage()
     End Sub
 
     '读版本号
@@ -68,7 +69,7 @@ Public Class FormCheckVersions
             Dim bytesRec As Integer = cliSocket.Receive(bytes)
 
         Catch ex As Exception
-            MsgBox($"发送读取指令错误")
+            MsgBox($"{If(selectLanguageId = 0, "发送读取指令错误", "Error sending read instruction")}")
             'Exit Sub
         End Try
 
@@ -110,7 +111,7 @@ Public Class FormCheckVersions
                 Next
             Next
         Catch ex As Exception
-            MsgBox("接收数据错误")
+            MsgBox($"{If(selectLanguageId = 0, "接收数据错误", "Packets received errors")}")
             'Exit Sub
         End Try
 
@@ -200,7 +201,17 @@ Public Class FormCheckVersions
 
         Button3.Enabled = True
 
-        Me.TextBox3.AppendText($"发送完毕")
+        Me.TextBox3.AppendText($"{If(selectLanguageId = 0, "发送完毕", "Send Successfully")}")
         'MsgBox("发送完毕")
+    End Sub
+
+    '更改语言 0:中文 1:English
+    Private Sub changeLanguage()
+        Me.GroupBox1.Text = $"{If(selectLanguageId = 0, "不匹配屏幕", "ScanBoard Version")}"
+        Me.Button4.Text = $"{If(selectLanguageId = 0, "检测版本", "Check")}"
+        Me.Label2.Text = $"{If(selectLanguageId = 0, "程序大小", "Size")}："
+        Me.Label1.Text = $"{If(selectLanguageId = 0, "匹配版本", "Version")}："
+        Me.Button3.Text = $"{If(selectLanguageId = 0, "升级程序", "Update")}"
+        Me.Text = $"{If(selectLanguageId = 0, "版本检测", "Version Check")}"
     End Sub
 End Class

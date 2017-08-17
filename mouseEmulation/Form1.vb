@@ -106,8 +106,8 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.KeyPreview = True
         Me.Text = My.Application.Info.Title
-        ToolStripStatusLabel1.Text = $"查询次数:未连接"
-        Me.ToolStripStatusLabel2.Text = $"| 屏幕数：0 | 控制器数：0"
+        ToolStripStatusLabel1.Text = $"{If(selectLanguageId = 0, "查询次数:未连接", "Update:Disconnect")}"
+        Me.ToolStripStatusLabel2.Text = $"| {If(selectLanguageId = 0, "| 屏幕数：0 | 控制器数：0", "Screen Nums：0 | Control Nums：0")}"
         ComboBox2.Sorted = True
 
         '初始为断开连接模式
@@ -169,9 +169,9 @@ Public Class Form1
         ListView1.CheckBoxes = False
         ListView1.ShowItemToolTips = True
         ListView1.Clear()
-        ListView1.Columns.Add("屏幕", 40, HorizontalAlignment.Left)
-        ListView1.Columns.Add("备注")
-        ListView1.Columns.Add("播放文件")
+        ListView1.Columns.Add($"{If(selectLanguageId = 0, "屏幕", "Screen")}", 40, HorizontalAlignment.Left)
+        ListView1.Columns.Add($"{If(selectLanguageId = 0, "备注", "remark")}")
+        ListView1.Columns.Add($"{If(selectLanguageId = 0, "播放文件", "playing")}")
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '测试数据
         'For i As Integer = 0 To 32 - 1
@@ -228,7 +228,7 @@ Public Class Form1
         debugMode(True)
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-        Me.Text = $"{My.Application.Info.Title} [调试模式]"
+        Me.Text = $"{My.Application.Info.Title} [{If(selectLanguageId = 0, "调试模式", "Debug")}]"
     End Sub
 
     Private Sub 关于ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 关于ToolStripMenuItem.Click
@@ -241,7 +241,7 @@ Public Class Form1
 
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         '未关闭连接则屏蔽关闭按钮消息
-        If ToolStripButton1.Text <> "连接控制器" Then
+        If ToolStripButton1.Text <> "连接控制器" Or ToolStripButton1.Text <> "Connect Screen" Then
             e.Cancel = True
             Exit Sub
         End If
@@ -304,12 +304,6 @@ Public Class Form1
 
     End Sub
 
-    '添加文件
-    Private Sub ToolStripButton7_Click(sender As Object, e As EventArgs)
-        Dim tmpDialog As New FormAddFile
-        tmpDialog.ShowDialog()
-    End Sub
-
     Private Sub 屏幕设置ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 屏幕设置ToolStripMenuItem.Click
         Dim tmpDialog As New FormScreenOption
         If tmpDialog.ShowDialog() = DialogResult.OK Then
@@ -342,11 +336,6 @@ Public Class Form1
 
     Private Sub 版本检测ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 版本检测ToolStripMenuItem.Click
         Dim tmpDialog As New FormCheckVersions
-        tmpDialog.ShowDialog()
-    End Sub
-
-    Private Sub 编辑ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 编辑ToolStripMenuItem.Click
-        Dim tmpDialog As New FormEditFile
         tmpDialog.ShowDialog()
     End Sub
 
@@ -409,7 +398,7 @@ Public Class Form1
 
         Try
             updateScreen()
-            Me.ToolStripStatusLabel2.Text = $"| 屏幕数：{screenMain.Length} | 控制器数：{senderArray.Length}"
+            Me.ToolStripStatusLabel2.Text = $"| {If(selectLanguageId = 0, "屏幕数", "Screen Nums")}：{screenMain.Length} | {If(selectLanguageId = 0, "控制器数", "Control Nums")}：{senderArray.Length}"
         Catch ex As Exception
         End Try
     End Sub
@@ -428,7 +417,7 @@ Public Class Form1
                 Case 4
                     ToolStripMenuItem7_Click(Nothing, Nothing)
                 Case 5
-                    If Me.Text.IndexOf("调试模式") = -1 Then
+                    If Me.Text.IndexOf($"{If(selectLanguageId = 0, "调试模式", "Debug")}") = -1 Then
                         Exit Sub
                     End If
 
@@ -524,7 +513,7 @@ Public Class Form1
             sfFormatter.Serialize(fStream, filesList)
             fStream.Close()
         Catch ex As Exception
-            putlog($"序列化异常 {ex.Message}")
+            putlog($"{If(selectLanguageId = 0, "序列化异常", "Serialized exception")} {ex.Message}")
             '不知道会不会引发异常，加个保险
         End Try
 
@@ -643,7 +632,7 @@ Public Class Form1
         灵敏度调节ToolStripMenuItem.Enabled = False
         版本检测ToolStripMenuItem.Enabled = False
 
-        ToolStripButton1.Text = "断开连接"
+        ToolStripButton1.Text = If(selectLanguageId = 0, "断开连接", "Disconnect Screen")
         ToolStripButton1.Image = My.Resources.disconnect
     End Sub
 
@@ -656,13 +645,13 @@ Public Class Form1
         灵敏度调节ToolStripMenuItem.Enabled = True
         版本检测ToolStripMenuItem.Enabled = True
 
-        ToolStripButton1.Text = "连接控制器"
+        ToolStripButton1.Text = If(selectLanguageId = 0, "连接控制器", "Connect Screen")
         ToolStripButton1.Image = My.Resources.connect
     End Sub
 
     '连接-断开连接
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        If ToolStripButton1.Text = "连接控制器" Then
+        If ToolStripButton1.Text = "连接控制器" Or ToolStripButton1.Text = "Connect Screen" Then
             Dim screenNums As Integer = 0
             For i As Integer = 0 To screenMain.Length - 1
                 If screenMain(i).showFlage Then
@@ -670,7 +659,9 @@ Public Class Form1
                 End If
             Next
             If screenNums = 0 Then
-                MsgBox("未设置屏幕", MsgBoxStyle.Information, "连接控制器")
+                MsgBox($"{If(selectLanguageId = 0, "未设置屏幕", "Unset screen")}",
+                       MsgBoxStyle.Information,
+                       $"{If(selectLanguageId = 0, "连接", "Connect")}")
                 Exit Sub
             End If
 
@@ -679,7 +670,9 @@ Public Class Form1
                 Dim ipStr As String = $"{senderArray(i).ipDate(3)}.{senderArray(i).ipDate(2)}.{senderArray(i).ipDate(1)}.{senderArray(i).ipDate(0)}"
 
                 If My.Computer.Network.Ping(ipStr, 500) = False Then
-                    MsgBox(ipStr & " 未能连通", MsgBoxStyle.Information, "连接")
+                    MsgBox(ipStr & $"{If(selectLanguageId = 0, " 未能连通", " Failed to connect")}",
+                           MsgBoxStyle.Information,
+                           $"{If(selectLanguageId = 0, "连接", "Connect")}")
                     Exit Sub
                 End If
             Next
@@ -709,7 +702,9 @@ Public Class Form1
                     End Try
                 Next
 
-                MsgBox("端口绑定失败，请稍后再连接", MsgBoxStyle.Information, "连接")
+                MsgBox($"{If(selectLanguageId = 0, "端口绑定失败，请稍后再连接", "The port binding failed, please connect later")}",
+                       MsgBoxStyle.Information,
+                       $"{If(selectLanguageId = 0, "连接", "Connect")}")
 
                 Exit Sub
             End Try
@@ -753,7 +748,7 @@ Public Class Form1
 
             ListView1.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent)
         Else
-            MsgBox("屏幕编号读取失败")
+            MsgBox($"{If(selectLanguageId = 0, "屏幕编号读取失败", "Screen number reads failed")}")
         End If
     End Sub
 
@@ -797,7 +792,7 @@ Public Class Form1
             Me.Invoke(d, New Object() {checknum})
         Else
             'putlog("1")
-            ToolStripStatusLabel1.Text = $"查询次数:{checknum}/s"
+            ToolStripStatusLabel1.Text = $"{If(selectLanguageId = 0, "查询次数", "Update")}:{checknum}/s"
         End If
 
     End Sub
@@ -820,7 +815,9 @@ Public Class Form1
 
             offLinkCon()
 
-            MsgBox($"控制器已连续{nums}次未返回数据!", MsgBoxStyle.Information, Me.Text)
+            MsgBox($"{If(selectLanguageId = 0, "控制器已连续", "The controller has not returned data for")} {nums} {If(selectLanguageId = 0, "次未返回数据!", "consecutive times!")}",
+                   MsgBoxStyle.Information,
+                   Me.Text)
         End If
 
     End Sub
@@ -1037,6 +1034,7 @@ Public Class Form1
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
         runMode = 0
         ToolStripMenuItem1.Text = ToolStripMenuItem2.Text
+        ToolStripMenuItem1.Image = ToolStripMenuItem2.Image
 
         For i As Integer = 0 To screenMain.Length - 1
             If screenMain(i).showFlage Then
@@ -1051,6 +1049,8 @@ Public Class Form1
     '测试
     Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem4.Click
         runMode = 1
+        ToolStripMenuItem1.Text = ToolStripMenuItem4.Text
+        ToolStripMenuItem1.Image = ToolStripMenuItem4.Image
 
         For i As Integer = 0 To screenMain.Length - 1
             If screenMain(i).showFlage Then
@@ -1065,6 +1065,8 @@ Public Class Form1
     '黑屏
     Private Sub ToolStripMenuItem6_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem6.Click
         runMode = 2
+        ToolStripMenuItem1.Text = ToolStripMenuItem6.Text
+        ToolStripMenuItem1.Image = ToolStripMenuItem6.Image
 
         For i As Integer = 0 To screenMain.Length - 1
             If screenMain(i).showFlage Then
@@ -1079,6 +1081,8 @@ Public Class Form1
     '忽略
     Private Sub ToolStripMenuItem7_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem7.Click
         runMode = 3
+        ToolStripMenuItem1.Text = ToolStripMenuItem7.Text
+        ToolStripMenuItem1.Image = ToolStripMenuItem7.Image
     End Sub
     Private Sub ToolStripMenuItem13_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem13.Click
         ToolStripMenuItem7_Click(Nothing, Nothing)
@@ -1087,6 +1091,8 @@ Public Class Form1
     '测试(电容)
     Private Sub ToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem5.Click
         runMode = 4
+        ToolStripMenuItem1.Text = ToolStripMenuItem5.Text
+        ToolStripMenuItem1.Image = ToolStripMenuItem5.Image
 
         For i As Integer = 0 To screenMain.Length - 1
             If screenMain(i).showFlage Then
@@ -1109,19 +1115,19 @@ Public Class Form1
 
     '记录数据
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
-        If ToolStripButton2.Text = "记录数据" Then
+        If ToolStripButton2.Text = "记录数据" Or ToolStripButton2.Text = "Save Data" Then
             recordDataFile = New StreamWriter($"DEBUG{Format(Now(), "yyyyMMddHHmmss")}.txt", True)
 
             recordDataFlage = True
 
-            ToolStripButton2.Text = "停止记录"
+            ToolStripButton2.Text = If(selectLanguageId = 0, "停止记录", "Stop Save")
             ToolStripButton2.Image = My.Resources.disconnect
         Else
             recordDataFile.Close()
 
             recordDataFlage = False
 
-            ToolStripButton2.Text = "记录数据"
+            ToolStripButton2.Text = If(selectLanguageId = 0, "记录数据", "Save Data")
             ToolStripButton2.Image = My.Resources.connect
         End If
     End Sub
@@ -1129,5 +1135,78 @@ Public Class Form1
     Private Sub 灵敏度调节ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 灵敏度调节ToolStripMenuItem.Click
         Dim tmpDialog As New FormTouchSetting
         tmpDialog.ShowDialog()
+    End Sub
+
+    '切换为中文
+    Private Sub 中文ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 中文ToolStripMenuItem.Click
+        selectLanguageId = 0
+
+        changeLanguage()
+    End Sub
+
+    '切换为英文
+    Private Sub EnglishToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnglishToolStripMenuItem.Click
+        selectLanguageId = 1
+
+        changeLanguage()
+    End Sub
+
+    '更改语言 0:中文 1:English
+    Private Sub changeLanguage()
+        Me.文件ToolStripMenuItem.Text = If(selectLanguageId = 0, "文件(&F)", "File(&F)")
+        Me.新建ToolStripMenuItem.Text = If(selectLanguageId = 0, "新建(&N)", "New(&N)")
+        Me.打开ToolStripMenuItem.Text = If(selectLanguageId = 0, "打开(&O)", "Open(&O)")
+        Me.保存ToolStripMenuItem.Text = If(selectLanguageId = 0, "保存(&S)", "Save(&S)")
+        Me.另存为ToolStripMenuItem.Text = If(selectLanguageId = 0, "另存为(&A)", "Save As(&A)")
+        Me.最近的文件ToolStripMenuItem.Text = If(selectLanguageId = 0, "最近的文件(&R)", "Recent Files(&R)")
+        Me.清空历史ToolStripMenuItem.Text = If(selectLanguageId = 0, "清除历史记录(&H)", "Clear History(&H)")
+        Me.退出ToolStripMenuItem.Text = If(selectLanguageId = 0, "退出(&X)", "Exit(&X)")
+        Me.控制CToolStripMenuItem.Text = If(selectLanguageId = 0, "控制(&C)", "Control(&C)")
+        Me.屏幕模式SToolStripMenuItem.Text = If(selectLanguageId = 0, "屏幕模式(&S)", "Screen Mode(&S)")
+
+        Me.ToolStripMenuItem8.Text = If(selectLanguageId = 0, "点击(&F1)", "Click(&F1)")
+        Me.ToolStripMenuItem10.Text = If(selectLanguageId = 0, "测试(&F2)", "Test(&F2)")
+        Me.ToolStripMenuItem12.Text = If(selectLanguageId = 0, "黑屏(&F3)", "Blank Screen(&F3)")
+        Me.ToolStripMenuItem13.Text = If(selectLanguageId = 0, "忽略(&F4)", "Disabled(&F4)")
+        Me.ToolStripMenuItem11.Text = If(selectLanguageId = 0, "测试(电容)(&F5)", "Test(Debug)(&F5)")
+        Me.ToolStripMenuItem2.Text = Me.ToolStripMenuItem8.Text
+        Me.ToolStripMenuItem4.Text = Me.ToolStripMenuItem10.Text
+        Me.ToolStripMenuItem6.Text = Me.ToolStripMenuItem12.Text
+        Me.ToolStripMenuItem7.Text = Me.ToolStripMenuItem13.Text
+        Me.ToolStripMenuItem5.Text = Me.ToolStripMenuItem11.Text
+
+        Select Case runMode
+            Case 0
+                Me.ToolStripMenuItem1.Text = Me.ToolStripMenuItem2.Text
+            Case 1
+                Me.ToolStripMenuItem1.Text = Me.ToolStripMenuItem4.Text
+            Case 2
+                Me.ToolStripMenuItem1.Text = Me.ToolStripMenuItem6.Text
+            Case 3
+                Me.ToolStripMenuItem1.Text = Me.ToolStripMenuItem7.Text
+            Case 4
+                Me.ToolStripMenuItem1.Text = Me.ToolStripMenuItem5.Text
+        End Select
+
+        Me.查询间隔ToolStripMenuItem.Text = If(selectLanguageId = 0, "查询间隔(ms)(&C)", "Update Interval(ms)(&C)")
+        Me.工具TToolStripMenuItem.Text = If(selectLanguageId = 0, "工具(&T)", "Tool(&T)")
+        Me.屏幕设置ToolStripMenuItem.Text = If(selectLanguageId = 0, "屏幕设置(&S)", "Screen Setting(&S)")
+        Me.控制器设置ToolStripMenuItem.Text = If(selectLanguageId = 0, "控制器设置(&C)", "Control Setting(&C)")
+        Me.灵敏度调节ToolStripMenuItem.Text = If(selectLanguageId = 0, "灵敏度调节(&T)", "Sensitivity Setting(&T)")
+        Me.版本检测ToolStripMenuItem.Text = If(selectLanguageId = 0, "版本检测(&V)", "Version Check(&V)")
+        Me.帮助HToolStripMenuItem.Text = If(selectLanguageId = 0, "帮助(&H)", "Help(&H)")
+        Me.技术支持TToolStripMenuItem.Text = If(selectLanguageId = 0, "技术支持(&T)", "Technical Support(&T)")
+        Me.关于ToolStripMenuItem.Text = If(selectLanguageId = 0, "关于 ME触摸地砖屏控制系统(&A)", "About ME触摸地砖屏控制系统(&A)")
+        Me.ToolStripButton1.Text = If(selectLanguageId = 0, "连接控制器", "Connect Screen")
+        Me.ToolStripButton2.Text = If(selectLanguageId = 0, "记录数据", "Save Data")
+        Me.GroupBox1.Text = If(selectLanguageId = 0, "播放信息", "Play Message")
+        Me.GroupBox2.Text = If(selectLanguageId = 0, "播放控制", "Play Control")
+        Me.Button5.Text = If(selectLanguageId = 0, "清空列表", "Clear List")
+        Me.Button4.Text = If(selectLanguageId = 0, "播放所有屏幕", "Play to all screens")
+        Me.Label2.Text = If(selectLanguageId = 0, "文件", "File")
+        Me.Button3.Text = If(selectLanguageId = 0, "删除文件", "Del File")
+        Me.Button2.Text = If(selectLanguageId = 0, "播放", "Play")
+        Me.Button1.Text = If(selectLanguageId = 0, "添加文件", "Add")
+        Me.Label1.Text = If(selectLanguageId = 0, "屏幕", "Screen")
     End Sub
 End Class

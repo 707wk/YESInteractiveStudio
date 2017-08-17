@@ -33,6 +33,8 @@ Public Class FormControlOption
 
         '绑定设置到ip事件
         AddHandler mainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
+
+        changeLanguage()
     End Sub
 
     Private Sub DataGridView1_CellMouseDown(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseDown
@@ -70,7 +72,7 @@ Public Class FormControlOption
 
         '判断长度
         If ipDataStrArr.Length <> 4 Then
-            MsgBox("非法参数", MsgBoxStyle.Information, Me.Text)
+            MsgBox($"{If(selectLanguageId = 0, "非法参数", "Invalid Argument")}", MsgBoxStyle.Information, Me.Text)
             updataIp(e.RowIndex)
             Exit Sub
         End If
@@ -82,7 +84,7 @@ Public Class FormControlOption
 
             If m.Success Then
             Else
-                MsgBox("非法参数", MsgBoxStyle.Information, Me.Text)
+                MsgBox($"{If(selectLanguageId = 0, "非法参数", "Invalid Argument")}", MsgBoxStyle.Information, Me.Text)
                 updataIp(e.RowIndex)
                 Exit Sub
             End If
@@ -90,7 +92,7 @@ Public Class FormControlOption
             Dim tmpNum As Integer = CInt(m.Value)
 
             If tmpNum > 255 Then
-                MsgBox("非法参数", MsgBoxStyle.Information, Me.Text)
+                MsgBox($"{If(selectLanguageId = 0, "非法参数", "Invalid Argument")}", MsgBoxStyle.Information, Me.Text)
                 updataIp(e.RowIndex)
                 Exit Sub
             End If
@@ -137,7 +139,7 @@ Public Class FormControlOption
                 Me.closeDialog("真是哔了狗了，这个事件居然是另一个线程触发的")
             End If
         Else
-            MsgBox($"控制器{senderArrayIndex}设置IP数据失败！请检查设备后，重新设置！")
+            MsgBox($"{If(selectLanguageId = 0, "控制器 ", "Controller ")}{senderArrayIndex}{If(selectLanguageId = 0, "设置IP数据失败！请检查设备后，重新设置！", "sets IP data failure! Please check the device and reset it！")}")
             'senderArrayIndex = senderArray.Length
             Me.closeDialog("真是哔了狗了，这个事件居然是另一个线程触发的")
         End If
@@ -242,5 +244,16 @@ Public Class FormControlOption
 
         senderArrayIndex = 0
         mainClass.SetEquipmentIP(0, senderArray(senderArrayIndex).tmpIpData)
+    End Sub
+
+    '更改语言 0:中文 1:English
+    Private Sub changeLanguage()
+        Me.GroupBox1.Text = $"{If(selectLanguageId = 0, "控制器列表", "Control List")}"
+        Me.Button1.Text = $"{If(selectLanguageId = 0, "保存修改", "Save")}"
+        Me.Text = $"{If(selectLanguageId = 0, "控制器设置", "Control Setting")}"
+
+        DataGridView1.Rows(0).HeaderCell.Value = $"{If(selectLanguageId = 0, "控制器序号", "Control Id")}"
+        DataGridView1.Rows(2).HeaderCell.Value = $"{If(selectLanguageId = 0, "子网掩码", "Mask")}"
+        DataGridView1.Rows(3).HeaderCell.Value = $"{If(selectLanguageId = 0, "网关", "Gateway")}"
     End Sub
 End Class

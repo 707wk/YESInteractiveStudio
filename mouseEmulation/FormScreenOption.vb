@@ -50,6 +50,7 @@
             tmpDataTable.Rows.Add(row)
         Next
 
+        changeLanguage()
     End Sub
 
     Private Sub DataGridView1_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseClick
@@ -127,5 +128,20 @@
                 DataGridView1.Rows(i).Cells(0).Value = True
             End If
         Next
+    End Sub
+
+    '更改语言 0:中文 1:English
+    Private Sub changeLanguage()
+        Me.GroupBox1.Text = $"{If(selectLanguageId = 0, "屏幕列表", "Screen List")}"
+        Me.Button3.Text = $"{If(selectLanguageId = 0, "反选", "Invert")}"
+        Me.Button2.Text = $"{If(selectLanguageId = 0, "全选", "all")}"
+        Me.Button1.Text = $"{If(selectLanguageId = 0, "保存修改", "Save")}"
+        Me.GroupBox2.Text = $"{If(selectLanguageId = 0, "屏幕走线", "Connection mode")}"
+        Me.Text = $"{If(selectLanguageId = 0, "屏幕设置", "Screen Setting")}"
+
+        DataGridView1.Rows(0).HeaderCell.Value = $"{If(selectLanguageId = 0, "显示", "Show")}"
+        DataGridView1.Rows(1).HeaderCell.Value = $"{If(selectLanguageId = 0, "屏幕序号", "Screen Id")}"
+        DataGridView1.Rows(2).HeaderCell.Value = $"{If(selectLanguageId = 0, "备注", "remark")}"
+        DataGridView1.Rows(3).HeaderCell.Value = $"{If(selectLanguageId = 0, "详细信息", "Information")}"
     End Sub
 End Class

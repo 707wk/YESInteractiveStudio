@@ -37,10 +37,8 @@ T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.xml
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.pdb
 T:\mouseEmulation\mouseEmulation\bin\x86\Debug\Newtonsoft.Json.dll
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.AboutBox1.resources
-T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormAddFile.resources
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormCheckVersions.resources
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormControlOption.resources
-T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormEditFile.resources
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormScreenOption.resources
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormPlay.resources
 T:\mouseEmulation\mouseEmulation\obj\x86\Debug\mouseEmulation.FormNovaInit.resources
