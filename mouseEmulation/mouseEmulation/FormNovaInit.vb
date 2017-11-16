@@ -240,6 +240,21 @@ Public Class FormNovaInit
 
                     'showinfo($"        {tmpScanBoardInfo.ScreenIndex}-{tmpScanBoardInfo.SenderIndex}-{tmpScanBoardInfo.PortIndex}-{tmpScanBoardInfo.ConnectIndex}: [{tmpScanBoardInfo.X},{tmpScanBoardInfo.Y}]")
                 Next
+
+                '缩放
+                If zoomFlage Then
+                    '缩放比例
+                    Dim zoomProportionWidth As Double = Screen.PrimaryScreen.Bounds.Width / zoomWidth
+                    Dim zoomProportionHeight As Double = Screen.PrimaryScreen.Bounds.Height / zoomHeight
+
+                    screenMain(LEDScreenIndex).x = x * zoomProportionWidth
+                    screenMain(LEDScreenIndex).y = y * zoomProportionHeight
+                    screenMain(LEDScreenIndex).width = screenMain(LEDScreenIndex).width * zoomProportionWidth
+                    screenMain(LEDScreenIndex).height = screenMain(LEDScreenIndex).height * zoomProportionHeight
+                    screenMain(LEDScreenIndex).ScanBoardWidth = screenMain(LEDScreenIndex).ScanBoardWidth * zoomProportionWidth
+                    screenMain(LEDScreenIndex).ScanBoardHeight = screenMain(LEDScreenIndex).ScanBoardHeight * zoomProportionHeight
+                End If
+
             Next
 
             'showinfo($"------------------------------")

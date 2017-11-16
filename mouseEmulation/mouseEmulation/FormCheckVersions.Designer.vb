@@ -40,7 +40,7 @@ Partial Class FormCheckVersions
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Left
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(320, 172)
+        Me.GroupBox1.Size = New System.Drawing.Size(320, 186)
         Me.GroupBox1.TabIndex = 9
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "不匹配屏幕"
@@ -48,79 +48,79 @@ Partial Class FormCheckVersions
         'ListView1
         '
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ListView1.Location = New System.Drawing.Point(3, 17)
+        Me.ListView1.Location = New System.Drawing.Point(3, 16)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(314, 152)
+        Me.ListView1.Size = New System.Drawing.Size(314, 167)
         Me.ListView1.TabIndex = 0
         Me.ListView1.UseCompatibleStateImageBehavior = False
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(367, 60)
+        Me.Button4.Location = New System.Drawing.Point(367, 65)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(100, 31)
+        Me.Button4.Size = New System.Drawing.Size(100, 34)
         Me.Button4.TabIndex = 17
         Me.Button4.Text = "检测版本"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(399, 36)
+        Me.TextBox2.Location = New System.Drawing.Point(399, 39)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(68, 21)
+        Me.TextBox2.Size = New System.Drawing.Size(68, 20)
         Me.TextBox2.TabIndex = 16
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(326, 39)
+        Me.Label2.Location = New System.Drawing.Point(326, 42)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 12)
+        Me.Label2.Size = New System.Drawing.Size(67, 13)
         Me.Label2.TabIndex = 15
         Me.Label2.Text = "程序大小："
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(399, 12)
+        Me.TextBox1.Location = New System.Drawing.Point(399, 13)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(68, 21)
+        Me.TextBox1.Size = New System.Drawing.Size(68, 20)
         Me.TextBox1.TabIndex = 14
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(326, 15)
+        Me.Label1.Location = New System.Drawing.Point(326, 16)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(65, 12)
+        Me.Label1.Size = New System.Drawing.Size(67, 13)
         Me.Label1.TabIndex = 13
         Me.Label1.Text = "匹配版本："
         '
         'Button3
         '
         Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(367, 137)
+        Me.Button3.Location = New System.Drawing.Point(367, 148)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(100, 28)
+        Me.Button3.Size = New System.Drawing.Size(100, 30)
         Me.Button3.TabIndex = 12
         Me.Button3.Text = "升级程序"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(367, 97)
+        Me.Button1.Location = New System.Drawing.Point(367, 105)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(100, 31)
+        Me.Button1.Size = New System.Drawing.Size(100, 34)
         Me.Button1.TabIndex = 18
         Me.Button1.Text = "读记数值"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'FormCheckVersions
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(478, 172)
+        Me.ClientSize = New System.Drawing.Size(478, 186)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Button4)

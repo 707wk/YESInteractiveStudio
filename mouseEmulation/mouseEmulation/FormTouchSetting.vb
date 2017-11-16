@@ -52,6 +52,11 @@ Public Class FormTouchSetting
             RadioButton4.Checked = True
         End If
 
+        Label8.Text = $"原始分辨率:{Screen.PrimaryScreen.Bounds.Width},{Screen.PrimaryScreen.Bounds.Height}"
+        CheckBox1.Checked = zoomFlage
+        NumericUpDown6.Value = zoomWidth
+        NumericUpDown5.Value = zoomHeight
+
         changeLanguage()
     End Sub
 
@@ -112,6 +117,10 @@ Public Class FormTouchSetting
 
         End If
 
+        '缩放参数
+        zoomFlage = CheckBox1.Checked
+        zoomWidth = NumericUpDown6.Value
+        zoomHeight = NumericUpDown5.Value
 
         'Next
         'MsgBox($"发送完毕", MsgBoxStyle.Information, Me.Text)

@@ -151,45 +151,56 @@ Public Class FormCheckVersions
     ''' <param name="ConnectIndex"></param>
     Private Sub updateBin(SenderIndex As Integer, PortIndex As Integer, ConnectIndex As Integer)
         Dim sendByte As Byte()
-        Dim sendstr As String = "aadb09030000000000"
+        Dim sendstr As String = "aadb09030000"
         ReDim sendByte(sendstr.Length \ 2 - 1)
 
-        For i As Integer = 0 To sendByte.Length - 1
+        For i As Integer = 0 To sendByte.Length \ 2 - 1
             sendByte(i) = Val($"&H{sendstr(i * 2)}{ sendstr(i * 2 + 1)}")
         Next
 
         sendByte(4) = binLength \ 256
         sendByte(5) = binLength Mod 256
 
-        sendByte(6) = verSion(0)
-        sendByte(7) = verSion(1)
-        sendByte(8) = verSion(2)
+        'sendByte(6) = verSion(0)
+        'sendByte(7) = verSion(1)
+        'sendByte(8) = verSion(2)
 
         'Me.TextBox3.AppendText($"{SenderIndex}-update:{}{vbCrLf}")
         mainClass.SetScanBoardData(SenderIndex, PortIndex, ConnectIndex, sendByte)
         Thread.Sleep(50)
 
-        Dim packLens As Integer = 128
+        If checkRecData({&H1A, &H1B}) = False Then
+            MsgBox($"升级指令未发送成功", MsgBoxStyle.Information, Me.Text)
+            Exit Sub
+        End If
 
-        ReDim sendByte(packLens + 1 - 1)
+        'Dim packLens As Integer = 131
+
+        ReDim sendByte(131 - 1)
         Dim fs As New System.IO.FileStream($".\bin\update.bin", IO.FileMode.Open, IO.FileAccess.Read)
         Dim re As New System.IO.BinaryReader(fs)
 
         Dim sendIndex As Integer = 0
         Do
-            Dim tmpByte(packLens - 1) As Byte
-            re.Read(tmpByte, 0, packLens)
+            Dim tmpByte(128 - 1) As Byte
+            '从文件读取的字节数
+            Dim readByteNum As Integer = re.Read(tmpByte, 0, 128)
 
             sendByte(0) = sendIndex
 
             Dim checkSum As Integer = 0
-            For i As Integer = 1 To packLens
-                sendByte(i) = tmpByte(i - 1)
-                checkSum += sendByte(i)
+            For i As Integer = 1 To 128
+                If i <= readByteNum Then
+                    sendByte(i) = tmpByte(i - 1)
+                    checkSum += sendByte(i)
+                Else
+                    '不足128字节则填充
+                    sendByte(i) = &HFF
+                End If
             Next
 
-            'sendByte(513) = (checkSum \ 256) Mod 256
-            'sendByte(514) = checkSum Mod 256
+            sendByte(129) = (checkSum \ 256) Mod 256
+            sendByte(130) = checkSum Mod 256
 
             'Dim tmpstr As String = Nothing
             'For qwe As Integer = 0 To 512 - 1
@@ -199,21 +210,106 @@ Public Class FormCheckVersions
             'Me.TextBox3.AppendText($"{SenderIndex}-{sendIndex}:{}{vbCrLf}")
             mainClass.SetScanBoardData(SenderIndex, PortIndex, ConnectIndex, sendByte)
 
+            If checkRecData({&H1C, &H1D}) = False Then
+                MsgBox($"第{sendIndex}包升级数据未发送成功", MsgBoxStyle.Information, Me.Text)
+                fs.Close()
+                Exit Sub
+            End If
+
             sendIndex += 1
 
-            If sendIndex * packLens >= binLength Then
+            If sendIndex * 128 >= binLength Then
                 Exit Do
             End If
 
-            Button3.Text = $"{(sendIndex * packLens * 100) \ binLength}%"
+            Button3.Text = $"{(sendIndex * 128 * 100) \ binLength}%"
 
             Thread.Sleep(50)
         Loop
+
+        mainClass.SetScanBoardData(SenderIndex, PortIndex, ConnectIndex, {&HAA, &HDB, &H9, &H9})
 
         Button3.Text = $"{If(selectLanguageId = 0, "发送完毕", "Send Successfully")}"
 
         fs.Close()
     End Sub
+
+    ''' <summary>
+    ''' 比较收到的数据
+    ''' </summary>
+    ''' <param name="checkData"></param>
+    ''' <returns></returns>
+    Private Function checkRecData(checkData() As Byte) As Boolean
+        For Each sender As senderInfo In senderArray
+            Dim cliSocket As Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
+                .SendTimeout = 500,
+                .ReceiveTimeout = 500
+            }
+            '连接
+            cliSocket.Connect($"{sender.ipDate(3)}.{sender.ipDate(2)}.{sender.ipDate(1)}.{sender.ipDate(0)}", 6000)
+
+            Try
+                Dim bytes(1028 - 1) As Byte
+                Dim tmpstr As String = "55d50902"
+                Dim sendbytes(4 - 1) As Byte
+                For i As Integer = 0 To tmpstr.Length \ 2 - 1
+                    sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
+                Next i
+
+                Dim bytesSend As Integer = cliSocket.Send(sendbytes)
+                Dim bytesRec As Integer = cliSocket.Receive(bytes)
+
+            Catch ex As Exception
+                MsgBox($"{If(selectLanguageId = 0, "发送读取指令错误", "Error sending read instruction")}")
+                'Exit Sub
+                cliSocket.Close()
+                Return False
+            End Try
+
+            'Dim asd As New Stopwatch
+            'asd.Start()
+            Dim showstr As String = Nothing
+            Try
+                Dim bytes(1028 - 1) As Byte
+                Dim tmpstr As String = "55d50905000000000400"
+                Dim sendbytes(10 - 1) As Byte
+                For i As Integer = 0 To tmpstr.Length \ 2 - 1
+                    sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
+                Next i
+
+                Dim bytesSend As Integer = cliSocket.Send(sendbytes)
+
+                For m As Integer = 0 To 16 - 1
+                    Dim bytesRec As Integer = cliSocket.Receive(bytes)
+
+                    For j As Integer = 4 To 1027 Step 32
+                        If bytes(j + 0) <> &H55 Then
+                            Continue For
+                        End If
+
+                        If bytes(j + 1) > 4 Then
+                            Continue For
+                        End If
+
+                        For i As Integer = 0 To checkData.Length - 1
+                            If bytes(j + 4 + i) <> checkData(i) Then
+                                cliSocket.Close()
+                                Return False
+                            End If
+                        Next
+                    Next
+                Next
+            Catch ex As Exception
+                MsgBox($"{If(selectLanguageId = 0, "接收数据错误", "Packets received errors")}")
+                'Exit Sub
+                cliSocket.Close()
+                Return False
+            End Try
+            cliSocket.Close()
+        Next
+
+        Return True
+    End Function
 
     ''' <summary>
     ''' 升级程序
@@ -286,11 +382,10 @@ Public Class FormCheckVersions
 
         Thread.Sleep(50)
 
-        Dim cliSocket As Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-        '发送超时
-        cliSocket.SendTimeout = 500
-        '接收超时
-        cliSocket.ReceiveTimeout = 500
+        Dim cliSocket As Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
+            .SendTimeout = 500,
+            .ReceiveTimeout = 500
+        }
         '连接
         cliSocket.Connect($"{senderArray(index).ipDate(3)}.{senderArray(index).ipDate(2)}.{senderArray(index).ipDate(1)}.{senderArray(index).ipDate(0)}", 6000)
 

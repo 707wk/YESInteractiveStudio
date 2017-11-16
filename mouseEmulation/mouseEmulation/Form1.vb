@@ -81,7 +81,7 @@ Public Class Form1
     Dim workThread As Threading.Thread
 
     ''' <summary>
-    ''' 创建窗体
+    ''' 创建播放窗体
     ''' </summary>
     ''' <param name="screenIndex"></param>
     Public Sub creatDialogThread(ByVal screenIndex As Integer)
@@ -282,6 +282,10 @@ Public Class Form1
         ' 语言设置保存
         selectLanguageId = CInt(tmp2.GetINI("SYS", "selectLanguageId", "", ".\setting.ini"))
 
+        ' 保存缩放设置
+        zoomFlage = CBool(tmp2.GetINI("SYS", "zoomFlage", "", ".\setting.ini"))
+        zoomWidth = CInt(tmp2.GetINI("SYS", "zoomWidth", "", ".\setting.ini"))
+        zoomHeight = CInt(tmp2.GetINI("SYS", "zoomHeight", "", ".\setting.ini"))
 
         '程序与诺瓦设备通信间隔参数读取
         checkTime = 100
@@ -402,10 +406,11 @@ Public Class Form1
         tmp2.WriteINI("SYS", "ResetTimeSec", ResetTimeSec, ".\setting.ini")
         tmp2.WriteINI("SYS", "selectLanguageId", selectLanguageId, ".\setting.ini")
         tmp2.WriteINI("SYS", "resetType", resetType, ".\setting.ini")
+        tmp2.WriteINI("SYS", "zoomFlage", zoomFlage, ".\setting.ini")
+        tmp2.WriteINI("SYS", "zoomWidth", zoomWidth, ".\setting.ini")
+        tmp2.WriteINI("SYS", "zoomHeight", zoomHeight, ".\setting.ini")
 
-
-
-        '清空变量
+        '注销变量
         If mainClass Is Nothing Then
         Else
             mainClass.UnInitialize()
@@ -859,11 +864,10 @@ Public Class Form1
 
                     Dim ipStr As String = $"{senderArray(i).ipDate(3)}.{senderArray(i).ipDate(2)}.{senderArray(i).ipDate(1)}.{senderArray(i).ipDate(0)}"
 
-                    senderArray(i).cliSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-                    '发送超时
-                    senderArray(i).cliSocket.SendTimeout = 1000
-                    '接收超时
-                    senderArray(i).cliSocket.ReceiveTimeout = 1000
+                    senderArray(i).cliSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
+                        .SendTimeout = 1000,
+                        .ReceiveTimeout = 1000
+                    }
                     '连接
                     senderArray(i).cliSocket.Connect(ipStr, 6000)
                 Next
@@ -883,11 +887,10 @@ Public Class Form1
                 Exit Sub
             End Try
 
-
             '建立一个线程文件
-            workThread = New Threading.Thread(AddressOf communicWorkThread)
-            '线程后台运行
-            workThread.IsBackground = True
+            workThread = New Threading.Thread(AddressOf communicWorkThread) With {
+                .IsBackground = True '线程后台运行
+            }
             '线程开始
             workThread.Start()
 
@@ -1197,7 +1200,7 @@ Public Class Form1
                     Dim bytesRec As Integer = senderArray(index).cliSocket.Receive(bytes)
 
                 Catch ex As Exception
-                    '出现异常，显示什么异常，结束本次循环
+                    '结束本次循环
                     exceptionNums += 1
                     putlog($"{senderArray(index).ipDate(3)}.{senderArray(index).ipDate(2)}.{senderArray(index).ipDate(1)}.{senderArray(index).ipDate(0)} 01:{ex.Message}")
                     Continue For

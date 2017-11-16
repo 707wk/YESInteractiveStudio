@@ -270,6 +270,7 @@
   <ItemGroup>
     <Content Include="main.ico" />
     <None Include="res\se.png" />
+    <Content Include="README.txt" />
     <Content Include="YES1.ico" />
     <None Include="res\touch.png" />
     <None Include="res\en.png" />

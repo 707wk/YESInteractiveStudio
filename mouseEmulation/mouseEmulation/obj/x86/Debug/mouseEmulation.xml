@@ -474,6 +474,13 @@ mouseEmulation
  <param name="PortIndex"></param>
  <param name="ConnectIndex"></param>
 </member>
+<member name="M:mouseEmulation.FormCheckVersions.checkRecData(System.Byte[])">
+ <summary>
+ 比较收到的数据
+ </summary>
+ <param name="checkData"></param>
+ <returns></returns>
+</member>
 <member name="M:mouseEmulation.FormCheckVersions.Button3_MouseUp(System.Object,System.EventArgs)">
  <summary>
  升级程序
@@ -572,6 +579,16 @@ mouseEmulation
  颜色渐变列表
  </summary>
 </member>
+<member name="F:mouseEmulation.FormPlay.touchPieceWidth">
+ <summary>
+ 触摸板宽度
+ </summary>
+</member>
+<member name="F:mouseEmulation.FormPlay.touchPieceHeight">
+ <summary>
+ 触摸板高度
+ </summary>
+</member>
 <member name="T:mouseEmulation.FormPlay.closeDialogCallback">
  <summary>
  关闭窗体
@@ -624,6 +641,383 @@ mouseEmulation
  <param name="tX"></param>
  <param name="tY"></param>
  <param name="value"></param>
+</member>
+<member name="F:mouseEmulation.FormScreenOption.tmpDataTable">
+ <summary>
+ 临时数据表
+ </summary>
+</member>
+<member name="M:mouseEmulation.FormScreenOption.Button1_Click(System.Object,System.EventArgs)">
+ <summary>
+ 保存修改
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:mouseEmulation.FormScreenOption.Button2_Click(System.Object,System.EventArgs)">
+ <summary>
+ 全选
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:mouseEmulation.FormScreenOption.Button3_Click(System.Object,System.EventArgs)">
+ <summary>
+ 反选
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:mouseEmulation.FormScreenOption.changeLanguage">
+ <summary>
+ 更改语言 0:中文 1:English
+ </summary>
+</member>
+<member name="F:mouseEmulation.FormTouchSetting.sendByte">
+ <summary>
+ 发送数据数组
+ </summary>
+</member>
+<member name="M:mouseEmulation.FormTouchSetting.Button1_Click(System.Object,System.EventArgs)">
+ <summary>
+ 保存参数
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:mouseEmulation.FormTouchSetting.changeLanguage">
+ <summary>
+ 更改语言 0:中文 1:English
+ </summary>
+</member>
+<member name="M:mouseEmulation.FormTouchSetting.RadioButton2_CheckedChanged(System.Object,System.EventArgs)">
+ <summary>
+ 地砖屏幕模式
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:mouseEmulation.FormTouchSetting.RadioButton1_CheckedChanged(System.Object,System.EventArgs)">
+ <summary>
+ 普通屏模式
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:mouseEmulation.FormTouchSetting.RadioButton3_CheckedChanged(System.Object,System.EventArgs)">
+ <summary>
+ 踩踏模式
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:mouseEmulation.FormTouchSetting.Button2_Click(System.Object,System.EventArgs)">
+ <summary>
+ 强制复位
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:mouseEmulation.FormTouchSetting.Button3_Click(System.Object,System.EventArgs)">
+ <summary>
+ 设置温度复位幅度
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:mouseEmulation.FormTouchSetting.Button4_Click(System.Object,System.EventArgs)">
+ <summary>
+ 设置定时复位时间间隔
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:mouseEmulation.ModuleMd5Hash.getMd5Hash(System.String)">
+ <summary>
+ 返回字符串MD5值
+ </summary>
+ <param name="input"></param>
+ <returns></returns>
+</member>
+<member name="T:mouseEmulation.ModuleSetting.ScanBoardInfo">
+ <summary>
+ 接收卡信息
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ScanBoardInfo.ScreenIndex">
+ <summary>
+ 屏幕索引
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ScanBoardInfo.linkIndex">
+ <summary>
+ 在屏幕数组的下标
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ScanBoardInfo.PortIndex">
+ <summary>
+ 网口索引
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ScanBoardInfo.ConnectIndex">
+ <summary>
+ 连接序号
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ScanBoardInfo.X">
+ <summary>
+ X轴索引
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ScanBoardInfo.Y">
+ <summary>
+ Y轴索引
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.TempI">
+ <summary>
+ 1： 普通模式 2：地砖踩踏模式 3：地砖四合一模式
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.TempS">
+ <summary>
+ 统计单张接收  开关量和
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.resetType">
+ <summary>
+ 复位类型 0软复位 1硬复位
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ScreenSensitivity">
+ <summary>
+ 屏幕灵敏度设置
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ScreenM2clickH">
+ <summary>
+ 踩踏模式下 历史点击记录 只适合点击事件
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ScreenM2click">
+ <summary>
+ 踩踏模式下 点击记录 只适合点击事件
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ScreenAnti">
+ <summary>
+ 屏幕特定模式 单触发块 抗干扰参数   （统计接收卡 单触发块 开关量和）
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ScreenAntiS">
+ <summary>
+ 屏幕总抗干扰参数 （统计接收卡开关量和）
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ResetTemp">
+ <summary>
+ 屏幕定时复位增量温度 K
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ResetTimeSec">
+ <summary>
+ 屏幕定时复位时间  min
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.ScanBoardTable">
+ <summary>
+ 接收卡信息索引表
+ </summary>
+</member>
+<member name="T:mouseEmulation.ModuleSetting.screenInfo">
+ <summary>
+ 显示屏信息
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenInfo.remark">
+ <summary>
+ 备注
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenInfo.showFlage">
+ <summary>
+ 是否显示
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenInfo.filePath">
+ <summary>
+ 播放文件路径
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenInfo.x">
+ <summary>
+ 显示屏 X 偏移(单位像素)
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenInfo.y">
+ <summary>
+ 显示屏 Y 偏移(单位像素)
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenInfo.width">
+ <summary>
+ 显示屏宽度(单位像素)
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenInfo.height">
+ <summary>
+ 显示屏高度(单位像素)
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenInfo.ScanBoardWidth">
+ <summary>
+ 屏幕单元宽度(单位像素)
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenInfo.ScanBoardHeight">
+ <summary>
+ 屏幕单元高度(单位像素)
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenInfo.clickHistoryArray">
+ <summary>
+ 上次点击状态
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenInfo.SenderList">
+ <summary>
+ 屏幕所在的发送卡序列
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenInfo.playDialog">
+ <summary>
+ 播放窗体
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenMain">
+ <summary>
+ 显示屏数组
+ </summary>
+</member>
+<member name="T:mouseEmulation.ModuleSetting.senderInfo">
+ <summary>
+ 发送卡(控制器)信息
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.senderInfo.link">
+ <summary>
+ 是否需要连接
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.senderInfo.ipDate">
+ <summary>
+ IP信息
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.senderInfo.tmpIpData">
+ <summary>
+ 临时保存修改后的IP信息
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.senderInfo.cliSocket">
+ <summary>
+ 连接变量
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.senderArray">
+ <summary>
+ 发送卡数组
+ </summary>
+</member>
+<member name="T:mouseEmulation.ModuleSetting.screenPlayInfo">
+ <summary>
+ 屏幕播放信息
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenPlayInfo.remark">
+ <summary>
+ 备注
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.screenPlayInfo.showFlage">
+ <summary>
+ 是否显示
+ </summary>
+</member>
+<member name="T:mouseEmulation.ModuleSetting.playInfoSave">
+ <summary>
+ 播放相关信息
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.playInfoSave.playList">
+ <summary>
+ 屏幕播放信息列表
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.playInfoSave.filesList">
+ <summary>
+ 播放列表
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.systeminfo">
+ <summary>
+ 系统设置变量
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.checkTime">
+ <summary>
+ 查询时间间隔
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.runMode">
+ <summary>
+ 运行模式
+ 0点击
+ 1测试
+ 2黑屏
+ 3忽略
+ 4测试(显示电容)
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.recordDataFlage">
+ <summary>
+ 记录数据标记
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.recordDataFile">
+ <summary>
+ 记录数据文件变量
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.selectLanguageId">
+ <summary>
+ 语言类型 0中文 1English
+ </summary>
+</member>
+<member name="F:mouseEmulation.ModuleSetting.rootClass">
+ <summary>
+ Nova服务变量
+ </summary>
+</member>
+<member name="M:mouseEmulation.ModuleSetting.putlog(System.String)">
+ <summary>
+ 输出日志
+ </summary>
+ <param name="str"></param>
+</member>
+<member name="M:mouseEmulation.ModuleSetting.SetresetTemp(System.Int32)">
+ <summary>
+ 设置温度复位幅度
+ </summary>
+ <param name="value"></param>
+ <returns></returns>
+</member>
+<member name="M:mouseEmulation.ModuleSetting.SetResetTimeSec(System.Int32)">
+ <summary>
+ 设置定时复位时间间隔
+ </summary>
+ <param name="value"></param>
+ <returns></returns>
 </member>
 </members>
 </doc>

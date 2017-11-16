@@ -357,18 +357,7 @@
                     '记录点击的时间事件和地砖屏一共触发点击的次数
                     If recordDataFlage Then
                         recordDataFile.WriteLine($"时间-{Format(Now(), "yyyyMMddHHmmss")}-方块-{tX * touchPieceWidth + 1}-{tY * touchPieceHeight + 1}-value-{value}-tempi-{TempI}-runMode-{runMode} ") '
-                        Dim tmp3 As New ClassIni
-                        Dim tmpI As Integer
-                        Try
-                            tmpI = CInt(tmp3.GetINI("ScreenInteraction", $"X-Y:{txp1}-{typ1}", "0", ".\InteractionNum.ini"))
-                            tmpI += 1
-                            tmp3.WriteINI("ScreenInteraction", $"X-Y:{txp1}-{typ1}", CStr(tmpI), ".\InteractionNum.ini")
-                        Catch ex As Exception
-                            tmp3.WriteINI("ScreenInteraction", $"X-Y:{txp1}-{typ1}", "1", ".\InteractionNum.ini")
-                        End Try
-
                     End If
-
                 End If
                 'If InteractMode = 1 Or InteractMode = 3 Then
                 ' g.FillRectangle(mpen,

@@ -49,7 +49,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>DLZgsPxicTRV6znfrrRiK4LIgn053TsWNC+OFQa/d4o=</dsig:DigestValue>
+        <dsig:DigestValue>Tm85Dnynzp5YCO3n0VPJ0LirzGuWaCw4TiiOEB6IlRo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -61,31 +61,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MNqQ9qawhTBojA2Q1MX2uBm0fKBsEUudCbdAyjsBoJ8=</dsig:DigestValue>
+        <dsig:DigestValue>+TCaJdyHrBvEH9Cc/uTd4R8eF+z9RgYBD3TkuAOOfhc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="mouseEmulation.exe" size="379920">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="mouseEmulation.exe" size="318992">
       <assemblyIdentity name="mouseEmulation" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>2esneVPDN/kNpr1PaiO3+FsxjIjkw05ibY5XKmvZTr8=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="507392">
-      <assemblyIdentity name="Newtonsoft.Json" version="7.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>5+A0fbsTiVHUjl1VdGcrIIinncjKL15b9KVqomgfT0A=</dsig:DigestValue>
+        <dsig:DigestValue>6J2ZHfahazPLEQvx+n34jVb+2l0NMeFULEj4NWN/E/0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

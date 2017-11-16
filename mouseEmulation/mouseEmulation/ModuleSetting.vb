@@ -35,14 +35,15 @@ Module ModuleSetting
         ''' </summary>
         Dim Y As Integer
     End Structure
-    Public InteractMode As Integer
+
     ''' <summary>
     ''' 1： 普通模式 2：地砖踩踏模式 3：地砖四合一模式
     ''' </summary>
+    Public InteractMode As Integer
+    ''' <summary>
+    ''' 统计单张接收 特定模式 单触发块 开关量和
+    ''' </summary>
     Public TempI As Integer
-    '''' <summary>
-    '''' 统计单张接收 特定模式 单触发块 开关量和
-    '''' </summary>
     'Public TempI2 As Integer
     ''' <summary>
     ''' 统计单张接收  开关量和
@@ -237,6 +238,19 @@ Module ModuleSetting
     ''' 4测试(显示电容)
     ''' </summary>
     Public runMode As Integer
+
+    ''' <summary>
+    ''' 缩放标志
+    ''' </summary>
+    Public zoomFlage As Boolean
+    ''' <summary>
+    ''' 缩放的宽度
+    ''' </summary>
+    Public zoomWidth As Integer
+    ''' <summary>
+    ''' 缩放的高度
+    ''' </summary>
+    Public zoomHeight As Integer
 
     ''' <summary>
     ''' 记录数据标记
