@@ -87,6 +87,7 @@ Partial Class FormOption
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -150,11 +151,12 @@ Partial Class FormOption
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Label12)
         Me.GroupBox3.Controls.Add(Me.TextBox1)
         Me.GroupBox3.Controls.Add(Me.Label1)
         Me.GroupBox3.Location = New System.Drawing.Point(8, 6)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(143, 49)
+        Me.GroupBox3.Size = New System.Drawing.Size(311, 49)
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "屏幕缩放"
@@ -169,7 +171,7 @@ Partial Class FormOption
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(17, 20)
+        Me.Label1.Location = New System.Drawing.Point(16, 21)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(35, 12)
         Me.Label1.TabIndex = 0
@@ -753,6 +755,15 @@ Partial Class FormOption
         Me.NumericUpDown1.Size = New System.Drawing.Size(52, 21)
         Me.NumericUpDown1.TabIndex = 0
         '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(143, 21)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(143, 12)
+        Me.Label12.TabIndex = 2
+        Me.Label12.Text = "= 实际宽度 / 缩放后宽度"
+        '
         'FormOption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -867,4 +878,5 @@ Partial Class FormOption
     Friend WithEvents Column13 As DataGridViewTextBoxColumn
     Friend WithEvents Column14 As DataGridViewTextBoxColumn
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label12 As Label
 End Class

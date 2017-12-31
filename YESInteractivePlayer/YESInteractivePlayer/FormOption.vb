@@ -98,7 +98,7 @@ Public Class FormOption
         '互动模式
         ComboBox2.Items.Add("单个感应")
         ComboBox2.Items.Add("4合1感应")
-        ComboBox2.SelectedIndex = sysInfo.touchMode
+        'ComboBox2.SelectedIndex = sysInfo.touchMode
 
         '检测间隔
         NumericUpDown1.Value = sysInfo.inquireTimeSec
@@ -187,7 +187,7 @@ Public Class FormOption
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '互动性
         '互动模式
-        sysInfo.touchMode = ComboBox2.SelectedIndex
+        'sysInfo.touchMode = ComboBox2.SelectedIndex
 
         '检测间隔
         sysInfo.inquireTimeSec = NumericUpDown1.Value

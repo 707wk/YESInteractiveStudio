@@ -223,8 +223,12 @@ Public Class FormMain
     End Sub
 
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        '未断开则不退出
-        If sysInfo.LinkFlage Then
+        '退出前提示
+        If MsgBox("确定退出程序?", MsgBoxStyle.YesNo, "退出") = MsgBoxResult.Yes Then
+            If sysInfo.LinkFlage Then
+                ToolStripButton1_Click(Nothing, Nothing)
+            End If
+        Else
             e.Cancel = True
             Exit Sub
         End If

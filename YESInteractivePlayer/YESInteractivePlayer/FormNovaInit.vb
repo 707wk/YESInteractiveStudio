@@ -160,10 +160,10 @@ Public Class FormNovaInit
         Dim x As Integer
         '获取到的显示屏 Y 偏移
         Dim y As Integer
-        '获取到的显示屏宽度
-        Dim width As Integer
-        '获取到的显示屏高度
-        Dim height As Integer
+        ''获取到的显示屏宽度
+        'Dim width As Integer
+        ''获取到的显示屏高度
+        'Dim height As Integer
 
         showinfo($"载入屏幕信息中")
         sysInfo.ScanBoardTable = New Hashtable

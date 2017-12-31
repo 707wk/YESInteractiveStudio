@@ -329,10 +329,10 @@ Module ModuleStructure
         ''' 3忽略
         ''' </summary>
         Dim displayMode As Integer
-        ''' <summary>
-        ''' 触摸模式 01合1 14合1
-        ''' </summary>
-        Dim touchMode As Integer
+        '''' <summary>
+        '''' 触摸模式 01合1 14合1 [废弃]
+        '''' </summary>
+        'Dim touchMode As Integer
         ''' <summary>
         ''' 触摸灵敏度 低1-9高
         ''' </summary>
