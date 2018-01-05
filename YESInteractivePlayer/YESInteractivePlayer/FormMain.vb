@@ -52,7 +52,8 @@ Public Class FormMain
                 sysInfo = sfFormatter.Deserialize(fStream)
             Catch ex As Exception
                 MsgBox($"配置文件读取失败:{ex.Message}", MsgBoxStyle.Information, "读取配置")
-                Application.Exit()
+                End
+                'Application.Exit()
                 '打开版本不同或错误的文件则无法读取
             End Try
 
@@ -124,6 +125,23 @@ Public Class FormMain
         黑屏F3ToolStripMenuItem.BackColor = Color.FromArgb(&H7F, &H7F, &H7F)
         忽略F4ToolStripMenuItem.BackColor = Color.FromArgb(&HB0, &HAF, &HDF)
         ToolStripDropDownButton1.BackColor = 运行F1ToolStripMenuItem.BackColor
+
+        '发送卡状态
+        Timer1.Interval = 1000
+
+        '发送卡状态列表样式
+        For i As Integer = 0 To 10 - 1
+            DataGridView1.Columns.Add($"C{i}", $"{i}")
+            DataGridView1.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+            DataGridView1.Columns(i).Width = 35
+        Next
+        DataGridView1.ColumnHeadersVisible = False
+        DataGridView1.RowHeadersVisible = False
+        DataGridView1.AllowUserToResizeColumns = False
+        DataGridView1.AllowUserToResizeRows = False
+        DataGridView1.MultiSelect = False
+        DataGridView1.Rows.Clear()
+        'DataGridView1.GridColor = Color.FromArgb(&H33, &H99, &HFF)
     End Sub
 
     ''' <summary>
@@ -176,6 +194,10 @@ Public Class FormMain
         '判断哪些控制器要连接
         For Each i In sysInfo.curtainList
             For Each j In i.screenList
+                If Not sysInfo.screenList(j).existFlage Then
+                    Continue For
+                End If
+
                 For Each k In sysInfo.screenList(j).SenderList
                     sysInfo.senderList(k).link = True
                 Next
@@ -200,6 +222,11 @@ Public Class FormMain
 
         '启动时为未连接状态
         offLinkCon()
+
+        '加载发送卡列表
+        For i As Integer = 0 To sysInfo.senderList.Length - 1 Step 10
+            DataGridView1.Rows.Add("")
+        Next
     End Sub
 
     ''' <summary>
@@ -311,6 +338,7 @@ Public Class FormMain
         Button5.Enabled = False
         ToolStripButton1.Text = "断开连接"
         ToolStripButton1.BackColor = Color.OrangeRed
+        Timer1.Start()
     End Sub
 
     ''' <summary>
@@ -321,6 +349,7 @@ Public Class FormMain
         Button5.Enabled = True
         ToolStripButton1.Text = "连接控制器"
         ToolStripButton1.BackColor = Color.FromArgb(&H0, &HE3, &HB)
+        Timer1.Stop()
     End Sub
 
     ''' <summary>
@@ -444,12 +473,16 @@ Public Class FormMain
         Dim nowsec As Integer = 0
         '异常次数
         Dim exceptionNums As Integer = 0
+        '每秒查询次数
+        Dim readNum As Integer = 0
 
         Do
             '获取当前时间秒
             nowsec = Now().Second
             If lastsec <> nowsec Then
                 exceptionNums = 0
+                sysInfo.senderList(senderId).MaxReadNum = readNum
+                readNum = 0
                 lastsec = nowsec
             End If
 
@@ -563,6 +596,7 @@ Public Class FormMain
                     Next
                 Next
 
+                readNum += 1
             Catch ex As Exception
                 exceptionNums += 1
             End Try
@@ -684,5 +718,12 @@ Public Class FormMain
                 End With
             Next
         End If
+    End Sub
+
+    '定时刷新发送卡状态
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        For i As Integer = 0 To sysInfo.senderList.Length - 1 Step 10
+            DataGridView1.Rows(i \ 10).Cells(i Mod 10).Value = $"{sysInfo.senderList(i).MaxReadNum}"
+        Next
     End Sub
 End Class

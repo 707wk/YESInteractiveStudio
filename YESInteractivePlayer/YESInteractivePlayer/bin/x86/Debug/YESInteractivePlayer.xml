@@ -177,6 +177,21 @@ YESInteractivePlayer
  右键选中
  </summary>
 </member>
+<member name="M:YESInteractivePlayer.FormOption.DataGridView3_CurrentCellChanged(System.Object,System.EventArgs)">
+ <summary>
+ 点击第一行添加屏幕
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.ComboBox3_SelectedIndexChanged(System.Object,System.EventArgs)">
+ <summary>
+ 选择屏幕ID
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.DataGridView3_CellEndEdit(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
+ <summary>
+ 更新输入
+ </summary>
+</member>
 <member name="M:YESInteractivePlayer.FormOption.updataIp(System.Int32)">
  <summary>
  更新显示IP信息
@@ -465,6 +480,11 @@ YESInteractivePlayer
 <member name="F:YESInteractivePlayer.ModuleStructure.senderInfo.workThread">
  <summary>
  状态检测线程
+ </summary>
+</member>
+<member name="F:YESInteractivePlayer.ModuleStructure.senderInfo.MaxReadNum">
+ <summary>
+ 每秒最大查询次数
  </summary>
 </member>
 <member name="T:YESInteractivePlayer.ModuleStructure.screenInfo">

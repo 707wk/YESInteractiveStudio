@@ -66,6 +66,11 @@ Module ModuleStructure
         ''' 状态检测线程
         ''' </summary>
         Dim workThread As Thread
+
+        ''' <summary>
+        ''' 每秒最大查询次数
+        ''' </summary>
+        Dim MaxReadNum As Integer
     End Structure
 
     ''' <summary>

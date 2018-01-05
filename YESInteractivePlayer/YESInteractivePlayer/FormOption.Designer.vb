@@ -25,6 +25,7 @@ Partial Class FormOption
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -37,6 +38,7 @@ Partial Class FormOption
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.DataGridView3 = New System.Windows.Forms.DataGridView()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -87,7 +89,6 @@ Partial Class FormOption
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -160,6 +161,15 @@ Partial Class FormOption
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "屏幕缩放"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(143, 21)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(143, 12)
+        Me.Label12.TabIndex = 2
+        Me.Label12.Text = "= 实际宽度 / 缩放后宽度"
         '
         'TextBox1
         '
@@ -238,9 +248,9 @@ Partial Class FormOption
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(35, 17)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(47, 12)
+        Me.Label11.Size = New System.Drawing.Size(29, 12)
         Me.Label11.TabIndex = 15
-        Me.Label11.Text = "Label11"
+        Me.Label11.Text = "NULL"
         '
         'Label6
         '
@@ -286,6 +296,7 @@ Partial Class FormOption
         Me.GroupBox11.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox11.Controls.Add(Me.ComboBox3)
         Me.GroupBox11.Controls.Add(Me.DataGridView3)
         Me.GroupBox11.Location = New System.Drawing.Point(9, 64)
         Me.GroupBox11.Name = "GroupBox11"
@@ -293,6 +304,14 @@ Partial Class FormOption
         Me.GroupBox11.TabIndex = 9
         Me.GroupBox11.TabStop = False
         Me.GroupBox11.Text = "屏幕列表"
+        '
+        'ComboBox3
+        '
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Location = New System.Drawing.Point(48, 72)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(64, 20)
+        Me.ComboBox3.TabIndex = 1
         '
         'DataGridView3
         '
@@ -366,6 +385,7 @@ Partial Class FormOption
         '
         Me.NumericUpDown7.Location = New System.Drawing.Point(163, 40)
         Me.NumericUpDown7.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.NumericUpDown7.Minimum = New Decimal(New Integer() {10000, 0, 0, -2147483648})
         Me.NumericUpDown7.Name = "NumericUpDown7"
         Me.NumericUpDown7.Size = New System.Drawing.Size(64, 21)
         Me.NumericUpDown7.TabIndex = 4
@@ -374,6 +394,7 @@ Partial Class FormOption
         '
         Me.NumericUpDown6.Location = New System.Drawing.Point(69, 40)
         Me.NumericUpDown6.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.NumericUpDown6.Minimum = New Decimal(New Integer() {10000, 0, 0, -2147483648})
         Me.NumericUpDown6.Name = "NumericUpDown6"
         Me.NumericUpDown6.Size = New System.Drawing.Size(64, 21)
         Me.NumericUpDown6.TabIndex = 3
@@ -629,6 +650,7 @@ Partial Class FormOption
         'NumericUpDown5
         '
         Me.NumericUpDown5.Location = New System.Drawing.Point(91, 52)
+        Me.NumericUpDown5.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.NumericUpDown5.Name = "NumericUpDown5"
         Me.NumericUpDown5.Size = New System.Drawing.Size(46, 21)
         Me.NumericUpDown5.TabIndex = 4
@@ -755,15 +777,6 @@ Partial Class FormOption
         Me.NumericUpDown1.Size = New System.Drawing.Size(52, 21)
         Me.NumericUpDown1.TabIndex = 0
         '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(143, 21)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(143, 12)
-        Me.Label12.TabIndex = 2
-        Me.Label12.Text = "= 实际宽度 / 缩放后宽度"
-        '
         'FormOption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -773,6 +786,7 @@ Partial Class FormOption
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormOption"
+        Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "选项"
         Me.TabControl1.ResumeLayout(False)
@@ -879,4 +893,5 @@ Partial Class FormOption
     Friend WithEvents Column14 As DataGridViewTextBoxColumn
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label12 As Label
+    Friend WithEvents ComboBox3 As ComboBox
 End Class

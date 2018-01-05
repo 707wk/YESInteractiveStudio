@@ -34,9 +34,18 @@ Public Class FormOption
             DataGridView2.Rows.Add(i + 1,
                                    sysInfo.curtainList.Item(i).remark,
                                    $"{sysInfo.curtainList.Item(i).x},{sysInfo.curtainList.Item(i).y}")
-
-            'maxCurtainId = If(maxCurtainId < i + 1, i + 1, maxCurtainId)
         Next
+
+        '初始化屏幕下拉列表
+        ComboBox3.DropDownStyle = ComboBoxStyle.DropDownList
+        ComboBox3.Visible = False
+        For i As Integer = 0 To sysInfo.screenList.Length - 1
+            If Not sysInfo.screenList(i).existFlage Then
+                Continue For
+            End If
+            ComboBox3.Items.Add($"{i}")
+        Next
+        DataGridView3.Controls.Add(ComboBox3)
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '屏幕
@@ -121,7 +130,9 @@ Public Class FormOption
     Private Sub FormOption_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '常规
-        sysInfo.zoomProportion = Val(TextBox1.Text)
+        If Val(TextBox1.Text) Then
+            sysInfo.zoomProportion = Val(TextBox1.Text)
+        End If
 
         sysInfo.selectLanguageId = ComboBox1.SelectedIndex
 
@@ -242,6 +253,85 @@ Public Class FormOption
     End Sub
 
     ''' <summary>
+    ''' 点击第一行添加屏幕
+    ''' </summary>
+    Private Sub DataGridView3_CurrentCellChanged(sender As Object, e As EventArgs) Handles DataGridView3.CurrentCellChanged
+        If DataGridView3.CurrentCell Is Nothing Then
+            Exit Sub
+        End If
+
+        Dim columnIndex As Integer = DataGridView3.CurrentCell.ColumnIndex
+        Dim rowIndex As Integer = DataGridView3.CurrentCell.RowIndex
+        If rowIndex = DataGridView3.Rows.Count - 1 Then
+            '最后一行只读
+            DataGridView3.Rows(rowIndex).Cells(columnIndex).ReadOnly = True
+        ElseIf columnIndex <> 0 Then
+            DataGridView3.Rows(rowIndex).Cells(columnIndex).ReadOnly = False
+        End If
+
+        ComboBox3.Visible = False
+        If columnIndex = 0 Then
+            '点击第一列单元格则显示下拉列表
+            Dim rect As Rectangle = DataGridView3.GetCellDisplayRectangle(columnIndex, rowIndex, False)
+            ComboBox3.Left = rect.Left
+            ComboBox3.Top = rect.Top
+            ComboBox3.Width = rect.Width
+            ComboBox3.Height = rect.Height
+            '将单元格的内容显示为下拉列表的当前项
+            ComboBox3.SelectedIndex = ComboBox3.Items.IndexOf($"{DataGridView3.Rows(rowIndex).Cells(columnIndex).Value}")
+            ComboBox3.Visible = True
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 选择屏幕ID
+    ''' </summary>
+    Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
+        If ComboBox3.SelectedIndex = -1 Then
+            Exit Sub
+        End If
+
+        If DataGridView3.Rows(DataGridView3.CurrentCell.RowIndex).Cells(0).Value Is Nothing Then
+            '新增
+            Dim row As DataGridViewRow = New DataGridViewRow
+            Dim textboxcell As DataGridViewTextBoxCell = New DataGridViewTextBoxCell
+            textboxcell.Value = ComboBox3.Items(ComboBox3.SelectedIndex)
+            row.Cells.Add(textboxcell)
+            DataGridView3.Rows.Add(row)
+        Else
+            '修改
+            DataGridView3.Rows(DataGridView3.CurrentCell.RowIndex).Cells(0).Value = ComboBox3.Items(ComboBox3.SelectedIndex)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 更新输入
+    ''' </summary>
+    Private Sub DataGridView3_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView3.CellEndEdit
+        Dim editValue As Integer
+
+        Dim reg As New Regex("\d+")
+        Dim m As Match
+
+        m = reg.Match(DataGridView3.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
+        If m.Success Then
+            editValue = CInt(m.Value)
+        End If
+
+        Select Case e.ColumnIndex
+            Case 0
+            Case 1
+            Case 2
+            Case 3
+                editValue = If(editValue, editValue, 4)
+            Case 4
+                editValue = If(editValue, editValue, 4)
+        End Select
+
+        DataGridView3.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = editValue
+    End Sub
+
+    ''' <summary>
     ''' 更新显示IP信息
     ''' </summary>
     Private Sub updataIp(i As Integer)
@@ -269,6 +359,12 @@ Public Class FormOption
 
         '判断数值
         For i As Integer = 0 To 4 - 1
+            If Not IsNumeric(ipDataStrArr(i)) Then
+                MsgBox($"非法参数", MsgBoxStyle.Information, Me.Text)
+                updataIp(e.RowIndex)
+                Exit Sub
+            End If
+
             Dim reg As New Regex("\d+")
             Dim m As Match = reg.Match(ipDataStrArr(i))
 
@@ -423,7 +519,10 @@ Public Class FormOption
         End If
 
         '删除时先关闭窗体
-        sysInfo.curtainList.Item(DataGridView2.SelectedCells(0).RowIndex).playDialog.closeDialog(True)
+        Try
+            sysInfo.curtainList.Item(DataGridView2.SelectedCells(0).RowIndex).playDialog.closeDialog(True)
+        Catch ex As Exception
+        End Try
 
         sysInfo.curtainList.RemoveAt(DataGridView2.SelectedCells(0).RowIndex)
         DataGridView2.Rows.RemoveAt(DataGridView2.SelectedCells(0).RowIndex)

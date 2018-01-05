@@ -44,6 +44,9 @@
     Private Const WM_MOUSEMOVE = &H200
 
     Private Sub FormPlay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '窗体置顶
+        Me.TopMost = True
+
         '隐藏播放控件
         AxShockwaveFlash1.Hide()
         AxShockwaveFlash1.BackgroundColor = 0

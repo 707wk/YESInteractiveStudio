@@ -49,7 +49,6 @@ Partial Class FormPlay
         Me.Name = "FormPlay"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "FormPlay"
-        Me.TopMost = True
         CType(Me.AxShockwaveFlash1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

@@ -89,7 +89,8 @@ Public Class FormNovaInit
             sysInfo.rootClass.UnInitialize()
         End If
 
-        Application.Exit()
+        End
+        'Application.Exit()
     End Sub
 
     ''' <summary>
