@@ -51,7 +51,9 @@ Public Class FormMain
             Try
                 sysInfo = sfFormatter.Deserialize(fStream)
             Catch ex As Exception
-                MsgBox($"配置文件读取失败:{ex.Message}", MsgBoxStyle.Information, "读取配置")
+                MsgBox($"配置文件读取失败:{ex.Message}",
+                       MsgBoxStyle.Information,
+                       "读取配置")
                 End
                 'Application.Exit()
                 '打开版本不同或错误的文件则无法读取
@@ -73,11 +75,6 @@ Public Class FormMain
 
         If sysInfo.curtainList Is Nothing Then
             sysInfo.curtainList = New List(Of curtainInfo)
-            'Else
-            '    '添加存在的幕布列表
-            '    For i As Integer = 0 To sysInfo.curtainList.Count - 1
-            '        ComboBox1.Items.Add($"幕布{i} {sysInfo.curtainList.Item(i).remark}")
-            '    Next
         End If
 
         If sysInfo.filesList Is Nothing Then
@@ -103,6 +100,35 @@ Public Class FormMain
             End If
         End If
 
+        '加载语言包
+        sysInfo.languageTable = New Hashtable
+        Try
+            Dim IOsR As StreamReader = New StreamReader("./data/languageTable.ini")
+            Do
+                Dim tmpstr As String = IOsR.ReadLine
+                '判断数据合法性
+                If tmpstr Is Nothing Then
+                    Exit Do
+                End If
+
+                '判断数据个数
+                Dim tmpstr2() As String = tmpstr.Split("_")
+                If tmpstr2.Length < 2 Then
+                    Continue Do
+                End If
+
+                Dim textArray(tmpstr2.Length - 1 - 1) As String
+                For i As Integer = 0 To textArray.Length - 1
+                    textArray(i) = tmpstr2(i + 1)
+                Next
+
+                sysInfo.languageTable.Add(tmpstr2(0), textArray)
+            Loop
+        Catch ex As Exception
+            MsgBox($"语言包读取异常:{ex.Message}", MsgBoxStyle.Information, "加载语言包")
+            Application.Exit()
+        End Try
+
         sysInfo.zoomProportion = If(sysInfo.zoomProportion, sysInfo.zoomProportion, 1)
         sysInfo.touchSensitivity = If(sysInfo.touchSensitivity, sysInfo.touchSensitivity, 1)
         sysInfo.clickValidNums = If(sysInfo.clickValidNums, sysInfo.clickValidNums, 1)
@@ -126,22 +152,25 @@ Public Class FormMain
         忽略F4ToolStripMenuItem.BackColor = Color.FromArgb(&HB0, &HAF, &HDF)
         ToolStripDropDownButton1.BackColor = 运行F1ToolStripMenuItem.BackColor
 
-        '发送卡状态
-        Timer1.Interval = 1000
+        ''发送卡状态
+        'Timer1.Interval = 1000
 
-        '发送卡状态列表样式
-        For i As Integer = 0 To 10 - 1
-            DataGridView1.Columns.Add($"C{i}", $"{i}")
-            DataGridView1.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-            DataGridView1.Columns(i).Width = 35
-        Next
-        DataGridView1.ColumnHeadersVisible = False
-        DataGridView1.RowHeadersVisible = False
-        DataGridView1.AllowUserToResizeColumns = False
-        DataGridView1.AllowUserToResizeRows = False
-        DataGridView1.MultiSelect = False
-        DataGridView1.Rows.Clear()
-        'DataGridView1.GridColor = Color.FromArgb(&H33, &H99, &HFF)
+        ''发送卡状态列表样式
+        'For i As Integer = 0 To 10 - 1
+        '    DataGridView1.Columns.Add($"C{i}", $"{i}")
+        '    DataGridView1.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        '    DataGridView1.Columns(i).Width = 35
+        'Next
+        'DataGridView1.ColumnHeadersVisible = False
+        'DataGridView1.RowHeadersVisible = False
+        'DataGridView1.AllowUserToResizeColumns = False
+        'DataGridView1.AllowUserToResizeRows = False
+        'DataGridView1.MultiSelect = False
+        'DataGridView1.Rows.Clear()
+        ''DataGridView1.GridColor = Color.FromArgb(&H33, &H99, &HFF)
+
+        '设置显示语言
+        setControlslanguage(Me)
     End Sub
 
     ''' <summary>
@@ -172,7 +201,7 @@ Public Class FormMain
         Dim tmpCreatDialogThread As Threading.Thread
         For i As Integer = 0 To sysInfo.curtainList.Count - 1
             With sysInfo.curtainList.Item(i)
-                ComboBox1.Items.Add($"幕布{i} { .remark}")
+                ComboBox1.Items.Add($"{i} { .remark}")
 
                 If .playDialog Is Nothing Then
                     '新幕布则创建新窗体
@@ -223,10 +252,10 @@ Public Class FormMain
         '启动时为未连接状态
         offLinkCon()
 
-        '加载发送卡列表
-        For i As Integer = 0 To sysInfo.senderList.Length - 1 Step 10
-            DataGridView1.Rows.Add("")
-        Next
+        ''加载发送卡列表
+        'For i As Integer = 0 To sysInfo.senderList.Length - 1 Step 10
+        '    DataGridView1.Rows.Add("")
+        'Next
     End Sub
 
     ''' <summary>
@@ -336,9 +365,9 @@ Public Class FormMain
     Private Sub onLinkCon()
         ToolStripDropDownButton1.Enabled = True
         Button5.Enabled = False
-        ToolStripButton1.Text = "断开连接"
+        ToolStripButton1.Text = getLanguage("断开连接")
         ToolStripButton1.BackColor = Color.OrangeRed
-        Timer1.Start()
+        'Timer1.Start()
     End Sub
 
     ''' <summary>
@@ -347,9 +376,9 @@ Public Class FormMain
     Private Sub offLinkCon()
         ToolStripDropDownButton1.Enabled = False
         Button5.Enabled = True
-        ToolStripButton1.Text = "连接控制器"
+        ToolStripButton1.Text = getLanguage("连接控制器")
         ToolStripButton1.BackColor = Color.FromArgb(&H0, &HE3, &HB)
-        Timer1.Stop()
+        'Timer1.Stop()
     End Sub
 
     ''' <summary>
@@ -372,7 +401,9 @@ Public Class FormMain
                     Dim ipStr As String = $"{ .ipDate(3)}.{ .ipDate(2)}.{ .ipDate(1)}.{ .ipDate(0)}"
                     'ping 设备IP地址
                     If My.Computer.Network.Ping(ipStr, 500) = False Then
-                        MsgBox($"{ipStr} 未能连通", MsgBoxStyle.Information, "连接")
+                        MsgBox($"{ipStr} 未能连通",
+                               MsgBoxStyle.Information,
+                               "连接")
                         Exit Sub
                     End If
                 End With
@@ -415,7 +446,9 @@ Public Class FormMain
                     End Try
                 Next
 
-                MsgBox($"控制器连接错误:{ex.Message}", MsgBoxStyle.Information, "连接")
+                MsgBox($"控制器连接错误:{ex.Message}",
+                       MsgBoxStyle.Information,
+                       "连接")
                 Exit Sub
             End Try
 
@@ -460,7 +493,9 @@ Public Class FormMain
 
         ToolStripButton1_Click(Nothing, Nothing)
 
-        MsgBox($"控制器已连续 {nums} 次未返回数据!", MsgBoxStyle.Information, Me.Text)
+        MsgBox($"控制器已连续 {nums} 次未返回数据!",
+               MsgBoxStyle.Information,
+               Me.Text)
     End Sub
 
     ''' <summary>
@@ -720,10 +755,10 @@ Public Class FormMain
         End If
     End Sub
 
-    '定时刷新发送卡状态
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        For i As Integer = 0 To sysInfo.senderList.Length - 1 Step 10
-            DataGridView1.Rows(i \ 10).Cells(i Mod 10).Value = $"{sysInfo.senderList(i).MaxReadNum}"
-        Next
-    End Sub
+    ''定时刷新发送卡状态
+    'Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    '    For i As Integer = 0 To sysInfo.senderList.Length - 1 Step 10
+    '        DataGridView1.Rows(i \ 10).Cells(i Mod 10).Value = $"{sysInfo.senderList(i).MaxReadNum}"
+    '    Next
+    'End Sub
 End Class

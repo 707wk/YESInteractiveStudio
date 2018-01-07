@@ -177,6 +177,11 @@ YESInteractivePlayer
  右键选中
  </summary>
 </member>
+<member name="M:YESInteractivePlayer.FormOption.DataGridView4_CellMouseDown(System.Object,System.Windows.Forms.DataGridViewCellMouseEventArgs)">
+ <summary>
+ 右键选中
+ </summary>
+</member>
 <member name="M:YESInteractivePlayer.FormOption.DataGridView3_CurrentCellChanged(System.Object,System.EventArgs)">
  <summary>
  点击第一行添加屏幕
@@ -235,6 +240,71 @@ YESInteractivePlayer
 <member name="M:YESInteractivePlayer.FormOption.DataGridView4_CellMouseClick(System.Object,System.Windows.Forms.DataGridViewCellMouseEventArgs)">
  <summary>
  显示点击屏幕走线
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.Button10_Click(System.Object,System.EventArgs)">
+ <summary>
+ 计算缩放比例
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.删除ToolStripMenuItem_Click(System.Object,System.EventArgs)">
+ <summary>
+ 删除屏幕
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.Button1_Click(System.Object,System.EventArgs)">
+ <summary>
+ 查询版本号 鼠标按下时
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.Button1_MouseUp(System.Object,System.Windows.Forms.MouseEventArgs)">
+ <summary>
+ 查询版本号 鼠标松开时
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.Button2_Click(System.Object,System.EventArgs)">
+ <summary>
+ 查询复位次数 鼠标按下时
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.Button2_MouseUp(System.Object,System.Windows.Forms.MouseEventArgs)">
+ <summary>
+ 查询复位次数 鼠标松开时
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.getScanBoardData(System.Int32,System.Int32)">
+ <summary>
+ 获取接收卡数据
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.TextBox4_TextChanged(System.Object,System.EventArgs)">
+ <summary>
+ 自动跳转
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.Button8_Click(System.Object,System.EventArgs)">
+ <summary>
+ 选择升级文件
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.Button9_Click(System.Object,System.EventArgs)">
+ <summary>
+ 发送升级程序 鼠标按下时
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.Button9_MouseUp(System.Object,System.Windows.Forms.MouseEventArgs)">
+ <summary>
+ 发送升级程序 鼠标松开时
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.sendUpdata">
+ <summary>
+ 升级接收卡程序
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormOption.checkUpdataRecData(System.Byte[])">
+ <summary>
+ 比较收到的数据
  </summary>
 </member>
 <member name="F:YESInteractivePlayer.FormPlay.curtainListId">
@@ -305,6 +375,16 @@ YESInteractivePlayer
 <member name="M:YESInteractivePlayer.ModuleFunction.getMd5Hash(System.String)">
  <summary>
  获取字符串MD5值
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.ModuleFunction.setControlslanguage(System.Windows.Forms.Control)">
+ <summary>
+ 设置显示语言
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.ModuleFunction.getLanguage(System.String)">
+ <summary>
+ 获取实际显示文本
  </summary>
 </member>
 <member name="M:YESInteractivePlayer.ModuleSmartTimeApp.SmartTimeGetLastError">
@@ -702,14 +782,29 @@ YESInteractivePlayer
  窗口显示位置
  </summary>
 </member>
+<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.zoomTmpNumerator">
+ <summary>
+ 缩放分子
+ </summary>
+</member>
+<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.zoomTmpDenominator">
+ <summary>
+ 缩放分母
+ </summary>
+</member>
 <member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.zoomProportion">
  <summary>
- 缩放比例 1-3
+ 缩放比例
  </summary>
 </member>
 <member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.selectLanguageId">
  <summary>
  语言类型 0中文 1English
+ </summary>
+</member>
+<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.languageTable">
+ <summary>
+ 语言包索引
  </summary>
 </member>
 <member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.displayMode">

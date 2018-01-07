@@ -44,9 +44,11 @@ Partial Class FormPlay
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 241)
+        Me.ControlBox = False
         Me.Controls.Add(Me.AxShockwaveFlash1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FormPlay"
+        Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "FormPlay"
         CType(Me.AxShockwaveFlash1, System.ComponentModel.ISupportInitialize).EndInit()

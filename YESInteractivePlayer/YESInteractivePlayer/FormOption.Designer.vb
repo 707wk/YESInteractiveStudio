@@ -22,9 +22,14 @@ Partial Class FormOption
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.NumericUpDown9 = New System.Windows.Forms.NumericUpDown()
+        Me.NumericUpDown8 = New System.Windows.Forms.NumericUpDown()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -89,9 +94,24 @@ Partial Class FormOption
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.GroupBox15 = New System.Windows.Forms.GroupBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.GroupBox14 = New System.Windows.Forms.GroupBox()
+        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.删除ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        CType(Me.NumericUpDown9, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NumericUpDown8, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
@@ -120,6 +140,10 @@ Partial Class FormOption
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage6.SuspendLayout()
+        Me.GroupBox15.SuspendLayout()
+        Me.GroupBox14.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -129,6 +153,7 @@ Partial Class FormOption
         Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -152,36 +177,79 @@ Partial Class FormOption
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Button10)
+        Me.GroupBox3.Controls.Add(Me.Label14)
+        Me.GroupBox3.Controls.Add(Me.NumericUpDown9)
+        Me.GroupBox3.Controls.Add(Me.NumericUpDown8)
         Me.GroupBox3.Controls.Add(Me.Label12)
         Me.GroupBox3.Controls.Add(Me.TextBox1)
         Me.GroupBox3.Controls.Add(Me.Label1)
         Me.GroupBox3.Location = New System.Drawing.Point(8, 6)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(311, 49)
+        Me.GroupBox3.Size = New System.Drawing.Size(417, 90)
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "屏幕缩放"
         '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(187, 20)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(75, 23)
+        Me.Button10.TabIndex = 6
+        Me.Button10.Text = "应用"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(18, 49)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(65, 12)
+        Me.Label14.TabIndex = 5
+        Me.Label14.Text = "缩放后像素"
+        '
+        'NumericUpDown9
+        '
+        Me.NumericUpDown9.Location = New System.Drawing.Point(89, 47)
+        Me.NumericUpDown9.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
+        Me.NumericUpDown9.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NumericUpDown9.Name = "NumericUpDown9"
+        Me.NumericUpDown9.Size = New System.Drawing.Size(84, 21)
+        Me.NumericUpDown9.TabIndex = 4
+        Me.NumericUpDown9.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'NumericUpDown8
+        '
+        Me.NumericUpDown8.Location = New System.Drawing.Point(89, 20)
+        Me.NumericUpDown8.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
+        Me.NumericUpDown8.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NumericUpDown8.Name = "NumericUpDown8"
+        Me.NumericUpDown8.Size = New System.Drawing.Size(84, 21)
+        Me.NumericUpDown8.TabIndex = 3
+        Me.NumericUpDown8.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(143, 21)
+        Me.Label12.Location = New System.Drawing.Point(30, 22)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(143, 12)
+        Me.Label12.Size = New System.Drawing.Size(53, 12)
         Me.Label12.TabIndex = 2
-        Me.Label12.Text = "= 实际宽度 / 缩放后宽度"
+        Me.Label12.Text = "实际像素"
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(57, 18)
+        Me.TextBox1.Location = New System.Drawing.Point(309, 19)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(80, 21)
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(102, 21)
         Me.TextBox1.TabIndex = 1
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(16, 21)
+        Me.Label1.Location = New System.Drawing.Point(268, 22)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(35, 12)
         Me.Label1.TabIndex = 0
@@ -190,7 +258,7 @@ Partial Class FormOption
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.ComboBox1)
-        Me.GroupBox2.Location = New System.Drawing.Point(8, 61)
+        Me.GroupBox2.Location = New System.Drawing.Point(8, 102)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(89, 49)
         Me.GroupBox2.TabIndex = 0
@@ -308,7 +376,7 @@ Partial Class FormOption
         'ComboBox3
         '
         Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(48, 72)
+        Me.ComboBox3.Location = New System.Drawing.Point(48, 68)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(64, 20)
         Me.ComboBox3.TabIndex = 1
@@ -464,7 +532,6 @@ Partial Class FormOption
         Me.Column7.HeaderText = "位置"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
-        Me.Column7.Width = 60
         '
         'TabPage5
         '
@@ -669,9 +736,9 @@ Partial Class FormOption
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(143, 24)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(59, 12)
+        Me.Label3.Size = New System.Drawing.Size(17, 12)
         Me.Label3.TabIndex = 2
-        Me.Label3.Text = "℃ 时复位"
+        Me.Label3.Text = "℃"
         '
         'NumericUpDown4
         '
@@ -777,6 +844,135 @@ Partial Class FormOption
         Me.NumericUpDown1.Size = New System.Drawing.Size(52, 21)
         Me.NumericUpDown1.TabIndex = 0
         '
+        'TabPage6
+        '
+        Me.TabPage6.Controls.Add(Me.GroupBox15)
+        Me.TabPage6.Controls.Add(Me.Button2)
+        Me.TabPage6.Controls.Add(Me.Button1)
+        Me.TabPage6.Controls.Add(Me.GroupBox14)
+        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage6.Name = "TabPage6"
+        Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage6.Size = New System.Drawing.Size(680, 275)
+        Me.TabPage6.TabIndex = 5
+        Me.TabPage6.Text = "接收卡"
+        Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'GroupBox15
+        '
+        Me.GroupBox15.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox15.Controls.Add(Me.TextBox4)
+        Me.GroupBox15.Controls.Add(Me.Button9)
+        Me.GroupBox15.Controls.Add(Me.TextBox3)
+        Me.GroupBox15.Controls.Add(Me.Button8)
+        Me.GroupBox15.Controls.Add(Me.Label13)
+        Me.GroupBox15.Location = New System.Drawing.Point(394, 6)
+        Me.GroupBox15.Name = "GroupBox15"
+        Me.GroupBox15.Size = New System.Drawing.Size(278, 263)
+        Me.GroupBox15.TabIndex = 6
+        Me.GroupBox15.TabStop = False
+        Me.GroupBox15.Text = "程序升级"
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox4.Location = New System.Drawing.Point(8, 105)
+        Me.TextBox4.Multiline = True
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TextBox4.Size = New System.Drawing.Size(264, 152)
+        Me.TextBox4.TabIndex = 7
+        '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(170, 76)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(102, 23)
+        Me.Button9.TabIndex = 6
+        Me.Button9.Text = "发送升级程序"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(47, 19)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.ReadOnly = True
+        Me.TextBox3.Size = New System.Drawing.Size(225, 21)
+        Me.TextBox3.TabIndex = 4
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(206, 47)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(66, 23)
+        Me.Button8.TabIndex = 5
+        Me.Button8.Text = "浏览..."
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(6, 22)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(35, 12)
+        Me.Label13.TabIndex = 3
+        Me.Label13.Text = "文件:"
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(288, 52)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(100, 23)
+        Me.Button2.TabIndex = 2
+        Me.Button2.Text = "查询复位次数"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(288, 23)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(100, 23)
+        Me.Button1.TabIndex = 1
+        Me.Button1.Text = "查询版本号"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'GroupBox14
+        '
+        Me.GroupBox14.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox14.Controls.Add(Me.ListView1)
+        Me.GroupBox14.Location = New System.Drawing.Point(8, 6)
+        Me.GroupBox14.Name = "GroupBox14"
+        Me.GroupBox14.Size = New System.Drawing.Size(274, 263)
+        Me.GroupBox14.TabIndex = 0
+        Me.GroupBox14.TabStop = False
+        Me.GroupBox14.Text = "接收卡列表"
+        '
+        'ListView1
+        '
+        Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ListView1.Location = New System.Drawing.Point(3, 17)
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.Size = New System.Drawing.Size(268, 243)
+        Me.ListView1.TabIndex = 0
+        Me.ListView1.UseCompatibleStateImageBehavior = False
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.删除ToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(101, 26)
+        '
+        '删除ToolStripMenuItem
+        '
+        Me.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem"
+        Me.删除ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
+        Me.删除ToolStripMenuItem.Text = "删除"
+        '
         'FormOption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -793,6 +989,8 @@ Partial Class FormOption
         Me.TabPage1.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        CType(Me.NumericUpDown9, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NumericUpDown8, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox10.ResumeLayout(False)
@@ -823,6 +1021,11 @@ Partial Class FormOption
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage6.ResumeLayout(False)
+        Me.GroupBox15.ResumeLayout(False)
+        Me.GroupBox15.PerformLayout()
+        Me.GroupBox14.ResumeLayout(False)
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -876,9 +1079,6 @@ Partial Class FormOption
     Friend WithEvents Button5 As Button
     Friend WithEvents Label11 As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
     Friend WithEvents Column9 As DataGridViewTextBoxColumn
     Friend WithEvents Column10 As DataGridViewTextBoxColumn
@@ -894,4 +1094,24 @@ Partial Class FormOption
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label12 As Label
     Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents TabPage6 As TabPage
+    Friend WithEvents GroupBox14 As GroupBox
+    Friend WithEvents ListView1 As ListView
+    Friend WithEvents GroupBox15 As GroupBox
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents Button9 As Button
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents Button8 As Button
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button10 As Button
+    Friend WithEvents Label14 As Label
+    Friend WithEvents NumericUpDown9 As NumericUpDown
+    Friend WithEvents NumericUpDown8 As NumericUpDown
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents 删除ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
 End Class

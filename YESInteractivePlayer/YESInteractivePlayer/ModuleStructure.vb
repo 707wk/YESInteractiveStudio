@@ -306,8 +306,17 @@ Module ModuleStructure
         ''' 窗口显示位置
         ''' </summary>
         Dim startLocation As Point
+
         ''' <summary>
-        ''' 缩放比例 1-3
+        ''' 缩放分子
+        ''' </summary>
+        Dim zoomTmpNumerator As Integer
+        ''' <summary>
+        ''' 缩放分母
+        ''' </summary>
+        Dim zoomTmpDenominator As Integer
+        ''' <summary>
+        ''' 缩放比例
         ''' </summary>
         Dim zoomProportion As Double
         '''' <summary>
@@ -322,6 +331,10 @@ Module ModuleStructure
         ''' 语言类型 0中文 1English
         ''' </summary>
         Dim selectLanguageId As Integer
+        ''' <summary>
+        ''' 语言包索引
+        ''' </summary>
+        Dim languageTable As Hashtable
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''

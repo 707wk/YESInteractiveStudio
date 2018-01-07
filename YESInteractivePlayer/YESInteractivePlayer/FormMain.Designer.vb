@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormMain
     Inherits System.Windows.Forms.Form
 
     'Form 重写 Dispose，以清理组件列表。
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FormMain
     '注意: 以下过程是 Windows 窗体设计器所必需的
     '可以使用 Windows 窗体设计器修改它。  
     '不要使用代码编辑器修改它。
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
@@ -42,12 +42,8 @@ Partial Class FormMain
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ToolStrip1.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ToolStrip1
@@ -55,7 +51,7 @@ Partial Class FormMain
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.ToolStripDropDownButton1})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(424, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(448, 25)
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -110,7 +106,7 @@ Partial Class FormMain
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(50, 26)
+        Me.ComboBox1.Location = New System.Drawing.Point(63, 26)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(78, 20)
         Me.ComboBox1.TabIndex = 2
@@ -127,7 +123,7 @@ Partial Class FormMain
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(134, 29)
+        Me.Label2.Location = New System.Drawing.Point(147, 29)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(59, 12)
         Me.Label2.TabIndex = 4
@@ -136,7 +132,7 @@ Partial Class FormMain
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(198, 26)
+        Me.ComboBox2.Location = New System.Drawing.Point(221, 26)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(121, 20)
         Me.ComboBox2.Sorted = True
@@ -144,7 +140,7 @@ Partial Class FormMain
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(196, 54)
+        Me.Button1.Location = New System.Drawing.Point(219, 54)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(86, 28)
         Me.Button1.TabIndex = 6
@@ -153,7 +149,7 @@ Partial Class FormMain
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(288, 54)
+        Me.Button2.Location = New System.Drawing.Point(311, 54)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(126, 28)
         Me.Button2.TabIndex = 7
@@ -162,7 +158,7 @@ Partial Class FormMain
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(325, 26)
+        Me.Button3.Location = New System.Drawing.Point(348, 26)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(42, 21)
         Me.Button3.TabIndex = 8
@@ -171,7 +167,7 @@ Partial Class FormMain
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(373, 26)
+        Me.Button4.Location = New System.Drawing.Point(396, 26)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(41, 21)
         Me.Button4.TabIndex = 9
@@ -190,45 +186,18 @@ Partial Class FormMain
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(94, 61)
+        Me.CheckBox1.Location = New System.Drawing.Point(107, 61)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(96, 16)
         Me.CheckBox1.TabIndex = 11
         Me.CheckBox1.Text = "隐藏播放窗体"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.DataGridView1)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 88)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(402, 47)
-        Me.GroupBox1.TabIndex = 12
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "发送卡状态"
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(3, 17)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.RowTemplate.Height = 23
-        Me.DataGridView1.Size = New System.Drawing.Size(396, 27)
-        Me.DataGridView1.TabIndex = 0
-        '
-        'Timer1
-        '
-        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 140)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.ClientSize = New System.Drawing.Size(448, 91)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
@@ -248,8 +217,6 @@ Partial Class FormMain
         Me.Text = "FormMain"
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -272,7 +239,5 @@ Partial Class FormMain
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Timer1 As Timer
 End Class

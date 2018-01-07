@@ -1,5 +1,7 @@
 ﻿Imports System.ComponentModel
+Imports System.Net.Sockets
 Imports System.Text.RegularExpressions
+Imports System.Threading
 Imports Nova.Mars.SDK
 
 Public Class FormOption
@@ -22,6 +24,8 @@ Public Class FormOption
     Private Sub FormOption_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '常规
+        NumericUpDown8.Value = sysInfo.zoomTmpNumerator
+        NumericUpDown9.Value = sysInfo.zoomTmpDenominator
         TextBox1.Text = sysInfo.zoomProportion
 
         ComboBox1.Items.Add("中文")
@@ -31,9 +35,11 @@ Public Class FormOption
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '幕布
         For i As Integer = 0 To sysInfo.curtainList.Count - 1
-            DataGridView2.Rows.Add(i + 1,
-                                   sysInfo.curtainList.Item(i).remark,
-                                   $"{sysInfo.curtainList.Item(i).x},{sysInfo.curtainList.Item(i).y}")
+            With sysInfo.curtainList.Item(i)
+                DataGridView2.Rows.Add(i + 1,
+                                  .remark,
+                                   $"{ .x},{ .y} [{ .width},{ .height}]")
+            End With
         Next
 
         '初始化屏幕下拉列表
@@ -46,6 +52,8 @@ Public Class FormOption
             ComboBox3.Items.Add($"{i}")
         Next
         DataGridView3.Controls.Add(ComboBox3)
+
+        DataGridView3.ContextMenuStrip = ContextMenuStrip1
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '屏幕
@@ -105,8 +113,8 @@ Public Class FormOption
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '互动性
         '互动模式
-        ComboBox2.Items.Add("单个感应")
-        ComboBox2.Items.Add("4合1感应")
+        ComboBox2.Items.Add(getLanguage("单个感应"))
+        ComboBox2.Items.Add(getLanguage("4合1感应"))
         'ComboBox2.SelectedIndex = sysInfo.touchMode
 
         '检测间隔
@@ -122,6 +130,27 @@ Public Class FormOption
         NumericUpDown4.Value = sysInfo.resetTemp
         '复位时间间隔
         NumericUpDown5.Value = sysInfo.resetSec
+
+        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+        '接收卡
+        '设置接收卡列表样式
+        ListView1.View = View.Details
+        ListView1.GridLines = True
+        ListView1.FullRowSelect = True
+        ListView1.CheckBoxes = False
+        ListView1.ShowItemToolTips = True
+        ListView1.Clear()
+        ListView1.Columns.Add(getLanguage("控制器号"), 60, HorizontalAlignment.Left)
+        ListView1.Columns.Add(getLanguage("网口号"), 50, HorizontalAlignment.Left)
+        ListView1.Columns.Add(getLanguage("接收卡号"), 60, HorizontalAlignment.Left)
+        ListView1.Columns.Add(getLanguage("值"), 60, HorizontalAlignment.Left)
+
+        For i As Integer = 0 To 100
+            TextBox4.AppendText($"{i} {vbCrLf}")
+        Next
+
+        '设置显示语言
+        setControlslanguage(Me)
     End Sub
 
     ''' <summary>
@@ -130,9 +159,9 @@ Public Class FormOption
     Private Sub FormOption_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '常规
-        If Val(TextBox1.Text) Then
-            sysInfo.zoomProportion = Val(TextBox1.Text)
-        End If
+        'If Val(TextBox1.Text) Then
+        'sysInfo.zoomProportion = Val(TextBox1.Text)
+        'End If
 
         sysInfo.selectLanguageId = ComboBox1.SelectedIndex
 
@@ -211,6 +240,8 @@ Public Class FormOption
         '复位时间间隔
         sysInfo.resetSec = NumericUpDown5.Value
 
+        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+        '接收卡
     End Sub
 
     ''' <summary>
@@ -253,6 +284,19 @@ Public Class FormOption
     End Sub
 
     ''' <summary>
+    ''' 右键选中
+    ''' </summary>
+    Private Sub DataGridView4_CellMouseDown(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView4.CellMouseDown
+        Select Case True
+            Case e.Button <> System.Windows.Forms.MouseButtons.Right
+            Case e.RowIndex < 0 Or e.ColumnIndex < 0
+            Case DataGridView4.Rows(e.RowIndex).Cells(e.ColumnIndex).Selected = False
+                DataGridView4.ClearSelection()
+                DataGridView4.Rows(e.RowIndex).Cells(e.ColumnIndex).Selected = True
+        End Select
+    End Sub
+
+    ''' <summary>
     ''' 点击第一行添加屏幕
     ''' </summary>
     Private Sub DataGridView3_CurrentCellChanged(sender As Object, e As EventArgs) Handles DataGridView3.CurrentCellChanged
@@ -291,6 +335,13 @@ Public Class FormOption
             Exit Sub
         End If
 
+        '检测重复
+        For Each i As DataGridViewRow In DataGridView3.Rows
+            If i.Cells(0).Value = ComboBox3.Items(ComboBox3.SelectedIndex) Then
+                Exit Sub
+            End If
+        Next
+
         If DataGridView3.Rows(DataGridView3.CurrentCell.RowIndex).Cells(0).Value Is Nothing Then
             '新增
             Dim row As DataGridViewRow = New DataGridViewRow
@@ -313,7 +364,7 @@ Public Class FormOption
         Dim reg As New Regex("\d+")
         Dim m As Match
 
-        m = reg.Match(DataGridView3.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
+        m = reg.Match($"{DataGridView3.Rows(e.RowIndex).Cells(e.ColumnIndex).Value}")
         If m.Success Then
             editValue = CInt(m.Value)
         End If
@@ -352,7 +403,9 @@ Public Class FormOption
 
         '判断长度
         If ipDataStrArr.Length <> 4 Then
-            MsgBox($"非法参数", MsgBoxStyle.Information, Me.Text)
+            MsgBox($"非法参数",
+                   MsgBoxStyle.Information,
+                   Me.Text)
             updataIp(e.RowIndex)
             Exit Sub
         End If
@@ -360,7 +413,9 @@ Public Class FormOption
         '判断数值
         For i As Integer = 0 To 4 - 1
             If Not IsNumeric(ipDataStrArr(i)) Then
-                MsgBox($"非法参数", MsgBoxStyle.Information, Me.Text)
+                MsgBox($"非法参数",
+                       MsgBoxStyle.Information,
+                       Me.Text)
                 updataIp(e.RowIndex)
                 Exit Sub
             End If
@@ -370,7 +425,9 @@ Public Class FormOption
 
             If m.Success Then
             Else
-                MsgBox($"非法参数", MsgBoxStyle.Information, Me.Text)
+                MsgBox($"非法参数",
+                       MsgBoxStyle.Information,
+                       Me.Text)
                 updataIp(e.RowIndex)
                 Exit Sub
             End If
@@ -378,7 +435,9 @@ Public Class FormOption
             Dim tmpNum As Integer = CInt(m.Value)
 
             If tmpNum > 255 Then
-                MsgBox($"非法参数", MsgBoxStyle.Information, Me.Text)
+                MsgBox($"非法参数",
+                       MsgBoxStyle.Information,
+                       Me.Text)
                 updataIp(e.RowIndex)
                 Exit Sub
             End If
@@ -422,10 +481,14 @@ Public Class FormOption
                 sysInfo.mainClass.SetEquipmentIP(senderArrayIndex, sysInfo.senderList(senderArrayIndex).tmpIpData)
             Else
                 sysInfo.senderList(senderArrayIndex).ipDate = sysInfo.senderList(senderArrayIndex).tmpIpData
-                MsgBox($"控制器ip设置成功!")
+                MsgBox($"控制器ip设置成功!",
+                       MsgBoxStyle.Information,
+                       Me.Text)
             End If
         Else
-            MsgBox($"控制器{senderArrayIndex} 设置IP数据失败!请检查设备后重新设置!")
+            MsgBox($"控制器{senderArrayIndex} 设置IP数据失败!请检查设备后重新设置!",
+                   MsgBoxStyle.Information,
+                   Me.Text)
         End If
     End Sub
 
@@ -479,6 +542,18 @@ Public Class FormOption
     ''' 新增幕布
     ''' </summary>
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        '判断幕布数是否超过屏幕数
+        Dim sumScreenNum As Integer = 0
+        For Each i As screenInfo In sysInfo.screenList
+            sumScreenNum += If(i.existFlage, 1, 0)
+        Next
+        If sysInfo.curtainList.Count = sumScreenNum Then
+            MsgBox($"幕布数已达最大值",
+                   MsgBoxStyle.Information,
+                   $"新增幕布")
+            Exit Sub
+        End If
+
         Dim tmp As New curtainInfo
 
         'tmp.id = maxCurtainId + 1
@@ -494,20 +569,35 @@ Public Class FormOption
 
                 sysInfo.screenList(.Cells(0).Value).defaultX = .Cells(1).Value
                 sysInfo.screenList(.Cells(0).Value).defaultY = .Cells(2).Value
-                'sysInfo.screenList(.Cells(0).Value).x = .Cells(1).Value / sysInfo.zoomProportion
-                'sysInfo.screenList(.Cells(0).Value).y = .Cells(2).Value / sysInfo.zoomProportion
                 sysInfo.screenList(.Cells(0).Value).touchPieceRowsNum = .Cells(3).Value
                 sysInfo.screenList(.Cells(0).Value).touchPieceColumnsNum = .Cells(4).Value
             End With
         Next
-        'For Each i As DataGridViewRow In DataGridView3.Rows
-
-        'Next
 
         sysInfo.curtainList.Add(tmp)
+
+        Dim maxHeight = 0
+        Dim maxWidth = 0
+
+        For Each j In tmp.screenList
+            '最大高度
+            maxHeight =
+                If(maxHeight < sysInfo.screenList(j).defaultY + sysInfo.screenList(j).defaultHeight,
+                sysInfo.screenList(j).defaultY + sysInfo.screenList(j).defaultHeight,
+                maxHeight)
+
+            '最大宽度
+            maxWidth =
+                If(maxWidth < sysInfo.screenList(j).defaultX + sysInfo.screenList(j).defaultWidth,
+                sysInfo.screenList(j).defaultX + sysInfo.screenList(j).defaultWidth,
+                maxWidth)
+        Next
+        maxHeight = maxHeight / sysInfo.zoomProportion
+        maxWidth = maxWidth / sysInfo.zoomProportion
+
         DataGridView2.Rows.Add(DataGridView2.Rows.Count + 1,
                                    tmp.remark,
-                                   $"{tmp.defaultX},{tmp.defaultY}")
+                                   $"{tmp.defaultX},{tmp.defaultY} [{ maxWidth},{ maxHeight}]")
     End Sub
 
     ''' <summary>
@@ -554,8 +644,6 @@ Public Class FormOption
 
                 sysInfo.screenList(.Cells(0).Value).defaultX = .Cells(1).Value
                 sysInfo.screenList(.Cells(0).Value).defaultY = .Cells(2).Value
-                'sysInfo.screenList(.Cells(0).Value).x = .Cells(1).Value / sysInfo.zoomProportion
-                'sysInfo.screenList(.Cells(0).Value).y = .Cells(2).Value / sysInfo.zoomProportion
                 sysInfo.screenList(.Cells(0).Value).touchPieceRowsNum = .Cells(3).Value
                 sysInfo.screenList(.Cells(0).Value).touchPieceColumnsNum = .Cells(4).Value
             End With
@@ -566,6 +654,27 @@ Public Class FormOption
         'DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(0).Value = DataGridView2.Rows.Count + 1
         DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(1).Value = tmp.remark
         DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(2).Value = $"{tmp.defaultX},{tmp.defaultY}"
+
+        Dim maxHeight = 0
+        Dim maxWidth = 0
+
+        For Each j In tmp.screenList
+            '最大高度
+            maxHeight =
+                If(maxHeight < sysInfo.screenList(j).defaultY + sysInfo.screenList(j).defaultHeight,
+                sysInfo.screenList(j).defaultY + sysInfo.screenList(j).defaultHeight,
+                maxHeight)
+
+            '最大宽度
+            maxWidth =
+                If(maxWidth < sysInfo.screenList(j).defaultX + sysInfo.screenList(j).defaultWidth,
+                sysInfo.screenList(j).defaultX + sysInfo.screenList(j).defaultWidth,
+                maxWidth)
+        Next
+        maxHeight = maxHeight / sysInfo.zoomProportion
+        maxWidth = maxWidth / sysInfo.zoomProportion
+
+        DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(2).Value = $"{tmp.defaultX},{tmp.defaultY} [{maxWidth},{maxHeight}]"
     End Sub
 
     ''' <summary>
@@ -595,7 +704,7 @@ Public Class FormOption
     ''' </summary>
     Private Sub DataGridView4_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView4.CellMouseClick
         Dim selectScreenId As Integer = DataGridView4.SelectedCells(0).RowIndex
-        GroupBox13.Text = $"屏幕{selectScreenId} 走线"
+        'GroupBox13.Text = $"屏幕{selectScreenId} 走线"
 
         Me.PictureBox1.Update()
         Dim g As Graphics = Me.PictureBox1.CreateGraphics
@@ -640,4 +749,404 @@ Public Class FormOption
             End If
         Next
     End Sub
+
+    ''' <summary>
+    ''' 计算缩放比例
+    ''' </summary>
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        TextBox1.Text = NumericUpDown8.Value / NumericUpDown9.Value
+        sysInfo.zoomTmpNumerator = NumericUpDown8.Value
+        sysInfo.zoomTmpDenominator = NumericUpDown9.Value
+        sysInfo.zoomProportion = Val(TextBox1.Text)
+    End Sub
+
+    ''' <summary>
+    ''' 删除屏幕
+    ''' </summary>
+    Private Sub 删除ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 删除ToolStripMenuItem.Click
+        Dim rowIndex As Integer = DataGridView3.SelectedCells(0).RowIndex
+        If Not DataGridView3.Rows(rowIndex).IsNewRow Then
+            DataGridView3.Rows.RemoveAt(rowIndex)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 查询版本号 鼠标按下时
+    ''' </summary>
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Button1.Enabled = False
+
+        ListView1.Columns(3).Text = getLanguage("版本号")
+        ListView1.Items.Clear()
+        TextBox4.Clear()
+    End Sub
+
+    ''' <summary>
+    ''' 查询版本号 鼠标松开时
+    ''' </summary>
+    Private Sub Button1_MouseUp(sender As Object, e As MouseEventArgs) Handles Button1.MouseUp
+        If Button1.Enabled Then
+            Exit Sub
+        End If
+
+        For i As Integer = 0 To sysInfo.senderList.Length - 1
+            getScanBoardData(i, 0)
+        Next
+
+        Button1.Enabled = True
+    End Sub
+
+    ''' <summary>
+    ''' 查询复位次数 鼠标按下时
+    ''' </summary>
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Button2.Enabled = False
+
+        ListView1.Columns(3).Text = getLanguage("复位次数")
+        ListView1.Items.Clear()
+        TextBox4.Clear()
+    End Sub
+
+    ''' <summary>
+    ''' 查询复位次数 鼠标松开时
+    ''' </summary>
+    Private Sub Button2_MouseUp(sender As Object, e As MouseEventArgs) Handles Button2.MouseUp
+        If Button2.Enabled Then
+            Exit Sub
+        End If
+
+        For i As Integer = 0 To sysInfo.senderList.Length - 1
+            getScanBoardData(i, 1)
+        Next
+
+        Button2.Enabled = True
+    End Sub
+
+    ''' <summary>
+    ''' 获取接收卡数据
+    ''' </summary>
+    Private Sub getScanBoardData(senderId As Integer, dataType As Integer)
+        Dim sendstr As String = "00"
+        Select Case dataType
+            Case 0
+                sendstr = "aadb0901"
+            Case 1
+                sendstr = "aadb0201"
+        End Select
+
+        Dim sendByte(sendstr.Length \ 2 - 1) As Byte
+
+        For i As Integer = 0 To sendByte.Length - 1
+            sendByte(i) = Val($"&H{sendstr(i * 2)}{ sendstr(i * 2 + 1)}")
+        Next
+
+        sysInfo.mainClass.SetScanBoardData(senderId, 255, 65535, sendByte)
+
+        Thread.Sleep(50)
+
+        Dim cliSocket As Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
+            .SendTimeout = 500,
+            .ReceiveTimeout = 500
+        }
+        '连接
+        With sysInfo.senderList(senderId)
+            cliSocket.Connect(
+                String.Format("{0}.{1}.{2}.{3}", .ipDate(3), .ipDate(2), .ipDate(1), .ipDate(0)),
+                6000)
+        End With
+
+        Try
+            Dim bytes(1028 - 1) As Byte
+            Dim tmpstr As String = "55d50902"
+            Dim sendbytes(4 - 1) As Byte
+            For i As Integer = 0 To tmpstr.Length \ 2 - 1
+                sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
+            Next i
+
+            Dim bytesSend As Integer = cliSocket.Send(sendbytes)
+            Dim bytesRec As Integer = cliSocket.Receive(bytes)
+
+        Catch ex As Exception
+            TextBox4.AppendText($"发送读取指令异常:{ex.Message}{vbCrLf}")
+            Exit Sub
+        End Try
+
+        'Dim asd As New Stopwatch
+        'asd.Start()
+        Dim getDataSum As Integer = 0
+
+        Try
+            Dim bytes(1028 - 1) As Byte
+            Dim tmpstr As String = "55d50905000000000400"
+            Dim sendbytes(10 - 1) As Byte
+            For i As Integer = 0 To tmpstr.Length \ 2 - 1
+                sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
+            Next i
+
+            Dim bytesSend As Integer = cliSocket.Send(sendbytes)
+
+            For m As Integer = 0 To 16 - 1
+                Dim bytesRec As Integer = cliSocket.Receive(bytes)
+
+                For j As Integer = 4 To 1027 Step 32
+                    If bytes(j + 0) <> &H55 Then
+                        Continue For
+                    End If
+
+                    If bytes(j + 1) > 4 Then
+                        Continue For
+                    End If
+
+                    Dim itm As ListViewItem = ListView1.Items.Add($"{senderId}")
+                    itm.SubItems.Add($"{bytes(j + 1)}")
+                    itm.SubItems.Add($"{(bytes(j + 2) * 256 + bytes(j + 3))}")
+
+                    Select Case dataType
+                        Case 0
+                            itm.SubItems.Add($"{bytes(j + 4)}.{bytes(j + 5)}.{bytes(j + 6)}")
+                        Case 1
+                            itm.SubItems.Add($"{bytes(j + 4) + bytes(j + 5) * &H100 + bytes(j + 6) * &H10000}")
+                    End Select
+
+                    getDataSum += 1
+                Next
+            Next
+        Catch ex As Exception
+            TextBox4.AppendText($"接收数据异常:{ex.Message}{vbCrLf}")
+        End Try
+
+        cliSocket.Close()
+
+        TextBox4.AppendText($"发送卡{senderId} 读取到 {getDataSum} 个接收卡数据{vbCrLf}")
+    End Sub
+
+    ''' <summary>
+    ''' 自动跳转
+    ''' </summary>
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
+        TextBox4.ScrollToCaret()
+    End Sub
+
+    ''' <summary>
+    ''' 选择升级文件
+    ''' </summary>
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Dim tmp As New OpenFileDialog With {
+            .Filter = "bin|*.bin"
+        }
+        If tmp.ShowDialog() <> DialogResult.OK Then
+            Exit Sub
+        End If
+
+        TextBox3.Text = tmp.FileName
+    End Sub
+
+    ''' <summary>
+    ''' 发送升级程序 鼠标按下时
+    ''' </summary>
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        Button9.Enabled = False
+
+        TextBox4.Clear()
+    End Sub
+
+    ''' <summary>
+    ''' 发送升级程序 鼠标松开时
+    ''' </summary>
+    Private Sub Button9_MouseUp(sender As Object, e As MouseEventArgs) Handles Button9.MouseUp
+        If Button9.Enabled Then
+            Exit Sub
+        End If
+
+        sendUpdata()
+
+        Button9.Enabled = True
+    End Sub
+
+    ''' <summary>
+    ''' 升级接收卡程序
+    ''' </summary>
+    Private Sub sendUpdata()
+        If TextBox3.Text = "" Then
+            Exit Sub
+        End If
+
+        '读文件信息
+        Dim infoReader As System.IO.FileInfo = My.Computer.FileSystem.GetFileInfo(TextBox3.Text)
+        Dim binLength = infoReader.Length
+        TextBox4.AppendText($"升级文件大小: {binLength} Byte{vbCrLf}")
+
+
+        '发送升级指令
+        Dim sendByte As Byte()
+        Dim temps As String = ""
+        Dim sendstr As String = "aadb09030000"
+        ReDim sendByte(sendstr.Length \ 2 - 1)
+
+        For i As Integer = 0 To sendByte.Length - 1
+            sendByte(i) = Val($"&H{sendstr(i * 2)}{ sendstr(i * 2 + 1)}")
+        Next
+
+        sendByte(4) = binLength \ 256
+        sendByte(5) = binLength Mod 256
+
+        sysInfo.mainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+
+        Thread.Sleep(20)
+
+        For i As Integer = 0 To 10
+            If checkUpdataRecData({&H1A, &H1B}) Then
+                Exit For
+            End If
+
+            If i = 10 Then
+                TextBox4.AppendText($"升级指令发送失败{vbCrLf}")
+                Exit Sub
+            End If
+        Next
+
+
+        '发送升级程序
+        ReDim sendByte(131 - 1)
+        Dim fs As New System.IO.FileStream(TextBox3.Text, IO.FileMode.Open, IO.FileAccess.Read)
+        Dim re As New System.IO.BinaryReader(fs)
+
+        Dim sendIndex As Integer = 0
+        Do
+            Dim tmpByte(128 - 1) As Byte
+            '从文件读取的字节数
+            Dim readByteNum As Integer = re.Read(tmpByte, 0, 128)
+
+            sendByte(0) = sendIndex
+
+            Dim checkSum As Integer = 0
+            For i As Integer = 1 To 128
+                If i <= readByteNum Then
+                    sendByte(i) = tmpByte(i - 1)
+                    checkSum += sendByte(i)
+                Else
+                    '不足128字节则填充
+                    sendByte(i) = &HFF
+                End If
+            Next
+
+            sendByte(129) = (checkSum \ 256) Mod 256
+            sendByte(130) = checkSum Mod 256
+
+            For i As Integer = 0 To 10
+                sysInfo.mainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+                TextBox4.AppendText($"第 {sendIndex} 包数据 第{i}次发送{vbCrLf}")
+                Thread.Sleep(20)
+
+                If checkUpdataRecData({&H1C, &H1D}) Then
+                    Exit For
+                End If
+
+                If i = 10 Then
+                    TextBox4.AppendText($"第 {sendIndex} 包升级数据发送失败{vbCrLf}")
+                    re.Close()
+                    fs.Close()
+                    Exit Sub
+                End If
+            Next
+
+            sendIndex += 1
+
+            TextBox4.AppendText($"{(sendIndex * 128 * 100) \ binLength}%{vbCrLf}")
+
+            If sendIndex * 128 >= binLength Then
+                Exit Do
+            End If
+
+            Thread.Sleep(30)
+        Loop
+
+
+        '发送完毕指令
+        sysInfo.mainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, {&HAA, &HDB, &H9, &H9})
+
+        TextBox4.AppendText($"数据发送完毕{vbCrLf}")
+
+        re.Close()
+        fs.Close()
+    End Sub
+
+    ''' <summary>
+    ''' 比较收到的数据
+    ''' </summary>
+    Private Function checkUpdataRecData(checkData() As Byte) As Boolean
+        Dim recSum As Integer = 0
+        For Each sender As senderInfo In sysInfo.senderList
+            Dim cliSocket As Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
+            .SendTimeout = 1000,
+                .ReceiveTimeout = 1000
+            }
+            '连接
+            cliSocket.Connect($"{sender.ipDate(3)}.{sender.ipDate(2)}.{sender.ipDate(1)}.{sender.ipDate(0)}", 6000)
+
+            Try
+                Dim bytes(1028 - 1) As Byte
+                Dim tmpstr As String = "55d50902"
+                Dim sendbytes(4 - 1) As Byte
+                For i As Integer = 0 To tmpstr.Length \ 2 - 1
+                    sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
+                Next i
+
+                Dim bytesSend As Integer = cliSocket.Send(sendbytes)
+
+                Thread.Sleep(30)
+
+                Dim bytesRec As Integer = cliSocket.Receive(bytes)
+
+            Catch ex As Exception
+                TextBox4.AppendText($"发送读取指令异常:{ex.Message}{vbCrLf}")
+                cliSocket.Close()
+                Return False
+            End Try
+
+            Try
+                Dim bytes(1028 - 1) As Byte
+                Dim tmpstr As String = "55d50905000000000400"
+                Dim sendbytes(10 - 1) As Byte
+                For i As Integer = 0 To tmpstr.Length \ 2 - 1
+                    sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
+                Next i
+
+                Dim bytesSend As Integer = cliSocket.Send(sendbytes)
+
+                Thread.Sleep(30)
+                For m As Integer = 0 To 16 - 1
+                    Dim bytesRec As Integer = cliSocket.Receive(bytes)
+
+                    For j As Integer = 4 To 1027 Step 32
+                        If bytes(j + 0) <> &H55 Then
+                            Continue For
+                        End If
+
+                        If bytes(j + 1) > 4 Then
+                            Continue For
+                        End If
+
+                        For i As Integer = 0 To checkData.Length - 1
+                            If bytes(j + 4 + i) <> checkData(i) Then
+                                cliSocket.Close()
+                                TextBox4.AppendText("校验值错误")
+                                Return False
+                            End If
+                        Next
+
+                        recSum = recSum + 1
+                    Next
+                Next
+            Catch ex As Exception
+                TextBox4.AppendText($"接收数据异常:{ex.Message}{vbCrLf}")
+                cliSocket.Close()
+                Return False
+            End Try
+
+            cliSocket.Close()
+        Next
+
+        Return If(recSum > 0, True, False)
+    End Function
 End Class
