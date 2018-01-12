@@ -52,12 +52,12 @@ YESInteractivePlayer
  Shift
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormMain.creatDialogThread(System.Int32)">
+<member name="M:YESInteractivePlayer.FormMain.CreatDialogThread(System.Int32)">
  <summary>
  创建播放窗体
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormMain.showCurtain">
+<member name="M:YESInteractivePlayer.FormMain.ShowCurtain">
  <summary>
  显示播放窗体
  </summary>
@@ -67,22 +67,22 @@ YESInteractivePlayer
  热键消息处理函数
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormMain.setResetTemp(System.Int32)">
+<member name="M:YESInteractivePlayer.FormMain.SetResetTemp(System.Int32)">
  <summary>
  设置 屏幕定时复位增量温度 K
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormMain.setResetSec(System.Int32)">
+<member name="M:YESInteractivePlayer.FormMain.SetResetSec(System.Int32)">
  <summary>
  设置 屏幕定时复位时间
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormMain.onLinkCon">
+<member name="M:YESInteractivePlayer.FormMain.OnLinkCon">
  <summary>
  连接
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormMain.offLinkCon">
+<member name="M:YESInteractivePlayer.FormMain.OffLinkCon">
  <summary>
  断开连接
  </summary>
@@ -97,7 +97,7 @@ YESInteractivePlayer
  异常时断开连接并提示
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormMain.communicWorkThread(System.Int32)">
+<member name="M:YESInteractivePlayer.FormMain.CommunicWorkThread(System.Int32)">
  <summary>
  检测线程
  </summary>
@@ -197,7 +197,7 @@ YESInteractivePlayer
  更新输入
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormOption.updataIp(System.Int32)">
+<member name="M:YESInteractivePlayer.FormOption.UpdataIp(System.Int32)">
  <summary>
  更新显示IP信息
  </summary>
@@ -272,14 +272,9 @@ YESInteractivePlayer
  查询复位次数 鼠标松开时
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormOption.getScanBoardData(System.Int32,System.Int32)">
+<member name="M:YESInteractivePlayer.FormOption.GetScanBoardData(System.Int32,System.Int32)">
  <summary>
  获取接收卡数据
- </summary>
-</member>
-<member name="M:YESInteractivePlayer.FormOption.TextBox4_TextChanged(System.Object,System.EventArgs)">
- <summary>
- 自动跳转
  </summary>
 </member>
 <member name="M:YESInteractivePlayer.FormOption.Button8_Click(System.Object,System.EventArgs)">
@@ -297,12 +292,12 @@ YESInteractivePlayer
  发送升级程序 鼠标松开时
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormOption.sendUpdata">
+<member name="M:YESInteractivePlayer.FormOption.SendUpdata">
  <summary>
  升级接收卡程序
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormOption.checkUpdataRecData(System.Byte[])">
+<member name="M:YESInteractivePlayer.FormOption.CheckUpdataRecData(System.Byte[])">
  <summary>
  比较收到的数据
  </summary>
@@ -367,22 +362,22 @@ YESInteractivePlayer
  模拟鼠标点击消息
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.ModuleFunction.putlog(System.String)">
+<member name="M:YESInteractivePlayer.ModuleFunction.Putlog(System.String)">
  <summary>
  输出日志
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.ModuleFunction.getMd5Hash(System.String)">
+<member name="M:YESInteractivePlayer.ModuleFunction.GetMd5Hash(System.String)">
  <summary>
  获取字符串MD5值
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.ModuleFunction.setControlslanguage(System.Windows.Forms.Control)">
+<member name="M:YESInteractivePlayer.ModuleFunction.SetControlslanguage(System.Windows.Forms.Control)">
  <summary>
  设置显示语言
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.ModuleFunction.getLanguage(System.String)">
+<member name="M:YESInteractivePlayer.ModuleFunction.GetLanguage(System.String)">
  <summary>
  获取实际显示文本
  </summary>
@@ -527,287 +522,287 @@ YESInteractivePlayer
  Y轴索引
  </summary>
 </member>
-<member name="T:YESInteractivePlayer.ModuleStructure.senderInfo">
+<member name="T:YESInteractivePlayer.ModuleStructure.SenderInfo">
  <summary>
  发送卡信息
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.senderInfo.id">
+<member name="F:YESInteractivePlayer.ModuleStructure.SenderInfo.Id">
  <summary>
  控制器索引
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.senderInfo.link">
+<member name="F:YESInteractivePlayer.ModuleStructure.SenderInfo.Link">
  <summary>
  是否需要连接
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.senderInfo.ipDate">
+<member name="F:YESInteractivePlayer.ModuleStructure.SenderInfo.IpDate">
  <summary>
  IP信息
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.senderInfo.tmpIpData">
+<member name="F:YESInteractivePlayer.ModuleStructure.SenderInfo.TmpIpData">
  <summary>
  临时保存修改后的IP信息
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.senderInfo.cliSocket">
+<member name="F:YESInteractivePlayer.ModuleStructure.SenderInfo.CliSocket">
  <summary>
  socket连接变量
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.senderInfo.workThread">
+<member name="F:YESInteractivePlayer.ModuleStructure.SenderInfo.WorkThread">
  <summary>
  状态检测线程
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.senderInfo.MaxReadNum">
+<member name="F:YESInteractivePlayer.ModuleStructure.SenderInfo.MaxReadNum">
  <summary>
  每秒最大查询次数
  </summary>
 </member>
-<member name="T:YESInteractivePlayer.ModuleStructure.screenInfo">
+<member name="T:YESInteractivePlayer.ModuleStructure.ScreenInfo">
  <summary>
  显示屏信息
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.existFlage">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.ExistFlage">
  <summary>
  是否存在
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.curtainListId">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.CurtainListId">
  <summary>
  幕布所在位置索引
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.x">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.X">
  <summary>
  缩放后的 X 偏移(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.defaultX">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.DefaultX">
  <summary>
   显示屏在幕布中的 X 偏移(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.y">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.Y">
  <summary>
  缩放后的 Y 偏移(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.defaultY">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.DefaultY">
  <summary>
  显示屏在幕布中的 Y 偏移(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.width">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.Width">
  <summary>
  缩放后显示屏宽度(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.defaultWidth">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.DefaultWidth">
  <summary>
  读取的默认显示屏宽度(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.height">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.Height">
  <summary>
  缩放后显示屏高度(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.defaultHeight">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.DefaultHeight">
  <summary>
  读取的默认显示屏高度(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.ScanBoardWidth">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.ScanBoardWidth">
  <summary>
  缩放后接收卡显示单元宽度(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.defaultScanBoardWidth">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.DefaultScanBoardWidth">
  <summary>
  读取的默认接收卡显示单元宽度(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.ScanBoardHeight">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.ScanBoardHeight">
  <summary>
  缩放后接收卡显示单元高度(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.defaultScanBoardHeight">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.DefaultScanBoardHeight">
  <summary>
  读取的默认接收卡显示单元高度(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.touchPieceColumnsNum">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.TouchPieceColumnsNum">
  <summary>
  触摸单元列数 默认4
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.touchPieceRowsNum">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.TouchPieceRowsNum">
  <summary>
  触摸单元行数 默认4
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.touchPieceHeight">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.TouchPieceHeight">
  <summary>
  触摸单元高度
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.touchPieceWidth">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.TouchPieceWidth">
  <summary>
  触摸单元宽度
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.clickHistoryArray">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.ClickHistoryArray">
  <summary>
  上次点击状态
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.screenInfo.SenderList">
+<member name="F:YESInteractivePlayer.ModuleStructure.ScreenInfo.SenderList">
  <summary>
  屏幕所属的发送卡列表
  </summary>
 </member>
-<member name="T:YESInteractivePlayer.ModuleStructure.curtainInfo">
+<member name="T:YESInteractivePlayer.ModuleStructure.CurtainInfo">
  <summary>
  幕布信息
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.curtainInfo.remark">
+<member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.Remark">
  <summary>
  备注
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.curtainInfo.x">
+<member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.X">
  <summary>
  缩放后 X 偏移(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.curtainInfo.defaultX">
+<member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.DefaultX">
  <summary>
  X 偏移(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.curtainInfo.y">
+<member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.Y">
  <summary>
  缩放后 Y 偏移(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.curtainInfo.defaultY">
+<member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.DefaultY">
  <summary>
  Y 偏移(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.curtainInfo.width">
+<member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.Width">
  <summary>
  缩放后宽度(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.curtainInfo.defaultWidth">
+<member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.DefaultWidth">
  <summary>
  宽度(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.curtainInfo.height">
+<member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.Height">
  <summary>
  缩放后高度(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.curtainInfo.defaultHeight">
+<member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.DefaultHeight">
  <summary>
  高度(单位像素)
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.curtainInfo.screenList">
+<member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.ScreenList">
  <summary>
  幕布所含屏幕列表
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.curtainInfo.playDialog">
+<member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.PlayDialog">
  <summary>
  播放窗体
  </summary>
 </member>
-<member name="T:YESInteractivePlayer.ModuleStructure.systemInfo">
+<member name="T:YESInteractivePlayer.ModuleStructure.SystemInfo">
  <summary>
  系统配置
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.LinkFlage">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.LinkFlage">
  <summary>
  连接状态
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.ScanBoardTable">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.ScanBoardTable">
  <summary>
  接收卡索引表 key发送卡id-网口id-接收卡id value ScanBoardInfo
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.senderList">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.SenderList">
  <summary>
  发送卡列表
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.screenList">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.ScreenList">
  <summary>
  屏幕列表 最大32个
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.curtainList">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.CurtainList">
  <summary>
  幕布列表 长度不能大于屏幕数
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.rootClass">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.RootClass">
  <summary>
  Nova连接变量
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.mainClass">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.MainClass">
  <summary>
  Nova配置变量
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.filesList">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.FilesList">
  <summary>
  播放列表 key文件名 value文件绝对路径
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.startLocation">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.StartLocation">
  <summary>
  窗口显示位置
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.zoomTmpNumerator">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.ZoomTmpNumerator">
  <summary>
  缩放分子
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.zoomTmpDenominator">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.ZoomTmpDenominator">
  <summary>
  缩放分母
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.zoomProportion">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.ZoomProportion">
  <summary>
  缩放比例
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.selectLanguageId">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.SelectLanguageId">
  <summary>
  语言类型 0中文 1English
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.languageTable">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.LanguageTable">
  <summary>
  语言包索引
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.displayMode">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.DisplayMode">
  <summary>
  显示模式
  0点击
@@ -816,27 +811,27 @@ YESInteractivePlayer
  3忽略
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.touchSensitivity">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.TouchSensitivity">
  <summary>
  触摸灵敏度 低1-9高
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.clickValidNums">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.ClickValidNums">
  <summary>
  抗干扰等级 同时点击数大于等于几个有效
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.resetTemp">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.ResetTemp">
  <summary>
  屏幕定时复位增量温度 K
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.resetSec">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.ResetSec">
  <summary>
  屏幕定时复位时间
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.systemInfo.inquireTimeSec">
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.InquireTimeSec">
  <summary>
  查询时间间隔 ms
  </summary>

@@ -35,26 +35,26 @@ Public Class FormMain
         'checkdog()
 
         '读取最后编译日期
-        Dim txtTmp As System.IO.TextReader = System.IO.File.OpenText(".\data\creationDate.ini")
+        Dim txtTmp As System.IO.TextReader = System.IO.File.OpenText(".\data\CreationDate.ini")
         Me.Text = $"{My.Application.Info.ProductName} [{txtTmp.ReadLine()}]"
 
         System.IO.Directory.CreateDirectory("./data")
         System.IO.Directory.CreateDirectory("./logs")
 
-        putlog("启动 " & Application.ExecutablePath)
+        Putlog("启动 " & Application.ExecutablePath)
 
         '反序列化
         If System.IO.File.Exists("./data/setting.db") Then
-            Dim fStream As FileStream = New FileStream("./data/setting.db", FileMode.Open)
+            Dim fStream As FileStream = New FileStream("./data/Setting.db", FileMode.Open)
             Dim sfFormatter As New System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
 
             Try
                 sysInfo = sfFormatter.Deserialize(fStream)
             Catch ex As Exception
-                MsgBox($"配置文件读取失败:{ex.Message}",
+                MsgBox($"配置文件读取异常:{ex.Message}",
                        MsgBoxStyle.Information,
                        "读取配置")
-                End
+                'End
                 'Application.Exit()
                 '打开版本不同或错误的文件则无法读取
             End Try
@@ -62,34 +62,34 @@ Public Class FormMain
             fStream.Close()
         Else
             '第一次使用初始化参数
-            ReDim sysInfo.screenList(32 - 1)
-            For i As Integer = 0 To sysInfo.screenList.Length - 1
-                sysInfo.screenList(i).touchPieceColumnsNum = 4
-                sysInfo.screenList(i).touchPieceRowsNum = 4
+            ReDim sysInfo.ScreenList(32 - 1)
+            For i As Integer = 0 To sysInfo.ScreenList.Length - 1
+                sysInfo.ScreenList(i).TouchPieceColumnsNum = 4
+                sysInfo.ScreenList(i).TouchPieceRowsNum = 4
             Next
             'sysInfo.curtainList = New List(Of curtainInfo)
-            sysInfo.startLocation.X = Screen.PrimaryScreen.Bounds.Width / 2
-            sysInfo.startLocation.Y = Screen.PrimaryScreen.Bounds.Height / 2
+            sysInfo.StartLocation.X = Screen.PrimaryScreen.Bounds.Width / 2
+            sysInfo.StartLocation.Y = Screen.PrimaryScreen.Bounds.Height / 2
             'sysInfo.filesList = New Hashtable
         End If
 
-        If sysInfo.curtainList Is Nothing Then
-            sysInfo.curtainList = New List(Of curtainInfo)
+        If sysInfo.CurtainList Is Nothing Then
+            sysInfo.CurtainList = New List(Of CurtainInfo)
         End If
 
-        If sysInfo.filesList Is Nothing Then
-            sysInfo.filesList = New Hashtable
+        If sysInfo.FilesList Is Nothing Then
+            sysInfo.FilesList = New Hashtable
         Else
             '添加历史文件列表
             Dim objFile As System.IO.File
-            Dim tmpfilesListkeys As New ArrayList(sysInfo.filesList.Keys)
+            Dim tmpfilesListkeys As New ArrayList(sysInfo.FilesList.Keys)
             For Each i In tmpfilesListkeys
 #Disable Warning BC42025
                 ' 通过实例访问共享成员、常量成员、枚举成员或嵌套类型
                 '删除不存在的文件路径
-                If Not objFile.Exists(sysInfo.filesList.Item(i).ToString) Then
+                If Not objFile.Exists(sysInfo.FilesList.Item(i).ToString) Then
 #Enable Warning BC42025
-                    sysInfo.filesList.Remove(i)
+                    sysInfo.FilesList.Remove(i)
                     Continue For
                 End If
                 ComboBox2.Items.Add(i)
@@ -101,9 +101,9 @@ Public Class FormMain
         End If
 
         '加载语言包
-        sysInfo.languageTable = New Hashtable
+        sysInfo.LanguageTable = New Hashtable
         Try
-            Dim IOsR As StreamReader = New StreamReader("./data/languageTable.ini")
+            Dim IOsR As StreamReader = New StreamReader("./data/LanguageTable.ini")
             Do
                 Dim tmpstr As String = IOsR.ReadLine
                 '判断数据合法性
@@ -122,20 +122,22 @@ Public Class FormMain
                     textArray(i) = tmpstr2(i + 1)
                 Next
 
-                sysInfo.languageTable.Add(tmpstr2(0), textArray)
+                sysInfo.LanguageTable.Add(tmpstr2(0), textArray)
             Loop
         Catch ex As Exception
             MsgBox($"语言包读取异常:{ex.Message}", MsgBoxStyle.Information, "加载语言包")
-            Application.Exit()
+            'Application.Exit()
         End Try
 
-        sysInfo.zoomProportion = If(sysInfo.zoomProportion, sysInfo.zoomProportion, 1)
-        sysInfo.touchSensitivity = If(sysInfo.touchSensitivity, sysInfo.touchSensitivity, 1)
-        sysInfo.clickValidNums = If(sysInfo.clickValidNums, sysInfo.clickValidNums, 1)
-        sysInfo.resetTemp = If(sysInfo.resetTemp, sysInfo.resetTemp, 1)
-        sysInfo.resetSec = If(sysInfo.resetSec, sysInfo.resetSec, 1)
+        sysInfo.ZoomProportion = If(sysInfo.ZoomProportion, sysInfo.ZoomProportion, 1)
+        sysInfo.ZoomTmpNumerator = If(sysInfo.ZoomTmpNumerator, sysInfo.ZoomTmpNumerator, 1)
+        sysInfo.ZoomTmpDenominator = If(sysInfo.ZoomTmpDenominator, sysInfo.ZoomTmpDenominator, 1)
+        sysInfo.TouchSensitivity = If(sysInfo.TouchSensitivity, sysInfo.TouchSensitivity, 1)
+        sysInfo.ClickValidNums = If(sysInfo.ClickValidNums, sysInfo.ClickValidNums, 1)
+        sysInfo.ResetTemp = If(sysInfo.ResetTemp, sysInfo.ResetTemp, 1)
+        sysInfo.ResetSec = If(sysInfo.ResetSec, sysInfo.ResetSec, 1)
 
-        Me.Location = sysInfo.startLocation
+        Me.Location = sysInfo.StartLocation
 
         ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList
         ComboBox2.DropDownStyle = ComboBoxStyle.DropDownList
@@ -152,8 +154,8 @@ Public Class FormMain
         忽略F4ToolStripMenuItem.BackColor = Color.FromArgb(&HB0, &HAF, &HDF)
         ToolStripDropDownButton1.BackColor = 运行F1ToolStripMenuItem.BackColor
 
-        ''发送卡状态
-        'Timer1.Interval = 1000
+        '发送卡状态
+        Timer1.Interval = 1000
 
         ''发送卡状态列表样式
         'For i As Integer = 0 To 10 - 1
@@ -170,65 +172,65 @@ Public Class FormMain
         ''DataGridView1.GridColor = Color.FromArgb(&H33, &H99, &HFF)
 
         '设置显示语言
-        setControlslanguage(Me)
+        SetControlslanguage(Me)
     End Sub
 
     ''' <summary>
     ''' 创建播放窗体
     ''' </summary>
-    Public Sub creatDialogThread(ByVal id As Integer)
-        Dim tmp As curtainInfo = sysInfo.curtainList.Item(id)
+    Public Sub CreatDialogThread(ByVal id As Integer)
+        Dim tmp As CurtainInfo = sysInfo.CurtainList.Item(id)
 
-        tmp.playDialog = New FormPlay
+        tmp.PlayDialog = New FormPlay
 
-        tmp.playDialog.curtainListId = id
+        tmp.PlayDialog.curtainListId = id
 
-        sysInfo.curtainList.Item(id) = tmp
+        sysInfo.CurtainList.Item(id) = tmp
 
-        tmp.playDialog.setLocation(tmp.x, tmp.y, tmp.width, tmp.height)
-        tmp.playDialog.ShowDialog()
+        tmp.PlayDialog.SetLocation(tmp.X, tmp.Y, tmp.Width, tmp.Height)
+        tmp.PlayDialog.ShowDialog()
     End Sub
 
     ''' <summary>
     ''' 显示播放窗体
     ''' </summary>
-    Private Sub showCurtain()
+    Private Sub ShowCurtain()
         '刷新屏幕下拉列表列表
         '刷新播放信息列表
         ComboBox1.Items.Clear()
 
         '显示标记的幕布窗体
         Dim tmpCreatDialogThread As Threading.Thread
-        For i As Integer = 0 To sysInfo.curtainList.Count - 1
-            With sysInfo.curtainList.Item(i)
-                ComboBox1.Items.Add($"{i} { .remark}")
+        For i As Integer = 0 To sysInfo.CurtainList.Count - 1
+            With sysInfo.CurtainList.Item(i)
+                ComboBox1.Items.Add($"{i} { .Remark}")
 
-                If .playDialog Is Nothing Then
+                If .PlayDialog Is Nothing Then
                     '新幕布则创建新窗体
-                    tmpCreatDialogThread = New Threading.Thread(AddressOf creatDialogThread)
+                    tmpCreatDialogThread = New Threading.Thread(AddressOf CreatDialogThread)
                     tmpCreatDialogThread.SetApartmentState(ApartmentState.STA)
                     tmpCreatDialogThread.IsBackground = True
                     tmpCreatDialogThread.Start(i)
                 Else
                     '已存在则更新位置及大小
-                    .playDialog.setLocation(.x, .y, .width, .height)
+                    .PlayDialog.SetLocation(.X, .Y, .Width, .Height)
                 End If
             End With
         Next
 
         '清空控制器连接标记
-        For i As Integer = 0 To sysInfo.senderList.Length - 1
-            sysInfo.senderList(i).link = False
+        For i As Integer = 0 To sysInfo.SenderList.Length - 1
+            sysInfo.SenderList(i).Link = False
         Next
         '判断哪些控制器要连接
-        For Each i In sysInfo.curtainList
-            For Each j In i.screenList
-                If Not sysInfo.screenList(j).existFlage Then
+        For Each i In sysInfo.CurtainList
+            For Each j In i.ScreenList
+                If Not sysInfo.ScreenList(j).ExistFlage Then
                     Continue For
                 End If
 
-                For Each k In sysInfo.screenList(j).SenderList
-                    sysInfo.senderList(k).link = True
+                For Each k In sysInfo.ScreenList(j).SenderList
+                    sysInfo.SenderList(k).Link = True
                 Next
             Next
         Next
@@ -236,6 +238,10 @@ Public Class FormMain
         If ComboBox1.Items.Count Then
             ComboBox1.SelectedIndex = 0
         End If
+
+        For i As Integer = 0 To sysInfo.SenderList.Length - 1
+            ToolStripDropDownButton2.DropDownItems(i).Enabled = sysInfo.SenderList(i).Link
+        Next
 
         Thread.Sleep(1000)
         Me.Activate()
@@ -246,16 +252,16 @@ Public Class FormMain
         Dim tmpDialog As New FormNovaInit
         tmpDialog.ShowDialog()
 
+        '加载发送卡列表
+        For i As Integer = 0 To sysInfo.SenderList.Length - 1
+            ToolStripDropDownButton2.DropDownItems.Add($"控制器{i}")
+        Next
+
         '显示幕布
-        showCurtain()
+        ShowCurtain()
 
         '启动时为未连接状态
-        offLinkCon()
-
-        ''加载发送卡列表
-        'For i As Integer = 0 To sysInfo.senderList.Length - 1 Step 10
-        '    DataGridView1.Rows.Add("")
-        'Next
+        OffLinkCon()
     End Sub
 
     ''' <summary>
@@ -290,7 +296,7 @@ Public Class FormMain
         End If
 
         '保存关闭时窗体位置
-        sysInfo.startLocation = Me.Location
+        sysInfo.StartLocation = Me.Location
 
         '注销全局快捷键
         UnregisterHotKey(Me.Handle.ToInt32, Keys.F1)
@@ -299,13 +305,13 @@ Public Class FormMain
         UnregisterHotKey(Me.Handle.ToInt32, Keys.F4)
 
         '关闭播放窗体
-        For Each i In sysInfo.curtainList
-            i.playDialog.closeDialog(True)
+        For Each i In sysInfo.CurtainList
+            i.PlayDialog.CloseDialog(True)
         Next
 
         '序列化
         Try
-            Dim fStream As New FileStream("./data/setting.db", FileMode.Create)
+            Dim fStream As New FileStream("./data/Setting.db", FileMode.Create)
             Dim sfFormatter As New System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             sfFormatter.Serialize(fStream, sysInfo)
             fStream.Close()
@@ -314,13 +320,13 @@ Public Class FormMain
         End Try
 
         '释放nova资源
-        If sysInfo.mainClass Is Nothing Then
+        If sysInfo.MainClass Is Nothing Then
         Else
-            sysInfo.mainClass.UnInitialize()
+            sysInfo.MainClass.UnInitialize()
         End If
-        If sysInfo.rootClass Is Nothing Then
+        If sysInfo.RootClass Is Nothing Then
         Else
-            sysInfo.rootClass.UnInitialize()
+            sysInfo.RootClass.UnInitialize()
         End If
     End Sub
 
@@ -328,13 +334,13 @@ Public Class FormMain
         Dim tmpDialog As New FormOption
         tmpDialog.ShowDialog()
 
-        showCurtain()
+        ShowCurtain()
     End Sub
 
     ''' <summary>
     ''' 设置 屏幕定时复位增量温度 K
     ''' </summary>
-    Private Sub setResetTemp(value As Integer)
+    Private Sub SetResetTemp(value As Integer)
         Dim sendstr As String = "aadb010300"
         Dim sendByte(sendstr.Length \ 2 - 1) As Byte
         For i As Integer = 0 To sendstr.Length \ 2 - 1
@@ -342,13 +348,13 @@ Public Class FormMain
         Next
         sendByte(4) = value
 
-        sysInfo.mainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
     End Sub
 
     ''' <summary>
     ''' 设置 屏幕定时复位时间
     ''' </summary>
-    Private Sub setResetSec(value As Integer)
+    Private Sub SetResetSec(value As Integer)
         Dim sendstr As String = "aadb010200"
         Dim sendByte(sendstr.Length \ 2 - 1) As Byte
         For i As Integer = 0 To sendstr.Length \ 2 - 1
@@ -356,29 +362,29 @@ Public Class FormMain
         Next
         sendByte(4) = value
 
-        sysInfo.mainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
     End Sub
 
     ''' <summary>
     ''' 连接
     ''' </summary>
-    Private Sub onLinkCon()
+    Private Sub OnLinkCon()
         ToolStripDropDownButton1.Enabled = True
         Button5.Enabled = False
-        ToolStripButton1.Text = getLanguage("断开连接")
+        ToolStripButton1.Text = GetLanguage("断开连接")
         ToolStripButton1.BackColor = Color.OrangeRed
-        'Timer1.Start()
+        Timer1.Start()
     End Sub
 
     ''' <summary>
     ''' 断开连接
     ''' </summary>
-    Private Sub offLinkCon()
+    Private Sub OffLinkCon()
         ToolStripDropDownButton1.Enabled = False
         Button5.Enabled = True
-        ToolStripButton1.Text = getLanguage("连接控制器")
+        ToolStripButton1.Text = GetLanguage("连接控制器")
         ToolStripButton1.BackColor = Color.FromArgb(&H0, &HE3, &HB)
-        'Timer1.Stop()
+        Timer1.Stop()
     End Sub
 
     ''' <summary>
@@ -387,18 +393,18 @@ Public Class FormMain
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         If Not sysInfo.LinkFlage Then
             '连接控制器
-            If sysInfo.curtainList.Count = 0 Then
+            If sysInfo.CurtainList.Count = 0 Then
                 Exit Sub
             End If
 
             '检测连接状态
-            For Each i In sysInfo.senderList
+            For Each i In sysInfo.SenderList
                 With i
-                    If .link = False Then
+                    If .Link = False Then
                         Continue For
                     End If
 
-                    Dim ipStr As String = $"{ .ipDate(3)}.{ .ipDate(2)}.{ .ipDate(1)}.{ .ipDate(0)}"
+                    Dim ipStr As String = $"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)}"
                     'ping 设备IP地址
                     If My.Computer.Network.Ping(ipStr, 500) = False Then
                         MsgBox($"{ipStr} 未能连通",
@@ -411,37 +417,37 @@ Public Class FormMain
 
             '建立与控制器的连接
             Try
-                For i As Integer = 0 To sysInfo.senderList.Length - 1
-                    If sysInfo.senderList(i).link = False Then
+                For i As Integer = 0 To sysInfo.SenderList.Length - 1
+                    If sysInfo.SenderList(i).Link = False Then
                         Continue For
                     End If
 
-                    With sysInfo.senderList(i)
-                        Dim ipStr As String = $"{ .ipDate(3)}.{ .ipDate(2)}.{ .ipDate(1)}.{ .ipDate(0)}"
+                    With sysInfo.SenderList(i)
+                        Dim ipStr As String = $"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)}"
 
-                        .cliSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
+                        .CliSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
                             .SendTimeout = 1000,
                             .ReceiveTimeout = 1000
                         }
                         '连接
-                        .cliSocket.Connect(ipStr, 6000)
+                        .CliSocket.Connect(ipStr, 6000)
 
-                        .workThread = New Threading.Thread(AddressOf communicWorkThread) With {
+                        .WorkThread = New Threading.Thread(AddressOf CommunicWorkThread) With {
                             .IsBackground = True '线程后台运行
                         }
                         '线程开始
-                        .workThread.Start(i)
+                        .WorkThread.Start(i)
                     End With
                 Next
             Catch ex As Exception
                 '异常关闭连接
-                For Each i In sysInfo.senderList
+                For Each i In sysInfo.SenderList
                     Try
-                        i.workThread.Abort()
+                        i.WorkThread.Abort()
                     Catch ex2 As Exception
                     End Try
                     Try
-                        i.cliSocket.Close()
+                        i.CliSocket.Close()
                     Catch ex3 As Exception
                     End Try
                 Next
@@ -453,30 +459,30 @@ Public Class FormMain
             End Try
 
             '启动复位功能
-            setResetTemp(sysInfo.resetTemp)
-            setResetSec(sysInfo.resetSec)
+            SetResetTemp(sysInfo.ResetTemp)
+            SetResetSec(sysInfo.ResetSec)
 
-            onLinkCon()
+            OnLinkCon()
             sysInfo.LinkFlage = True
         Else
             '断开控制器
 
-            For Each i In sysInfo.senderList
-                If i.link = False Then
+            For Each i In sysInfo.SenderList
+                If i.Link = False Then
                     Continue For
                 End If
 
                 With i
-                    .workThread.Abort()
-                    .cliSocket.Close()
+                    .WorkThread.Abort()
+                    .CliSocket.Close()
                 End With
             Next
 
             '关闭复位功能
-            setResetTemp(0)
-            setResetSec(0)
+            SetResetTemp(0)
+            SetResetSec(0)
 
-            offLinkCon()
+            OffLinkCon()
             sysInfo.LinkFlage = False
         End If
     End Sub
@@ -485,9 +491,9 @@ Public Class FormMain
     ''' 异常时断开连接并提示
     ''' </summary>
     Public Delegate Sub showExceptionCallback(ByVal nums As Integer)
-    Public Sub showException(ByVal nums As Integer)
+    Public Sub ShowException(ByVal nums As Integer)
         If Me.InvokeRequired Then
-            Me.Invoke(New showExceptionCallback(AddressOf showException), New Object() {nums})
+            Me.Invoke(New showExceptionCallback(AddressOf ShowException), New Object() {nums})
             Exit Sub
         End If
 
@@ -501,7 +507,7 @@ Public Class FormMain
     ''' <summary>
     ''' 检测线程
     ''' </summary>
-    Private Sub communicWorkThread(ByVal senderId As Integer)
+    Private Sub CommunicWorkThread(ByVal senderId As Integer)
         '上次运行时间
         Dim lastsec As Integer = -1
         '当前运行时间
@@ -516,14 +522,14 @@ Public Class FormMain
             nowsec = Now().Second
             If lastsec <> nowsec Then
                 exceptionNums = 0
-                sysInfo.senderList(senderId).MaxReadNum = readNum
+                sysInfo.SenderList(senderId).MaxReadNum = readNum
                 readNum = 0
                 lastsec = nowsec
             End If
 
             '出现三次异常，进行提示，并且终止进程
             If exceptionNums > 3 Then
-                showException(exceptionNums)
+                ShowException(exceptionNums)
                 Exit Sub
             End If
 
@@ -541,9 +547,9 @@ Public Class FormMain
                     sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
                 Next i
                 '发送数据
-                Dim bytesSend As Integer = sysInfo.senderList(senderId).cliSocket.Send(sendbytes)
+                Dim bytesSend As Integer = sysInfo.SenderList(senderId).CliSocket.Send(sendbytes)
                 '接收数据
-                Dim bytesRec As Integer = sysInfo.senderList(senderId).cliSocket.Receive(bytes)
+                Dim bytesRec As Integer = sysInfo.SenderList(senderId).CliSocket.Receive(bytes)
 
             Catch ex As Exception
                 exceptionNums += 1
@@ -562,12 +568,12 @@ Public Class FormMain
                     sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
                 Next i
                 '发送到发送卡数据
-                Dim bytesSend As Integer = sysInfo.senderList(senderId).cliSocket.Send(sendbytes)
+                Dim bytesSend As Integer = sysInfo.SenderList(senderId).CliSocket.Send(sendbytes)
 
                 '诺瓦每次只发送1K数据，16K数据分16次发送
                 For i As Integer = 0 To 16 - 1
 
-                    Dim bytesRec As Integer = sysInfo.senderList(senderId).cliSocket.Receive(bytes)
+                    Dim bytesRec As Integer = sysInfo.SenderList(senderId).CliSocket.Receive(bytes)
                     'TextBox5.Text = ""
                     '分析接收到的数据
                     For j As Integer = 4 To 1027 Step 32
@@ -580,8 +586,8 @@ Public Class FormMain
                             Continue For
                         End If
 
-                        If sysInfo.displayMode <> 0 And
-                            sysInfo.displayMode <> 1 Then
+                        If sysInfo.DisplayMode <> 0 And
+                            sysInfo.DisplayMode <> 1 Then
                             Exit For
                         End If
 
@@ -593,38 +599,38 @@ Public Class FormMain
 
                         '计算总点击块
                         Dim tmpClickValidSum As Integer = 0
-                        For k = 0 To sysInfo.screenList(tmp.ScreenId).touchPieceRowsNum * sysInfo.screenList(tmp.Screenid).touchPieceColumnsNum - 1
+                        For k = 0 To sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum * sysInfo.ScreenList(tmp.ScreenId).TouchPieceColumnsNum - 1
                             tmpClickValidSum = tmpClickValidSum + If(bytes(j + 4 + k) And &H80, 1, 0)
                         Next
 
-                        If tmpClickValidSum < sysInfo.clickValidNums Then
+                        If tmpClickValidSum < sysInfo.ClickValidNums Then
                             Continue For
                         End If
 
                         'Debug.WriteLine(tmpClickValidSum)
 
-                        For k As Integer = 0 To sysInfo.screenList(tmp.ScreenId).touchPieceRowsNum - 1
-                            For l As Integer = 0 To sysInfo.screenList(tmp.ScreenId).touchPieceColumnsNum - 1
-                                sysInfo.screenList(tmp.ScreenId).clickHistoryArray(tmp.Y + k, tmp.X + l) = bytes(j + k * sysInfo.screenList(tmp.ScreenId).touchPieceRowsNum + l) And &H80
+                        For k As Integer = 0 To sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum - 1
+                            For l As Integer = 0 To sysInfo.ScreenList(tmp.ScreenId).TouchPieceColumnsNum - 1
+                                sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = bytes(j + k * sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum + l) And &H80
 
-                                If (bytes(j + 4 + k * sysInfo.screenList(tmp.ScreenId).touchPieceRowsNum + l) And &H80) <> &H80 Then
-                                    sysInfo.screenList(tmp.ScreenId).clickHistoryArray(tmp.Y + k, tmp.X + l) = 0
+                                If (bytes(j + 4 + k * sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum + l) And &H80) <> &H80 Then
+                                    sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = 0
                                     Continue For
                                 End If
 
-                                If sysInfo.screenList(tmp.ScreenId).clickHistoryArray(tmp.Y + k, tmp.X + l) Then
-                                    sysInfo.screenList(tmp.ScreenId).clickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
+                                If sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) Then
+                                    sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
 
                                     Continue For
                                 End If
 
-                                sysInfo.screenList(tmp.ScreenId).clickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
-                                sysInfo.curtainList.Item(sysInfo.screenList(tmp.ScreenId).curtainListId).
-                                    playDialog.
+                                sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
+                                sysInfo.CurtainList.Item(sysInfo.ScreenList(tmp.ScreenId).CurtainListId).
+                                    PlayDialog.
                                     MousesimulationClick(tmp.ScreenId,
                                                          tmp.X + l,
                                                          tmp.Y + k,
-                                                         bytes(j + 4 + k * sysInfo.screenList(tmp.ScreenId).touchPieceRowsNum + l))
+                                                         bytes(j + 4 + k * sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum + l))
                             Next
                         Next
 
@@ -636,7 +642,7 @@ Public Class FormMain
                 exceptionNums += 1
             End Try
 
-            Thread.Sleep(sysInfo.inquireTimeSec)
+            Thread.Sleep(sysInfo.InquireTimeSec)
         Loop
     End Sub
 
@@ -652,20 +658,23 @@ Public Class FormMain
 
         '添加到播放列表
         For i As Integer = 0 To tmp.FileNames.Length - 1
-            If sysInfo.filesList.Item(tmp.SafeFileNames(i)) IsNot Nothing Then
+            If sysInfo.FilesList.Item(tmp.SafeFileNames(i)) IsNot Nothing Then
                 Continue For
             End If
 
             ComboBox2.Items.Add(tmp.SafeFileNames(i))
-            sysInfo.filesList.Add(tmp.SafeFileNames(i), tmp.FileNames(i))
+            sysInfo.FilesList.Add(tmp.SafeFileNames(i), tmp.FileNames(i))
         Next
+
+        '显示第一个添加的文件名
+        ComboBox2.Text = tmp.SafeFileNames(0)
     End Sub
 
     ''' <summary>
     ''' 删除文件
     ''' </summary>
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        sysInfo.filesList.Remove(ComboBox2.Text)
+        sysInfo.FilesList.Remove(ComboBox2.Text)
         ComboBox2.Items.Remove(ComboBox2.Text)
         If ComboBox2.Items.Count Then
             ComboBox2.SelectedIndex = 0
@@ -680,7 +689,7 @@ Public Class FormMain
             Exit Sub
         End If
 
-        sysInfo.curtainList.Item(ComboBox1.SelectedIndex).playDialog.play(sysInfo.filesList.Item(ComboBox2.Text))
+        sysInfo.CurtainList.Item(ComboBox1.SelectedIndex).PlayDialog.Play(sysInfo.FilesList.Item(ComboBox2.Text))
     End Sub
 
     ''' <summary>
@@ -691,46 +700,46 @@ Public Class FormMain
             Exit Sub
         End If
 
-        For Each i In sysInfo.curtainList
-            i.playDialog.play(sysInfo.filesList.Item(ComboBox2.Text))
+        For Each i In sysInfo.CurtainList
+            i.PlayDialog.Play(sysInfo.FilesList.Item(ComboBox2.Text))
         Next
     End Sub
 
     Private Sub 运行F1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 运行F1ToolStripMenuItem.Click
-        sysInfo.displayMode = 0
+        sysInfo.DisplayMode = 0
 
         ToolStripDropDownButton1.Text = 运行F1ToolStripMenuItem.Text
         ToolStripDropDownButton1.BackColor = 运行F1ToolStripMenuItem.BackColor
 
-        For Each i In sysInfo.curtainList
-            i.playDialog.switchPlayMode(True)
+        For Each i In sysInfo.CurtainList
+            i.PlayDialog.SwitchPlayMode(True)
         Next
     End Sub
 
     Private Sub 测试F2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 测试F2ToolStripMenuItem.Click
-        sysInfo.displayMode = 1
+        sysInfo.DisplayMode = 1
 
         ToolStripDropDownButton1.Text = 测试F2ToolStripMenuItem.Text
         ToolStripDropDownButton1.BackColor = 测试F2ToolStripMenuItem.BackColor
 
-        For Each i In sysInfo.curtainList
-            i.playDialog.switchTestMode(True)
+        For Each i In sysInfo.CurtainList
+            i.PlayDialog.SwitchTestMode(True)
         Next
     End Sub
 
     Private Sub 黑屏F3ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 黑屏F3ToolStripMenuItem.Click
-        sysInfo.displayMode = 2
+        sysInfo.DisplayMode = 2
 
         ToolStripDropDownButton1.Text = 黑屏F3ToolStripMenuItem.Text
         ToolStripDropDownButton1.BackColor = 黑屏F3ToolStripMenuItem.BackColor
 
-        For Each i In sysInfo.curtainList
-            i.playDialog.switchBlankScreenMode(True)
+        For Each i In sysInfo.CurtainList
+            i.PlayDialog.SwitchBlankScreenMode(True)
         Next
     End Sub
 
     Private Sub 忽略F4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 忽略F4ToolStripMenuItem.Click
-        sysInfo.displayMode = 3
+        sysInfo.DisplayMode = 3
 
         ToolStripDropDownButton1.Text = 忽略F4ToolStripMenuItem.Text
         ToolStripDropDownButton1.BackColor = 忽略F4ToolStripMenuItem.BackColor
@@ -741,24 +750,35 @@ Public Class FormMain
     ''' </summary>
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         If Not CheckBox1.Checked Then
-            For i As Integer = 0 To sysInfo.curtainList.Count - 1
-                With sysInfo.curtainList.Item(i)
-                    .playDialog.setLocation(.x, .y, .width, .height)
+            For i As Integer = 0 To sysInfo.CurtainList.Count - 1
+                With sysInfo.CurtainList.Item(i)
+                    .PlayDialog.SetLocation(.X, .Y, .Width, .Height)
                 End With
             Next
         Else
-            For i As Integer = 0 To sysInfo.curtainList.Count - 1
-                With sysInfo.curtainList.Item(i)
-                    .playDialog.setLocation(.x, .y, .0, .0)
+            For i As Integer = 0 To sysInfo.CurtainList.Count - 1
+                With sysInfo.CurtainList.Item(i)
+                    .PlayDialog.SetLocation(.X, .Y, .0, .0)
                 End With
             Next
         End If
     End Sub
 
-    ''定时刷新发送卡状态
-    'Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-    '    For i As Integer = 0 To sysInfo.senderList.Length - 1 Step 10
-    '        DataGridView1.Rows(i \ 10).Cells(i Mod 10).Value = $"{sysInfo.senderList(i).MaxReadNum}"
-    '    Next
-    'End Sub
+    '定时刷新发送卡状态
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Dim minReadNum As Integer = &HFFFF
+        For i As Integer = 0 To sysInfo.SenderList.Length - 1
+            With sysInfo.SenderList(i)
+                If Not .Link Then
+                    Continue For
+                End If
+
+                ToolStripDropDownButton2.DropDownItems(i).Text = $"控制器{i}:{ .MaxReadNum}"
+                minReadNum = If(minReadNum > .MaxReadNum, .MaxReadNum, minReadNum)
+            End With
+
+        Next
+
+        ToolStripDropDownButton2.BackColor = If(minReadNum, Color.FromArgb(&H0, &HE3, &HB), Color.Yellow)
+    End Sub
 End Class

@@ -43,7 +43,10 @@ Partial Class FormMain
         Me.Button5 = New System.Windows.Forms.Button()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripDropDownButton2 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ToolStrip1.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStrip1
@@ -193,11 +196,30 @@ Partial Class FormMain
         Me.CheckBox1.Text = "隐藏播放窗体"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton2})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 87)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(448, 23)
+        Me.StatusStrip1.TabIndex = 12
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'ToolStripDropDownButton2
+        '
+        Me.ToolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripDropDownButton2.Image = CType(resources.GetObject("ToolStripDropDownButton2.Image"), System.Drawing.Image)
+        Me.ToolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripDropDownButton2.Name = "ToolStripDropDownButton2"
+        Me.ToolStripDropDownButton2.Size = New System.Drawing.Size(69, 21)
+        Me.ToolStripDropDownButton2.Text = "连接状态"
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(448, 91)
+        Me.ClientSize = New System.Drawing.Size(448, 110)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
@@ -217,6 +239,8 @@ Partial Class FormMain
         Me.Text = "FormMain"
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -240,4 +264,6 @@ Partial Class FormMain
     Friend WithEvents Button5 As Button
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents ToolStripDropDownButton2 As ToolStripDropDownButton
 End Class

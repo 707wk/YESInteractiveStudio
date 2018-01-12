@@ -26,34 +26,34 @@ Public Class FormNovaInit
         Static Dim senderArrayId As Integer = 0
         If e.IsExecResult Then
             'senderArray(senderArrayIndex).index = senderArrayIndex
-            sysInfo.senderList(senderArrayId).ipDate = e.Data
+            sysInfo.SenderList(senderArrayId).IpDate = e.Data
 
-            showinfo($"控制器{senderArrayId}")
-            showinfo($"    ip:{e.Data(3)}.{e.Data(2)}.{e.Data(1)}.{e.Data(0)}")
-            showinfo($"    掩码:{e.Data(7)}.{e.Data(6)}.{e.Data(5)}.{e.Data(4)}")
-            showinfo($"    网关:{e.Data(11)}.{e.Data(10)}.{e.Data(9)}.{e.Data(8)}")
+            Showinfo($"控制器{senderArrayId}")
+            Showinfo($"    ip:{e.Data(3)}.{e.Data(2)}.{e.Data(1)}.{e.Data(0)}")
+            Showinfo($"    掩码:{e.Data(7)}.{e.Data(6)}.{e.Data(5)}.{e.Data(4)}")
+            Showinfo($"    网关:{e.Data(11)}.{e.Data(10)}.{e.Data(9)}.{e.Data(8)}")
 
             senderArrayId += 1
-            If senderArrayId < sysInfo.senderList.Length Then
-                sysInfo.mainClass.GetEquipmentIP(senderArrayId)
+            If senderArrayId < sysInfo.SenderList.Length Then
+                sysInfo.MainClass.GetEquipmentIP(senderArrayId)
             Else
-                showinfo($"加载完成")
+                Showinfo($"加载完成")
                 '移除事件
-                RemoveHandler sysInfo.mainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
-                Me.closeDialog("真是哔了狗了，这个事件居然是另一个线程触发的")
+                RemoveHandler sysInfo.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+                Me.CloseDialog("真是哔了狗了，这个事件居然是另一个线程触发的")
             End If
         Else
             '移除事件
-            RemoveHandler sysInfo.mainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
-            showinfo("ERROR:获取设备IP失败！请检查设备后，重新启动程序")
+            RemoveHandler sysInfo.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+            Showinfo("ERROR:获取设备IP失败！请检查设备后，重新启动程序")
         End If
     End Sub
 
     '关闭窗体
     Public Delegate Sub closeDialogCallback(ByVal text As String)
-    Public Sub closeDialog(ByVal text As String)
+    Public Sub CloseDialog(ByVal text As String)
         If Me.InvokeRequired Then
-            Me.Invoke(New closeDialogCallback(AddressOf closeDialog), New Object() {text})
+            Me.Invoke(New closeDialogCallback(AddressOf CloseDialog), New Object() {text})
             Exit Sub
         End If
 
@@ -64,9 +64,9 @@ Public Class FormNovaInit
     ''' 显示信息
     ''' </summary>
     Public Delegate Sub showinfoCallback(ByVal text As String)
-    Public Sub showinfo(ByVal text As String)
+    Public Sub Showinfo(ByVal text As String)
         If Me.InvokeRequired Then
-            Me.Invoke(New showinfoCallback(AddressOf showinfo), New Object() {text})
+            Me.Invoke(New showinfoCallback(AddressOf Showinfo), New Object() {text})
             Exit Sub
         End If
 
@@ -76,17 +76,17 @@ Public Class FormNovaInit
             Exit Sub
         End If
 
-        putlog(text)
+        Putlog(text)
         Thread.Sleep(2000)
 
         '释放nova资源
-        If sysInfo.mainClass Is Nothing Then
+        If sysInfo.MainClass Is Nothing Then
         Else
-            sysInfo.mainClass.UnInitialize()
+            sysInfo.MainClass.UnInitialize()
         End If
-        If sysInfo.rootClass Is Nothing Then
+        If sysInfo.RootClass Is Nothing Then
         Else
-            sysInfo.rootClass.UnInitialize()
+            sysInfo.RootClass.UnInitialize()
         End If
 
         End
@@ -97,9 +97,9 @@ Public Class FormNovaInit
     ''' 读取屏幕信息
     ''' </summary>
     Public Delegate Sub novaInitializeCallback(ByVal text As String)
-    Public Sub novaInitialize(ByVal text As String)
+    Public Sub NovaInitialize(ByVal text As String)
         If Me.InvokeRequired Then
-            Me.Invoke(New novaInitializeCallback(AddressOf novaInitialize), New Object() {text})
+            Me.Invoke(New novaInitializeCallback(AddressOf NovaInitialize), New Object() {text})
             Exit Sub
         End If
 
@@ -108,52 +108,52 @@ Public Class FormNovaInit
 
         Dim LEDScreenInfoList As List(Of LEDScreenInfo) = Nothing
 
-        showinfo("连接Nova服务中")
-        sysInfo.rootClass = New MarsHardwareEnumerator
+        Showinfo("连接Nova服务中")
+        sysInfo.RootClass = New MarsHardwareEnumerator
 
-        If sysInfo.rootClass.Initialize() Then
-            showinfo($"连接Nova服务成功")
+        If sysInfo.RootClass.Initialize() Then
+            Showinfo($"连接Nova服务成功")
         Else
-            showinfo($"ERROR:连接Nova服务失败")
+            Showinfo($"ERROR:连接Nova服务失败")
             'Application.Exit()
             Exit Sub
         End If
 
-        showinfo("查找控制系统中")
+        Showinfo("查找控制系统中")
 
-        Dim SystemCount As Integer = sysInfo.rootClass.CtrlSystemCount()
+        Dim SystemCount As Integer = sysInfo.RootClass.CtrlSystemCount()
         If SystemCount Then
-            showinfo($"控制系统数:{SystemCount}")
+            Showinfo($"控制系统数:{SystemCount}")
         Else
-            showinfo($"ERROR:未找到控制系统")
+            Showinfo($"ERROR:未找到控制系统")
             'Application.Exit()
             Exit Sub
         End If
 
-        sysInfo.mainClass = New MarsControlSystem(sysInfo.rootClass)
+        sysInfo.MainClass = New MarsControlSystem(sysInfo.RootClass)
         '绑定读取到ip事件
-        AddHandler sysInfo.mainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+        AddHandler sysInfo.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
 
         Dim screenCount As Integer
         Dim senderCount As Integer
         Dim tmpstr As String = Nothing
-        sysInfo.rootClass.GetComNameOfControlSystem(0, tmpstr)
-        showinfo($"初始化屏幕:{sysInfo.mainClass.Initialize(tmpstr, screenCount, senderCount)}")
-        showinfo($"显示屏个数:{screenCount} 控制器个数:{senderCount}")
+        sysInfo.RootClass.GetComNameOfControlSystem(0, tmpstr)
+        Showinfo($"初始化屏幕:{sysInfo.MainClass.Initialize(tmpstr, screenCount, senderCount)}")
+        Showinfo($"显示屏个数:{screenCount} 控制器个数:{senderCount}")
 
         If senderCount = 0 Then
-            showinfo($"ERROR:未找到控制器")
+            Showinfo($"ERROR:未找到控制器")
             Exit Sub
         End If
 
-        showinfo("读取显示屏信息中")
-        If sysInfo.mainClass.ReadLEDScreenInfo(LEDScreenInfoList) Then
-            showinfo($"ERROR:读显示屏信息失败")
+        Showinfo("读取显示屏信息中")
+        If sysInfo.MainClass.ReadLEDScreenInfo(LEDScreenInfoList) Then
+            Showinfo($"ERROR:读显示屏信息失败")
             Exit Sub
         End If
 
         If LEDScreenInfoList.Count = 0 Then
-            showinfo($"ERROR:未找到显示屏")
+            Showinfo($"ERROR:未找到显示屏")
             Exit Sub
         End If
 
@@ -166,20 +166,20 @@ Public Class FormNovaInit
         ''获取到的显示屏高度
         'Dim height As Integer
 
-        showinfo($"载入屏幕信息中")
+        Showinfo($"载入屏幕信息中")
         sysInfo.ScanBoardTable = New Hashtable
         'ReDim sysInfo.screenList(screenCount - 1)
-        For i As Integer = 0 To sysInfo.screenList.Length - 1
+        For i As Integer = 0 To sysInfo.ScreenList.Length - 1
             If i < screenCount Then
-                sysInfo.screenList(i).existFlage = True
+                sysInfo.ScreenList(i).ExistFlage = True
             Else
-                sysInfo.screenList(i).existFlage = False
+                sysInfo.ScreenList(i).ExistFlage = False
             End If
         Next
 
-        ReDim sysInfo.senderList(senderCount - 1)
-        For i As Integer = 0 To sysInfo.senderList.Length - 1
-            ReDim sysInfo.senderList(i).tmpIpData(12 - 1)
+        ReDim sysInfo.SenderList(senderCount - 1)
+        For i As Integer = 0 To sysInfo.SenderList.Length - 1
+            ReDim sysInfo.SenderList(i).TmpIpData(12 - 1)
         Next
 
         For LEDScreenId As Integer = 0 To screenCount - 1
@@ -188,35 +188,35 @@ Public Class FormNovaInit
             '屏幕索引
             'screenMain(LEDScreenIndex).index = LEDScreenIndex
             '获取起始位置 大小
-            sysInfo.mainClass.GetScreenLocation(LEDScreenId,
+            sysInfo.MainClass.GetScreenLocation(LEDScreenId,
                                             x,
                                             y,
-                                            sysInfo.screenList(LEDScreenId).defaultWidth,
-                                            sysInfo.screenList(LEDScreenId).defaultHeight)
+                                            sysInfo.ScreenList(LEDScreenId).DefaultWidth,
+                                            sysInfo.ScreenList(LEDScreenId).DefaultHeight)
             '屏幕单元宽度
-            sysInfo.screenList(LEDScreenId).defaultScanBoardWidth = LEDScreenInfoList(LEDScreenId).ScanBoardInfoList(0).Width
+            sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth = LEDScreenInfoList(LEDScreenId).ScanBoardInfoList(0).Width
             '屏幕单元高度
-            sysInfo.screenList(LEDScreenId).defaultScanBoardHeight = LEDScreenInfoList(LEDScreenId).ScanBoardInfoList(0).Height
+            sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight = LEDScreenInfoList(LEDScreenId).ScanBoardInfoList(0).Height
             '创建上次点击状态缓存
-            ReDim sysInfo.screenList(LEDScreenId).clickHistoryArray((sysInfo.screenList(LEDScreenId).defaultHeight \ sysInfo.screenList(LEDScreenId).defaultScanBoardHeight) * sysInfo.screenList(LEDScreenId).touchPieceRowsNum,
-                                                                   (sysInfo.screenList(LEDScreenId).defaultWidth \ sysInfo.screenList(LEDScreenId).defaultScanBoardWidth) * sysInfo.screenList(LEDScreenId).touchPieceColumnsNum)
+            ReDim sysInfo.ScreenList(LEDScreenId).ClickHistoryArray((sysInfo.ScreenList(LEDScreenId).DefaultHeight \ sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight) * sysInfo.ScreenList(LEDScreenId).TouchPieceRowsNum,
+                                                                   (sysInfo.ScreenList(LEDScreenId).DefaultWidth \ sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth) * sysInfo.ScreenList(LEDScreenId).TouchPieceColumnsNum)
 
             'putlog($"{LEDScreenIndex}:{(screenMain(LEDScreenIndex).height \ screenMain(LEDScreenIndex).ScanBoardHeight) * 4},{(screenMain(LEDScreenIndex).width \ screenMain(LEDScreenIndex).ScanBoardWidth) * 4}")
 
-            showinfo($">>>>显示屏{LEDScreenId}: start[_
-{sysInfo.screenList(LEDScreenId).defaultX},_
-{sysInfo.screenList(LEDScreenId).defaultY}] size[_
-{sysInfo.screenList(LEDScreenId).defaultWidth},_
-{sysInfo.screenList(LEDScreenId).defaultHeight}] touch[_
-{sysInfo.screenList(LEDScreenId).defaultScanBoardWidth},_
-{sysInfo.screenList(LEDScreenId).defaultScanBoardHeight}]")
-            showinfo($"        屏幕块[{LEDScreenInfoList(LEDScreenId).ScanBoardInfoList.Count}]")
+            Showinfo($">>>>显示屏{LEDScreenId}: start[_
+{sysInfo.ScreenList(LEDScreenId).DefaultX},_
+{sysInfo.ScreenList(LEDScreenId).DefaultY}] size[_
+{sysInfo.ScreenList(LEDScreenId).DefaultWidth},_
+{sysInfo.ScreenList(LEDScreenId).DefaultHeight}] touch[_
+{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth},_
+{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight}]")
+            Showinfo($"        屏幕块[{LEDScreenInfoList(LEDScreenId).ScanBoardInfoList.Count}]")
 
-            sysInfo.screenList(LEDScreenId).SenderList = New List(Of Integer)
+            sysInfo.ScreenList(LEDScreenId).SenderList = New List(Of Integer)
             '遍历屏幕
             'Dim tmpIndex As Integer = 0
             For Each i In LEDScreenInfoList(LEDScreenId).ScanBoardInfoList
-                sysInfo.screenList(LEDScreenId).SenderList.Add(i.SenderIndex)
+                sysInfo.ScreenList(LEDScreenId).SenderList.Add(i.SenderIndex)
 
                 'Dim itm As ListViewItem = ListView3.Items.Add($"{LEDScreenIndex} {i.SenderIndex}", 0)
                 'itm.SubItems.Add($"{i.PortIndex}")
@@ -236,8 +236,8 @@ Public Class FormNovaInit
                 '接收卡索引
                 tmpScanBoardInfo.ConnectId = i.ConnectIndex
                 '屏幕块位置
-                tmpScanBoardInfo.X = (i.X \ sysInfo.screenList(LEDScreenId).defaultScanBoardWidth) * sysInfo.screenList(LEDScreenId).touchPieceColumnsNum
-                tmpScanBoardInfo.Y = (i.Y \ sysInfo.screenList(LEDScreenId).defaultScanBoardHeight) * sysInfo.screenList(LEDScreenId).touchPieceRowsNum
+                tmpScanBoardInfo.X = (i.X \ sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth) * sysInfo.ScreenList(LEDScreenId).TouchPieceColumnsNum
+                tmpScanBoardInfo.Y = (i.Y \ sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight) * sysInfo.ScreenList(LEDScreenId).TouchPieceRowsNum
                 'putlog($"{tmpScanBoardInfo.ConnectIndex}:{tmpScanBoardInfo.Y},{tmpScanBoardInfo.X}")
 
                 sysInfo.ScanBoardTable.Add($"{i.SenderIndex}-{i.PortIndex}-{i.ConnectIndex}", tmpScanBoardInfo)
@@ -250,19 +250,19 @@ Public Class FormNovaInit
             '缩放比例
             'Dim zoomProportionWidth As Double = 1 / zoomWidth ' Screen.PrimaryScreen.Bounds.Width / zoomWidth
             'Dim zoomProportionHeight As Double = 1 / zoomHeight ' Screen.PrimaryScreen.Bounds.Height / zoomHeight
-            With sysInfo.screenList(LEDScreenId)
-                .x = sysInfo.screenList(LEDScreenId).defaultX / sysInfo.zoomProportion
-                .y = .defaultY / sysInfo.zoomProportion
-                .width = .defaultWidth / sysInfo.zoomProportion
-                .height = .defaultHeight / sysInfo.zoomProportion
-                .ScanBoardWidth = .defaultScanBoardWidth / sysInfo.zoomProportion
-                .ScanBoardHeight = .defaultScanBoardHeight / sysInfo.zoomProportion
-                .touchPieceHeight = .defaultScanBoardHeight / .touchPieceRowsNum / sysInfo.zoomProportion
-                .touchPieceWidth = .defaultScanBoardWidth / .touchPieceColumnsNum / sysInfo.zoomProportion
+            With sysInfo.ScreenList(LEDScreenId)
+                .X = sysInfo.ScreenList(LEDScreenId).DefaultX / sysInfo.ZoomProportion
+                .Y = .DefaultY / sysInfo.ZoomProportion
+                .Width = .DefaultWidth / sysInfo.ZoomProportion
+                .Height = .DefaultHeight / sysInfo.ZoomProportion
+                .ScanBoardWidth = .DefaultScanBoardWidth / sysInfo.ZoomProportion
+                .ScanBoardHeight = .DefaultScanBoardHeight / sysInfo.ZoomProportion
+                .TouchPieceHeight = .DefaultScanBoardHeight / .TouchPieceRowsNum / sysInfo.ZoomProportion
+                .TouchPieceWidth = .DefaultScanBoardWidth / .TouchPieceColumnsNum / sysInfo.ZoomProportion
             End With
         Next
 
-        sysInfo.mainClass.GetEquipmentIP(0)
+        sysInfo.MainClass.GetEquipmentIP(0)
     End Sub
 
     ''' <summary>
@@ -271,10 +271,10 @@ Public Class FormNovaInit
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
         If System.Diagnostics.Process.GetProcessesByName("MarsServerProvider").Length = 0 Then
             Dim tmpProcessHwnd As Process = Process.Start($".\Nova\Server\MarsServerProvider.exe")
-            showinfo($"启动Nova服务：{If(tmpProcessHwnd.Handle, True, False)}")
+            Showinfo($"启动Nova服务：{If(tmpProcessHwnd.Handle, True, False)}")
             Thread.Sleep(5000)
         End If
 
-        novaInitialize("")
+        NovaInitialize("")
     End Sub
 End Class

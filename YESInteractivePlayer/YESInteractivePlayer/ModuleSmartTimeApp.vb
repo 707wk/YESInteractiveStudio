@@ -150,10 +150,10 @@ Module ModuleSmartTimeApp
         Next
 
         If zeroNum = 64 Then
-            register(KeyHandle(0), getMd5Hash(sGUID & "YESTECH"))
+            register(KeyHandle(0), GetMd5Hash(sGUID & "YESTECH"))
         Else
             hashcode = System.Text.Encoding.Unicode.GetString(pBuffer, 0, 64)
-            If hashcode.Equals(getMd5Hash(sGUID & "YESTECH")) = False Then
+            If hashcode.Equals(GetMd5Hash(sGUID & "YESTECH")) = False Then
                 End
             End If
         End If

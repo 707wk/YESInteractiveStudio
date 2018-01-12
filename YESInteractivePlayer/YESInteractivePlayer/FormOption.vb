@@ -16,7 +16,7 @@ Public Class FormOption
     ''' <summary>
     ''' 临时数据表
     ''' </summary>
-    Dim tmpDataTable As DataTable
+    Private tmpDataTable As DataTable
 
     ''' <summary>
     ''' 加载数据
@@ -24,29 +24,29 @@ Public Class FormOption
     Private Sub FormOption_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '常规
-        NumericUpDown8.Value = sysInfo.zoomTmpNumerator
-        NumericUpDown9.Value = sysInfo.zoomTmpDenominator
-        TextBox1.Text = sysInfo.zoomProportion
+        NumericUpDown8.Value = sysInfo.ZoomTmpNumerator
+        NumericUpDown9.Value = sysInfo.ZoomTmpDenominator
+        TextBox1.Text = sysInfo.ZoomProportion
 
         ComboBox1.Items.Add("中文")
         ComboBox1.Items.Add("English")
-        ComboBox1.SelectedIndex = sysInfo.selectLanguageId
+        ComboBox1.SelectedIndex = sysInfo.SelectLanguageId
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '幕布
-        For i As Integer = 0 To sysInfo.curtainList.Count - 1
-            With sysInfo.curtainList.Item(i)
+        For i As Integer = 0 To sysInfo.CurtainList.Count - 1
+            With sysInfo.CurtainList.Item(i)
                 DataGridView2.Rows.Add(i + 1,
-                                  .remark,
-                                   $"{ .x},{ .y} [{ .width},{ .height}]")
+                                  .Remark,
+                                   $"{ .X},{ .Y} [{ .Width},{ .Height}]")
             End With
         Next
 
         '初始化屏幕下拉列表
         ComboBox3.DropDownStyle = ComboBoxStyle.DropDownList
         ComboBox3.Visible = False
-        For i As Integer = 0 To sysInfo.screenList.Length - 1
-            If Not sysInfo.screenList(i).existFlage Then
+        For i As Integer = 0 To sysInfo.ScreenList.Length - 1
+            If Not sysInfo.ScreenList(i).ExistFlage Then
                 Continue For
             End If
             ComboBox3.Items.Add($"{i}")
@@ -57,13 +57,13 @@ Public Class FormOption
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '屏幕
-        For i As Integer = 0 To sysInfo.screenList.Length - 1
-            If Not sysInfo.screenList(i).existFlage Then
+        For i As Integer = 0 To sysInfo.ScreenList.Length - 1
+            If Not sysInfo.ScreenList(i).ExistFlage Then
                 Continue For
             End If
 
             DataGridView4.Rows.Add(i,
-                                   $"{sysInfo.screenList(i).defaultWidth},{sysInfo.screenList(i).defaultHeight}")
+                                   $"{sysInfo.ScreenList(i).DefaultWidth},{sysInfo.ScreenList(i).DefaultHeight}")
         Next
 
         '创建临时表
@@ -94,42 +94,42 @@ Public Class FormOption
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '控制器
-        For i As Integer = 0 To sysInfo.senderList.Length - 1
+        For i As Integer = 0 To sysInfo.SenderList.Length - 1
             DataGridView1.Rows.Add(i,
-                                   $"{sysInfo.senderList(i).ipDate(3)}.{sysInfo.senderList(i).ipDate(2)}.{sysInfo.senderList(i).ipDate(1)}.{sysInfo.senderList(i).ipDate(0)}",
-                                   $"{sysInfo.senderList(i).ipDate(7)}.{sysInfo.senderList(i).ipDate(6)}.{sysInfo.senderList(i).ipDate(5)}.{sysInfo.senderList(i).ipDate(4)}",
-                                   $"{sysInfo.senderList(i).ipDate(11)}.{sysInfo.senderList(i).ipDate(10)}.{sysInfo.senderList(i).ipDate(9)}.{sysInfo.senderList(i).ipDate(8)}")
+                                   $"{sysInfo.SenderList(i).IpDate(3)}.{sysInfo.SenderList(i).IpDate(2)}.{sysInfo.SenderList(i).IpDate(1)}.{sysInfo.SenderList(i).IpDate(0)}",
+                                   $"{sysInfo.SenderList(i).IpDate(7)}.{sysInfo.SenderList(i).IpDate(6)}.{sysInfo.SenderList(i).IpDate(5)}.{sysInfo.SenderList(i).IpDate(4)}",
+                                   $"{sysInfo.SenderList(i).IpDate(11)}.{sysInfo.SenderList(i).IpDate(10)}.{sysInfo.SenderList(i).IpDate(9)}.{sysInfo.SenderList(i).IpDate(8)}")
         Next
 
-        For i As Integer = 0 To sysInfo.senderList.Length - 1
+        For i As Integer = 0 To sysInfo.SenderList.Length - 1
             For j As Integer = 0 To 12 - 1
-                sysInfo.senderList(i).tmpIpData(j) = sysInfo.senderList(i).ipDate(j)
+                sysInfo.SenderList(i).TmpIpData(j) = sysInfo.SenderList(i).IpDate(j)
             Next
         Next
 
         '绑定设置到ip事件
-        AddHandler sysInfo.mainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
+        AddHandler sysInfo.MainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '互动性
         '互动模式
-        ComboBox2.Items.Add(getLanguage("单个感应"))
-        ComboBox2.Items.Add(getLanguage("4合1感应"))
+        ComboBox2.Items.Add(GetLanguage("单个感应"))
+        ComboBox2.Items.Add(GetLanguage("4合1感应"))
         'ComboBox2.SelectedIndex = sysInfo.touchMode
 
         '检测间隔
-        NumericUpDown1.Value = sysInfo.inquireTimeSec
+        NumericUpDown1.Value = sysInfo.InquireTimeSec
 
         '触摸灵敏度
-        NumericUpDown2.Value = sysInfo.touchSensitivity
+        NumericUpDown2.Value = sysInfo.TouchSensitivity
 
         '抗干扰等级
-        NumericUpDown3.Value = sysInfo.clickValidNums
+        NumericUpDown3.Value = sysInfo.ClickValidNums
 
         '复位温度
-        NumericUpDown4.Value = sysInfo.resetTemp
+        NumericUpDown4.Value = sysInfo.ResetTemp
         '复位时间间隔
-        NumericUpDown5.Value = sysInfo.resetSec
+        NumericUpDown5.Value = sysInfo.ResetSec
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '接收卡
@@ -140,17 +140,13 @@ Public Class FormOption
         ListView1.CheckBoxes = False
         ListView1.ShowItemToolTips = True
         ListView1.Clear()
-        ListView1.Columns.Add(getLanguage("控制器号"), 60, HorizontalAlignment.Left)
-        ListView1.Columns.Add(getLanguage("网口号"), 50, HorizontalAlignment.Left)
-        ListView1.Columns.Add(getLanguage("接收卡号"), 60, HorizontalAlignment.Left)
-        ListView1.Columns.Add(getLanguage("值"), 60, HorizontalAlignment.Left)
-
-        For i As Integer = 0 To 100
-            TextBox4.AppendText($"{i} {vbCrLf}")
-        Next
+        ListView1.Columns.Add(GetLanguage("控制器号"), 60, HorizontalAlignment.Left)
+        ListView1.Columns.Add(GetLanguage("网口号"), 50, HorizontalAlignment.Left)
+        ListView1.Columns.Add(GetLanguage("接收卡号"), 60, HorizontalAlignment.Left)
+        ListView1.Columns.Add(GetLanguage("值"), 60, HorizontalAlignment.Left)
 
         '设置显示语言
-        setControlslanguage(Me)
+        SetControlslanguage(Me)
     End Sub
 
     ''' <summary>
@@ -163,66 +159,66 @@ Public Class FormOption
         'sysInfo.zoomProportion = Val(TextBox1.Text)
         'End If
 
-        sysInfo.selectLanguageId = ComboBox1.SelectedIndex
+        sysInfo.SelectLanguageId = ComboBox1.SelectedIndex
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '幕布
-        For i As Integer = 0 To sysInfo.curtainList.Count - 1
+        For i As Integer = 0 To sysInfo.CurtainList.Count - 1
             '刷新屏幕记录的幕布位置
-            For Each j In sysInfo.curtainList.Item(i).screenList
-                sysInfo.screenList(j).curtainListId = i
+            For Each j In sysInfo.CurtainList.Item(i).ScreenList
+                sysInfo.ScreenList(j).CurtainListId = i
             Next
 
             '计算幕布面积
-            Dim tmp As curtainInfo = sysInfo.curtainList.Item(i)
-            tmp.defaultHeight = 0
-            tmp.defaultWidth = 0
+            Dim tmp As CurtainInfo = sysInfo.CurtainList.Item(i)
+            tmp.DefaultHeight = 0
+            tmp.DefaultWidth = 0
 
-            For Each j In sysInfo.curtainList.Item(i).screenList
+            For Each j In sysInfo.CurtainList.Item(i).ScreenList
                 '最大高度
-                tmp.defaultHeight =
-                If(tmp.defaultHeight < sysInfo.screenList(j).defaultY + sysInfo.screenList(j).defaultHeight,
-                sysInfo.screenList(j).defaultY + sysInfo.screenList(j).defaultHeight,
-                tmp.defaultHeight)
+                tmp.DefaultHeight =
+                If(tmp.DefaultHeight < sysInfo.ScreenList(j).DefaultY + sysInfo.ScreenList(j).DefaultHeight,
+                sysInfo.ScreenList(j).DefaultY + sysInfo.ScreenList(j).DefaultHeight,
+                tmp.DefaultHeight)
 
                 '最大宽度
-                tmp.defaultWidth =
-                If(tmp.defaultWidth < sysInfo.screenList(j).defaultX + sysInfo.screenList(j).defaultWidth,
-                sysInfo.screenList(j).defaultX + sysInfo.screenList(j).defaultWidth,
-                tmp.defaultWidth)
+                tmp.DefaultWidth =
+                If(tmp.DefaultWidth < sysInfo.ScreenList(j).DefaultX + sysInfo.ScreenList(j).DefaultWidth,
+                sysInfo.ScreenList(j).DefaultX + sysInfo.ScreenList(j).DefaultWidth,
+                tmp.DefaultWidth)
             Next
 
             '计算缩放后位置及大小
             With tmp
-                .x = .defaultX '/ sysInfo.zoomProportion
-                .y = .defaultY '/ sysInfo.zoomProportion
-                .height = .defaultHeight / sysInfo.zoomProportion
-                .width = .defaultWidth / sysInfo.zoomProportion
+                .X = .DefaultX '/ sysInfo.zoomProportion
+                .Y = .DefaultY '/ sysInfo.zoomProportion
+                .Height = .DefaultHeight / sysInfo.ZoomProportion
+                .Width = .DefaultWidth / sysInfo.ZoomProportion
             End With
 
-            sysInfo.curtainList.Item(i) = tmp
+            sysInfo.CurtainList.Item(i) = tmp
         Next
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '屏幕
         '计算缩放后位置及大小
-        For i As Integer = 0 To sysInfo.screenList.Length - 1
-            With sysInfo.screenList(i)
-                .x = .defaultX / sysInfo.zoomProportion
-                .y = .defaultY / sysInfo.zoomProportion
-                .height = .defaultHeight / sysInfo.zoomProportion
-                .width = .defaultWidth / sysInfo.zoomProportion
-                .ScanBoardHeight = .defaultScanBoardHeight / sysInfo.zoomProportion
-                .ScanBoardWidth = .defaultScanBoardWidth / sysInfo.zoomProportion
-                .touchPieceHeight = .defaultScanBoardHeight / .touchPieceRowsNum / sysInfo.zoomProportion
-                .touchPieceWidth = .defaultScanBoardWidth / .touchPieceColumnsNum / sysInfo.zoomProportion
+        For i As Integer = 0 To sysInfo.ScreenList.Length - 1
+            With sysInfo.ScreenList(i)
+                .X = .DefaultX / sysInfo.ZoomProportion
+                .Y = .DefaultY / sysInfo.ZoomProportion
+                .Height = .DefaultHeight / sysInfo.ZoomProportion
+                .Width = .DefaultWidth / sysInfo.ZoomProportion
+                .ScanBoardHeight = .DefaultScanBoardHeight / sysInfo.ZoomProportion
+                .ScanBoardWidth = .DefaultScanBoardWidth / sysInfo.ZoomProportion
+                .TouchPieceHeight = .DefaultScanBoardHeight / .TouchPieceRowsNum / sysInfo.ZoomProportion
+                .TouchPieceWidth = .DefaultScanBoardWidth / .TouchPieceColumnsNum / sysInfo.ZoomProportion
             End With
         Next
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '控制器
         '移除事件
-        RemoveHandler sysInfo.mainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
+        RemoveHandler sysInfo.MainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '互动性
@@ -230,15 +226,15 @@ Public Class FormOption
         'sysInfo.touchMode = ComboBox2.SelectedIndex
 
         '检测间隔
-        sysInfo.inquireTimeSec = NumericUpDown1.Value
+        sysInfo.InquireTimeSec = NumericUpDown1.Value
 
         '抗干扰等级
-        sysInfo.clickValidNums = NumericUpDown3.Value
+        sysInfo.ClickValidNums = NumericUpDown3.Value
 
         '复位温度
-        sysInfo.resetTemp = NumericUpDown4.Value
+        sysInfo.ResetTemp = NumericUpDown4.Value
         '复位时间间隔
-        sysInfo.resetSec = NumericUpDown5.Value
+        sysInfo.ResetSec = NumericUpDown5.Value
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '接收卡
@@ -385,13 +381,13 @@ Public Class FormOption
     ''' <summary>
     ''' 更新显示IP信息
     ''' </summary>
-    Private Sub updataIp(i As Integer)
+    Private Sub UpdataIp(i As Integer)
         DataGridView1.Rows(i).Cells(1).Value =
-            $"{sysInfo.senderList(i).tmpIpData(3)}.{sysInfo.senderList(i).tmpIpData(2)}.{sysInfo.senderList(i).tmpIpData(1)}.{sysInfo.senderList(i).tmpIpData(0)}"
+            $"{sysInfo.SenderList(i).TmpIpData(3)}.{sysInfo.SenderList(i).TmpIpData(2)}.{sysInfo.SenderList(i).TmpIpData(1)}.{sysInfo.SenderList(i).TmpIpData(0)}"
         DataGridView1.Rows(i).Cells(2).Value =
-            $"{sysInfo.senderList(i).tmpIpData(7)}.{sysInfo.senderList(i).tmpIpData(6)}.{sysInfo.senderList(i).tmpIpData(5)}.{sysInfo.senderList(i).tmpIpData(4)}"
+            $"{sysInfo.SenderList(i).TmpIpData(7)}.{sysInfo.SenderList(i).TmpIpData(6)}.{sysInfo.SenderList(i).TmpIpData(5)}.{sysInfo.SenderList(i).TmpIpData(4)}"
         DataGridView1.Rows(i).Cells(3).Value =
-            $"{sysInfo.senderList(i).tmpIpData(11)}.{sysInfo.senderList(i).tmpIpData(10)}.{sysInfo.senderList(i).tmpIpData(9)}.{sysInfo.senderList(i).tmpIpData(8)}"
+            $"{sysInfo.SenderList(i).TmpIpData(11)}.{sysInfo.SenderList(i).TmpIpData(10)}.{sysInfo.SenderList(i).TmpIpData(9)}.{sysInfo.SenderList(i).TmpIpData(8)}"
     End Sub
 
     Private Sub DataGridView1_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellEndEdit
@@ -406,7 +402,7 @@ Public Class FormOption
             MsgBox($"非法参数",
                    MsgBoxStyle.Information,
                    Me.Text)
-            updataIp(e.RowIndex)
+            UpdataIp(e.RowIndex)
             Exit Sub
         End If
 
@@ -416,7 +412,7 @@ Public Class FormOption
                 MsgBox($"非法参数",
                        MsgBoxStyle.Information,
                        Me.Text)
-                updataIp(e.RowIndex)
+                UpdataIp(e.RowIndex)
                 Exit Sub
             End If
 
@@ -428,7 +424,7 @@ Public Class FormOption
                 MsgBox($"非法参数",
                        MsgBoxStyle.Information,
                        Me.Text)
-                updataIp(e.RowIndex)
+                UpdataIp(e.RowIndex)
                 Exit Sub
             End If
 
@@ -438,7 +434,7 @@ Public Class FormOption
                 MsgBox($"非法参数",
                        MsgBoxStyle.Information,
                        Me.Text)
-                updataIp(e.RowIndex)
+                UpdataIp(e.RowIndex)
                 Exit Sub
             End If
         Next
@@ -447,22 +443,22 @@ Public Class FormOption
         Select Case e.ColumnIndex
             Case 1
                 'ip
-                sysInfo.senderList(e.RowIndex).tmpIpData(3) = CInt(ipDataStrArr(0))
-                sysInfo.senderList(e.RowIndex).tmpIpData(2) = CInt(ipDataStrArr(1))
-                sysInfo.senderList(e.RowIndex).tmpIpData(1) = CInt(ipDataStrArr(2))
-                sysInfo.senderList(e.RowIndex).tmpIpData(0) = CInt(ipDataStrArr(3))
+                sysInfo.SenderList(e.RowIndex).TmpIpData(3) = CInt(ipDataStrArr(0))
+                sysInfo.SenderList(e.RowIndex).TmpIpData(2) = CInt(ipDataStrArr(1))
+                sysInfo.SenderList(e.RowIndex).TmpIpData(1) = CInt(ipDataStrArr(2))
+                sysInfo.SenderList(e.RowIndex).TmpIpData(0) = CInt(ipDataStrArr(3))
             Case 2
                 '子网掩码
-                sysInfo.senderList(e.RowIndex).tmpIpData(7) = CInt(ipDataStrArr(0))
-                sysInfo.senderList(e.RowIndex).tmpIpData(6) = CInt(ipDataStrArr(1))
-                sysInfo.senderList(e.RowIndex).tmpIpData(5) = CInt(ipDataStrArr(2))
-                sysInfo.senderList(e.RowIndex).tmpIpData(4) = CInt(ipDataStrArr(3))
+                sysInfo.SenderList(e.RowIndex).TmpIpData(7) = CInt(ipDataStrArr(0))
+                sysInfo.SenderList(e.RowIndex).TmpIpData(6) = CInt(ipDataStrArr(1))
+                sysInfo.SenderList(e.RowIndex).TmpIpData(5) = CInt(ipDataStrArr(2))
+                sysInfo.SenderList(e.RowIndex).TmpIpData(4) = CInt(ipDataStrArr(3))
             Case 3
                 '网关
-                sysInfo.senderList(e.RowIndex).tmpIpData(11) = CInt(ipDataStrArr(0))
-                sysInfo.senderList(e.RowIndex).tmpIpData(10) = CInt(ipDataStrArr(1))
-                sysInfo.senderList(e.RowIndex).tmpIpData(9) = CInt(ipDataStrArr(2))
-                sysInfo.senderList(e.RowIndex).tmpIpData(8) = CInt(ipDataStrArr(3))
+                sysInfo.SenderList(e.RowIndex).TmpIpData(11) = CInt(ipDataStrArr(0))
+                sysInfo.SenderList(e.RowIndex).TmpIpData(10) = CInt(ipDataStrArr(1))
+                sysInfo.SenderList(e.RowIndex).TmpIpData(9) = CInt(ipDataStrArr(2))
+                sysInfo.SenderList(e.RowIndex).TmpIpData(8) = CInt(ipDataStrArr(3))
         End Select
     End Sub
 
@@ -473,14 +469,14 @@ Public Class FormOption
     Private Sub SendEquipmentIPData(sender As Object, e As MarsEquipmentIPEventArgs)
         'Static Dim senderArrayIndex As Integer = 0
         If e.IsExecResult Then
-            If senderArrayIndex < sysInfo.senderList.Length - 1 Then
-                sysInfo.senderList(senderArrayIndex).ipDate = sysInfo.senderList(senderArrayIndex).tmpIpData
+            If senderArrayIndex < sysInfo.SenderList.Length - 1 Then
+                sysInfo.SenderList(senderArrayIndex).IpDate = sysInfo.SenderList(senderArrayIndex).TmpIpData
 
                 senderArrayIndex += 1
 
-                sysInfo.mainClass.SetEquipmentIP(senderArrayIndex, sysInfo.senderList(senderArrayIndex).tmpIpData)
+                sysInfo.MainClass.SetEquipmentIP(senderArrayIndex, sysInfo.SenderList(senderArrayIndex).TmpIpData)
             Else
-                sysInfo.senderList(senderArrayIndex).ipDate = sysInfo.senderList(senderArrayIndex).tmpIpData
+                sysInfo.SenderList(senderArrayIndex).IpDate = sysInfo.SenderList(senderArrayIndex).TmpIpData
                 MsgBox($"控制器ip设置成功!",
                        MsgBoxStyle.Information,
                        Me.Text)
@@ -497,7 +493,7 @@ Public Class FormOption
     ''' </summary>
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         senderArrayIndex = 0
-        sysInfo.mainClass.SetEquipmentIP(0, sysInfo.senderList(senderArrayIndex).tmpIpData)
+        sysInfo.MainClass.SetEquipmentIP(0, sysInfo.SenderList(senderArrayIndex).TmpIpData)
     End Sub
 
     '''' <summary>
@@ -520,21 +516,21 @@ Public Class FormOption
     ''' 显示选中幕布信息
     ''' </summary>
     Private Sub DataGridView2_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView2.CellMouseClick
-        Dim tmp As curtainInfo = sysInfo.curtainList.Item(DataGridView2.SelectedCells(0).RowIndex)
+        Dim tmp As CurtainInfo = sysInfo.CurtainList.Item(DataGridView2.SelectedCells(0).RowIndex)
 
         Label11.Text = DataGridView2.SelectedCells(0).RowIndex + 1
-        TextBox2.Text = tmp.remark
-        NumericUpDown6.Value = tmp.defaultX
-        NumericUpDown7.Value = tmp.defaultY
+        TextBox2.Text = tmp.Remark
+        NumericUpDown6.Value = tmp.DefaultX
+        NumericUpDown7.Value = tmp.DefaultY
 
         DataGridView3.Rows.Clear()
-        For Each i In tmp.screenList
+        For Each i In tmp.ScreenList
             DataGridView3.Rows.Add(
                 $"{i}",
-                $"{sysInfo.screenList(i).defaultX}",
-                $"{sysInfo.screenList(i).defaultY}",
-                $"{sysInfo.screenList(i).touchPieceRowsNum}",
-                $"{sysInfo.screenList(i).touchPieceColumnsNum}")
+                $"{sysInfo.ScreenList(i).DefaultX}",
+                $"{sysInfo.ScreenList(i).DefaultY}",
+                $"{sysInfo.ScreenList(i).TouchPieceRowsNum}",
+                $"{sysInfo.ScreenList(i).TouchPieceColumnsNum}")
         Next
     End Sub
 
@@ -544,60 +540,60 @@ Public Class FormOption
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         '判断幕布数是否超过屏幕数
         Dim sumScreenNum As Integer = 0
-        For Each i As screenInfo In sysInfo.screenList
-            sumScreenNum += If(i.existFlage, 1, 0)
+        For Each i As ScreenInfo In sysInfo.ScreenList
+            sumScreenNum += If(i.ExistFlage, 1, 0)
         Next
-        If sysInfo.curtainList.Count = sumScreenNum Then
+        If sysInfo.CurtainList.Count = sumScreenNum Then
             MsgBox($"幕布数已达最大值",
                    MsgBoxStyle.Information,
                    $"新增幕布")
             Exit Sub
         End If
 
-        Dim tmp As New curtainInfo
+        Dim tmp As New CurtainInfo
 
         'tmp.id = maxCurtainId + 1
         'maxCurtainId += 1
-        tmp.remark = TextBox2.Text
-        tmp.defaultY = NumericUpDown6.Value
-        tmp.defaultY = NumericUpDown7.Value
+        tmp.Remark = TextBox2.Text
+        tmp.DefaultY = NumericUpDown6.Value
+        tmp.DefaultY = NumericUpDown7.Value
 
-        tmp.screenList = New List(Of Integer)
+        tmp.ScreenList = New List(Of Integer)
         For i As Integer = 0 To DataGridView3.Rows.Count - 1 - 1
             With DataGridView3.Rows(i)
-                tmp.screenList.Add(.Cells(0).Value)
+                tmp.ScreenList.Add(.Cells(0).Value)
 
-                sysInfo.screenList(.Cells(0).Value).defaultX = .Cells(1).Value
-                sysInfo.screenList(.Cells(0).Value).defaultY = .Cells(2).Value
-                sysInfo.screenList(.Cells(0).Value).touchPieceRowsNum = .Cells(3).Value
-                sysInfo.screenList(.Cells(0).Value).touchPieceColumnsNum = .Cells(4).Value
+                sysInfo.ScreenList(.Cells(0).Value).DefaultX = .Cells(1).Value
+                sysInfo.ScreenList(.Cells(0).Value).DefaultY = .Cells(2).Value
+                sysInfo.ScreenList(.Cells(0).Value).TouchPieceRowsNum = .Cells(3).Value
+                sysInfo.ScreenList(.Cells(0).Value).TouchPieceColumnsNum = .Cells(4).Value
             End With
         Next
 
-        sysInfo.curtainList.Add(tmp)
+        sysInfo.CurtainList.Add(tmp)
 
         Dim maxHeight = 0
         Dim maxWidth = 0
 
-        For Each j In tmp.screenList
+        For Each j In tmp.ScreenList
             '最大高度
             maxHeight =
-                If(maxHeight < sysInfo.screenList(j).defaultY + sysInfo.screenList(j).defaultHeight,
-                sysInfo.screenList(j).defaultY + sysInfo.screenList(j).defaultHeight,
+                If(maxHeight < sysInfo.ScreenList(j).DefaultY + sysInfo.ScreenList(j).DefaultHeight,
+                sysInfo.ScreenList(j).DefaultY + sysInfo.ScreenList(j).DefaultHeight,
                 maxHeight)
 
             '最大宽度
             maxWidth =
-                If(maxWidth < sysInfo.screenList(j).defaultX + sysInfo.screenList(j).defaultWidth,
-                sysInfo.screenList(j).defaultX + sysInfo.screenList(j).defaultWidth,
+                If(maxWidth < sysInfo.ScreenList(j).DefaultX + sysInfo.ScreenList(j).DefaultWidth,
+                sysInfo.ScreenList(j).DefaultX + sysInfo.ScreenList(j).DefaultWidth,
                 maxWidth)
         Next
-        maxHeight = maxHeight / sysInfo.zoomProportion
-        maxWidth = maxWidth / sysInfo.zoomProportion
+        maxHeight = maxHeight / sysInfo.ZoomProportion
+        maxWidth = maxWidth / sysInfo.ZoomProportion
 
         DataGridView2.Rows.Add(DataGridView2.Rows.Count + 1,
-                                   tmp.remark,
-                                   $"{tmp.defaultX},{tmp.defaultY} [{ maxWidth},{ maxHeight}]")
+                                   tmp.Remark,
+                                   $"{tmp.DefaultX},{tmp.DefaultY} [{ maxWidth},{ maxHeight}]")
     End Sub
 
     ''' <summary>
@@ -610,11 +606,11 @@ Public Class FormOption
 
         '删除时先关闭窗体
         Try
-            sysInfo.curtainList.Item(DataGridView2.SelectedCells(0).RowIndex).playDialog.closeDialog(True)
+            sysInfo.CurtainList.Item(DataGridView2.SelectedCells(0).RowIndex).PlayDialog.CloseDialog(True)
         Catch ex As Exception
         End Try
 
-        sysInfo.curtainList.RemoveAt(DataGridView2.SelectedCells(0).RowIndex)
+        sysInfo.CurtainList.RemoveAt(DataGridView2.SelectedCells(0).RowIndex)
         DataGridView2.Rows.RemoveAt(DataGridView2.SelectedCells(0).RowIndex)
         Label11.Text = "NULL"
     End Sub
@@ -627,54 +623,54 @@ Public Class FormOption
             Exit Sub
         End If
 
-        Dim tmp As curtainInfo = sysInfo.curtainList.Item(DataGridView2.SelectedCells(0).RowIndex)
+        Dim tmp As CurtainInfo = sysInfo.CurtainList.Item(DataGridView2.SelectedCells(0).RowIndex)
         'tmp.id = maxCurtainId + 1
         'maxCurtainId += 1
-        tmp.remark = TextBox2.Text
-        tmp.defaultX = NumericUpDown6.Value
-        tmp.defaultY = NumericUpDown7.Value
+        tmp.Remark = TextBox2.Text
+        tmp.DefaultX = NumericUpDown6.Value
+        tmp.DefaultY = NumericUpDown7.Value
         'tmp.x = tmp.defaultX '/ sysInfo.zoomProportion
         'tmp.y = tmp.defaultY '/ sysInfo.zoomProportion
         'tmp.playDialog
 
-        tmp.screenList = New List(Of Integer)
+        tmp.ScreenList = New List(Of Integer)
         For i As Integer = 0 To DataGridView3.Rows.Count - 1 - 1
             With DataGridView3.Rows(i)
-                tmp.screenList.Add(.Cells(0).Value)
+                tmp.ScreenList.Add(.Cells(0).Value)
 
-                sysInfo.screenList(.Cells(0).Value).defaultX = .Cells(1).Value
-                sysInfo.screenList(.Cells(0).Value).defaultY = .Cells(2).Value
-                sysInfo.screenList(.Cells(0).Value).touchPieceRowsNum = .Cells(3).Value
-                sysInfo.screenList(.Cells(0).Value).touchPieceColumnsNum = .Cells(4).Value
+                sysInfo.ScreenList(.Cells(0).Value).DefaultX = .Cells(1).Value
+                sysInfo.ScreenList(.Cells(0).Value).DefaultY = .Cells(2).Value
+                sysInfo.ScreenList(.Cells(0).Value).TouchPieceRowsNum = .Cells(3).Value
+                sysInfo.ScreenList(.Cells(0).Value).TouchPieceColumnsNum = .Cells(4).Value
             End With
         Next
 
 
-        sysInfo.curtainList.Item(DataGridView2.SelectedCells(0).RowIndex) = tmp
+        sysInfo.CurtainList.Item(DataGridView2.SelectedCells(0).RowIndex) = tmp
         'DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(0).Value = DataGridView2.Rows.Count + 1
-        DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(1).Value = tmp.remark
-        DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(2).Value = $"{tmp.defaultX},{tmp.defaultY}"
+        DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(1).Value = tmp.Remark
+        DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(2).Value = $"{tmp.DefaultX},{tmp.DefaultY}"
 
         Dim maxHeight = 0
         Dim maxWidth = 0
 
-        For Each j In tmp.screenList
+        For Each j In tmp.ScreenList
             '最大高度
             maxHeight =
-                If(maxHeight < sysInfo.screenList(j).defaultY + sysInfo.screenList(j).defaultHeight,
-                sysInfo.screenList(j).defaultY + sysInfo.screenList(j).defaultHeight,
+                If(maxHeight < sysInfo.ScreenList(j).DefaultY + sysInfo.ScreenList(j).DefaultHeight,
+                sysInfo.ScreenList(j).DefaultY + sysInfo.ScreenList(j).DefaultHeight,
                 maxHeight)
 
             '最大宽度
             maxWidth =
-                If(maxWidth < sysInfo.screenList(j).defaultX + sysInfo.screenList(j).defaultWidth,
-                sysInfo.screenList(j).defaultX + sysInfo.screenList(j).defaultWidth,
+                If(maxWidth < sysInfo.ScreenList(j).DefaultX + sysInfo.ScreenList(j).DefaultWidth,
+                sysInfo.ScreenList(j).DefaultX + sysInfo.ScreenList(j).DefaultWidth,
                 maxWidth)
         Next
-        maxHeight = maxHeight / sysInfo.zoomProportion
-        maxWidth = maxWidth / sysInfo.zoomProportion
+        maxHeight = maxHeight / sysInfo.ZoomProportion
+        maxWidth = maxWidth / sysInfo.ZoomProportion
 
-        DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(2).Value = $"{tmp.defaultX},{tmp.defaultY} [{maxWidth},{maxHeight}]"
+        DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(2).Value = $"{tmp.DefaultX},{tmp.DefaultY} [{maxWidth},{maxHeight}]"
     End Sub
 
     ''' <summary>
@@ -688,9 +684,9 @@ Public Class FormOption
             sendByte(i) = Val($"&H{sendstr(i * 2)}{ sendstr(i * 2 + 1)}")
         Next
         sendByte(3) = NumericUpDown2.Value
-        If sysInfo.mainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
+        If sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
             '触摸灵敏度
-            sysInfo.touchSensitivity = NumericUpDown2.Value
+            sysInfo.TouchSensitivity = NumericUpDown2.Value
         Else
             MsgBox($"指令发送失败",
                    MsgBoxStyle.Information,
@@ -704,15 +700,15 @@ Public Class FormOption
     ''' </summary>
     Private Sub DataGridView4_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView4.CellMouseClick
         Dim selectScreenId As Integer = DataGridView4.SelectedCells(0).RowIndex
-        'GroupBox13.Text = $"屏幕{selectScreenId} 走线"
+        GroupBox13.Text = $"{GetLanguage("屏幕")}{selectScreenId} {GetLanguage("走线")}"
 
         Me.PictureBox1.Update()
         Dim g As Graphics = Me.PictureBox1.CreateGraphics
         Dim mpen As New Pen(Color.Green)
         Dim tmpHeight As Integer =
-            sysInfo.screenList(selectScreenId).defaultHeight * 21 \ sysInfo.screenList(selectScreenId).defaultScanBoardHeight
+            sysInfo.ScreenList(selectScreenId).DefaultHeight * 21 \ sysInfo.ScreenList(selectScreenId).DefaultScanBoardHeight
         Dim tmpWidth As Integer =
-            sysInfo.screenList(selectScreenId).defaultWidth * 21 \ sysInfo.screenList(selectScreenId).defaultScanBoardWidth
+            sysInfo.ScreenList(selectScreenId).DefaultWidth * 21 \ sysInfo.ScreenList(selectScreenId).DefaultScanBoardWidth
 
         For i As Integer = 0 To tmpHeight Step 21
             g.DrawLine(mpen, 0, i, tmpWidth, i)
@@ -755,9 +751,9 @@ Public Class FormOption
     ''' </summary>
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         TextBox1.Text = NumericUpDown8.Value / NumericUpDown9.Value
-        sysInfo.zoomTmpNumerator = NumericUpDown8.Value
-        sysInfo.zoomTmpDenominator = NumericUpDown9.Value
-        sysInfo.zoomProportion = Val(TextBox1.Text)
+        sysInfo.ZoomTmpNumerator = NumericUpDown8.Value
+        sysInfo.ZoomTmpDenominator = NumericUpDown9.Value
+        sysInfo.ZoomProportion = Val(TextBox1.Text)
     End Sub
 
     ''' <summary>
@@ -776,9 +772,9 @@ Public Class FormOption
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Button1.Enabled = False
 
-        ListView1.Columns(3).Text = getLanguage("版本号")
+        ListView1.Columns(3).Text = GetLanguage("版本号")
         ListView1.Items.Clear()
-        TextBox4.Clear()
+        'TextBox4.Clear()
     End Sub
 
     ''' <summary>
@@ -789,8 +785,8 @@ Public Class FormOption
             Exit Sub
         End If
 
-        For i As Integer = 0 To sysInfo.senderList.Length - 1
-            getScanBoardData(i, 0)
+        For i As Integer = 0 To sysInfo.SenderList.Length - 1
+            GetScanBoardData(i, 0)
         Next
 
         Button1.Enabled = True
@@ -802,9 +798,9 @@ Public Class FormOption
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Button2.Enabled = False
 
-        ListView1.Columns(3).Text = getLanguage("复位次数")
+        ListView1.Columns(3).Text = GetLanguage("复位次数")
         ListView1.Items.Clear()
-        TextBox4.Clear()
+        'TextBox4.Clear()
     End Sub
 
     ''' <summary>
@@ -815,8 +811,8 @@ Public Class FormOption
             Exit Sub
         End If
 
-        For i As Integer = 0 To sysInfo.senderList.Length - 1
-            getScanBoardData(i, 1)
+        For i As Integer = 0 To sysInfo.SenderList.Length - 1
+            GetScanBoardData(i, 1)
         Next
 
         Button2.Enabled = True
@@ -825,7 +821,7 @@ Public Class FormOption
     ''' <summary>
     ''' 获取接收卡数据
     ''' </summary>
-    Private Sub getScanBoardData(senderId As Integer, dataType As Integer)
+    Private Sub GetScanBoardData(senderId As Integer, dataType As Integer)
         Dim sendstr As String = "00"
         Select Case dataType
             Case 0
@@ -840,7 +836,7 @@ Public Class FormOption
             sendByte(i) = Val($"&H{sendstr(i * 2)}{ sendstr(i * 2 + 1)}")
         Next
 
-        sysInfo.mainClass.SetScanBoardData(senderId, 255, 65535, sendByte)
+        sysInfo.MainClass.SetScanBoardData(senderId, 255, 65535, sendByte)
 
         Thread.Sleep(50)
 
@@ -849,9 +845,9 @@ Public Class FormOption
             .ReceiveTimeout = 500
         }
         '连接
-        With sysInfo.senderList(senderId)
+        With sysInfo.SenderList(senderId)
             cliSocket.Connect(
-                String.Format("{0}.{1}.{2}.{3}", .ipDate(3), .ipDate(2), .ipDate(1), .ipDate(0)),
+                String.Format("{0}.{1}.{2}.{3}", .IpDate(3), .IpDate(2), .IpDate(1), .IpDate(0)),
                 6000)
         End With
 
@@ -867,7 +863,7 @@ Public Class FormOption
             Dim bytesRec As Integer = cliSocket.Receive(bytes)
 
         Catch ex As Exception
-            TextBox4.AppendText($"发送读取指令异常:{ex.Message}{vbCrLf}")
+            'TextBox4.AppendText($"发送读取指令异常:{ex.Message}{vbCrLf}")
             Exit Sub
         End Try
 
@@ -912,20 +908,20 @@ Public Class FormOption
                 Next
             Next
         Catch ex As Exception
-            TextBox4.AppendText($"接收数据异常:{ex.Message}{vbCrLf}")
+            'TextBox4.AppendText($"接收数据异常:{ex.Message}{vbCrLf}")
         End Try
 
         cliSocket.Close()
 
-        TextBox4.AppendText($"发送卡{senderId} 读取到 {getDataSum} 个接收卡数据{vbCrLf}")
+        'TextBox4.AppendText($"发送卡{senderId} 读取到 {getDataSum} 个接收卡数据{vbCrLf}")
     End Sub
 
-    ''' <summary>
-    ''' 自动跳转
-    ''' </summary>
-    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
-        TextBox4.ScrollToCaret()
-    End Sub
+    '''' <summary>
+    '''' 自动跳转
+    '''' </summary>
+    'Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
+    '    TextBox4.ScrollToCaret()
+    'End Sub
 
     ''' <summary>
     ''' 选择升级文件
@@ -947,7 +943,7 @@ Public Class FormOption
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         Button9.Enabled = False
 
-        TextBox4.Clear()
+        'TextBox4.Clear()
     End Sub
 
     ''' <summary>
@@ -958,7 +954,7 @@ Public Class FormOption
             Exit Sub
         End If
 
-        sendUpdata()
+        SendUpdata()
 
         Button9.Enabled = True
     End Sub
@@ -966,7 +962,7 @@ Public Class FormOption
     ''' <summary>
     ''' 升级接收卡程序
     ''' </summary>
-    Private Sub sendUpdata()
+    Private Sub SendUpdata()
         If TextBox3.Text = "" Then
             Exit Sub
         End If
@@ -974,7 +970,7 @@ Public Class FormOption
         '读文件信息
         Dim infoReader As System.IO.FileInfo = My.Computer.FileSystem.GetFileInfo(TextBox3.Text)
         Dim binLength = infoReader.Length
-        TextBox4.AppendText($"升级文件大小: {binLength} Byte{vbCrLf}")
+        'TextBox4.AppendText($"升级文件大小: {binLength} Byte{vbCrLf}")
 
 
         '发送升级指令
@@ -990,17 +986,20 @@ Public Class FormOption
         sendByte(4) = binLength \ 256
         sendByte(5) = binLength Mod 256
 
-        sysInfo.mainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
 
-        Thread.Sleep(20)
+        Thread.Sleep(60)
 
         For i As Integer = 0 To 10
-            If checkUpdataRecData({&H1A, &H1B}) Then
+            If CheckUpdataRecData({&H1A, &H1B}) Then
                 Exit For
             End If
 
             If i = 10 Then
-                TextBox4.AppendText($"升级指令发送失败{vbCrLf}")
+                Putlog($"升级指令发送失败")
+                MsgBox($"升级指令发送失败",
+                           MsgBoxStyle.Information,
+                           "升级")
                 Exit Sub
             End If
         Next
@@ -1034,55 +1033,61 @@ Public Class FormOption
             sendByte(130) = checkSum Mod 256
 
             For i As Integer = 0 To 10
-                sysInfo.mainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
-                TextBox4.AppendText($"第 {sendIndex} 包数据 第{i}次发送{vbCrLf}")
-                Thread.Sleep(20)
+                sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+                'TextBox4.AppendText($"第 {sendIndex} 包数据 第{i}次发送{vbCrLf}")
+                Thread.Sleep(60)
 
-                If checkUpdataRecData({&H1C, &H1D}) Then
+                If CheckUpdataRecData({&H1C, &H1D}) Then
                     Exit For
                 End If
 
                 If i = 10 Then
-                    TextBox4.AppendText($"第 {sendIndex} 包升级数据发送失败{vbCrLf}")
+                    Putlog($"第 {sendIndex} 包升级数据发送失败")
                     re.Close()
                     fs.Close()
+                    MsgBox($"升级数据发送失败",
+                           MsgBoxStyle.Information,
+                           "升级")
                     Exit Sub
                 End If
             Next
 
             sendIndex += 1
 
-            TextBox4.AppendText($"{(sendIndex * 128 * 100) \ binLength}%{vbCrLf}")
+            ProgressBar1.Value = (sendIndex * 128 * 100) \ binLength
+            Label15.Text = $"{ProgressBar1.Value}%"
 
             If sendIndex * 128 >= binLength Then
                 Exit Do
             End If
-
-            Thread.Sleep(30)
         Loop
 
 
         '发送完毕指令
-        sysInfo.mainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, {&HAA, &HDB, &H9, &H9})
-
-        TextBox4.AppendText($"数据发送完毕{vbCrLf}")
-
+        sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, {&HAA, &HDB, &H9, &H9})
         re.Close()
         fs.Close()
+
+        'TextBox4.AppendText($"数据发送完毕{vbCrLf}")
+        MsgBox($"程序升级完毕",
+               MsgBoxStyle.Information,
+               "升级")
     End Sub
 
     ''' <summary>
     ''' 比较收到的数据
     ''' </summary>
-    Private Function checkUpdataRecData(checkData() As Byte) As Boolean
+    Private Function CheckUpdataRecData(checkData() As Byte) As Boolean
         Dim recSum As Integer = 0
-        For Each sender As senderInfo In sysInfo.senderList
+        Dim errorSum As Integer = 0
+
+        For Each sender As SenderInfo In sysInfo.SenderList
             Dim cliSocket As Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
             .SendTimeout = 1000,
                 .ReceiveTimeout = 1000
             }
             '连接
-            cliSocket.Connect($"{sender.ipDate(3)}.{sender.ipDate(2)}.{sender.ipDate(1)}.{sender.ipDate(0)}", 6000)
+            cliSocket.Connect($"{sender.IpDate(3)}.{sender.IpDate(2)}.{sender.IpDate(1)}.{sender.IpDate(0)}", 6000)
 
             Try
                 Dim bytes(1028 - 1) As Byte
@@ -1093,13 +1098,10 @@ Public Class FormOption
                 Next i
 
                 Dim bytesSend As Integer = cliSocket.Send(sendbytes)
-
-                Thread.Sleep(30)
-
                 Dim bytesRec As Integer = cliSocket.Receive(bytes)
 
             Catch ex As Exception
-                TextBox4.AppendText($"发送读取指令异常:{ex.Message}{vbCrLf}")
+                'TextBox4.AppendText($"发送读取指令异常:{ex.Message}{vbCrLf}")
                 cliSocket.Close()
                 Return False
             End Try
@@ -1114,7 +1116,6 @@ Public Class FormOption
 
                 Dim bytesSend As Integer = cliSocket.Send(sendbytes)
 
-                Thread.Sleep(30)
                 For m As Integer = 0 To 16 - 1
                     Dim bytesRec As Integer = cliSocket.Receive(bytes)
 
@@ -1129,9 +1130,11 @@ Public Class FormOption
 
                         For i As Integer = 0 To checkData.Length - 1
                             If bytes(j + 4 + i) <> checkData(i) Then
-                                cliSocket.Close()
-                                TextBox4.AppendText("校验值错误")
-                                Return False
+                                errorSum += 1
+                                'cliSocket.Close()
+                                'TextBox4.AppendText("校验值错误")
+                                'Return False
+                                Exit For
                             End If
                         Next
 
@@ -1139,13 +1142,18 @@ Public Class FormOption
                     Next
                 Next
             Catch ex As Exception
-                TextBox4.AppendText($"接收数据异常:{ex.Message}{vbCrLf}")
-                cliSocket.Close()
-                Return False
+                'TextBox4.AppendText($"接收数据异常:{ex.Message}{vbCrLf}")
+                errorSum += 1
+                'cliSocket.Close()
+                'Return False
             End Try
 
             cliSocket.Close()
         Next
+
+        If errorSum > 0 Then
+            Return False
+        End If
 
         Return If(recSum > 0, True, False)
     End Function
