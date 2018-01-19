@@ -45,6 +45,11 @@ Partial Class FormOption
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.DataGridView3 = New System.Windows.Forms.DataGridView()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -103,11 +108,6 @@ Partial Class FormOption
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.删除ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -393,6 +393,37 @@ Partial Class FormOption
         Me.DataGridView3.Name = "DataGridView3"
         Me.DataGridView3.Size = New System.Drawing.Size(423, 146)
         Me.DataGridView3.TabIndex = 0
+        '
+        'Column8
+        '
+        Me.Column8.HeaderText = "屏幕ID"
+        Me.Column8.Name = "Column8"
+        '
+        'Column9
+        '
+        Me.Column9.HeaderText = "X"
+        Me.Column9.Name = "Column9"
+        Me.Column9.Width = 50
+        '
+        'Column10
+        '
+        Me.Column10.HeaderText = "Y"
+        Me.Column10.Name = "Column10"
+        Me.Column10.Width = 50
+        '
+        'Column11
+        '
+        Me.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column11.HeaderText = "单元行数"
+        Me.Column11.Name = "Column11"
+        Me.Column11.Width = 78
+        '
+        'Column12
+        '
+        Me.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column12.HeaderText = "单元列数"
+        Me.Column12.Name = "Column12"
+        Me.Column12.Width = 78
         '
         'Label10
         '
@@ -949,37 +980,6 @@ Partial Class FormOption
         Me.删除ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.删除ToolStripMenuItem.Text = "删除"
         '
-        'Column8
-        '
-        Me.Column8.HeaderText = "屏幕ID"
-        Me.Column8.Name = "Column8"
-        '
-        'Column9
-        '
-        Me.Column9.HeaderText = "X"
-        Me.Column9.Name = "Column9"
-        Me.Column9.Width = 50
-        '
-        'Column10
-        '
-        Me.Column10.HeaderText = "Y"
-        Me.Column10.Name = "Column10"
-        Me.Column10.Width = 50
-        '
-        'Column11
-        '
-        Me.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column11.HeaderText = "单元行数"
-        Me.Column11.Name = "Column11"
-        Me.Column11.Width = 78
-        '
-        'Column12
-        '
-        Me.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column12.HeaderText = "单元列数"
-        Me.Column12.Name = "Column12"
-        Me.Column12.Width = 78
-        '
         'FormOption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -991,7 +991,7 @@ Partial Class FormOption
         Me.Name = "FormOption"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "选项"
+        Me.Text = "设置"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)

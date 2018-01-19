@@ -25,6 +25,15 @@
     ''' </summary>
     Private gFont As Font
 
+    ''' <summary>
+    ''' 播放器控件
+    ''' </summary>
+    Private playFlash As AxShockwaveFlashObjects.AxShockwaveFlash
+    ''' <summary>
+    ''' 正在播放的文件
+    ''' </summary>
+    Private movie As String
+
     '发送消息
     Private Declare Function PostMessage Lib "user32" Alias _
         "PostMessageA" (ByVal hwnd As Int32,
@@ -48,8 +57,8 @@
         'Me.TopMost = True
 
         '隐藏播放控件
-        AxShockwaveFlash1.Hide()
-        AxShockwaveFlash1.BackgroundColor = 0
+        'AxShockwaveFlash1.Hide()
+        'AxShockwaveFlash1.BackgroundColor = 0
 
         Me.BackColor = Color.Black
         '初始化绘图参数
@@ -90,12 +99,24 @@
             Exit Sub
         End If
 
-        AxShockwaveFlash1.Show()
-        AxShockwaveFlash1.StopPlay()
-        AxShockwaveFlash1.SAlign = 1
-        AxShockwaveFlash1.ScaleMode = 2
-        AxShockwaveFlash1.Movie = swfUrl
-        AxShockwaveFlash1.Play()
+        'AxShockwaveFlash1.Show()
+        'AxShockwaveFlash1.StopPlay()
+        If playFlash IsNot Nothing Then
+            Me.Controls.Remove(playFlash)
+            playFlash.Dispose()
+            playFlash = Nothing
+        End If
+
+        playFlash = New AxShockwaveFlashObjects.AxShockwaveFlash
+        playFlash.Dock = DockStyle.Fill
+        Me.Controls.Add(playFlash)
+
+        playFlash.SAlign = 1
+        playFlash.ScaleMode = 2
+        playFlash.BackgroundColor = 0
+        playFlash.Movie = swfUrl
+        movie = swfUrl
+        'AxShockwaveFlash1.Play()
     End Sub
 
     ''' <summary>
@@ -127,9 +148,21 @@
 
         Me.Refresh()
         '显示播放控件
-        AxShockwaveFlash1.Show()
-        AxShockwaveFlash1.Movie = AxShockwaveFlash1.Movie
-        AxShockwaveFlash1.Play()
+        'playFlash.Show()
+        'playFlash.Movie = playFlash.Movie
+        'playFlash.Play()
+        If playFlash Is Nothing Then
+            playFlash = New AxShockwaveFlashObjects.AxShockwaveFlash
+            playFlash.Dock = DockStyle.Fill
+            Me.Controls.Add(playFlash)
+
+            playFlash.SAlign = 1
+            playFlash.ScaleMode = 2
+            playFlash.BackgroundColor = 0
+            playFlash.Movie = movie
+        End If
+
+
     End Sub
 
     ''' <summary>
@@ -143,7 +176,12 @@
         End If
 
         '隐藏播放控件
-        AxShockwaveFlash1.Hide()
+        'playFlash.Hide()
+        If playFlash IsNot Nothing Then
+            Me.Controls.Remove(playFlash)
+            playFlash.Dispose()
+            playFlash = Nothing
+        End If
 
         Me.BackColor = Color.Black
         Me.Refresh()
@@ -183,7 +221,13 @@
 
         Me.Refresh()
         '隐藏播放控件
-        AxShockwaveFlash1.Hide()
+        'AxShockwaveFlash1.Hide()
+        If playFlash IsNot Nothing Then
+            Me.Controls.Remove(playFlash)
+            playFlash.Dispose()
+            playFlash = Nothing
+        End If
+
         Me.BackColor = Color.Black
     End Sub
 
@@ -210,15 +254,15 @@
                 Dim ttp2 As Int32 = txp + ((typ + 2) << 16)
 
                 '点击-移动-松开
-                PostMessage(Me.AxShockwaveFlash1.Handle,
+                PostMessage(playFlash.Handle,
                             WM_LBUTTONDOWN,
                             0,
                             ttp)
-                PostMessage(Me.AxShockwaveFlash1.Handle,
+                PostMessage(playFlash.Handle,
                             WM_MOUSEMOVE,
                             0,
                             ttp2)
-                PostMessage(Me.AxShockwaveFlash1.Handle,
+                PostMessage(playFlash.Handle,
                             WM_LBUTTONUP,
                             0,
                             ttp)

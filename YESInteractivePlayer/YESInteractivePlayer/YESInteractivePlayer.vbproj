@@ -201,6 +201,22 @@
   <ItemGroup>
     <Content Include="main.ico" />
     <Content Include="README.txt" />
+    <None Include="res\ServerNormal.png" />
+    <None Include="res\ServerFault.png" />
+    <None Include="res\DisplayMode3G.png" />
+    <None Include="res\DisplayMode2G.png" />
+    <None Include="res\DisplayMode1G.png" />
+    <None Include="res\DisplayMode0G.png" />
+    <None Include="res\DisplayMode3.png" />
+    <None Include="res\DisplayMode2.png" />
+    <None Include="res\DisplayMode1.png" />
+    <None Include="res\DisplayMode0.png" />
+    <None Include="res\disconnect.png" />
+    <None Include="res\connect.png" />
+    <None Include="res\clear.png" />
+    <None Include="res\del.png" />
+    <None Include="res\add.png" />
+    <None Include="res\setting.png" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="AxShockwaveFlashObjects">

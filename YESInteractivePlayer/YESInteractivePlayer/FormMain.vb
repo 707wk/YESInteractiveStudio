@@ -36,7 +36,7 @@ Public Class FormMain
 
         '读取最后编译日期
         Dim txtTmp As System.IO.TextReader = System.IO.File.OpenText(".\data\CreationDate.ini")
-        Me.Text = $"{My.Application.Info.ProductName} [{txtTmp.ReadLine()}]"
+        Me.Text = $"{My.Application.Info.ProductName}" ' [{txtTmp.ReadLine()}]"
 
         System.IO.Directory.CreateDirectory("./data")
         System.IO.Directory.CreateDirectory("./logs")
@@ -148,32 +148,36 @@ Public Class FormMain
         RegisterHotKey(Me.Handle.ToInt32, 3, 0, Keys.F3)
         RegisterHotKey(Me.Handle.ToInt32, 4, 0, Keys.F4)
 
-        运行F1ToolStripMenuItem.BackColor = Color.FromArgb(&H0, &HE3, &HB)
-        测试F2ToolStripMenuItem.BackColor = Color.FromArgb(&HFF, &H7F, &H27)
-        黑屏F3ToolStripMenuItem.BackColor = Color.FromArgb(&H7F, &H7F, &H7F)
-        忽略F4ToolStripMenuItem.BackColor = Color.FromArgb(&HB0, &HAF, &HDF)
-        ToolStripDropDownButton1.BackColor = 运行F1ToolStripMenuItem.BackColor
+        '运行F1ToolStripMenuItem.BackColor = Color.FromArgb(&H0, &HE3, &HB)
+        '测试F2ToolStripMenuItem.BackColor = Color.FromArgb(&HFF, &H7F, &H27)
+        '黑屏F3ToolStripMenuItem.BackColor = Color.FromArgb(&H7F, &H7F, &H7F)
+        '忽略F4ToolStripMenuItem.BackColor = Color.FromArgb(&HB0, &HAF, &HDF)
+        'ToolStripDropDownButton1.BackColor = 运行F1ToolStripMenuItem.BackColor
 
         '发送卡状态
         Timer1.Interval = 1000
 
-        ''发送卡状态列表样式
-        'For i As Integer = 0 To 10 - 1
-        '    DataGridView1.Columns.Add($"C{i}", $"{i}")
-        '    DataGridView1.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        '    DataGridView1.Columns(i).Width = 35
-        'Next
-        'DataGridView1.ColumnHeadersVisible = False
-        'DataGridView1.RowHeadersVisible = False
-        'DataGridView1.AllowUserToResizeColumns = False
-        'DataGridView1.AllowUserToResizeRows = False
-        'DataGridView1.MultiSelect = False
-        'DataGridView1.Rows.Clear()
-        ''DataGridView1.GridColor = Color.FromArgb(&H33, &H99, &HFF)
+        '删除旧log文件
+        DeleteLog(30)
 
         '设置显示语言
         SetControlslanguage(Me)
     End Sub
+
+    '''' <summary>
+    '''' 删除多少天前的log文件
+    '''' </summary>
+    'Private Sub DeleteLog(saveDays As Integer)
+    '    Dim nowtime As DateTime = DateTime.Now
+    '    Dim files As String() = Directory.GetFiles("./logs")
+    '    For Each file In files
+    '        Dim f As FileInfo = New FileInfo(file)
+    '        Dim t As TimeSpan = nowtime - f.LastWriteTime
+    '        If (t.Days > saveDays) Then
+    '            f.Delete()
+    '        End If
+    '    Next
+    'End Sub
 
     ''' <summary>
     ''' 创建播放窗体
@@ -271,13 +275,13 @@ Public Class FormMain
         If m.Msg = WM_HOTKEY And sysInfo.LinkFlage Then '判断是否为热键消息
             Select Case m.WParam.ToInt32 '判断热键消息的注册ID
                 Case 1
-                    运行F1ToolStripMenuItem_Click(Nothing, Nothing)
+                    Button6_Click(Nothing, Nothing)
                 Case 2
-                    测试F2ToolStripMenuItem_Click(Nothing, Nothing)
+                    Button7_Click(Nothing, Nothing)
                 Case 3
-                    黑屏F3ToolStripMenuItem_Click(Nothing, Nothing)
+                    Button8_Click(Nothing, Nothing)
                 Case 4
-                    忽略F4ToolStripMenuItem_Click(Nothing, Nothing)
+                    Button9_Click(Nothing, Nothing)
             End Select
         End If
 
@@ -330,7 +334,11 @@ Public Class FormMain
         End If
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+    'Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+
+    'End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
         Dim tmpDialog As New FormOption
         tmpDialog.ShowDialog()
 
@@ -369,10 +377,18 @@ Public Class FormMain
     ''' 连接
     ''' </summary>
     Private Sub OnLinkCon()
-        ToolStripDropDownButton1.Enabled = True
-        Button5.Enabled = False
+        'ToolStripDropDownButton1.Enabled = True
+        Button6.Enabled = True
+        Button7.Enabled = True
+        Button8.Enabled = True
+        Button9.Enabled = True
+
+        Button6_Click(Nothing, Nothing)
+
+        ToolStripButton2.Enabled = False
         ToolStripButton1.Text = GetLanguage("断开连接")
-        ToolStripButton1.BackColor = Color.OrangeRed
+        'ToolStripButton1.BackColor = Color.OrangeRed
+        ToolStripButton1.Image = My.Resources.disconnect
         Timer1.Start()
     End Sub
 
@@ -380,10 +396,16 @@ Public Class FormMain
     ''' 断开连接
     ''' </summary>
     Private Sub OffLinkCon()
-        ToolStripDropDownButton1.Enabled = False
-        Button5.Enabled = True
+        'ToolStripDropDownButton1.Enabled = False
+        Button6.Enabled = False
+        Button7.Enabled = False
+        Button8.Enabled = False
+        Button9.Enabled = False
+
+        ToolStripButton2.Enabled = True
         ToolStripButton1.Text = GetLanguage("连接控制器")
-        ToolStripButton1.BackColor = Color.FromArgb(&H0, &HE3, &HB)
+        'ToolStripButton1.BackColor = Color.FromArgb(&H0, &HE3, &HB)
+        ToolStripButton1.Image = My.Resources.connect
         Timer1.Stop()
     End Sub
 
@@ -705,44 +727,77 @@ Public Class FormMain
         Next
     End Sub
 
-    Private Sub 运行F1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 运行F1ToolStripMenuItem.Click
+    ''' <summary>
+    ''' 互动
+    ''' </summary>
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         sysInfo.DisplayMode = 0
 
-        ToolStripDropDownButton1.Text = 运行F1ToolStripMenuItem.Text
-        ToolStripDropDownButton1.BackColor = 运行F1ToolStripMenuItem.BackColor
+        'ToolStripDropDownButton1.Text = 运行F1ToolStripMenuItem.Text
+        'ToolStripDropDownButton1.BackColor = 运行F1ToolStripMenuItem.BackColor
+
+        Button6.Image = My.Resources.DisplayMode0
+        Button7.Image = My.Resources.DisplayMode1G
+        Button8.Image = My.Resources.DisplayMode2G
+        Button9.Image = My.Resources.DisplayMode3G
 
         For Each i In sysInfo.CurtainList
             i.PlayDialog.SwitchPlayMode(True)
         Next
     End Sub
 
-    Private Sub 测试F2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 测试F2ToolStripMenuItem.Click
+    ''' <summary>
+    ''' 测试
+    ''' </summary>
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         sysInfo.DisplayMode = 1
 
-        ToolStripDropDownButton1.Text = 测试F2ToolStripMenuItem.Text
-        ToolStripDropDownButton1.BackColor = 测试F2ToolStripMenuItem.BackColor
+        'ToolStripDropDownButton1.Text = 测试F2ToolStripMenuItem.Text
+        'ToolStripDropDownButton1.BackColor = 测试F2ToolStripMenuItem.BackColor
+
+        Button6.Image = My.Resources.DisplayMode0G
+        Button7.Image = My.Resources.DisplayMode1
+        Button8.Image = My.Resources.DisplayMode2G
+        Button9.Image = My.Resources.DisplayMode3G
 
         For Each i In sysInfo.CurtainList
             i.PlayDialog.SwitchTestMode(True)
         Next
     End Sub
 
-    Private Sub 黑屏F3ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 黑屏F3ToolStripMenuItem.Click
+    ''' <summary>
+    ''' 黑屏
+    ''' </summary>
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         sysInfo.DisplayMode = 2
 
-        ToolStripDropDownButton1.Text = 黑屏F3ToolStripMenuItem.Text
-        ToolStripDropDownButton1.BackColor = 黑屏F3ToolStripMenuItem.BackColor
+        'ToolStripDropDownButton1.Text = 黑屏F3ToolStripMenuItem.Text
+        'ToolStripDropDownButton1.BackColor = 黑屏F3ToolStripMenuItem.BackColor
+
+        Button6.Image = My.Resources.DisplayMode0G
+        Button7.Image = My.Resources.DisplayMode1G
+        Button8.Image = My.Resources.DisplayMode2
+        Button9.Image = My.Resources.DisplayMode3G
 
         For Each i In sysInfo.CurtainList
             i.PlayDialog.SwitchBlankScreenMode(True)
         Next
     End Sub
 
-    Private Sub 忽略F4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 忽略F4ToolStripMenuItem.Click
+    ''' <summary>
+    ''' 忽略
+    ''' </summary>
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         sysInfo.DisplayMode = 3
 
-        ToolStripDropDownButton1.Text = 忽略F4ToolStripMenuItem.Text
-        ToolStripDropDownButton1.BackColor = 忽略F4ToolStripMenuItem.BackColor
+        'ToolStripDropDownButton1.Text = 忽略F4ToolStripMenuItem.Text
+        'ToolStripDropDownButton1.BackColor = 忽略F4ToolStripMenuItem.BackColor
+
+        Button6.Image = My.Resources.DisplayMode0G
+        Button7.Image = My.Resources.DisplayMode1G
+        Button8.Image = My.Resources.DisplayMode2G
+        Button9.Image = My.Resources.DisplayMode3
+
     End Sub
 
     ''' <summary>
@@ -779,6 +834,6 @@ Public Class FormMain
 
         Next
 
-        ToolStripDropDownButton2.BackColor = If(minReadNum, Color.FromArgb(&H0, &HE3, &HB), Color.Yellow)
+        ToolStripDropDownButton2.Image = If(minReadNum, My.Resources.ServerNormal, My.Resources.ServerFault)
     End Sub
 End Class

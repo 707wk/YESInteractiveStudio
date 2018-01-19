@@ -22,6 +22,86 @@ YESInteractivePlayer
   重写当前线程的 CurrentUICulture 属性。
 </summary>
 </member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.add">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.clear">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.connect">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.del">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.disconnect">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.DisplayMode0">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.DisplayMode0G">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.DisplayMode1">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.DisplayMode1G">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.DisplayMode2">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.DisplayMode2G">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.DisplayMode3">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.DisplayMode3G">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.ServerFault">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.ServerNormal">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.setting">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
 <member name="M:YESInteractivePlayer.FormMain.RegisterHotKey(System.Int32,System.Int32,System.Int32,System.Int32)">
  <summary>
  声明注册热键API函数
@@ -115,6 +195,26 @@ YESInteractivePlayer
 <member name="M:YESInteractivePlayer.FormMain.Button2_Click(System.Object,System.EventArgs)">
  <summary>
  播放至所有屏幕
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormMain.Button6_Click(System.Object,System.EventArgs)">
+ <summary>
+ 互动
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormMain.Button7_Click(System.Object,System.EventArgs)">
+ <summary>
+ 测试
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormMain.Button8_Click(System.Object,System.EventArgs)">
+ <summary>
+ 黑屏
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormMain.Button9_Click(System.Object,System.EventArgs)">
+ <summary>
+ 忽略
  </summary>
 </member>
 <member name="M:YESInteractivePlayer.FormMain.CheckBox1_CheckedChanged(System.Object,System.EventArgs)">
@@ -327,6 +427,16 @@ YESInteractivePlayer
  背景字体
  </summary>
 </member>
+<member name="F:YESInteractivePlayer.FormPlay.playFlash">
+ <summary>
+ 播放器控件
+ </summary>
+</member>
+<member name="F:YESInteractivePlayer.FormPlay.movie">
+ <summary>
+ 正在播放的文件
+ </summary>
+</member>
 <member name="T:YESInteractivePlayer.FormPlay.closeDialogCallback">
  <summary>
  关闭窗体
@@ -370,6 +480,11 @@ YESInteractivePlayer
 <member name="M:YESInteractivePlayer.ModuleFunction.GetMd5Hash(System.String)">
  <summary>
  获取字符串MD5值
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.ModuleFunction.DeleteLog(System.Int32)">
+ <summary>
+ 删除多少天前的log文件
  </summary>
 </member>
 <member name="M:YESInteractivePlayer.ModuleFunction.SetControlslanguage(System.Windows.Forms.Control)">

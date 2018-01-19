@@ -1,0 +1,15 @@
+T:\YESInteractiveTools\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.FormMain.resources
+T:\YESInteractiveTools\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.FormNovaInit.resources
+T:\YESInteractiveTools\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.FormOption.resources
+T:\YESInteractiveTools\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.FormPlay.resources
+T:\YESInteractiveTools\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.Resources.resources
+T:\YESInteractiveTools\YESInteractivePlayer\obj\x86\Debug\YESInteractiveTools.vbproj.GenerateResource.Cache
+T:\YESInteractiveTools\YESInteractivePlayer\obj\x86\Debug\YESInteractiveTools.vbproj.CoreCompileInputs.cache
+T:\YESInteractiveTools\YESInteractivePlayer\bin\x86\Debug\YESInteractivePlayer.exe.config
+T:\YESInteractiveTools\YESInteractivePlayer\bin\x86\Debug\YESInteractivePlayer.exe
+T:\YESInteractiveTools\YESInteractivePlayer\bin\x86\Debug\YESInteractivePlayer.pdb
+T:\YESInteractiveTools\YESInteractivePlayer\bin\x86\Debug\YESInteractivePlayer.xml
+T:\YESInteractiveTools\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.exe
+T:\YESInteractiveTools\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.xml
+T:\YESInteractiveTools\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.pdb
+T:\YESInteractiveTools\YESInteractivePlayer\obj\x86\Debug\YESInteractiveTools.vbprojResolveAssemblyReference.cache
