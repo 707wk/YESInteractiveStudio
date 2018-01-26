@@ -560,14 +560,21 @@ Public Class FormOption
 
         tmp.ScreenList = New List(Of Integer)
         For i As Integer = 0 To DataGridView3.Rows.Count - 1 - 1
-            With DataGridView3.Rows(i)
-                tmp.ScreenList.Add(.Cells(0).Value)
+            Try
+                With DataGridView3.Rows(i)
+                    tmp.ScreenList.Add(.Cells(0).Value)
 
-                sysInfo.ScreenList(.Cells(0).Value).DefaultX = .Cells(1).Value
-                sysInfo.ScreenList(.Cells(0).Value).DefaultY = .Cells(2).Value
-                sysInfo.ScreenList(.Cells(0).Value).TouchPieceRowsNum = .Cells(3).Value
-                sysInfo.ScreenList(.Cells(0).Value).TouchPieceColumnsNum = .Cells(4).Value
-            End With
+                    sysInfo.ScreenList(.Cells(0).Value).DefaultX = .Cells(1).Value
+                    sysInfo.ScreenList(.Cells(0).Value).DefaultY = .Cells(2).Value
+                    sysInfo.ScreenList(.Cells(0).Value).TouchPieceRowsNum = .Cells(3).Value
+                    sysInfo.ScreenList(.Cells(0).Value).TouchPieceColumnsNum = .Cells(4).Value
+                End With
+
+            Catch ex As Exception
+                MsgBox($"第{i + 1}行数据错误:{ex.Message}", MsgBoxStyle.Information, "新增")
+                Exit Sub
+            End Try
+
         Next
 
         sysInfo.CurtainList.Add(tmp)
@@ -635,16 +642,21 @@ Public Class FormOption
 
         tmp.ScreenList = New List(Of Integer)
         For i As Integer = 0 To DataGridView3.Rows.Count - 1 - 1
-            With DataGridView3.Rows(i)
-                tmp.ScreenList.Add(.Cells(0).Value)
+            Try
+                With DataGridView3.Rows(i)
+                    tmp.ScreenList.Add(.Cells(0).Value)
 
-                sysInfo.ScreenList(.Cells(0).Value).DefaultX = .Cells(1).Value
-                sysInfo.ScreenList(.Cells(0).Value).DefaultY = .Cells(2).Value
-                sysInfo.ScreenList(.Cells(0).Value).TouchPieceRowsNum = .Cells(3).Value
-                sysInfo.ScreenList(.Cells(0).Value).TouchPieceColumnsNum = .Cells(4).Value
-            End With
+                    sysInfo.ScreenList(.Cells(0).Value).DefaultX = .Cells(1).Value
+                    sysInfo.ScreenList(.Cells(0).Value).DefaultY = .Cells(2).Value
+                    sysInfo.ScreenList(.Cells(0).Value).TouchPieceRowsNum = .Cells(3).Value
+                    sysInfo.ScreenList(.Cells(0).Value).TouchPieceColumnsNum = .Cells(4).Value
+                End With
+
+            Catch ex As Exception
+                MsgBox($"第{i + 1}行数据错误:{ex.Message}", MsgBoxStyle.Information, "保存修改")
+                Exit Sub
+            End Try
         Next
-
 
         sysInfo.CurtainList.Item(DataGridView2.SelectedCells(0).RowIndex) = tmp
         'DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(0).Value = DataGridView2.Rows.Count + 1
@@ -724,12 +736,18 @@ Public Class FormOption
         Dim lastPortIndex As Integer = -1
         Dim lastX As Integer = 0
         Dim lastY As Integer = 0
+        Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 
         mpen.Color = Color.Red
         mpen.Width = 3
         For i As Integer = 0 To dataRow.Length - 1
-            Dim tmpX As Integer = (dataRow(i).Item(4) \ 4) * 21 + 10
-            Dim tmpY As Integer = (dataRow(i).Item(5) \ 4) * 21 + 10
+            Dim tmpX As Integer = (dataRow(i).Item(4) \ sysInfo.ScreenList(selectScreenId).TouchPieceColumnsNum) * 21 + 10
+            Dim tmpY As Integer = (dataRow(i).Item(5) \ sysInfo.ScreenList(selectScreenId).TouchPieceRowsNum) * 21 + 10
+
+            For k As Integer = 0 To 6 - 1
+                Debug.Write($"{dataRow(i).Item(k)} ")
+            Next
+            Debug.WriteLine("")
 
             If dataRow(i).Item(1) = lastSenderIndex And dataRow(i).Item(2) = lastPortIndex Then
                 g.DrawLine(mpen, lastX, lastY, tmpX, tmpY)

@@ -272,7 +272,11 @@
                 gBack.DrawString($"√", gFont, gBrush,
                                  sysInfo.ScreenList(screenId).X + tX * touchPieceWidth + 1,
                                  sysInfo.ScreenList(screenId).Y + tY * touchPieceHeight + 1)
-
+            Case 4
+                '显示电容
+                gBack.DrawString($"{value And &H7F}", gFont, gBrush,
+                                 sysInfo.ScreenList(screenId).X + tX * touchPieceWidth + 1,
+                                 sysInfo.ScreenList(screenId).Y + tY * touchPieceHeight + 1)
         End Select
 
     End Sub

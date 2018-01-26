@@ -132,6 +132,11 @@ YESInteractivePlayer
  Shift
  </summary>
 </member>
+<member name="F:YESInteractivePlayer.FormMain.DebugFlage">
+ <summary>
+ 调试模式
+ </summary>
+</member>
 <member name="M:YESInteractivePlayer.FormMain.CreatDialogThread(System.Int32)">
  <summary>
  创建播放窗体
@@ -145,6 +150,11 @@ YESInteractivePlayer
 <member name="M:YESInteractivePlayer.FormMain.WndProc(System.Windows.Forms.Message@)">
  <summary>
  热键消息处理函数
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormMain.FormMain_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+ <summary>
+ 开启调试模式
  </summary>
 </member>
 <member name="M:YESInteractivePlayer.FormMain.SetResetTemp(System.Int32)">
@@ -185,6 +195,11 @@ YESInteractivePlayer
 <member name="M:YESInteractivePlayer.FormMain.Button4_Click(System.Object,System.EventArgs)">
  <summary>
  删除文件
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormMain.Button5_Click(System.Object,System.EventArgs)">
+ <summary>
+ 清空播放列表
  </summary>
 </member>
 <member name="M:YESInteractivePlayer.FormMain.Button1_Click(System.Object,System.EventArgs)">
@@ -923,7 +938,7 @@ YESInteractivePlayer
  0点击
  1测试
  2黑屏
- 3忽略
+ 3忽略 4显示电容
  </summary>
 </member>
 <member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.TouchSensitivity">

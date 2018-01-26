@@ -29,8 +29,14 @@ Public Class FormMain
     ''' Shift
     ''' </summary>
     Public Const MOD_SHIFT As Short = &H4S
+    ''' <summary>
+    ''' 调试模式
+    ''' </summary>
+    Private DebugFlage As Boolean
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.KeyPreview = True
+
         '测试时关闭登陆验证
         'checkdog()
 
@@ -138,6 +144,12 @@ Public Class FormMain
         sysInfo.ResetSec = If(sysInfo.ResetSec, sysInfo.ResetSec, 1)
 
         Me.Location = sysInfo.StartLocation
+        If Me.Location.X > Screen.PrimaryScreen.Bounds.Width Or
+            Me.Location.Y > Screen.PrimaryScreen.Bounds.Height Then
+
+            Me.Location = New Point(Screen.PrimaryScreen.Bounds.Width / 2,
+                                    Screen.PrimaryScreen.Bounds.Height / 2)
+        End If
 
         ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList
         ComboBox2.DropDownStyle = ComboBoxStyle.DropDownList
@@ -286,6 +298,25 @@ Public Class FormMain
         End If
 
         MyBase.WndProc(m) '循环监听消息
+    End Sub
+
+    ''' <summary>
+    ''' 开启调试模式
+    ''' </summary>
+    Private Sub FormMain_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        Static password As String = Nothing
+        password = password & Convert.ToChar(e.KeyValue)
+        If password.Length > 128 Then
+            password = Microsoft.VisualBasic.Right(password, 32)
+        End If
+
+        If password.IndexOf("YESTECH") = -1 Then
+            Exit Sub
+        End If
+
+        DebugFlage = True
+
+        Button9.Text = GetLanguage("电容")
     End Sub
 
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -609,7 +640,8 @@ Public Class FormMain
                         End If
 
                         If sysInfo.DisplayMode <> 0 And
-                            sysInfo.DisplayMode <> 1 Then
+                            sysInfo.DisplayMode <> 1 And
+                            sysInfo.DisplayMode <> 4 Then
                             Exit For
                         End If
 
@@ -625,7 +657,9 @@ Public Class FormMain
                             tmpClickValidSum = tmpClickValidSum + If(bytes(j + 4 + k) And &H80, 1, 0)
                         Next
 
-                        If tmpClickValidSum < sysInfo.ClickValidNums Then
+                        If tmpClickValidSum < sysInfo.ClickValidNums And
+                            sysInfo.DisplayMode = 0 Then
+                            '互动模式下抗干扰才启用
                             Continue For
                         End If
 
@@ -633,17 +667,22 @@ Public Class FormMain
 
                         For k As Integer = 0 To sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum - 1
                             For l As Integer = 0 To sysInfo.ScreenList(tmp.ScreenId).TouchPieceColumnsNum - 1
-                                sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = bytes(j + k * sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum + l) And &H80
 
-                                If (bytes(j + 4 + k * sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum + l) And &H80) <> &H80 Then
-                                    sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = 0
-                                    Continue For
-                                End If
+                                If sysInfo.DisplayMode = 0 Or
+                                        sysInfo.DisplayMode = 1 Then
+                                    '互动或测试时启用
+                                    sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = bytes(j + k * sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum + l) And &H80
 
-                                If sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) Then
-                                    sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
+                                    If (bytes(j + 4 + k * sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum + l) And &H80) <> &H80 Then
+                                        sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = 0
+                                        Continue For
+                                    End If
 
-                                    Continue For
+                                    If sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) Then
+                                        sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
+
+                                        Continue For
+                                    End If
                                 End If
 
                                 sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
@@ -701,6 +740,14 @@ Public Class FormMain
         If ComboBox2.Items.Count Then
             ComboBox2.SelectedIndex = 0
         End If
+    End Sub
+
+    ''' <summary>
+    ''' 清空播放列表
+    ''' </summary>
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        ComboBox2.Items.Clear()
+        sysInfo.FilesList.Clear()
     End Sub
 
     ''' <summary>
@@ -788,7 +835,13 @@ Public Class FormMain
     ''' 忽略
     ''' </summary>
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        sysInfo.DisplayMode = 3
+        sysInfo.DisplayMode = If(DebugFlage, 4, 3)
+
+        If DebugFlage Then
+            For Each i In sysInfo.CurtainList
+                i.PlayDialog.SwitchTestMode(True)
+            Next
+        End If
 
         'ToolStripDropDownButton1.Text = 忽略F4ToolStripMenuItem.Text
         'ToolStripDropDownButton1.BackColor = 忽略F4ToolStripMenuItem.BackColor

@@ -345,7 +345,7 @@ Module ModuleStructure
         ''' 0点击
         ''' 1测试
         ''' 2黑屏
-        ''' 3忽略
+        ''' 3忽略 4显示电容
         ''' </summary>
         Dim DisplayMode As Integer
         '''' <summary>
