@@ -150,8 +150,8 @@ Partial Class FormOption
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage5)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Controls.Add(Me.TabPage6)
