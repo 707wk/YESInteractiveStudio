@@ -187,6 +187,11 @@ YESInteractivePlayer
  异常时断开连接并提示
  </summary>
 </member>
+<member name="M:YESInteractivePlayer.FormMain.CheckAdjacencyPieceNums(System.Int32,System.Int32,System.Int32)">
+ <summary>
+ 检测相邻触发数是否大于等于抗干扰数
+ </summary>
+</member>
 <member name="M:YESInteractivePlayer.FormMain.CommunicWorkThread(System.Int32)">
  <summary>
  检测线程
@@ -485,11 +490,6 @@ YESInteractivePlayer
 <member name="T:YESInteractivePlayer.FormPlay.MousesimulationClickCallback">
  <summary>
  模拟鼠标点击消息
- </summary>
-</member>
-<member name="M:YESInteractivePlayer.ModuleFunction.Putlog(System.String)">
- <summary>
- 输出日志
  </summary>
 </member>
 <member name="M:YESInteractivePlayer.ModuleFunction.GetMd5Hash(System.String)">
@@ -865,6 +865,11 @@ YESInteractivePlayer
 <member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.LinkFlage">
  <summary>
  连接状态
+ </summary>
+</member>
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.logger">
+ <summary>
+ 日志记录
  </summary>
 </member>
 <member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.ScanBoardTable">

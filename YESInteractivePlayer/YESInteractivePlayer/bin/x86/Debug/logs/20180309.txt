@@ -1,0 +1,1305 @@
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:02.840
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:03.847
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:04.855
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:05.861
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:06.867
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:07.874
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:08.880
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:09.885
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:10.891
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:11.897
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:12.903
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:13.909
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:14.916
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:15.922
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:16.929
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:17.936
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:22.579
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:23.583
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:24.589
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:25.596
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:26.601
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:44:57.330
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:45:49.993
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:46:20.813
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:46:51.667
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:47:22.517
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:47:53.344
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:48:58.526
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:49:29.432
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:50:27.716
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:50:58.658
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:51:29.652
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:52:00.612
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:52:38.961
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:53:09.904
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:53:40.836
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:55:43.037
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:56:46.945
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:57:17.878
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:57:48.813
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 13:58:19.734
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:07.575
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:07.602
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:07.631
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:07.660
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:18.395
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:18.423
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:18.453
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:18.483
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:40.488
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:40.519
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:40.547
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:40.579
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:46.286
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:46.314
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:46.344
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:38:46.373
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:40:06.551
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:40:06.581
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:40:06.612
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:40:06.640
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 722
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:56:49.764
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:57:20.676
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 14:57:51.613
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:03:44.958
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:04:15.886
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:05:29.635
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:06:28.901
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:07:46.456
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:07:50.759
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 675
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:08:18.355
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:09:19.073
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:09:49.980
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:10:20.891
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:12:02.351
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 730
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:12:02.381
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 730
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:12:02.410
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 730
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:12:02.440
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 730
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:12:07.644
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 730
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:12:07.676
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 730
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:12:07.706
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 730
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:12:07.736
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 730
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:12:52.473
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:13:24.187
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:13:55.099
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:14:26.026
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:15:26.988
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:15:57.893
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:16:28.825
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:16:59.763
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:17:30.697
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:18:01.636
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:18:32.575
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:19:03.505
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:19:34.452
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:20:05.396
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:39:24.206
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:40:06.126
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   在 System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   在 YESInteractivePlayer.FormPlay.MousesimulationClick(Int32 screenId, Int32 tX, Int32 tY, Int32 value) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormPlay.vb:行号 240
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 755
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:40:40.393
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 675
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:41:56.413
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:44:33.651
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:45:12.481
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:45:43.435
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:46:14.406
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:47:48.675
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:48:19.580
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:48:50.469
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:49:28.509
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:50:08.531
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:50:39.441
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:51:10.372
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:51:41.297
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:52:12.202
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:52:43.103
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:52:45.897
+level  :  Level_DEBUG
+Context:  接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 675
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:53:15.038
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:53:45.930
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:54:16.828
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:54:47.738
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:55:18.647
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:55:49.638
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:57:01.509
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:57:32.512
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:58:03.436
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:58:34.333
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 15:59:57.087
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 16:00:28.079
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 16:00:59.047
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 16:51:44.676
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 16:52:25.001
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 16:53:57.126
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 16:56:17.935
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 17:00:33.520
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 17:12:08.065
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 17:12:53.645
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Times  :  2018/03/09 17:13:33.775
+level  :  Level_DEBUG
+Context:  请求接收传感器数据数据
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   在 YESInteractivePlayer.FormMain.CommunicWorkThread(Int32 senderId) 位置 T:\YESInteractivePlayer\YESInteractivePlayer\FormMain.vb:行号 649
+------------------------------------------------------------------------------
+

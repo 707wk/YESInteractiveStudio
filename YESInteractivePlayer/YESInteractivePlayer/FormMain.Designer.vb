@@ -65,7 +65,7 @@ Partial Class FormMain
         Me.ToolStripButton1.Image = Global.YESInteractivePlayer.My.Resources.Resources.connect
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(88, 22)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(87, 22)
         Me.ToolStripButton1.Text = "连接控制器"
         '
         'ToolStripSeparator1
@@ -79,26 +79,26 @@ Partial Class FormMain
         Me.ToolStripButton2.Image = Global.YESInteractivePlayer.My.Resources.Resources.setting
         Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(52, 22)
+        Me.ToolStripButton2.Size = New System.Drawing.Size(51, 22)
         Me.ToolStripButton2.Text = "设置"
         '
         'ComboBox1
         '
-        Me.ComboBox1.Font = New System.Drawing.Font("宋体", 10.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.ComboBox1.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Location = New System.Drawing.Point(6, 16)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(46, 22)
+        Me.ComboBox1.Size = New System.Drawing.Size(46, 20)
         Me.ComboBox1.TabIndex = 2
         '
         'ComboBox2
         '
-        Me.ComboBox2.Font = New System.Drawing.Font("宋体", 10.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.ComboBox2.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.ItemHeight = 14
+        Me.ComboBox2.ItemHeight = 12
         Me.ComboBox2.Location = New System.Drawing.Point(6, 16)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(148, 22)
+        Me.ComboBox2.Size = New System.Drawing.Size(148, 20)
         Me.ComboBox2.Sorted = True
         Me.ComboBox2.TabIndex = 5
         '

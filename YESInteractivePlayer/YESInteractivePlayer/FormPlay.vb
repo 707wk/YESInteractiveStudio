@@ -244,6 +244,10 @@
         Dim touchPieceWidth As Integer = sysInfo.ScreenList(screenId).TouchPieceWidth
         Dim touchPieceHeight As Integer = sysInfo.ScreenList(screenId).TouchPieceHeight
 
+        'Static id As Integer = 0
+        'Debug.WriteLine($"{id} x:{tX} y:{tY}")
+        'id += 1
+
         Select Case sysInfo.DisplayMode
             Case 0
                 '点击

@@ -76,18 +76,20 @@ Public Class FormNovaInit
             Exit Sub
         End If
 
-        Putlog(text)
-        Thread.Sleep(2000)
+        MsgBox($"{text}", MsgBoxStyle.Information, Me.Text)
+
+        'Putlog(text)
+        'Thread.Sleep(2000)
 
         '释放nova资源
-        If sysInfo.MainClass Is Nothing Then
-        Else
-            sysInfo.MainClass.UnInitialize()
-        End If
-        If sysInfo.RootClass Is Nothing Then
-        Else
-            sysInfo.RootClass.UnInitialize()
-        End If
+        'If sysInfo.MainClass Is Nothing Then
+        'Else
+        '    sysInfo.MainClass.UnInitialize()
+        'End If
+        'If sysInfo.RootClass Is Nothing Then
+        'Else
+        '    sysInfo.RootClass.UnInitialize()
+        'End If
 
         End
         'Application.Exit()
@@ -216,6 +218,11 @@ Public Class FormNovaInit
             '遍历屏幕
             'Dim tmpIndex As Integer = 0
             For Each i In LEDScreenInfoList(LEDScreenId).ScanBoardInfoList
+                '接收卡留空则不添加
+                If i.SenderIndex = &HFF Then
+                    Continue For
+                End If
+
                 sysInfo.ScreenList(LEDScreenId).SenderList.Add(i.SenderIndex)
 
                 'Dim itm As ListViewItem = ListView3.Items.Add($"{LEDScreenIndex} {i.SenderIndex}", 0)

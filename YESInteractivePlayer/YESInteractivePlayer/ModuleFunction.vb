@@ -3,14 +3,14 @@ Imports System.Security.Cryptography
 Imports System.Text
 
 Module ModuleFunction
-    ''' <summary>
-    ''' 输出日志
-    ''' </summary>
-    Public Sub Putlog(str As String)
-        Dim tmp As StreamWriter = New StreamWriter($"logs\{Format(Now(), "yyyyMMdd")}.log", True)
-        tmp.WriteLine(Format(Now(), "[yyyy-MM-dd HH:mm:ss] ") & str)
-        tmp.Close()
-    End Sub
+    '''' <summary>
+    '''' 输出日志
+    '''' </summary>
+    'Public Sub Putlog(str As String)
+    '    Dim tmp As StreamWriter = New StreamWriter($"logs\{Format(Now(), "yyyyMMdd")}.log", True)
+    '    tmp.WriteLine(Format(Now(), "[yyyy-MM-dd HH:mm:ss] ") & str)
+    '    tmp.Close()
+    'End Sub
 
     ''' <summary>
     ''' 获取字符串MD5值
@@ -59,7 +59,7 @@ Module ModuleFunction
                     Dim tmpstr2() As String = sysInfo.LanguageTable.Item(c.Text)
                     c.Text = tmpstr2(sysInfo.SelectLanguageId)
                 Catch ex As Exception
-                    Putlog($"{parent.GetType.ToString} {c.Text} 更改显示语言异常:{ex.Message}")
+                    'Putlog($"{parent.GetType.ToString} {c.Text} 更改显示语言异常:{ex.Message}")
                 End Try
 
                 For Each i In c.Controls

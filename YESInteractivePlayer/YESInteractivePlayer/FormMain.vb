@@ -45,9 +45,9 @@ Public Class FormMain
         Me.Text = $"{My.Application.Info.ProductName}" ' [{txtTmp.ReadLine()}]"
 
         System.IO.Directory.CreateDirectory("./data")
-        System.IO.Directory.CreateDirectory("./logs")
+        'System.IO.Directory.CreateDirectory("./logs")
 
-        Putlog("启动 " & Application.ExecutablePath)
+        'Putlog("启动 " & Application.ExecutablePath)
 
         '反序列化
         If System.IO.File.Exists("./data/setting.db") Then
@@ -140,8 +140,8 @@ Public Class FormMain
         sysInfo.ZoomTmpDenominator = If(sysInfo.ZoomTmpDenominator, sysInfo.ZoomTmpDenominator, 1)
         sysInfo.TouchSensitivity = If(sysInfo.TouchSensitivity, sysInfo.TouchSensitivity, 1)
         sysInfo.ClickValidNums = If(sysInfo.ClickValidNums, sysInfo.ClickValidNums, 1)
-        sysInfo.ResetTemp = If(sysInfo.ResetTemp, sysInfo.ResetTemp, 1)
-        sysInfo.ResetSec = If(sysInfo.ResetSec, sysInfo.ResetSec, 1)
+        sysInfo.ResetTemp = sysInfo.ResetTemp
+        sysInfo.ResetSec = sysInfo.ResetSec
 
         Me.Location = sysInfo.StartLocation
         If Me.Location.X > Screen.PrimaryScreen.Bounds.Width Or
@@ -174,6 +174,12 @@ Public Class FormMain
 
         '设置显示语言
         SetControlslanguage(Me)
+
+        sysInfo.logger = New Wangk.Tools.Logger With {
+            .writelevel = Wangk.Tools.Loglevel.Level_DEBUG,
+            .saveDaysMax = 30
+        }
+        sysInfo.logger.Init()
     End Sub
 
     '''' <summary>
@@ -234,6 +240,19 @@ Public Class FormMain
             End With
         Next
 
+        '重建点击历史缓存[20180310]
+        For i As Integer = 0 To sysInfo.ScreenList.Length - 1
+            If Not sysInfo.ScreenList(i).ExistFlage Then
+                Continue For
+            End If
+
+            With sysInfo.ScreenList(i)
+                '创建上次点击状态缓存
+                ReDim .ClickHistoryArray((.DefaultHeight \ .DefaultScanBoardHeight) * .TouchPieceRowsNum,
+                                         (.DefaultWidth \ .DefaultScanBoardWidth) * .TouchPieceColumnsNum)
+            End With
+        Next
+
         '清空控制器连接标记
         For i As Integer = 0 To sysInfo.SenderList.Length - 1
             sysInfo.SenderList(i).Link = False
@@ -246,6 +265,10 @@ Public Class FormMain
                 End If
 
                 For Each k In sysInfo.ScreenList(j).SenderList
+                    If k >= sysInfo.SenderList.Length Then
+                        Continue For
+                    End If
+
                     sysInfo.SenderList(k).Link = True
                 Next
             Next
@@ -388,6 +411,8 @@ Public Class FormMain
         sendByte(4) = value
 
         sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+
+        Thread.Sleep(100)
     End Sub
 
     ''' <summary>
@@ -402,6 +427,8 @@ Public Class FormMain
         sendByte(4) = value
 
         sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+
+        Thread.Sleep(100)
     End Sub
 
     ''' <summary>
@@ -437,6 +464,9 @@ Public Class FormMain
         ToolStripButton1.Text = GetLanguage("连接控制器")
         'ToolStripButton1.BackColor = Color.FromArgb(&H0, &HE3, &HB)
         ToolStripButton1.Image = My.Resources.connect
+
+        ToolStripDropDownButton2.Image = My.Resources.ServerFault
+
         Timer1.Stop()
     End Sub
 
@@ -558,6 +588,33 @@ Public Class FormMain
     End Sub
 
     ''' <summary>
+    ''' 检测相邻触发数是否大于等于抗干扰数
+    ''' </summary>
+    Private Function CheckAdjacencyPieceNums(ScreenId As Integer, Y As Integer, X As Integer) As Boolean
+        '忽略自身
+        Dim checkNums As Integer = -1
+
+        For i = -1 To 1
+            For j = -1 To 1
+
+                '屏幕边缘则跳过
+                If X = 0 Or
+                    Y = 0 Or
+                    Y = sysInfo.ScreenList(ScreenId).ClickHistoryArray.GetLength(0) - 1 Or
+                    X = sysInfo.ScreenList(ScreenId).ClickHistoryArray.GetLength(1) - 1 Then
+                    Continue For
+                End If
+
+                If sysInfo.ScreenList(ScreenId).ClickHistoryArray(Y + i, X + j) = &H80 Then
+                    checkNums += 1
+                End If
+            Next
+        Next
+
+        Return If(checkNums >= sysInfo.ClickValidNums, True, False)
+    End Function
+
+    ''' <summary>
     ''' 检测线程
     ''' </summary>
     Private Sub CommunicWorkThread(ByVal senderId As Integer)
@@ -604,9 +661,11 @@ Public Class FormMain
                 '接收数据
                 Dim bytesRec As Integer = sysInfo.SenderList(senderId).CliSocket.Receive(bytes)
 
-            Catch ex As Exception
+            Catch ex As SocketException
+                sysInfo.logger.LogThis("请求接收传感器数据数据", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
                 exceptionNums += 1
                 Continue Do
+            Catch ex As Exception
             End Try
 
             'Dim asd As New Stopwatch
@@ -614,28 +673,29 @@ Public Class FormMain
             '向发送卡 请求发送传感器数据数据
             Try
                 '向发送卡发送数据
-                Dim bytes(1028 - 1) As Byte
-                Dim tmpstr As String = "55d50905000000000400"
-                Dim sendbytes(10 - 1) As Byte
-                For i As Integer = 0 To tmpstr.Length \ 2 - 1
-                    sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
+                Dim bytes2(1028 - 1) As Byte
+                Dim tmpstr2 As String = "55d50905000000000400"
+                Dim sendbytes2(10 - 1) As Byte
+                For i As Integer = 0 To tmpstr2.Length \ 2 - 1
+                    sendbytes2(i) = Val("&H" & tmpstr2(i * 2)) * 16 + Val("&H" & tmpstr2(i * 2 + 1))
                 Next i
                 '发送到发送卡数据
-                Dim bytesSend As Integer = sysInfo.SenderList(senderId).CliSocket.Send(sendbytes)
+                Dim bytesSend2 As Integer = sysInfo.SenderList(senderId).CliSocket.Send(sendbytes2)
 
                 '诺瓦每次只发送1K数据，16K数据分16次发送
                 For i As Integer = 0 To 16 - 1
 
-                    Dim bytesRec As Integer = sysInfo.SenderList(senderId).CliSocket.Receive(bytes)
+                    Dim bytesRec2 As Integer = sysInfo.SenderList(senderId).CliSocket.Receive(bytes2)
                     'TextBox5.Text = ""
                     '分析接收到的数据
                     For j As Integer = 4 To 1027 Step 32
                         '有效数据头
-                        If bytes(j + 0) <> &H55 Then
+                        If bytes2(j + 0) <> &H55 Then
                             Continue For
                         End If
 
-                        If bytes(j + 1) > 4 Then
+                        '网口号大于4则丢弃
+                        If bytes2(j + 1) > 4 Then
                             Continue For
                         End If
 
@@ -646,17 +706,18 @@ Public Class FormMain
                         End If
 
                         '查找接收卡位置[由像素改为索引]
-                        If sysInfo.ScanBoardTable.Item($"{senderId}-{bytes(j + 1)}-{(bytes(j + 2) * 256 + bytes(j + 3))}") Is Nothing Then
+                        If sysInfo.ScanBoardTable.Item($"{senderId}-{bytes2(j + 1)}-{(bytes2(j + 2) * 256 + bytes2(j + 3))}") Is Nothing Then
                             Continue For
                         End If
-                        Dim tmp As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{senderId}-{bytes(j + 1)}-{(bytes(j + 2) * 256 + bytes(j + 3))}")
+                        Dim tmp As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{senderId}-{bytes2(j + 1)}-{(bytes2(j + 2) * 256 + bytes2(j + 3))}")
 
                         '计算总点击块
                         Dim tmpClickValidSum As Integer = 0
-                        For k = 0 To sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum * sysInfo.ScreenList(tmp.ScreenId).TouchPieceColumnsNum - 1
-                            tmpClickValidSum = tmpClickValidSum + If(bytes(j + 4 + k) And &H80, 1, 0)
+                        For k = 0 To 4 * 4 - 1
+                            tmpClickValidSum = tmpClickValidSum + If(bytes2(j + 4 + k) And &H80, 1, 0)
                         Next
 
+                        ''If tmpClickValidSum < 1 And
                         If tmpClickValidSum < sysInfo.ClickValidNums And
                             sysInfo.DisplayMode = 0 Then
                             '互动模式下抗干扰才启用
@@ -665,24 +726,46 @@ Public Class FormMain
 
                         'Debug.WriteLine(tmpClickValidSum)
 
-                        For k As Integer = 0 To sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum - 1
-                            For l As Integer = 0 To sysInfo.ScreenList(tmp.ScreenId).TouchPieceColumnsNum - 1
+                        For k As Integer = 0 To 4 - 1 'sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum - 1
+                            If k >= sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum Then
+                                Continue For
+                            End If
+
+                            For l As Integer = 0 To 4 - 1 'sysInfo.ScreenList(tmp.ScreenId).TouchPieceColumnsNum - 1
+                                If l >= sysInfo.ScreenList(tmp.ScreenId).TouchPieceColumnsNum Then
+                                    Continue For
+                                End If
 
                                 If sysInfo.DisplayMode = 0 Or
-                                        sysInfo.DisplayMode = 1 Then
+                                                sysInfo.DisplayMode = 1 Then
                                     '互动或测试时启用
-                                    sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = bytes(j + k * sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum + l) And &H80
+                                    'Static id As Integer = 0
 
-                                    If (bytes(j + 4 + k * sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum + l) And &H80) <> &H80 Then
+                                    'sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = bytes(j + k * sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum + l) And &H80
+                                    'sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = bytes2(j + k * 4 + l) And &H80
+
+                                    '未被点击
+                                    If (bytes2(j + 4 + k * 4 + l) And &H80) <> &H80 Then
                                         sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = 0
+
                                         Continue For
                                     End If
 
+                                    '被点击过
                                     If sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) Then
                                         sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
 
                                         Continue For
                                     End If
+
+                                    sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
+
+                                    'Debug.WriteLine($"new {id} x:{tmp.X} + {l} y:{tmp.Y} + {k}")
+                                    'id += 1
+
+                                    'If Not CheckAdjacencyPieceNums(tmp.ScreenId, tmp.Y + k, tmp.X + l) Then
+                                    '    Continue For
+                                    'End If
                                 End If
 
                                 sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
@@ -691,7 +774,7 @@ Public Class FormMain
                                     MousesimulationClick(tmp.ScreenId,
                                                          tmp.X + l,
                                                          tmp.Y + k,
-                                                         bytes(j + 4 + k * sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum + l))
+                                                         bytes2(j + 4 + k * 4 + l))
                             Next
                         Next
 
@@ -699,8 +782,11 @@ Public Class FormMain
                 Next
 
                 readNum += 1
-            Catch ex As Exception
+
+            Catch ex As SocketException
+                sysInfo.logger.LogThis("接收传感器数据数据", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
                 exceptionNums += 1
+            Catch ex As Exception
             End Try
 
             Thread.Sleep(sysInfo.InquireTimeSec)

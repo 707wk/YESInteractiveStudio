@@ -736,7 +736,7 @@ Public Class FormOption
         Dim lastPortIndex As Integer = -1
         Dim lastX As Integer = 0
         Dim lastY As Integer = 0
-        Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        'Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 
         mpen.Color = Color.Red
         mpen.Width = 3
@@ -744,10 +744,10 @@ Public Class FormOption
             Dim tmpX As Integer = (dataRow(i).Item(4) \ sysInfo.ScreenList(selectScreenId).TouchPieceColumnsNum) * 21 + 10
             Dim tmpY As Integer = (dataRow(i).Item(5) \ sysInfo.ScreenList(selectScreenId).TouchPieceRowsNum) * 21 + 10
 
-            For k As Integer = 0 To 6 - 1
-                Debug.Write($"{dataRow(i).Item(k)} ")
-            Next
-            Debug.WriteLine("")
+            'For k As Integer = 0 To 6 - 1
+            '    Debug.Write($"{dataRow(i).Item(k)} ")
+            'Next
+            'Debug.WriteLine("")
 
             If dataRow(i).Item(1) = lastSenderIndex And dataRow(i).Item(2) = lastPortIndex Then
                 g.DrawLine(mpen, lastX, lastY, tmpX, tmpY)
@@ -1014,7 +1014,7 @@ Public Class FormOption
             End If
 
             If i = 10 Then
-                Putlog($"升级指令发送失败")
+                'Putlog($"升级指令发送失败")
                 MsgBox($"升级指令发送失败",
                            MsgBoxStyle.Information,
                            "升级")
@@ -1060,7 +1060,7 @@ Public Class FormOption
                 End If
 
                 If i = 10 Then
-                    Putlog($"第 {sendIndex} 包升级数据发送失败")
+                    'Putlog($"第 {sendIndex} 包升级数据发送失败")
                     re.Close()
                     fs.Close()
                     MsgBox($"升级数据发送失败",

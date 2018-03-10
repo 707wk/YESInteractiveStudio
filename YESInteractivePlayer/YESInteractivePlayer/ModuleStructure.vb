@@ -259,6 +259,11 @@ Module ModuleStructure
         <NonSerialized()>
         Dim LinkFlage As Boolean
 
+        ''' <summary>
+        ''' 日志记录
+        ''' </summary>
+        <NonSerialized()>
+        Dim logger As Wangk.Tools.Logger
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '硬件相关变量
         ''' <summary>
