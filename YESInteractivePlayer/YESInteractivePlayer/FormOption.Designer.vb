@@ -102,7 +102,6 @@ Partial Class FormOption
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
         Me.ListView1 = New System.Windows.Forms.ListView()
@@ -848,7 +847,6 @@ Partial Class FormOption
         'TabPage6
         '
         Me.TabPage6.Controls.Add(Me.GroupBox15)
-        Me.TabPage6.Controls.Add(Me.Button2)
         Me.TabPage6.Controls.Add(Me.Button1)
         Me.TabPage6.Controls.Add(Me.GroupBox14)
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
@@ -929,15 +927,6 @@ Partial Class FormOption
         Me.Label13.TabIndex = 3
         Me.Label13.Text = "文件:"
         '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(288, 52)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(100, 23)
-        Me.Button2.TabIndex = 2
-        Me.Button2.Text = "查询复位次数"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(288, 23)
@@ -972,12 +961,12 @@ Partial Class FormOption
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.删除ToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(99, 26)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(101, 26)
         '
         '删除ToolStripMenuItem
         '
         Me.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem"
-        Me.删除ToolStripMenuItem.Size = New System.Drawing.Size(98, 22)
+        Me.删除ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.删除ToolStripMenuItem.Text = "删除"
         '
         'FormOption
@@ -1104,7 +1093,6 @@ Partial Class FormOption
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents Button8 As Button
     Friend WithEvents Label13 As Label
-    Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents Button10 As Button
     Friend WithEvents Label14 As Label

@@ -41,8 +41,11 @@ Public Class FormMain
         'checkdog()
 
         '读取最后编译日期
-        Dim txtTmp As System.IO.TextReader = System.IO.File.OpenText(".\data\CreationDate.ini")
-        Me.Text = $"{My.Application.Info.ProductName}" ' [{txtTmp.ReadLine()}]"
+        'Dim txtTmp As System.IO.TextReader = System.IO.File.OpenText(".\data\CreationDate.ini")
+        With My.Application.Info
+            '版本号每修改一次加1
+            Me.Text = $"{ .ProductName} V{ .Version.ToString}"
+        End With
 
         System.IO.Directory.CreateDirectory("./data")
         'System.IO.Directory.CreateDirectory("./logs")
@@ -60,7 +63,7 @@ Public Class FormMain
                 MsgBox($"配置文件读取异常:{ex.Message}",
                        MsgBoxStyle.Information,
                        "读取配置")
-                'End
+                End
                 'Application.Exit()
                 '打开版本不同或错误的文件则无法读取
             End Try
@@ -168,9 +171,6 @@ Public Class FormMain
 
         '发送卡状态
         Timer1.Interval = 1000
-
-        '删除旧log文件
-        DeleteLog(30)
 
         '设置显示语言
         SetControlslanguage(Me)
@@ -282,7 +282,22 @@ Public Class FormMain
             ToolStripDropDownButton2.DropDownItems(i).Enabled = sysInfo.SenderList(i).Link
         Next
 
+        '等待播放窗体显示完毕
         Thread.Sleep(1000)
+
+        Try
+            For i As Integer = 0 To sysInfo.CurtainList.Count - 1
+                With sysInfo.CurtainList.Item(i)
+                    '更新位置及大小
+                    .PlayDialog.SetLocation(.X, .Y, .Width, .Height)
+                End With
+            Next
+        Catch ex As Exception
+            '第一次显示播放窗体时尺寸未改变大小
+            '暂时用此办法解决
+        End Try
+
+        '将焦点移至主窗体
         Me.Activate()
     End Sub
 
@@ -480,23 +495,31 @@ Public Class FormMain
                 Exit Sub
             End If
 
-            '检测连接状态
-            For Each i In sysInfo.SenderList
-                With i
-                    If .Link = False Then
-                        Continue For
-                    End If
+            Try
+                '检测连接状态
+                For Each i In sysInfo.SenderList
+                    With i
+                        If .Link = False Then
+                            Continue For
+                        End If
 
-                    Dim ipStr As String = $"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)}"
-                    'ping 设备IP地址
-                    If My.Computer.Network.Ping(ipStr, 500) = False Then
-                        MsgBox($"{ipStr} 未能连通",
-                               MsgBoxStyle.Information,
-                               "连接")
-                        Exit Sub
-                    End If
-                End With
-            Next
+                        Dim ipStr As String = $"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)}"
+                        'ping 设备IP地址
+                        If My.Computer.Network.Ping(ipStr, 500) = False Then
+                            MsgBox($"{ipStr} 未能连通",
+                                   MsgBoxStyle.Information,
+                                   "连接")
+                            Exit Sub
+                        End If
+                    End With
+                Next
+            Catch ex As Exception
+                MsgBox($"连接异常:{ex.Message}",
+                                   MsgBoxStyle.Information,
+                                   "连接")
+                Exit Sub
+            End Try
+
 
             '建立与控制器的连接
             Try
@@ -509,8 +532,8 @@ Public Class FormMain
                         Dim ipStr As String = $"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)}"
 
                         .CliSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
-                            .SendTimeout = 1000,
-                            .ReceiveTimeout = 1000
+                            .SendTimeout = 200,
+                            .ReceiveTimeout = 200
                         }
                         '连接
                         .CliSocket.Connect(ipStr, 6000)
@@ -535,7 +558,7 @@ Public Class FormMain
                     End Try
                 Next
 
-                MsgBox($"控制器连接错误:{ex.Message}",
+                MsgBox($"控制器连接异常:{ex.Message}",
                        MsgBoxStyle.Information,
                        "连接")
                 Exit Sub
@@ -555,10 +578,14 @@ Public Class FormMain
                     Continue For
                 End If
 
-                With i
-                    .WorkThread.Abort()
-                    .CliSocket.Close()
-                End With
+                Try
+                    With i
+                        .WorkThread.Abort()
+                        .CliSocket.Close()
+                    End With
+                Catch ex As Exception
+                End Try
+
             Next
 
             '关闭复位功能
@@ -573,16 +600,16 @@ Public Class FormMain
     ''' <summary>
     ''' 异常时断开连接并提示
     ''' </summary>
-    Public Delegate Sub showExceptionCallback(ByVal nums As Integer)
-    Public Sub ShowException(ByVal nums As Integer)
+    Public Delegate Sub showExceptionCallback(ByVal lastErrorStr As String)
+    Public Sub ShowException(ByVal lastErrorStr As String)
         If Me.InvokeRequired Then
-            Me.Invoke(New showExceptionCallback(AddressOf ShowException), New Object() {nums})
+            Me.Invoke(New showExceptionCallback(AddressOf ShowException), New Object() {lastErrorStr})
             Exit Sub
         End If
 
         ToolStripButton1_Click(Nothing, Nothing)
 
-        MsgBox($"控制器已连续 {nums} 次未返回数据!",
+        MsgBox($"控制器连接异常:{lastErrorStr},请重启控制器",
                MsgBoxStyle.Information,
                Me.Text)
     End Sub
@@ -626,6 +653,8 @@ Public Class FormMain
         Dim exceptionNums As Integer = 0
         '每秒查询次数
         Dim readNum As Integer = 0
+        '最后一次异常信息
+        Dim lastErrorStr As String = Nothing
 
         Do
             '获取当前时间秒
@@ -639,7 +668,7 @@ Public Class FormMain
 
             '出现三次异常，进行提示，并且终止进程
             If exceptionNums > 3 Then
-                ShowException(exceptionNums)
+                ShowException(lastErrorStr)
                 Exit Sub
             End If
 
@@ -662,10 +691,14 @@ Public Class FormMain
                 Dim bytesRec As Integer = sysInfo.SenderList(senderId).CliSocket.Receive(bytes)
 
             Catch ex As SocketException
-                sysInfo.logger.LogThis("请求接收传感器数据数据", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
+                lastErrorStr = ex.Message
+                sysInfo.logger.LogThis("请求接收传感器数据异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
                 exceptionNums += 1
                 Continue Do
+            Catch ex As ThreadAbortException
+                '不记录终止异常
             Catch ex As Exception
+                sysInfo.logger.LogThis("请求传感器数据其他异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
             End Try
 
             'Dim asd As New Stopwatch
@@ -784,9 +817,13 @@ Public Class FormMain
                 readNum += 1
 
             Catch ex As SocketException
-                sysInfo.logger.LogThis("接收传感器数据数据", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
+                lastErrorStr = ex.Message
+                sysInfo.logger.LogThis("接收传感器数据数据通信异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
                 exceptionNums += 1
+            Catch ex As ThreadAbortException
+                '不记录终止异常
             Catch ex As Exception
+                sysInfo.logger.LogThis("接收传感器数据数据其他异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
             End Try
 
             Thread.Sleep(sysInfo.InquireTimeSec)

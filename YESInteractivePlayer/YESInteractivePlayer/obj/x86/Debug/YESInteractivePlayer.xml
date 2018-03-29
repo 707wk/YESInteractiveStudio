@@ -382,16 +382,6 @@ YESInteractivePlayer
  查询版本号 鼠标松开时
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormOption.Button2_Click(System.Object,System.EventArgs)">
- <summary>
- 查询复位次数 鼠标按下时
- </summary>
-</member>
-<member name="M:YESInteractivePlayer.FormOption.Button2_MouseUp(System.Object,System.Windows.Forms.MouseEventArgs)">
- <summary>
- 查询复位次数 鼠标松开时
- </summary>
-</member>
 <member name="M:YESInteractivePlayer.FormOption.GetScanBoardData(System.Int32,System.Int32)">
  <summary>
  获取接收卡数据
@@ -495,11 +485,6 @@ YESInteractivePlayer
 <member name="M:YESInteractivePlayer.ModuleFunction.GetMd5Hash(System.String)">
  <summary>
  获取字符串MD5值
- </summary>
-</member>
-<member name="M:YESInteractivePlayer.ModuleFunction.DeleteLog(System.Int32)">
- <summary>
- 删除多少天前的log文件
  </summary>
 </member>
 <member name="M:YESInteractivePlayer.ModuleFunction.SetControlslanguage(System.Windows.Forms.Control)">

@@ -550,6 +550,8 @@ Public Class FormOption
             Exit Sub
         End If
 
+        Label11.Text = DataGridView2.Rows.Count + 1
+
         Dim tmp As New CurtainInfo
 
         'tmp.id = maxCurtainId + 1
@@ -613,12 +615,12 @@ Public Class FormOption
 
         '删除时先关闭窗体
         Try
-            sysInfo.CurtainList.Item(DataGridView2.SelectedCells(0).RowIndex).PlayDialog.CloseDialog(True)
+            sysInfo.CurtainList.Item(CInt(Label11.Text) - 1).PlayDialog.CloseDialog(True)
         Catch ex As Exception
         End Try
 
-        sysInfo.CurtainList.RemoveAt(DataGridView2.SelectedCells(0).RowIndex)
-        DataGridView2.Rows.RemoveAt(DataGridView2.SelectedCells(0).RowIndex)
+        sysInfo.CurtainList.RemoveAt(CInt(Label11.Text) - 1)
+        DataGridView2.Rows.RemoveAt(CInt(Label11.Text) - 1)
         Label11.Text = "NULL"
     End Sub
 
@@ -630,7 +632,7 @@ Public Class FormOption
             Exit Sub
         End If
 
-        Dim tmp As CurtainInfo = sysInfo.CurtainList.Item(DataGridView2.SelectedCells(0).RowIndex)
+        Dim tmp As CurtainInfo = sysInfo.CurtainList.Item(CInt(Label11.Text) - 1)
         'tmp.id = maxCurtainId + 1
         'maxCurtainId += 1
         tmp.Remark = TextBox2.Text
@@ -658,10 +660,10 @@ Public Class FormOption
             End Try
         Next
 
-        sysInfo.CurtainList.Item(DataGridView2.SelectedCells(0).RowIndex) = tmp
-        'DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(0).Value = DataGridView2.Rows.Count + 1
-        DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(1).Value = tmp.Remark
-        DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(2).Value = $"{tmp.DefaultX},{tmp.DefaultY}"
+        sysInfo.CurtainList.Item(CInt(Label11.Text) - 1) = tmp
+        'DataGridView2.Rows(CInt(Label11.Text) - 1).Cells(0).Value = DataGridView2.Rows.Count + 1
+        DataGridView2.Rows(CInt(Label11.Text) - 1).Cells(1).Value = tmp.Remark
+        DataGridView2.Rows(CInt(Label11.Text)-1).Cells(2).Value = $"{tmp.DefaultX},{tmp.DefaultY}"
 
         Dim maxHeight = 0
         Dim maxWidth = 0
@@ -682,7 +684,7 @@ Public Class FormOption
         maxHeight = maxHeight / sysInfo.ZoomProportion
         maxWidth = maxWidth / sysInfo.ZoomProportion
 
-        DataGridView2.Rows(DataGridView2.SelectedCells(0).RowIndex).Cells(2).Value = $"{tmp.DefaultX},{tmp.DefaultY} [{maxWidth},{maxHeight}]"
+        DataGridView2.Rows(CInt(Label11.Text) - 1).Cells(2).Value = $"{tmp.DefaultX},{tmp.DefaultY} [{maxWidth},{maxHeight}]"
     End Sub
 
     ''' <summary>
@@ -705,6 +707,7 @@ Public Class FormOption
                    $"触摸灵敏度")
         End If
 
+        Thread.Sleep(100)
     End Sub
 
     ''' <summary>
@@ -810,31 +813,31 @@ Public Class FormOption
         Button1.Enabled = True
     End Sub
 
-    ''' <summary>
-    ''' 查询复位次数 鼠标按下时
-    ''' </summary>
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Button2.Enabled = False
+    '''' <summary>
+    '''' 查询复位次数 鼠标按下时
+    '''' </summary>
+    'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    '    Button2.Enabled = False
 
-        ListView1.Columns(3).Text = GetLanguage("复位次数")
-        ListView1.Items.Clear()
-        'TextBox4.Clear()
-    End Sub
+    '    ListView1.Columns(3).Text = GetLanguage("复位次数")
+    '    ListView1.Items.Clear()
+    '    'TextBox4.Clear()
+    'End Sub
 
-    ''' <summary>
-    ''' 查询复位次数 鼠标松开时
-    ''' </summary>
-    Private Sub Button2_MouseUp(sender As Object, e As MouseEventArgs) Handles Button2.MouseUp
-        If Button2.Enabled Then
-            Exit Sub
-        End If
+    '''' <summary>
+    '''' 查询复位次数 鼠标松开时
+    '''' </summary>
+    'Private Sub Button2_MouseUp(sender As Object, e As MouseEventArgs) Handles Button2.MouseUp
+    '    If Button2.Enabled Then
+    '        Exit Sub
+    '    End If
 
-        For i As Integer = 0 To sysInfo.SenderList.Length - 1
-            GetScanBoardData(i, 1)
-        Next
+    '    For i As Integer = 0 To sysInfo.SenderList.Length - 1
+    '        GetScanBoardData(i, 1)
+    '    Next
 
-        Button2.Enabled = True
-    End Sub
+    '    Button2.Enabled = True
+    'End Sub
 
     ''' <summary>
     ''' 获取接收卡数据
@@ -844,8 +847,8 @@ Public Class FormOption
         Select Case dataType
             Case 0
                 sendstr = "aadb0901"
-            Case 1
-                sendstr = "aadb0201"
+                'Case 1
+                '    sendstr = "aadb0201"
         End Select
 
         Dim sendByte(sendstr.Length \ 2 - 1) As Byte
@@ -856,18 +859,26 @@ Public Class FormOption
 
         sysInfo.MainClass.SetScanBoardData(senderId, 255, 65535, sendByte)
 
-        Thread.Sleep(50)
+        Thread.Sleep(500)
 
-        Dim cliSocket As Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
+        Dim cliSocket As Socket
+        Try
+            cliSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
             .SendTimeout = 500,
             .ReceiveTimeout = 500
-        }
-        '连接
-        With sysInfo.SenderList(senderId)
-            cliSocket.Connect(
-                String.Format("{0}.{1}.{2}.{3}", .IpDate(3), .IpDate(2), .IpDate(1), .IpDate(0)),
-                6000)
-        End With
+            }
+            '连接
+            With sysInfo.SenderList(senderId)
+                cliSocket.Connect(
+                    String.Format("{0}.{1}.{2}.{3}", .IpDate(3), .IpDate(2), .IpDate(1), .IpDate(0)),
+                    6000)
+            End With
+        Catch ex As Exception
+            MsgBox($"连接异常:{ex.Message}",
+                   MsgBoxStyle.Information,
+                   "获取接收卡数据")
+            Exit Sub
+        End Try
 
         Try
             Dim bytes(1028 - 1) As Byte
@@ -881,8 +892,11 @@ Public Class FormOption
             Dim bytesRec As Integer = cliSocket.Receive(bytes)
 
         Catch ex As Exception
+            'MsgBox($"发送读取指令异常:{ex.Message}",
+            '       MsgBoxStyle.Information,
+            '       "获取接收卡数据")
             'TextBox4.AppendText($"发送读取指令异常:{ex.Message}{vbCrLf}")
-            Exit Sub
+            'Exit Sub
         End Try
 
         'Dim asd As New Stopwatch

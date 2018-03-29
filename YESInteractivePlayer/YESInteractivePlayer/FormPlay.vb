@@ -131,6 +131,8 @@
 
         Me.Location = New Point(x, y)
         Me.Size = New Size(width, height)
+        Me.Width = width
+        Me.Height = height
         Me.gFont = New Font("宋体", Convert.ToSingle(12 / sysInfo.ZoomProportion), FontStyle.Regular)
 
         Me.gBack = Me.CreateGraphics
@@ -283,5 +285,9 @@
                                  sysInfo.ScreenList(screenId).Y + tY * touchPieceHeight + 1)
         End Select
 
+    End Sub
+
+    Private Sub FormPlay_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Debug.WriteLine($"w{Me.Width}h{Me.Height}")
     End Sub
 End Class

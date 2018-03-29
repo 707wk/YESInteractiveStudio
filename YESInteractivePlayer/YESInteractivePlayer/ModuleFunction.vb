@@ -31,20 +31,20 @@ Module ModuleFunction
         Return sBuilder.ToString()
     End Function
 
-    ''' <summary>
-    ''' 删除多少天前的log文件
-    ''' </summary>
-    Public Sub DeleteLog(saveDays As Integer)
-        Dim nowtime As DateTime = DateTime.Now
-        Dim files As String() = Directory.GetFiles("./logs")
-        For Each file In files
-            Dim f As FileInfo = New FileInfo(file)
-            Dim t As TimeSpan = nowtime - f.LastWriteTime
-            If (t.Days > saveDays) Then
-                f.Delete()
-            End If
-        Next
-    End Sub
+    '''' <summary>
+    '''' 删除多少天前的log文件
+    '''' </summary>
+    'Public Sub DeleteLog(saveDays As Integer)
+    '    Dim nowtime As DateTime = DateTime.Now
+    '    Dim files As String() = Directory.GetFiles("./logs")
+    '    For Each file In files
+    '        Dim f As FileInfo = New FileInfo(file)
+    '        Dim t As TimeSpan = nowtime - f.LastWriteTime
+    '        If (t.Days > saveDays) Then
+    '            f.Delete()
+    '        End If
+    '    Next
+    'End Sub
 
     ''' <summary>
     ''' 设置显示语言

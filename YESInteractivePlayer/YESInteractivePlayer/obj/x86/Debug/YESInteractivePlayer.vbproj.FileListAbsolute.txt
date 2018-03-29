@@ -16,7 +16,6 @@ C:\Users\wk950\Desktop\YESInteractivePlayer\YESInteractivePlayer\obj\x86\Debug\Y
 C:\Users\wk950\Desktop\YESInteractivePlayer\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.xml
 C:\Users\wk950\Desktop\YESInteractivePlayer\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.pdb
 C:\Users\wk950\Desktop\YESInteractivePlayer\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.vbprojResolveAssemblyReference.cache
-T:\YESInteractivePlayer\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.vbprojResolveAssemblyReference.cache
 T:\YESInteractivePlayer\YESInteractivePlayer\obj\x86\Debug\Interop.ShockwaveFlashObjects.dll
 T:\YESInteractivePlayer\YESInteractivePlayer\obj\x86\Debug\AxInterop.ShockwaveFlashObjects.dll
 T:\YESInteractivePlayer\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.vbproj.ResolveComReference.cache
