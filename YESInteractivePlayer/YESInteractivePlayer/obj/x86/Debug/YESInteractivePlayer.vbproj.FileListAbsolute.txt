@@ -33,3 +33,4 @@ T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractivePlayer.
 T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractivePlayer.exe
 T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractivePlayer.pdb
 T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractivePlayer.xml
+T:\YESInteractivePlayer\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.vbprojResolveAssemblyReference.cache
