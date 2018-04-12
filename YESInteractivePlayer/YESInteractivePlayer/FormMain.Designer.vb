@@ -56,7 +56,7 @@ Partial Class FormMain
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.ToolStripButton2})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(319, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(325, 25)
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -65,7 +65,7 @@ Partial Class FormMain
         Me.ToolStripButton1.Image = Global.YESInteractivePlayer.My.Resources.Resources.connect
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(87, 22)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(88, 22)
         Me.ToolStripButton1.Text = "连接控制器"
         '
         'ToolStripSeparator1
@@ -79,7 +79,7 @@ Partial Class FormMain
         Me.ToolStripButton2.Image = Global.YESInteractivePlayer.My.Resources.Resources.setting
         Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(51, 22)
+        Me.ToolStripButton2.Size = New System.Drawing.Size(52, 22)
         Me.ToolStripButton2.Text = "设置"
         '
         'ComboBox1
@@ -127,9 +127,9 @@ Partial Class FormMain
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton2})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 182)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 187)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(319, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(325, 22)
         Me.StatusStrip1.TabIndex = 12
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -273,7 +273,7 @@ Partial Class FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(319, 204)
+        Me.ClientSize = New System.Drawing.Size(325, 209)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button7)

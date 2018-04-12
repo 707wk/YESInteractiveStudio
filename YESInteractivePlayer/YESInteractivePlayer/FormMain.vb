@@ -40,13 +40,6 @@ Public Class FormMain
         '测试时关闭登陆验证
         'checkdog()
 
-        '读取最后编译日期
-        'Dim txtTmp As System.IO.TextReader = System.IO.File.OpenText(".\data\CreationDate.ini")
-        With My.Application.Info
-            '版本号每修改一次加1
-            Me.Text = $"{ .ProductName} V{ .Version.ToString}"
-        End With
-
         System.IO.Directory.CreateDirectory("./data")
         'System.IO.Directory.CreateDirectory("./logs")
 
@@ -174,6 +167,12 @@ Public Class FormMain
 
         '设置显示语言
         SetControlslanguage(Me)
+
+        '显示版本号
+        With My.Application.Info
+            '版本号每修改一次加1
+            Me.Text = $"{ GetLanguage(.ProductName)} V{ .Version.ToString}"
+        End With
 
         sysInfo.logger = New Wangk.Tools.Logger With {
             .writelevel = Wangk.Tools.Loglevel.Level_DEBUG,
@@ -520,6 +519,7 @@ Public Class FormMain
                 Exit Sub
             End Try
 
+            sysInfo.LinkFlage = True
 
             '建立与控制器的连接
             Try
@@ -557,7 +557,7 @@ Public Class FormMain
                     Catch ex3 As Exception
                     End Try
                 Next
-
+                sysInfo.LinkFlage = True
                 MsgBox($"控制器连接异常:{ex.Message}",
                        MsgBoxStyle.Information,
                        "连接")
@@ -569,9 +569,10 @@ Public Class FormMain
             SetResetSec(sysInfo.ResetSec)
 
             OnLinkCon()
-            sysInfo.LinkFlage = True
+
         Else
             '断开控制器
+            sysInfo.LinkFlage = False
 
             For Each i In sysInfo.SenderList
                 If i.Link = False Then
@@ -580,20 +581,21 @@ Public Class FormMain
 
                 Try
                     With i
-                        .WorkThread.Abort()
-                        .CliSocket.Close()
+                        .WorkThread.Join()
+                        '.WorkThread.Abort()
+                        '.CliSocket.Close()
                     End With
                 Catch ex As Exception
                 End Try
 
             Next
+            'Thread.Sleep(200)
 
             '关闭复位功能
             SetResetTemp(0)
             SetResetSec(0)
 
             OffLinkCon()
-            sysInfo.LinkFlage = False
         End If
     End Sub
 
@@ -656,7 +658,7 @@ Public Class FormMain
         '最后一次异常信息
         Dim lastErrorStr As String = Nothing
 
-        Do
+        Do While sysInfo.LinkFlage
             '获取当前时间秒
             nowsec = Now().Second
             If lastsec <> nowsec Then
@@ -696,6 +698,7 @@ Public Class FormMain
                 exceptionNums += 1
                 Continue Do
             Catch ex As ThreadAbortException
+                Debug.WriteLine($"stop read")
                 '不记录终止异常
             Catch ex As Exception
                 sysInfo.logger.LogThis("请求传感器数据其他异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
@@ -704,6 +707,7 @@ Public Class FormMain
             'Dim asd As New Stopwatch
             'asd.Start()
             '向发送卡 请求发送传感器数据数据
+            Dim qweasd As Integer = 0
             Try
                 '向发送卡发送数据
                 Dim bytes2(1028 - 1) As Byte
@@ -717,7 +721,7 @@ Public Class FormMain
 
                 '诺瓦每次只发送1K数据，16K数据分16次发送
                 For i As Integer = 0 To 16 - 1
-
+                    qweasd = i
                     Dim bytesRec2 As Integer = sysInfo.SenderList(senderId).CliSocket.Receive(bytes2)
                     'TextBox5.Text = ""
                     '分析接收到的数据
@@ -821,6 +825,7 @@ Public Class FormMain
                 sysInfo.logger.LogThis("接收传感器数据数据通信异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
                 exceptionNums += 1
             Catch ex As ThreadAbortException
+                Debug.WriteLine($"stop:{qweasd}")
                 '不记录终止异常
             Catch ex As Exception
                 sysInfo.logger.LogThis("接收传感器数据数据其他异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
@@ -828,6 +833,12 @@ Public Class FormMain
 
             Thread.Sleep(sysInfo.InquireTimeSec)
         Loop
+
+        Try
+            sysInfo.SenderList(senderId).CliSocket.Close()
+        Catch ex As Exception
+        End Try
+        Debug.WriteLine("end")
     End Sub
 
     '添加文件

@@ -111,8 +111,9 @@
         playFlash.Dock = DockStyle.Fill
         Me.Controls.Add(playFlash)
 
-        playFlash.SAlign = 1
-        playFlash.ScaleMode = 2
+        playFlash.AlignMode = 5 '对齐方式
+        playFlash.ScaleMode = 2 '缩放模式
+        playFlash.Quality = 0 '画面质量
         playFlash.BackgroundColor = 0
         playFlash.Movie = swfUrl
         movie = swfUrl
@@ -158,8 +159,9 @@
             playFlash.Dock = DockStyle.Fill
             Me.Controls.Add(playFlash)
 
-            playFlash.SAlign = 1
-            playFlash.ScaleMode = 2
+            playFlash.AlignMode = 5 '对齐方式
+            playFlash.ScaleMode = 2 '缩放模式
+            playFlash.Quality = 0 '画面质量
             playFlash.BackgroundColor = 0
             playFlash.Movie = movie
         End If
@@ -258,6 +260,15 @@
 
                 Dim ttp As Int32 = txp + (typ << 16)
                 Dim ttp2 As Int32 = txp + ((typ + 2) << 16)
+
+                '                Dim tmpStr =
+                '$"<invoke name=""pointActive"" returntype=""xml""><arguments><string>{txp}</string><string>{typ}</string></arguments></invoke>"
+                '                Debug.WriteLine("c")
+                '                Try
+                '                    playFlash.CallFunction(tmpStr)
+                '                Catch ex As Exception
+                '                    Debug.WriteLine(ex.Message)
+                '                End Try
 
                 '点击-移动-松开
                 PostMessage(playFlash.Handle,

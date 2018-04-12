@@ -160,13 +160,18 @@ Module ModuleFunction
     ''' 获取实际显示文本
     ''' </summary>
     Public Function GetLanguage(keyStr As String)
-        Dim tmpstr2() As String = sysInfo.LanguageTable.Item(keyStr)
-        If tmpstr2 Is Nothing Then
-            Return keyStr
-        ElseIf sysInfo.SelectLanguageId + 1 > tmpstr2.Length Then
-            Return keyStr
-        Else
-            Return tmpstr2(sysInfo.SelectLanguageId)
-        End If
+        Try
+            Dim tmpstr2() As String = sysInfo.LanguageTable.Item(keyStr)
+            If tmpstr2 Is Nothing Then
+                Return keyStr
+            ElseIf sysInfo.SelectLanguageId + 1 > tmpstr2.Length Then
+                Return keyStr
+            Else
+                Return tmpstr2(sysInfo.SelectLanguageId)
+            End If
+        Catch ex As Exception
+        End Try
+
+        Return "NULL"
     End Function
 End Module
