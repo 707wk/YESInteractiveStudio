@@ -1,4 +1,8 @@
-﻿Public Class FormPlay
+﻿Imports System.IO
+Imports System.Reflection
+Imports YESInteractiveSDK.ModuleStructure
+
+Public Class FormPlay
     '''' <summary>
     '''' 幕布ID
     '''' </summary>
@@ -26,13 +30,22 @@
     Private gFont As Font
 
     ''' <summary>
-    ''' 播放器控件
+    ''' Flash播放器控件
     ''' </summary>
-    Private playFlash As AxShockwaveFlashObjects.AxShockwaveFlash
+    Private playFlashControl As AxShockwaveFlashObjects.AxShockwaveFlash
+    ''' <summary>
+    ''' DLL播放器控件
+    ''' </summary>
+    Dim playDllControl As YESInteractiveSDK.IYESInterfaceSDK
+
     ''' <summary>
     ''' 正在播放的文件
     ''' </summary>
-    Private movie As String
+    Private mediaUrl As String
+    ''' <summary>
+    ''' 播放文件类型 0flash 1dll
+    ''' </summary>
+    Private filesType As Integer
 
     '发送消息
     Private Declare Function PostMessage Lib "user32" Alias _
@@ -90,33 +103,83 @@
     End Sub
 
     ''' <summary>
-    ''' 播放flash
+    ''' 播放Flash
     ''' </summary>
-    Public Delegate Sub playCallback(ByVal swfUrl As String)
-    Public Sub Play(ByVal swfUrl As String)
+    Private Sub playSwf()
+        '卸载旧文件
+        If playDllControl IsNot Nothing Then
+            playDllControl.FinalizeAddonFunc(Me)
+        End If
+
+        If playFlashControl IsNot Nothing Then
+            Me.Controls.Remove(playFlashControl)
+            playFlashControl.Dispose()
+            playFlashControl = Nothing
+        End If
+
+        playFlashControl = New AxShockwaveFlashObjects.AxShockwaveFlash
+        playFlashControl.Dock = DockStyle.Fill
+        Me.Controls.Add(playFlashControl)
+
+        playFlashControl.AlignMode = 5 '对齐方式
+        playFlashControl.ScaleMode = 2 '缩放模式
+        playFlashControl.Quality = 0 '画面质量
+        playFlashControl.BackgroundColor = 0
+        playFlashControl.Movie = mediaUrl
+    End Sub
+
+    ''' <summary>
+    ''' 播放DLL
+    ''' </summary>
+    Private Sub playDll()
+        '卸载旧文件
+        If playFlashControl IsNot Nothing Then
+            Me.Controls.Remove(playFlashControl)
+            playFlashControl.Dispose()
+            playFlashControl = Nothing
+        End If
+
+        If playDllControl IsNot Nothing Then
+            playDllControl.FinalizeAddonFunc(Me)
+        End If
+
+        Dim ass = Assembly.LoadFrom(mediaUrl)
+        Dim tp = ass.GetType($"{Path.GetFileNameWithoutExtension(mediaUrl)}.{Path.GetFileNameWithoutExtension(mediaUrl)}")
+        Dim obj = System.Activator.CreateInstance(tp)
+        playDllControl = CType(obj, YESInteractiveSDK.IYESInterfaceSDK)
+        playDllControl.InitAddonFunc(Me)
+    End Sub
+
+    ''' <summary>
+    ''' 播放文件
+    ''' </summary>
+    Public Delegate Sub playCallback(ByVal playUrl As String)
+    Public Sub Play(ByVal playUrl As String)
         If Me.InvokeRequired Then
-            Me.Invoke(New playCallback(AddressOf Play), New Object() {swfUrl})
+            Me.Invoke(New playCallback(AddressOf Play), New Object() {playUrl})
             Exit Sub
         End If
 
         'AxShockwaveFlash1.Show()
         'AxShockwaveFlash1.StopPlay()
-        If playFlash IsNot Nothing Then
-            Me.Controls.Remove(playFlash)
-            playFlash.Dispose()
-            playFlash = Nothing
-        End If
 
-        playFlash = New AxShockwaveFlashObjects.AxShockwaveFlash
-        playFlash.Dock = DockStyle.Fill
-        Me.Controls.Add(playFlash)
+        mediaUrl = playUrl
 
-        playFlash.AlignMode = 5 '对齐方式
-        playFlash.ScaleMode = 2 '缩放模式
-        playFlash.Quality = 0 '画面质量
-        playFlash.BackgroundColor = 0
-        playFlash.Movie = swfUrl
-        movie = swfUrl
+        Select Case System.IO.Path.GetExtension(playUrl)
+            Case ".swf"
+                playSwf()
+                filesType = 0
+            Case ".SWF"
+                playSwf()
+                filesType = 0
+            Case ".dll"
+                playDll()
+                filesType = 1
+            Case ".DLL"
+                playDll()
+                filesType = 1
+        End Select
+
         'AxShockwaveFlash1.Play()
     End Sub
 
@@ -154,16 +217,16 @@
         'playFlash.Show()
         'playFlash.Movie = playFlash.Movie
         'playFlash.Play()
-        If playFlash Is Nothing Then
-            playFlash = New AxShockwaveFlashObjects.AxShockwaveFlash
-            playFlash.Dock = DockStyle.Fill
-            Me.Controls.Add(playFlash)
+        If playFlashControl Is Nothing Then
+            playFlashControl = New AxShockwaveFlashObjects.AxShockwaveFlash
+            playFlashControl.Dock = DockStyle.Fill
+            Me.Controls.Add(playFlashControl)
 
-            playFlash.AlignMode = 5 '对齐方式
-            playFlash.ScaleMode = 2 '缩放模式
-            playFlash.Quality = 0 '画面质量
-            playFlash.BackgroundColor = 0
-            playFlash.Movie = movie
+            playFlashControl.AlignMode = 5 '对齐方式
+            playFlashControl.ScaleMode = 2 '缩放模式
+            playFlashControl.Quality = 0 '画面质量
+            playFlashControl.BackgroundColor = 0
+            playFlashControl.Movie = mediaUrl
         End If
 
 
@@ -181,10 +244,10 @@
 
         '隐藏播放控件
         'playFlash.Hide()
-        If playFlash IsNot Nothing Then
-            Me.Controls.Remove(playFlash)
-            playFlash.Dispose()
-            playFlash = Nothing
+        If playFlashControl IsNot Nothing Then
+            Me.Controls.Remove(playFlashControl)
+            playFlashControl.Dispose()
+            playFlashControl = Nothing
         End If
 
         Me.BackColor = Color.Black
@@ -226,10 +289,10 @@
         Me.Refresh()
         '隐藏播放控件
         'AxShockwaveFlash1.Hide()
-        If playFlash IsNot Nothing Then
-            Me.Controls.Remove(playFlash)
-            playFlash.Dispose()
-            playFlash = Nothing
+        If playFlashControl IsNot Nothing Then
+            Me.Controls.Remove(playFlashControl)
+            playFlashControl.Dispose()
+            playFlashControl = Nothing
         End If
 
         Me.BackColor = Color.Black
@@ -238,10 +301,10 @@
     ''' <summary>
     ''' 模拟鼠标点击消息
     ''' </summary>
-    Public Delegate Sub MousesimulationClickCallback(ByVal screenId As Integer, ByVal tX As Integer, ByVal tY As Integer, ByVal value As Integer)
-    Public Sub MousesimulationClick(ByVal screenId As Integer, ByVal tX As Integer, ByVal tY As Integer, ByVal value As Integer)
+    Public Delegate Sub MousesimulationClickCallback(ByVal screenId As Integer, ByVal tX As Integer, ByVal tY As Integer, ByVal value As Integer, ByVal active As PointActivity)
+    Public Sub MousesimulationClick(ByVal screenId As Integer, ByVal tX As Integer, ByVal tY As Integer, ByVal value As Integer, ByVal active As PointActivity)
         If Me.InvokeRequired Then
-            Me.Invoke(New MousesimulationClickCallback(AddressOf MousesimulationClick), New Object() {screenId, tX, tY, value})
+            Me.Invoke(New MousesimulationClickCallback(AddressOf MousesimulationClick), New Object() {screenId, tX, tY, value, active})
             Exit Sub
         End If
 
@@ -252,37 +315,54 @@
         'Debug.WriteLine($"{id} x:{tX} y:{tY}")
         'id += 1
 
+        '显示模式
         Select Case sysInfo.DisplayMode
             Case 0
                 '点击
                 Dim txp As Int16 = sysInfo.ScreenList(screenId).X + tX * touchPieceWidth + touchPieceWidth \ 2
                 Dim typ As Int32 = sysInfo.ScreenList(screenId).Y + tY * touchPieceHeight + touchPieceHeight \ 2
 
-                Dim ttp As Int32 = txp + (typ << 16)
-                Dim ttp2 As Int32 = txp + ((typ + 2) << 16)
+                Select Case filesType
+                    Case 0 'swf
+                        '不是按下事件则丢弃
+                        If active <> PointActivity.DOWN Then
+                            Exit Sub
+                        End If
 
-                '                Dim tmpStr =
-                '$"<invoke name=""pointActive"" returntype=""xml""><arguments><string>{txp}</string><string>{typ}</string></arguments></invoke>"
-                '                Debug.WriteLine("c")
-                '                Try
-                '                    playFlash.CallFunction(tmpStr)
-                '                Catch ex As Exception
-                '                    Debug.WriteLine(ex.Message)
-                '                End Try
+                        If Not sysInfo.SetCaptureFlage Then
+                            '使用接口
+                            Try
+                                playFlashControl.CallFunction($"<invoke name=""pointActive"" returntype=""xml""><arguments><string>{txp}</string><string>{typ}</string></arguments></invoke>")
+                            Catch ex As Exception
+                            End Try
+                        Else
+                            '捕获鼠标
+                            Dim ttp As Int32 = txp + (typ << 16)
+                            Dim ttp2 As Int32 = txp + ((typ + 2) << 16)
 
-                '点击-移动-松开
-                PostMessage(playFlash.Handle,
-                            WM_LBUTTONDOWN,
-                            0,
-                            ttp)
-                PostMessage(playFlash.Handle,
-                            WM_MOUSEMOVE,
-                            0,
-                            ttp2)
-                PostMessage(playFlash.Handle,
-                            WM_LBUTTONUP,
-                            0,
-                            ttp)
+                            '点击-移动 - 松开
+                            PostMessage(playFlashControl.Handle,
+                                    WM_LBUTTONDOWN,
+                                    0,
+                                    ttp)
+                            PostMessage(playFlashControl.Handle,
+                                    WM_MOUSEMOVE,
+                                    0,
+                                    ttp2)
+                            PostMessage(playFlashControl.Handle,
+                                    WM_LBUTTONUP,
+                                    0,
+                                    ttp)
+                        End If
+
+                    Case 1 'dll
+                        Dim tmpPoint As PointInfo
+                        tmpPoint.X = txp
+                        tmpPoint.Y = typ
+                        tmpPoint.Activity = active
+                        playDllControl.PointActive(tmpPoint)
+                End Select
+
 
             Case 1
                 '测试
@@ -298,7 +378,7 @@
 
     End Sub
 
-    Private Sub FormPlay_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        Debug.WriteLine($"w{Me.Width}h{Me.Height}")
-    End Sub
+    'Private Sub FormPlay_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+    '    Debug.WriteLine($"w{Me.Width}h{Me.Height}")
+    'End Sub
 End Class

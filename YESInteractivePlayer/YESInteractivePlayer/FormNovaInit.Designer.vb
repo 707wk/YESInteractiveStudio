@@ -33,7 +33,7 @@ Partial Class FormNovaInit
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox1.Size = New System.Drawing.Size(312, 75)
+        Me.TextBox1.Size = New System.Drawing.Size(302, 75)
         Me.TextBox1.TabIndex = 0
         '
         'BackgroundWorker1
@@ -43,7 +43,7 @@ Partial Class FormNovaInit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(312, 75)
+        Me.ClientSize = New System.Drawing.Size(302, 75)
         Me.Controls.Add(Me.TextBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FormNovaInit"

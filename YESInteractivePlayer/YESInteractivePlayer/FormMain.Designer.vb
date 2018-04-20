@@ -30,24 +30,19 @@ Partial Class FormMain
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripDropDownButton2 = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.ToolStrip1.SuspendLayout()
-        Me.StatusStrip1.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -56,7 +51,7 @@ Partial Class FormMain
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.ToolStripButton2})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(325, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(307, 25)
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -86,7 +81,7 @@ Partial Class FormMain
         '
         Me.ComboBox1.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(6, 16)
+        Me.ComboBox1.Location = New System.Drawing.Point(56, 20)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(46, 20)
         Me.ComboBox1.TabIndex = 2
@@ -96,25 +91,16 @@ Partial Class FormMain
         Me.ComboBox2.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.ItemHeight = 12
-        Me.ComboBox2.Location = New System.Drawing.Point(6, 16)
+        Me.ComboBox2.Location = New System.Drawing.Point(108, 20)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(148, 20)
+        Me.ComboBox2.Size = New System.Drawing.Size(186, 20)
         Me.ComboBox2.Sorted = True
         Me.ComboBox2.TabIndex = 5
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(6, 47)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(66, 23)
-        Me.Button1.TabIndex = 6
-        Me.Button1.Text = "播放"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(6, 51)
+        Me.CheckBox1.Location = New System.Drawing.Point(56, 55)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(48, 16)
         Me.CheckBox1.TabIndex = 11
@@ -124,48 +110,22 @@ Partial Class FormMain
         'Timer1
         '
         '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton2})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 187)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(325, 22)
-        Me.StatusStrip1.TabIndex = 12
-        Me.StatusStrip1.Text = "StatusStrip1"
-        '
-        'ToolStripDropDownButton2
-        '
-        Me.ToolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripDropDownButton2.Image = Global.YESInteractivePlayer.My.Resources.Resources.ServerFault
-        Me.ToolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripDropDownButton2.Name = "ToolStripDropDownButton2"
-        Me.ToolStripDropDownButton2.Size = New System.Drawing.Size(29, 20)
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.ComboBox1)
-        Me.GroupBox1.Controls.Add(Me.CheckBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(10, 100)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(65, 76)
-        Me.GroupBox1.TabIndex = 14
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "幕布"
-        '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Controls.Add(Me.CheckBox2)
+        Me.GroupBox2.Controls.Add(Me.ComboBox1)
         Me.GroupBox2.Controls.Add(Me.Button5)
-        Me.GroupBox2.Controls.Add(Me.Button2)
+        Me.GroupBox2.Controls.Add(Me.CheckBox1)
         Me.GroupBox2.Controls.Add(Me.ComboBox2)
         Me.GroupBox2.Controls.Add(Me.Button3)
         Me.GroupBox2.Controls.Add(Me.Button4)
-        Me.GroupBox2.Controls.Add(Me.Button1)
-        Me.GroupBox2.Location = New System.Drawing.Point(81, 100)
+        Me.GroupBox2.Location = New System.Drawing.Point(0, 100)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(230, 76)
+        Me.GroupBox2.Size = New System.Drawing.Size(307, 85)
         Me.GroupBox2.TabIndex = 15
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Flash"
+        Me.GroupBox2.Text = "控制面板"
         '
         'Button5
         '
@@ -173,20 +133,11 @@ Partial Class FormMain
         Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button5.FlatAppearance.BorderSize = 0
         Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.Location = New System.Drawing.Point(194, 47)
+        Me.Button5.Location = New System.Drawing.Point(268, 51)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(26, 23)
         Me.Button5.TabIndex = 11
         Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(78, 47)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(110, 23)
-        Me.Button2.TabIndex = 10
-        Me.Button2.Text = "播放所有屏幕"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
         '
@@ -195,7 +146,7 @@ Partial Class FormMain
         Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button3.FlatAppearance.BorderSize = 0
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Location = New System.Drawing.Point(160, 13)
+        Me.Button3.Location = New System.Drawing.Point(200, 48)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(28, 28)
         Me.Button3.TabIndex = 8
@@ -207,7 +158,7 @@ Partial Class FormMain
         Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button4.FlatAppearance.BorderSize = 0
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Location = New System.Drawing.Point(194, 13)
+        Me.Button4.Location = New System.Drawing.Point(234, 48)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(28, 28)
         Me.Button4.TabIndex = 9
@@ -219,7 +170,7 @@ Partial Class FormMain
         Me.Button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button9.Image = Global.YESInteractivePlayer.My.Resources.Resources.DisplayMode3
         Me.Button9.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button9.Location = New System.Drawing.Point(248, 35)
+        Me.Button9.Location = New System.Drawing.Point(237, 28)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(59, 56)
         Me.Button9.TabIndex = 0
@@ -233,7 +184,7 @@ Partial Class FormMain
         Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button8.Image = Global.YESInteractivePlayer.My.Resources.Resources.DisplayMode2
         Me.Button8.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button8.Location = New System.Drawing.Point(172, 35)
+        Me.Button8.Location = New System.Drawing.Point(162, 28)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(59, 56)
         Me.Button8.TabIndex = 0
@@ -247,7 +198,7 @@ Partial Class FormMain
         Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button7.Image = Global.YESInteractivePlayer.My.Resources.Resources.DisplayMode1
         Me.Button7.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button7.Location = New System.Drawing.Point(96, 35)
+        Me.Button7.Location = New System.Drawing.Point(87, 28)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(59, 56)
         Me.Button7.TabIndex = 0
@@ -261,7 +212,7 @@ Partial Class FormMain
         Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button6.Image = Global.YESInteractivePlayer.My.Resources.Resources.DisplayMode0
         Me.Button6.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button6.Location = New System.Drawing.Point(20, 35)
+        Me.Button6.Location = New System.Drawing.Point(14, 28)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(59, 56)
         Me.Button6.TabIndex = 0
@@ -269,18 +220,35 @@ Partial Class FormMain
         Me.Button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.Button6.UseVisualStyleBackColor = True
         '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(108, 55)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(72, 16)
+        Me.CheckBox2.TabIndex = 12
+        Me.CheckBox2.Text = "捕获鼠标"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 23)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(29, 12)
+        Me.Label1.TabIndex = 13
+        Me.Label1.Text = "幕布"
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(325, 209)
+        Me.ClientSize = New System.Drawing.Size(307, 184)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.ToolStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -290,11 +258,8 @@ Partial Class FormMain
         Me.Text = "FormMain"
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
-        Me.StatusStrip1.ResumeLayout(False)
-        Me.StatusStrip1.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -304,20 +269,17 @@ Partial Class FormMain
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents Button1 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents StatusStrip1 As StatusStrip
-    Friend WithEvents ToolStripDropDownButton2 As ToolStripDropDownButton
     Friend WithEvents ToolStripButton2 As ToolStripButton
-    Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents Button2 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Button9 As Button
     Friend WithEvents Button8 As Button
     Friend WithEvents Button7 As Button
     Friend WithEvents Button6 As Button
+    Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents Label1 As Label
 End Class

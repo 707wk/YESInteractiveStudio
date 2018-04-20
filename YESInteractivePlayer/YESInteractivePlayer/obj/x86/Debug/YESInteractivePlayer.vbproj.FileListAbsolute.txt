@@ -33,4 +33,17 @@ T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractivePlayer.
 T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractivePlayer.exe
 T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractivePlayer.pdb
 T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractivePlayer.xml
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\Wangk.Resource.dll
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\Wangk.Tools.dll
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\Wangk.Resource.pdb
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\Wangk.Resource.xml
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\Wangk.Tools.pdb
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\Wangk.Tools.xml
+T:\YESInteractivePlayer\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.vbproj.CopyComplete
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\Wangk.Hash.dll
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\Wangk.Hash.pdb
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\Wangk.Hash.xml
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractiveSDK.dll
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractiveSDK.pdb
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractiveSDK.xml
 T:\YESInteractivePlayer\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.vbprojResolveAssemblyReference.cache

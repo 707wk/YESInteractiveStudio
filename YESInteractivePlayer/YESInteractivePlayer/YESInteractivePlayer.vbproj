@@ -133,9 +133,20 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="Wangk.Hash">
+      <HintPath>..\..\WangkNamespace\Wangk.Hash\bin\Debug\Wangk.Hash.dll</HintPath>
+    </Reference>
+    <Reference Include="Wangk.Resource">
+      <HintPath>..\..\WangkNamespace\Wangk.Resource\bin\Debug\Wangk.Resource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Wangk.Tools">
       <HintPath>..\..\WangkNamespace\Wangk.Tools\bin\Debug\Wangk.Tools.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="YESInteractiveSDK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\YESInteractiveSDK\bin\x86\Debug\YESInteractiveSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

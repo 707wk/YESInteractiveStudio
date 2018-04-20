@@ -207,14 +207,14 @@ YESInteractivePlayer
  清空播放列表
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormMain.Button1_Click(System.Object,System.EventArgs)">
+<member name="F:YESInteractivePlayer.FormMain.LastSelectPlayFile">
  <summary>
- 播放
+ 上次选中播放文件名
  </summary>
 </member>
-<member name="M:YESInteractivePlayer.FormMain.Button2_Click(System.Object,System.EventArgs)">
+<member name="M:YESInteractivePlayer.FormMain.ComboBox2_DropDownClosed(System.Object,System.EventArgs)">
  <summary>
- 播放至所有屏幕
+ 播放
  </summary>
 </member>
 <member name="M:YESInteractivePlayer.FormMain.Button6_Click(System.Object,System.EventArgs)">
@@ -241,6 +241,14 @@ YESInteractivePlayer
  <summary>
  隐藏播放窗体
  </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormMain.CheckBox2_CheckedChanged(System.Object,System.EventArgs)">
+ <summary>
+ 捕获鼠标
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormMain.Timer1_Tick(System.Object,System.EventArgs)">
+ 定时刷新发送卡状态
 </member>
 <member name="M:YESInteractivePlayer.FormNovaInit.TextBox1_TextChanged(System.Object,System.EventArgs)">
  <summary>
@@ -437,14 +445,24 @@ YESInteractivePlayer
  背景字体
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.FormPlay.playFlash">
+<member name="F:YESInteractivePlayer.FormPlay.playFlashControl">
  <summary>
- 播放器控件
+ Flash播放器控件
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.FormPlay.movie">
+<member name="F:YESInteractivePlayer.FormPlay.playDllControl">
+ <summary>
+ DLL播放器控件
+ </summary>
+</member>
+<member name="F:YESInteractivePlayer.FormPlay.mediaUrl">
  <summary>
  正在播放的文件
+ </summary>
+</member>
+<member name="F:YESInteractivePlayer.FormPlay.filesType">
+ <summary>
+ 播放文件类型 0flash 1dll
  </summary>
 </member>
 <member name="T:YESInteractivePlayer.FormPlay.closeDialogCallback">
@@ -452,9 +470,19 @@ YESInteractivePlayer
  关闭窗体
  </summary>
 </member>
+<member name="M:YESInteractivePlayer.FormPlay.playSwf">
+ <summary>
+ 播放Flash
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormPlay.playDll">
+ <summary>
+ 播放DLL
+ </summary>
+</member>
 <member name="T:YESInteractivePlayer.FormPlay.playCallback">
  <summary>
- 播放flash
+ 播放文件
  </summary>
 </member>
 <member name="T:YESInteractivePlayer.FormPlay.setLocationCallback">
@@ -480,21 +508,6 @@ YESInteractivePlayer
 <member name="T:YESInteractivePlayer.FormPlay.MousesimulationClickCallback">
  <summary>
  模拟鼠标点击消息
- </summary>
-</member>
-<member name="M:YESInteractivePlayer.ModuleFunction.GetMd5Hash(System.String)">
- <summary>
- 获取字符串MD5值
- </summary>
-</member>
-<member name="M:YESInteractivePlayer.ModuleFunction.SetControlslanguage(System.Windows.Forms.Control)">
- <summary>
- 设置显示语言
- </summary>
-</member>
-<member name="M:YESInteractivePlayer.ModuleFunction.GetLanguage(System.String)">
- <summary>
- 获取实际显示文本
  </summary>
 </member>
 <member name="M:YESInteractivePlayer.ModuleSmartTimeApp.SmartTimeGetLastError">
@@ -857,6 +870,11 @@ YESInteractivePlayer
  日志记录
  </summary>
 </member>
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.Language">
+ <summary>
+ 切换语言类
+ </summary>
+</member>
 <member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.ScanBoardTable">
  <summary>
  接收卡索引表 key发送卡id-网口id-接收卡id value ScanBoardInfo
@@ -917,11 +935,6 @@ YESInteractivePlayer
  语言类型 0中文 1English
  </summary>
 </member>
-<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.LanguageTable">
- <summary>
- 语言包索引
- </summary>
-</member>
 <member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.DisplayMode">
  <summary>
  显示模式
@@ -954,6 +967,11 @@ YESInteractivePlayer
 <member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.InquireTimeSec">
  <summary>
  查询时间间隔 ms
+ </summary>
+</member>
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.SetCaptureFlage">
+ <summary>
+ 捕获鼠标 默认使用接口
  </summary>
 </member>
 <member name="F:YESInteractivePlayer.ModuleVar.sysInfo">

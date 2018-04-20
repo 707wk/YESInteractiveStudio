@@ -1,0 +1,10 @@
+T:\YESInteractivePlayer\YESInteractiveSDK\bin\Debug\YESInteractiveSDK.dll
+T:\YESInteractivePlayer\YESInteractiveSDK\bin\Debug\YESInteractiveSDK.pdb
+T:\YESInteractivePlayer\YESInteractiveSDK\bin\Debug\YESInteractiveSDK.xml
+T:\YESInteractivePlayer\YESInteractiveSDK\obj\Debug\YESInteractiveSDK.Resources.resources
+T:\YESInteractivePlayer\YESInteractiveSDK\obj\Debug\YESInteractiveSDK.vbproj.GenerateResource.cache
+T:\YESInteractivePlayer\YESInteractiveSDK\obj\Debug\YESInteractiveSDK.vbproj.CoreCompileInputs.cache
+T:\YESInteractivePlayer\YESInteractiveSDK\obj\Debug\YESInteractiveSDK.dll
+T:\YESInteractivePlayer\YESInteractiveSDK\obj\Debug\YESInteractiveSDK.xml
+T:\YESInteractivePlayer\YESInteractiveSDK\obj\Debug\YESInteractiveSDK.pdb
+T:\YESInteractivePlayer\YESInteractiveSDK\obj\Debug\YESInteractiveSDK.vbprojResolveAssemblyReference.cache

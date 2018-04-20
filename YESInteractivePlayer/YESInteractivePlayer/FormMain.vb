@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Net.Sockets
 Imports System.Threading
+Imports YESInteractiveSDK.ModuleStructure
 
 Public Class FormMain
     ''' <summary>
@@ -97,39 +98,14 @@ Public Class FormMain
                 ComboBox2.Items.Add(i)
             Next
 
-            If ComboBox2.Items.Count Then
-                ComboBox2.SelectedIndex = 0
-            End If
+            'If ComboBox2.Items.Count Then
+            '    ComboBox2.SelectedIndex = 0
+            'End If
         End If
 
         '加载语言包
-        sysInfo.LanguageTable = New Hashtable
-        Try
-            Dim IOsR As StreamReader = New StreamReader("./data/LanguageTable.ini")
-            Do
-                Dim tmpstr As String = IOsR.ReadLine
-                '判断数据合法性
-                If tmpstr Is Nothing Then
-                    Exit Do
-                End If
-
-                '判断数据个数
-                Dim tmpstr2() As String = tmpstr.Split("_")
-                If tmpstr2.Length < 2 Then
-                    Continue Do
-                End If
-
-                Dim textArray(tmpstr2.Length - 1 - 1) As String
-                For i As Integer = 0 To textArray.Length - 1
-                    textArray(i) = tmpstr2(i + 1)
-                Next
-
-                sysInfo.LanguageTable.Add(tmpstr2(0), textArray)
-            Loop
-        Catch ex As Exception
-            MsgBox($"语言包读取异常:{ex.Message}", MsgBoxStyle.Information, "加载语言包")
-            'Application.Exit()
-        End Try
+        sysInfo.Language = New Wangk.Resource.MultiLanguage
+        sysInfo.Language.SelectLanguageId = sysInfo.SelectLanguageId
 
         sysInfo.ZoomProportion = If(sysInfo.ZoomProportion, sysInfo.ZoomProportion, 1)
         sysInfo.ZoomTmpNumerator = If(sysInfo.ZoomTmpNumerator, sysInfo.ZoomTmpNumerator, 1)
@@ -138,6 +114,7 @@ Public Class FormMain
         sysInfo.ClickValidNums = If(sysInfo.ClickValidNums, sysInfo.ClickValidNums, 1)
         sysInfo.ResetTemp = sysInfo.ResetTemp
         sysInfo.ResetSec = sysInfo.ResetSec
+        sysInfo.InquireTimeSec = 20
 
         Me.Location = sysInfo.StartLocation
         If Me.Location.X > Screen.PrimaryScreen.Bounds.Width Or
@@ -166,12 +143,12 @@ Public Class FormMain
         Timer1.Interval = 1000
 
         '设置显示语言
-        SetControlslanguage(Me)
+        sysInfo.Language.SetControlslanguage(Me)
 
         '显示版本号
         With My.Application.Info
             '版本号每修改一次加1
-            Me.Text = $"{ GetLanguage(.ProductName)} V{ .Version.ToString}"
+            Me.Text = $"{ sysInfo.Language.GetLanguage(.ProductName)} V{ .Version.ToString}"
         End With
 
         sysInfo.logger = New Wangk.Tools.Logger With {
@@ -277,9 +254,9 @@ Public Class FormMain
             ComboBox1.SelectedIndex = 0
         End If
 
-        For i As Integer = 0 To sysInfo.SenderList.Length - 1
-            ToolStripDropDownButton2.DropDownItems(i).Enabled = sysInfo.SenderList(i).Link
-        Next
+        'For i As Integer = 0 To sysInfo.SenderList.Length - 1
+        '    ToolStripDropDownButton2.DropDownItems(i).Enabled = sysInfo.SenderList(i).Link
+        'Next
 
         '等待播放窗体显示完毕
         Thread.Sleep(1000)
@@ -305,10 +282,10 @@ Public Class FormMain
         Dim tmpDialog As New FormNovaInit
         tmpDialog.ShowDialog()
 
-        '加载发送卡列表
-        For i As Integer = 0 To sysInfo.SenderList.Length - 1
-            ToolStripDropDownButton2.DropDownItems.Add($"控制器{i}")
-        Next
+        ''加载发送卡列表
+        'For i As Integer = 0 To sysInfo.SenderList.Length - 1
+        '    ToolStripDropDownButton2.DropDownItems.Add($"控制器{i}")
+        'Next
 
         '显示幕布
         ShowCurtain()
@@ -353,7 +330,7 @@ Public Class FormMain
 
         DebugFlage = True
 
-        Button9.Text = GetLanguage("电容")
+        Button9.Text = sysInfo.Language.GetLanguage("电容")
     End Sub
 
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -458,7 +435,7 @@ Public Class FormMain
         Button6_Click(Nothing, Nothing)
 
         ToolStripButton2.Enabled = False
-        ToolStripButton1.Text = GetLanguage("断开连接")
+        ToolStripButton1.Text = sysInfo.Language.GetLanguage("断开连接")
         'ToolStripButton1.BackColor = Color.OrangeRed
         ToolStripButton1.Image = My.Resources.disconnect
         Timer1.Start()
@@ -475,11 +452,11 @@ Public Class FormMain
         Button9.Enabled = False
 
         ToolStripButton2.Enabled = True
-        ToolStripButton1.Text = GetLanguage("连接控制器")
+        ToolStripButton1.Text = sysInfo.Language.GetLanguage("连接控制器")
         'ToolStripButton1.BackColor = Color.FromArgb(&H0, &HE3, &HB)
         ToolStripButton1.Image = My.Resources.connect
 
-        ToolStripDropDownButton2.Image = My.Resources.ServerFault
+        'ToolStripDropDownButton2.Image = My.Resources.ServerFault
 
         Timer1.Stop()
     End Sub
@@ -671,13 +648,13 @@ Public Class FormMain
             '出现三次异常，进行提示，并且终止进程
             If exceptionNums > 3 Then
                 ShowException(lastErrorStr)
-                Exit Sub
+                Exit Do
             End If
 
             'Dim asd As New Stopwatch
             'asd.Start()
             '发送到发送卡的字符
-            Dim showstr As String = Nothing
+            'Dim showstr As String = Nothing
 
             Try
                 '向发送卡 请求接收传感器数据数据
@@ -694,11 +671,10 @@ Public Class FormMain
 
             Catch ex As SocketException
                 lastErrorStr = ex.Message
-                sysInfo.logger.LogThis("请求接收传感器数据异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
+                'sysInfo.logger.LogThis("请求接收传感器数据异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
                 exceptionNums += 1
                 Continue Do
             Catch ex As ThreadAbortException
-                Debug.WriteLine($"stop read")
                 '不记录终止异常
             Catch ex As Exception
                 sysInfo.logger.LogThis("请求传感器数据其他异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
@@ -706,8 +682,8 @@ Public Class FormMain
 
             'Dim asd As New Stopwatch
             'asd.Start()
+
             '向发送卡 请求发送传感器数据数据
-            Dim qweasd As Integer = 0
             Try
                 '向发送卡发送数据
                 Dim bytes2(1028 - 1) As Byte
@@ -721,7 +697,6 @@ Public Class FormMain
 
                 '诺瓦每次只发送1K数据，16K数据分16次发送
                 For i As Integer = 0 To 16 - 1
-                    qweasd = i
                     Dim bytesRec2 As Integer = sysInfo.SenderList(senderId).CliSocket.Receive(bytes2)
                     'TextBox5.Text = ""
                     '分析接收到的数据
@@ -755,11 +730,11 @@ Public Class FormMain
                         Next
 
                         ''If tmpClickValidSum < 1 And
-                        If tmpClickValidSum < sysInfo.ClickValidNums And
-                            sysInfo.DisplayMode = 0 Then
-                            '互动模式下抗干扰才启用
-                            Continue For
-                        End If
+                        'If tmpClickValidSum < sysInfo.ClickValidNums And
+                        '    sysInfo.DisplayMode = 0 Then
+                        '    '互动模式下抗干扰才启用
+                        '    Continue For
+                        'End If
 
                         'Debug.WriteLine(tmpClickValidSum)
 
@@ -773,8 +748,8 @@ Public Class FormMain
                                     Continue For
                                 End If
 
-                                If sysInfo.DisplayMode = 0 Or
-                                                sysInfo.DisplayMode = 1 Then
+                                If sysInfo.DisplayMode = 0 OrElse
+                                               sysInfo.DisplayMode = 1 Then
                                     '互动或测试时启用
                                     'Static id As Integer = 0
 
@@ -783,6 +758,17 @@ Public Class FormMain
 
                                     '未被点击
                                     If (bytes2(j + 4 + k * 4 + l) And &H80) <> &H80 Then
+                                        '抬起事件
+                                        If sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) And &H80 Then
+                                            sysInfo.CurtainList.Item(sysInfo.ScreenList(tmp.ScreenId).CurtainListId).
+                                                PlayDialog.
+                                                MousesimulationClick(tmp.ScreenId,
+                                                    tmp.X + l,
+                                                    tmp.Y + k,
+                                                    0,
+                                                    PointActivity.UP)
+                                        End If
+
                                         sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = 0
 
                                         Continue For
@@ -797,6 +783,12 @@ Public Class FormMain
 
                                     sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
 
+                                    If tmpClickValidSum < sysInfo.ClickValidNums AndAlso
+                                        sysInfo.DisplayMode = 0 Then
+                                        '互动模式下抗干扰才启用
+                                        Continue For
+                                    End If
+
                                     'Debug.WriteLine($"new {id} x:{tmp.X} + {l} y:{tmp.Y} + {k}")
                                     'id += 1
 
@@ -806,12 +798,15 @@ Public Class FormMain
                                 End If
 
                                 sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
+
+                                '按下事件
                                 sysInfo.CurtainList.Item(sysInfo.ScreenList(tmp.ScreenId).CurtainListId).
                                     PlayDialog.
                                     MousesimulationClick(tmp.ScreenId,
                                                          tmp.X + l,
                                                          tmp.Y + k,
-                                                         bytes2(j + 4 + k * 4 + l))
+                                                         bytes2(j + 4 + k * 4 + l),
+                                                         PointActivity.DOWN)
                             Next
                         Next
 
@@ -822,14 +817,17 @@ Public Class FormMain
 
             Catch ex As SocketException
                 lastErrorStr = ex.Message
-                sysInfo.logger.LogThis("接收传感器数据数据通信异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
+                'sysInfo.logger.LogThis("接收传感器数据数据通信异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
                 exceptionNums += 1
             Catch ex As ThreadAbortException
-                Debug.WriteLine($"stop:{qweasd}")
                 '不记录终止异常
             Catch ex As Exception
                 sysInfo.logger.LogThis("接收传感器数据数据其他异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
             End Try
+
+            'If asd.ElapsedMilliseconds > 4 Then
+            '    Debug.WriteLine(asd.ElapsedMilliseconds)
+            'End If
 
             Thread.Sleep(sysInfo.InquireTimeSec)
         Loop
@@ -838,14 +836,14 @@ Public Class FormMain
             sysInfo.SenderList(senderId).CliSocket.Close()
         Catch ex As Exception
         End Try
-        Debug.WriteLine("end")
+
     End Sub
 
     '添加文件
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         '添加flash文件
         Dim tmp As New OpenFileDialog
-        tmp.Filter = "swf|*.swf"
+        tmp.Filter = "Flash或DLL插件|*.SWF;*.DLL"
         tmp.Multiselect = True
         If tmp.ShowDialog() <> DialogResult.OK Then
             Exit Sub
@@ -861,8 +859,8 @@ Public Class FormMain
             sysInfo.FilesList.Add(tmp.SafeFileNames(i), tmp.FileNames(i))
         Next
 
-        '显示第一个添加的文件名
-        ComboBox2.Text = tmp.SafeFileNames(0)
+        ''显示第一个添加的文件名
+        'ComboBox2.Text = tmp.SafeFileNames(0)
     End Sub
 
     ''' <summary>
@@ -871,6 +869,7 @@ Public Class FormMain
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         sysInfo.FilesList.Remove(ComboBox2.Text)
         ComboBox2.Items.Remove(ComboBox2.Text)
+
         If ComboBox2.Items.Count Then
             ComboBox2.SelectedIndex = 0
         End If
@@ -885,28 +884,50 @@ Public Class FormMain
     End Sub
 
     ''' <summary>
+    ''' 上次选中播放文件名
+    ''' </summary>
+    Dim LastSelectPlayFile As String = Nothing
+    ''' <summary>
     ''' 播放
     ''' </summary>
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If ComboBox1.Text = "" Then
+    Private Sub ComboBox2_DropDownClosed(sender As Object, e As EventArgs) Handles ComboBox2.DropDownClosed
+        If ComboBox2.SelectedIndex < 0 OrElse
+            LastSelectPlayFile = ComboBox2.Items(ComboBox2.SelectedIndex) Then
             Exit Sub
         End If
+
+        'LastSelectPlayFile = ComboBox2.Items(ComboBox2.SelectedIndex)
 
         sysInfo.CurtainList.Item(ComboBox1.SelectedIndex).PlayDialog.Play(sysInfo.FilesList.Item(ComboBox2.Text))
     End Sub
 
-    ''' <summary>
-    ''' 播放至所有屏幕
-    ''' </summary>
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        If ComboBox1.Text = "" Then
-            Exit Sub
-        End If
-
-        For Each i In sysInfo.CurtainList
-            i.PlayDialog.Play(sysInfo.FilesList.Item(ComboBox2.Text))
-        Next
+    Private Sub ComboBox2_TextChanged(sender As Object, e As EventArgs) Handles ComboBox2.TextChanged
+        LastSelectPlayFile = ComboBox2.Text
     End Sub
+
+    '''' <summary>
+    '''' 播放
+    '''' </summary>
+    'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    '    If ComboBox1.Text = "" Then
+    '        Exit Sub
+    '    End If
+
+    '    sysInfo.CurtainList.Item(ComboBox1.SelectedIndex).PlayDialog.Play(sysInfo.FilesList.Item(ComboBox2.Text))
+    'End Sub
+
+    '''' <summary>
+    '''' 播放至所有屏幕
+    '''' </summary>
+    'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    '    If ComboBox1.Text = "" Then
+    '        Exit Sub
+    '    End If
+
+    '    For Each i In sysInfo.CurtainList
+    '        i.PlayDialog.Play(sysInfo.FilesList.Item(ComboBox2.Text))
+    '    Next
+    'End Sub
 
     ''' <summary>
     ''' 互动
@@ -1006,7 +1027,15 @@ Public Class FormMain
         End If
     End Sub
 
-    '定时刷新发送卡状态
+    ''' <summary>
+    ''' 捕获鼠标
+    ''' </summary>
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
+        sysInfo.SetCaptureFlage = CheckBox2.Checked
+        'Debug.WriteLine(sysInfo.SetCaptureFlage)
+    End Sub
+
+    ''' 定时刷新发送卡状态
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Dim minReadNum As Integer = &HFFFF
         For i As Integer = 0 To sysInfo.SenderList.Length - 1
@@ -1015,12 +1044,20 @@ Public Class FormMain
                     Continue For
                 End If
 
-                ToolStripDropDownButton2.DropDownItems(i).Text = $"控制器{i}:{ .MaxReadNum}"
+                'ToolStripDropDownButton2.DropDownItems(i).Text = $"控制器{i}:{ .MaxReadNum}"
                 minReadNum = If(minReadNum > .MaxReadNum, .MaxReadNum, minReadNum)
             End With
 
         Next
 
-        ToolStripDropDownButton2.Image = If(minReadNum, My.Resources.ServerNormal, My.Resources.ServerFault)
+        If minReadNum < 40 Then
+            sysInfo.InquireTimeSec -= 1
+        ElseIf minReadNum > 42 Then
+            sysInfo.InquireTimeSec += 1
+        End If
+
+        'Debug.WriteLine($"read nums: {minReadNum}")
+        'ToolStripDropDownButton2.Image = If(minReadNum, My.Resources.ServerNormal, My.Resources.ServerFault)
     End Sub
+
 End Class

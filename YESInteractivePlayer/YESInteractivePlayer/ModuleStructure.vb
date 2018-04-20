@@ -1,6 +1,7 @@
 ﻿Imports System.Net.Sockets
 Imports System.Threading
 Imports Nova.Mars.SDK
+Imports YESInteractiveSDK.ModuleStructure
 
 Module ModuleStructure
     ''' <summary>
@@ -246,6 +247,11 @@ Module ModuleStructure
         ''' </summary>
         <NonSerialized()>
         Dim PlayDialog As FormPlay
+        '''' <summary>
+        '''' 点活动事件队列
+        '''' </summary>
+        '<NonSerialized()>
+        'Dim PointActiveQueue As Queue(Of PointInfo)
     End Structure
 
     ''' <summary>
@@ -264,6 +270,11 @@ Module ModuleStructure
         ''' </summary>
         <NonSerialized()>
         Dim logger As Wangk.Tools.Logger
+        ''' <summary>
+        ''' 切换语言类
+        ''' </summary>
+        <NonSerialized()>
+        Dim Language As Wangk.Resource.MultiLanguage
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '硬件相关变量
         ''' <summary>
@@ -336,11 +347,11 @@ Module ModuleStructure
         ''' 语言类型 0中文 1English
         ''' </summary>
         Dim SelectLanguageId As Integer
-        ''' <summary>
-        ''' 语言包索引
-        ''' </summary>
-        <NonSerialized()>
-        Dim LanguageTable As Hashtable
+        '''' <summary>
+        '''' 语言包索引
+        '''' </summary>
+        '<NonSerialized()>
+        'Dim LanguageTable As Hashtable
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -378,7 +389,14 @@ Module ModuleStructure
         ''' <summary>
         ''' 查询时间间隔 ms
         ''' </summary>
+        <NonSerialized()>
         Dim InquireTimeSec As Integer
+
+        ''' <summary>
+        ''' 捕获鼠标 默认使用接口
+        ''' </summary>
+        <NonSerialized()>
+        Dim SetCaptureFlage As Boolean
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     End Structure
 End Module

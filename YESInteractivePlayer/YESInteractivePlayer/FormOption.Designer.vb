@@ -829,6 +829,7 @@ Partial Class FormOption
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.NumericUpDown1)
+        Me.GroupBox1.Enabled = False
         Me.GroupBox1.Location = New System.Drawing.Point(187, 6)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(188, 46)

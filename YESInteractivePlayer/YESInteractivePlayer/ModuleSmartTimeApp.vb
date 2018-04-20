@@ -91,6 +91,7 @@ Module ModuleSmartTimeApp
             'TextBox5.AppendText("写该分页失败,错误代码：" & SmartTimeGetLastError())
             End
         End If
+
     End Sub
 
     ''' <summary>
@@ -150,10 +151,10 @@ Module ModuleSmartTimeApp
         Next
 
         If zeroNum = 64 Then
-            register(KeyHandle(0), GetMd5Hash(sGUID & "YESTECH"))
+            register(KeyHandle(0), Wangk.Hash.GetStr128MD5(sGUID & "YESTECH"))
         Else
             hashcode = System.Text.Encoding.Unicode.GetString(pBuffer, 0, 64)
-            If hashcode.Equals(GetMd5Hash(sGUID & "YESTECH")) = False Then
+            If hashcode.Equals(Wangk.Hash.GetStr128MD5(sGUID & "YESTECH")) = False Then
                 End
             End If
         End If

@@ -154,7 +154,8 @@ Public Class FormNovaInit
             Exit Sub
         End If
 
-        If LEDScreenInfoList.Count = 0 Then
+        If LEDScreenInfoList Is Nothing OrElse
+            LEDScreenInfoList.Count = 0 Then
             Showinfo($"ERROR:未找到显示屏")
             Exit Sub
         End If
@@ -205,13 +206,9 @@ Public Class FormNovaInit
 
             'putlog($"{LEDScreenIndex}:{(screenMain(LEDScreenIndex).height \ screenMain(LEDScreenIndex).ScanBoardHeight) * 4},{(screenMain(LEDScreenIndex).width \ screenMain(LEDScreenIndex).ScanBoardWidth) * 4}")
 
-            Showinfo($">>>>显示屏{LEDScreenId}: start[_
-{sysInfo.ScreenList(LEDScreenId).DefaultX},_
-{sysInfo.ScreenList(LEDScreenId).DefaultY}] size[_
-{sysInfo.ScreenList(LEDScreenId).DefaultWidth},_
-{sysInfo.ScreenList(LEDScreenId).DefaultHeight}] touch[_
-{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth},_
-{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight}]")
+            Showinfo($">>>>显示屏{LEDScreenId}: start[{sysInfo.ScreenList(LEDScreenId).DefaultX},{sysInfo.ScreenList(LEDScreenId).DefaultY}]
+size[{sysInfo.ScreenList(LEDScreenId).DefaultWidth},{sysInfo.ScreenList(LEDScreenId).DefaultHeight}]
+touch[{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth},{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight}]")
             Showinfo($"        屏幕块[{LEDScreenInfoList(LEDScreenId).ScanBoardInfoList.Count}]")
 
             sysInfo.ScreenList(LEDScreenId).SenderList = New List(Of Integer)

@@ -113,8 +113,8 @@ Public Class FormOption
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '互动性
         '互动模式
-        ComboBox2.Items.Add(GetLanguage("单个感应"))
-        ComboBox2.Items.Add(GetLanguage("4合1感应"))
+        ComboBox2.Items.Add(sysInfo.Language.GetLanguage("单个感应"))
+        ComboBox2.Items.Add(sysInfo.Language.GetLanguage("4合1感应"))
         'ComboBox2.SelectedIndex = sysInfo.touchMode
 
         '检测间隔
@@ -140,13 +140,13 @@ Public Class FormOption
         ListView1.CheckBoxes = False
         ListView1.ShowItemToolTips = True
         ListView1.Clear()
-        ListView1.Columns.Add(GetLanguage("控制器号"), 60, HorizontalAlignment.Left)
-        ListView1.Columns.Add(GetLanguage("网口号"), 50, HorizontalAlignment.Left)
-        ListView1.Columns.Add(GetLanguage("接收卡号"), 60, HorizontalAlignment.Left)
-        ListView1.Columns.Add(GetLanguage("值"), 60, HorizontalAlignment.Left)
+        ListView1.Columns.Add(sysInfo.Language.GetLanguage("控制器号"), 60, HorizontalAlignment.Left)
+        ListView1.Columns.Add(sysInfo.Language.GetLanguage("网口号"), 50, HorizontalAlignment.Left)
+        ListView1.Columns.Add(sysInfo.Language.GetLanguage("接收卡号"), 60, HorizontalAlignment.Left)
+        ListView1.Columns.Add(sysInfo.Language.GetLanguage("值"), 60, HorizontalAlignment.Left)
 
         '设置显示语言
-        SetControlslanguage(Me)
+        sysInfo.Language.SetControlslanguage(Me)
     End Sub
 
     ''' <summary>
@@ -225,8 +225,8 @@ Public Class FormOption
         '互动模式
         'sysInfo.touchMode = ComboBox2.SelectedIndex
 
-        '检测间隔
-        sysInfo.InquireTimeSec = NumericUpDown1.Value
+        ''检测间隔
+        'sysInfo.InquireTimeSec = NumericUpDown1.Value
 
         '抗干扰等级
         sysInfo.ClickValidNums = NumericUpDown3.Value
@@ -715,7 +715,7 @@ Public Class FormOption
     ''' </summary>
     Private Sub DataGridView4_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView4.CellMouseClick
         Dim selectScreenId As Integer = DataGridView4.SelectedCells(0).RowIndex
-        GroupBox13.Text = $"{GetLanguage("屏幕")}{selectScreenId} {GetLanguage("走线")}"
+        GroupBox13.Text = $"{sysInfo.Language.GetLanguage("屏幕")}{selectScreenId} {sysInfo.Language.GetLanguage("走线")}"
 
         Me.PictureBox1.Update()
         Dim g As Graphics = Me.PictureBox1.CreateGraphics
@@ -793,7 +793,7 @@ Public Class FormOption
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Button1.Enabled = False
 
-        ListView1.Columns(3).Text = GetLanguage("版本号")
+        ListView1.Columns(3).Text = sysInfo.Language.GetLanguage("版本号")
         ListView1.Items.Clear()
         'TextBox4.Clear()
     End Sub
