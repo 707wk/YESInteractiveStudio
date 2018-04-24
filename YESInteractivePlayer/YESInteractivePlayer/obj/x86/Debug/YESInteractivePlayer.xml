@@ -470,6 +470,11 @@ YESInteractivePlayer
  关闭窗体
  </summary>
 </member>
+<member name="M:YESInteractivePlayer.FormPlay.delPlayControl">
+ <summary>
+ 删除播放控件
+ </summary>
+</member>
 <member name="M:YESInteractivePlayer.FormPlay.playSwf">
  <summary>
  播放Flash

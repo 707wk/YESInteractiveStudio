@@ -121,15 +121,12 @@ namespace WaterDemo
         {
             if (Point.Activity == YESInteractiveSDK.ModuleStructure.PointActivity.DOWN)
             {
-                Debug.WriteLine($"{Point.X},{Point.Y}");
-
                 water.Drop(Point.X / (float)this.ClientSize.Width, Point.Y / (float)this.ClientSize.Height);
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Debug.WriteLine("timer1");
             water.Updata();
             map.LockRectangle(0, LockFlags.DoNotCopyData).Data.WriteRange(water.Data);
             map.UnlockRectangle(0);
@@ -137,7 +134,6 @@ namespace WaterDemo
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            Debug.WriteLine("timer2");
             Refresh();
         }
 

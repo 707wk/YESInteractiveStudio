@@ -8,12 +8,12 @@ Public Interface IYESInterfaceSDK
     ''' 加载插件
     ''' </summary>
     ''' <param name="Parent">父控件</param>
-    Sub InitAddonFunc(ByRef Parent As Control)
+    Sub InitAddonFunc(ByVal Parent As Control)
     ''' <summary>
     ''' 卸载插件
     ''' </summary>
     ''' <param name="Parent">父控件</param>
-    Sub FinalizeAddonFunc(ByRef Parent As Control)
+    Sub FinalizeAddonFunc(ByVal Parent As Control)
 
     ''' <summary>
     ''' 点活动事件

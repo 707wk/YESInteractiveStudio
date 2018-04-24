@@ -10,17 +10,18 @@ using YESInteractiveSDK;
 
 namespace WaterDemo
 {
+    [Serializable]
     class WaterDemo : IYESInterfaceSDK
     {
         UserControl1 tmp;
-        public void InitAddonFunc(ref Control Parent)
+        public void InitAddonFunc(Control Parent)
         {
             tmp = new UserControl1();
             tmp.Dock = DockStyle.Fill;
             Parent.Controls.Add(tmp);
         }
 
-        public void FinalizeAddonFunc(ref Control Parent)
+        public void FinalizeAddonFunc(Control Parent)
         {
             Parent.Controls.Remove(tmp);
             tmp.Dispose();

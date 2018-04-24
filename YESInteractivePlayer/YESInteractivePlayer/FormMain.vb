@@ -234,6 +234,7 @@ Public Class FormMain
             sysInfo.SenderList(i).Link = False
         Next
         '判断哪些控制器要连接
+        'TODO: Collection was modified,控制器配置好后未接屏幕,然后第一次启动程序报错,再启动就没问题
         For Each i In sysInfo.CurtainList
             For Each j In i.ScreenList
                 If Not sysInfo.ScreenList(j).ExistFlage Then
@@ -279,6 +280,7 @@ Public Class FormMain
 
     Private Sub FormMain_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         '读取屏幕参数
+        'TODO:测试将读取窗体放在初始化函数
         Dim tmpDialog As New FormNovaInit
         tmpDialog.ShowDialog()
 

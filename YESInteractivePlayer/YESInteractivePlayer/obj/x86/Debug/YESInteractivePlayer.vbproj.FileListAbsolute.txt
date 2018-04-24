@@ -47,3 +47,5 @@ T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractiveSDK.dll
 T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractiveSDK.pdb
 T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\YESInteractiveSDK.xml
 T:\YESInteractivePlayer\YESInteractivePlayer\obj\x86\Debug\YESInteractivePlayer.vbprojResolveAssemblyReference.cache
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\Interop.ShockwaveFlashObjects.dll
+T:\YESInteractivePlayer\YESInteractivePlayer\bin\x86\Debug\AxInterop.ShockwaveFlashObjects.dll

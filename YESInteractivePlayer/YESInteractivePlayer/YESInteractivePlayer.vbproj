@@ -268,7 +268,7 @@
       <Lcid>0</Lcid>
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
-      <Private>False</Private>
+      <Private>True</Private>
     </COMReference>
     <COMReference Include="ShockwaveFlashObjects">
       <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
@@ -278,7 +278,7 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>False</Private>
+      <Private>True</Private>
     </COMReference>
   </ItemGroup>
   <ItemGroup>
@@ -295,7 +295,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
-    <PostBuildEvent>@del .\data\CreationDate.ini
-@echo %25date:~0,4%25%25date:~5,2%25%25date:~8,2%25 by %25username%25&gt; .\data\CreationDate.ini</PostBuildEvent>
+    <PostBuildEvent>%25删除临时文件%25
+del *.xml
+del *.pdb
+%25移动DLL文件到data文件夹%25
+for /f "delims=" %25%25i in ('dir /b "*.dll"') do move %25%25i "./data"</PostBuildEvent>
   </PropertyGroup>
 </Project>

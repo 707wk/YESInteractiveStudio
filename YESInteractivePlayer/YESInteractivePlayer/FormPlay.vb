@@ -103,19 +103,27 @@ Public Class FormPlay
     End Sub
 
     ''' <summary>
-    ''' 播放Flash
+    ''' 删除播放控件
     ''' </summary>
-    Private Sub playSwf()
-        '卸载旧文件
-        If playDllControl IsNot Nothing Then
-            playDllControl.FinalizeAddonFunc(Me)
-        End If
-
+    Private Sub delPlayControl()
         If playFlashControl IsNot Nothing Then
             Me.Controls.Remove(playFlashControl)
             playFlashControl.Dispose()
             playFlashControl = Nothing
         End If
+
+        If playDllControl IsNot Nothing Then
+            playDllControl.FinalizeAddonFunc(Me)
+            playDllControl = Nothing
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 播放Flash
+    ''' </summary>
+    Private Sub playSwf()
+        '卸载旧文件
+        delPlayControl()
 
         playFlashControl = New AxShockwaveFlashObjects.AxShockwaveFlash
         playFlashControl.Dock = DockStyle.Fill
@@ -133,15 +141,7 @@ Public Class FormPlay
     ''' </summary>
     Private Sub playDll()
         '卸载旧文件
-        If playFlashControl IsNot Nothing Then
-            Me.Controls.Remove(playFlashControl)
-            playFlashControl.Dispose()
-            playFlashControl = Nothing
-        End If
-
-        If playDllControl IsNot Nothing Then
-            playDllControl.FinalizeAddonFunc(Me)
-        End If
+        delPlayControl()
 
         Dim ass = Assembly.LoadFrom(mediaUrl)
         Dim tp = ass.GetType($"{Path.GetFileNameWithoutExtension(mediaUrl)}.{Path.GetFileNameWithoutExtension(mediaUrl)}")
@@ -160,9 +160,6 @@ Public Class FormPlay
             Exit Sub
         End If
 
-        'AxShockwaveFlash1.Show()
-        'AxShockwaveFlash1.StopPlay()
-
         mediaUrl = playUrl
 
         Select Case System.IO.Path.GetExtension(playUrl)
@@ -180,7 +177,6 @@ Public Class FormPlay
                 filesType = 1
         End Select
 
-        'AxShockwaveFlash1.Play()
     End Sub
 
     ''' <summary>
@@ -214,21 +210,12 @@ Public Class FormPlay
 
         Me.Refresh()
         '显示播放控件
-        'playFlash.Show()
-        'playFlash.Movie = playFlash.Movie
-        'playFlash.Play()
-        If playFlashControl Is Nothing Then
-            playFlashControl = New AxShockwaveFlashObjects.AxShockwaveFlash
-            playFlashControl.Dock = DockStyle.Fill
-            Me.Controls.Add(playFlashControl)
-
-            playFlashControl.AlignMode = 5 '对齐方式
-            playFlashControl.ScaleMode = 2 '缩放模式
-            playFlashControl.Quality = 0 '画面质量
-            playFlashControl.BackgroundColor = 0
-            playFlashControl.Movie = mediaUrl
-        End If
-
+        Select Case filesType
+            Case 0
+                playSwf()
+            Case 1
+                playDll()
+        End Select
 
     End Sub
 
@@ -243,12 +230,7 @@ Public Class FormPlay
         End If
 
         '隐藏播放控件
-        'playFlash.Hide()
-        If playFlashControl IsNot Nothing Then
-            Me.Controls.Remove(playFlashControl)
-            playFlashControl.Dispose()
-            playFlashControl = Nothing
-        End If
+        delPlayControl()
 
         Me.BackColor = Color.Black
         Me.Refresh()
@@ -288,12 +270,7 @@ Public Class FormPlay
 
         Me.Refresh()
         '隐藏播放控件
-        'AxShockwaveFlash1.Hide()
-        If playFlashControl IsNot Nothing Then
-            Me.Controls.Remove(playFlashControl)
-            playFlashControl.Dispose()
-            playFlashControl = Nothing
-        End If
+        delPlayControl()
 
         Me.BackColor = Color.Black
     End Sub
@@ -310,10 +287,6 @@ Public Class FormPlay
 
         Dim touchPieceWidth As Integer = sysInfo.ScreenList(screenId).TouchPieceWidth
         Dim touchPieceHeight As Integer = sysInfo.ScreenList(screenId).TouchPieceHeight
-
-        'Static id As Integer = 0
-        'Debug.WriteLine($"{id} x:{tX} y:{tY}")
-        'id += 1
 
         '显示模式
         Select Case sysInfo.DisplayMode
@@ -378,7 +351,4 @@ Public Class FormPlay
 
     End Sub
 
-    'Private Sub FormPlay_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-    '    Debug.WriteLine($"w{Me.Width}h{Me.Height}")
-    'End Sub
 End Class

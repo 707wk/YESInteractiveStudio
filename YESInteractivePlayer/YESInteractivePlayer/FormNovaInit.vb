@@ -28,16 +28,16 @@ Public Class FormNovaInit
             'senderArray(senderArrayIndex).index = senderArrayIndex
             sysInfo.SenderList(senderArrayId).IpDate = e.Data
 
-            Showinfo($"控制器{senderArrayId}")
+            Showinfo($"{sysInfo.Language.GetLanguage("控制器")}{senderArrayId}")
             Showinfo($"    ip:{e.Data(3)}.{e.Data(2)}.{e.Data(1)}.{e.Data(0)}")
-            Showinfo($"    掩码:{e.Data(7)}.{e.Data(6)}.{e.Data(5)}.{e.Data(4)}")
-            Showinfo($"    网关:{e.Data(11)}.{e.Data(10)}.{e.Data(9)}.{e.Data(8)}")
+            Showinfo($"    {sysInfo.Language.GetLanguage("掩码")}:{e.Data(7)}.{e.Data(6)}.{e.Data(5)}.{e.Data(4)}")
+            Showinfo($"    {sysInfo.Language.GetLanguage("网关")}:{e.Data(11)}.{e.Data(10)}.{e.Data(9)}.{e.Data(8)}")
 
             senderArrayId += 1
             If senderArrayId < sysInfo.SenderList.Length Then
                 sysInfo.MainClass.GetEquipmentIP(senderArrayId)
             Else
-                Showinfo($"加载完成")
+                Showinfo(sysInfo.Language.GetLanguage("加载完成"))
                 '移除事件
                 RemoveHandler sysInfo.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
                 Me.CloseDialog("真是哔了狗了，这个事件居然是另一个线程触发的")
@@ -45,7 +45,7 @@ Public Class FormNovaInit
         Else
             '移除事件
             RemoveHandler sysInfo.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
-            Showinfo("ERROR:获取设备IP失败！请检查设备后，重新启动程序")
+            Showinfo($"ERROR:{sysInfo.Language.GetLanguage("获取设备IP失败！请检查设备后，重新启动程序")}")
         End If
     End Sub
 
@@ -110,24 +110,24 @@ Public Class FormNovaInit
 
         Dim LEDScreenInfoList As List(Of LEDScreenInfo) = Nothing
 
-        Showinfo("连接Nova服务中")
+        Showinfo(sysInfo.Language.GetLanguage("连接Nova服务中"))
         sysInfo.RootClass = New MarsHardwareEnumerator
 
         If sysInfo.RootClass.Initialize() Then
-            Showinfo($"连接Nova服务成功")
+            Showinfo(sysInfo.Language.GetLanguage("连接Nova服务成功"))
         Else
-            Showinfo($"ERROR:连接Nova服务失败")
+            Showinfo($"ERROR:{sysInfo.Language.GetLanguage("连接Nova服务失败")}")
             'Application.Exit()
             Exit Sub
         End If
 
-        Showinfo("查找控制系统中")
+        Showinfo(sysInfo.Language.GetLanguage("查找控制系统中"))
 
         Dim SystemCount As Integer = sysInfo.RootClass.CtrlSystemCount()
         If SystemCount Then
-            Showinfo($"控制系统数:{SystemCount}")
+            Showinfo($"{sysInfo.Language.GetLanguage("控制系统数")}:{SystemCount}")
         Else
-            Showinfo($"ERROR:未找到控制系统")
+            Showinfo($"ERROR:{sysInfo.Language.GetLanguage("未找到控制系统")}")
             'Application.Exit()
             Exit Sub
         End If
@@ -140,23 +140,23 @@ Public Class FormNovaInit
         Dim senderCount As Integer
         Dim tmpstr As String = Nothing
         sysInfo.RootClass.GetComNameOfControlSystem(0, tmpstr)
-        Showinfo($"初始化屏幕:{sysInfo.MainClass.Initialize(tmpstr, screenCount, senderCount)}")
-        Showinfo($"显示屏个数:{screenCount} 控制器个数:{senderCount}")
+        Showinfo($"{sysInfo.Language.GetLanguage("初始化屏幕")}:{sysInfo.MainClass.Initialize(tmpstr, screenCount, senderCount)}")
+        Showinfo($"{sysInfo.Language.GetLanguage("显示屏个数")}:{screenCount} {sysInfo.Language.GetLanguage("控制器个数")}:{senderCount}")
 
         If senderCount = 0 Then
-            Showinfo($"ERROR:未找到控制器")
+            Showinfo($"ERROR:{sysInfo.Language.GetLanguage("未找到控制器")}")
             Exit Sub
         End If
 
-        Showinfo("读取显示屏信息中")
+        Showinfo(sysInfo.Language.GetLanguage("读取显示屏信息中"))
         If sysInfo.MainClass.ReadLEDScreenInfo(LEDScreenInfoList) Then
-            Showinfo($"ERROR:读显示屏信息失败")
+            Showinfo($"ERROR:{sysInfo.Language.GetLanguage("读显示屏信息失败")}")
             Exit Sub
         End If
 
         If LEDScreenInfoList Is Nothing OrElse
             LEDScreenInfoList.Count = 0 Then
-            Showinfo($"ERROR:未找到显示屏")
+            Showinfo($"ERROR:{sysInfo.Language.GetLanguage("未找到显示屏")}")
             Exit Sub
         End If
 
@@ -169,7 +169,7 @@ Public Class FormNovaInit
         ''获取到的显示屏高度
         'Dim height As Integer
 
-        Showinfo($"载入屏幕信息中")
+        Showinfo(sysInfo.Language.GetLanguage("载入屏幕信息中"))
         sysInfo.ScanBoardTable = New Hashtable
         'ReDim sysInfo.screenList(screenCount - 1)
         For i As Integer = 0 To sysInfo.ScreenList.Length - 1
@@ -206,10 +206,10 @@ Public Class FormNovaInit
 
             'putlog($"{LEDScreenIndex}:{(screenMain(LEDScreenIndex).height \ screenMain(LEDScreenIndex).ScanBoardHeight) * 4},{(screenMain(LEDScreenIndex).width \ screenMain(LEDScreenIndex).ScanBoardWidth) * 4}")
 
-            Showinfo($">>>>显示屏{LEDScreenId}: start[{sysInfo.ScreenList(LEDScreenId).DefaultX},{sysInfo.ScreenList(LEDScreenId).DefaultY}]
+            Showinfo($">>>>{sysInfo.Language.GetLanguage("显示屏")}{LEDScreenId}: start[{sysInfo.ScreenList(LEDScreenId).DefaultX},{sysInfo.ScreenList(LEDScreenId).DefaultY}]
 size[{sysInfo.ScreenList(LEDScreenId).DefaultWidth},{sysInfo.ScreenList(LEDScreenId).DefaultHeight}]
 touch[{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth},{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight}]")
-            Showinfo($"        屏幕块[{LEDScreenInfoList(LEDScreenId).ScanBoardInfoList.Count}]")
+            Showinfo($"        {sysInfo.Language.GetLanguage("屏幕块")}[{LEDScreenInfoList(LEDScreenId).ScanBoardInfoList.Count}]")
 
             sysInfo.ScreenList(LEDScreenId).SenderList = New List(Of Integer)
             '遍历屏幕
@@ -275,7 +275,7 @@ touch[{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth},{sysInfo.ScreenLis
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
         If System.Diagnostics.Process.GetProcessesByName("MarsServerProvider").Length = 0 Then
             Dim tmpProcessHwnd As Process = Process.Start($".\Nova\Server\MarsServerProvider.exe")
-            Showinfo($"启动Nova服务：{If(tmpProcessHwnd.Handle, True, False)}")
+            Showinfo($"{sysInfo.Language.GetLanguage("启动Nova服务")}：{If(tmpProcessHwnd.Handle, True, False)}")
             Thread.Sleep(5000)
         End If
 
