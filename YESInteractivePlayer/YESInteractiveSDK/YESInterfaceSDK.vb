@@ -19,4 +19,9 @@ Public Interface IYESInterfaceSDK
     ''' 点活动事件
     ''' </summary>
     Sub PointActive(ByVal Point As PointInfo)
+
+    ''' <summary>
+    ''' 点活动事件
+    ''' </summary>
+    Sub PointActive(ByVal Point As PointInfo())
 End Interface

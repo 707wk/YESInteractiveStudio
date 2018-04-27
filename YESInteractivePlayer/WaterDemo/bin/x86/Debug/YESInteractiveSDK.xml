@@ -94,5 +94,10 @@ YESInteractiveSDK
  点活动事件
  </summary>
 </member>
+<member name="M:YESInteractiveSDK.IYESInterfaceSDK.PointActive(YESInteractiveSDK.ModuleStructure.PointInfo[])">
+ <summary>
+ 点活动事件
+ </summary>
+</member>
 </members>
 </doc>

@@ -815,6 +815,11 @@ YESInteractivePlayer
  备注
  </summary>
 </member>
+<member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.file">
+ <summary>
+ 播放文件名
+ </summary>
+</member>
 <member name="F:YESInteractivePlayer.ModuleStructure.CurtainInfo.X">
  <summary>
  缩放后 X 偏移(单位像素)

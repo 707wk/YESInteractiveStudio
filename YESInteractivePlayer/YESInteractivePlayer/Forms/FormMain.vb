@@ -65,6 +65,13 @@ Public Class FormMain
             ReDim sysInfo.ScreenList(32 - 1)
             sysInfo.StartLocation.X = Screen.PrimaryScreen.Bounds.Width / 2
             sysInfo.StartLocation.Y = Screen.PrimaryScreen.Bounds.Height / 2
+
+            With sysInfo
+                .TouchSensitivity = If(.TouchSensitivity, .TouchSensitivity, 5)
+                .ClickValidNums = If(.ClickValidNums, .ClickValidNums, 2)
+                .ResetTemp = If(.ResetTemp, .ResetTemp, 5)
+                .ResetSec = If(.ResetSec, .ResetSec, 20)
+            End With
         End If
 
         If sysInfo.CurtainList Is Nothing Then
@@ -99,10 +106,10 @@ Public Class FormMain
             .ZoomProportion = If(.ZoomProportion, .ZoomProportion, 1)
             .ZoomTmpNumerator = If(.ZoomTmpNumerator, .ZoomTmpNumerator, 1)
             .ZoomTmpDenominator = If(.ZoomTmpDenominator, .ZoomTmpDenominator, 1)
-            .TouchSensitivity = If(.TouchSensitivity, .TouchSensitivity, 5)
-            .ClickValidNums = If(.ClickValidNums, .ClickValidNums, 2)
-            .ResetTemp = If(.ResetTemp, .ResetTemp, 5)
-            .ResetSec = If(.ResetSec, .ResetSec, 20)
+            '.TouchSensitivity = If(.TouchSensitivity, .TouchSensitivity, 5)
+            '.ClickValidNums = If(.ClickValidNums, .ClickValidNums, 2)
+            '.ResetTemp = If(.ResetTemp, .ResetTemp, 5)
+            '.ResetSec = If(.ResetSec, .ResetSec, 20)
             .InquireTimeSec = 20
         End With
 
@@ -133,7 +140,6 @@ Public Class FormMain
 
         '显示版本号
         With My.Application.Info
-            '版本号每修改一次加1
             Me.Text = $"{ sysInfo.Language.GetLanguage(.ProductName)} V{ .Version.ToString}"
         End With
 
@@ -154,9 +160,9 @@ Public Class FormMain
     Public Sub CreatDialogThread(ByVal id As Integer)
         Dim tmp As CurtainInfo = sysInfo.CurtainList.Item(id)
 
-        tmp.PlayDialog = New FormPlay
-
-        tmp.PlayDialog.curtainListId = id
+        tmp.PlayDialog = New FormPlay With {
+            .curtainListId = id
+        }
 
         sysInfo.CurtainList.Item(id) = tmp
 
@@ -416,6 +422,8 @@ Public Class FormMain
         ToolStripButton1.Text = sysInfo.Language.GetLanguage("断开连接")
         ToolStripButton1.Image = My.Resources.disconnect
 
+        GroupBox2.Enabled = True
+
         Timer1.Start()
     End Sub
 
@@ -431,6 +439,8 @@ Public Class FormMain
         ToolStripButton2.Enabled = True
         ToolStripButton1.Text = sysInfo.Language.GetLanguage("连接控制器")
         ToolStripButton1.Image = My.Resources.connect
+
+        GroupBox2.Enabled = False
 
         Timer1.Stop()
     End Sub
@@ -729,7 +739,7 @@ Public Class FormMain
                                     '未被点击
                                     If (bytes2(j + 4 + k * 4 + l) And &H80) <> &H80 Then
                                         '抬起事件
-                                        If sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) And &H80 Then
+                                        If (sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) And &H80) = &H80 Then
                                             sysInfo.CurtainList.Item(sysInfo.ScreenList(tmp.ScreenId).CurtainListId).
                                                 PlayDialog.
                                                 MousesimulationClick(tmp.ScreenId,
@@ -805,6 +815,11 @@ Public Class FormMain
 
     End Sub
 
+    '选择幕布
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        ComboBox2.Text = sysInfo.CurtainList.Item(ComboBox1.SelectedIndex).file
+    End Sub
+
     '添加文件
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         '添加flash文件
@@ -855,6 +870,14 @@ Public Class FormMain
     ''' 播放
     ''' </summary>
     Private Sub ComboBox2_DropDownClosed(sender As Object, e As EventArgs) Handles ComboBox2.DropDownClosed
+        If ComboBox1.Text = "" Then
+            Exit Sub
+        End If
+
+        If sysInfo.DisplayMode <> 0 Then
+            Exit Sub
+        End If
+
         If ComboBox2.SelectedIndex < 0 OrElse
             LastSelectPlayFile = ComboBox2.Items(ComboBox2.SelectedIndex) Then
             Exit Sub
@@ -863,6 +886,9 @@ Public Class FormMain
         'LastSelectPlayFile = ComboBox2.Items(ComboBox2.SelectedIndex)
 
         sysInfo.CurtainList.Item(ComboBox1.SelectedIndex).PlayDialog.Play(sysInfo.FilesList.Item(ComboBox2.Text))
+        Dim tmp As CurtainInfo = sysInfo.CurtainList.Item(ComboBox1.SelectedIndex)
+        tmp.file = ComboBox2.Text
+        sysInfo.CurtainList.Item(ComboBox1.SelectedIndex) = tmp
     End Sub
 
     Private Sub ComboBox2_TextChanged(sender As Object, e As EventArgs) Handles ComboBox2.TextChanged
@@ -988,5 +1014,4 @@ Public Class FormMain
         End If
 
     End Sub
-
 End Class

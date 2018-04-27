@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormOption
     Inherits System.Windows.Forms.Form
 
     'Form 重写 Dispose，以清理组件列表。
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FormOption
     '注意: 以下过程是 Windows 窗体设计器所必需的
     '可以使用 Windows 窗体设计器修改它。  
     '不要使用代码编辑器修改它。
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
@@ -37,6 +37,7 @@ Partial Class FormOption
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.DataGridView4 = New System.Windows.Forms.DataGridView()
         Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -51,6 +52,11 @@ Partial Class FormOption
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.DataGridView3 = New System.Windows.Forms.DataGridView()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -101,12 +107,7 @@ Partial Class FormOption
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.删除ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -115,6 +116,7 @@ Partial Class FormOption
         Me.GroupBox2.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox12.SuspendLayout()
         CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
@@ -143,7 +145,6 @@ Partial Class FormOption
         Me.GroupBox15.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -299,6 +300,15 @@ Partial Class FormOption
         Me.GroupBox13.TabIndex = 1
         Me.GroupBox13.TabStop = False
         Me.GroupBox13.Text = "走线"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PictureBox1.Location = New System.Drawing.Point(3, 17)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(477, 241)
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
         '
         'GroupBox12
         '
@@ -457,6 +467,39 @@ Partial Class FormOption
         Me.DataGridView3.Name = "DataGridView3"
         Me.DataGridView3.Size = New System.Drawing.Size(423, 146)
         Me.DataGridView3.TabIndex = 0
+        '
+        'Column8
+        '
+        Me.Column8.HeaderText = "屏幕ID"
+        Me.Column8.Name = "Column8"
+        '
+        'Column9
+        '
+        Me.Column9.HeaderText = "X"
+        Me.Column9.Name = "Column9"
+        Me.Column9.Width = 50
+        '
+        'Column10
+        '
+        Me.Column10.HeaderText = "Y"
+        Me.Column10.Name = "Column10"
+        Me.Column10.Width = 50
+        '
+        'Column11
+        '
+        Me.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column11.HeaderText = "单元行数"
+        Me.Column11.Name = "Column11"
+        Me.Column11.ReadOnly = True
+        Me.Column11.Visible = False
+        '
+        'Column12
+        '
+        Me.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column12.HeaderText = "单元列数"
+        Me.Column12.Name = "Column12"
+        Me.Column12.ReadOnly = True
+        Me.Column12.Visible = False
         '
         'Label10
         '
@@ -807,6 +850,7 @@ Partial Class FormOption
         '
         'TabPage6
         '
+        Me.TabPage6.Controls.Add(Me.CheckBox1)
         Me.TabPage6.Controls.Add(Me.GroupBox15)
         Me.TabPage6.Controls.Add(Me.Button1)
         Me.TabPage6.Controls.Add(Me.GroupBox14)
@@ -847,9 +891,9 @@ Partial Class FormOption
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(6, 106)
+        Me.ProgressBar1.Location = New System.Drawing.Point(8, 106)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(232, 20)
+        Me.ProgressBar1.Size = New System.Drawing.Size(230, 20)
         Me.ProgressBar1.Step = 1
         Me.ProgressBar1.TabIndex = 8
         '
@@ -930,49 +974,15 @@ Partial Class FormOption
         Me.删除ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.删除ToolStripMenuItem.Text = "删除"
         '
-        'PictureBox1
+        'CheckBox1
         '
-        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureBox1.Location = New System.Drawing.Point(3, 17)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(477, 241)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
-        '
-        'Column8
-        '
-        Me.Column8.HeaderText = "屏幕ID"
-        Me.Column8.Name = "Column8"
-        '
-        'Column9
-        '
-        Me.Column9.HeaderText = "X"
-        Me.Column9.Name = "Column9"
-        Me.Column9.Width = 50
-        '
-        'Column10
-        '
-        Me.Column10.HeaderText = "Y"
-        Me.Column10.Name = "Column10"
-        Me.Column10.Width = 50
-        '
-        'Column11
-        '
-        Me.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column11.HeaderText = "单元行数"
-        Me.Column11.Name = "Column11"
-        Me.Column11.ReadOnly = True
-        Me.Column11.Visible = False
-        Me.Column11.Width = 78
-        '
-        'Column12
-        '
-        Me.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column12.HeaderText = "单元列数"
-        Me.Column12.Name = "Column12"
-        Me.Column12.ReadOnly = True
-        Me.Column12.Visible = False
-        Me.Column12.Width = 78
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(288, 53)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(72, 16)
+        Me.CheckBox1.TabIndex = 7
+        Me.CheckBox1.Text = "旧版程序"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'FormOption
         '
@@ -995,6 +1005,7 @@ Partial Class FormOption
         Me.GroupBox2.ResumeLayout(False)
         Me.TabPage5.ResumeLayout(False)
         Me.GroupBox13.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox12.ResumeLayout(False)
         CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
@@ -1022,11 +1033,11 @@ Partial Class FormOption
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage6.ResumeLayout(False)
+        Me.TabPage6.PerformLayout()
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox15.PerformLayout()
         Me.GroupBox14.ResumeLayout(False)
         Me.ContextMenuStrip1.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1115,4 +1126,5 @@ Partial Class FormOption
     Friend WithEvents Column10 As DataGridViewTextBoxColumn
     Friend WithEvents Column11 As DataGridViewTextBoxColumn
     Friend WithEvents Column12 As DataGridViewTextBoxColumn
+    Friend WithEvents CheckBox1 As CheckBox
 End Class

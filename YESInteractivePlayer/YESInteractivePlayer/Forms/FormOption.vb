@@ -203,6 +203,10 @@ Public Class FormOption
         '屏幕
         '计算缩放后位置及大小
         For i As Integer = 0 To sysInfo.ScreenList.Length - 1
+            If Not sysInfo.ScreenList(i).ExistFlage Then
+                Continue For
+            End If
+
             With sysInfo.ScreenList(i)
                 .X = .DefaultX / sysInfo.ZoomProportion
                 .Y = .DefaultY / sysInfo.ZoomProportion
@@ -859,7 +863,11 @@ Public Class FormOption
 
         sysInfo.MainClass.SetScanBoardData(senderId, 255, 65535, sendByte)
 
-        Thread.Sleep(500)
+        If CheckBox1.Checked Then
+            Thread.Sleep(50)
+        Else
+            Thread.Sleep(500)
+        End If
 
         Dim cliSocket As Socket
         Try

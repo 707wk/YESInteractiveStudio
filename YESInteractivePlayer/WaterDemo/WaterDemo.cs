@@ -31,5 +31,10 @@ namespace WaterDemo
         {
             tmp.PointActive(Point);
         }
+
+        public void PointActive(ModuleStructure.PointInfo[] Point)
+        {
+
+        }
     }
 }

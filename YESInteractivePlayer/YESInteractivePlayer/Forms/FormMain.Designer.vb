@@ -25,9 +25,7 @@ Partial Class FormMain
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
@@ -35,13 +33,15 @@ Partial Class FormMain
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -55,27 +55,10 @@ Partial Class FormMain
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
         '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.Image = Global.YESInteractivePlayer.My.Resources.Resources.connect
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(88, 22)
-        Me.ToolStripButton1.Text = "连接控制器"
-        '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripButton2.Image = Global.YESInteractivePlayer.My.Resources.Resources.setting
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(52, 22)
-        Me.ToolStripButton2.Text = "设置"
         '
         'ComboBox1
         '
@@ -146,43 +129,6 @@ Partial Class FormMain
         Me.CheckBox2.Text = "捕获鼠标"
         Me.CheckBox2.UseVisualStyleBackColor = True
         '
-        'Button5
-        '
-        Me.Button5.BackgroundImage = Global.YESInteractivePlayer.My.Resources.Resources.clear
-        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button5.FlatAppearance.BorderSize = 0
-        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.Location = New System.Drawing.Point(271, 54)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(26, 23)
-        Me.Button5.TabIndex = 11
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.SystemColors.Control
-        Me.Button3.BackgroundImage = Global.YESInteractivePlayer.My.Resources.Resources.add
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button3.FlatAppearance.BorderSize = 0
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Location = New System.Drawing.Point(203, 51)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(28, 28)
-        Me.Button3.TabIndex = 8
-        Me.Button3.UseVisualStyleBackColor = False
-        '
-        'Button4
-        '
-        Me.Button4.BackgroundImage = Global.YESInteractivePlayer.My.Resources.Resources.del
-        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button4.FlatAppearance.BorderSize = 0
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Location = New System.Drawing.Point(237, 51)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(28, 28)
-        Me.Button4.TabIndex = 9
-        Me.Button4.UseVisualStyleBackColor = True
-        '
         'Button9
         '
         Me.Button9.FlatAppearance.BorderSize = 0
@@ -225,6 +171,43 @@ Partial Class FormMain
         Me.Button7.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.Button7.UseVisualStyleBackColor = True
         '
+        'Button5
+        '
+        Me.Button5.BackgroundImage = Global.YESInteractivePlayer.My.Resources.Resources.clear
+        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button5.FlatAppearance.BorderSize = 0
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button5.Location = New System.Drawing.Point(271, 54)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(26, 23)
+        Me.Button5.TabIndex = 11
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.SystemColors.Control
+        Me.Button3.BackgroundImage = Global.YESInteractivePlayer.My.Resources.Resources.add
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Location = New System.Drawing.Point(203, 51)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(28, 28)
+        Me.Button3.TabIndex = 8
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'Button4
+        '
+        Me.Button4.BackgroundImage = Global.YESInteractivePlayer.My.Resources.Resources.del
+        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button4.FlatAppearance.BorderSize = 0
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.Location = New System.Drawing.Point(237, 51)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(28, 28)
+        Me.Button4.TabIndex = 9
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'Button6
         '
         Me.Button6.FlatAppearance.BorderSize = 0
@@ -239,11 +222,28 @@ Partial Class FormMain
         Me.Button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.Button6.UseVisualStyleBackColor = True
         '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.Image = Global.YESInteractivePlayer.My.Resources.Resources.connect
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(88, 22)
+        Me.ToolStripButton1.Text = "连接控制器"
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton2.Image = Global.YESInteractivePlayer.My.Resources.Resources.setting
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(52, 22)
+        Me.ToolStripButton2.Text = "设置"
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(307, 184)
+        Me.ClientSize = New System.Drawing.Size(307, 183)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button7)

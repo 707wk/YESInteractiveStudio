@@ -33,6 +33,7 @@ Partial Class FormPlay
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FormPlay"
         Me.ShowIcon = False
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "FormPlay"
         Me.ResumeLayout(False)

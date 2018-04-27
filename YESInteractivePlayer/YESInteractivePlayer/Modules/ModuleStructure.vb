@@ -199,10 +199,11 @@ Module ModuleStructure
         '''' 是否显示
         '''' </summary>
         'Dim showFlage As Boolean
-        '''' <summary>
-        '''' 播放文件名
-        '''' </summary>
-        'Dim file As String
+        ''' <summary>
+        ''' 播放文件名
+        ''' </summary>
+        <NonSerialized()>
+        Dim file As String
 
         ''' <summary>
         ''' 缩放后 X 偏移(单位像素)

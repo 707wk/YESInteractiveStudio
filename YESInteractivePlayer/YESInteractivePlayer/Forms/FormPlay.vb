@@ -67,7 +67,7 @@ Public Class FormPlay
 
     Private Sub FormPlay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         '窗体置顶
-        'Me.TopMost = True
+        Me.TopMost = True
 
         '隐藏播放控件
         'AxShockwaveFlash1.Hide()
@@ -339,6 +339,11 @@ Public Class FormPlay
 
             Case 1
                 '测试
+                '不是按下事件则丢弃
+                If active <> PointActivity.DOWN Then
+                    Exit Sub
+                End If
+
                 gBack.DrawString($"√", gFont, gBrush,
                                  sysInfo.ScreenList(screenId).X + tX * touchPieceWidth + 1,
                                  sysInfo.ScreenList(screenId).Y + tY * touchPieceHeight + 1)
