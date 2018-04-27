@@ -33,6 +33,8 @@ Partial Class FormMain
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -40,8 +42,6 @@ Partial Class FormMain
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.ToolStrip1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -100,7 +100,7 @@ Partial Class FormMain
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(56, 55)
+        Me.CheckBox1.Location = New System.Drawing.Point(73, 60)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(48, 16)
         Me.CheckBox1.TabIndex = 11
@@ -127,13 +127,32 @@ Partial Class FormMain
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "控制面板"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 23)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(29, 12)
+        Me.Label1.TabIndex = 13
+        Me.Label1.Text = "幕布"
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(125, 60)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(72, 16)
+        Me.CheckBox2.TabIndex = 12
+        Me.CheckBox2.Text = "捕获鼠标"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
         'Button5
         '
         Me.Button5.BackgroundImage = Global.YESInteractivePlayer.My.Resources.Resources.clear
         Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button5.FlatAppearance.BorderSize = 0
         Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.Location = New System.Drawing.Point(268, 51)
+        Me.Button5.Location = New System.Drawing.Point(271, 54)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(26, 23)
         Me.Button5.TabIndex = 11
@@ -146,7 +165,7 @@ Partial Class FormMain
         Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button3.FlatAppearance.BorderSize = 0
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Location = New System.Drawing.Point(200, 48)
+        Me.Button3.Location = New System.Drawing.Point(203, 51)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(28, 28)
         Me.Button3.TabIndex = 8
@@ -158,7 +177,7 @@ Partial Class FormMain
         Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button4.FlatAppearance.BorderSize = 0
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Location = New System.Drawing.Point(234, 48)
+        Me.Button4.Location = New System.Drawing.Point(237, 51)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(28, 28)
         Me.Button4.TabIndex = 9
@@ -170,7 +189,7 @@ Partial Class FormMain
         Me.Button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button9.Image = Global.YESInteractivePlayer.My.Resources.Resources.DisplayMode3
         Me.Button9.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button9.Location = New System.Drawing.Point(237, 28)
+        Me.Button9.Location = New System.Drawing.Point(236, 28)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(59, 56)
         Me.Button9.TabIndex = 0
@@ -184,7 +203,7 @@ Partial Class FormMain
         Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button8.Image = Global.YESInteractivePlayer.My.Resources.Resources.DisplayMode2
         Me.Button8.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button8.Location = New System.Drawing.Point(162, 28)
+        Me.Button8.Location = New System.Drawing.Point(163, 28)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(59, 56)
         Me.Button8.TabIndex = 0
@@ -198,7 +217,7 @@ Partial Class FormMain
         Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button7.Image = Global.YESInteractivePlayer.My.Resources.Resources.DisplayMode1
         Me.Button7.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button7.Location = New System.Drawing.Point(87, 28)
+        Me.Button7.Location = New System.Drawing.Point(90, 28)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(59, 56)
         Me.Button7.TabIndex = 0
@@ -212,32 +231,13 @@ Partial Class FormMain
         Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button6.Image = Global.YESInteractivePlayer.My.Resources.Resources.DisplayMode0
         Me.Button6.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button6.Location = New System.Drawing.Point(14, 28)
+        Me.Button6.Location = New System.Drawing.Point(17, 28)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(59, 56)
         Me.Button6.TabIndex = 0
         Me.Button6.Text = "互动"
         Me.Button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.Button6.UseVisualStyleBackColor = True
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(108, 55)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(72, 16)
-        Me.CheckBox2.TabIndex = 12
-        Me.CheckBox2.Text = "捕获鼠标"
-        Me.CheckBox2.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 23)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(29, 12)
-        Me.Label1.TabIndex = 13
-        Me.Label1.Text = "幕布"
         '
         'FormMain
         '

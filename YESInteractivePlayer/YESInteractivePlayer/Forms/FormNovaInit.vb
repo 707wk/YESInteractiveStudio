@@ -2,13 +2,13 @@
 Imports Nova.Mars.SDK
 
 Public Class FormNovaInit
-    ''' <summary>
-    ''' 自动滚动到最底端
-    ''' </summary>
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-        TextBox1.SelectionStart = TextBox1.Text.Length
-        TextBox1.ScrollToCaret()
-    End Sub
+    '''' <summary>
+    '''' 自动滚动到最底端
+    '''' </summary>
+    'Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
+    '    TextBox1.SelectionStart = TextBox1.Text.Length
+    '    TextBox1.ScrollToCaret()
+    'End Sub
 
     Private Sub FormNovaInit_Load(sender As Object, e As EventArgs) Handles Me.Load
         'Me.ShowInTaskbar = False
@@ -70,7 +70,7 @@ Public Class FormNovaInit
             Exit Sub
         End If
 
-        TextBox1.AppendText($"{text}{vbCrLf}")
+        Label1.Text = text
         '有错误则提示并退出
         If text.IndexOf("ERROR") = -1 Then
             Exit Sub
@@ -114,7 +114,7 @@ Public Class FormNovaInit
         sysInfo.RootClass = New MarsHardwareEnumerator
 
         If sysInfo.RootClass.Initialize() Then
-            Showinfo(sysInfo.Language.GetLanguage("连接Nova服务成功"))
+            'Showinfo(sysInfo.Language.GetLanguage("连接Nova服务成功"))
         Else
             Showinfo($"ERROR:{sysInfo.Language.GetLanguage("连接Nova服务失败")}")
             'Application.Exit()
@@ -125,7 +125,7 @@ Public Class FormNovaInit
 
         Dim SystemCount As Integer = sysInfo.RootClass.CtrlSystemCount()
         If SystemCount Then
-            Showinfo($"{sysInfo.Language.GetLanguage("控制系统数")}:{SystemCount}")
+            'Showinfo($"{sysInfo.Language.GetLanguage("控制系统数")}:{SystemCount}")
         Else
             Showinfo($"ERROR:{sysInfo.Language.GetLanguage("未找到控制系统")}")
             'Application.Exit()
@@ -200,16 +200,34 @@ Public Class FormNovaInit
             sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth = LEDScreenInfoList(LEDScreenId).ScanBoardInfoList(0).Width
             '屏幕单元高度
             sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight = LEDScreenInfoList(LEDScreenId).ScanBoardInfoList(0).Height
+            ''TODO:自动判断行列数
+            'Debug.WriteLine($"{LEDScreenId} {sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth},{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight}")
+
+            If sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth * 4 = sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight Then
+                '4 1
+                sysInfo.ScreenList(LEDScreenId).TouchPieceRowsNum = 4
+                sysInfo.ScreenList(LEDScreenId).TouchPieceColumnsNum = 1
+            ElseIf sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth = sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight * 4 Then
+                '1 4
+                sysInfo.ScreenList(LEDScreenId).TouchPieceRowsNum = 1
+                sysInfo.ScreenList(LEDScreenId).TouchPieceColumnsNum = 4
+            ElseIf sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth = sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight Then
+                '4 4
+                sysInfo.ScreenList(LEDScreenId).TouchPieceRowsNum = 4
+                sysInfo.ScreenList(LEDScreenId).TouchPieceColumnsNum = 4
+            End If
+            'Debug.WriteLine($"{LEDScreenId} {sysInfo.ScreenList(LEDScreenId).TouchPieceRowsNum},{sysInfo.ScreenList(LEDScreenId).TouchPieceColumnsNum}")
+
             '创建上次点击状态缓存
             ReDim sysInfo.ScreenList(LEDScreenId).ClickHistoryArray((sysInfo.ScreenList(LEDScreenId).DefaultHeight \ sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight) * sysInfo.ScreenList(LEDScreenId).TouchPieceRowsNum,
                                                                    (sysInfo.ScreenList(LEDScreenId).DefaultWidth \ sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth) * sysInfo.ScreenList(LEDScreenId).TouchPieceColumnsNum)
 
             'putlog($"{LEDScreenIndex}:{(screenMain(LEDScreenIndex).height \ screenMain(LEDScreenIndex).ScanBoardHeight) * 4},{(screenMain(LEDScreenIndex).width \ screenMain(LEDScreenIndex).ScanBoardWidth) * 4}")
 
-            Showinfo($">>>>{sysInfo.Language.GetLanguage("显示屏")}{LEDScreenId}: start[{sysInfo.ScreenList(LEDScreenId).DefaultX},{sysInfo.ScreenList(LEDScreenId).DefaultY}]
-size[{sysInfo.ScreenList(LEDScreenId).DefaultWidth},{sysInfo.ScreenList(LEDScreenId).DefaultHeight}]
-touch[{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth},{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight}]")
-            Showinfo($"        {sysInfo.Language.GetLanguage("屏幕块")}[{LEDScreenInfoList(LEDScreenId).ScanBoardInfoList.Count}]")
+            '            Showinfo($">>>>{sysInfo.Language.GetLanguage("显示屏")}{LEDScreenId}: start[{sysInfo.ScreenList(LEDScreenId).DefaultX},{sysInfo.ScreenList(LEDScreenId).DefaultY}]
+            'size[{sysInfo.ScreenList(LEDScreenId).DefaultWidth},{sysInfo.ScreenList(LEDScreenId).DefaultHeight}]
+            'touch[{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth},{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardHeight}]")
+            '            Showinfo($"        {sysInfo.Language.GetLanguage("屏幕块")}[{LEDScreenInfoList(LEDScreenId).ScanBoardInfoList.Count}]")
 
             sysInfo.ScreenList(LEDScreenId).SenderList = New List(Of Integer)
             '遍历屏幕
@@ -273,6 +291,7 @@ touch[{sysInfo.ScreenList(LEDScreenId).DefaultScanBoardWidth},{sysInfo.ScreenLis
     ''' 后台线程
     ''' </summary>
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        '判断诺瓦服务是否启动
         If System.Diagnostics.Process.GetProcessesByName("MarsServerProvider").Length = 0 Then
             Dim tmpProcessHwnd As Process = Process.Start($".\Nova\Server\MarsServerProvider.exe")
             Showinfo($"{sysInfo.Language.GetLanguage("启动Nova服务")}：{If(tmpProcessHwnd.Handle, True, False)}")

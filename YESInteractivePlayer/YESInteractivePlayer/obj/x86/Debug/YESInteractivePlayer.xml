@@ -102,6 +102,11 @@ YESInteractivePlayer
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
+<member name="P:YESInteractivePlayer.My.Resources.Resources.YESTECH">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
 <member name="M:YESInteractivePlayer.FormMain.RegisterHotKey(System.Int32,System.Int32,System.Int32,System.Int32)">
  <summary>
  声明注册热键API函数
@@ -155,6 +160,11 @@ YESInteractivePlayer
 <member name="M:YESInteractivePlayer.FormMain.FormMain_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
  <summary>
  开启调试模式
+ </summary>
+</member>
+<member name="M:YESInteractivePlayer.FormMain.ToolStripButton2_Click(System.Object,System.EventArgs)">
+ <summary>
+ 设置
  </summary>
 </member>
 <member name="M:YESInteractivePlayer.FormMain.SetResetTemp(System.Int32)">
@@ -249,11 +259,6 @@ YESInteractivePlayer
 </member>
 <member name="M:YESInteractivePlayer.FormMain.Timer1_Tick(System.Object,System.EventArgs)">
  定时刷新发送卡状态
-</member>
-<member name="M:YESInteractivePlayer.FormNovaInit.TextBox1_TextChanged(System.Object,System.EventArgs)">
- <summary>
- 自动滚动到最底端
- </summary>
 </member>
 <member name="M:YESInteractivePlayer.FormNovaInit.GetEquipmentIPData(System.Object,Nova.Mars.SDK.MarsEquipmentIPEventArgs)">
  <summary>

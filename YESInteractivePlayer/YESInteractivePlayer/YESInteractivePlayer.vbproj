@@ -163,34 +163,34 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormMain.Designer.vb">
+    <Compile Include="Forms\FormMain.Designer.vb">
       <DependentUpon>FormMain.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.vb">
+    <Compile Include="Forms\FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormNovaInit.Designer.vb">
+    <Compile Include="Forms\FormNovaInit.Designer.vb">
       <DependentUpon>FormNovaInit.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormNovaInit.vb">
+    <Compile Include="Forms\FormNovaInit.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormOption.Designer.vb">
+    <Compile Include="Forms\FormOption.Designer.vb">
       <DependentUpon>FormOption.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormOption.vb">
+    <Compile Include="Forms\FormOption.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPlay.Designer.vb">
+    <Compile Include="Forms\FormPlay.Designer.vb">
       <DependentUpon>FormPlay.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormPlay.vb">
+    <Compile Include="Forms\FormPlay.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModuleFunction.vb" />
-    <Compile Include="ModuleSmartTimeApp.vb" />
-    <Compile Include="ModuleStructure.vb" />
-    <Compile Include="ModuleVar.vb" />
+    <Compile Include="Modules\ModuleFunction.vb" />
+    <Compile Include="Modules\ModuleSmartTimeApp.vb" />
+    <Compile Include="Modules\ModuleStructure.vb" />
+    <Compile Include="Modules\ModuleVar.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -208,16 +208,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormMain.resx">
+    <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormNovaInit.resx">
+    <EmbeddedResource Include="Forms\FormNovaInit.resx">
       <DependentUpon>FormNovaInit.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormOption.resx">
+    <EmbeddedResource Include="Forms\FormOption.resx">
       <DependentUpon>FormOption.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPlay.resx">
+    <EmbeddedResource Include="Forms\FormPlay.resx">
       <DependentUpon>FormPlay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -243,6 +243,7 @@
   <ItemGroup>
     <Content Include="main.ico" />
     <Content Include="README.txt" />
+    <None Include="res\YESTECH.png" />
     <None Include="res\ServerNormal.png" />
     <None Include="res\ServerFault.png" />
     <None Include="res\DisplayMode3G.png" />

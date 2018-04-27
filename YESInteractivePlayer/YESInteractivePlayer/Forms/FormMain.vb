@@ -42,9 +42,6 @@ Public Class FormMain
         'checkdog()
 
         System.IO.Directory.CreateDirectory("./data")
-        'System.IO.Directory.CreateDirectory("./logs")
-
-        'Putlog("启动 " & Application.ExecutablePath)
 
         '反序列化
         If System.IO.File.Exists("./data/setting.db") Then
@@ -66,14 +63,8 @@ Public Class FormMain
         Else
             '第一次使用初始化参数
             ReDim sysInfo.ScreenList(32 - 1)
-            For i As Integer = 0 To sysInfo.ScreenList.Length - 1
-                sysInfo.ScreenList(i).TouchPieceColumnsNum = 4
-                sysInfo.ScreenList(i).TouchPieceRowsNum = 4
-            Next
-            'sysInfo.curtainList = New List(Of curtainInfo)
             sysInfo.StartLocation.X = Screen.PrimaryScreen.Bounds.Width / 2
             sysInfo.StartLocation.Y = Screen.PrimaryScreen.Bounds.Height / 2
-            'sysInfo.filesList = New Hashtable
         End If
 
         If sysInfo.CurtainList Is Nothing Then
@@ -97,25 +88,25 @@ Public Class FormMain
                 End If
                 ComboBox2.Items.Add(i)
             Next
-
-            'If ComboBox2.Items.Count Then
-            '    ComboBox2.SelectedIndex = 0
-            'End If
         End If
 
-        '加载语言包
-        sysInfo.Language = New Wangk.Resource.MultiLanguage
-        sysInfo.Language.SelectLanguageId = sysInfo.SelectLanguageId
+        With sysInfo
+            '加载语言包
+            .Language = New Wangk.Resource.MultiLanguage
+            .Language.SelectLanguageId = .SelectLanguageId
 
-        sysInfo.ZoomProportion = If(sysInfo.ZoomProportion, sysInfo.ZoomProportion, 1)
-        sysInfo.ZoomTmpNumerator = If(sysInfo.ZoomTmpNumerator, sysInfo.ZoomTmpNumerator, 1)
-        sysInfo.ZoomTmpDenominator = If(sysInfo.ZoomTmpDenominator, sysInfo.ZoomTmpDenominator, 1)
-        sysInfo.TouchSensitivity = If(sysInfo.TouchSensitivity, sysInfo.TouchSensitivity, 1)
-        sysInfo.ClickValidNums = If(sysInfo.ClickValidNums, sysInfo.ClickValidNums, 1)
-        sysInfo.ResetTemp = sysInfo.ResetTemp
-        sysInfo.ResetSec = sysInfo.ResetSec
-        sysInfo.InquireTimeSec = 20
+            '检测参数
+            .ZoomProportion = If(.ZoomProportion, .ZoomProportion, 1)
+            .ZoomTmpNumerator = If(.ZoomTmpNumerator, .ZoomTmpNumerator, 1)
+            .ZoomTmpDenominator = If(.ZoomTmpDenominator, .ZoomTmpDenominator, 1)
+            .TouchSensitivity = If(.TouchSensitivity, .TouchSensitivity, 5)
+            .ClickValidNums = If(.ClickValidNums, .ClickValidNums, 2)
+            .ResetTemp = If(.ResetTemp, .ResetTemp, 5)
+            .ResetSec = If(.ResetSec, .ResetSec, 20)
+            .InquireTimeSec = 20
+        End With
 
+        '恢复关闭前位置
         Me.Location = sysInfo.StartLocation
         If Me.Location.X > Screen.PrimaryScreen.Bounds.Width Or
             Me.Location.Y > Screen.PrimaryScreen.Bounds.Height Then
@@ -124,6 +115,7 @@ Public Class FormMain
                                     Screen.PrimaryScreen.Bounds.Height / 2)
         End If
 
+        '设置下拉列表只读
         ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList
         ComboBox2.DropDownStyle = ComboBoxStyle.DropDownList
 
@@ -132,12 +124,6 @@ Public Class FormMain
         RegisterHotKey(Me.Handle.ToInt32, 2, 0, Keys.F2)
         RegisterHotKey(Me.Handle.ToInt32, 3, 0, Keys.F3)
         RegisterHotKey(Me.Handle.ToInt32, 4, 0, Keys.F4)
-
-        '运行F1ToolStripMenuItem.BackColor = Color.FromArgb(&H0, &HE3, &HB)
-        '测试F2ToolStripMenuItem.BackColor = Color.FromArgb(&HFF, &H7F, &H27)
-        '黑屏F3ToolStripMenuItem.BackColor = Color.FromArgb(&H7F, &H7F, &H7F)
-        '忽略F4ToolStripMenuItem.BackColor = Color.FromArgb(&HB0, &HAF, &HDF)
-        'ToolStripDropDownButton1.BackColor = 运行F1ToolStripMenuItem.BackColor
 
         '发送卡状态
         Timer1.Interval = 1000
@@ -156,22 +142,11 @@ Public Class FormMain
             .saveDaysMax = 30
         }
         sysInfo.logger.Init()
-    End Sub
 
-    '''' <summary>
-    '''' 删除多少天前的log文件
-    '''' </summary>
-    'Private Sub DeleteLog(saveDays As Integer)
-    '    Dim nowtime As DateTime = DateTime.Now
-    '    Dim files As String() = Directory.GetFiles("./logs")
-    '    For Each file In files
-    '        Dim f As FileInfo = New FileInfo(file)
-    '        Dim t As TimeSpan = nowtime - f.LastWriteTime
-    '        If (t.Days > saveDays) Then
-    '            f.Delete()
-    '        End If
-    '    Next
-    'End Sub
+        '读取屏幕配置
+        Dim tmpDialog As New FormNovaInit
+        tmpDialog.ShowDialog()
+    End Sub
 
     ''' <summary>
     ''' 创建播放窗体
@@ -199,6 +174,7 @@ Public Class FormMain
 
         '显示标记的幕布窗体
         Dim tmpCreatDialogThread As Threading.Thread
+
         For i As Integer = 0 To sysInfo.CurtainList.Count - 1
             With sysInfo.CurtainList.Item(i)
                 ComboBox1.Items.Add($"{i} { .Remark}")
@@ -228,15 +204,16 @@ Public Class FormMain
                                          (.DefaultWidth \ .DefaultScanBoardWidth) * .TouchPieceColumnsNum)
             End With
         Next
+        Dim qwe As Integer = 0
 
         '清空控制器连接标记
         For i As Integer = 0 To sysInfo.SenderList.Length - 1
             sysInfo.SenderList(i).Link = False
         Next
         '判断哪些控制器要连接
-        'TODO: Collection was modified,控制器配置好后未接屏幕,然后第一次启动程序报错,再启动就没问题
-        For Each i In sysInfo.CurtainList
-            For Each j In i.ScreenList
+        ''TODO: Collection was modified,控制器配置好后未接屏幕,然后第一次启动程序报错,再启动就没问题
+        For i As Integer = 0 To sysInfo.CurtainList.Count - 1
+            For Each j In sysInfo.CurtainList.Item(i).ScreenList
                 If Not sysInfo.ScreenList(j).ExistFlage Then
                     Continue For
                 End If
@@ -255,40 +232,41 @@ Public Class FormMain
             ComboBox1.SelectedIndex = 0
         End If
 
-        'For i As Integer = 0 To sysInfo.SenderList.Length - 1
-        '    ToolStripDropDownButton2.DropDownItems(i).Enabled = sysInfo.SenderList(i).Link
-        'Next
+        ''等待播放窗体显示完毕
+        'Try
+        '    Do
+        '        Thread.Sleep(100)
 
-        '等待播放窗体显示完毕
-        Thread.Sleep(1000)
+        '        With sysInfo.CurtainList
+        '            For i As Integer = 0 To .Count - 1
+        '                If Not .Item(i).PlayDialog.Visible Then
+        '                    Continue Do
+        '                End If
+        '            Next
+        '        End With
 
-        Try
-            For i As Integer = 0 To sysInfo.CurtainList.Count - 1
-                With sysInfo.CurtainList.Item(i)
-                    '更新位置及大小
-                    .PlayDialog.SetLocation(.X, .Y, .Width, .Height)
-                End With
-            Next
-        Catch ex As Exception
-            '第一次显示播放窗体时尺寸未改变大小
-            '暂时用此办法解决
-        End Try
+        '        Exit Do
+        '    Loop
+        'Catch ex As Exception
+        'End Try
+
+        'Try
+        '    For i As Integer = 0 To sysInfo.CurtainList.Count - 1
+        '        With sysInfo.CurtainList.Item(i)
+        '            '更新位置及大小
+        '            .PlayDialog.SetLocation(.X, .Y, .Width, .Height)
+        '        End With
+        '    Next
+        'Catch ex As Exception
+        '    '第一次显示播放窗体时尺寸未改变大小
+        '    '暂时用此办法解决
+        'End Try
 
         '将焦点移至主窗体
         Me.Activate()
     End Sub
 
     Private Sub FormMain_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        '读取屏幕参数
-        'TODO:测试将读取窗体放在初始化函数
-        Dim tmpDialog As New FormNovaInit
-        tmpDialog.ShowDialog()
-
-        ''加载发送卡列表
-        'For i As Integer = 0 To sysInfo.SenderList.Length - 1
-        '    ToolStripDropDownButton2.DropDownItems.Add($"控制器{i}")
-        'Next
-
         '显示幕布
         ShowCurtain()
 
@@ -356,8 +334,8 @@ Public Class FormMain
         UnregisterHotKey(Me.Handle.ToInt32, Keys.F4)
 
         '关闭播放窗体
-        For Each i In sysInfo.CurtainList
-            i.PlayDialog.CloseDialog(True)
+        For i As Integer = 0 To sysInfo.CurtainList.Count - 1
+            sysInfo.CurtainList.Item(i).PlayDialog.CloseDialog(True)
         Next
 
         '序列化
@@ -381,10 +359,9 @@ Public Class FormMain
         End If
     End Sub
 
-    'Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-
-    'End Sub
-
+    ''' <summary>
+    ''' 设置
+    ''' </summary>
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
         Dim tmpDialog As New FormOption
         tmpDialog.ShowDialog()
@@ -428,7 +405,6 @@ Public Class FormMain
     ''' 连接
     ''' </summary>
     Private Sub OnLinkCon()
-        'ToolStripDropDownButton1.Enabled = True
         Button6.Enabled = True
         Button7.Enabled = True
         Button8.Enabled = True
@@ -438,8 +414,8 @@ Public Class FormMain
 
         ToolStripButton2.Enabled = False
         ToolStripButton1.Text = sysInfo.Language.GetLanguage("断开连接")
-        'ToolStripButton1.BackColor = Color.OrangeRed
         ToolStripButton1.Image = My.Resources.disconnect
+
         Timer1.Start()
     End Sub
 
@@ -447,7 +423,6 @@ Public Class FormMain
     ''' 断开连接
     ''' </summary>
     Private Sub OffLinkCon()
-        'ToolStripDropDownButton1.Enabled = False
         Button6.Enabled = False
         Button7.Enabled = False
         Button8.Enabled = False
@@ -455,10 +430,7 @@ Public Class FormMain
 
         ToolStripButton2.Enabled = True
         ToolStripButton1.Text = sysInfo.Language.GetLanguage("连接控制器")
-        'ToolStripButton1.BackColor = Color.FromArgb(&H0, &HE3, &HB)
         ToolStripButton1.Image = My.Resources.connect
-
-        'ToolStripDropDownButton2.Image = My.Resources.ServerFault
 
         Timer1.Stop()
     End Sub
@@ -526,17 +498,21 @@ Public Class FormMain
                 Next
             Catch ex As Exception
                 '异常关闭连接
+                sysInfo.LinkFlage = False
+
                 For Each i In sysInfo.SenderList
+                    If i.Link = False Then
+                        Continue For
+                    End If
+
                     Try
-                        i.WorkThread.Abort()
-                    Catch ex2 As Exception
-                    End Try
-                    Try
-                        i.CliSocket.Close()
-                    Catch ex3 As Exception
+                        With i
+                            .WorkThread.Join()
+                        End With
+                    Catch ex1 As Exception
                     End Try
                 Next
-                sysInfo.LinkFlage = True
+
                 MsgBox($"控制器连接异常:{ex.Message}",
                        MsgBoxStyle.Information,
                        "连接")
@@ -561,12 +537,9 @@ Public Class FormMain
                 Try
                     With i
                         .WorkThread.Join()
-                        '.WorkThread.Abort()
-                        '.CliSocket.Close()
                     End With
                 Catch ex As Exception
                 End Try
-
             Next
             'Thread.Sleep(200)
 
@@ -655,8 +628,6 @@ Public Class FormMain
 
             'Dim asd As New Stopwatch
             'asd.Start()
-            '发送到发送卡的字符
-            'Dim showstr As String = Nothing
 
             Try
                 '向发送卡 请求接收传感器数据数据
@@ -676,14 +647,11 @@ Public Class FormMain
                 'sysInfo.logger.LogThis("请求接收传感器数据异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
                 exceptionNums += 1
                 Continue Do
-            Catch ex As ThreadAbortException
+                'Catch ex As ThreadAbortException
                 '不记录终止异常
             Catch ex As Exception
                 sysInfo.logger.LogThis("请求传感器数据其他异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
             End Try
-
-            'Dim asd As New Stopwatch
-            'asd.Start()
 
             '向发送卡 请求发送传感器数据数据
             Try
@@ -821,15 +789,11 @@ Public Class FormMain
                 lastErrorStr = ex.Message
                 'sysInfo.logger.LogThis("接收传感器数据数据通信异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
                 exceptionNums += 1
-            Catch ex As ThreadAbortException
+                'Catch ex As ThreadAbortException
                 '不记录终止异常
             Catch ex As Exception
                 sysInfo.logger.LogThis("接收传感器数据数据其他异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
             End Try
-
-            'If asd.ElapsedMilliseconds > 4 Then
-            '    Debug.WriteLine(asd.ElapsedMilliseconds)
-            'End If
 
             Thread.Sleep(sysInfo.InquireTimeSec)
         Loop
@@ -861,8 +825,6 @@ Public Class FormMain
             sysInfo.FilesList.Add(tmp.SafeFileNames(i), tmp.FileNames(i))
         Next
 
-        ''显示第一个添加的文件名
-        'ComboBox2.Text = tmp.SafeFileNames(0)
     End Sub
 
     ''' <summary>
@@ -907,38 +869,11 @@ Public Class FormMain
         LastSelectPlayFile = ComboBox2.Text
     End Sub
 
-    '''' <summary>
-    '''' 播放
-    '''' </summary>
-    'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-    '    If ComboBox1.Text = "" Then
-    '        Exit Sub
-    '    End If
-
-    '    sysInfo.CurtainList.Item(ComboBox1.SelectedIndex).PlayDialog.Play(sysInfo.FilesList.Item(ComboBox2.Text))
-    'End Sub
-
-    '''' <summary>
-    '''' 播放至所有屏幕
-    '''' </summary>
-    'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-    '    If ComboBox1.Text = "" Then
-    '        Exit Sub
-    '    End If
-
-    '    For Each i In sysInfo.CurtainList
-    '        i.PlayDialog.Play(sysInfo.FilesList.Item(ComboBox2.Text))
-    '    Next
-    'End Sub
-
     ''' <summary>
     ''' 互动
     ''' </summary>
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         sysInfo.DisplayMode = 0
-
-        'ToolStripDropDownButton1.Text = 运行F1ToolStripMenuItem.Text
-        'ToolStripDropDownButton1.BackColor = 运行F1ToolStripMenuItem.BackColor
 
         Button6.Image = My.Resources.DisplayMode0
         Button7.Image = My.Resources.DisplayMode1G
@@ -948,6 +883,8 @@ Public Class FormMain
         For Each i In sysInfo.CurtainList
             i.PlayDialog.SwitchPlayMode(True)
         Next
+
+        GroupBox2.Enabled = True
     End Sub
 
     ''' <summary>
@@ -955,9 +892,6 @@ Public Class FormMain
     ''' </summary>
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         sysInfo.DisplayMode = 1
-
-        'ToolStripDropDownButton1.Text = 测试F2ToolStripMenuItem.Text
-        'ToolStripDropDownButton1.BackColor = 测试F2ToolStripMenuItem.BackColor
 
         Button6.Image = My.Resources.DisplayMode0G
         Button7.Image = My.Resources.DisplayMode1
@@ -967,6 +901,8 @@ Public Class FormMain
         For Each i In sysInfo.CurtainList
             i.PlayDialog.SwitchTestMode(True)
         Next
+
+        GroupBox2.Enabled = False
     End Sub
 
     ''' <summary>
@@ -974,9 +910,6 @@ Public Class FormMain
     ''' </summary>
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         sysInfo.DisplayMode = 2
-
-        'ToolStripDropDownButton1.Text = 黑屏F3ToolStripMenuItem.Text
-        'ToolStripDropDownButton1.BackColor = 黑屏F3ToolStripMenuItem.BackColor
 
         Button6.Image = My.Resources.DisplayMode0G
         Button7.Image = My.Resources.DisplayMode1G
@@ -986,6 +919,8 @@ Public Class FormMain
         For Each i In sysInfo.CurtainList
             i.PlayDialog.SwitchBlankScreenMode(True)
         Next
+
+        GroupBox2.Enabled = False
     End Sub
 
     ''' <summary>
@@ -1000,14 +935,10 @@ Public Class FormMain
             Next
         End If
 
-        'ToolStripDropDownButton1.Text = 忽略F4ToolStripMenuItem.Text
-        'ToolStripDropDownButton1.BackColor = 忽略F4ToolStripMenuItem.BackColor
-
         Button6.Image = My.Resources.DisplayMode0G
         Button7.Image = My.Resources.DisplayMode1G
         Button8.Image = My.Resources.DisplayMode2G
         Button9.Image = My.Resources.DisplayMode3
-
     End Sub
 
     ''' <summary>
@@ -1034,7 +965,6 @@ Public Class FormMain
     ''' </summary>
     Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
         sysInfo.SetCaptureFlage = CheckBox2.Checked
-        'Debug.WriteLine(sysInfo.SetCaptureFlage)
     End Sub
 
     ''' 定时刷新发送卡状态
@@ -1046,7 +976,6 @@ Public Class FormMain
                     Continue For
                 End If
 
-                'ToolStripDropDownButton2.DropDownItems(i).Text = $"控制器{i}:{ .MaxReadNum}"
                 minReadNum = If(minReadNum > .MaxReadNum, .MaxReadNum, minReadNum)
             End With
 
@@ -1058,8 +987,6 @@ Public Class FormMain
             sysInfo.InquireTimeSec += 1
         End If
 
-        'Debug.WriteLine($"read nums: {minReadNum}")
-        'ToolStripDropDownButton2.Image = If(minReadNum, My.Resources.ServerNormal, My.Resources.ServerFault)
     End Sub
 
 End Class

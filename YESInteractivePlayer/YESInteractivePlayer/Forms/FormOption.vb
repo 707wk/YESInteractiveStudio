@@ -568,8 +568,8 @@ Public Class FormOption
 
                     sysInfo.ScreenList(.Cells(0).Value).DefaultX = .Cells(1).Value
                     sysInfo.ScreenList(.Cells(0).Value).DefaultY = .Cells(2).Value
-                    sysInfo.ScreenList(.Cells(0).Value).TouchPieceRowsNum = .Cells(3).Value
-                    sysInfo.ScreenList(.Cells(0).Value).TouchPieceColumnsNum = .Cells(4).Value
+                    'sysInfo.ScreenList(.Cells(0).Value).TouchPieceRowsNum = .Cells(3).Value
+                    'sysInfo.ScreenList(.Cells(0).Value).TouchPieceColumnsNum = .Cells(4).Value
                 End With
 
             Catch ex As Exception
@@ -650,8 +650,8 @@ Public Class FormOption
 
                     sysInfo.ScreenList(.Cells(0).Value).DefaultX = .Cells(1).Value
                     sysInfo.ScreenList(.Cells(0).Value).DefaultY = .Cells(2).Value
-                    sysInfo.ScreenList(.Cells(0).Value).TouchPieceRowsNum = .Cells(3).Value
-                    sysInfo.ScreenList(.Cells(0).Value).TouchPieceColumnsNum = .Cells(4).Value
+                    'sysInfo.ScreenList(.Cells(0).Value).TouchPieceRowsNum = .Cells(3).Value
+                    'sysInfo.ScreenList(.Cells(0).Value).TouchPieceColumnsNum = .Cells(4).Value
                 End With
 
             Catch ex As Exception
