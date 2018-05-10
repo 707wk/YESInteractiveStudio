@@ -15,6 +15,7 @@ using System.Diagnostics;
 
 namespace WaterDemo
 {
+    [Serializable]
     public partial class UserControl1 : UserControl
     {
         Direct3D Direct3D;
@@ -33,6 +34,7 @@ namespace WaterDemo
             {
                 Path = Path + tmp[i] + "\\";
             }
+            Debug.WriteLine(Path);
 
             InitializeComponent();
             Initialize();
@@ -57,7 +59,7 @@ namespace WaterDemo
 
             Device = new Device(Direct3D, 0, DeviceType.Hardware, this.Handle, CreateFlags.HardwareVertexProcessing, PresentParameters);
 
-            Device.SetTexture(0, Texture.FromFile(Device, Path + "back.jpg"));
+            //Device.SetTexture(0, Texture.FromFile(Device, Path + "back.jpg"));
 
             map = new Texture(Device, water.Width, water.Height, 0, Usage.None, Format.R32F, Pool.Managed);
 

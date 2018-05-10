@@ -163,6 +163,9 @@ Public Class FormOption
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '幕布
+        'For i As Integer = 0 To sysInfo.ScreenList.Length - 1
+        '    sysInfo.ScreenList(i).CurtainListId = -1
+        'Next
         For i As Integer = 0 To sysInfo.CurtainList.Count - 1
             '刷新屏幕记录的幕布位置
             For Each j In sysInfo.CurtainList.Item(i).ScreenList
@@ -198,6 +201,11 @@ Public Class FormOption
 
             sysInfo.CurtainList.Item(i) = tmp
         Next
+
+        ''TODO:Debug
+        ''        For Each j In sysInfo.ScreenList
+        ''            Debug.Write(" " + j.CurtainListId.ToString)
+        ''        Next
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '屏幕

@@ -67,7 +67,7 @@ Public Class FormPlay
 
     Private Sub FormPlay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         '窗体置顶
-        Me.TopMost = True
+        'Me.TopMost = True
 
         '隐藏播放控件
         'AxShockwaveFlash1.Hide()
@@ -234,6 +234,8 @@ Public Class FormPlay
 
         Me.BackColor = Color.Black
         Me.Refresh()
+
+        Debug.WriteLine("curtainListId" + curtainListId.ToString)
 
         For Each tmp In sysInfo.CurtainList.Item(curtainListId).ScreenList
             '缩放后触摸单元高度

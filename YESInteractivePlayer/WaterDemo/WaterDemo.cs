@@ -11,7 +11,7 @@ using YESInteractiveSDK;
 namespace WaterDemo
 {
     [Serializable]
-    class WaterDemo : IYESInterfaceSDK
+    class WaterDemo : MarshalByRefObject,IYESInterfaceSDK
     {
         UserControl1 tmp;
         public void InitAddonFunc(Control Parent)
@@ -34,7 +34,7 @@ namespace WaterDemo
 
         public void PointActive(ModuleStructure.PointInfo[] Point)
         {
-
+            Debug.WriteLine("");
         }
     }
 }

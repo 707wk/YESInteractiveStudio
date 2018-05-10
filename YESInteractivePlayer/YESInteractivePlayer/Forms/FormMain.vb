@@ -37,6 +37,7 @@ Public Class FormMain
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.KeyPreview = True
+        Me.TopMost = True
 
         '测试时关闭登陆验证
         'checkdog()
@@ -115,8 +116,10 @@ Public Class FormMain
 
         '恢复关闭前位置
         Me.Location = sysInfo.StartLocation
-        If Me.Location.X > Screen.PrimaryScreen.Bounds.Width Or
-            Me.Location.Y > Screen.PrimaryScreen.Bounds.Height Then
+        If Me.Location.X > Screen.PrimaryScreen.Bounds.Width - Me.Location.X OrElse
+                Me.Location.X < 0 OrElse
+            Me.Location.Y > Screen.PrimaryScreen.Bounds.Height - Me.Location.Y OrElse
+            Me.Location.Y < 0 Then
 
             Me.Location = New Point(Screen.PrimaryScreen.Bounds.Width / 2,
                                     Screen.PrimaryScreen.Bounds.Height / 2)
@@ -201,6 +204,7 @@ Public Class FormMain
         '重建点击历史缓存[20180310]
         For i As Integer = 0 To sysInfo.ScreenList.Length - 1
             If Not sysInfo.ScreenList(i).ExistFlage Then
+                sysInfo.ScreenList(i).CurtainListId = -1
                 Continue For
             End If
 
@@ -221,6 +225,10 @@ Public Class FormMain
         For i As Integer = 0 To sysInfo.CurtainList.Count - 1
             For Each j In sysInfo.CurtainList.Item(i).ScreenList
                 If Not sysInfo.ScreenList(j).ExistFlage Then
+                    Continue For
+                End If
+
+                If sysInfo.ScreenList(j).CurtainListId < 0 Then
                     Continue For
                 End If
 
@@ -422,7 +430,7 @@ Public Class FormMain
         ToolStripButton1.Text = sysInfo.Language.GetLanguage("断开连接")
         ToolStripButton1.Image = My.Resources.disconnect
 
-        GroupBox2.Enabled = True
+        'GroupBox2.Enabled = True
 
         Timer1.Start()
     End Sub
@@ -440,7 +448,7 @@ Public Class FormMain
         ToolStripButton1.Text = sysInfo.Language.GetLanguage("连接控制器")
         ToolStripButton1.Image = My.Resources.connect
 
-        GroupBox2.Enabled = False
+        'GroupBox2.Enabled = False
 
         Timer1.Stop()
     End Sub
@@ -539,6 +547,8 @@ Public Class FormMain
             '断开控制器
             sysInfo.LinkFlage = False
 
+            Thread.Sleep(300)
+
             For Each i In sysInfo.SenderList
                 If i.Link = False Then
                     Continue For
@@ -546,7 +556,7 @@ Public Class FormMain
 
                 Try
                     With i
-                        .WorkThread.Join()
+                        .WorkThread.Abort()
                     End With
                 Catch ex As Exception
                 End Try
@@ -703,6 +713,11 @@ Public Class FormMain
                         End If
                         Dim tmp As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{senderId}-{bytes2(j + 1)}-{(bytes2(j + 2) * 256 + bytes2(j + 3))}")
 
+                        '未显示则跳过
+                        If sysInfo.ScreenList(tmp.ScreenId).CurtainListId < 0 Then
+                            Continue For
+                        End If
+
                         '计算总点击块
                         Dim tmpClickValidSum As Integer = 0
                         For k = 0 To 4 * 4 - 1
@@ -813,6 +828,7 @@ Public Class FormMain
         Catch ex As Exception
         End Try
 
+        Debug.WriteLine($"sender{senderId} exit")
     End Sub
 
     '选择幕布
@@ -824,7 +840,8 @@ Public Class FormMain
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         '添加flash文件
         Dim tmp As New OpenFileDialog
-        tmp.Filter = "Flash或DLL插件|*.SWF;*.DLL"
+        'tmp.Filter = "Flash或DLL插件|*.SWF;*.DLL"
+        tmp.Filter = "Flash|*.SWF"
         tmp.Multiselect = True
         If tmp.ShowDialog() <> DialogResult.OK Then
             Exit Sub
@@ -910,7 +927,7 @@ Public Class FormMain
             i.PlayDialog.SwitchPlayMode(True)
         Next
 
-        GroupBox2.Enabled = True
+        'GroupBox2.Enabled = True
     End Sub
 
     ''' <summary>
@@ -928,7 +945,7 @@ Public Class FormMain
             i.PlayDialog.SwitchTestMode(True)
         Next
 
-        GroupBox2.Enabled = False
+        'GroupBox2.Enabled = False
     End Sub
 
     ''' <summary>
@@ -946,7 +963,7 @@ Public Class FormMain
             i.PlayDialog.SwitchBlankScreenMode(True)
         Next
 
-        GroupBox2.Enabled = False
+        'GroupBox2.Enabled = False
     End Sub
 
     ''' <summary>
@@ -954,6 +971,8 @@ Public Class FormMain
     ''' </summary>
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         sysInfo.DisplayMode = If(DebugFlage, 4, 3)
+
+        Debug.WriteLine("mode:" + sysInfo.DisplayMode.ToString)
 
         If DebugFlage Then
             For Each i In sysInfo.CurtainList
@@ -1007,11 +1026,13 @@ Public Class FormMain
 
         Next
 
-        If minReadNum < 40 Then
+        If minReadNum < 40 AndAlso
+            sysInfo.InquireTimeSec >= 0 Then
             sysInfo.InquireTimeSec -= 1
         ElseIf minReadNum > 42 Then
             sysInfo.InquireTimeSec += 1
         End If
 
+        Debug.WriteLine(minReadNum)
     End Sub
 End Class

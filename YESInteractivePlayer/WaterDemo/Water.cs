@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace Water
 {
+    [Serializable]
     unsafe class Water : IDisposable
     {
         [DllImport("kernel32.dll", EntryPoint = "RtlMoveMemory")]
