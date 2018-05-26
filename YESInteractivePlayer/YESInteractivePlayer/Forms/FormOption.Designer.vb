@@ -95,6 +95,8 @@ Partial Class FormOption
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox15 = New System.Windows.Forms.GroupBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
@@ -107,7 +109,6 @@ Partial Class FormOption
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.删除ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -720,7 +721,7 @@ Partial Class FormOption
         'NumericUpDown5
         '
         Me.NumericUpDown5.Location = New System.Drawing.Point(37, 82)
-        Me.NumericUpDown5.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.NumericUpDown5.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.NumericUpDown5.Name = "NumericUpDown5"
         Me.NumericUpDown5.Size = New System.Drawing.Size(46, 21)
         Me.NumericUpDown5.TabIndex = 4
@@ -762,7 +763,6 @@ Partial Class FormOption
         'GroupBox6
         '
         Me.GroupBox6.Controls.Add(Me.ComboBox2)
-        Me.GroupBox6.Enabled = False
         Me.GroupBox6.Location = New System.Drawing.Point(8, 6)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(173, 46)
@@ -850,6 +850,7 @@ Partial Class FormOption
         '
         'TabPage6
         '
+        Me.TabPage6.Controls.Add(Me.CheckBox2)
         Me.TabPage6.Controls.Add(Me.CheckBox1)
         Me.TabPage6.Controls.Add(Me.GroupBox15)
         Me.TabPage6.Controls.Add(Me.Button1)
@@ -861,6 +862,26 @@ Partial Class FormOption
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "接收卡"
         Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(394, 146)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(108, 16)
+        Me.CheckBox2.TabIndex = 8
+        Me.CheckBox2.Text = "旧版接收卡程序"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(288, 53)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(72, 16)
+        Me.CheckBox1.TabIndex = 7
+        Me.CheckBox1.Text = "旧版程序"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'GroupBox15
         '
@@ -973,16 +994,6 @@ Partial Class FormOption
         Me.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem"
         Me.删除ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.删除ToolStripMenuItem.Text = "删除"
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(288, 53)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(72, 16)
-        Me.CheckBox1.TabIndex = 7
-        Me.CheckBox1.Text = "旧版程序"
-        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'FormOption
         '
@@ -1127,4 +1138,5 @@ Partial Class FormOption
     Friend WithEvents Column11 As DataGridViewTextBoxColumn
     Friend WithEvents Column12 As DataGridViewTextBoxColumn
     Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents CheckBox2 As CheckBox
 End Class

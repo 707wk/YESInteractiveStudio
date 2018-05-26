@@ -365,6 +365,11 @@ YESInteractivePlayer
  保存幕布信息修改
  </summary>
 </member>
+<member name="M:YESInteractivePlayer.FormOption.UpdateCurtainListId">
+ <summary>
+ 刷新幕布列表ID
+ </summary>
+</member>
 <member name="M:YESInteractivePlayer.FormOption.Button7_Click(System.Object,System.EventArgs)">
  <summary>
  修改屏幕灵敏度
@@ -920,6 +925,11 @@ YESInteractivePlayer
  Nova配置变量
  </summary>
 </member>
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.ScanBoardOldFlage">
+ <summary>
+ 接收卡是否是旧版
+ </summary>
+</member>
 <member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.FilesList">
  <summary>
  播放列表 key文件名 value文件绝对路径
@@ -957,6 +967,11 @@ YESInteractivePlayer
  1测试
  2黑屏
  3忽略 4显示电容
+ </summary>
+</member>
+<member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.touchMode">
+ <summary>
+ 触摸模式 01合1 14合1 216合1
  </summary>
 </member>
 <member name="F:YESInteractivePlayer.ModuleStructure.SystemInfo.TouchSensitivity">

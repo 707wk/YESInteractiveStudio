@@ -26,64 +26,66 @@ Partial Class FormMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.RibbonControl1 = New DevComponents.DotNetBar.RibbonControl()
         Me.RibbonPanel1 = New DevComponents.DotNetBar.RibbonPanel()
-        Me.RibbonBar3 = New DevComponents.DotNetBar.RibbonBar()
+        Me.RibbonBarOther = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer5 = New DevComponents.DotNetBar.ItemContainer()
-        Me.CheckBoxItem1 = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.CheckBoxItem2 = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.RibbonBar2 = New DevComponents.DotNetBar.RibbonBar()
-        Me.ButtonItem13 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem14 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem15 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem16 = New DevComponents.DotNetBar.ButtonItem()
-        Me.RibbonBar1 = New DevComponents.DotNetBar.RibbonBar()
-        Me.ButtonItem6 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem12 = New DevComponents.DotNetBar.ButtonItem()
+        Me.CheckBoxHidePlayWindow = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.CheckBoxCatchMouse = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.RibbonBarInteractiveMode = New DevComponents.DotNetBar.RibbonBar()
+        Me.ButtonClickMode = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonTestMode = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonBlackMode = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonDebugMode = New DevComponents.DotNetBar.ButtonItem()
+        Me.RibbonBarControl = New DevComponents.DotNetBar.RibbonBar()
+        Me.ButtonConnect = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonDisconnect = New DevComponents.DotNetBar.ButtonItem()
+        Me.RibbonPanel3 = New DevComponents.DotNetBar.RibbonPanel()
+        Me.RibbonBarHardware = New DevComponents.DotNetBar.RibbonBar()
+        Me.Buttonligature = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonControl = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonCheckVersion = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonUpdateBin = New DevComponents.DotNetBar.ButtonItem()
+        Me.RibbonBarGui = New DevComponents.DotNetBar.RibbonBar()
+        Me.ItemContainer12 = New DevComponents.DotNetBar.ItemContainer()
+        Me.LabelItemLanguage = New DevComponents.DotNetBar.LabelItem()
+        Me.ComboBoxItem5 = New DevComponents.DotNetBar.ComboBoxItem()
         Me.RibbonPanel2 = New DevComponents.DotNetBar.RibbonPanel()
-        Me.RibbonBar5 = New DevComponents.DotNetBar.RibbonBar()
+        Me.RibbonBarReset = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer9 = New DevComponents.DotNetBar.ItemContainer()
         Me.ItemContainer10 = New DevComponents.DotNetBar.ItemContainer()
-        Me.LabelItem3 = New DevComponents.DotNetBar.LabelItem()
+        Me.LabelItemTempReset = New DevComponents.DotNetBar.LabelItem()
         Me.ComboBoxItem3 = New DevComponents.DotNetBar.ComboBoxItem()
         Me.LabelItem5 = New DevComponents.DotNetBar.LabelItem()
         Me.ItemContainer11 = New DevComponents.DotNetBar.ItemContainer()
-        Me.LabelItem4 = New DevComponents.DotNetBar.LabelItem()
+        Me.LabelItemTimeReset = New DevComponents.DotNetBar.LabelItem()
         Me.ComboBoxItem4 = New DevComponents.DotNetBar.ComboBoxItem()
         Me.LabelItem6 = New DevComponents.DotNetBar.LabelItem()
-        Me.RibbonBar4 = New DevComponents.DotNetBar.RibbonBar()
+        Me.RibbonBarInteraction = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer6 = New DevComponents.DotNetBar.ItemContainer()
         Me.ItemContainer7 = New DevComponents.DotNetBar.ItemContainer()
-        Me.LabelItem1 = New DevComponents.DotNetBar.LabelItem()
+        Me.LabelItemAntiInterference = New DevComponents.DotNetBar.LabelItem()
         Me.ComboBoxItem1 = New DevComponents.DotNetBar.ComboBoxItem()
         Me.ItemContainer8 = New DevComponents.DotNetBar.ItemContainer()
-        Me.LabelItem2 = New DevComponents.DotNetBar.LabelItem()
+        Me.LabelItemSensitivity = New DevComponents.DotNetBar.LabelItem()
         Me.ComboBoxItem2 = New DevComponents.DotNetBar.ComboBoxItem()
-        Me.RibbonPanel3 = New DevComponents.DotNetBar.RibbonPanel()
-        Me.RibbonBar7 = New DevComponents.DotNetBar.RibbonBar()
-        Me.ButtonItem18 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem17 = New DevComponents.DotNetBar.ButtonItem()
-        Me.RibbonBar6 = New DevComponents.DotNetBar.RibbonBar()
-        Me.ItemContainer12 = New DevComponents.DotNetBar.ItemContainer()
-        Me.LabelItem7 = New DevComponents.DotNetBar.LabelItem()
-        Me.ComboBoxItem5 = New DevComponents.DotNetBar.ComboBoxItem()
-        Me.ApplicationButton1 = New DevComponents.DotNetBar.ApplicationButton()
+        Me.ApplicationFile = New DevComponents.DotNetBar.ApplicationButton()
         Me.ItemContainer1 = New DevComponents.DotNetBar.ItemContainer()
         Me.ItemContainer2 = New DevComponents.DotNetBar.ItemContainer()
         Me.ItemContainer3 = New DevComponents.DotNetBar.ItemContainer()
-        Me.ButtonItem2 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem3 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem4 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem5 = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItemFileNew = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItemFileOpen = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItemFileSave = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItemFileSaveAs = New DevComponents.DotNetBar.ButtonItem()
         Me.GalleryContainer1 = New DevComponents.DotNetBar.GalleryContainer()
-        Me.labelItem8 = New DevComponents.DotNetBar.LabelItem()
-        Me.ButtonItem8 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem9 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem10 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem11 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem7 = New DevComponents.DotNetBar.ButtonItem()
+        Me.HistoryFile = New DevComponents.DotNetBar.LabelItem()
+        Me.HistoryFileName01 = New DevComponents.DotNetBar.ButtonItem()
+        Me.HistoryFileName02 = New DevComponents.DotNetBar.ButtonItem()
+        Me.HistoryFileName03 = New DevComponents.DotNetBar.ButtonItem()
+        Me.HistoryFileName04 = New DevComponents.DotNetBar.ButtonItem()
+        Me.HistoryFileName05 = New DevComponents.DotNetBar.ButtonItem()
         Me.ItemContainer4 = New DevComponents.DotNetBar.ItemContainer()
-        Me.RibbonTabItem1 = New DevComponents.DotNetBar.RibbonTabItem()
-        Me.RibbonTabItem2 = New DevComponents.DotNetBar.RibbonTabItem()
-        Me.RibbonTabItem3 = New DevComponents.DotNetBar.RibbonTabItem()
+        Me.RibbonGeneral = New DevComponents.DotNetBar.RibbonTabItem()
+        Me.RibbonInteraction = New DevComponents.DotNetBar.RibbonTabItem()
+        Me.RibbonTool = New DevComponents.DotNetBar.RibbonTabItem()
         Me.ButtonItem1 = New DevComponents.DotNetBar.ButtonItem()
         Me.QatCustomizeItem1 = New DevComponents.DotNetBar.QatCustomizeItem()
         Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
@@ -91,10 +93,27 @@ Partial Class FormMain
         Me.MicroChartItem2 = New DevComponents.DotNetBar.MicroChartItem()
         Me.MicroChartItem3 = New DevComponents.DotNetBar.MicroChartItem()
         Me.MicroChartItem4 = New DevComponents.DotNetBar.MicroChartItem()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.TreeView1 = New System.Windows.Forms.TreeView()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.RibbonControl1.SuspendLayout()
         Me.RibbonPanel1.SuspendLayout()
-        Me.RibbonPanel2.SuspendLayout()
         Me.RibbonPanel3.SuspendLayout()
+        Me.RibbonPanel2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl1
@@ -109,13 +128,13 @@ Partial Class FormMain
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel2)
         Me.RibbonControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.RibbonControl1.Font = New System.Drawing.Font("微软雅黑", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.RibbonControl1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ApplicationButton1, Me.RibbonTabItem1, Me.RibbonTabItem2, Me.RibbonTabItem3})
+        Me.RibbonControl1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ApplicationFile, Me.RibbonGeneral, Me.RibbonInteraction, Me.RibbonTool})
         Me.RibbonControl1.KeyTipsFont = New System.Drawing.Font("Tahoma", 7.0!)
         Me.RibbonControl1.Location = New System.Drawing.Point(0, 0)
         Me.RibbonControl1.Name = "RibbonControl1"
         Me.RibbonControl1.Padding = New System.Windows.Forms.Padding(0, 0, 0, 3)
         Me.RibbonControl1.QuickToolbarItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem1, Me.QatCustomizeItem1})
-        Me.RibbonControl1.Size = New System.Drawing.Size(663, 107)
+        Me.RibbonControl1.Size = New System.Drawing.Size(786, 107)
         Me.RibbonControl1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonControl1.SystemText.MaximizeRibbonText = "&Maximize the Ribbon"
         Me.RibbonControl1.SystemText.MinimizeRibbonText = "Mi&nimize the Ribbon"
@@ -138,14 +157,14 @@ Partial Class FormMain
         'RibbonPanel1
         '
         Me.RibbonPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonPanel1.Controls.Add(Me.RibbonBar3)
-        Me.RibbonPanel1.Controls.Add(Me.RibbonBar2)
-        Me.RibbonPanel1.Controls.Add(Me.RibbonBar1)
+        Me.RibbonPanel1.Controls.Add(Me.RibbonBarOther)
+        Me.RibbonPanel1.Controls.Add(Me.RibbonBarInteractiveMode)
+        Me.RibbonPanel1.Controls.Add(Me.RibbonBarControl)
         Me.RibbonPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RibbonPanel1.Location = New System.Drawing.Point(0, 27)
         Me.RibbonPanel1.Name = "RibbonPanel1"
         Me.RibbonPanel1.Padding = New System.Windows.Forms.Padding(3, 0, 3, 3)
-        Me.RibbonPanel1.Size = New System.Drawing.Size(663, 77)
+        Me.RibbonPanel1.Size = New System.Drawing.Size(786, 77)
         '
         '
         '
@@ -160,36 +179,36 @@ Partial Class FormMain
         Me.RibbonPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonPanel1.TabIndex = 1
         '
-        'RibbonBar3
+        'RibbonBarOther
         '
-        Me.RibbonBar3.AutoOverflowEnabled = True
-        '
-        '
-        '
-        Me.RibbonBar3.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarOther.AutoOverflowEnabled = True
         '
         '
         '
-        Me.RibbonBar3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar3.ContainerControlProcessDialogKey = True
-        Me.RibbonBar3.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar3.DragDropSupport = True
-        Me.RibbonBar3.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer5})
-        Me.RibbonBar3.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar3.Location = New System.Drawing.Point(422, 0)
-        Me.RibbonBar3.Name = "RibbonBar3"
-        Me.RibbonBar3.Size = New System.Drawing.Size(105, 74)
-        Me.RibbonBar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar3.TabIndex = 2
-        Me.RibbonBar3.Text = "其他"
+        Me.RibbonBarOther.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
         '
         '
-        Me.RibbonBar3.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarOther.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarOther.ContainerControlProcessDialogKey = True
+        Me.RibbonBarOther.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBarOther.DragDropSupport = True
+        Me.RibbonBarOther.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer5})
+        Me.RibbonBarOther.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBarOther.Location = New System.Drawing.Point(422, 0)
+        Me.RibbonBarOther.Name = "RibbonBarOther"
+        Me.RibbonBarOther.Size = New System.Drawing.Size(105, 74)
+        Me.RibbonBarOther.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBarOther.TabIndex = 2
+        Me.RibbonBarOther.Text = "其他"
         '
         '
         '
-        Me.RibbonBar3.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarOther.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBarOther.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
         'ItemContainer5
         '
@@ -199,7 +218,7 @@ Partial Class FormMain
         Me.ItemContainer5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.ItemContainer5.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
         Me.ItemContainer5.Name = "ItemContainer5"
-        Me.ItemContainer5.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.CheckBoxItem1, Me.CheckBoxItem2})
+        Me.ItemContainer5.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.CheckBoxHidePlayWindow, Me.CheckBoxCatchMouse})
         '
         '
         '
@@ -209,136 +228,285 @@ Partial Class FormMain
         '
         Me.ItemContainer5.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'CheckBoxItem1
+        'CheckBoxHidePlayWindow
         '
-        Me.CheckBoxItem1.Name = "CheckBoxItem1"
-        Me.CheckBoxItem1.Text = "隐藏播放窗体"
+        Me.CheckBoxHidePlayWindow.Name = "CheckBoxHidePlayWindow"
+        Me.CheckBoxHidePlayWindow.Text = "隐藏播放窗体"
         '
-        'CheckBoxItem2
+        'CheckBoxCatchMouse
         '
-        Me.CheckBoxItem2.Name = "CheckBoxItem2"
-        Me.CheckBoxItem2.Text = "捕获鼠标"
+        Me.CheckBoxCatchMouse.Name = "CheckBoxCatchMouse"
+        Me.CheckBoxCatchMouse.Text = "捕获鼠标"
         '
-        'RibbonBar2
+        'RibbonBarInteractiveMode
         '
-        Me.RibbonBar2.AutoOverflowEnabled = True
-        '
-        '
-        '
-        Me.RibbonBar2.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarInteractiveMode.AutoOverflowEnabled = True
         '
         '
         '
-        Me.RibbonBar2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar2.ContainerControlProcessDialogKey = True
-        Me.RibbonBar2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar2.DragDropSupport = True
-        Me.RibbonBar2.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem13, Me.ButtonItem14, Me.ButtonItem15, Me.ButtonItem16})
-        Me.RibbonBar2.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar2.Location = New System.Drawing.Point(133, 0)
-        Me.RibbonBar2.Name = "RibbonBar2"
-        Me.RibbonBar2.Size = New System.Drawing.Size(289, 74)
-        Me.RibbonBar2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar2.TabIndex = 1
-        Me.RibbonBar2.Text = "互动模式"
+        Me.RibbonBarInteractiveMode.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
         '
         '
-        Me.RibbonBar2.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarInteractiveMode.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarInteractiveMode.ContainerControlProcessDialogKey = True
+        Me.RibbonBarInteractiveMode.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBarInteractiveMode.DragDropSupport = True
+        Me.RibbonBarInteractiveMode.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonClickMode, Me.ButtonTestMode, Me.ButtonBlackMode, Me.ButtonDebugMode})
+        Me.RibbonBarInteractiveMode.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBarInteractiveMode.Location = New System.Drawing.Point(133, 0)
+        Me.RibbonBarInteractiveMode.Name = "RibbonBarInteractiveMode"
+        Me.RibbonBarInteractiveMode.Size = New System.Drawing.Size(289, 74)
+        Me.RibbonBarInteractiveMode.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBarInteractiveMode.TabIndex = 1
+        Me.RibbonBarInteractiveMode.Text = "互动模式"
         '
         '
         '
-        Me.RibbonBar2.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'ButtonItem13
-        '
-        Me.ButtonItem13.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem13.Image = Global.YESInteractiveStudio.My.Resources.Resources.DisplayMode0
-        Me.ButtonItem13.Name = "ButtonItem13"
-        Me.ButtonItem13.SubItemsExpandWidth = 14
-        Me.ButtonItem13.Text = "互动"
-        '
-        'ButtonItem14
-        '
-        Me.ButtonItem14.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem14.Image = Global.YESInteractiveStudio.My.Resources.Resources.DisplayMode1
-        Me.ButtonItem14.Name = "ButtonItem14"
-        Me.ButtonItem14.SubItemsExpandWidth = 14
-        Me.ButtonItem14.Text = "测试"
-        '
-        'ButtonItem15
-        '
-        Me.ButtonItem15.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem15.Image = Global.YESInteractiveStudio.My.Resources.Resources.DisplayMode2
-        Me.ButtonItem15.Name = "ButtonItem15"
-        Me.ButtonItem15.SubItemsExpandWidth = 14
-        Me.ButtonItem15.Text = "黑屏"
-        '
-        'ButtonItem16
-        '
-        Me.ButtonItem16.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem16.Image = Global.YESInteractiveStudio.My.Resources.Resources.DisplayMode3
-        Me.ButtonItem16.Name = "ButtonItem16"
-        Me.ButtonItem16.SubItemsExpandWidth = 14
-        Me.ButtonItem16.Text = "调试"
-        '
-        'RibbonBar1
-        '
-        Me.RibbonBar1.AutoOverflowEnabled = True
+        Me.RibbonBarInteractiveMode.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
         '
         '
-        Me.RibbonBar1.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarInteractiveMode.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'ButtonClickMode
+        '
+        Me.ButtonClickMode.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonClickMode.Image = Global.YESInteractiveStudio.My.Resources.Resources.DisplayMode0
+        Me.ButtonClickMode.Name = "ButtonClickMode"
+        Me.ButtonClickMode.SubItemsExpandWidth = 14
+        Me.ButtonClickMode.Text = "互动"
+        '
+        'ButtonTestMode
+        '
+        Me.ButtonTestMode.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonTestMode.Image = Global.YESInteractiveStudio.My.Resources.Resources.DisplayMode1
+        Me.ButtonTestMode.Name = "ButtonTestMode"
+        Me.ButtonTestMode.SubItemsExpandWidth = 14
+        Me.ButtonTestMode.Text = "测试"
+        '
+        'ButtonBlackMode
+        '
+        Me.ButtonBlackMode.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonBlackMode.Image = Global.YESInteractiveStudio.My.Resources.Resources.DisplayMode2
+        Me.ButtonBlackMode.Name = "ButtonBlackMode"
+        Me.ButtonBlackMode.SubItemsExpandWidth = 14
+        Me.ButtonBlackMode.Text = "黑屏"
+        '
+        'ButtonDebugMode
+        '
+        Me.ButtonDebugMode.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonDebugMode.Image = Global.YESInteractiveStudio.My.Resources.Resources.DisplayMode3
+        Me.ButtonDebugMode.Name = "ButtonDebugMode"
+        Me.ButtonDebugMode.SubItemsExpandWidth = 14
+        Me.ButtonDebugMode.Text = "调试"
+        '
+        'RibbonBarControl
+        '
+        Me.RibbonBarControl.AutoOverflowEnabled = True
         '
         '
         '
-        Me.RibbonBar1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar1.ContainerControlProcessDialogKey = True
-        Me.RibbonBar1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar1.DragDropSupport = True
-        Me.RibbonBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem6, Me.ButtonItem12})
-        Me.RibbonBar1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar1.Location = New System.Drawing.Point(3, 0)
-        Me.RibbonBar1.Name = "RibbonBar1"
-        Me.RibbonBar1.Size = New System.Drawing.Size(130, 74)
-        Me.RibbonBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar1.TabIndex = 0
-        Me.RibbonBar1.Text = "控制器"
+        Me.RibbonBarControl.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
         '
         '
-        Me.RibbonBar1.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarControl.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarControl.ContainerControlProcessDialogKey = True
+        Me.RibbonBarControl.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBarControl.DragDropSupport = True
+        Me.RibbonBarControl.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonConnect, Me.ButtonDisconnect})
+        Me.RibbonBarControl.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBarControl.Location = New System.Drawing.Point(3, 0)
+        Me.RibbonBarControl.Name = "RibbonBarControl"
+        Me.RibbonBarControl.Size = New System.Drawing.Size(130, 74)
+        Me.RibbonBarControl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBarControl.TabIndex = 0
+        Me.RibbonBarControl.Text = "控制器"
         '
         '
         '
-        Me.RibbonBar1.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarControl.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'ButtonItem6
         '
-        Me.ButtonItem6.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem6.Image = Global.YESInteractiveStudio.My.Resources.Resources.connect
-        Me.ButtonItem6.Name = "ButtonItem6"
-        Me.ButtonItem6.SubItemsExpandWidth = 14
-        Me.ButtonItem6.Text = "连接"
         '
-        'ButtonItem12
+        Me.RibbonBarControl.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        Me.ButtonItem12.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem12.Image = Global.YESInteractiveStudio.My.Resources.Resources.disconnect
-        Me.ButtonItem12.Name = "ButtonItem12"
-        Me.ButtonItem12.SubItemsExpandWidth = 14
-        Me.ButtonItem12.Text = "断开"
+        'ButtonConnect
+        '
+        Me.ButtonConnect.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonConnect.Image = Global.YESInteractiveStudio.My.Resources.Resources.connect
+        Me.ButtonConnect.Name = "ButtonConnect"
+        Me.ButtonConnect.SubItemsExpandWidth = 14
+        Me.ButtonConnect.Text = "连接"
+        '
+        'ButtonDisconnect
+        '
+        Me.ButtonDisconnect.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonDisconnect.Image = Global.YESInteractiveStudio.My.Resources.Resources.disconnect
+        Me.ButtonDisconnect.Name = "ButtonDisconnect"
+        Me.ButtonDisconnect.SubItemsExpandWidth = 14
+        Me.ButtonDisconnect.Text = "断开"
+        '
+        'RibbonPanel3
+        '
+        Me.RibbonPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonPanel3.Controls.Add(Me.RibbonBarHardware)
+        Me.RibbonPanel3.Controls.Add(Me.RibbonBarGui)
+        Me.RibbonPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RibbonPanel3.Location = New System.Drawing.Point(0, 27)
+        Me.RibbonPanel3.Name = "RibbonPanel3"
+        Me.RibbonPanel3.Padding = New System.Windows.Forms.Padding(3, 0, 3, 3)
+        Me.RibbonPanel3.Size = New System.Drawing.Size(786, 77)
+        '
+        '
+        '
+        Me.RibbonPanel3.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel3.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel3.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonPanel3.TabIndex = 3
+        Me.RibbonPanel3.Visible = False
+        '
+        'RibbonBarHardware
+        '
+        Me.RibbonBarHardware.AutoOverflowEnabled = True
+        '
+        '
+        '
+        Me.RibbonBarHardware.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBarHardware.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarHardware.ContainerControlProcessDialogKey = True
+        Me.RibbonBarHardware.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBarHardware.DragDropSupport = True
+        Me.RibbonBarHardware.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.Buttonligature, Me.ButtonControl, Me.ButtonCheckVersion, Me.ButtonUpdateBin})
+        Me.RibbonBarHardware.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBarHardware.Location = New System.Drawing.Point(96, 0)
+        Me.RibbonBarHardware.Name = "RibbonBarHardware"
+        Me.RibbonBarHardware.Size = New System.Drawing.Size(244, 74)
+        Me.RibbonBarHardware.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBarHardware.TabIndex = 1
+        Me.RibbonBarHardware.Text = "硬件参数"
+        '
+        '
+        '
+        Me.RibbonBarHardware.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBarHardware.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'Buttonligature
+        '
+        Me.Buttonligature.Image = Global.YESInteractiveStudio.My.Resources.Resources.line
+        Me.Buttonligature.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.Buttonligature.Name = "Buttonligature"
+        Me.Buttonligature.SubItemsExpandWidth = 14
+        Me.Buttonligature.Text = "屏幕走线"
+        '
+        'ButtonControl
+        '
+        Me.ButtonControl.Image = Global.YESInteractiveStudio.My.Resources.Resources.control
+        Me.ButtonControl.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.ButtonControl.Name = "ButtonControl"
+        Me.ButtonControl.SubItemsExpandWidth = 14
+        Me.ButtonControl.Text = "控制器"
+        '
+        'ButtonCheckVersion
+        '
+        Me.ButtonCheckVersion.Image = Global.YESInteractiveStudio.My.Resources.Resources.getVersions
+        Me.ButtonCheckVersion.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.ButtonCheckVersion.Name = "ButtonCheckVersion"
+        Me.ButtonCheckVersion.SubItemsExpandWidth = 14
+        Me.ButtonCheckVersion.Text = "版本检测"
+        '
+        'ButtonUpdateBin
+        '
+        Me.ButtonUpdateBin.Image = Global.YESInteractiveStudio.My.Resources.Resources.update
+        Me.ButtonUpdateBin.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.ButtonUpdateBin.Name = "ButtonUpdateBin"
+        Me.ButtonUpdateBin.SubItemsExpandWidth = 14
+        Me.ButtonUpdateBin.Text = "程序升级"
+        '
+        'RibbonBarGui
+        '
+        Me.RibbonBarGui.AutoOverflowEnabled = True
+        '
+        '
+        '
+        Me.RibbonBarGui.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBarGui.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarGui.ContainerControlProcessDialogKey = True
+        Me.RibbonBarGui.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBarGui.DragDropSupport = True
+        Me.RibbonBarGui.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer12})
+        Me.RibbonBarGui.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBarGui.Location = New System.Drawing.Point(3, 0)
+        Me.RibbonBarGui.Name = "RibbonBarGui"
+        Me.RibbonBarGui.Size = New System.Drawing.Size(93, 74)
+        Me.RibbonBarGui.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBarGui.TabIndex = 0
+        Me.RibbonBarGui.Text = "界面"
+        '
+        '
+        '
+        Me.RibbonBarGui.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBarGui.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'ItemContainer12
+        '
+        '
+        '
+        '
+        Me.ItemContainer12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer12.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
+        Me.ItemContainer12.Name = "ItemContainer12"
+        Me.ItemContainer12.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItemLanguage, Me.ComboBoxItem5})
+        '
+        '
+        '
+        Me.ItemContainer12.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer12.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'LabelItemLanguage
+        '
+        Me.LabelItemLanguage.Name = "LabelItemLanguage"
+        Me.LabelItemLanguage.Text = "语言:"
+        '
+        'ComboBoxItem5
+        '
+        Me.ComboBoxItem5.ComboWidth = 80
+        Me.ComboBoxItem5.DropDownHeight = 106
+        Me.ComboBoxItem5.ItemHeight = 18
+        Me.ComboBoxItem5.Name = "ComboBoxItem5"
         '
         'RibbonPanel2
         '
         Me.RibbonPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonPanel2.Controls.Add(Me.RibbonBar5)
-        Me.RibbonPanel2.Controls.Add(Me.RibbonBar4)
+        Me.RibbonPanel2.Controls.Add(Me.RibbonBarReset)
+        Me.RibbonPanel2.Controls.Add(Me.RibbonBarInteraction)
         Me.RibbonPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RibbonPanel2.Location = New System.Drawing.Point(0, 27)
         Me.RibbonPanel2.Name = "RibbonPanel2"
         Me.RibbonPanel2.Padding = New System.Windows.Forms.Padding(3, 0, 3, 3)
-        Me.RibbonPanel2.Size = New System.Drawing.Size(663, 77)
+        Me.RibbonPanel2.Size = New System.Drawing.Size(786, 77)
         '
         '
         '
@@ -354,36 +522,36 @@ Partial Class FormMain
         Me.RibbonPanel2.TabIndex = 2
         Me.RibbonPanel2.Visible = False
         '
-        'RibbonBar5
+        'RibbonBarReset
         '
-        Me.RibbonBar5.AutoOverflowEnabled = True
-        '
-        '
-        '
-        Me.RibbonBar5.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarReset.AutoOverflowEnabled = True
         '
         '
         '
-        Me.RibbonBar5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar5.ContainerControlProcessDialogKey = True
-        Me.RibbonBar5.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar5.DragDropSupport = True
-        Me.RibbonBar5.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer9})
-        Me.RibbonBar5.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar5.Location = New System.Drawing.Point(153, 0)
-        Me.RibbonBar5.Name = "RibbonBar5"
-        Me.RibbonBar5.Size = New System.Drawing.Size(178, 74)
-        Me.RibbonBar5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar5.TabIndex = 1
-        Me.RibbonBar5.Text = "复位"
+        Me.RibbonBarReset.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
         '
         '
-        Me.RibbonBar5.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarReset.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarReset.ContainerControlProcessDialogKey = True
+        Me.RibbonBarReset.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBarReset.DragDropSupport = True
+        Me.RibbonBarReset.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer9})
+        Me.RibbonBarReset.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBarReset.Location = New System.Drawing.Point(153, 0)
+        Me.RibbonBarReset.Name = "RibbonBarReset"
+        Me.RibbonBarReset.Size = New System.Drawing.Size(178, 74)
+        Me.RibbonBarReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBarReset.TabIndex = 1
+        Me.RibbonBarReset.Text = "复位"
         '
         '
         '
-        Me.RibbonBar5.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarReset.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBarReset.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
         'ItemContainer9
         '
@@ -411,7 +579,7 @@ Partial Class FormMain
         '
         Me.ItemContainer10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.ItemContainer10.Name = "ItemContainer10"
-        Me.ItemContainer10.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItem3, Me.ComboBoxItem3, Me.LabelItem5})
+        Me.ItemContainer10.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItemTempReset, Me.ComboBoxItem3, Me.LabelItem5})
         '
         '
         '
@@ -421,10 +589,10 @@ Partial Class FormMain
         '
         Me.ItemContainer10.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'LabelItem3
+        'LabelItemTempReset
         '
-        Me.LabelItem3.Name = "LabelItem3"
-        Me.LabelItem3.Text = "温度变化超过"
+        Me.LabelItemTempReset.Name = "LabelItemTempReset"
+        Me.LabelItemTempReset.Text = "温度变化超过"
         '
         'ComboBoxItem3
         '
@@ -445,7 +613,7 @@ Partial Class FormMain
         Me.ItemContainer11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.ItemContainer11.HorizontalItemAlignment = DevComponents.DotNetBar.eHorizontalItemsAlignment.Right
         Me.ItemContainer11.Name = "ItemContainer11"
-        Me.ItemContainer11.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItem4, Me.ComboBoxItem4, Me.LabelItem6})
+        Me.ItemContainer11.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItemTimeReset, Me.ComboBoxItem4, Me.LabelItem6})
         '
         '
         '
@@ -455,10 +623,10 @@ Partial Class FormMain
         '
         Me.ItemContainer11.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'LabelItem4
+        'LabelItemTimeReset
         '
-        Me.LabelItem4.Name = "LabelItem4"
-        Me.LabelItem4.Text = "复位时间间隔"
+        Me.LabelItemTimeReset.Name = "LabelItemTimeReset"
+        Me.LabelItemTimeReset.Text = "复位时间间隔"
         '
         'ComboBoxItem4
         '
@@ -471,36 +639,36 @@ Partial Class FormMain
         Me.LabelItem6.Name = "LabelItem6"
         Me.LabelItem6.Text = "S"
         '
-        'RibbonBar4
+        'RibbonBarInteraction
         '
-        Me.RibbonBar4.AutoOverflowEnabled = True
-        '
-        '
-        '
-        Me.RibbonBar4.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarInteraction.AutoOverflowEnabled = True
         '
         '
         '
-        Me.RibbonBar4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar4.ContainerControlProcessDialogKey = True
-        Me.RibbonBar4.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar4.DragDropSupport = True
-        Me.RibbonBar4.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer6})
-        Me.RibbonBar4.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar4.Location = New System.Drawing.Point(3, 0)
-        Me.RibbonBar4.Name = "RibbonBar4"
-        Me.RibbonBar4.Size = New System.Drawing.Size(150, 74)
-        Me.RibbonBar4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar4.TabIndex = 0
-        Me.RibbonBar4.Text = "感应"
+        Me.RibbonBarInteraction.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
         '
         '
-        Me.RibbonBar4.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarInteraction.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarInteraction.ContainerControlProcessDialogKey = True
+        Me.RibbonBarInteraction.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBarInteraction.DragDropSupport = True
+        Me.RibbonBarInteraction.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer6})
+        Me.RibbonBarInteraction.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBarInteraction.Location = New System.Drawing.Point(3, 0)
+        Me.RibbonBarInteraction.Name = "RibbonBarInteraction"
+        Me.RibbonBarInteraction.Size = New System.Drawing.Size(150, 74)
+        Me.RibbonBarInteraction.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBarInteraction.TabIndex = 0
+        Me.RibbonBarInteraction.Text = "感应"
         '
         '
         '
-        Me.RibbonBar4.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBarInteraction.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBarInteraction.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
         'ItemContainer6
         '
@@ -527,7 +695,7 @@ Partial Class FormMain
         '
         Me.ItemContainer7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.ItemContainer7.Name = "ItemContainer7"
-        Me.ItemContainer7.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItem1, Me.ComboBoxItem1})
+        Me.ItemContainer7.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItemAntiInterference, Me.ComboBoxItem1})
         '
         '
         '
@@ -537,10 +705,10 @@ Partial Class FormMain
         '
         Me.ItemContainer7.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'LabelItem1
+        'LabelItemAntiInterference
         '
-        Me.LabelItem1.Name = "LabelItem1"
-        Me.LabelItem1.Text = "抗干扰等级:"
+        Me.LabelItemAntiInterference.Name = "LabelItemAntiInterference"
+        Me.LabelItemAntiInterference.Text = "抗干扰等级:"
         '
         'ComboBoxItem1
         '
@@ -556,7 +724,7 @@ Partial Class FormMain
         Me.ItemContainer8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.ItemContainer8.HorizontalItemAlignment = DevComponents.DotNetBar.eHorizontalItemsAlignment.Right
         Me.ItemContainer8.Name = "ItemContainer8"
-        Me.ItemContainer8.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItem2, Me.ComboBoxItem2})
+        Me.ItemContainer8.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItemSensitivity, Me.ComboBoxItem2})
         '
         '
         '
@@ -566,10 +734,10 @@ Partial Class FormMain
         '
         Me.ItemContainer8.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'LabelItem2
+        'LabelItemSensitivity
         '
-        Me.LabelItem2.Name = "LabelItem2"
-        Me.LabelItem2.Text = "灵敏度:"
+        Me.LabelItemSensitivity.Name = "LabelItemSensitivity"
+        Me.LabelItemSensitivity.Text = "灵敏度:"
         '
         'ComboBoxItem2
         '
@@ -577,152 +745,19 @@ Partial Class FormMain
         Me.ComboBoxItem2.ItemHeight = 18
         Me.ComboBoxItem2.Name = "ComboBoxItem2"
         '
-        'RibbonPanel3
+        'ApplicationFile
         '
-        Me.RibbonPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonPanel3.Controls.Add(Me.RibbonBar7)
-        Me.RibbonPanel3.Controls.Add(Me.RibbonBar6)
-        Me.RibbonPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RibbonPanel3.Location = New System.Drawing.Point(0, 27)
-        Me.RibbonPanel3.Name = "RibbonPanel3"
-        Me.RibbonPanel3.Padding = New System.Windows.Forms.Padding(3, 0, 3, 3)
-        Me.RibbonPanel3.Size = New System.Drawing.Size(663, 77)
-        '
-        '
-        '
-        Me.RibbonPanel3.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel3.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel3.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonPanel3.TabIndex = 3
-        Me.RibbonPanel3.Visible = False
-        '
-        'RibbonBar7
-        '
-        Me.RibbonBar7.AutoOverflowEnabled = True
-        '
-        '
-        '
-        Me.RibbonBar7.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar7.ContainerControlProcessDialogKey = True
-        Me.RibbonBar7.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar7.DragDropSupport = True
-        Me.RibbonBar7.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem18, Me.ButtonItem17})
-        Me.RibbonBar7.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar7.Location = New System.Drawing.Point(96, 0)
-        Me.RibbonBar7.Name = "RibbonBar7"
-        Me.RibbonBar7.Size = New System.Drawing.Size(133, 74)
-        Me.RibbonBar7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar7.TabIndex = 1
-        Me.RibbonBar7.Text = "接收卡"
-        '
-        '
-        '
-        Me.RibbonBar7.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar7.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'ButtonItem18
-        '
-        Me.ButtonItem18.Image = Global.YESInteractiveStudio.My.Resources.Resources.getVersions
-        Me.ButtonItem18.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.ButtonItem18.Name = "ButtonItem18"
-        Me.ButtonItem18.SubItemsExpandWidth = 14
-        Me.ButtonItem18.Text = "版本检测"
-        '
-        'ButtonItem17
-        '
-        Me.ButtonItem17.Image = Global.YESInteractiveStudio.My.Resources.Resources.update
-        Me.ButtonItem17.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.ButtonItem17.Name = "ButtonItem17"
-        Me.ButtonItem17.SubItemsExpandWidth = 14
-        Me.ButtonItem17.Text = "程序升级"
-        '
-        'RibbonBar6
-        '
-        Me.RibbonBar6.AutoOverflowEnabled = True
-        '
-        '
-        '
-        Me.RibbonBar6.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar6.ContainerControlProcessDialogKey = True
-        Me.RibbonBar6.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar6.DragDropSupport = True
-        Me.RibbonBar6.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer12})
-        Me.RibbonBar6.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar6.Location = New System.Drawing.Point(3, 0)
-        Me.RibbonBar6.Name = "RibbonBar6"
-        Me.RibbonBar6.Size = New System.Drawing.Size(93, 74)
-        Me.RibbonBar6.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar6.TabIndex = 0
-        Me.RibbonBar6.Text = "界面"
-        '
-        '
-        '
-        Me.RibbonBar6.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar6.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'ItemContainer12
-        '
-        '
-        '
-        '
-        Me.ItemContainer12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer12.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
-        Me.ItemContainer12.Name = "ItemContainer12"
-        Me.ItemContainer12.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItem7, Me.ComboBoxItem5})
-        '
-        '
-        '
-        Me.ItemContainer12.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer12.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'LabelItem7
-        '
-        Me.LabelItem7.Name = "LabelItem7"
-        Me.LabelItem7.Text = "语言:"
-        '
-        'ComboBoxItem5
-        '
-        Me.ComboBoxItem5.ComboWidth = 80
-        Me.ComboBoxItem5.DropDownHeight = 106
-        Me.ComboBoxItem5.ItemHeight = 18
-        Me.ComboBoxItem5.Name = "ComboBoxItem5"
-        '
-        'ApplicationButton1
-        '
-        Me.ApplicationButton1.AutoExpandOnClick = True
-        Me.ApplicationButton1.CanCustomize = False
-        Me.ApplicationButton1.HotTrackingStyle = DevComponents.DotNetBar.eHotTrackingStyle.Image
-        Me.ApplicationButton1.Image = CType(resources.GetObject("ApplicationButton1.Image"), System.Drawing.Image)
-        Me.ApplicationButton1.ImageFixedSize = New System.Drawing.Size(16, 16)
-        Me.ApplicationButton1.ImagePaddingHorizontal = 0
-        Me.ApplicationButton1.ImagePaddingVertical = 0
-        Me.ApplicationButton1.Name = "ApplicationButton1"
-        Me.ApplicationButton1.ShowSubItems = False
-        Me.ApplicationButton1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer1})
-        Me.ApplicationButton1.Text = "文件"
+        Me.ApplicationFile.AutoExpandOnClick = True
+        Me.ApplicationFile.CanCustomize = False
+        Me.ApplicationFile.HotTrackingStyle = DevComponents.DotNetBar.eHotTrackingStyle.Image
+        Me.ApplicationFile.Image = CType(resources.GetObject("ApplicationFile.Image"), System.Drawing.Image)
+        Me.ApplicationFile.ImageFixedSize = New System.Drawing.Size(16, 16)
+        Me.ApplicationFile.ImagePaddingHorizontal = 0
+        Me.ApplicationFile.ImagePaddingVertical = 0
+        Me.ApplicationFile.Name = "ApplicationFile"
+        Me.ApplicationFile.ShowSubItems = False
+        Me.ApplicationFile.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer1})
+        Me.ApplicationFile.Text = "文件"
         '
         'ItemContainer1
         '
@@ -772,7 +807,7 @@ Partial Class FormMain
         Me.ItemContainer3.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
         Me.ItemContainer3.MinimumSize = New System.Drawing.Size(120, 0)
         Me.ItemContainer3.Name = "ItemContainer3"
-        Me.ItemContainer3.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem2, Me.ButtonItem3, Me.ButtonItem4, Me.ButtonItem5})
+        Me.ItemContainer3.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItemFileNew, Me.ButtonItemFileOpen, Me.ButtonItemFileSave, Me.ButtonItemFileSaveAs})
         '
         '
         '
@@ -782,37 +817,37 @@ Partial Class FormMain
         '
         Me.ItemContainer3.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'ButtonItem2
+        'ButtonItemFileNew
         '
-        Me.ButtonItem2.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem2.Image = CType(resources.GetObject("ButtonItem2.Image"), System.Drawing.Image)
-        Me.ButtonItem2.Name = "ButtonItem2"
-        Me.ButtonItem2.SubItemsExpandWidth = 24
-        Me.ButtonItem2.Text = "新建"
+        Me.ButtonItemFileNew.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonItemFileNew.Image = CType(resources.GetObject("ButtonItemFileNew.Image"), System.Drawing.Image)
+        Me.ButtonItemFileNew.Name = "ButtonItemFileNew"
+        Me.ButtonItemFileNew.SubItemsExpandWidth = 24
+        Me.ButtonItemFileNew.Text = "新建"
         '
-        'ButtonItem3
+        'ButtonItemFileOpen
         '
-        Me.ButtonItem3.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem3.Image = CType(resources.GetObject("ButtonItem3.Image"), System.Drawing.Image)
-        Me.ButtonItem3.Name = "ButtonItem3"
-        Me.ButtonItem3.SubItemsExpandWidth = 24
-        Me.ButtonItem3.Text = "打开..."
+        Me.ButtonItemFileOpen.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonItemFileOpen.Image = CType(resources.GetObject("ButtonItemFileOpen.Image"), System.Drawing.Image)
+        Me.ButtonItemFileOpen.Name = "ButtonItemFileOpen"
+        Me.ButtonItemFileOpen.SubItemsExpandWidth = 24
+        Me.ButtonItemFileOpen.Text = "打开..."
         '
-        'ButtonItem4
+        'ButtonItemFileSave
         '
-        Me.ButtonItem4.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem4.Image = CType(resources.GetObject("ButtonItem4.Image"), System.Drawing.Image)
-        Me.ButtonItem4.Name = "ButtonItem4"
-        Me.ButtonItem4.SubItemsExpandWidth = 24
-        Me.ButtonItem4.Text = "保存"
+        Me.ButtonItemFileSave.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonItemFileSave.Image = CType(resources.GetObject("ButtonItemFileSave.Image"), System.Drawing.Image)
+        Me.ButtonItemFileSave.Name = "ButtonItemFileSave"
+        Me.ButtonItemFileSave.SubItemsExpandWidth = 24
+        Me.ButtonItemFileSave.Text = "保存"
         '
-        'ButtonItem5
+        'ButtonItemFileSaveAs
         '
-        Me.ButtonItem5.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem5.Image = CType(resources.GetObject("ButtonItem5.Image"), System.Drawing.Image)
-        Me.ButtonItem5.Name = "ButtonItem5"
-        Me.ButtonItem5.SubItemsExpandWidth = 24
-        Me.ButtonItem5.Text = "另存为..."
+        Me.ButtonItemFileSaveAs.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonItemFileSaveAs.Image = CType(resources.GetObject("ButtonItemFileSaveAs.Image"), System.Drawing.Image)
+        Me.ButtonItemFileSaveAs.Name = "ButtonItemFileSaveAs"
+        Me.ButtonItemFileSaveAs.SubItemsExpandWidth = 24
+        Me.ButtonItemFileSaveAs.Text = "另存为..."
         '
         'GalleryContainer1
         '
@@ -827,7 +862,7 @@ Partial Class FormMain
         Me.GalleryContainer1.MultiLine = False
         Me.GalleryContainer1.Name = "GalleryContainer1"
         Me.GalleryContainer1.PopupUsesStandardScrollbars = False
-        Me.GalleryContainer1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.labelItem8, Me.ButtonItem8, Me.ButtonItem9, Me.ButtonItem10, Me.ButtonItem11, Me.ButtonItem7})
+        Me.GalleryContainer1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.HistoryFile, Me.HistoryFileName01, Me.HistoryFileName02, Me.HistoryFileName03, Me.HistoryFileName04, Me.HistoryFileName05})
         '
         '
         '
@@ -837,42 +872,42 @@ Partial Class FormMain
         '
         Me.GalleryContainer1.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'labelItem8
+        'HistoryFile
         '
-        Me.labelItem8.BorderSide = DevComponents.DotNetBar.eBorderSide.Bottom
-        Me.labelItem8.BorderType = DevComponents.DotNetBar.eBorderType.Etched
-        Me.labelItem8.CanCustomize = False
-        Me.labelItem8.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.labelItem8.Name = "labelItem8"
-        Me.labelItem8.PaddingBottom = 2
-        Me.labelItem8.PaddingTop = 2
-        Me.labelItem8.Stretch = True
-        Me.labelItem8.Text = "最近的文件"
+        Me.HistoryFile.BorderSide = DevComponents.DotNetBar.eBorderSide.Bottom
+        Me.HistoryFile.BorderType = DevComponents.DotNetBar.eBorderType.Etched
+        Me.HistoryFile.CanCustomize = False
+        Me.HistoryFile.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.HistoryFile.Name = "HistoryFile"
+        Me.HistoryFile.PaddingBottom = 2
+        Me.HistoryFile.PaddingTop = 2
+        Me.HistoryFile.Stretch = True
+        Me.HistoryFile.Text = "最近的文件"
         '
-        'ButtonItem8
+        'HistoryFileName01
         '
-        Me.ButtonItem8.Name = "ButtonItem8"
-        Me.ButtonItem8.Text = "&1. Short News 5-7.rtf"
+        Me.HistoryFileName01.Name = "HistoryFileName01"
+        Me.HistoryFileName01.Text = "&1. Short News 5-7.rtf"
         '
-        'ButtonItem9
+        'HistoryFileName02
         '
-        Me.ButtonItem9.Name = "ButtonItem9"
-        Me.ButtonItem9.Text = "&2. Prospect Email.rtf"
+        Me.HistoryFileName02.Name = "HistoryFileName02"
+        Me.HistoryFileName02.Text = "&2. Prospect Email.rtf"
         '
-        'ButtonItem10
+        'HistoryFileName03
         '
-        Me.ButtonItem10.Name = "ButtonItem10"
-        Me.ButtonItem10.Text = "&3. Customer Email.rtf"
+        Me.HistoryFileName03.Name = "HistoryFileName03"
+        Me.HistoryFileName03.Text = "&3. Customer Email.rtf"
         '
-        'ButtonItem11
+        'HistoryFileName04
         '
-        Me.ButtonItem11.Name = "ButtonItem11"
-        Me.ButtonItem11.Text = "&4. example.rtf"
+        Me.HistoryFileName04.Name = "HistoryFileName04"
+        Me.HistoryFileName04.Text = "&4. example.rtf"
         '
-        'ButtonItem7
+        'HistoryFileName05
         '
-        Me.ButtonItem7.Name = "ButtonItem7"
-        Me.ButtonItem7.Text = "&5. example.rtf"
+        Me.HistoryFileName05.Name = "HistoryFileName05"
+        Me.HistoryFileName05.Text = "&5. example.rtf"
         '
         'ItemContainer4
         '
@@ -892,24 +927,24 @@ Partial Class FormMain
         '
         Me.ItemContainer4.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'RibbonTabItem1
+        'RibbonGeneral
         '
-        Me.RibbonTabItem1.Checked = True
-        Me.RibbonTabItem1.Name = "RibbonTabItem1"
-        Me.RibbonTabItem1.Panel = Me.RibbonPanel1
-        Me.RibbonTabItem1.Text = "常规"
+        Me.RibbonGeneral.Checked = True
+        Me.RibbonGeneral.Name = "RibbonGeneral"
+        Me.RibbonGeneral.Panel = Me.RibbonPanel1
+        Me.RibbonGeneral.Text = "常规"
         '
-        'RibbonTabItem2
+        'RibbonInteraction
         '
-        Me.RibbonTabItem2.Name = "RibbonTabItem2"
-        Me.RibbonTabItem2.Panel = Me.RibbonPanel2
-        Me.RibbonTabItem2.Text = "互动性"
+        Me.RibbonInteraction.Name = "RibbonInteraction"
+        Me.RibbonInteraction.Panel = Me.RibbonPanel2
+        Me.RibbonInteraction.Text = "互动性"
         '
-        'RibbonTabItem3
+        'RibbonTool
         '
-        Me.RibbonTabItem3.Name = "RibbonTabItem3"
-        Me.RibbonTabItem3.Panel = Me.RibbonPanel3
-        Me.RibbonTabItem3.Text = "工具"
+        Me.RibbonTool.Name = "RibbonTool"
+        Me.RibbonTool.Panel = Me.RibbonPanel3
+        Me.RibbonTool.Text = "工具"
         '
         'ButtonItem1
         '
@@ -941,11 +976,167 @@ Partial Class FormMain
         '
         Me.MicroChartItem4.Name = "MicroChartItem4"
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.TreeView1)
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 113)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(178, 313)
+        Me.GroupBox1.TabIndex = 1
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "播放方案"
+        '
+        'TreeView1
+        '
+        Me.TreeView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TreeView1.Location = New System.Drawing.Point(3, 17)
+        Me.TreeView1.Name = "TreeView1"
+        Me.TreeView1.Size = New System.Drawing.Size(172, 293)
+        Me.TreeView1.TabIndex = 0
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 429)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(786, 22)
+        Me.StatusStrip1.TabIndex = 2
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(236, 118)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(121, 21)
+        Me.TextBox1.TabIndex = 16
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.DataGridView1)
+        Me.GroupBox2.Controls.Add(Me.Button2)
+        Me.GroupBox2.Controls.Add(Me.Button1)
+        Me.GroupBox2.Location = New System.Drawing.Point(186, 145)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(588, 281)
+        Me.GroupBox2.TabIndex = 14
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "节目列表"
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToOrderColumns = True
+        Me.DataGridView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column4, Me.Column2, Me.Column3, Me.Column1})
+        Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.DataGridView1.Location = New System.Drawing.Point(6, 20)
+        Me.DataGridView1.MultiSelect = False
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersVisible = False
+        Me.DataGridView1.RowTemplate.Height = 23
+        Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DataGridView1.Size = New System.Drawing.Size(576, 219)
+        Me.DataGridView1.TabIndex = 0
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "ID"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        Me.Column4.Width = 40
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "文件名"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        Me.Column2.Width = 120
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "路径"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        Me.Column3.Width = 320
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "时长"
+        Me.Column1.Name = "Column1"
+        Me.Column1.Width = 80
+        '
+        'Button2
+        '
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Image = Global.YESInteractiveStudio.My.Resources.Resources.del
+        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button2.Location = New System.Drawing.Point(515, 245)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(67, 30)
+        Me.Button2.TabIndex = 6
+        Me.Button2.Text = "删除"
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Image = Global.YESInteractiveStudio.My.Resources.Resources.add
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.Location = New System.Drawing.Point(442, 245)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(67, 30)
+        Me.Button1.TabIndex = 5
+        Me.Button1.Text = "添加"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(195, 121)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(35, 12)
+        Me.Label2.TabIndex = 15
+        Me.Label2.Text = "名称:"
+        '
+        'Button3
+        '
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Image = Global.YESInteractiveStudio.My.Resources.Resources.edit
+        Me.Button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button3.Location = New System.Drawing.Point(363, 113)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(96, 30)
+        Me.Button3.TabIndex = 17
+        Me.Button3.Text = "编辑窗口"
+        Me.Button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(663, 367)
+        Me.ClientSize = New System.Drawing.Size(786, 451)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.RibbonControl1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormMain"
@@ -954,63 +1145,67 @@ Partial Class FormMain
         Me.RibbonControl1.ResumeLayout(False)
         Me.RibbonControl1.PerformLayout()
         Me.RibbonPanel1.ResumeLayout(False)
-        Me.RibbonPanel2.ResumeLayout(False)
         Me.RibbonPanel3.ResumeLayout(False)
+        Me.RibbonPanel2.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents RibbonControl1 As DevComponents.DotNetBar.RibbonControl
     Friend WithEvents RibbonPanel1 As DevComponents.DotNetBar.RibbonPanel
-    Friend WithEvents RibbonBar1 As DevComponents.DotNetBar.RibbonBar
+    Friend WithEvents RibbonBarControl As DevComponents.DotNetBar.RibbonBar
     Friend WithEvents RibbonPanel2 As DevComponents.DotNetBar.RibbonPanel
-    Friend WithEvents ApplicationButton1 As DevComponents.DotNetBar.ApplicationButton
-    Friend WithEvents RibbonTabItem1 As DevComponents.DotNetBar.RibbonTabItem
-    Friend WithEvents RibbonTabItem2 As DevComponents.DotNetBar.RibbonTabItem
+    Friend WithEvents ApplicationFile As DevComponents.DotNetBar.ApplicationButton
+    Friend WithEvents RibbonGeneral As DevComponents.DotNetBar.RibbonTabItem
+    Friend WithEvents RibbonInteraction As DevComponents.DotNetBar.RibbonTabItem
     Friend WithEvents ButtonItem1 As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents QatCustomizeItem1 As DevComponents.DotNetBar.QatCustomizeItem
     Friend WithEvents StyleManager1 As DevComponents.DotNetBar.StyleManager
     Friend WithEvents ItemContainer1 As DevComponents.DotNetBar.ItemContainer
     Friend WithEvents ItemContainer2 As DevComponents.DotNetBar.ItemContainer
     Friend WithEvents ItemContainer3 As DevComponents.DotNetBar.ItemContainer
-    Friend WithEvents ButtonItem2 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents ButtonItem3 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents ButtonItem4 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents ButtonItem5 As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents ButtonItemFileNew As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents ButtonItemFileOpen As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents ButtonItemFileSave As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents ButtonItemFileSaveAs As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents GalleryContainer1 As DevComponents.DotNetBar.GalleryContainer
-    Friend WithEvents labelItem8 As DevComponents.DotNetBar.LabelItem
-    Friend WithEvents ButtonItem8 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents ButtonItem9 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents ButtonItem10 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents ButtonItem11 As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents HistoryFile As DevComponents.DotNetBar.LabelItem
+    Friend WithEvents HistoryFileName01 As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents HistoryFileName02 As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents HistoryFileName03 As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents HistoryFileName04 As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents ItemContainer4 As DevComponents.DotNetBar.ItemContainer
-    Friend WithEvents RibbonBar2 As DevComponents.DotNetBar.RibbonBar
-    Friend WithEvents ButtonItem13 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents ButtonItem14 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents ButtonItem15 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents ButtonItem6 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents ButtonItem12 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents ButtonItem16 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents RibbonBar3 As DevComponents.DotNetBar.RibbonBar
+    Friend WithEvents RibbonBarInteractiveMode As DevComponents.DotNetBar.RibbonBar
+    Friend WithEvents ButtonClickMode As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents ButtonTestMode As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents ButtonBlackMode As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents ButtonConnect As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents ButtonDisconnect As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents ButtonDebugMode As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents RibbonBarOther As DevComponents.DotNetBar.RibbonBar
     Friend WithEvents ItemContainer5 As DevComponents.DotNetBar.ItemContainer
-    Friend WithEvents CheckBoxItem1 As DevComponents.DotNetBar.CheckBoxItem
-    Friend WithEvents CheckBoxItem2 As DevComponents.DotNetBar.CheckBoxItem
-    Friend WithEvents ButtonItem7 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents RibbonBar4 As DevComponents.DotNetBar.RibbonBar
+    Friend WithEvents CheckBoxHidePlayWindow As DevComponents.DotNetBar.CheckBoxItem
+    Friend WithEvents CheckBoxCatchMouse As DevComponents.DotNetBar.CheckBoxItem
+    Friend WithEvents HistoryFileName05 As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents RibbonBarInteraction As DevComponents.DotNetBar.RibbonBar
     Friend WithEvents ItemContainer6 As DevComponents.DotNetBar.ItemContainer
     Friend WithEvents ComboBoxItem1 As DevComponents.DotNetBar.ComboBoxItem
     Friend WithEvents ItemContainer7 As DevComponents.DotNetBar.ItemContainer
-    Friend WithEvents LabelItem1 As DevComponents.DotNetBar.LabelItem
+    Friend WithEvents LabelItemAntiInterference As DevComponents.DotNetBar.LabelItem
     Friend WithEvents ItemContainer8 As DevComponents.DotNetBar.ItemContainer
-    Friend WithEvents LabelItem2 As DevComponents.DotNetBar.LabelItem
+    Friend WithEvents LabelItemSensitivity As DevComponents.DotNetBar.LabelItem
     Friend WithEvents ComboBoxItem2 As DevComponents.DotNetBar.ComboBoxItem
-    Friend WithEvents RibbonBar5 As DevComponents.DotNetBar.RibbonBar
+    Friend WithEvents RibbonBarReset As DevComponents.DotNetBar.RibbonBar
     Friend WithEvents ItemContainer9 As DevComponents.DotNetBar.ItemContainer
     Friend WithEvents ItemContainer10 As DevComponents.DotNetBar.ItemContainer
-    Friend WithEvents LabelItem3 As DevComponents.DotNetBar.LabelItem
+    Friend WithEvents LabelItemTempReset As DevComponents.DotNetBar.LabelItem
     Friend WithEvents ComboBoxItem3 As DevComponents.DotNetBar.ComboBoxItem
     Friend WithEvents ItemContainer11 As DevComponents.DotNetBar.ItemContainer
-    Friend WithEvents LabelItem4 As DevComponents.DotNetBar.LabelItem
+    Friend WithEvents LabelItemTimeReset As DevComponents.DotNetBar.LabelItem
     Friend WithEvents ComboBoxItem4 As DevComponents.DotNetBar.ComboBoxItem
     Friend WithEvents LabelItem5 As DevComponents.DotNetBar.LabelItem
     Friend WithEvents LabelItem6 As DevComponents.DotNetBar.LabelItem
@@ -1019,12 +1214,28 @@ Partial Class FormMain
     Friend WithEvents MicroChartItem3 As DevComponents.DotNetBar.MicroChartItem
     Friend WithEvents MicroChartItem4 As DevComponents.DotNetBar.MicroChartItem
     Friend WithEvents RibbonPanel3 As DevComponents.DotNetBar.RibbonPanel
-    Friend WithEvents RibbonTabItem3 As DevComponents.DotNetBar.RibbonTabItem
-    Friend WithEvents RibbonBar6 As DevComponents.DotNetBar.RibbonBar
+    Friend WithEvents RibbonTool As DevComponents.DotNetBar.RibbonTabItem
+    Friend WithEvents RibbonBarGui As DevComponents.DotNetBar.RibbonBar
     Friend WithEvents ItemContainer12 As DevComponents.DotNetBar.ItemContainer
     Friend WithEvents ComboBoxItem5 As DevComponents.DotNetBar.ComboBoxItem
-    Friend WithEvents RibbonBar7 As DevComponents.DotNetBar.RibbonBar
-    Friend WithEvents ButtonItem17 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents ButtonItem18 As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents LabelItem7 As DevComponents.DotNetBar.LabelItem
+    Friend WithEvents RibbonBarHardware As DevComponents.DotNetBar.RibbonBar
+    Friend WithEvents ButtonUpdateBin As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents ButtonCheckVersion As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents LabelItemLanguage As DevComponents.DotNetBar.LabelItem
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents TreeView1 As TreeView
+    Friend WithEvents Button3 As Button
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Buttonligature As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents ButtonControl As DevComponents.DotNetBar.ButtonItem
 End Class

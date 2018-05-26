@@ -5,14 +5,6 @@ Imports System.Threading
 Imports Nova.Mars.SDK
 
 Public Class FormOption
-    '''' <summary>
-    '''' 最大幕布id
-    '''' </summary>
-    'Private maxCurtainId As Integer = 0
-    '''' <summary>
-    '''' 选中幕布id
-    '''' </summary>
-    'Private selectCurtainId As Integer = 0
     ''' <summary>
     ''' 临时数据表
     ''' </summary>
@@ -113,9 +105,10 @@ Public Class FormOption
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '互动性
         '互动模式
-        ComboBox2.Items.Add(sysInfo.Language.GetLanguage("单个感应"))
-        ComboBox2.Items.Add(sysInfo.Language.GetLanguage("4合1感应"))
-        'ComboBox2.SelectedIndex = sysInfo.touchMode
+        ComboBox2.Items.Add(sysInfo.Language.GetLanguage("高分辨率"))
+        ComboBox2.Items.Add(sysInfo.Language.GetLanguage("中分辨率"))
+        ComboBox2.Items.Add(sysInfo.Language.GetLanguage("低分辨率"))
+        ComboBox2.SelectedIndex = sysInfo.touchMode
 
         '检测间隔
         NumericUpDown1.Value = sysInfo.InquireTimeSec
@@ -145,6 +138,9 @@ Public Class FormOption
         ListView1.Columns.Add(sysInfo.Language.GetLanguage("接收卡号"), 60, HorizontalAlignment.Left)
         ListView1.Columns.Add(sysInfo.Language.GetLanguage("值"), 60, HorizontalAlignment.Left)
 
+        '接收卡旧版程序标记
+        CheckBox2.Checked = sysInfo.ScanBoardOldFlage
+
         '设置显示语言
         sysInfo.Language.SetControlslanguage(Me)
     End Sub
@@ -155,17 +151,10 @@ Public Class FormOption
     Private Sub FormOption_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '常规
-        'If Val(TextBox1.Text) Then
-        'sysInfo.zoomProportion = Val(TextBox1.Text)
-        'End If
-
         sysInfo.SelectLanguageId = ComboBox1.SelectedIndex
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '幕布
-        'For i As Integer = 0 To sysInfo.ScreenList.Length - 1
-        '    sysInfo.ScreenList(i).CurtainListId = -1
-        'Next
         For i As Integer = 0 To sysInfo.CurtainList.Count - 1
             '刷新屏幕记录的幕布位置
             For Each j In sysInfo.CurtainList.Item(i).ScreenList
@@ -202,11 +191,6 @@ Public Class FormOption
             sysInfo.CurtainList.Item(i) = tmp
         Next
 
-        ''TODO:Debug
-        ''        For Each j In sysInfo.ScreenList
-        ''            Debug.Write(" " + j.CurtainListId.ToString)
-        ''        Next
-
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '屏幕
         '计算缩放后位置及大小
@@ -235,7 +219,7 @@ Public Class FormOption
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '互动性
         '互动模式
-        'sysInfo.touchMode = ComboBox2.SelectedIndex
+        sysInfo.touchMode = ComboBox2.SelectedIndex
 
         ''检测间隔
         'sysInfo.InquireTimeSec = NumericUpDown1.Value
@@ -245,8 +229,17 @@ Public Class FormOption
 
         '复位温度
         sysInfo.ResetTemp = NumericUpDown4.Value
+        If sysInfo.ResetTemp > 0 AndAlso
+            sysInfo.ResetTemp < 5 Then
+            sysInfo.ResetTemp = 5
+        End If
+
         '复位时间间隔
         sysInfo.ResetSec = NumericUpDown5.Value
+        If sysInfo.ResetSec > 0 AndAlso
+            sysInfo.ResetSec < 25 Then
+            sysInfo.ResetSec = 25
+        End If
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         '接收卡
@@ -508,27 +501,16 @@ Public Class FormOption
         sysInfo.MainClass.SetEquipmentIP(0, sysInfo.SenderList(senderArrayIndex).TmpIpData)
     End Sub
 
-    '''' <summary>
-    '''' 设置复位温度变化幅度
-    '''' </summary>
-    'Private Sub Button1_Click(sender As Object, e As EventArgs)
-    '    sysInfo.resetTemp = NumericUpDown4.Value
-    '    'sysInfo.resetMin = 0
-    'End Sub
-
-    '''' <summary>
-    '''' 设置复位时间间隔 min
-    '''' </summary>
-    'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-    '    'sysInfo.resetTemp = 0
-    '    sysInfo.resetSec = NumericUpDown5.Value
-    'End Sub
-
     ''' <summary>
     ''' 显示选中幕布信息
     ''' </summary>
     Private Sub DataGridView2_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView2.CellMouseClick
         Dim tmp As CurtainInfo = sysInfo.CurtainList.Item(DataGridView2.SelectedCells(0).RowIndex)
+
+        '多次点击只显示一次
+        If Label11.Text = (DataGridView2.SelectedCells(0).RowIndex + 1).ToString Then
+            Exit Sub
+        End If
 
         Label11.Text = DataGridView2.SelectedCells(0).RowIndex + 1
         TextBox2.Text = tmp.Remark
@@ -566,10 +548,8 @@ Public Class FormOption
 
         Dim tmp As New CurtainInfo
 
-        'tmp.id = maxCurtainId + 1
-        'maxCurtainId += 1
         tmp.Remark = TextBox2.Text
-        tmp.DefaultY = NumericUpDown6.Value
+        tmp.DefaultX = NumericUpDown6.Value
         tmp.DefaultY = NumericUpDown7.Value
 
         tmp.ScreenList = New List(Of Integer)
@@ -580,8 +560,6 @@ Public Class FormOption
 
                     sysInfo.ScreenList(.Cells(0).Value).DefaultX = .Cells(1).Value
                     sysInfo.ScreenList(.Cells(0).Value).DefaultY = .Cells(2).Value
-                    'sysInfo.ScreenList(.Cells(0).Value).TouchPieceRowsNum = .Cells(3).Value
-                    'sysInfo.ScreenList(.Cells(0).Value).TouchPieceColumnsNum = .Cells(4).Value
                 End With
 
             Catch ex As Exception
@@ -634,6 +612,7 @@ Public Class FormOption
         sysInfo.CurtainList.RemoveAt(CInt(Label11.Text) - 1)
         DataGridView2.Rows.RemoveAt(CInt(Label11.Text) - 1)
         Label11.Text = "NULL"
+        UpdateCurtainListId()
     End Sub
 
     ''' <summary>
@@ -645,14 +624,9 @@ Public Class FormOption
         End If
 
         Dim tmp As CurtainInfo = sysInfo.CurtainList.Item(CInt(Label11.Text) - 1)
-        'tmp.id = maxCurtainId + 1
-        'maxCurtainId += 1
         tmp.Remark = TextBox2.Text
         tmp.DefaultX = NumericUpDown6.Value
         tmp.DefaultY = NumericUpDown7.Value
-        'tmp.x = tmp.defaultX '/ sysInfo.zoomProportion
-        'tmp.y = tmp.defaultY '/ sysInfo.zoomProportion
-        'tmp.playDialog
 
         tmp.ScreenList = New List(Of Integer)
         For i As Integer = 0 To DataGridView3.Rows.Count - 1 - 1
@@ -662,8 +636,6 @@ Public Class FormOption
 
                     sysInfo.ScreenList(.Cells(0).Value).DefaultX = .Cells(1).Value
                     sysInfo.ScreenList(.Cells(0).Value).DefaultY = .Cells(2).Value
-                    'sysInfo.ScreenList(.Cells(0).Value).TouchPieceRowsNum = .Cells(3).Value
-                    'sysInfo.ScreenList(.Cells(0).Value).TouchPieceColumnsNum = .Cells(4).Value
                 End With
 
             Catch ex As Exception
@@ -697,20 +669,33 @@ Public Class FormOption
         maxWidth = maxWidth / sysInfo.ZoomProportion
 
         DataGridView2.Rows(CInt(Label11.Text) - 1).Cells(2).Value = $"{tmp.DefaultX},{tmp.DefaultY} [{maxWidth},{maxHeight}]"
+        UpdateCurtainListId()
+    End Sub
+
+    ''' <summary>
+    ''' 刷新幕布列表ID
+    ''' </summary>
+    Private Sub UpdateCurtainListId()
+        For i001 As Integer = 0 To DataGridView2.Rows.Count - 1
+            DataGridView2.Rows(i001).Cells(0).Value = $"{i001 + 1}"
+        Next
     End Sub
 
     ''' <summary>
     ''' 修改屏幕灵敏度
     ''' </summary>
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        Dim sendstr As String = "aadb0305"
-        Dim sendByte(sendstr.Length \ 2 - 1) As Byte
-
-        For i As Integer = 0 To sendstr.Length \ 2 - 1
-            sendByte(i) = Val($"&H{sendstr(i * 2)}{ sendstr(i * 2 + 1)}")
-        Next
+        Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb0305")
         sendByte(3) = NumericUpDown2.Value
-        If sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
+
+        Dim result As Boolean
+        If Not sysInfo.ScanBoardOldFlage Then
+            result = sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        Else
+            result = sysInfo.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        End If
+
+        If result Then
             '触摸灵敏度
             sysInfo.TouchSensitivity = NumericUpDown2.Value
         Else
@@ -825,51 +810,15 @@ Public Class FormOption
         Button1.Enabled = True
     End Sub
 
-    '''' <summary>
-    '''' 查询复位次数 鼠标按下时
-    '''' </summary>
-    'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-    '    Button2.Enabled = False
-
-    '    ListView1.Columns(3).Text = GetLanguage("复位次数")
-    '    ListView1.Items.Clear()
-    '    'TextBox4.Clear()
-    'End Sub
-
-    '''' <summary>
-    '''' 查询复位次数 鼠标松开时
-    '''' </summary>
-    'Private Sub Button2_MouseUp(sender As Object, e As MouseEventArgs) Handles Button2.MouseUp
-    '    If Button2.Enabled Then
-    '        Exit Sub
-    '    End If
-
-    '    For i As Integer = 0 To sysInfo.SenderList.Length - 1
-    '        GetScanBoardData(i, 1)
-    '    Next
-
-    '    Button2.Enabled = True
-    'End Sub
-
     ''' <summary>
     ''' 获取接收卡数据
     ''' </summary>
     Private Sub GetScanBoardData(senderId As Integer, dataType As Integer)
-        Dim sendstr As String = "00"
-        Select Case dataType
-            Case 0
-                sendstr = "aadb0901"
-                'Case 1
-                '    sendstr = "aadb0201"
-        End Select
-
-        Dim sendByte(sendstr.Length \ 2 - 1) As Byte
-
-        For i As Integer = 0 To sendByte.Length - 1
-            sendByte(i) = Val($"&H{sendstr(i * 2)}{ sendstr(i * 2 + 1)}")
-        Next
-
-        sysInfo.MainClass.SetScanBoardData(senderId, 255, 65535, sendByte)
+        If Not sysInfo.ScanBoardOldFlage Then
+            sysInfo.MainClass.SetNewScanBoardData(senderId, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
+        Else
+            sysInfo.MainClass.SetOldScanBoardData(senderId, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
+        End If
 
         If CheckBox1.Checked Then
             Thread.Sleep(50)
@@ -898,21 +847,10 @@ Public Class FormOption
 
         Try
             Dim bytes(1028 - 1) As Byte
-            Dim tmpstr As String = "55d50902"
-            Dim sendbytes(4 - 1) As Byte
-            For i As Integer = 0 To tmpstr.Length \ 2 - 1
-                sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
-            Next i
-
-            Dim bytesSend As Integer = cliSocket.Send(sendbytes)
+            Dim bytesSend As Integer = cliSocket.Send(Wangk.Hash.Hex2Bin("55d50902"))
             Dim bytesRec As Integer = cliSocket.Receive(bytes)
 
         Catch ex As Exception
-            'MsgBox($"发送读取指令异常:{ex.Message}",
-            '       MsgBoxStyle.Information,
-            '       "获取接收卡数据")
-            'TextBox4.AppendText($"发送读取指令异常:{ex.Message}{vbCrLf}")
-            'Exit Sub
         End Try
 
         'Dim asd As New Stopwatch
@@ -921,13 +859,7 @@ Public Class FormOption
 
         Try
             Dim bytes(1028 - 1) As Byte
-            Dim tmpstr As String = "55d50905000000000400"
-            Dim sendbytes(10 - 1) As Byte
-            For i As Integer = 0 To tmpstr.Length \ 2 - 1
-                sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
-            Next i
-
-            Dim bytesSend As Integer = cliSocket.Send(sendbytes)
+            Dim bytesSend As Integer = cliSocket.Send(Wangk.Hash.Hex2Bin("55d50905000000000400"))
 
             For m As Integer = 0 To 16 - 1
                 Dim bytesRec As Integer = cliSocket.Receive(bytes)
@@ -956,20 +888,12 @@ Public Class FormOption
                 Next
             Next
         Catch ex As Exception
-            'TextBox4.AppendText($"接收数据异常:{ex.Message}{vbCrLf}")
         End Try
 
         cliSocket.Close()
 
         'TextBox4.AppendText($"发送卡{senderId} 读取到 {getDataSum} 个接收卡数据{vbCrLf}")
     End Sub
-
-    '''' <summary>
-    '''' 自动跳转
-    '''' </summary>
-    'Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
-    '    TextBox4.ScrollToCaret()
-    'End Sub
 
     ''' <summary>
     ''' 选择升级文件
@@ -1022,24 +946,21 @@ Public Class FormOption
 
 
         '发送升级指令
-        Dim sendByte As Byte()
-        Dim temps As String = ""
-        Dim sendstr As String = "aadb09030000"
-        ReDim sendByte(sendstr.Length \ 2 - 1)
-
-        For i As Integer = 0 To sendByte.Length - 1
-            sendByte(i) = Val($"&H{sendstr(i * 2)}{ sendstr(i * 2 + 1)}")
-        Next
-
+        Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb09030000")
         sendByte(4) = binLength \ 256
         sendByte(5) = binLength Mod 256
 
-        sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        If Not sysInfo.ScanBoardOldFlage Then
+            sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        Else
+            sysInfo.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        End If
+        'sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
 
         Thread.Sleep(60)
 
         For i As Integer = 0 To 10
-            If CheckUpdataRecData({&H1A, &H1B}) Then
+            If CheckUpdataRecData(Wangk.Hash.Hex2Bin("1a1b")) Then
                 Exit For
             End If
 
@@ -1081,16 +1002,19 @@ Public Class FormOption
             sendByte(130) = checkSum Mod 256
 
             For i As Integer = 0 To 10
-                sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
-                'TextBox4.AppendText($"第 {sendIndex} 包数据 第{i}次发送{vbCrLf}")
+                If Not sysInfo.ScanBoardOldFlage Then
+                    sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+                Else
+                    sysInfo.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+                End If
+
                 Thread.Sleep(60)
 
-                If CheckUpdataRecData({&H1C, &H1D}) Then
+                If CheckUpdataRecData(Wangk.Hash.Hex2Bin("1c1d")) Then
                     Exit For
                 End If
 
                 If i = 10 Then
-                    'Putlog($"第 {sendIndex} 包升级数据发送失败")
                     re.Close()
                     fs.Close()
                     MsgBox($"升级数据发送失败",
@@ -1112,11 +1036,15 @@ Public Class FormOption
 
 
         '发送完毕指令
-        sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, {&HAA, &HDB, &H9, &H9})
+        If Not sysInfo.ScanBoardOldFlage Then
+            sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0909"))
+        Else
+            sysInfo.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0909"))
+        End If
+
         re.Close()
         fs.Close()
 
-        'TextBox4.AppendText($"数据发送完毕{vbCrLf}")
         MsgBox($"程序升级完毕",
                MsgBoxStyle.Information,
                "升级")
@@ -1139,30 +1067,17 @@ Public Class FormOption
 
             Try
                 Dim bytes(1028 - 1) As Byte
-                Dim tmpstr As String = "55d50902"
-                Dim sendbytes(4 - 1) As Byte
-                For i As Integer = 0 To tmpstr.Length \ 2 - 1
-                    sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
-                Next i
-
-                Dim bytesSend As Integer = cliSocket.Send(sendbytes)
+                Dim bytesSend As Integer = cliSocket.Send(Wangk.Hash.Hex2Bin("55d50902"))
                 Dim bytesRec As Integer = cliSocket.Receive(bytes)
 
             Catch ex As Exception
-                'TextBox4.AppendText($"发送读取指令异常:{ex.Message}{vbCrLf}")
                 cliSocket.Close()
                 Return False
             End Try
 
             Try
                 Dim bytes(1028 - 1) As Byte
-                Dim tmpstr As String = "55d50905000000000400"
-                Dim sendbytes(10 - 1) As Byte
-                For i As Integer = 0 To tmpstr.Length \ 2 - 1
-                    sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
-                Next i
-
-                Dim bytesSend As Integer = cliSocket.Send(sendbytes)
+                Dim bytesSend As Integer = cliSocket.Send(Wangk.Hash.Hex2Bin("55d50905000000000400"))
 
                 For m As Integer = 0 To 16 - 1
                     Dim bytesRec As Integer = cliSocket.Receive(bytes)
@@ -1179,9 +1094,6 @@ Public Class FormOption
                         For i As Integer = 0 To checkData.Length - 1
                             If bytes(j + 4 + i) <> checkData(i) Then
                                 errorSum += 1
-                                'cliSocket.Close()
-                                'TextBox4.AppendText("校验值错误")
-                                'Return False
                                 Exit For
                             End If
                         Next
@@ -1190,10 +1102,7 @@ Public Class FormOption
                     Next
                 Next
             Catch ex As Exception
-                'TextBox4.AppendText($"接收数据异常:{ex.Message}{vbCrLf}")
                 errorSum += 1
-                'cliSocket.Close()
-                'Return False
             End Try
 
             cliSocket.Close()
@@ -1205,4 +1114,8 @@ Public Class FormOption
 
         Return If(recSum > 0, True, False)
     End Function
+
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
+        sysInfo.ScanBoardOldFlage = CheckBox2.Checked
+    End Sub
 End Class

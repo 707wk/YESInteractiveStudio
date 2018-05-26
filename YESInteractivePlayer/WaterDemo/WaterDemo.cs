@@ -10,8 +10,8 @@ using YESInteractiveSDK;
 
 namespace WaterDemo
 {
-    [Serializable]
-    class WaterDemo : MarshalByRefObject,IYESInterfaceSDK
+    //[Serializable]
+    class WaterDemo : IYESInterfaceSDK
     {
         UserControl1 tmp;
         public void InitAddonFunc(Control Parent)

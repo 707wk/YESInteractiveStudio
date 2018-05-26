@@ -49,8 +49,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::WaterDemo.Properties.Resources.back;
             this.Name = "UserControl1";
-            this.Size = new System.Drawing.Size(203, 162);
+            this.Size = new System.Drawing.Size(294, 244);
+            this.Load += new System.EventHandler(this.UserControl1_Load);
             this.ResumeLayout(false);
 
         }

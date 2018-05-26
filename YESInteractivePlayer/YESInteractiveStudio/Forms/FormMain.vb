@@ -6,5 +6,9 @@
         End With
 
         StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue
+
+        '初始化配置
+        Dim tmpDialog As New FormInit
+        tmpDialog.ShowDialog()
     End Sub
 End Class

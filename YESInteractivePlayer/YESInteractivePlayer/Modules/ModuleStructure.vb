@@ -307,6 +307,11 @@ Module ModuleStructure
         ''' </summary>
         <NonSerialized()>
         Dim MainClass As MarsControlSystem
+
+        ''' <summary>
+        ''' 接收卡是否是旧版
+        ''' </summary>
+        Dim ScanBoardOldFlage As Boolean
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -365,10 +370,10 @@ Module ModuleStructure
         ''' 3忽略 4显示电容
         ''' </summary>
         Dim DisplayMode As Integer
-        '''' <summary>
-        '''' 触摸模式 01合1 14合1 [废弃]
-        '''' </summary>
-        'Dim touchMode As Integer
+        ''' <summary>
+        ''' 触摸模式 01合1 14合1 216合1
+        ''' </summary>
+        Dim touchMode As Integer
         ''' <summary>
         ''' 触摸灵敏度 低1-9高
         ''' </summary>
@@ -383,7 +388,7 @@ Module ModuleStructure
         ''' </summary>
         Dim ResetTemp As Integer
         ''' <summary>
-        ''' 屏幕定时复位时间
+        ''' 屏幕定时复位时间 Sec
         ''' </summary>
         Dim ResetSec As Integer
 
@@ -396,7 +401,6 @@ Module ModuleStructure
         ''' <summary>
         ''' 捕获鼠标 默认使用接口
         ''' </summary>
-        <NonSerialized()>
         Dim SetCaptureFlage As Boolean
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     End Structure

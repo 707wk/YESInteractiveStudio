@@ -36,7 +36,7 @@
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DocumentationFile>YESInteractivePlayer.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
@@ -46,7 +46,7 @@
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DocumentationFile>YESInteractivePlayer.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
@@ -69,7 +69,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DocumentationFile>YESInteractivePlayer.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DebugType>full</DebugType>
@@ -79,7 +79,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x86\Release\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DocumentationFile>YESInteractivePlayer.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
@@ -95,7 +95,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DocumentationFile>YESInteractivePlayer.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DebugType>full</DebugType>
@@ -105,7 +105,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x64\Release\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DocumentationFile>YESInteractivePlayer.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
@@ -118,9 +118,8 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Nova.Mars.SDK.MarsInterface, Version=1.5.1604.2001, Culture=neutral, processorArchitecture=x86">
-      <HintPath>dll\Nova.Mars.SDK.MarsInterface.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Nova.Mars.SDK.MarsInterface">
+      <HintPath>..\Nova\Nova.Mars.SDK.MarsInterface.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -142,9 +141,8 @@
     <Reference Include="Wangk.Tools">
       <HintPath>..\..\WangkNamespace\DLL\Wangk.Tools.dll</HintPath>
     </Reference>
-    <Reference Include="YESInteractiveSDK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\YESInteractiveSDK\bin\x86\Debug\YESInteractiveSDK.dll</HintPath>
+    <Reference Include="YESInteractiveSDK">
+      <HintPath>..\YESInteractiveSDK\bin\YESInteractiveSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -240,7 +238,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="main.ico" />
-    <Content Include="README.txt" />
     <None Include="res\YESTECH.png" />
     <None Include="res\ServerNormal.png" />
     <None Include="res\ServerFault.png" />
@@ -267,7 +264,7 @@
       <Lcid>0</Lcid>
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
-      <Private>False</Private>
+      <Private>True</Private>
     </COMReference>
     <COMReference Include="ShockwaveFlashObjects">
       <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
@@ -277,7 +274,7 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>False</Private>
+      <Private>True</Private>
     </COMReference>
   </ItemGroup>
   <ItemGroup>
@@ -295,9 +292,16 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PostBuildEvent>%25删除临时文件%25
-del *.xml
-del *.pdb
-%25移动DLL文件到data文件夹%25
-for /f "delims=" %25%25i in ('dir /b "*.dll"') do move %25%25i "./data"</PostBuildEvent>
+DEL *.xml
+DEL *.pdb
+
+%25移动DLL文件到DLL文件夹%25
+MKDIR .\DLL
+FOR /f "delims=" %25%25i IN ('dir /b "*.dll"') DO MOVE %25%25i "./DLL"
+
+%25复制SDK文件%25
+RD /S /Q .\Nova
+MKDIR .\Nova
+XCOPY ..\..\Nova .\Nova /E</PostBuildEvent>
   </PropertyGroup>
 </Project>

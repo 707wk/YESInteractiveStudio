@@ -1,9 +1,3 @@
-T:\YESInteractivePlayer\WaterDemo\bin\x86\Debug\WaterDemo.dll
-T:\YESInteractivePlayer\WaterDemo\bin\x86\Debug\WaterDemo.pdb
-T:\YESInteractivePlayer\WaterDemo\bin\x86\Debug\SlimDX.dll
-T:\YESInteractivePlayer\WaterDemo\bin\x86\Debug\YESInteractiveSDK.dll
-T:\YESInteractivePlayer\WaterDemo\bin\x86\Debug\YESInteractiveSDK.pdb
-T:\YESInteractivePlayer\WaterDemo\bin\x86\Debug\YESInteractiveSDK.xml
 T:\YESInteractivePlayer\WaterDemo\obj\x86\Debug\WaterDemo.Properties.Resources.resources
 T:\YESInteractivePlayer\WaterDemo\obj\x86\Debug\WaterDemo.Resource1.resources
 T:\YESInteractivePlayer\WaterDemo\obj\x86\Debug\WaterDemo.UserControl1.resources
@@ -13,3 +7,9 @@ T:\YESInteractivePlayer\WaterDemo\obj\x86\Debug\WaterDemo.csproj.CopyComplete
 T:\YESInteractivePlayer\WaterDemo\obj\x86\Debug\WaterDemo.dll
 T:\YESInteractivePlayer\WaterDemo\obj\x86\Debug\WaterDemo.pdb
 T:\YESInteractivePlayer\WaterDemo\obj\x86\Debug\WaterDemo.csprojAssemblyReference.cache
+T:\YESInteractivePlayer\WaterDemo\bin\WaterDemo.dll
+T:\YESInteractivePlayer\WaterDemo\bin\WaterDemo.pdb
+T:\YESInteractivePlayer\WaterDemo\bin\SlimDX.dll
+T:\YESInteractivePlayer\WaterDemo\bin\YESInteractiveSDK.pdb
+T:\YESInteractivePlayer\WaterDemo\bin\YESInteractiveSDK.xml
+T:\YESInteractivePlayer\WaterDemo\bin\YESInteractiveSDK.dll

@@ -235,7 +235,7 @@ Public Class FormPlay
         Me.BackColor = Color.Black
         Me.Refresh()
 
-        Debug.WriteLine("curtainListId" + curtainListId.ToString)
+        'Debug.WriteLine("curtainListId" + curtainListId.ToString)
 
         For Each tmp In sysInfo.CurtainList.Item(curtainListId).ScreenList
             '缩放后触摸单元高度
@@ -290,71 +290,101 @@ Public Class FormPlay
         Dim touchPieceWidth As Integer = sysInfo.ScreenList(screenId).TouchPieceWidth
         Dim touchPieceHeight As Integer = sysInfo.ScreenList(screenId).TouchPieceHeight
 
-        '显示模式
-        Select Case sysInfo.DisplayMode
-            Case 0
-                '点击
-                Dim txp As Int16 = sysInfo.ScreenList(screenId).X + tX * touchPieceWidth + touchPieceWidth \ 2
-                Dim typ As Int32 = sysInfo.ScreenList(screenId).Y + tY * touchPieceHeight + touchPieceHeight \ 2
+        Try
+            '显示模式
+            Select Case sysInfo.DisplayMode
+                Case 0
+                    '点击
+                    Dim txp As Int16 = sysInfo.ScreenList(screenId).X + tX * touchPieceWidth ' + touchPieceWidth \ 2
+                    Dim typ As Int32 = sysInfo.ScreenList(screenId).Y + tY * touchPieceHeight ' + touchPieceHeight \ 2
 
-                Select Case filesType
-                    Case 0 'swf
-                        '不是按下事件则丢弃
-                        If active <> PointActivity.DOWN Then
-                            Exit Sub
-                        End If
+                    '切换模式
+                    If sysInfo.touchMode = 0 OrElse
+                        sysInfo.DisplayMode <> 0 OrElse
+                            sysInfo.ScreenList(screenId).TouchPieceRowsNum <> sysInfo.ScreenList(screenId).TouchPieceColumnsNum Then
+                        txp = txp + touchPieceWidth \ 2
+                        typ = typ + touchPieceHeight \ 2
 
-                        If Not sysInfo.SetCaptureFlage Then
-                            '使用接口
-                            Try
-                                playFlashControl.CallFunction($"<invoke name=""pointActive"" returntype=""xml""><arguments><string>{txp}</string><string>{typ}</string></arguments></invoke>")
-                            Catch ex As Exception
-                            End Try
-                        Else
-                            '捕获鼠标
-                            Dim ttp As Int32 = txp + (typ << 16)
-                            Dim ttp2 As Int32 = txp + ((typ + 2) << 16)
+                    ElseIf sysInfo.touchMode = 1 Then
+                        txp = txp + touchPieceWidth
+                        typ = typ + touchPieceHeight
 
-                            '点击-移动 - 松开
-                            PostMessage(playFlashControl.Handle,
-                                    WM_LBUTTONDOWN,
-                                    0,
-                                    ttp)
-                            PostMessage(playFlashControl.Handle,
-                                    WM_MOUSEMOVE,
-                                    0,
-                                    ttp2)
-                            PostMessage(playFlashControl.Handle,
-                                    WM_LBUTTONUP,
-                                    0,
-                                    ttp)
-                        End If
+                    ElseIf sysInfo.touchMode = 2 Then
+                        txp = txp + touchPieceWidth * 2
+                        typ = typ + touchPieceHeight * 2
+                    End If
 
-                    Case 1 'dll
-                        Dim tmpPoint As PointInfo
-                        tmpPoint.X = txp
-                        tmpPoint.Y = typ
-                        tmpPoint.Activity = active
-                        playDllControl.PointActive(tmpPoint)
-                End Select
+                    '按照文件类型发送点击事件
+                    Select Case filesType
+                        Case 0 'swf
+                            '不是按下事件则丢弃
+                            If active <> PointActivity.DOWN Then
+                                'Debug.WriteLine($"up {Format(Now(), "yyyy/MM/dd HH:mm:ss.fff")}")
 
+                                Exit Sub
+                            End If
 
-            Case 1
-                '测试
-                '不是按下事件则丢弃
-                If active <> PointActivity.DOWN Then
-                    Exit Sub
-                End If
+                            If Not sysInfo.SetCaptureFlage Then
+                                '使用接口
+                                Try
+                                    playFlashControl.CallFunction($"<invoke name=""pointActive"" returntype=""xml""><arguments><string>{txp}</string><string>{typ}</string></arguments></invoke>")
+                                Catch ex As Exception
+                                End Try
+                            Else
+                                '捕获鼠标
+#Region "捕获鼠标"
+                                Dim ttp As Int32 = txp + (typ << 16)
+                                Dim ttp2 As Int32 = txp + ((typ + 2) << 16)
 
-                gBack.DrawString($"√", gFont, gBrush,
-                                 sysInfo.ScreenList(screenId).X + tX * touchPieceWidth + 1,
-                                 sysInfo.ScreenList(screenId).Y + tY * touchPieceHeight + 1)
-            Case 4
-                '显示电容
-                gBack.DrawString($"{value And &H7F}", gFont, gBrush,
-                                 sysInfo.ScreenList(screenId).X + tX * touchPieceWidth + 1,
-                                 sysInfo.ScreenList(screenId).Y + tY * touchPieceHeight + 1)
-        End Select
+                                '点击-移动 - 松开
+                                PostMessage(playFlashControl.Handle,
+                                        WM_LBUTTONDOWN,
+                                        0,
+                                        ttp)
+                                PostMessage(playFlashControl.Handle,
+                                        WM_MOUSEMOVE,
+                                        0,
+                                        ttp2)
+                                PostMessage(playFlashControl.Handle,
+                                        WM_LBUTTONUP,
+                                        0,
+                                        ttp)
+#End Region
+                            End If
+
+                        Case 1 'dll
+                            Dim tmpPoint As PointInfo
+                            tmpPoint.X = txp
+                            tmpPoint.Y = typ
+                            tmpPoint.Activity = active
+                            playDllControl.PointActive(tmpPoint)
+                    End Select
+
+                'Debug.WriteLine($"response {Format(Now(), "yyyy/MM/dd HH:mm:ss.fff")}")
+
+                Case 1
+                    '测试
+                    '不是按下事件则丢弃
+                    If active <> PointActivity.DOWN Then
+                        'Debug.WriteLine($"test up {Format(Now(), "yyyy/MM/dd HH:mm:ss.fff")}")
+
+                        Exit Sub
+                    End If
+
+                    gBack.DrawString($"√", gFont, gBrush,
+                                     sysInfo.ScreenList(screenId).X + tX * touchPieceWidth + 1,
+                                     sysInfo.ScreenList(screenId).Y + tY * touchPieceHeight + 1)
+
+                'Debug.WriteLine($"test response {Format(Now(), "yyyy/MM/dd HH:mm:ss.fff")}")
+
+                Case 4
+                    '显示电容
+                    gBack.DrawString($"{value And &H7F}", gFont, gBrush,
+                                     sysInfo.ScreenList(screenId).X + tX * touchPieceWidth + 1,
+                                     sysInfo.ScreenList(screenId).Y + tY * touchPieceHeight + 1)
+            End Select
+        Catch ex As Exception
+        End Try
 
     End Sub
 

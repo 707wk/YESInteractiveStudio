@@ -15,13 +15,14 @@ T:\YESInteractivePlayer\YESInteractiveStudio\bin\DevComponents.DotNetBar2.xml
 T:\YESInteractivePlayer\YESInteractiveStudio\bin\Wangk.Hash.dll
 T:\YESInteractivePlayer\YESInteractiveStudio\bin\Wangk.Resource.dll
 T:\YESInteractivePlayer\YESInteractiveStudio\bin\Wangk.Tools.dll
-T:\YESInteractivePlayer\YESInteractiveStudio\bin\YESInteractiveSDK.dll
 T:\YESInteractivePlayer\YESInteractiveStudio\bin\Wangk.Hash.pdb
 T:\YESInteractivePlayer\YESInteractiveStudio\bin\Wangk.Hash.xml
 T:\YESInteractivePlayer\YESInteractiveStudio\bin\Wangk.Resource.pdb
 T:\YESInteractivePlayer\YESInteractiveStudio\bin\Wangk.Resource.xml
 T:\YESInteractivePlayer\YESInteractiveStudio\bin\Wangk.Tools.pdb
 T:\YESInteractivePlayer\YESInteractiveStudio\bin\Wangk.Tools.xml
+T:\YESInteractivePlayer\YESInteractiveStudio\obj\x86\Debug\YESInteractiveStudio.vbprojAssemblyReference.cache
+T:\YESInteractivePlayer\YESInteractiveStudio\obj\x86\Debug\YESInteractiveStudio.FormInit.resources
+T:\YESInteractivePlayer\YESInteractiveStudio\bin\YESInteractiveSDK.dll
 T:\YESInteractivePlayer\YESInteractiveStudio\bin\YESInteractiveSDK.pdb
 T:\YESInteractivePlayer\YESInteractiveStudio\bin\YESInteractiveSDK.xml
-T:\YESInteractivePlayer\YESInteractiveStudio\obj\x86\Debug\YESInteractiveStudio.vbprojAssemblyReference.cache

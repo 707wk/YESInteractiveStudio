@@ -37,7 +37,7 @@ Public Class FormMain
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.KeyPreview = True
-        Me.TopMost = True
+        'Me.TopMost = True
 
         '测试时关闭登陆验证
         'checkdog()
@@ -63,15 +63,15 @@ Public Class FormMain
             fStream.Close()
         Else
             '第一次使用初始化参数
-            ReDim sysInfo.ScreenList(32 - 1)
-            sysInfo.StartLocation.X = Screen.PrimaryScreen.Bounds.Width / 2
-            sysInfo.StartLocation.Y = Screen.PrimaryScreen.Bounds.Height / 2
-
             With sysInfo
-                .TouchSensitivity = If(.TouchSensitivity, .TouchSensitivity, 5)
-                .ClickValidNums = If(.ClickValidNums, .ClickValidNums, 2)
-                .ResetTemp = If(.ResetTemp, .ResetTemp, 5)
-                .ResetSec = If(.ResetSec, .ResetSec, 20)
+                ReDim .ScreenList(32 - 1)
+                .StartLocation.X = Screen.PrimaryScreen.Bounds.Width / 2
+                .StartLocation.Y = Screen.PrimaryScreen.Bounds.Height / 2
+                .TouchSensitivity = 5
+                .ClickValidNums = 2
+                .ResetTemp = 5
+                .ResetSec = 25
+                .touchMode = 1
             End With
         End If
 
@@ -107,10 +107,6 @@ Public Class FormMain
             .ZoomProportion = If(.ZoomProportion, .ZoomProportion, 1)
             .ZoomTmpNumerator = If(.ZoomTmpNumerator, .ZoomTmpNumerator, 1)
             .ZoomTmpDenominator = If(.ZoomTmpDenominator, .ZoomTmpDenominator, 1)
-            '.TouchSensitivity = If(.TouchSensitivity, .TouchSensitivity, 5)
-            '.ClickValidNums = If(.ClickValidNums, .ClickValidNums, 2)
-            '.ResetTemp = If(.ResetTemp, .ResetTemp, 5)
-            '.ResetSec = If(.ResetSec, .ResetSec, 20)
             .InquireTimeSec = 20
         End With
 
@@ -145,6 +141,9 @@ Public Class FormMain
         With My.Application.Info
             Me.Text = $"{ sysInfo.Language.GetLanguage(.ProductName)} V{ .Version.ToString}"
         End With
+
+        '捕获鼠标标志
+        CheckBox2.Checked = sysInfo.SetCaptureFlage
 
         sysInfo.logger = New Wangk.Tools.Logger With {
             .writelevel = Wangk.Tools.Loglevel.Level_DEBUG,
@@ -387,14 +386,14 @@ Public Class FormMain
     ''' 设置 屏幕定时复位增量温度 K
     ''' </summary>
     Private Sub SetResetTemp(value As Integer)
-        Dim sendstr As String = "aadb010300"
-        Dim sendByte(sendstr.Length \ 2 - 1) As Byte
-        For i As Integer = 0 To sendstr.Length \ 2 - 1
-            sendByte(i) = Val($"&H{sendstr(i * 2)}{ sendstr(i * 2 + 1)}")
-        Next
+        Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb010300")
         sendByte(4) = value
 
-        sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        If Not sysInfo.ScanBoardOldFlage Then
+            sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        Else
+            sysInfo.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        End If
 
         Thread.Sleep(100)
     End Sub
@@ -403,14 +402,14 @@ Public Class FormMain
     ''' 设置 屏幕定时复位时间
     ''' </summary>
     Private Sub SetResetSec(value As Integer)
-        Dim sendstr As String = "aadb010200"
-        Dim sendByte(sendstr.Length \ 2 - 1) As Byte
-        For i As Integer = 0 To sendstr.Length \ 2 - 1
-            sendByte(i) = Val($"&H{sendstr(i * 2)}{ sendstr(i * 2 + 1)}")
-        Next
+        Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb010200")
         sendByte(4) = value
 
-        sysInfo.MainClass.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        If Not sysInfo.ScanBoardOldFlage Then
+            sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        Else
+            sysInfo.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        End If
 
         Thread.Sleep(100)
     End Sub
@@ -459,6 +458,7 @@ Public Class FormMain
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         If Not sysInfo.LinkFlage Then
             '连接控制器
+#Region "连接控制器"
             If sysInfo.CurtainList.Count = 0 Then
                 Exit Sub
             End If
@@ -501,8 +501,8 @@ Public Class FormMain
                         Dim ipStr As String = $"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)}"
 
                         .CliSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
-                            .SendTimeout = 200,
-                            .ReceiveTimeout = 200
+                            .SendTimeout = 100,
+                            .ReceiveTimeout = 100
                         }
                         '连接
                         .CliSocket.Connect(ipStr, 6000)
@@ -542,9 +542,10 @@ Public Class FormMain
             SetResetSec(sysInfo.ResetSec)
 
             OnLinkCon()
-
+#End Region
         Else
             '断开控制器
+#Region "断开控制器"
             sysInfo.LinkFlage = False
 
             Thread.Sleep(300)
@@ -556,7 +557,8 @@ Public Class FormMain
 
                 Try
                     With i
-                        .WorkThread.Abort()
+                        .WorkThread.Join()
+                        '.WorkThread.Abort()
                     End With
                 Catch ex As Exception
                 End Try
@@ -568,6 +570,7 @@ Public Class FormMain
             SetResetSec(0)
 
             OffLinkCon()
+#End Region
         End If
     End Sub
 
@@ -583,7 +586,9 @@ Public Class FormMain
 
         ToolStripButton1_Click(Nothing, Nothing)
 
-        MsgBox($"控制器连接异常:{lastErrorStr},请重启控制器",
+        sysInfo.logger.LogThis("控制器连接异常", lastErrorStr, Wangk.Tools.Loglevel.Level_DEBUG)
+
+        MsgBox($"控制器连接异常:{lastErrorStr},请重新连接控制器或重启控制器",
                MsgBoxStyle.Information,
                Me.Text)
     End Sub
@@ -629,6 +634,9 @@ Public Class FormMain
         Dim readNum As Integer = 0
         '最后一次异常信息
         Dim lastErrorStr As String = Nothing
+        '接收的传感器数据
+        Dim ReceDataArray As Byte(,)
+        ReDim ReceDataArray(16 - 1, 1028 - 1)
 
         Do While sysInfo.LinkFlage
             '获取当前时间秒
@@ -642,30 +650,33 @@ Public Class FormMain
 
             '出现三次异常，进行提示，并且终止进程
             If exceptionNums > 3 Then
-                ShowException(lastErrorStr)
+                Dim tmpThread As Thread = New Thread(AddressOf ShowException) With {
+                    .IsBackground = True
+                    }
+                tmpThread.Start(lastErrorStr)
+                'ShowException(lastErrorStr)
                 Exit Do
             End If
 
             'Dim asd As New Stopwatch
             'asd.Start()
 
+            '接收传感器数据
+#Region "接收传感器数据"
             Try
                 '向发送卡 请求接收传感器数据数据
                 Dim bytes(1028 - 1) As Byte
-                Dim tmpstr As String = "55d50902"
-                Dim sendbytes(4 - 1) As Byte
-                For i As Integer = 0 To tmpstr.Length \ 2 - 1
-                    sendbytes(i) = Val("&H" & tmpstr(i * 2)) * 16 + Val("&H" & tmpstr(i * 2 + 1))
-                Next i
                 '发送数据
-                Dim bytesSend As Integer = sysInfo.SenderList(senderId).CliSocket.Send(sendbytes)
+                Dim bytesSend As Integer = sysInfo.SenderList(senderId).CliSocket.Send(Wangk.Hash.Hex2Bin("55d50902"))
                 '接收数据
                 Dim bytesRec As Integer = sysInfo.SenderList(senderId).CliSocket.Receive(bytes)
 
             Catch ex As SocketException
                 lastErrorStr = ex.Message
-                'sysInfo.logger.LogThis("请求接收传感器数据异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
+                'sysInfo.logger.LogThis("请求传感器数据通信异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
                 exceptionNums += 1
+
+                Thread.Sleep(100)
                 Continue Do
                 'Catch ex As ThreadAbortException
                 '不记录终止异常
@@ -674,30 +685,54 @@ Public Class FormMain
             End Try
 
             '向发送卡 请求发送传感器数据数据
+            Dim index As Integer
             Try
                 '向发送卡发送数据
                 Dim bytes2(1028 - 1) As Byte
-                Dim tmpstr2 As String = "55d50905000000000400"
-                Dim sendbytes2(10 - 1) As Byte
-                For i As Integer = 0 To tmpstr2.Length \ 2 - 1
-                    sendbytes2(i) = Val("&H" & tmpstr2(i * 2)) * 16 + Val("&H" & tmpstr2(i * 2 + 1))
-                Next i
                 '发送到发送卡数据
-                Dim bytesSend2 As Integer = sysInfo.SenderList(senderId).CliSocket.Send(sendbytes2)
+                Dim bytesSend2 As Integer = sysInfo.SenderList(senderId).CliSocket.Send(Wangk.Hash.Hex2Bin("55d50905000000000400"))
+
+                '清空历史数据
+                For index = 0 To 16 - 1
+                    For i1 As Integer = 0 To 1028 - 1
+                        ReceDataArray(index, i1) = 0
+                    Next
+                Next
 
                 '诺瓦每次只发送1K数据，16K数据分16次发送
-                For i As Integer = 0 To 16 - 1
-                    Dim bytesRec2 As Integer = sysInfo.SenderList(senderId).CliSocket.Receive(bytes2)
+                For index = 0 To 16 - 1
+                    sysInfo.SenderList(senderId).CliSocket.Receive(bytes2)
+                    For i1 As Integer = 0 To 1028 - 1
+                        ReceDataArray(index, i1) = bytes2(i1)
+                    Next
+                Next
+            Catch ex As SocketException
+                lastErrorStr = ex.Message
+                'sysInfo.logger.LogThis($"接收传感器数据数据通信异常{index}", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
+                exceptionNums += 1
+                'Catch ex As ThreadAbortException
+                '不记录终止异常
+            Catch ex As Exception
+                sysInfo.logger.LogThis($"接收传感器数据数据其他异常{index}", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
+            End Try
+#End Region
+            readNum += 1
+
+            '处理收到的数据
+            Try
+                For index = 0 To 16 - 1
                     'TextBox5.Text = ""
                     '分析接收到的数据
                     For j As Integer = 4 To 1027 Step 32
+                        '判断有效性
+#Region "判断有效性"
                         '有效数据头
-                        If bytes2(j + 0) <> &H55 Then
+                        If ReceDataArray(index, j + 0) <> &H55 Then
                             Continue For
                         End If
 
                         '网口号大于4则丢弃
-                        If bytes2(j + 1) > 4 Then
+                        If ReceDataArray(index, j + 1) > 4 Then
                             Continue For
                         End If
 
@@ -708,62 +743,173 @@ Public Class FormMain
                         End If
 
                         '查找接收卡位置[由像素改为索引]
-                        If sysInfo.ScanBoardTable.Item($"{senderId}-{bytes2(j + 1)}-{(bytes2(j + 2) * 256 + bytes2(j + 3))}") Is Nothing Then
+                        If sysInfo.ScanBoardTable.Item($"{senderId}-{ReceDataArray(index, j + 1)}-{(ReceDataArray(index, j + 2) * 256 + ReceDataArray(index, j + 3))}") Is Nothing Then
                             Continue For
                         End If
-                        Dim tmp As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{senderId}-{bytes2(j + 1)}-{(bytes2(j + 2) * 256 + bytes2(j + 3))}")
+                        Dim tmp As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{senderId}-{ReceDataArray(index, j + 1)}-{(ReceDataArray(index, j + 2) * 256 + ReceDataArray(index, j + 3))}")
 
                         '未显示则跳过
                         If sysInfo.ScreenList(tmp.ScreenId).CurtainListId < 0 Then
                             Continue For
                         End If
-
+#End Region
                         '计算总点击块
                         Dim tmpClickValidSum As Integer = 0
                         For k = 0 To 4 * 4 - 1
-                            tmpClickValidSum = tmpClickValidSum + If(bytes2(j + 4 + k) And &H80, 1, 0)
+                            tmpClickValidSum = tmpClickValidSum + If(ReceDataArray(index, j + 4 + k) And &H80, 1, 0)
                         Next
 
-                        ''If tmpClickValidSum < 1 And
-                        'If tmpClickValidSum < sysInfo.ClickValidNums And
-                        '    sysInfo.DisplayMode = 0 Then
-                        '    '互动模式下抗干扰才启用
-                        '    Continue For
-                        'End If
-
-                        'Debug.WriteLine(tmpClickValidSum)
-
-                        For k As Integer = 0 To 4 - 1 'sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum - 1
-                            If k >= sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum Then
-                                Continue For
-                            End If
-
-                            For l As Integer = 0 To 4 - 1 'sysInfo.ScreenList(tmp.ScreenId).TouchPieceColumnsNum - 1
-                                If l >= sysInfo.ScreenList(tmp.ScreenId).TouchPieceColumnsNum Then
+                        '按触摸模式计算点击坐标
+                        If sysInfo.touchMode = 0 OrElse
+                            sysInfo.DisplayMode <> 0 OrElse
+                            sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum <> sysInfo.ScreenList(tmp.ScreenId).TouchPieceColumnsNum Then
+                            '1合1
+#Region "1合1"
+                            For k As Integer = 0 To 4 - 1 '行数
+                                If k >= sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum Then
                                     Continue For
                                 End If
 
-                                If sysInfo.DisplayMode = 0 OrElse
-                                               sysInfo.DisplayMode = 1 Then
-                                    '互动或测试时启用
-                                    'Static id As Integer = 0
+                                For l As Integer = 0 To 4 - 1 '列数
+                                    If l >= sysInfo.ScreenList(tmp.ScreenId).TouchPieceColumnsNum Then
+                                        Continue For
+                                    End If
 
-                                    'sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = bytes(j + k * sysInfo.ScreenList(tmp.ScreenId).TouchPieceRowsNum + l) And &H80
-                                    'sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = bytes2(j + k * 4 + l) And &H80
+                                    If sysInfo.DisplayMode = 0 OrElse '点击
+                                            sysInfo.DisplayMode = 1 Then '测试
+                                        '未被点击
+                                        If (ReceDataArray(index, j + 4 + k * 4 + l) And &H80) <> &H80 Then
+                                            '抬起事件
+                                            ''todo:抬起事件
+                                            If (sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) And &H80) = &H80 Then
+                                                sysInfo.CurtainList.Item(sysInfo.ScreenList(tmp.ScreenId).CurtainListId).
+                                                       PlayDialog.
+                                                        MousesimulationClick(tmp.ScreenId,
+                                                            tmp.X + l,
+                                                            tmp.Y + k,
+                                                            0,
+                                                            PointActivity.UP)
+                                            End If
 
-                                    '未被点击
-                                    If (bytes2(j + 4 + k * 4 + l) And &H80) <> &H80 Then
-                                        '抬起事件
-                                        If (sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) And &H80) = &H80 Then
-                                            sysInfo.CurtainList.Item(sysInfo.ScreenList(tmp.ScreenId).CurtainListId).
-                                                PlayDialog.
-                                                MousesimulationClick(tmp.ScreenId,
-                                                    tmp.X + l,
-                                                    tmp.Y + k,
-                                                    0,
-                                                    PointActivity.UP)
+                                            sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = 0
+
+                                            Continue For
                                         End If
 
+                                        '被点击过
+                                        If sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) Then
+                                            '
+                                            'sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
+
+                                            Continue For
+                                        End If
+
+                                        '新点击点
+                                        sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
+
+                                        If tmpClickValidSum < sysInfo.ClickValidNums AndAlso
+                                                sysInfo.DisplayMode = 0 Then
+                                            '互动模式下抗干扰才启用
+                                            Continue For
+                                        End If
+
+                                        'If Not CheckAdjacencyPieceNums(tmp.ScreenId, tmp.Y + k, tmp.X + l) Then
+                                        '    Continue For
+                                        'End If
+                                    End If
+                                    '
+                                    'sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
+
+                                    'Debug.WriteLine($"download {Format(Now(), "yyyy/MM/dd HH:mm:ss.fff")}")
+
+                                    '按下事件
+                                    sysInfo.CurtainList.Item(sysInfo.ScreenList(tmp.ScreenId).CurtainListId).
+                                            PlayDialog.
+                                            MousesimulationClick(tmp.ScreenId,
+                                                                 tmp.X + l,
+                                                                 tmp.Y + k,
+                                                                 ReceDataArray(index, j + 4 + k * 4 + l),
+                                                                 PointActivity.DOWN)
+
+                                    'Debug.WriteLine($"1-1 {Format(Now(), "HH:mm:ss.fff")} {tmp.X + l },{tmp.Y + k}")
+                                Next
+                            Next
+#End Region
+
+                        ElseIf sysInfo.touchMode = 1 Then
+                            '4合1
+#Region "4合1"
+                            '是否有新点击点标记
+                            Dim NewPointActiveFlage As Boolean = False
+
+                            For k As Integer = 0 To 2 - 1 '行数
+                                For l As Integer = 0 To 2 - 1 '列数
+                                    '是否有新点击点
+                                    NewPointActiveFlage = False
+
+                                    For i001 As Integer = 0 To 2 - 1 '行数
+                                        For j002 As Integer = 0 To 2 - 1 '列数
+
+                                            Dim xId As Integer = tmp.X + l * 2 + j002
+                                            Dim yId As Integer = tmp.Y + k * 2 + i001
+                                            '未被点击
+                                            If (ReceDataArray(index, j + 4 + k * 8 + l * 2 + i001 * 4 + j002) And &H80) <> &H80 Then
+                                                '抬起事件
+                                                sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(yId, xId) = 0
+
+                                                Continue For
+                                            End If
+
+                                            '被点击过
+                                            If sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(yId, xId) Then
+                                                'sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
+                                                'Debug.WriteLine("C")
+                                                Continue For
+                                            End If
+
+                                            '新点击点
+                                            sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(yId, xId) = &H80
+
+                                            NewPointActiveFlage = True
+
+                                            'Debug.WriteLine(k * 8 + l * 2 + i001 * 4 + j002)
+                                        Next
+                                    Next
+
+                                    If tmpClickValidSum < sysInfo.ClickValidNums Then
+                                        '互动模式下抗干扰才启用
+                                        Continue For
+                                    End If
+
+                                    If Not NewPointActiveFlage Then
+                                        Continue For
+                                    End If
+
+                                    '按下事件
+                                    sysInfo.CurtainList.Item(sysInfo.ScreenList(tmp.ScreenId).CurtainListId).
+                                            PlayDialog.
+                                            MousesimulationClick(tmp.ScreenId,
+                                                                 tmp.X + l * 2,
+                                                                 tmp.Y + k * 2,
+                                                                 0,
+                                                                 PointActivity.DOWN)
+                                    'Debug.WriteLine($"4-1 {NewPointActiveFlage} {Format(Now(), "HH:mm:ss.fff")} {tmp.X + l * 2},{tmp.Y + k * 2}")
+                                Next
+                            Next
+#End Region
+
+                        ElseIf sysInfo.touchMode = 2 Then
+                            '16合1
+#Region "16合1"
+                            '是否有新点击点标记
+                            Dim NewPointActiveFlage As Boolean = False
+
+                            For k As Integer = 0 To 4 - 1 '行数
+                                For l As Integer = 0 To 4 - 1 '列数
+
+                                    '未被点击
+                                    If (ReceDataArray(index, j + 4 + k * 4 + l) And &H80) <> &H80 Then
+                                        '抬起事件
                                         sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = 0
 
                                         Continue For
@@ -771,53 +917,44 @@ Public Class FormMain
 
                                     '被点击过
                                     If sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) Then
-                                        sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
-
                                         Continue For
                                     End If
 
+                                    '新点击点
                                     sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
 
-                                    If tmpClickValidSum < sysInfo.ClickValidNums AndAlso
-                                        sysInfo.DisplayMode = 0 Then
-                                        '互动模式下抗干扰才启用
-                                        Continue For
-                                    End If
+                                    NewPointActiveFlage = True
+                                Next
+                            Next
 
-                                    'Debug.WriteLine($"new {id} x:{tmp.X} + {l} y:{tmp.Y} + {k}")
-                                    'id += 1
+                            If tmpClickValidSum < sysInfo.ClickValidNums Then
+                                '互动模式下抗干扰才启用
+                                Continue For
+                            End If
 
-                                    'If Not CheckAdjacencyPieceNums(tmp.ScreenId, tmp.Y + k, tmp.X + l) Then
-                                    '    Continue For
-                                    'End If
-                                End If
+                            If Not NewPointActiveFlage Then
+                                Continue For
+                            End If
 
-                                sysInfo.ScreenList(tmp.ScreenId).ClickHistoryArray(tmp.Y + k, tmp.X + l) = &H80
-
-                                '按下事件
-                                sysInfo.CurtainList.Item(sysInfo.ScreenList(tmp.ScreenId).CurtainListId).
+                            '按下事件
+                            sysInfo.CurtainList.Item(sysInfo.ScreenList(tmp.ScreenId).CurtainListId).
                                     PlayDialog.
                                     MousesimulationClick(tmp.ScreenId,
-                                                         tmp.X + l,
-                                                         tmp.Y + k,
-                                                         bytes2(j + 4 + k * 4 + l),
+                                                         tmp.X,
+                                                         tmp.Y,
+                                                         0,
                                                          PointActivity.DOWN)
-                            Next
-                        Next
+
+                            'Debug.WriteLine($"16-1 {Format(Now(), "HH:mm:ss.fff")} {tmp.X },{tmp.Y }")
+
+#End Region
+                        End If
 
                     Next
                 Next
 
-                readNum += 1
-
-            Catch ex As SocketException
-                lastErrorStr = ex.Message
-                'sysInfo.logger.LogThis("接收传感器数据数据通信异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
-                exceptionNums += 1
-                'Catch ex As ThreadAbortException
-                '不记录终止异常
             Catch ex As Exception
-                sysInfo.logger.LogThis("接收传感器数据数据其他异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
+                sysInfo.logger.LogThis($"处理传感器数据数据异常{index}", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
             End Try
 
             Thread.Sleep(sysInfo.InquireTimeSec)
@@ -840,8 +977,8 @@ Public Class FormMain
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         '添加flash文件
         Dim tmp As New OpenFileDialog
-        'tmp.Filter = "Flash或DLL插件|*.SWF;*.DLL"
-        tmp.Filter = "Flash|*.SWF"
+        tmp.Filter = "Flash或DLL插件|*.SWF;*.DLL"
+        'tmp.Filter = "Flash|*.SWF"
         tmp.Multiselect = True
         If tmp.ShowDialog() <> DialogResult.OK Then
             Exit Sub
@@ -972,7 +1109,7 @@ Public Class FormMain
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         sysInfo.DisplayMode = If(DebugFlage, 4, 3)
 
-        Debug.WriteLine("mode:" + sysInfo.DisplayMode.ToString)
+        'Debug.WriteLine("mode:" + sysInfo.DisplayMode.ToString)
 
         If DebugFlage Then
             For Each i In sysInfo.CurtainList
@@ -1014,6 +1151,10 @@ Public Class FormMain
 
     ''' 定时刷新发送卡状态
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        '修正检测间隔
+#Region "修正检测间隔"
+        'Debug.Write($"{Format(Now(), "HH:mm:ss")} {sysInfo.InquireTimeSec}-")
+
         Dim minReadNum As Integer = &HFFFF
         For i As Integer = 0 To sysInfo.SenderList.Length - 1
             With sysInfo.SenderList(i)
@@ -1027,12 +1168,11 @@ Public Class FormMain
         Next
 
         If minReadNum < 40 AndAlso
-            sysInfo.InquireTimeSec >= 0 Then
+            sysInfo.InquireTimeSec > 0 Then
             sysInfo.InquireTimeSec -= 1
         ElseIf minReadNum > 42 Then
             sysInfo.InquireTimeSec += 1
         End If
-
-        Debug.WriteLine(minReadNum)
+#End Region
     End Sub
 End Class

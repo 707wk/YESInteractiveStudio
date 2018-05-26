@@ -75,7 +75,7 @@
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.0, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
     <Reference Include="Nova.Mars.SDK.MarsInterface">
-      <HintPath>Nova\Nova.Mars.SDK.MarsInterface.dll</HintPath>
+      <HintPath>..\Nova\Nova.Mars.SDK.MarsInterface.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -98,7 +98,7 @@
       <HintPath>..\..\WangkNamespace\DLL\Wangk.Tools.dll</HintPath>
     </Reference>
     <Reference Include="YESInteractiveSDK">
-      <HintPath>..\YESInteractiveSDK\bin\x86\Debug\YESInteractiveSDK.dll</HintPath>
+      <HintPath>..\YESInteractiveSDK\bin\YESInteractiveSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +115,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FormInit.Designer.vb">
+      <DependentUpon>FormInit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormInit.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormMain.Designer.vb">
       <DependentUpon>FormMain.vb</DependentUpon>
     </Compile>
@@ -138,6 +144,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\FormInit.resx">
+      <DependentUpon>FormInit.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -158,11 +167,18 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.ico" />
-    <Content Include="README.txt" />
+    <None Include="res\control.png" />
+    <None Include="res\line.png" />
+    <None Include="res\StartLogo.png" />
+    <None Include="res\del.png" />
+    <None Include="res\add.png" />
+    <None Include="res\edit.png" />
     <None Include="res\getVersions.png" />
     <None Include="res\update.png" />
     <None Include="res\DisplayMode3G.png" />
@@ -182,9 +198,16 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PostBuildEvent>%25删除临时文件%25
-del *.xml
-del *.pdb
-%25移动DLL文件到data文件夹%25
-for /f "delims=" %25%25i in ('dir /b "*.dll"') do move %25%25i "./DLL"</PostBuildEvent>
+DEL *.xml
+DEL *.pdb
+
+%25移动DLL文件到DLL文件夹%25
+MKDIR .\DLL
+FOR /f "delims=" %25%25i IN ('dir /b "*.dll"') DO MOVE %25%25i "./DLL"
+
+%25复制SDK文件%25
+RD /S /Q .\Nova
+MKDIR .\Nova
+XCOPY ..\..\Nova .\Nova /E</PostBuildEvent>
   </PropertyGroup>
 </Project>
