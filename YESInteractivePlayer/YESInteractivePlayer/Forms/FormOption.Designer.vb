@@ -561,7 +561,7 @@ Partial Class FormOption
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(35, 12)
         Me.Label7.TabIndex = 1
-        Me.Label7.Text = "备注:"
+        Me.Label7.Text = "备注"
         '
         'GroupBox9
         '

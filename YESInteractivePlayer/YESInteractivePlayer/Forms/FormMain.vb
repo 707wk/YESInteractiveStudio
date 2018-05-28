@@ -328,7 +328,7 @@ Public Class FormMain
 
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         '退出前提示
-        If MsgBox("确定退出程序?", MsgBoxStyle.YesNo, "退出") = MsgBoxResult.Yes Then
+        If MsgBox($"{sysInfo.Language.GetLanguage("确定退出程序")}?", MsgBoxStyle.YesNo, sysInfo.Language.GetLanguage("退出")) = MsgBoxResult.Yes Then
             If sysInfo.LinkFlage Then
                 ToolStripButton1_Click(Nothing, Nothing)
             End If
@@ -474,17 +474,17 @@ Public Class FormMain
                         Dim ipStr As String = $"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)}"
                         'ping 设备IP地址
                         If My.Computer.Network.Ping(ipStr, 500) = False Then
-                            MsgBox($"{ipStr} 未能连通",
+                            MsgBox($"{ipStr} {sysInfo.Language.GetLanguage("未能连通")}",
                                    MsgBoxStyle.Information,
-                                   "连接")
+                                   sysInfo.Language.GetLanguage("连接"))
                             Exit Sub
                         End If
                     End With
                 Next
             Catch ex As Exception
-                MsgBox($"连接异常:{ex.Message}",
+                MsgBox($"{sysInfo.Language.GetLanguage("连接异常")}:{ex.Message}",
                                    MsgBoxStyle.Information,
-                                   "连接")
+                                   sysInfo.Language.GetLanguage("连接"))
                 Exit Sub
             End Try
 
@@ -531,9 +531,9 @@ Public Class FormMain
                     End Try
                 Next
 
-                MsgBox($"控制器连接异常:{ex.Message}",
+                MsgBox($"{sysInfo.Language.GetLanguage("控制器连接异常")}:{ex.Message}",
                        MsgBoxStyle.Information,
-                       "连接")
+                       sysInfo.Language.GetLanguage("连接"))
                 Exit Sub
             End Try
 
@@ -588,7 +588,7 @@ Public Class FormMain
 
         sysInfo.logger.LogThis("控制器连接异常", lastErrorStr, Wangk.Tools.Loglevel.Level_DEBUG)
 
-        MsgBox($"控制器连接异常:{lastErrorStr},请重新连接控制器或重启控制器",
+        MsgBox($"{sysInfo.Language.GetLanguage("控制器连接异常")}:{lastErrorStr},{sysInfo.Language.GetLanguage("请重新连接控制器或重启控制器")}",
                MsgBoxStyle.Information,
                Me.Text)
     End Sub

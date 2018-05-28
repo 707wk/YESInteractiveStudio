@@ -404,7 +404,7 @@ Public Class FormOption
 
         '判断长度
         If ipDataStrArr.Length <> 4 Then
-            MsgBox($"非法参数",
+            MsgBox(sysInfo.Language.GetLanguage("非法参数"),
                    MsgBoxStyle.Information,
                    Me.Text)
             UpdataIp(e.RowIndex)
@@ -414,7 +414,7 @@ Public Class FormOption
         '判断数值
         For i As Integer = 0 To 4 - 1
             If Not IsNumeric(ipDataStrArr(i)) Then
-                MsgBox($"非法参数",
+                MsgBox(sysInfo.Language.GetLanguage("非法参数"),
                        MsgBoxStyle.Information,
                        Me.Text)
                 UpdataIp(e.RowIndex)
@@ -426,7 +426,7 @@ Public Class FormOption
 
             If m.Success Then
             Else
-                MsgBox($"非法参数",
+                MsgBox(sysInfo.Language.GetLanguage("非法参数"),
                        MsgBoxStyle.Information,
                        Me.Text)
                 UpdataIp(e.RowIndex)
@@ -436,7 +436,7 @@ Public Class FormOption
             Dim tmpNum As Integer = CInt(m.Value)
 
             If tmpNum > 255 Then
-                MsgBox($"非法参数",
+                MsgBox(sysInfo.Language.GetLanguage("非法参数"),
                        MsgBoxStyle.Information,
                        Me.Text)
                 UpdataIp(e.RowIndex)
@@ -482,12 +482,12 @@ Public Class FormOption
                 sysInfo.MainClass.SetEquipmentIP(senderArrayIndex, sysInfo.SenderList(senderArrayIndex).TmpIpData)
             Else
                 sysInfo.SenderList(senderArrayIndex).IpDate = sysInfo.SenderList(senderArrayIndex).TmpIpData
-                MsgBox($"控制器ip设置成功!",
+                MsgBox($"{sysInfo.Language.GetLanguage("控制器ip设置成功")}!",
                        MsgBoxStyle.Information,
                        Me.Text)
             End If
         Else
-            MsgBox($"控制器{senderArrayIndex} 设置IP数据失败!请检查设备后重新设置!",
+            MsgBox($"{sysInfo.Language.GetLanguage("控制器")}{senderArrayIndex} {sysInfo.Language.GetLanguage("设置IP数据失败!请检查设备后重新设置")}!",
                    MsgBoxStyle.Information,
                    Me.Text)
         End If
@@ -538,9 +538,9 @@ Public Class FormOption
             sumScreenNum += If(i.ExistFlage, 1, 0)
         Next
         If sysInfo.CurtainList.Count = sumScreenNum Then
-            MsgBox($"幕布数已达最大值",
+            MsgBox(sysInfo.Language.GetLanguage("幕布数已达最大值"),
                    MsgBoxStyle.Information,
-                   $"新增幕布")
+                   sysInfo.Language.GetLanguage("新增幕布"))
             Exit Sub
         End If
 
@@ -563,7 +563,9 @@ Public Class FormOption
                 End With
 
             Catch ex As Exception
-                MsgBox($"第{i + 1}行数据错误:{ex.Message}", MsgBoxStyle.Information, "新增")
+                MsgBox($"{i + 1}{sysInfo.Language.GetLanguage("行数据错误")}:{ex.Message}",
+                       MsgBoxStyle.Information,
+                       sysInfo.Language.GetLanguage("新增"))
                 Exit Sub
             End Try
 
@@ -639,7 +641,9 @@ Public Class FormOption
                 End With
 
             Catch ex As Exception
-                MsgBox($"第{i + 1}行数据错误:{ex.Message}", MsgBoxStyle.Information, "保存修改")
+                MsgBox($"{i + 1}{sysInfo.Language.GetLanguage("行数据错误")}:{ex.Message}",
+                       MsgBoxStyle.Information,
+                       sysInfo.Language.GetLanguage("保存修改"))
                 Exit Sub
             End Try
         Next
@@ -699,9 +703,9 @@ Public Class FormOption
             '触摸灵敏度
             sysInfo.TouchSensitivity = NumericUpDown2.Value
         Else
-            MsgBox($"指令发送失败",
+            MsgBox(sysInfo.Language.GetLanguage("指令发送失败"),
                    MsgBoxStyle.Information,
-                   $"触摸灵敏度")
+                   sysInfo.Language.GetLanguage("触摸灵敏度"))
         End If
 
         Thread.Sleep(100)
@@ -839,9 +843,9 @@ Public Class FormOption
                     6000)
             End With
         Catch ex As Exception
-            MsgBox($"连接异常:{ex.Message}",
+            MsgBox($"{sysInfo.Language.GetLanguage("连接异常")}:{ex.Message}",
                    MsgBoxStyle.Information,
-                   "获取接收卡数据")
+                   sysInfo.Language.GetLanguage("获取接收卡数据"))
             Exit Sub
         End Try
 
@@ -966,9 +970,9 @@ Public Class FormOption
 
             If i = 10 Then
                 'Putlog($"升级指令发送失败")
-                MsgBox($"升级指令发送失败",
+                MsgBox(sysInfo.Language.GetLanguage("升级指令发送失败"),
                            MsgBoxStyle.Information,
-                           "升级")
+                           sysInfo.Language.GetLanguage("升级"))
                 Exit Sub
             End If
         Next
@@ -1017,9 +1021,9 @@ Public Class FormOption
                 If i = 10 Then
                     re.Close()
                     fs.Close()
-                    MsgBox($"升级数据发送失败",
+                    MsgBox(sysInfo.Language.GetLanguage("升级数据发送失败"),
                            MsgBoxStyle.Information,
-                           "升级")
+                           {sysInfo.Language.GetLanguage("升级")})
                     Exit Sub
                 End If
             Next
@@ -1045,9 +1049,9 @@ Public Class FormOption
         re.Close()
         fs.Close()
 
-        MsgBox($"程序升级完毕",
+        MsgBox(sysInfo.Language.GetLanguage("程序升级完毕"),
                MsgBoxStyle.Information,
-               "升级")
+               sysInfo.Language.GetLanguage("升级"))
     End Sub
 
     ''' <summary>
