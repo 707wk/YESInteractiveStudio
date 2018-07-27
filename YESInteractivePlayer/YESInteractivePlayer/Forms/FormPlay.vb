@@ -143,11 +143,18 @@ Public Class FormPlay
         '卸载旧文件
         delPlayControl()
 
-        Dim ass = Assembly.LoadFrom(mediaUrl)
-        Dim tp = ass.GetType($"{Path.GetFileNameWithoutExtension(mediaUrl)}.{Path.GetFileNameWithoutExtension(mediaUrl)}")
-        Dim obj = System.Activator.CreateInstance(tp)
-        playDllControl = CType(obj, YESInteractiveSDK.IYESInterfaceSDK)
-        playDllControl.InitAddonFunc(Me)
+        Try
+            Dim ass = Assembly.LoadFrom(mediaUrl)
+            Dim tp = ass.GetType($"{Path.GetFileNameWithoutExtension(mediaUrl)}.{Path.GetFileNameWithoutExtension(mediaUrl)}")
+            Dim obj = System.Activator.CreateInstance(tp)
+            playDllControl = CType(obj, YESInteractiveSDK.IYESInterfaceSDK)
+            playDllControl.InitAddonFunc(Me)
+        Catch ex As Exception
+            MsgBox(ex.Message,
+                       MsgBoxStyle.Information,
+                       sysInfo.Language.GetLanguage("播放"))
+        End Try
+
     End Sub
 
     ''' <summary>

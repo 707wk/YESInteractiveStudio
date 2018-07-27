@@ -1,0 +1,36 @@
+[NETFramework]
+4.5.2
+
+[exe.config]
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <startup>
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2" />
+    </startup>
+    <runtime>
+        <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+            <probing privatePath="Nova;DLL"/>
+        </assemblyBinding>
+    </runtime>
+</configuration>
+
+
+[Debug]
+%删除临时文件%
+DEL *.xml
+DEL *.pdb
+
+%移动DLL文件到DLL文件夹%
+MKDIR .\DLL
+FOR /f "delims=" %%i IN ('dir /b "*.dll"') DO MOVE %%i "./DLL"
+
+%复制SDK文件%
+RD /S /Q .\Nova
+MKDIR .\Nova
+XCOPY ..\..\Nova .\Nova /E
+
+[Corporation]
+Hunan Yestech Optoelectronic Co., LTD.
+
+[Function]
+loadDataFromDB

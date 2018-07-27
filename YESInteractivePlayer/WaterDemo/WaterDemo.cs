@@ -10,7 +10,7 @@ using YESInteractiveSDK;
 
 namespace WaterDemo
 {
-    //[Serializable]
+    [Serializable]
     class WaterDemo : IYESInterfaceSDK
     {
         UserControl1 tmp;
