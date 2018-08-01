@@ -76,13 +76,15 @@ Module ModuleFunction
         '反序列化
         Try
             Using fStream As New FileStream(Path, FileMode.Open)
-                Dim XmlSerializer As XmlSerializer = New XmlSerializer(GetType(WindowInfo))
-                sysInfo.WindowList = XmlSerializer.Deserialize(fStream)
+                Dim XmlSerializer As XmlSerializer = New XmlSerializer(GetType(ScheduleInfo))
+                sysInfo.Schedule = XmlSerializer.Deserialize(fStream)
+
+                ReDim Preserve sysInfo.Schedule.ScreenLocations(sysInfo.ScreenList.Count - 1)
             End Using
         Catch ex As Exception
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
-                   "读取配置异常")
+                   "读取文件异常")
             Return False
         End Try
 
@@ -104,8 +106,8 @@ Module ModuleFunction
                 Dim tmpXmlTextWriter As XmlTextWriter = New XmlTextWriter(fStream, Encoding.UTF8) With {
                     .Formatting = Formatting.Indented '子节点缩进
                 }
-                Dim sfFormatter As New XmlSerializer(GetType(WindowInfo))
-                sfFormatter.Serialize(tmpXmlTextWriter, sysInfo.WindowList, ns)
+                Dim sfFormatter As New XmlSerializer(GetType(ScheduleInfo))
+                sfFormatter.Serialize(tmpXmlTextWriter, sysInfo.Schedule, ns)
             End Using
 
         Catch ex As Exception
@@ -117,5 +119,26 @@ Module ModuleFunction
 
         Return True
     End Function
+#End Region
+
+#Region "屏幕索引转窗口屏幕索引"
+    '''' <summary>
+    '''' 屏幕索引转窗口屏幕索引
+    '''' </summary>
+    '''' <param name="WindowId"></param>
+    '''' <param name="ScreenId"></param>
+    '''' <returns></returns>
+    'Public Function SI2SLI(ByVal WindowId As Integer, ByVal ScreenId As Integer) As Integer
+    '    Dim ID As Integer = 0
+    '    For Each i001 As ScreenInWindow In sysInfo.Schedule.WindowList(WindowId).ScreenList
+    '        If i001.ScreenID = ScreenId Then
+    '            Return ID
+    '        End If
+
+    '        ID += 1
+    '    Next
+
+    '    Return 0
+    'End Function
 #End Region
 End Module

@@ -105,6 +105,12 @@ Partial Class MDIParentMain
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.WindowMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.EditWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProgramMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.PlayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteProgramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RibbonControl1.SuspendLayout()
         Me.RibbonPanel2.SuspendLayout()
         Me.RibbonPanel1.SuspendLayout()
@@ -114,6 +120,8 @@ Partial Class MDIParentMain
         Me.GroupBox1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.WindowMenuStrip.SuspendLayout()
+        Me.ProgramMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'ItemContainer5
@@ -258,11 +266,11 @@ Partial Class MDIParentMain
         Me.RibbonControl1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonControl1.CanCustomize = False
         Me.RibbonControl1.CategorizeMode = DevComponents.DotNetBar.eCategorizeMode.Categories
+        Me.RibbonControl1.Controls.Add(Me.RibbonPanel4)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel2)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel1)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel3)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel5)
-        Me.RibbonControl1.Controls.Add(Me.RibbonPanel4)
         Me.RibbonControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.RibbonControl1.Font = New System.Drawing.Font("微软雅黑", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.RibbonControl1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(210, Byte), Integer), CType(CType(210, Byte), Integer), CType(CType(210, Byte), Integer))
@@ -314,6 +322,7 @@ Partial Class MDIParentMain
         '
         Me.RibbonPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonPanel2.TabIndex = 2
+        Me.RibbonPanel2.Visible = False
         '
         'RibbonBar3
         '
@@ -570,7 +579,7 @@ Partial Class MDIParentMain
         Me.RibbonBar5.DragDropSupport = True
         Me.RibbonBar5.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer6})
         Me.RibbonBar5.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar5.Location = New System.Drawing.Point(375, 0)
+        Me.RibbonBar5.Location = New System.Drawing.Point(346, 0)
         Me.RibbonBar5.Name = "RibbonBar5"
         Me.RibbonBar5.Size = New System.Drawing.Size(200, 79)
         Me.RibbonBar5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -681,7 +690,7 @@ Partial Class MDIParentMain
         Me.RibbonBar4.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar4.Location = New System.Drawing.Point(3, 0)
         Me.RibbonBar4.Name = "RibbonBar4"
-        Me.RibbonBar4.Size = New System.Drawing.Size(372, 79)
+        Me.RibbonBar4.Size = New System.Drawing.Size(343, 79)
         Me.RibbonBar4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar4.TabIndex = 2
         Me.RibbonBar4.Text = "Reaction"
@@ -813,7 +822,7 @@ Partial Class MDIParentMain
         '
         Me.LabelItem8.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Far
         Me.LabelItem8.Name = "LabelItem8"
-        Me.LabelItem8.Text = "Interactive Mode"
+        Me.LabelItem8.Text = "TouchMode"
         '
         'ComboBoxItem11
         '
@@ -844,7 +853,6 @@ Partial Class MDIParentMain
         '
         Me.RibbonPanel4.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonPanel4.TabIndex = 4
-        Me.RibbonPanel4.Visible = False
         '
         'RibbonBar7
         '
@@ -1061,7 +1069,6 @@ Partial Class MDIParentMain
         '
         'RibbonTabItem2
         '
-        Me.RibbonTabItem2.Checked = True
         Me.RibbonTabItem2.Name = "RibbonTabItem2"
         Me.RibbonTabItem2.Panel = Me.RibbonPanel2
         Me.RibbonTabItem2.Text = "Device"
@@ -1074,6 +1081,7 @@ Partial Class MDIParentMain
         '
         'RibbonTabItem4
         '
+        Me.RibbonTabItem4.Checked = True
         Me.RibbonTabItem4.Name = "RibbonTabItem4"
         Me.RibbonTabItem4.Panel = Me.RibbonPanel4
         Me.RibbonTabItem4.Text = "Settings"
@@ -1162,7 +1170,7 @@ Partial Class MDIParentMain
         Me.GroupBox2.Size = New System.Drawing.Size(747, 439)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Window / Program"
+        Me.GroupBox2.Text = "Program"
         '
         'Panel1
         '
@@ -1174,6 +1182,42 @@ Partial Class MDIParentMain
         '
         'Timer1
         '
+        '
+        'WindowMenuStrip
+        '
+        Me.WindowMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditWindowToolStripMenuItem, Me.DeleteWindowToolStripMenuItem})
+        Me.WindowMenuStrip.Name = "WindowMenuStrip"
+        Me.WindowMenuStrip.Size = New System.Drawing.Size(165, 48)
+        '
+        'EditWindowToolStripMenuItem
+        '
+        Me.EditWindowToolStripMenuItem.Name = "EditWindowToolStripMenuItem"
+        Me.EditWindowToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.EditWindowToolStripMenuItem.Text = "Edit Window"
+        '
+        'DeleteWindowToolStripMenuItem
+        '
+        Me.DeleteWindowToolStripMenuItem.Name = "DeleteWindowToolStripMenuItem"
+        Me.DeleteWindowToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.DeleteWindowToolStripMenuItem.Text = "Delete Window"
+        '
+        'ProgramMenuStrip
+        '
+        Me.ProgramMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlayToolStripMenuItem, Me.DeleteProgramToolStripMenuItem})
+        Me.ProgramMenuStrip.Name = "ProgramMenuStrip"
+        Me.ProgramMenuStrip.Size = New System.Drawing.Size(169, 48)
+        '
+        'PlayToolStripMenuItem
+        '
+        Me.PlayToolStripMenuItem.Name = "PlayToolStripMenuItem"
+        Me.PlayToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.PlayToolStripMenuItem.Text = "Play"
+        '
+        'DeleteProgramToolStripMenuItem
+        '
+        Me.DeleteProgramToolStripMenuItem.Name = "DeleteProgramToolStripMenuItem"
+        Me.DeleteProgramToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.DeleteProgramToolStripMenuItem.Text = "Delete Program"
         '
         'MDIParentMain
         '
@@ -1199,6 +1243,8 @@ Partial Class MDIParentMain
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
+        Me.WindowMenuStrip.ResumeLayout(False)
+        Me.ProgramMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1283,4 +1329,10 @@ Partial Class MDIParentMain
     Friend WithEvents ComboBoxItem11 As DevComponents.DotNetBar.ComboBoxItem
     Friend WithEvents ButtonItem1 As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents WindowMenuStrip As ContextMenuStrip
+    Friend WithEvents ProgramMenuStrip As ContextMenuStrip
+    Friend WithEvents DeleteWindowToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DeleteProgramToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EditWindowToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PlayToolStripMenuItem As ToolStripMenuItem
 End Class

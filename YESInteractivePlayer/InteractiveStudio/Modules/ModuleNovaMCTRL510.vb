@@ -7,6 +7,49 @@ Public Module ModuleNovaMCTRL510
     ''' 连接控制器
     ''' </summary>
     Public Function ConnectControl() As Boolean
+#Region "重建历史点击状态"
+        '重建历史点击状态
+        For i001 As Integer = 0 To sysInfo.ScreenList.Count - 1
+            With sysInfo.ScreenList(i001)
+                .WindowId = -1
+
+                ReDim .ClickHistoryMap((.DefSize.Height \ .DefScanBoardSize.Height) * .SensorLayout.Height,
+                                        (.DefSize.Width \ .DefScanBoardSize.Width) * .SensorLayout.Width)
+            End With
+        Next
+#End Region
+
+#Region "标记要连接的控制器"
+        For i002 As Integer = 0 To sysInfo.SenderList.Count - 1
+            With sysInfo.SenderList(i002)
+                .LinkFlage = False
+            End With
+        Next
+
+        For i003 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
+            With sysInfo.Schedule.WindowList(i003)
+                '遍历窗口内屏幕
+                For Each j003 As Integer In .ScreenList
+                    '屏幕不存在则跳过
+                    If j003 > sysInfo.ScreenList.Count - 1 Then
+                        Continue For
+                    End If
+
+                    sysInfo.ScreenList(j003).WindowId = i003
+
+                    '遍历屏幕所在控制器
+                    For Each k003 As Integer In sysInfo.ScreenList(j003).SenderList
+                        '控制器不存在则跳过
+                        If k003 > sysInfo.SenderList.Count - 1 Then
+                            Continue For
+                        End If
+
+                        sysInfo.SenderList(k003).LinkFlage = True
+                    Next
+                Next
+            End With
+        Next
+#End Region
 
 #Region "检测是否连通"
         '检测是否连通
@@ -289,7 +332,7 @@ Public Module ModuleNovaMCTRL510
                                                 ClickHistoryMap(tmpScanBoardInfo.Location.Y + rowId,
                                                                 tmpScanBoardInfo.Location.X + colId) = &H80 Then
 
-                                                sysInfo.WindowList.
+                                                sysInfo.Schedule.WindowList.
                                                     Item(sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).WindowId).
                                                     PlayDialog.
                                                     PointActive(tmpScanBoardInfo.ScreenId,
@@ -332,7 +375,7 @@ Public Module ModuleNovaMCTRL510
 
 #Region "按下"
                                     '按下
-                                    sysInfo.WindowList.
+                                    sysInfo.Schedule.WindowList.
                                         Item(sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).WindowId).
                                         PlayDialog.
                                         PointActive(tmpScanBoardInfo.ScreenId,
@@ -398,7 +441,7 @@ Public Module ModuleNovaMCTRL510
 
 #Region "按下"
                                     '按下
-                                    sysInfo.WindowList.
+                                    sysInfo.Schedule.WindowList.
                                         Item(sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).WindowId).
                                         PlayDialog.
                                         PointActive(tmpScanBoardInfo.ScreenId,
@@ -461,7 +504,7 @@ Public Module ModuleNovaMCTRL510
 
 #Region "按下"
                             '按下
-                            sysInfo.WindowList.
+                            sysInfo.Schedule.WindowList.
                                         Item(sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).WindowId).
                                         PlayDialog.
                                         PointActive(tmpScanBoardInfo.ScreenId,

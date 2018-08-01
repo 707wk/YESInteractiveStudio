@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Net.Sockets
+Imports System.Threading
 Imports DevComponents.DotNetBar
 
 Public Class MDIParentMain
@@ -32,10 +33,10 @@ Public Class MDIParentMain
 #End Region
 
 #Region "编辑窗体"
-    ''' <summary>
-    ''' 窗口编辑
-    ''' </summary>
-    Dim WindowEditDialog As WindowEdit
+    '''' <summary>
+    '''' 窗口编辑
+    '''' </summary>
+    'Dim WindowEditDialog As WindowEdit
     ''' <summary>
     ''' 节目编辑
     ''' </summary>
@@ -58,7 +59,46 @@ Public Class MDIParentMain
     ''' 加载窗口列表
     ''' </summary>
     Public Sub LoadSchedule()
+        ClearWindow()
 
+        ProgramEditDialog.Hide()
+
+        LoadFile(sysInfo.HistoryFile)
+
+        TreeView1.Nodes.Clear()
+
+        For i001 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
+            Dim Tmpnode001 As New TreeNode With {
+                        .Text = sysInfo.Schedule.WindowList.Item(i001).Remark,
+                        .ImageIndex = 0,
+                        .SelectedImageIndex = 0,
+                        .ContextMenuStrip = WindowMenuStrip
+                    }
+            For Each j001 As ProgramInfo In sysInfo.Schedule.WindowList.Item(i001).ProgramList
+                Dim Tmpnode002 As New TreeNode With {
+                    .Text = j001.Remark,
+                    .ImageIndex = 1,
+                    .SelectedImageIndex = 1,
+                    .ContextMenuStrip = ProgramMenuStrip
+                }
+
+                Tmpnode001.Nodes.Add(Tmpnode002)
+            Next
+
+            TreeView1.Nodes.Add(Tmpnode001)
+
+            UpdateWindow(i001)
+
+#Disable Warning BC40000 ' 类型或成员已过时
+            Dim tmpThread As New Threading.Thread(AddressOf CreatWindowThread) With {
+            .ApartmentState = ApartmentState.STA,
+            .IsBackground = True
+        }
+            tmpThread.Start(i001)
+#Enable Warning BC40000 ' 类型或成员已过时
+        Next
+
+        TreeView1.ExpandAll()
     End Sub
 #End Region
 
@@ -102,14 +142,14 @@ Public Class MDIParentMain
         '隐藏显示电容按钮
         ButtonItem17.Visible = False
 
-        '窗口编辑窗体
-        WindowEditDialog = New WindowEdit With {
-            .FormBorderStyle = FormBorderStyle.None,
-            .Dock = DockStyle.Fill,
-            .TopLevel = False,
-            .Parent = Panel1
-            }
-        Panel1.Controls.Add(WindowEditDialog)
+        ''窗口编辑窗体
+        'WindowEditDialog = New WindowEdit With {
+        '    .FormBorderStyle = FormBorderStyle.None,
+        '    .Dock = DockStyle.Fill,
+        '    .TopLevel = False,
+        '    .Parent = Panel1
+        '    }
+        'Panel1.Controls.Add(WindowEditDialog)
 
         '节目编辑窗体
         ProgramEditDialog = New ProgramEdit With {
@@ -119,6 +159,9 @@ Public Class MDIParentMain
             .Parent = Panel1
             }
         Panel1.Controls.Add(ProgramEditDialog)
+
+        'todo:互动选项
+        'todo:语言选项
 
         SetLinkControlState(False)
 
@@ -137,7 +180,7 @@ Public Class MDIParentMain
 
         '加载最后打开文件
         If Not LoadFile(sysInfo.HistoryFile) Then
-            sysInfo.WindowList = New List(Of WindowInfo)
+            sysInfo.Schedule.WindowList = New List(Of WindowInfo)
         End If
 
 #Region "测试数据"
@@ -223,31 +266,9 @@ Public Class MDIParentMain
 
         SwitchDisplayModeIco(Mode)
 
-        For Each i001 As WindowInfo In sysInfo.WindowList
+        For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
             i001.PlayDialog.SwitchDisplayMode(Modal)
         Next
-    End Sub
-#End Region
-
-#Region "切换按钮"
-    Private Sub ButtonItem14_Click(sender As Object, e As EventArgs) Handles ButtonItem14.Click
-        SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.INTERACT)
-    End Sub
-
-    Private Sub ButtonItem15_Click(sender As Object, e As EventArgs) Handles ButtonItem15.Click
-        SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.TEST)
-    End Sub
-
-    Private Sub ButtonItem16_Click(sender As Object, e As EventArgs) Handles ButtonItem16.Click
-        SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.BLACK)
-    End Sub
-
-    Private Sub ButtonItem17_Click(sender As Object, e As EventArgs) Handles ButtonItem17.Click
-        If ButtonItem17.Visible = False Then
-            Exit Sub
-        End If
-
-        SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.DEBUG)
     End Sub
 #End Region
 
@@ -318,7 +339,7 @@ Public Class MDIParentMain
 
 #Region "关闭播放窗体"
         '关闭播放窗体
-        For Each i001 As WindowInfo In sysInfo.WindowList
+        For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
             i001.PlayDialog.Close(True)
         Next
 #End Region
@@ -353,28 +374,6 @@ Public Class MDIParentMain
     End Sub
 #End Region
 
-#Region "点击窗口/节目"
-    ''' <summary>
-    ''' 点击窗口/节目
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub TreeView1_NodeMouseClick(sender As Object, e As TreeNodeMouseClickEventArgs) Handles TreeView1.NodeMouseClick
-        Select Case e.Node.Level
-            Case 0
-                '窗口
-                GroupBox2.Text = "Window"
-                WindowEditDialog.Show()
-                ProgramEditDialog.Hide()
-            Case 1
-                '节目
-                GroupBox2.Text = "Program"
-                WindowEditDialog.Hide()
-                ProgramEditDialog.Show()
-        End Select
-    End Sub
-#End Region
-
 #Region "连接/断开操作"
 #Region "连接"
     ''' <summary>
@@ -386,22 +385,15 @@ Public Class MDIParentMain
         End If
 
         '无窗口则不处理
-        If sysInfo.WindowList.Count = 0 Then
+        If sysInfo.Schedule.WindowList.Count = 0 Then
             Exit Sub
         End If
-
-        'todo:计算缩放后尺寸
-
 
         If Not ConnectControl() Then
             Exit Sub
         End If
 
         SetLinkControlState(sysInfo.LinkFlage)
-    End Sub
-
-    Private Sub ButtonItem18_Click(sender As Object, e As EventArgs) Handles ButtonItem18.Click
-        SetLinkControl()
     End Sub
 #End Region
 
@@ -417,10 +409,6 @@ Public Class MDIParentMain
         DisconnectControl()
 
         SetLinkControlState(sysInfo.LinkFlage)
-    End Sub
-
-    Private Sub ButtonItem19_Click(sender As Object, e As EventArgs) Handles ButtonItem19.Click
-        SetOffLinkControl()
     End Sub
 #End Region
 
@@ -501,13 +489,37 @@ Public Class MDIParentMain
 #End Region
 
 #Region "节目定时切换"
-    'todo:节目定时切换
+    ''' <summary>
+    ''' 节目定时切换
+    ''' </summary>
+    Public Sub ChangePlayMedia()
+        For i001 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
+            Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(i001)
+
+            With TmpWindowInfo
+                If .PlayMediaId = -1 Then
+                    Continue For
+                End If
+
+                .PlayMediaTime += 1
+
+                If .PlayMediaTime >= .PlayProgramInfo.MediaList(.PlayMediaId).PlayTime Then
+                    .PlayMediaTime = 0
+                    .PlayMediaId = (.PlayMediaId + 1) Mod .PlayProgramInfo.MediaList.Count
+
+                    .PlayDialog.Play(.PlayProgramInfo.MediaList(.PlayMediaId).Path)
+                End If
+            End With
+
+            sysInfo.Schedule.WindowList(i001) = TmpWindowInfo
+        Next
+    End Sub
 #End Region
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         CorrectionInquireTime()
 
-
+        ChangePlayMedia()
     End Sub
 #End Region
 
@@ -533,103 +545,641 @@ Public Class MDIParentMain
 #End Region
 
 #Region "播放窗体操作"
+#Region "创建窗体"
     ''' <summary>
     ''' 创建窗体
     ''' </summary>
     Public Sub CreatWindowThread(ByVal WindowId As Integer)
+        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList.Item(WindowId)
+        TmpWindowInfo.PlayDialog = New PlayWindow With {
+            .WindowId = WindowId
+        }
+        sysInfo.Schedule.WindowList.Item(WindowId) = TmpWindowInfo
 
+        TmpWindowInfo.PlayDialog.ShowDialog()
     End Sub
+#End Region
 
+#Region "添加窗体节点"
+    Public Sub CreatWindowNode(ByVal WindowId As Integer)
+        Dim Tmpnode001 As New TreeNode With {
+                        .Text = $"窗口{WindowId}",
+                        .ImageIndex = 0,
+                        .SelectedImageIndex = 0,
+                        .ContextMenuStrip = WindowMenuStrip
+                    }
+        TreeView1.Nodes.Add(Tmpnode001)
+    End Sub
+#End Region
+
+#Region "添加播放窗口"
     ''' <summary>
     ''' 添加播放窗口
     ''' </summary>
-    Public Sub AddNewWindow(ByVal WindowId As Integer)
+    Public Sub AddNewWindow()
+        CreatWindowNode(sysInfo.Schedule.WindowList.Count + 1)
 
+        Dim TmpWindowInfo As New WindowInfo With {
+            .Remark = $"窗口{sysInfo.Schedule.WindowList.Count + 1}",
+            .ShowFlage = True,
+            .Size = New Size(1, 1),
+            .ScreenList = New List(Of Integer),
+            .ZoomPix = New Size(1, 1),
+            .ProgramList = New List(Of ProgramInfo),
+            .PlayMediaId = -1
+        }
+        sysInfo.Schedule.WindowList.Add(TmpWindowInfo)
+
+#Disable Warning BC40000 ' 类型或成员已过时
+        Dim tmpThread As New Threading.Thread(AddressOf CreatWindowThread) With {
+            .ApartmentState = ApartmentState.STA,
+            .IsBackground = True
+        }
+        tmpThread.Start(sysInfo.Schedule.WindowList.Count - 1)
+#Enable Warning BC40000 ' 类型或成员已过时
     End Sub
+#End Region
 
+#Region "更新屏幕的窗口ID"
+    ''' <summary>
+    ''' 更新屏幕的窗口ID
+    ''' </summary>
+    Public Sub UpdateWindowIdInScreen()
+        For i002 As Integer = 0 To sysInfo.ScreenList.Count - 1
+            With sysInfo.ScreenList(i002)
+                .WindowId = -1
+            End With
+        Next
+
+        For i001 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
+            sysInfo.Schedule.WindowList.Item(i001).PlayDialog.WindowId = i001
+
+            For Each j001 As Integer In sysInfo.Schedule.WindowList.Item(i001).ScreenList
+                sysInfo.ScreenList(j001).WindowId = i001
+            Next
+        Next
+    End Sub
+#End Region
+
+#Region "更新播放窗体尺寸"
     ''' <summary>
     ''' 更新播放窗体尺寸
     ''' </summary>
     Public Sub UpdateWindow(ByVal WindowId As Integer)
+        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList.Item(WindowId)
+        With TmpWindowInfo
+            .Size = New Size(0, 0)
+            Dim zoomProportion As Double = .ZoomPix.Width / .ZoomPix.Height
 
+            For Each i001 As Integer In .ScreenList
+                '屏幕不存在则跳过
+                If i001 > sysInfo.ScreenList.Count - 1 Then
+                    Continue For
+                End If
+
+                Dim TmpPoint As Point = sysInfo.Schedule.ScreenLocations(i001)
+
+                '查找最大宽度
+                If .Size.Width < TmpPoint.X + sysInfo.ScreenList(i001).DefSize.Width Then
+                    .Size.Width = TmpPoint.X + sysInfo.ScreenList(i001).DefSize.Width
+                End If
+                '查找最大高度
+                If .Size.Height < TmpPoint.Y + sysInfo.ScreenList(i001).DefSize.Height Then
+                    .Size.Height = TmpPoint.Y + sysInfo.ScreenList(i001).DefSize.Height
+                End If
+
+                '更新屏幕参数
+                With sysInfo.ScreenList(i001)
+                    '位置
+                    .ZoomLocation.X = TmpPoint.X / zoomProportion
+                    .ZoomLocation.Y = TmpPoint.Y / zoomProportion
+                    '尺寸
+                    .ZoomSize.Width = .DefSize.Width / zoomProportion
+                    .ZoomSize.Height = .DefSize.Height / zoomProportion
+                    '接收卡大小
+                    .ZoomScanBoardSize.Width = .DefScanBoardSize.Width / zoomProportion
+                    .ZoomScanBoardSize.Height = .DefScanBoardSize.Height / zoomProportion
+                    '传感器大小
+                    .ZoomSensorSize.Width = .ZoomScanBoardSize.Width / .SensorLayout.Width / zoomProportion
+                    .ZoomSensorSize.Height = .ZoomScanBoardSize.Height / .SensorLayout.Height / zoomProportion
+                End With
+            Next
+
+            '缩放窗口尺寸
+            .Size.Width = .Size.Width / zoomProportion
+            .Size.Height = .Size.Height / zoomProportion
+        End With
+        sysInfo.Schedule.WindowList.Item(WindowId) = TmpWindowInfo
     End Sub
+#End Region
 
+#Region "删除窗体节点"
+    Public Sub DeleteWindowNode(ByVal WindowId As Integer)
+        TreeView1.Nodes.RemoveAt(WindowId)
+    End Sub
+#End Region
+
+#Region "删除窗口"
     ''' <summary>
     ''' 删除窗口
     ''' </summary>
     Public Sub DeleteWindow(ByVal WindowId As Integer)
+        DeleteWindowNode(WindowId)
 
+        With sysInfo.Schedule.WindowList
+            .Item(WindowId).PlayDialog.Close(True)
+            .RemoveAt(WindowId)
+        End With
     End Sub
+#End Region
 
+#Region "关闭所有窗体"
     ''' <summary>
     ''' 关闭所有窗体
     ''' </summary>
     Public Sub ClearWindow()
-        For Each i001 As WindowInfo In sysInfo.WindowList
+        For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
             i001.PlayDialog.Close(True)
         Next
     End Sub
-
-    ''' <summary>
-    ''' 加载窗口
-    ''' </summary>
-    Public Sub InitWinsow()
-
-
-        '显示新窗体
-    End Sub
-
-#Region "更新所有窗体信息"
-    ''' <summary>
-    ''' 更新所有窗体信息
-    ''' </summary>
-    Public Sub UpdateAllWinsow()
-#Region "重建历史点击状态"
-        '重建历史点击状态
-        For i001 As Integer = 0 To sysInfo.ScreenList.Count - 1
-            With sysInfo.ScreenList(i001)
-                .WindowId = -1
-
-                ReDim .ClickHistoryMap((.DefSize.Height \ .DefScanBoardSize.Height) * .SensorLayout.Height,
-                                        (.DefSize.Width \ .DefScanBoardSize.Width) * .SensorLayout.Width)
-            End With
-        Next
+#End Region
 #End Region
 
-#Region "标记要连接的控制器"
-        For i002 As Integer = 0 To sysInfo.SenderList.Count - 1
-            With sysInfo.SenderList(i002)
-                .LinkFlage = False
-            End With
-        Next
+#Region "节目操作"
+#Region "新建节目"
+    ''' <summary>
+    ''' 新建节目
+    ''' </summary>
+    Public Sub AddNewProgram(ByVal WindowId As Integer)
+        Dim Tmpnode002 As New TreeNode With {
+            .Text = $"节目{sysInfo.Schedule.WindowList(WindowId).ProgramList.Count + 1}",
+            .ImageIndex = 1,
+            .SelectedImageIndex = 1,
+            .ContextMenuStrip = ProgramMenuStrip
+        }
+        TreeView1.Nodes(WindowId).Nodes.Add(Tmpnode002)
 
-        For i003 As Integer = 0 To sysInfo.WindowList.Count - 1
-            With sysInfo.WindowList(i003)
-                '遍历窗口内屏幕
-                For j003 As Integer = 0 To .ScreenList.Count - 1
-                    With .ScreenList(j003)
-                        '屏幕不存在则跳过
-                        If .ScreenID > sysInfo.ScreenList.Count - 1 Then
-                            Continue For
-                        End If
-
-                        sysInfo.ScreenList(.ScreenID).WindowId = i003
-
-                        '遍历屏幕所在控制器
-                        For Each k003 As Integer In sysInfo.ScreenList(.ScreenID).SenderList
-                            '控制器不存在则跳过
-                            If k003 > sysInfo.SenderList.Count - 1 Then
-                                Continue For
-                            End If
-
-                            sysInfo.SenderList(k003).LinkFlage = True
-                        Next
-                    End With
-                Next
-            End With
-        Next
-#End Region
+        sysInfo.Schedule.WindowList(WindowId).ProgramList.Add(
+            New ProgramInfo With {
+            .Remark = Tmpnode002.Text,
+            .MediaList = New List(Of MediaInfo)
+            })
     End Sub
+#End Region
+
+#Region "更新节目"
+    ''' <summary>
+    ''' 更新节目
+    ''' </summary>
+    Public Sub UpdateProgram(ByVal WindowId As Integer, ByVal ProgramId As Integer)
+        TreeView1.Nodes(WindowId).Nodes(ProgramId).Text = sysInfo.Schedule.WindowList(WindowId).ProgramList(ProgramId).Remark
+    End Sub
+#End Region
+
+#Region "删除节目"
+    ''' <summary>
+    ''' 删除节目
+    ''' </summary>
+    ''' <param name="WindowId"></param>
+    ''' <param name="ProgramId"></param>
+    Public Sub DeleteProgram(ByVal WindowId As Integer, ByVal ProgramId As Integer)
+        TreeView1.Nodes(WindowId).Nodes.RemoveAt(ProgramId)
+
+        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(WindowId)
+        With TmpWindowInfo
+            If .ProgramList(ProgramId).Remark = .PlayProgramInfo.Remark Then
+                .PlayProgramInfo = Nothing
+                .PlayMediaId = -1
+            End If
+
+            .ProgramList.RemoveAt(ProgramId)
+        End With
+        sysInfo.Schedule.WindowList(WindowId) = TmpWindowInfo
+    End Sub
+#End Region
+
+#Region "播放节目"
+    ''' <summary>
+    ''' 播放节目
+    ''' </summary>
+    Public Sub PlayProgram(ByVal WindowId As Integer, ByVal ProgramId As Integer)
+        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(WindowId)
+
+        With TmpWindowInfo
+            If .ProgramList(ProgramId).MediaList.Count = 0 Then
+                Exit Sub
+            End If
+            For Each i001 As MediaInfo In .ProgramList(ProgramId).MediaList
+                If Not System.IO.File.Exists(i001.Path) Then
+                    MsgBox($"{i001.Path} {sysInfo.Language.GetLang("not found")}",
+                           MsgBoxStyle.Information,
+                           sysInfo.Language.GetLang("播放节目"))
+
+                    Exit Sub
+                End If
+            Next
+
+            .PlayProgramInfo = .ProgramList(ProgramId)
+            .PlayMediaId = 0
+            .PlayMediaTime = 0
+        End With
+
+        sysInfo.Schedule.WindowList(WindowId) = TmpWindowInfo
+    End Sub
+#End Region
+#End Region
+
+#Region "功能区"
+#Region "文件"
+#Region "新建"
+    ''' <summary>
+    ''' 新建
+    ''' </summary>
+    Private Sub ButtonItem20_Click(sender As Object, e As EventArgs) Handles ButtonItem20.Click
+        '新建前保存旧文件
+        Select Case MsgBox("是否保存修改?", MsgBoxStyle.YesNoCancel, "保存")
+            Case MsgBoxResult.Yes '保存
+                If sysInfo.HistoryFile = "" Then
+                    Dim tmp1 As New SaveFileDialog
+                    tmp1.Filter = "播放方案文件|*.xml"
+                    If tmp1.ShowDialog() <> DialogResult.OK Then
+                        Exit Sub
+                    End If
+
+                    sysInfo.HistoryFile = tmp1.FileName
+                End If
+
+                SaveFile(sysInfo.HistoryFile)
+            Case MsgBoxResult.No '不保存
+
+            Case MsgBoxResult.Cancel '取消
+                Exit Sub
+        End Select
+
+        '新建空文件
+        sysInfo.HistoryFile = ""
+        LoadFile(sysInfo.HistoryFile)
+
+        ShowToolBarInfo()
+
+        ''todo:重新刷新数据
+        LoadSchedule()
+    End Sub
+#End Region
+
+#Region "打开"
+    ''' <summary>
+    ''' 打开
+    ''' </summary>
+    Private Sub ButtonItem21_Click(sender As Object, e As EventArgs) Handles ButtonItem21.Click
+        '新建前保存旧文件
+        Select Case MsgBox("是否保存修改?", MsgBoxStyle.YesNoCancel, "保存")
+            Case MsgBoxResult.Yes '保存
+                If sysInfo.HistoryFile = "" Then
+                    Dim tmp1 As New SaveFileDialog With {
+                        .Filter = "播放方案文件|*.xml"
+                    }
+                    If tmp1.ShowDialog() <> DialogResult.OK Then
+                        Exit Sub
+                    End If
+
+                    sysInfo.HistoryFile = tmp1.FileName
+                End If
+
+                SaveFile(sysInfo.HistoryFile)
+            Case MsgBoxResult.No '不保存
+
+            Case MsgBoxResult.Cancel '取消
+                Exit Sub
+        End Select
+
+        '选择打开文件的路径
+        Dim tmp As New OpenFileDialog With {
+            .Filter = "播放方案文件|*.xml"
+        }
+        If tmp.ShowDialog() <> DialogResult.OK Then
+            Exit Sub
+        End If
+
+        '文件打开异常则打开旧文件
+        If Not LoadFile(tmp.FileName) Then
+            LoadFile(sysInfo.HistoryFile)
+        Else
+            sysInfo.HistoryFile = tmp.FileName
+        End If
+
+        ShowToolBarInfo()
+
+        ''todo:重新刷新数据
+        LoadSchedule()
+    End Sub
+#End Region
+
+#Region "保存"
+    ''' <summary>
+    ''' 保存
+    ''' </summary>
+    Private Sub ButtonItem22_Click(sender As Object, e As EventArgs) Handles ButtonItem22.Click
+        '新文件则选择保存路径
+        If sysInfo.HistoryFile = "" Then
+            Dim tmp1 As New SaveFileDialog
+            'tmp.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            tmp1.Filter = "播放方案文件|*.xml"
+            If tmp1.ShowDialog() <> DialogResult.OK Then
+                Exit Sub
+            End If
+
+            sysInfo.HistoryFile = tmp1.FileName
+        End If
+
+        SaveFile(sysInfo.HistoryFile)
+
+        ShowToolBarInfo()
+    End Sub
+#End Region
+
+#Region "另存为"
+    ''' <summary>
+    ''' 另存为
+    ''' </summary>
+    Private Sub ButtonItem23_Click(sender As Object, e As EventArgs) Handles ButtonItem23.Click
+        Dim tmp As New SaveFileDialog With {
+            .Filter = "播放方案文件|*.xml"
+        }
+        If tmp.ShowDialog() <> DialogResult.OK Then
+            Exit Sub
+        End If
+
+        sysInfo.HistoryFile = tmp.FileName
+
+        SaveFile(sysInfo.HistoryFile)
+
+        ShowToolBarInfo()
+    End Sub
+#End Region
+#End Region
+
+#Region "设备操作"
+    ''' <summary>
+    ''' 连接
+    ''' </summary>
+    Private Sub ButtonItem18_Click(sender As Object, e As EventArgs) Handles ButtonItem18.Click
+        SetLinkControl()
+    End Sub
+
+    ''' <summary>
+    ''' 断开
+    ''' </summary>
+    Private Sub ButtonItem19_Click(sender As Object, e As EventArgs) Handles ButtonItem19.Click
+        SetOffLinkControl()
+    End Sub
+
+#Region "切换显示模式"
+    Private Sub ButtonItem14_Click(sender As Object, e As EventArgs) Handles ButtonItem14.Click
+        SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.INTERACT)
+    End Sub
+
+    Private Sub ButtonItem15_Click(sender As Object, e As EventArgs) Handles ButtonItem15.Click
+        SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.TEST)
+    End Sub
+
+    Private Sub ButtonItem16_Click(sender As Object, e As EventArgs) Handles ButtonItem16.Click
+        SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.BLACK)
+    End Sub
+
+    Private Sub ButtonItem17_Click(sender As Object, e As EventArgs) Handles ButtonItem17.Click
+        If ButtonItem17.Visible = False Then
+            Exit Sub
+        End If
+
+        SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.DEBUG)
+    End Sub
+#End Region
+#End Region
+
+#Region "互动参数"
+    ''' <summary>
+    ''' 抗干扰等级
+    ''' </summary>
+    Private Sub ComboBoxItem9_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem9.SelectedIndexChanged
+        sysInfo.ClickValidNums = Val(ComboBoxItem9.Text)
+    End Sub
+
+    ''' <summary>
+    ''' 触摸灵敏度
+    ''' </summary>
+    Private Sub ComboBoxItem10_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem10.SelectedIndexChanged
+        sysInfo.TouchSensitivity = ComboBoxItem10.SelectedIndex
+    End Sub
+
+    ''' <summary>
+    ''' 触摸模式
+    ''' </summary>
+    Private Sub ComboBoxItem11_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem11.SelectedIndexChanged
+        sysInfo.TouchMode = ComboBoxItem11.SelectedIndex
+    End Sub
+
+    ''' <summary>
+    ''' 复位温度
+    ''' </summary>
+    Private Sub ComboBoxItem7_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem7.SelectedIndexChanged
+        sysInfo.ResetTemp = Val(ComboBoxItem7.Text)
+        If sysInfo.ResetTemp > 0 AndAlso
+            sysInfo.ResetTemp < 5 Then
+            sysInfo.ResetTemp = 5
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 复位时间
+    ''' </summary>
+    Private Sub ComboBoxItem8_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem8.SelectedIndexChanged
+        sysInfo.ResetSec = Val(ComboBoxItem8.Text)
+        If sysInfo.ResetSec > 0 AndAlso
+            sysInfo.ResetSec < 25 Then
+            sysInfo.ResetSec = 25
+        End If
+    End Sub
+#End Region
+
+#Region "设置"
+    ''' <summary>
+    ''' 显示语言
+    ''' </summary>
+    Private Sub ComboBoxItem1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem1.SelectedIndexChanged
+        sysInfo.SelectLang = ComboBoxItem1.SelectedIndex
+    End Sub
+
+    ''' <summary>
+    ''' 屏幕走线
+    ''' </summary>
+    Private Sub ButtonItem26_Click(sender As Object, e As EventArgs) Handles ButtonItem26.Click
+        Dim TmpDialog As New ScreenLigature
+        TmpDialog.ShowDialog()
+    End Sub
+
+    ''' <summary>
+    ''' 控制器
+    ''' </summary>
+    Private Sub ButtonItem27_Click(sender As Object, e As EventArgs) Handles ButtonItem27.Click
+        Dim TmpDialog As New ControlNetwork
+        TmpDialog.ShowDialog()
+    End Sub
+
+    ''' <summary>
+    ''' 接收卡
+    ''' </summary>
+    Private Sub ButtonItem28_Click(sender As Object, e As EventArgs) Handles ButtonItem28.Click
+        Dim TmpDialog As New ScanBoardOption
+        TmpDialog.ShowDialog()
+    End Sub
+
+    ''' <summary>
+    ''' 高级用户
+    ''' </summary>
+    Private Sub ButtonItem1_Click(sender As Object, e As EventArgs) Handles ButtonItem1.Click
+        Dim TmpDialog As New Wangk.Resource.InputBox With {
+            .Title = "高级用户登陆",
+            .InputTips = "输入密码",
+            .PasswordChar = "*"
+        }
+        If TmpDialog.ShowDialog <> DialogResult.OK Then
+            Exit Sub
+        End If
+
+        If System.IO.Path.GetExtension(TmpDialog.InputStr).ToLower() = "yestech" Then
+            ButtonItem17.Visible = True
+            ButtonItem1.Enabled = False
+        End If
+    End Sub
+#End Region
+
+#Region "帮助"
+    ''' <summary>
+    ''' 用户手册
+    ''' </summary>
+    Private Sub ButtonItem24_Click(sender As Object, e As EventArgs) Handles ButtonItem24.Click
+        System.Diagnostics.Process.Start($"{My.Application.Info.Title} User Manual {[Enum].
+                                         GetName(GetType(Wangk.Resource.MultiLanguage.LANG),
+                                                 sysInfo.SelectLang)}.chm")
+        'todo:编写用户手册
+    End Sub
+
+    ''' <summary>
+    ''' 关于
+    ''' </summary>
+    Private Sub ButtonItem25_Click(sender As Object, e As EventArgs) Handles ButtonItem25.Click
+        Dim TmpDialog As New AboutBox
+        TmpDialog.ShowDialog()
+    End Sub
+#End Region
+#End Region
+
+#Region "播放方案"
+#Region "添加窗口"
+    ''' <summary>
+    ''' 添加窗口
+    ''' </summary>
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        AddNewWindow()
+    End Sub
+#End Region
+
+#Region "编辑窗口"
+    ''' <summary>
+    ''' 编辑窗口
+    ''' </summary>
+    Private Sub EditWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditWindowToolStripMenuItem.Click
+        Dim TmpDialog As New WindowEdit With {
+            .WindowId = TreeView1.SelectedNode.Index
+        }
+        TmpDialog.ShowDialog()
+
+        UpdateWindowIdInScreen()
+
+        UpdateWindow(TmpDialog.WindowId)
+    End Sub
+#End Region
+
+#Region "删除窗口"
+    ''' <summary>
+    ''' 删除窗口
+    ''' </summary>
+    Private Sub DeleteWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteWindowToolStripMenuItem.Click
+        DeleteWindow(TreeView1.SelectedNode.Index)
+
+        UpdateWindowIdInScreen()
+    End Sub
+#End Region
+
+#Region "节目"
+#Region "添加节目"
+    ''' <summary>
+    ''' 添加节目
+    ''' </summary>
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        If TreeView1.SelectedNode Is Nothing Then
+            Exit Sub
+        End If
+
+        Dim WindowId As Integer
+        Select Case TreeView1.SelectedNode.Level
+            Case 0
+                '窗口
+                WindowId = TreeView1.SelectedNode.Index
+            Case 1
+                '节目
+                WindowId = TreeView1.SelectedNode.Parent.Index
+        End Select
+
+        AddNewProgram(WindowId)
+    End Sub
+#End Region
+
+#Region "编辑节目"
+    ''' <summary>
+    ''' 编辑节目
+    ''' </summary>
+    Private Sub TreeView1_NodeMouseClick(sender As Object, e As TreeNodeMouseClickEventArgs) Handles TreeView1.NodeMouseClick
+        Select Case e.Node.Level
+            Case 0
+                '窗口
+                'GroupBox2.Text = "Window"
+                'WindowEditDialog.Show()
+                ProgramEditDialog.Hide()
+            Case 1
+                '节目
+                'GroupBox2.Text = "Program"
+                'WindowEditDialog.Hide()
+                ProgramEditDialog.LoadProgram(e.Node.Parent.Index, e.Node.Index)
+                ProgramEditDialog.Show()
+        End Select
+    End Sub
+#End Region
+
+#Region "删除节目"
+    ''' <summary>
+    ''' 删除节目
+    ''' </summary>
+    Private Sub DeleteProgramToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteProgramToolStripMenuItem.Click
+        With TreeView1.SelectedNode
+            DeleteProgram(.Parent.Index, .Index)
+        End With
+
+        ProgramEditDialog.Hide()
+    End Sub
+#End Region
+
+#Region "播放节目"
+    ''' <summary>
+    ''' 播放节目
+    ''' </summary>
+    Private Sub PlayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlayToolStripMenuItem.Click
+        With TreeView1.SelectedNode
+            PlayProgram(.Parent.Index, .Index)
+        End With
+    End Sub
+#End Region
 #End Region
 #End Region
 End Class

@@ -157,6 +157,11 @@ InteractiveStudio
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
+<member name="P:InteractiveStudio.My.Resources.Resources.startLogo">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
 <member name="P:InteractiveStudio.My.Resources.Resources.trash_24px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
@@ -196,6 +201,92 @@ InteractiveStudio
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
+</member>
+<member name="F:InteractiveStudio.ScreenButton.oldPoint">
+ <summary>
+ 计算位置用的坐标
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ScreenButton.OperateType">
+ <summary>
+ 操作类型 0无 1移动
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ScreenButton.ScreenId">
+ <summary>
+ 屏幕ID
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ProgramEdit.LoadProgram(System.Int32,System.Int32)">
+ <summary>
+ 加载节目
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ProgramEdit.UpdateID">
+ <summary>
+ 更新序号
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ProgramEdit.ToolStripButton1_Click(System.Object,System.EventArgs)">
+ <summary>
+ 添加文件
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:InteractiveStudio.ProgramEdit.DeleteMediaToolStripMenuItem_Click(System.Object,System.EventArgs)">
+ <summary>
+ 删除文件
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:InteractiveStudio.ProgramEdit.GroupBox2_Leave(System.Object,System.EventArgs)">
+ <summary>
+ 保存文件
+ </summary>
+</member>
+<member name="F:InteractiveStudio.WindowEdit.WindowId">
+ <summary>
+ 窗口ID
+ </summary>
+</member>
+<member name="M:InteractiveStudio.WindowEdit.ClearScreen">
+ <summary>
+ 清空屏幕
+ </summary>
+</member>
+<member name="M:InteractiveStudio.WindowEdit.LoadWindow">
+ <summary>
+ 加载窗体信息
+ </summary>
+</member>
+<member name="M:InteractiveStudio.WindowEdit.ScreenControls_MouseDown(System.Object,System.EventArgs)">
+ <summary>
+ 显示选中屏幕信息
+ </summary>
+</member>
+<member name="M:InteractiveStudio.WindowEdit.ScreenControls_MouseMove(System.Object,System.EventArgs)">
+ <summary>
+ 显示屏幕移动位置
+ </summary>
+</member>
+<member name="M:InteractiveStudio.WindowEdit.ToolStripButton3_Click(System.Object,System.EventArgs)">
+ <summary>
+ 添加屏幕
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:InteractiveStudio.WindowEdit.GroupBox3_Leave(System.Object,System.EventArgs)">
+ <summary>
+ 窗口信息
+ </summary>
+</member>
+<member name="M:InteractiveStudio.WindowEdit.GroupBox2_Leave(System.Object,System.EventArgs)">
+ <summary>
+ 屏幕位置
+ </summary>
 </member>
 <member name="M:InteractiveStudio.DeviceInit.BackgroundWorker1_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
  <summary>
@@ -249,11 +340,6 @@ InteractiveStudio
  Shift
  </summary>
 </member>
-<member name="F:InteractiveStudio.MDIParentMain.WindowEditDialog">
- <summary>
- 窗口编辑
- </summary>
-</member>
 <member name="F:InteractiveStudio.MDIParentMain.ProgramEditDialog">
  <summary>
  节目编辑
@@ -291,13 +377,6 @@ InteractiveStudio
  右键选中
  </summary>
 </member>
-<member name="M:InteractiveStudio.MDIParentMain.TreeView1_NodeMouseClick(System.Object,System.Windows.Forms.TreeNodeMouseClickEventArgs)">
- <summary>
- 点击窗口/节目
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
 <member name="M:InteractiveStudio.MDIParentMain.SetLinkControl">
  <summary>
  连接操作
@@ -319,6 +398,11 @@ InteractiveStudio
  修正查询时间间隔
  </summary>
 </member>
+<member name="M:InteractiveStudio.MDIParentMain.ChangePlayMedia">
+ <summary>
+ 节目定时切换
+ </summary>
+</member>
 <member name="M:InteractiveStudio.MDIParentMain.DisposeControlOffLink(System.Int32)">
  <summary>
  控制器离线处理
@@ -329,9 +413,14 @@ InteractiveStudio
  创建窗体
  </summary>
 </member>
-<member name="M:InteractiveStudio.MDIParentMain.AddNewWindow(System.Int32)">
+<member name="M:InteractiveStudio.MDIParentMain.AddNewWindow">
  <summary>
  添加播放窗口
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.UpdateWindowIdInScreen">
+ <summary>
+ 更新屏幕的窗口ID
  </summary>
 </member>
 <member name="M:InteractiveStudio.MDIParentMain.UpdateWindow(System.Int32)">
@@ -349,14 +438,151 @@ InteractiveStudio
  关闭所有窗体
  </summary>
 </member>
-<member name="M:InteractiveStudio.MDIParentMain.InitWinsow">
+<member name="M:InteractiveStudio.MDIParentMain.AddNewProgram(System.Int32)">
  <summary>
- 加载窗口
+ 新建节目
  </summary>
 </member>
-<member name="M:InteractiveStudio.MDIParentMain.UpdateAllWinsow">
+<member name="M:InteractiveStudio.MDIParentMain.UpdateProgram(System.Int32,System.Int32)">
  <summary>
- 更新所有窗体信息
+ 更新节目
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.DeleteProgram(System.Int32,System.Int32)">
+ <summary>
+ 删除节目
+ </summary>
+ <param name="WindowId"></param>
+ <param name="ProgramId"></param>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.PlayProgram(System.Int32,System.Int32)">
+ <summary>
+ 播放节目
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ButtonItem20_Click(System.Object,System.EventArgs)">
+ <summary>
+ 新建
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ButtonItem21_Click(System.Object,System.EventArgs)">
+ <summary>
+ 打开
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ButtonItem22_Click(System.Object,System.EventArgs)">
+ <summary>
+ 保存
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ButtonItem23_Click(System.Object,System.EventArgs)">
+ <summary>
+ 另存为
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ButtonItem18_Click(System.Object,System.EventArgs)">
+ <summary>
+ 连接
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ButtonItem19_Click(System.Object,System.EventArgs)">
+ <summary>
+ 断开
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ComboBoxItem9_SelectedIndexChanged(System.Object,System.EventArgs)">
+ <summary>
+ 抗干扰等级
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ComboBoxItem10_SelectedIndexChanged(System.Object,System.EventArgs)">
+ <summary>
+ 触摸灵敏度
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ComboBoxItem11_SelectedIndexChanged(System.Object,System.EventArgs)">
+ <summary>
+ 触摸模式
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ComboBoxItem7_SelectedIndexChanged(System.Object,System.EventArgs)">
+ <summary>
+ 复位温度
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ComboBoxItem8_SelectedIndexChanged(System.Object,System.EventArgs)">
+ <summary>
+ 复位时间
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ComboBoxItem1_SelectedIndexChanged(System.Object,System.EventArgs)">
+ <summary>
+ 显示语言
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ButtonItem26_Click(System.Object,System.EventArgs)">
+ <summary>
+ 屏幕走线
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ButtonItem27_Click(System.Object,System.EventArgs)">
+ <summary>
+ 控制器
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ButtonItem28_Click(System.Object,System.EventArgs)">
+ <summary>
+ 接收卡
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ButtonItem1_Click(System.Object,System.EventArgs)">
+ <summary>
+ 高级用户
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ButtonItem24_Click(System.Object,System.EventArgs)">
+ <summary>
+ 用户手册
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ButtonItem25_Click(System.Object,System.EventArgs)">
+ <summary>
+ 关于
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ToolStripButton1_Click(System.Object,System.EventArgs)">
+ <summary>
+ 添加窗口
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.EditWindowToolStripMenuItem_Click(System.Object,System.EventArgs)">
+ <summary>
+ 编辑窗口
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.DeleteWindowToolStripMenuItem_Click(System.Object,System.EventArgs)">
+ <summary>
+ 删除窗口
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.ToolStripButton2_Click(System.Object,System.EventArgs)">
+ <summary>
+ 添加节目
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.TreeView1_NodeMouseClick(System.Object,System.Windows.Forms.TreeNodeMouseClickEventArgs)">
+ <summary>
+ 编辑节目
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.DeleteProgramToolStripMenuItem_Click(System.Object,System.EventArgs)">
+ <summary>
+ 删除节目
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.PlayToolStripMenuItem_Click(System.Object,System.EventArgs)">
+ <summary>
+ 播放节目
  </summary>
 </member>
 <member name="F:InteractiveStudio.PlayWindow.WindowId">
@@ -558,11 +784,6 @@ InteractiveStudio
  窗口ID -1不显示
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.ScreenInfo.DefLocation">
- <summary>
- 默认位置
- </summary>
-</member>
 <member name="F:InteractiveStudio.ModuleStructure.ScreenInfo.ZoomLocation">
  <summary>
  缩放后位置
@@ -611,22 +832,6 @@ InteractiveStudio
 <member name="F:InteractiveStudio.ModuleStructure.ScreenInfo.SenderList">
  <summary>
  屏幕所属的发送卡列表
- </summary>
-</member>
-<member name="T:InteractiveStudio.ModuleStructure.ScreenInWindow">
- <summary>
- 窗口中的屏幕信息
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.ScreenInWindow.ScreenID">
- <summary>
- 屏幕ID
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.ScreenInWindow.Location">
- <summary>
- 屏幕在窗口中位置
- 编辑后需写入到ScreenInfo的DefLocation
  </summary>
 </member>
 <member name="T:InteractiveStudio.ModuleStructure.MediaInfo">
@@ -709,14 +914,39 @@ InteractiveStudio
  播放窗体
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.WindowInfo.PlayMediaInfo">
+<member name="F:InteractiveStudio.ModuleStructure.WindowInfo.PlayProgramInfo">
  <summary>
- 正在播放的文件
+ 正在播放的节目
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.WindowInfo.PlayMediaId">
+ <summary>
+ 正在播放的文件序号
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.WindowInfo.PlayMediaTime">
+ <summary>
+ 已播放时长
  </summary>
 </member>
 <member name="F:InteractiveStudio.ModuleStructure.WindowInfo.ProgramList">
  <summary>
  节目列表
+ </summary>
+</member>
+<member name="T:InteractiveStudio.ModuleStructure.ScheduleInfo">
+ <summary>
+ 播放方案
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.ScheduleInfo.WindowList">
+ <summary>
+ 窗口列表 不能大于屏幕数
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.ScheduleInfo.ScreenLocations">
+ <summary>
+ 屏幕位置
  </summary>
 </member>
 <member name="T:InteractiveStudio.ModuleStructure.InteractiveOptions">
@@ -799,9 +1029,9 @@ InteractiveStudio
  日志记录
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.WindowList">
+<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.Schedule">
  <summary>
- 窗口列表 不能大于屏幕数
+ 播放方案
  </summary>
 </member>
 <member name="F:InteractiveStudio.ModuleStructure.SystemInfo.ScanBoardTable">

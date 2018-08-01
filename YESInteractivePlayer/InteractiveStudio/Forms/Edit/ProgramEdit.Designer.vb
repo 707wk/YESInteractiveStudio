@@ -22,26 +22,29 @@ Partial Class ProgramEdit
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.MediaMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DeleteMediaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.MediaMenuStrip.SuspendLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -74,9 +77,19 @@ Partial Class ProgramEdit
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Media List"
         '
+        'ListView1
+        '
+        Me.ListView1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ListView1.Location = New System.Drawing.Point(3, 42)
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.Size = New System.Drawing.Size(622, 215)
+        Me.ListView1.TabIndex = 2
+        Me.ListView1.UseCompatibleStateImageBehavior = False
+        '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.ToolStripButton2, Me.ToolStripButton3})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1})
         Me.ToolStrip1.Location = New System.Drawing.Point(3, 17)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(622, 25)
@@ -91,32 +104,12 @@ Partial Class ProgramEdit
         Me.ToolStripButton1.Size = New System.Drawing.Size(93, 22)
         Me.ToolStripButton1.Text = "Add Media"
         '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.Image = Global.InteractiveStudio.My.Resources.Resources.moveUp
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(82, 22)
-        Me.ToolStripButton2.Text = "Move Up"
-        '
-        'ToolStripButton3
-        '
-        Me.ToolStripButton3.Image = Global.InteractiveStudio.My.Resources.Resources.moveDown
-        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(98, 22)
-        Me.ToolStripButton3.Text = "Move Down"
-        '
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.DateTimePicker1)
+        Me.GroupBox2.Controls.Add(Me.Label5)
+        Me.GroupBox2.Controls.Add(Me.NumericUpDown1)
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Controls.Add(Me.TextBox3)
@@ -129,16 +122,6 @@ Partial Class ProgramEdit
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Media Setting"
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.CustomFormat = "HH:mm:ss"
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time
-        Me.DateTimePicker1.Location = New System.Drawing.Point(216, 20)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.ShowUpDown = True
-        Me.DateTimePicker1.Size = New System.Drawing.Size(71, 21)
-        Me.DateTimePicker1.TabIndex = 6
         '
         'Label4
         '
@@ -162,6 +145,7 @@ Partial Class ProgramEdit
         '
         Me.TextBox3.Location = New System.Drawing.Point(45, 47)
         Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.ReadOnly = True
         Me.TextBox3.Size = New System.Drawing.Size(496, 21)
         Me.TextBox3.TabIndex = 3
         '
@@ -191,15 +175,36 @@ Partial Class ProgramEdit
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "ID"
         '
-        'ListView1
+        'MediaMenuStrip
         '
-        Me.ListView1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ListView1.Location = New System.Drawing.Point(3, 42)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(622, 215)
-        Me.ListView1.TabIndex = 2
-        Me.ListView1.UseCompatibleStateImageBehavior = False
+        Me.MediaMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteMediaToolStripMenuItem})
+        Me.MediaMenuStrip.Name = "MediaMenuStrip"
+        Me.MediaMenuStrip.Size = New System.Drawing.Size(155, 26)
+        '
+        'DeleteMediaToolStripMenuItem
+        '
+        Me.DeleteMediaToolStripMenuItem.Name = "DeleteMediaToolStripMenuItem"
+        Me.DeleteMediaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.DeleteMediaToolStripMenuItem.Text = "Delete Media"
+        '
+        'NumericUpDown1
+        '
+        Me.NumericUpDown1.Location = New System.Drawing.Point(216, 20)
+        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
+        Me.NumericUpDown1.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Size = New System.Drawing.Size(71, 21)
+        Me.NumericUpDown1.TabIndex = 7
+        Me.NumericUpDown1.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(293, 23)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(11, 12)
+        Me.Label5.TabIndex = 8
+        Me.Label5.Text = "s"
         '
         'ProgramEdit
         '
@@ -219,6 +224,8 @@ Partial Class ProgramEdit
         Me.ToolStrip1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.MediaMenuStrip.ResumeLayout(False)
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -228,7 +235,6 @@ Partial Class ProgramEdit
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents Label4 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents TextBox3 As TextBox
@@ -237,8 +243,9 @@ Partial Class ProgramEdit
     Friend WithEvents Label2 As Label
     Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents ToolStripButton1 As ToolStripButton
-    Friend WithEvents ToolStripButton2 As ToolStripButton
-    Friend WithEvents ToolStripButton3 As ToolStripButton
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ListView1 As ListView
+    Friend WithEvents MediaMenuStrip As ContextMenuStrip
+    Friend WithEvents DeleteMediaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Label5 As Label
+    Friend WithEvents NumericUpDown1 As NumericUpDown
 End Class

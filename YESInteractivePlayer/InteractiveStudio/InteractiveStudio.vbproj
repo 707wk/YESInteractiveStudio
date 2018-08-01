@@ -115,6 +115,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ScreenButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\Edit\ProgramEdit.Designer.vb">
       <DependentUpon>ProgramEdit.vb</DependentUpon>
     </Compile>
@@ -149,6 +152,30 @@
       <DependentUpon>ScreenSingleSelect.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Select\ScreenSingleSelect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tool\AboutBox.Designer.vb">
+      <DependentUpon>AboutBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tool\AboutBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tool\ControlNetwork.Designer.vb">
+      <DependentUpon>ControlNetwork.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tool\ControlNetwork.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tool\ScanBoardOption.Designer.vb">
+      <DependentUpon>ScanBoardOption.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tool\ScanBoardOption.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tool\ScreenLigature.Designer.vb">
+      <DependentUpon>ScreenLigature.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tool\ScreenLigature.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\ModuleFunction.vb" />
@@ -190,6 +217,18 @@
     <EmbeddedResource Include="Forms\Select\ScreenSingleSelect.resx">
       <DependentUpon>ScreenSingleSelect.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tool\AboutBox.resx">
+      <DependentUpon>AboutBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tool\ControlNetwork.resx">
+      <DependentUpon>ControlNetwork.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tool\ScanBoardOption.resx">
+      <DependentUpon>ScanBoardOption.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tool\ScreenLigature.resx">
+      <DependentUpon>ScreenLigature.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -211,7 +250,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms\Option\" />
-    <Folder Include="Forms\Tool\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Forms\Main\README.txt" />
@@ -219,6 +257,7 @@
     <Content Include="logo_32px.ico" />
     <Content Include="OPTION.txt" />
     <Content Include="README.txt" />
+    <None Include="res\startLogo.png" />
     <None Include="res\Power_User_32px.png" />
     <None Include="res\startBackground.png" />
     <None Include="res\moveDown.png" />
@@ -287,6 +326,10 @@ FOR /f "delims=" %25%25i IN ('dir /b "*.dll"') DO MOVE %25%25i "./DLL"
 %25复制SDK文件%25
 RD /S /Q .\Nova
 MKDIR .\Nova
-XCOPY ..\..\Nova .\Nova /E</PostBuildEvent>
+XCOPY ..\..\Nova .\Nova /E
+
+%25复制帮助文档%25
+DEL .\Help\*.chm 
+XCOPY ..\Help\*.chm .\Help /E</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class WindowEdit
     Inherits System.Windows.Forms.Form
 
     'Form 重写 Dispose，以清理组件列表。
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,8 +20,10 @@ Partial Class WindowEdit
     '注意: 以下过程是 Windows 窗体设计器所必需的
     '可以使用 Windows 窗体设计器修改它。  
     '不要使用代码编辑器修改它。
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(WindowEdit))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -39,11 +41,11 @@ Partial Class WindowEdit
         Me.NumericUpDown6 = New System.Windows.Forms.NumericUpDown()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
@@ -52,6 +54,8 @@ Partial Class WindowEdit
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
+        Me.ScreenMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DeleteScreenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -64,8 +68,8 @@ Partial Class WindowEdit
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
-        Me.Panel1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
+        Me.ScreenMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -96,13 +100,17 @@ Partial Class WindowEdit
         'NumericUpDown1
         '
         Me.NumericUpDown1.Location = New System.Drawing.Point(96, 50)
+        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {65536, 0, 0, 0})
+        Me.NumericUpDown1.Minimum = New Decimal(New Integer() {65536, 0, 0, -2147483648})
         Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(51, 21)
+        Me.NumericUpDown1.Size = New System.Drawing.Size(52, 21)
         Me.NumericUpDown1.TabIndex = 3
         '
         'NumericUpDown2
         '
-        Me.NumericUpDown2.Location = New System.Drawing.Point(95, 77)
+        Me.NumericUpDown2.Location = New System.Drawing.Point(96, 77)
+        Me.NumericUpDown2.Maximum = New Decimal(New Integer() {65536, 0, 0, 0})
+        Me.NumericUpDown2.Minimum = New Decimal(New Integer() {65536, 0, 0, -2147483648})
         Me.NumericUpDown2.Name = "NumericUpDown2"
         Me.NumericUpDown2.Size = New System.Drawing.Size(52, 21)
         Me.NumericUpDown2.TabIndex = 4
@@ -136,9 +144,11 @@ Partial Class WindowEdit
         '
         'NumericUpDown3
         '
-        Me.NumericUpDown3.Location = New System.Drawing.Point(95, 104)
+        Me.NumericUpDown3.Location = New System.Drawing.Point(96, 104)
+        Me.NumericUpDown3.Maximum = New Decimal(New Integer() {65536, 0, 0, 0})
+        Me.NumericUpDown3.Minimum = New Decimal(New Integer() {65536, 0, 0, -2147483648})
         Me.NumericUpDown3.Name = "NumericUpDown3"
-        Me.NumericUpDown3.Size = New System.Drawing.Size(51, 21)
+        Me.NumericUpDown3.Size = New System.Drawing.Size(52, 21)
         Me.NumericUpDown3.TabIndex = 9
         '
         'Label7
@@ -152,15 +162,17 @@ Partial Class WindowEdit
         '
         'NumericUpDown4
         '
-        Me.NumericUpDown4.Location = New System.Drawing.Point(95, 131)
+        Me.NumericUpDown4.Location = New System.Drawing.Point(96, 131)
+        Me.NumericUpDown4.Maximum = New Decimal(New Integer() {65536, 0, 0, 0})
+        Me.NumericUpDown4.Minimum = New Decimal(New Integer() {65536, 0, 0, -2147483648})
         Me.NumericUpDown4.Name = "NumericUpDown4"
-        Me.NumericUpDown4.Size = New System.Drawing.Size(51, 21)
+        Me.NumericUpDown4.Size = New System.Drawing.Size(52, 21)
         Me.NumericUpDown4.TabIndex = 11
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(78, 56)
+        Me.Label9.Location = New System.Drawing.Point(77, 76)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(11, 12)
         Me.Label9.TabIndex = 18
@@ -169,7 +181,7 @@ Partial Class WindowEdit
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(78, 29)
+        Me.Label10.Location = New System.Drawing.Point(77, 49)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(11, 12)
         Me.Label10.TabIndex = 17
@@ -177,22 +189,26 @@ Partial Class WindowEdit
         '
         'NumericUpDown5
         '
-        Me.NumericUpDown5.Location = New System.Drawing.Point(96, 54)
+        Me.NumericUpDown5.Location = New System.Drawing.Point(96, 74)
+        Me.NumericUpDown5.Maximum = New Decimal(New Integer() {65536, 0, 0, 0})
+        Me.NumericUpDown5.Minimum = New Decimal(New Integer() {65536, 0, 0, -2147483648})
         Me.NumericUpDown5.Name = "NumericUpDown5"
         Me.NumericUpDown5.Size = New System.Drawing.Size(52, 21)
         Me.NumericUpDown5.TabIndex = 16
         '
         'NumericUpDown6
         '
-        Me.NumericUpDown6.Location = New System.Drawing.Point(96, 27)
+        Me.NumericUpDown6.Location = New System.Drawing.Point(96, 47)
+        Me.NumericUpDown6.Maximum = New Decimal(New Integer() {65536, 0, 0, 0})
+        Me.NumericUpDown6.Minimum = New Decimal(New Integer() {65536, 0, 0, -2147483648})
         Me.NumericUpDown6.Name = "NumericUpDown6"
-        Me.NumericUpDown6.Size = New System.Drawing.Size(51, 21)
+        Me.NumericUpDown6.Size = New System.Drawing.Size(52, 21)
         Me.NumericUpDown6.TabIndex = 15
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(19, 29)
+        Me.Label11.Location = New System.Drawing.Point(18, 49)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(53, 12)
         Me.Label11.TabIndex = 14
@@ -200,6 +216,8 @@ Partial Class WindowEdit
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.TextBox2)
+        Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.NumericUpDown6)
         Me.GroupBox2.Controls.Add(Me.Label9)
         Me.GroupBox2.Controls.Add(Me.Label11)
@@ -207,10 +225,27 @@ Partial Class WindowEdit
         Me.GroupBox2.Controls.Add(Me.NumericUpDown5)
         Me.GroupBox2.Location = New System.Drawing.Point(3, 173)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(200, 87)
+        Me.GroupBox2.Size = New System.Drawing.Size(200, 137)
         Me.GroupBox2.TabIndex = 19
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Screen Setting"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(96, 20)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
+        Me.TextBox2.Size = New System.Drawing.Size(52, 21)
+        Me.TextBox2.TabIndex = 20
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(71, 23)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(17, 12)
+        Me.Label5.TabIndex = 19
+        Me.Label5.Text = "ID"
         '
         'GroupBox3
         '
@@ -249,49 +284,25 @@ Partial Class WindowEdit
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox3)
         Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox2)
-        Me.SplitContainer1.Size = New System.Drawing.Size(748, 452)
-        Me.SplitContainer1.SplitterDistance = 531
+        Me.SplitContainer1.Size = New System.Drawing.Size(738, 451)
+        Me.SplitContainer1.SplitterDistance = 521
         Me.SplitContainer1.TabIndex = 1
         '
         'Panel1
         '
         Me.Panel1.AutoScroll = True
-        Me.Panel1.Controls.Add(Me.Button1)
-        Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 25)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(531, 427)
+        Me.Panel1.Size = New System.Drawing.Size(521, 426)
         Me.Panel1.TabIndex = 3
-        '
-        'Button1
-        '
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(178, 187)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(0)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(168, 186)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Screen 1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Location( 200,300 )" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Size( 100,200 )"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Location = New System.Drawing.Point(346, 287)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(0)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(168, 186)
-        Me.Button2.TabIndex = 1
-        Me.Button2.Text = "Screen 1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Location( 200,300 )" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Size( 100,200 )"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'ToolStrip1
         '
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripSeparator1, Me.ToolStripButton3, Me.ToolStripSeparator2, Me.ToolStripButton4})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(531, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(521, 25)
         Me.ToolStrip1.TabIndex = 2
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -304,6 +315,7 @@ Partial Class WindowEdit
         'ToolStripButton1
         '
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.Enabled = False
         Me.ToolStripButton1.Image = Global.InteractiveStudio.My.Resources.Resources.zoomIn_24px
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
@@ -313,6 +325,7 @@ Partial Class WindowEdit
         'ToolStripButton2
         '
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.Enabled = False
         Me.ToolStripButton2.Image = Global.InteractiveStudio.My.Resources.Resources.zoomOut_24px
         Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton2.Name = "ToolStripButton2"
@@ -347,13 +360,25 @@ Partial Class WindowEdit
         Me.ToolStripButton4.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton4.Text = "Clear"
         '
+        'ScreenMenuStrip
+        '
+        Me.ScreenMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteScreenToolStripMenuItem})
+        Me.ScreenMenuStrip.Name = "ScreenMenuStrip"
+        Me.ScreenMenuStrip.Size = New System.Drawing.Size(157, 26)
+        '
+        'DeleteScreenToolStripMenuItem
+        '
+        Me.DeleteScreenToolStripMenuItem.Name = "DeleteScreenToolStripMenuItem"
+        Me.DeleteScreenToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.DeleteScreenToolStripMenuItem.Text = "Delete Screen"
+        '
         'WindowEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(748, 452)
+        Me.ClientSize = New System.Drawing.Size(738, 451)
         Me.Controls.Add(Me.SplitContainer1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "WindowEdit"
         Me.Text = "WindowEdit"
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -371,9 +396,9 @@ Partial Class WindowEdit
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
+        Me.ScreenMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -396,8 +421,6 @@ Partial Class WindowEdit
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents SplitContainer1 As SplitContainer
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
@@ -407,4 +430,8 @@ Partial Class WindowEdit
     Friend WithEvents ToolStripButton3 As ToolStripButton
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents ToolStripButton4 As ToolStripButton
+    Friend WithEvents ScreenMenuStrip As ContextMenuStrip
+    Friend WithEvents DeleteScreenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Label5 As Label
 End Class

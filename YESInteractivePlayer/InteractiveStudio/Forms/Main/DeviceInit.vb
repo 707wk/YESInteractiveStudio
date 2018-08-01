@@ -5,7 +5,11 @@ Imports Nova.Mars.SDK
 Public Class DeviceInit
 #Region "窗体初始化/关闭"
     Private Sub DeviceInit_Load(sender As Object, e As EventArgs) Handles Me.Load
-
+        'MsgBox($"{My.Application.Info.Title}.{[Enum].GetName(GetType(Wangk.Resource.MultiLanguage.LANG),
+        '                                                     Wangk.Resource.MultiLanguage.LANG.EN)}.resources")
+        'Dim TmpDialog As New AboutBox
+        'TmpDialog.ShowDialog()
+        'End
     End Sub
 
     Private Sub DeviceInit_Shown(sender As Object, e As EventArgs) Handles Me.Shown

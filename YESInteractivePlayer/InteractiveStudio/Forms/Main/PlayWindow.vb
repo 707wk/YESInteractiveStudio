@@ -77,7 +77,7 @@ Public Class PlayWindow
             Exit Sub
         End If
 
-        With sysInfo.WindowList(WindowId)
+        With sysInfo.Schedule.WindowList(WindowId)
             Me.Location = .Location
             Me.Size = .Size
             Me.gFont = New Font("宋体", Convert.ToSingle(12 / (.ZoomPix.Width / .ZoomPix.Height)), FontStyle.Regular)
@@ -198,7 +198,9 @@ Public Class PlayWindow
     ''' 播放文件
     ''' </summary>
     Public Sub PlayMode()
-        Play(sysInfo.WindowList(WindowId).PlayMediaInfo.Path)
+        With sysInfo.Schedule.WindowList(WindowId)
+            Play(.PlayProgramInfo.MediaList(.PlayMediaId).Path)
+        End With
     End Sub
 
     ''' <summary>
@@ -210,8 +212,8 @@ Public Class PlayWindow
         Me.BackColor = Color.Black
         Me.Refresh()
 
-        For Each tmp As ScreenInWindow In sysInfo.WindowList.Item(WindowId).ScreenList
-            With sysInfo.ScreenList(tmp.ScreenID)
+        For Each tmp As Integer In sysInfo.Schedule.WindowList.Item(WindowId).ScreenList
+            With sysInfo.ScreenList(tmp)
                 '缩放后触摸单元高度
                 For i As Integer = 0 To .ZoomSize.Height Step .ZoomSensorSize.Height
                     gBack.DrawLine(gPen,

@@ -29,8 +29,15 @@ RD /S /Q .\Nova
 MKDIR .\Nova
 XCOPY ..\..\Nova .\Nova /E
 
+%复制帮助文档%
+DEL .\Help\*.chm 
+XCOPY ..\Help\*.chm .\Help /E
+
+
 [Corporation]
 Hunan Yestech Optoelectronic Co., LTD.
+Copyright ©  2018 Yestech All Rights Reserved
+
 
 [Function]
 loadDataFromDB

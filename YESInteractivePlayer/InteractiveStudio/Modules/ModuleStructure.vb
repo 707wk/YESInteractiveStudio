@@ -83,10 +83,10 @@ Public Module ModuleStructure
         ''' </summary>
         Dim WindowId As Integer
 
-        ''' <summary>
-        ''' 默认位置
-        ''' </summary>
-        Dim DefLocation As Point
+        '''' <summary>
+        '''' 默认位置
+        '''' </summary>
+        'Dim DefLocation As Point
         ''' <summary>
         ''' 缩放后位置
         ''' </summary>
@@ -135,22 +135,22 @@ Public Module ModuleStructure
     End Structure
 #End Region
 
-#Region "窗口信息"
+#Region "播放方案"
 #Region "窗口中的屏幕信息"
-    ''' <summary>
-    ''' 窗口中的屏幕信息
-    ''' </summary>
-    Structure ScreenInWindow
-        ''' <summary>
-        ''' 屏幕ID
-        ''' </summary>
-        Dim ScreenID As Integer
-        ''' <summary>
-        ''' 屏幕在窗口中位置
-        ''' 编辑后需写入到ScreenInfo的DefLocation
-        ''' </summary>
-        Dim Location As Point
-    End Structure
+    '''' <summary>
+    '''' 窗口中的屏幕信息
+    '''' </summary>
+    'Structure ScreenInWindow
+    '    ''' <summary>
+    '    ''' 屏幕ID
+    '    ''' </summary>
+    '    Dim ScreenID As Integer
+    '    ''' <summary>
+    '    ''' 屏幕在窗口中位置
+    '    ''' 编辑后需写入到ScreenInfo的DefLocation
+    '    ''' </summary>
+    '    Dim Location As Point
+    'End Structure
 #End Region
 
 #Region "文件信息"
@@ -226,7 +226,7 @@ Public Module ModuleStructure
         ''' <summary>
         ''' 幕布所含屏幕列表
         ''' </summary>
-        Dim ScreenList As List(Of ScreenInWindow)
+        Dim ScreenList As List(Of Integer)
 
         ''' <summary>
         ''' 缩放像素 Width默认 Height显示像素
@@ -240,16 +240,42 @@ Public Module ModuleStructure
         Dim PlayDialog As PlayWindow
 
         ''' <summary>
-        ''' 正在播放的文件
+        ''' 正在播放的节目
         ''' </summary>
         <XmlIgnore>
-        Dim PlayMediaInfo As MediaInfo
+        Dim PlayProgramInfo As ProgramInfo
+        ''' <summary>
+        ''' 正在播放的文件序号
+        ''' </summary>
+        <XmlIgnore>
+        Dim PlayMediaId As Integer
+        ''' <summary>
+        ''' 已播放时长
+        ''' </summary>
+        <XmlIgnore>
+        Dim PlayMediaTime As Integer
+
         ''' <summary>
         ''' 节目列表
         ''' </summary>
         Dim ProgramList As List(Of ProgramInfo)
     End Structure
 #End Region
+
+    ''' <summary>
+    ''' 播放方案
+    ''' </summary>
+    Structure ScheduleInfo
+        ''' <summary>
+        ''' 窗口列表 不能大于屏幕数
+        ''' </summary>
+        Dim WindowList As List(Of WindowInfo)
+
+        ''' <summary>
+        ''' 屏幕位置
+        ''' </summary>
+        Dim ScreenLocations As Point()
+    End Structure
 #End Region
 
 #Region "互动选项"
@@ -339,10 +365,10 @@ Public Module ModuleStructure
 
 #Region "播放方案"
         ''' <summary>
-        ''' 窗口列表 不能大于屏幕数
+        ''' 播放方案
         ''' </summary>
         <XmlIgnore>
-        Dim WindowList As List(Of WindowInfo)
+        Dim Schedule As ScheduleInfo
 #End Region
 
 #Region "控制器"
