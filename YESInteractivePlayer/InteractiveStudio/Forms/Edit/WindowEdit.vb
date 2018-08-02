@@ -58,6 +58,9 @@ Public Class WindowEdit
     Private Sub WindowEdit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = sysInfo.Schedule.WindowList.Item(WindowId).Remark
 
+        'sysInfo.Language.GetS(Me)
+        ChangeControlsLanguage()
+
         ReDim ScreenControls(sysInfo.ScreenList.Count - 1)
         For i001 As Integer = 0 To ScreenControls.Count - 1
             ScreenControls(i001) = New ScreenButton With {
@@ -144,15 +147,51 @@ Public Class WindowEdit
     End Sub
 
     ''' <summary>
-    ''' 屏幕位置
+    ''' 改变屏幕位置
     ''' </summary>
-    Private Sub GroupBox2_Leave(sender As Object, e As EventArgs) Handles GroupBox2.Leave
+    Public Sub ChangeScreenLocation()
         If TextBox2.Text = "" Then
             Exit Sub
         End If
 
         sysInfo.Schedule.ScreenLocations(Val(TextBox2.Text)) = New Point(NumericUpDown6.Value, NumericUpDown5.Value)
         ScreenControls(Val(TextBox2.Text)).Location = sysInfo.Schedule.ScreenLocations(Val(TextBox2.Text))
+    End Sub
+
+    Private Sub NumericUpDown6_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown6.ValueChanged
+        ChangeScreenLocation()
+    End Sub
+
+    Private Sub NumericUpDown5_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown5.ValueChanged
+        ChangeScreenLocation()
+    End Sub
+#End Region
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With sysInfo.Language
+            Me.Label1.Text = .GetS("Remark")
+            Me.Label2.Text = .GetS("Location")
+            Me.Label3.Text = .GetS("X")
+            Me.Label4.Text = .GetS("Y")
+            Me.Label6.Text = .GetS("Actual Pixels")
+            Me.Label7.Text = .GetS("Zoom Pixels")
+            Me.Label9.Text = .GetS("Y")
+            Me.Label10.Text = .GetS("X")
+            Me.Label11.Text = .GetS("Location")
+            Me.GroupBox2.Text = .GetS("Screen Setting")
+            Me.Label5.Text = .GetS("ID")
+            Me.GroupBox3.Text = .GetS("Window Setting")
+            Me.ToolStripLabel1.Text = .GetS("Zoom 100%")
+            Me.ToolStripButton1.Text = .GetS("Zoom In")
+            Me.ToolStripButton2.Text = .GetS("Zoom Out")
+            Me.ToolStripButton3.Text = .GetS("Add Screen")
+            Me.ToolStripButton4.Text = .GetS("Clear")
+            Me.DeleteScreenToolStripMenuItem.Text = .GetS("Delete Screen")
+        End With
     End Sub
 #End Region
 End Class

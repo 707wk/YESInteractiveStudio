@@ -90,6 +90,9 @@ Public Class PlayWindow
         Me.BackColor = Color.Black
         Me.gPen = New Pen(Color.Green)
         Me.gBrush = New SolidBrush(Color.Green)
+
+        'sysInfo.Language.GetS(Me)
+        ChangeControlsLanguage()
     End Sub
 
     Private Sub PlayWindow_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -396,6 +399,17 @@ Public Class PlayWindow
 #End Region
 
         End Select
+    End Sub
+#End Region
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With sysInfo.Language
+            Me.Text = .GetS("启动中 ...")
+        End With
     End Sub
 #End Region
 End Class

@@ -160,12 +160,69 @@ Public Class MDIParentMain
             }
         Panel1.Controls.Add(ProgramEditDialog)
 
-        'todo:互动选项
-        'todo:语言选项
+#Region "触摸参数"
+        '抗干扰等级
+        With ComboBoxItem9
+            For i001 As Integer = 1 To 9
+                .Items.Add(i001)
+            Next
+            .SelectedIndex = sysInfo.ClickValidNums
+        End With
+
+        '触摸灵敏度
+        With ComboBoxItem10
+            For i001 As Integer = 1 To 9
+                .Items.Add(i001)
+            Next
+            .SelectedIndex = sysInfo.TouchSensitivity
+        End With
+
+        '触摸模式
+        With ComboBoxItem11
+            .Items.Add(sysInfo.Language.GetS("High Resolution"))
+            .Items.Add(sysInfo.Language.GetS("Medium Resolution"))
+            .Items.Add(sysInfo.Language.GetS("Low Resolution"))
+
+            .SelectedIndex = sysInfo.TouchMode
+        End With
+#End Region
+
+#Region "复位时间"
+        '复位温度
+        With ComboBoxItem7
+            .Items.Add(0)
+            For i001 As Integer = 5 To 255
+                .Items.Add(i001)
+            Next
+
+            .Text = sysInfo.ResetTemp
+        End With
+
+        '复位时间
+        With ComboBoxItem8
+            .Items.Add(0)
+            For i001 As Integer = 25 To 255
+                .Items.Add(i001)
+            Next
+
+            .Text = sysInfo.ResetSec
+        End With
+#End Region
+
+#Region "语言选项"
+        '语言选项
+        With ComboBoxItem1
+            .Items.Add("中文")
+            .Items.Add("English")
+
+            .SelectedIndex = sysInfo.SelectLang
+        End With
+#End Region
 
         SetLinkControlState(False)
 
-        sysInfo.Language.SetControlslanguage(Me)
+        'sysInfo.Language.GetS(Me)
+        ChangeControlsLanguage()
 #End Region
 
 #Region "注册全局快捷键"
@@ -538,9 +595,9 @@ Public Class MDIParentMain
 
         sysInfo.logger.LogThis("控制器离线", sysInfo.LastErrorInfo, Wangk.Tools.Loglevel.Level_DEBUG)
 
-        MsgBox($"{sysInfo.LastErrorInfo},{sysInfo.Language.GetLang("请重新连接控制器或重启控制器")}",
+        MsgBox($"{sysInfo.LastErrorInfo},{sysInfo.Language.GetS("请重新连接控制器或重启控制器")}",
                MsgBoxStyle.Information,
-               sysInfo.Language.GetLang("控制器连接异常"))
+               sysInfo.Language.GetS("控制器连接异常"))
     End Sub
 #End Region
 
@@ -771,9 +828,9 @@ Public Class MDIParentMain
             End If
             For Each i001 As MediaInfo In .ProgramList(ProgramId).MediaList
                 If Not System.IO.File.Exists(i001.Path) Then
-                    MsgBox($"{i001.Path} {sysInfo.Language.GetLang("not found")}",
+                    MsgBox($"{i001.Path} {sysInfo.Language.GetS("not found")}",
                            MsgBoxStyle.Information,
-                           sysInfo.Language.GetLang("播放节目"))
+                           sysInfo.Language.GetS("播放节目"))
 
                     Exit Sub
                 End If
@@ -984,10 +1041,6 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ComboBoxItem7_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem7.SelectedIndexChanged
         sysInfo.ResetTemp = Val(ComboBoxItem7.Text)
-        If sysInfo.ResetTemp > 0 AndAlso
-            sysInfo.ResetTemp < 5 Then
-            sysInfo.ResetTemp = 5
-        End If
     End Sub
 
     ''' <summary>
@@ -995,10 +1048,6 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ComboBoxItem8_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem8.SelectedIndexChanged
         sysInfo.ResetSec = Val(ComboBoxItem8.Text)
-        If sysInfo.ResetSec > 0 AndAlso
-            sysInfo.ResetSec < 25 Then
-            sysInfo.ResetSec = 25
-        End If
     End Sub
 #End Region
 
@@ -1179,7 +1228,68 @@ Public Class MDIParentMain
             PlayProgram(.Parent.Index, .Index)
         End With
     End Sub
+
+    Private Sub ComboBoxItem9_Click(sender As Object, e As EventArgs) Handles ComboBoxItem9.Click
+
+    End Sub
 #End Region
 #End Region
+#End Region
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With sysInfo.Language
+            Me.LabelItem5.Text = .GetS("Temp Change Over")
+            Me.LabelItem6.Text = .GetS("Reset Time Interval")
+            Me.LabelItem3.Text = .GetS("Anti-interference")
+            Me.LabelItem4.Text = .GetS("Touch Sensitivity")
+            Me.LabelItem7.Text = .GetS("Language")
+            Me.RibbonBar7.Text = .GetS("Screen Configuration")
+            Me.ButtonItem26.Text = .GetS("Ligature")
+            Me.ButtonItem27.Text = .GetS("Controls")
+            Me.ButtonItem28.Text = .GetS("ScanBoard")
+            Me.ButtonItem1.Text = .GetS("PowerUser")
+            Me.RibbonBar6.Text = .GetS("General")
+            Me.LabelItem1.Text = .GetS("Language")
+            Me.RibbonBar3.Text = .GetS("Display Mode")
+            Me.ButtonItem14.Text = .GetS("Interact")
+            Me.ButtonItem15.Text = .GetS("Test")
+            Me.ButtonItem16.Text = .GetS("Black")
+            Me.ButtonItem17.Text = .GetS("Debug")
+            Me.RibbonBar2.Text = .GetS("Control")
+            Me.ButtonItem18.Text = .GetS("Connect")
+            Me.ButtonItem19.Text = .GetS("Disconnect")
+            Me.ButtonItem20.Text = .GetS("New")
+            Me.ButtonItem21.Text = .GetS("Open")
+            Me.ButtonItem22.Text = .GetS("Save")
+            Me.ButtonItem23.Text = .GetS("Save As")
+            Me.RibbonBar5.Text = .GetS("Reset")
+            Me.LabelItem2.Text = .GetS("Temp Change Over")
+            Me.LabelItem9.Text = .GetS("Reset Time Interval")
+            Me.RibbonBar4.Text = .GetS("Reaction")
+            Me.LabelItem10.Text = .GetS("Anti-interference")
+            Me.LabelItem11.Text = .GetS("Touch Sensitivity")
+            Me.LabelItem8.Text = .GetS("TouchMode")
+            Me.ButtonItem24.Text = .GetS("User Manual")
+            Me.ButtonItem25.Text = .GetS("About")
+            Me.RibbonTabItem1.Text = .GetS("Schedule")
+            Me.RibbonTabItem2.Text = .GetS("Device")
+            Me.RibbonTabItem3.Text = .GetS("Interactivity")
+            Me.RibbonTabItem4.Text = .GetS("Settings")
+            Me.RibbonTabItem5.Text = .GetS("Help")
+            Me.GroupBox1.Text = .GetS("Schedule")
+            Me.ToolStrip1.Text = .GetS("ToolStrip1")
+            Me.ToolStripButton1.Text = .GetS("Add Window")
+            Me.ToolStripButton2.Text = .GetS("Add Program")
+            Me.GroupBox2.Text = .GetS("Program")
+            Me.EditWindowToolStripMenuItem.Text = .GetS("Edit Window")
+            Me.DeleteWindowToolStripMenuItem.Text = .GetS("Delete Window")
+            Me.PlayToolStripMenuItem.Text = .GetS("Play")
+            Me.DeleteProgramToolStripMenuItem.Text = .GetS("Delete Program")
+        End With
+    End Sub
 #End Region
 End Class

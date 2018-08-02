@@ -62,9 +62,9 @@ Public Module ModuleNovaMCTRL510
 
                     Dim TmpStr As String = $"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)}"
                     If Not My.Computer.Network.Ping(TmpStr, 500) Then
-                        MsgBox($"{TmpStr} {sysInfo.Language.GetLang("未能连通")}",
+                        MsgBox($"{TmpStr} {sysInfo.Language.GetS("未能连通")}",
                                MsgBoxStyle.Information,
-                               sysInfo.Language.GetLang("测试连接"))
+                               sysInfo.Language.GetS("测试连接"))
                         Return False
                         Exit Function
                     End If
@@ -73,7 +73,7 @@ Public Module ModuleNovaMCTRL510
         Catch ex As Exception
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
-                   sysInfo.Language.GetLang("连接异常"))
+                   sysInfo.Language.GetS("连接异常"))
             Return False
             Exit Function
         End Try
@@ -119,7 +119,7 @@ Public Module ModuleNovaMCTRL510
 
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
-                   sysInfo.Language.GetLang("建立连接"))
+                   sysInfo.Language.GetS("建立连接"))
             Return False
             Exit Function
         End Try

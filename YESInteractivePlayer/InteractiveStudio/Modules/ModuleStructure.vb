@@ -400,7 +400,7 @@ Public Module ModuleStructure
         Dim MainClass As MarsControlSystem
 
         ''' <summary>
-        ''' 接收卡程序旧版标记
+        ''' MCU程序旧版标记
         ''' </summary>
         Dim ScanBoardOldFlage As Boolean
 #End Region

@@ -246,6 +246,11 @@ InteractiveStudio
  保存文件
  </summary>
 </member>
+<member name="M:InteractiveStudio.ProgramEdit.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
 <member name="F:InteractiveStudio.WindowEdit.WindowId">
  <summary>
  窗口ID
@@ -283,9 +288,14 @@ InteractiveStudio
  窗口信息
  </summary>
 </member>
-<member name="M:InteractiveStudio.WindowEdit.GroupBox2_Leave(System.Object,System.EventArgs)">
+<member name="M:InteractiveStudio.WindowEdit.ChangeScreenLocation">
  <summary>
- 屏幕位置
+ 改变屏幕位置
+ </summary>
+</member>
+<member name="M:InteractiveStudio.WindowEdit.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
  </summary>
 </member>
 <member name="M:InteractiveStudio.DeviceInit.BackgroundWorker1_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
@@ -308,6 +318,11 @@ InteractiveStudio
 <member name="T:InteractiveStudio.DeviceInit.novaInitializeCallback">
  <summary>
  读取屏幕信息
+ </summary>
+</member>
+<member name="M:InteractiveStudio.DeviceInit.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
  </summary>
 </member>
 <member name="M:InteractiveStudio.MDIParentMain.RegisterHotKey(System.Int32,System.Int32,System.Int32,System.Int32)">
@@ -585,6 +600,11 @@ InteractiveStudio
  播放节目
  </summary>
 </member>
+<member name="M:InteractiveStudio.MDIParentMain.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
 <member name="F:InteractiveStudio.PlayWindow.WindowId">
  <summary>
  窗口ID
@@ -683,6 +703,76 @@ InteractiveStudio
  <param name="Location">点击位置</param>
  <param name="Value">电容值</param>
  <param name="Active">操作</param>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ScreenSingleSelect.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
+<member name="M:InteractiveStudio.AboutBox.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ControlNetwork.DataGridView1_CellMouseDown(System.Object,System.Windows.Forms.DataGridViewCellMouseEventArgs)">
+ <summary>
+ 右键选中
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ControlNetwork.UpdataIp(System.Int32)">
+ <summary>
+ 更新显示IP信息
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ControlNetwork.senderArrayIndex">
+ <summary>
+ 设置ip通知
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ControlNetwork.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ScanBoardOption.GetSenderMCUVersion(System.Int32)">
+ <summary>
+ 获取发送卡下MCU版本号
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ScanBoardOption.Button1_Click(System.Object,System.EventArgs)">
+ <summary>
+选择升级文件
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ScanBoardOption.SendMCUBin">
+ <summary>
+ 发送升级包
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ScanBoardOption.CheckUpdataRecData(System.Byte[])">
+ <summary>
+ 比较收到的数据
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ScanBoardOption.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ScreenLigature.TmpDataTable">
+ <summary>
+ 临时数据表
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ScreenLigature.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
 </member>
 <member name="M:InteractiveStudio.ModuleFunction.LoadSetting">
  <summary>
@@ -1061,7 +1151,7 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.ModuleStructure.SystemInfo.ScanBoardOldFlage">
  <summary>
- 接收卡程序旧版标记
+ MCU程序旧版标记
  </summary>
 </member>
 <member name="F:InteractiveStudio.ModuleStructure.SystemInfo.LinkFlage">

@@ -3,7 +3,7 @@
 
     Private Sub ScreenSingleSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 #Region "样式设置"
-        Me.Text = sysInfo.Language.GetLang("Select Screen")
+        Me.Text = sysInfo.Language.GetS("Select Screen")
 
         With ListView1
             .View = View.Details
@@ -17,6 +17,9 @@
             .Columns.Add("序号", 40)
             .Columns.Add("尺寸", 80)
         End With
+
+        'sysInfo.Language.GetS(Me)
+        ChangeControlsLanguage()
 
 #Region "排除已选择的屏幕"
         Dim TmpScreenList As New List(Of Integer)
@@ -52,4 +55,15 @@
 
         SelectScreenID = Val(ListView1.SelectedItems(0).SubItems(0).Text)
     End Sub
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With sysInfo.Language
+            Me.Button1.Text = .GetS("OK")
+        End With
+    End Sub
+#End Region
 End Class

@@ -41,6 +41,9 @@
             .Columns.Add("播放时长(s)", 60)
             .ContextMenuStrip = MediaMenuStrip
         End With
+
+        'sysInfo.Language.GetS(Me)
+        ChangeControlsLanguage()
 #End Region
     End Sub
 
@@ -174,6 +177,27 @@
 
         ListView1.Items(mediaId).SubItems(1).Text = TextBox3.Text
         ListView1.Items(mediaId).SubItems(2).Text = NumericUpDown1.Value
+    End Sub
+#End Region
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With sysInfo.Language
+            Me.Label1.Text = .GetS("Remark")
+            Me.GroupBox1.Text = .GetS("Media List")
+            Me.ToolStrip1.Text = .GetS("ToolStrip1")
+            Me.ToolStripButton1.Text = .GetS("Add Media")
+            Me.GroupBox2.Text = .GetS("Media Setting")
+            Me.Label4.Text = .GetS("Play Time")
+            Me.Button1.Text = .GetS("Browse ...")
+            Me.Label3.Text = .GetS("File")
+            Me.Label2.Text = .GetS("ID")
+            Me.DeleteMediaToolStripMenuItem.Text = .GetS("Delete Media")
+            Me.Label5.Text = .GetS("s")
+        End With
     End Sub
 #End Region
 End Class

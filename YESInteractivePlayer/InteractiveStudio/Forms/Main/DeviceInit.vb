@@ -10,6 +10,9 @@ Public Class DeviceInit
         'Dim TmpDialog As New AboutBox
         'TmpDialog.ShowDialog()
         'End
+
+        'sysInfo.Language.GetS(Me)
+        ChangeControlsLanguage()
     End Sub
 
     Private Sub DeviceInit_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -43,7 +46,7 @@ Public Class DeviceInit
         '判断诺瓦服务是否启动
         If System.Diagnostics.Process.GetProcessesByName("MarsServerProvider").Length = 0 Then
             Dim tmpProcessHwnd As Process = Process.Start($".\Nova\Server\MarsServerProvider.exe")
-            ShowInfo($"{sysInfo.Language.GetLang("启动Nova服务")}：{If(tmpProcessHwnd.Handle, True, False)}")
+            ShowInfo($"{sysInfo.Language.GetS("启动Nova服务")}：{If(tmpProcessHwnd.Handle, True, False)}")
             Thread.Sleep(5000)
         End If
 
@@ -88,7 +91,7 @@ Public Class DeviceInit
             If senderArrayId < sysInfo.SenderList.Length Then
                 sysInfo.MainClass.GetEquipmentIP(senderArrayId)
             Else
-                ShowInfo(sysInfo.Language.GetLang("加载完成"))
+                ShowInfo(sysInfo.Language.GetS("加载完成"))
                 '移除事件
                 RemoveHandler sysInfo.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
                 Me.Close(True)
@@ -96,7 +99,7 @@ Public Class DeviceInit
         Else
             '移除事件
             RemoveHandler sysInfo.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
-            ShowInfo($"ERROR:{sysInfo.Language.GetLang("获取设备IP失败！请检查设备后，重新启动程序")}")
+            ShowInfo($"ERROR:{sysInfo.Language.GetS("获取设备IP失败！请检查设备后，重新启动程序")}")
         End If
     End Sub
 #End Region
@@ -113,20 +116,20 @@ Public Class DeviceInit
         End If
 
 #Region "连接Nova服务"
-        ShowInfo(sysInfo.Language.GetLang("连接Nova服务中"))
+        ShowInfo(sysInfo.Language.GetS("连接Nova服务中"))
         sysInfo.RootClass = New MarsHardwareEnumerator
         If Not sysInfo.RootClass.Initialize() Then
-            ShowInfo($"ERROR:{sysInfo.Language.GetLang("连接Nova服务失败")}")
+            ShowInfo($"ERROR:{sysInfo.Language.GetS("连接Nova服务失败")}")
             Exit Sub
         End If
 #End Region
 
 #Region "查找控制系统"
-        ShowInfo(sysInfo.Language.GetLang("查找控制系统中"))
+        ShowInfo(sysInfo.Language.GetS("查找控制系统中"))
         For i001 As Integer = 0 To 6 - 1
             If sysInfo.RootClass.CtrlSystemCount() < 1 Then
                 If i001 = 5 Then
-                    ShowInfo($"ERROR:{sysInfo.Language.GetLang("未找到控制系统")}")
+                    ShowInfo($"ERROR:{sysInfo.Language.GetS("未找到控制系统")}")
                     Exit Sub
                 End If
 
@@ -149,24 +152,24 @@ Public Class DeviceInit
         sysInfo.MainClass.Initialize(tmpstr, screenCount, senderCount)
 
         If senderCount = 0 Then
-            ShowInfo($"ERROR:{sysInfo.Language.GetLang("未找到控制器")}")
+            ShowInfo($"ERROR:{sysInfo.Language.GetS("未找到控制器")}")
             Exit Sub
         End If
 
-        ShowInfo(sysInfo.Language.GetLang("读取显示屏信息中"))
+        ShowInfo(sysInfo.Language.GetS("读取显示屏信息中"))
         Dim LEDScreenInfoList As List(Of LEDScreenInfo) = Nothing
         If sysInfo.MainClass.ReadLEDScreenInfo(LEDScreenInfoList) Then
-            ShowInfo($"ERROR:{sysInfo.Language.GetLang("读显示屏信息失败")}")
+            ShowInfo($"ERROR:{sysInfo.Language.GetS("读显示屏信息失败")}")
             Exit Sub
         End If
 
         If LEDScreenInfoList Is Nothing OrElse
             LEDScreenInfoList.Count = 0 Then
-            ShowInfo($"ERROR:{sysInfo.Language.GetLang("未找到显示屏")}")
+            ShowInfo($"ERROR:{sysInfo.Language.GetS("未找到显示屏")}")
             Exit Sub
         End If
 
-        ShowInfo(sysInfo.Language.GetLang("载入屏幕信息中"))
+        ShowInfo(sysInfo.Language.GetS("载入屏幕信息中"))
         sysInfo.ScanBoardTable = New Hashtable
         ReDim sysInfo.ScreenList(screenCount - 1)
         ReDim sysInfo.SenderList(senderCount - 1)
@@ -242,6 +245,17 @@ Public Class DeviceInit
 #End Region
 
         sysInfo.MainClass.GetEquipmentIP(0)
+    End Sub
+#End Region
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With sysInfo.Language
+            Me.ToolStripStatusLabel1.Text = .GetS("启动中 ...")
+        End With
     End Sub
 #End Region
 End Class
