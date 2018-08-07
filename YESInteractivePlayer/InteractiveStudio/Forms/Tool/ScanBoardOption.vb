@@ -64,7 +64,11 @@ Public Class ScanBoardOption
             sysInfo.MainClass.SetOldScanBoardData(SenderId, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
         End If
 
-        Thread.Sleep(500)
+        If CheckBox2.Checked Then
+            Thread.Sleep(50)
+        Else
+            Thread.Sleep(500)
+        End If
 
         Try
             Dim cliSocket As Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
@@ -113,7 +117,7 @@ Public Class ScanBoardOption
         Catch ex As Exception
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
-                   sysInfo.Language.GetS("连接异常"))
+                   sysInfo.Language.GetS("Connect Exception"))
             Exit Sub
         End Try
     End Sub
@@ -127,7 +131,7 @@ Public Class ScanBoardOption
     ''' </summary>
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim TmpDialog As New OpenFileDialog With {
-            .Filter = "MCU程序包|*.bin"
+            .Filter = sysInfo.Language.GetS("MCU Bin") & "|*.bin"
         }
         If TmpDialog.ShowDialog() <> DialogResult.OK Then
             Exit Sub
@@ -145,6 +149,7 @@ Public Class ScanBoardOption
     Private Sub Button2_MouseUp(sender As Object, e As MouseEventArgs) Handles Button2.MouseUp
         If Button2.Enabled OrElse
             TextBox1.Text = "" Then
+            Button2.Enabled = True
             Exit Sub
         End If
 
@@ -183,9 +188,9 @@ Public Class ScanBoardOption
 
             If i = 10 Then
                 'Putlog($"升级指令发送失败")
-                MsgBox(sysInfo.Language.GetS("升级指令发送失败"),
+                MsgBox(sysInfo.Language.GetS("Upgrade command failed to send"),
                            MsgBoxStyle.Information,
-                           sysInfo.Language.GetS("升级"))
+                           sysInfo.Language.GetS("Update"))
                 Exit Sub
             End If
         Next
@@ -234,9 +239,9 @@ Public Class ScanBoardOption
                 If i = 10 Then
                     re.Close()
                     fs.Close()
-                    MsgBox(sysInfo.Language.GetS("升级数据发送失败"),
+                    MsgBox(sysInfo.Language.GetS("Upgrade data failed to send"),
                            MsgBoxStyle.Information,
-                           {sysInfo.Language.GetS("升级")})
+                           {sysInfo.Language.GetS("Update")})
                     Exit Sub
                 End If
             Next
@@ -262,9 +267,9 @@ Public Class ScanBoardOption
         re.Close()
         fs.Close()
 
-        MsgBox(sysInfo.Language.GetS("程序升级完毕"),
+        MsgBox(sysInfo.Language.GetS("Program upgrade completed"),
                MsgBoxStyle.Information,
-               sysInfo.Language.GetS("升级"))
+               sysInfo.Language.GetS("Update"))
     End Sub
 #End Region
 

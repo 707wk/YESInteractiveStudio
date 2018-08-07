@@ -104,6 +104,7 @@ Partial Class ControlNetwork
         Me.MinimizeBox = False
         Me.Name = "ControlNetwork"
         Me.ShowIcon = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "ControlNetwork"
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()

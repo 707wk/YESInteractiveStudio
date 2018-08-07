@@ -25,10 +25,7 @@
     ''' </summary>
     Public Sub ChangeControlsLanguage()
         With sysInfo.Language
-            Me.Label1.Text = .GetS("Version")
-            Me.Label2.Text = .GetS("Copyright")
-            Me.Label3.Text = .GetS("CompanyName")
-            Me.LinkLabel1.Text = .GetS("WebUrl")
+
         End With
     End Sub
 #End Region

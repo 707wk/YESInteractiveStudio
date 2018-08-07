@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SystemInfo>
-  <HistoryFiles />
+  <HistoryFile>C:\Users\wk950\Desktop\test002.xml</HistoryFile>
   <VersionArray>
     <int>1</int>
     <int>0</int>
     <int>0</int>
   </VersionArray>
+  <SelectLang>ZH_CN</SelectLang>
+  <ScanBoardOldFlage>false</ScanBoardOldFlage>
+  <TouchMode>T121</TouchMode>
+  <TouchSensitivity>5</TouchSensitivity>
+  <ClickValidNums>2</ClickValidNums>
+  <ResetTemp>5</ResetTemp>
+  <ResetSec>0</ResetSec>
 </SystemInfo>

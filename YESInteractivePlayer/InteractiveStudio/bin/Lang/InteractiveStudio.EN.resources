@@ -1,0 +1,127 @@
+File_File
+ID_ID
+Play Time(s)_Play Time(s)
+Port_Port
+ScanBoard_ScanBoard
+Sender_Sender
+Size_Size
+Version_Version
+MCU Bin_MCU Bin
+Schedule_Schedule
+High Resolution_High Resolution
+Low Resolution_Low Resolution
+Medium Resolution_Medium Resolution
+Window_Window
+Program_Program
+Screen_Screen
+Apply_Apply
+Browse ..._Browse ...
+OK_OK
+Update_Update
+PowerUser_PowerUser
+Interact_Interact
+Test_Test
+Black_Black
+Debug_Debug
+Connect_Connect
+Disconnect_Disconnect
+New_New
+Open_Open
+Save_Save
+Save As_Save As
+User Manual_User Manual
+About_About
+Ligature_Ligature
+Controls_Controls
+Old ScanBoard Version_Old ScanBoard Version
+IP Address_IP Address
+Gateway_Gateway
+Subnet Mask_Subnet Mask
+Delete Media_Delete Media
+Delete Program_Delete Program
+Delete Screen_Delete Screen
+Delete Window_Delete Window
+Edit Window_Edit Window
+Control Network_Control Network
+Media List_Media List
+ScanBoard List_ScanBoard List
+Screen List_Screen List
+MCU_MCU
+Media Setting_Media Setting
+Screen Setting_Screen Setting
+ScanBoard Version_ScanBoard Version
+Window Setting_Window Setting
+Remark_Remark
+X_X
+Location_Location
+0%_0%
+Copyright_Copyright
+CompanyName_CompanyName
+Play Time_Play Time
+Y_Y
+s_s
+Actual Pixels_Actual Pixels
+Zoom Pixels_Zoom Pixels
+Language_Language
+Anti-interference_Anti-interference
+Touch Sensitivity_Touch Sensitivity
+Temp Change Over_Temp Change Over
+Reset Time Interval_Reset Time Interval
+TouchMode_TouchMode
+WebUrl_WebUrl
+Play_Play
+Control_Control
+Display Mode_Display Mode
+Reaction_Reaction
+Reset_Reset
+General_General
+Screen Configuration_Screen Configuration
+Device_Device
+Interactivity_Interactivity
+Settings_Settings
+Help_Help
+Not saved_Not saved
+Screen Ligature_Screen Ligature
+Select Screen_Select Screen
+ToolStrip1_ToolStrip1
+Add Media_Add Media
+Add Window_Add Window
+Get MCU Version_Get MCU Version
+Zoom In_Zoom In
+Add Program_Add Program
+Zoom Out_Zoom Out
+Add Screen_Add Screen
+Clear_Clear
+Zoom 100%_Zoom 100%
+Start ..._Start ...
+not found_not found
+Modified Control IP successfully_Modified Control IP successfully
+Please reconnect the control or restart the control_Please reconnect the control or restart the control
+Failed to connect_Failed to connect
+Invalid Argument_Invalid Argument
+Program upgrade completed_Program upgrade completed
+Upgrade command failed to send_Upgrade command failed to send
+Upgrade data failed to send_Upgrade data failed to send
+Do you want to save the changes_Do you want to save the changes
+Failed to Connect Nova Serve_Failed to Connect Nova Serve
+Failed to Reading display screen information_Failed to Reading display screen information
+Failed to set IP data!Please check the equipment and reset it_Failed to set IP data!Please check the equipment and reset it
+No control system found_No control system found
+No controller found_No controller found
+No display screen found_No display screen found
+Start Nova Serve_Start Nova Serve
+Connect Nova Serve ..._Connect Nova Serve ...
+Loading Completed_Loading Completed
+Loading screen information_Loading screen information
+Reading display screen information_Reading display screen information
+Searching Control System_Searching Control System
+Connect Exception_Connect Exception
+Connected Exception_Connected Exception
+Control connection exception_Control connection exception
+Play Program_Play Program
+Test Connect_Test Connect
+Old MCU Version_Old MCU Version
+PowerUser_PowerUser
+Input Password_Input Password
+Played Time_Played Time
+Play File ID_Play File ID

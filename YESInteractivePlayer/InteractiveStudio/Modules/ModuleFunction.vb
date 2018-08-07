@@ -18,12 +18,13 @@ Module ModuleFunction
                 sysInfo = XmlSerializer.Deserialize(fStream)
             End Using
         Catch ex As Exception
-            MsgBox(ex.Message,
-                   MsgBoxStyle.Information,
-                   "读取配置异常")
+            'MsgBox(ex.Message,
+            '       MsgBoxStyle.Information,
+            '       "读取配置异常")
 
             '第一次使用初始化参数
             With sysInfo
+                .HistoryFile = ""
                 .TouchSensitivity = 5
                 .ClickValidNums = 2
                 .ResetTemp = 5
@@ -78,15 +79,20 @@ Module ModuleFunction
             Using fStream As New FileStream(Path, FileMode.Open)
                 Dim XmlSerializer As XmlSerializer = New XmlSerializer(GetType(ScheduleInfo))
                 sysInfo.Schedule = XmlSerializer.Deserialize(fStream)
-
-                ReDim Preserve sysInfo.Schedule.ScreenLocations(sysInfo.ScreenList.Count - 1)
             End Using
         Catch ex As Exception
-            MsgBox(ex.Message,
-                   MsgBoxStyle.Information,
-                   "读取文件异常")
-            Return False
+            'MsgBox(ex.Message,
+            '       MsgBoxStyle.Information,
+            '       "读取文件异常")
+            'Return False
+            sysInfo.Schedule.WindowList = New List(Of WindowInfo)
         End Try
+
+        sysInfo.InquireTimeSec = 20
+        For Each i001 In sysInfo.Schedule.WindowList
+            i001.PlayMediaId = -1
+        Next
+        ReDim Preserve sysInfo.Schedule.ScreenLocations(sysInfo.ScreenList.Count - 1)
 
         Return True
     End Function

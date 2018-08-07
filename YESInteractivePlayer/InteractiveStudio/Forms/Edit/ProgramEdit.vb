@@ -22,6 +22,8 @@
 
             UpdateID()
         End With
+
+        TextBox2.Clear()
     End Sub
 #End Region
 
@@ -36,9 +38,9 @@
             .ShowItemToolTips = True
             .MultiSelect = False
 
-            .Columns.Add("序号", 40)
-            .Columns.Add("文件", 300)
-            .Columns.Add("播放时长(s)", 60)
+            .Columns.Add(sysInfo.Language.GetS("ID"), 40)
+            .Columns.Add(sysInfo.Language.GetS("File"), 400)
+            .Columns.Add(sysInfo.Language.GetS("Play Time(s)"), 100)
             .ContextMenuStrip = MediaMenuStrip
         End With
 
@@ -68,7 +70,7 @@
     ''' <param name="e"></param>
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         Dim TmpDialog As New OpenFileDialog With {
-            .Filter = "Flash或DLL插件|*.SWF;*.DLL",
+            .Filter = "Flash or DLL|*.SWF;*.DLL",
             .Multiselect = True
         }
         If TmpDialog.ShowDialog() <> DialogResult.OK Then
@@ -138,7 +140,7 @@
 #Region "更新文件"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim TmpDialog As New OpenFileDialog With {
-            .Filter = "Flash或DLL插件|*.SWF;*.DLL",
+            .Filter = "Flash or DLL|*.SWF;*.DLL",
             .Multiselect = False
         }
         If TmpDialog.ShowDialog() <> DialogResult.OK Then

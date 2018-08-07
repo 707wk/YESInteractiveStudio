@@ -298,6 +298,22 @@ InteractiveStudio
  切换控件语言
  </summary>
 </member>
+<member name="M:InteractiveStudio.WindowPlay.UpdateID">
+ <summary>
+ 更新序号
+ </summary>
+</member>
+<member name="M:InteractiveStudio.WindowPlay.LoadWindow(System.Int32)">
+ <summary>
+ 加载窗体播放信息
+ </summary>
+ <param name="WinId"></param>
+</member>
+<member name="M:InteractiveStudio.WindowPlay.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
 <member name="M:InteractiveStudio.DeviceInit.BackgroundWorker1_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
  <summary>
  后台线程
@@ -353,6 +369,11 @@ InteractiveStudio
 <member name="F:InteractiveStudio.MDIParentMain.MOD_SHIFT">
  <summary>
  Shift
+ </summary>
+</member>
+<member name="F:InteractiveStudio.MDIParentMain.WindowPlayDialog">
+ <summary>
+ 窗口播放信息
  </summary>
 </member>
 <member name="F:InteractiveStudio.MDIParentMain.ProgramEditDialog">
@@ -473,6 +494,11 @@ InteractiveStudio
 <member name="M:InteractiveStudio.MDIParentMain.PlayProgram(System.Int32,System.Int32)">
  <summary>
  播放节目
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MDIParentMain.RecalcRibbonControlSize">
+ <summary>
+ 重新调整功能区内控件位置
  </summary>
 </member>
 <member name="M:InteractiveStudio.MDIParentMain.ButtonItem20_Click(System.Object,System.EventArgs)">
@@ -647,7 +673,7 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.PlayWindow.FileType">
  <summary>
- 文件类型
+ 文件类型 0无 1swf 2dll
  </summary>
 </member>
 <member name="M:InteractiveStudio.PlayWindow.UpdateWindow(System.Boolean)">

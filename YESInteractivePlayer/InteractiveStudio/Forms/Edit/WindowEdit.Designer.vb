@@ -291,6 +291,7 @@ Partial Class WindowEdit
         'Panel1
         '
         Me.Panel1.AutoScroll = True
+        Me.Panel1.BackColor = System.Drawing.Color.LightGray
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 25)
         Me.Panel1.Name = "Panel1"
@@ -379,7 +380,9 @@ Partial Class WindowEdit
         Me.ClientSize = New System.Drawing.Size(738, 451)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MinimizeBox = False
         Me.Name = "WindowEdit"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "WindowEdit"
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).EndInit()

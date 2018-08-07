@@ -130,6 +130,12 @@
     <Compile Include="Forms\Edit\WindowEdit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\Edit\WindowPlay.Designer.vb">
+      <DependentUpon>WindowPlay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Edit\WindowPlay.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Main\DeviceInit.Designer.vb">
       <DependentUpon>DeviceInit.vb</DependentUpon>
     </Compile>
@@ -204,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Edit\WindowEdit.resx">
       <DependentUpon>WindowEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Edit\WindowPlay.resx">
+      <DependentUpon>WindowPlay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main\DeviceInit.resx">
       <DependentUpon>DeviceInit.vb</DependentUpon>
@@ -318,6 +327,7 @@
     <PostBuildEvent>%25删除临时文件%25
 DEL *.xml
 DEL *.pdb
+DEL *.dll.config
 
 %25移动DLL文件到DLL文件夹%25
 MKDIR .\DLL

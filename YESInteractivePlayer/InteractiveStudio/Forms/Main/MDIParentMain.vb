@@ -38,6 +38,10 @@ Public Class MDIParentMain
     '''' </summary>
     'Dim WindowEditDialog As WindowEdit
     ''' <summary>
+    ''' 窗口播放信息
+    ''' </summary>
+    Dim WindowPlayDialog As WindowPlay
+    ''' <summary>
     ''' 节目编辑
     ''' </summary>
     Dim ProgramEditDialog As ProgramEdit
@@ -49,7 +53,7 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ShowToolBarInfo()
         With My.Application.Info
-            Me.Text = $"{ .ProductName} V{ .Version.Major}.{ .Version.Minor}.{ .Version.Build} [{If(sysInfo.HistoryFile = "", "未保存", sysInfo.HistoryFile)}]"
+            Me.Text = $"{ .ProductName} V{ .Version.Major}.{ .Version.Minor}.{ .Version.Build} [{If(sysInfo.HistoryFile = "", sysInfo.Language.GetS("Not saved"), sysInfo.HistoryFile)}]"
         End With
     End Sub
 #End Region
@@ -59,8 +63,8 @@ Public Class MDIParentMain
     ''' 加载窗口列表
     ''' </summary>
     Public Sub LoadSchedule()
-        ClearWindow()
-
+        'ClearWindow()
+        WindowPlayDialog.Hide()
         ProgramEditDialog.Hide()
 
         LoadFile(sysInfo.HistoryFile)
@@ -68,6 +72,13 @@ Public Class MDIParentMain
         TreeView1.Nodes.Clear()
 
         For i001 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
+            Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(i001)
+            With TmpWindowInfo
+                .PlayMediaId = -1
+                .PlayMediaTime = 0
+            End With
+            sysInfo.Schedule.WindowList(i001) = TmpWindowInfo
+
             Dim Tmpnode001 As New TreeNode With {
                         .Text = sysInfo.Schedule.WindowList.Item(i001).Remark,
                         .ImageIndex = 0,
@@ -151,6 +162,15 @@ Public Class MDIParentMain
         '    }
         'Panel1.Controls.Add(WindowEditDialog)
 
+        '窗口播放信息窗体
+        WindowPlayDialog = New WindowPlay With {
+            .FormBorderStyle = FormBorderStyle.None,
+            .Dock = DockStyle.Fill,
+            .TopLevel = False,
+            .Parent = Panel1
+            }
+        Panel1.Controls.Add(WindowPlayDialog)
+
         '节目编辑窗体
         ProgramEditDialog = New ProgramEdit With {
             .FormBorderStyle = FormBorderStyle.None,
@@ -166,7 +186,7 @@ Public Class MDIParentMain
             For i001 As Integer = 1 To 9
                 .Items.Add(i001)
             Next
-            .SelectedIndex = sysInfo.ClickValidNums
+            .Text = sysInfo.ClickValidNums
         End With
 
         '触摸灵敏度
@@ -174,7 +194,7 @@ Public Class MDIParentMain
             For i001 As Integer = 1 To 9
                 .Items.Add(i001)
             Next
-            .SelectedIndex = sysInfo.TouchSensitivity
+            .Text = sysInfo.TouchSensitivity
         End With
 
         '触摸模式
@@ -236,32 +256,10 @@ Public Class MDIParentMain
         DeviceInit.ShowDialog()
 
         '加载最后打开文件
-        If Not LoadFile(sysInfo.HistoryFile) Then
-            sysInfo.Schedule.WindowList = New List(Of WindowInfo)
-        End If
-
-#Region "测试数据"
-        'For i001 As Integer = 0 To 2 - 1
-        '    Dim Tmpnode001 As New TreeNode With {
-        '        .Text = $"窗口{i001}",
-        '        .ImageIndex = 0,
-        '        .SelectedImageIndex = 0
-        '    }
-
-        '    For i002 As Integer = 0 To 4 - 1
-        '        Dim Tmpnode002 As New TreeNode With {
-        '        .Text = $"节目{i002}",
-        '        .ImageIndex = 1,
-        '        .SelectedImageIndex = 1
-        '    }
-
-        '        Tmpnode001.Nodes.Add(Tmpnode002)
-        '    Next
-
-        '    TreeView1.Nodes.Add(Tmpnode001)
-        'Next
-        'TreeView1.ExpandAll()
-#End Region
+        LoadFile(sysInfo.HistoryFile)
+        LoadSchedule()
+        'sysInfo.Schedule.WindowList = New List(Of WindowInfo)
+        'End If
     End Sub
 #End Region
 
@@ -269,20 +267,22 @@ Public Class MDIParentMain
     Private Sub MDIParentMain_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 #Region "显示新程序更新内容"
         With My.Application.Info
-            If sysInfo.VersionArray(0) <> .Version.Major + 1 OrElse
-                sysInfo.VersionArray(1) <> .Version.Minor OrElse
-                sysInfo.VersionArray(2) <> .Version.Build Then
-                MsgBox($"新功能提示                                        
-        1.界面优化
-        2.性能优化
-        3.修复已知问题", MsgBoxStyle.Information, "更新内容")
-            End If
+            '    If sysInfo.VersionArray(0) <> .Version.Major + 1 OrElse
+            '        sysInfo.VersionArray(1) <> .Version.Minor OrElse
+            '        sysInfo.VersionArray(2) <> .Version.Build Then
+            '        MsgBox($"新功能提示                                        
+            '1.界面优化
+            '2.性能优化
+            '3.修复已知问题", MsgBoxStyle.Information, "更新内容")
+            '    End If
 
             sysInfo.VersionArray(0) = .Version.Major
             sysInfo.VersionArray(1) = .Version.Minor
             sysInfo.VersionArray(2) = .Version.Build
         End With
 #End Region
+
+        'RecalcRibbonControlSize()
     End Sub
 #End Region
 
@@ -324,7 +324,7 @@ Public Class MDIParentMain
         SwitchDisplayModeIco(Mode)
 
         For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
-            i001.PlayDialog.SwitchDisplayMode(Modal)
+            i001.PlayDialog.SwitchDisplayMode(Mode)
         Next
     End Sub
 #End Region
@@ -359,7 +359,9 @@ Public Class MDIParentMain
 #Region "关闭"
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
 #Region "退出前保存文件"
-        Select Case MsgBox("是否保存修改?", MsgBoxStyle.YesNoCancel, "保存")
+        Select Case MsgBox(sysInfo.Language.GetS("Do you want to save the changes"),
+                           MsgBoxStyle.YesNoCancel,
+                           sysInfo.Language.GetS("Save"))
             Case MsgBoxResult.Yes '保存
                 If sysInfo.HistoryFile = "" Then
                     Dim tmp1 As New SaveFileDialog
@@ -450,6 +452,8 @@ Public Class MDIParentMain
             Exit Sub
         End If
 
+        SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.INTERACT)
+
         SetLinkControlState(sysInfo.LinkFlage)
     End Sub
 #End Region
@@ -503,14 +507,19 @@ Public Class MDIParentMain
         '接收卡
         ButtonItem28.Enabled = Not State
 
-        '添加窗口
-        ToolStripButton1.Enabled = Not State
-
         If State Then
             Timer1.Start()
         Else
             Timer1.Stop()
         End If
+
+        '窗口
+        ToolStripButton1.Enabled = Not State
+        WindowMenuStrip.Enabled = Not State
+
+        '节目
+        'DeleteProgramToolStripMenuItem.Enabled = Not State
+        'ToolStripButton2.Enabled = Not State
     End Sub
 #End Region
 #End Region
@@ -521,7 +530,7 @@ Public Class MDIParentMain
     ''' 修正查询时间间隔
     ''' </summary>
     Public Sub CorrectionInquireTime()
-        Dim minReadNum As Integer = &HFFFF
+        Dim minReadNum As Integer = &H7FFFFFFF
 
         For Each i001 As SenderInfo In sysInfo.SenderList
             With i001
@@ -529,12 +538,12 @@ Public Class MDIParentMain
                     Continue For
                 End If
 
-                minReadNum = If(minReadNum > .MaxReadNum, minReadNum, .MaxReadNum)
+                minReadNum = If(minReadNum > .MaxReadNum, .MaxReadNum, minReadNum)
             End With
         Next
 
         If minReadNum < 40 AndAlso
-            sysInfo.InquireTimeSec > 0 Then
+            sysInfo.InquireTimeSec > 1 Then
 
             sysInfo.InquireTimeSec -= 1
         ElseIf minReadNum > 42 AndAlso
@@ -550,6 +559,10 @@ Public Class MDIParentMain
     ''' 节目定时切换
     ''' </summary>
     Public Sub ChangePlayMedia()
+        If sysInfo.DisplayMode <> InteractiveOptions.DISPLAYMODE.INTERACT Then
+            Exit Sub
+        End If
+
         For i001 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
             Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(i001)
 
@@ -559,7 +572,7 @@ Public Class MDIParentMain
                 End If
 
                 .PlayMediaTime += 1
-
+                'todo:节目定时切换null异常
                 If .PlayMediaTime >= .PlayProgramInfo.MediaList(.PlayMediaId).PlayTime Then
                     .PlayMediaTime = 0
                     .PlayMediaId = (.PlayMediaId + 1) Mod .PlayProgramInfo.MediaList.Count
@@ -591,13 +604,13 @@ Public Class MDIParentMain
             Exit Sub
         End If
 
-        DisconnectControl()
+        SetOffLinkControl()
 
         sysInfo.logger.LogThis("控制器离线", sysInfo.LastErrorInfo, Wangk.Tools.Loglevel.Level_DEBUG)
 
-        MsgBox($"{sysInfo.LastErrorInfo},{sysInfo.Language.GetS("请重新连接控制器或重启控制器")}",
+        MsgBox($"{sysInfo.LastErrorInfo},{sysInfo.Language.GetS("Please reconnect the control or restart the control")}",
                MsgBoxStyle.Information,
-               sysInfo.Language.GetS("控制器连接异常"))
+               sysInfo.Language.GetS("Control connection exception"))
     End Sub
 #End Region
 
@@ -637,7 +650,7 @@ Public Class MDIParentMain
         CreatWindowNode(sysInfo.Schedule.WindowList.Count + 1)
 
         Dim TmpWindowInfo As New WindowInfo With {
-            .Remark = $"窗口{sysInfo.Schedule.WindowList.Count + 1}",
+            .Remark = $"{sysInfo.Language.GetS("Window")}{sysInfo.Schedule.WindowList.Count + 1}",
             .ShowFlage = True,
             .Size = New Size(1, 1),
             .ScreenList = New List(Of Integer),
@@ -726,6 +739,7 @@ Public Class MDIParentMain
             .Size.Width = .Size.Width / zoomProportion
             .Size.Height = .Size.Height / zoomProportion
         End With
+
         sysInfo.Schedule.WindowList.Item(WindowId) = TmpWindowInfo
     End Sub
 #End Region
@@ -756,7 +770,9 @@ Public Class MDIParentMain
     ''' </summary>
     Public Sub ClearWindow()
         For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
-            i001.PlayDialog.Close(True)
+            If i001.PlayDialog IsNot Nothing Then
+                i001.PlayDialog.Close(True)
+            End If
         Next
     End Sub
 #End Region
@@ -769,12 +785,13 @@ Public Class MDIParentMain
     ''' </summary>
     Public Sub AddNewProgram(ByVal WindowId As Integer)
         Dim Tmpnode002 As New TreeNode With {
-            .Text = $"节目{sysInfo.Schedule.WindowList(WindowId).ProgramList.Count + 1}",
+            .Text = $"{sysInfo.Language.GetS("Program")}{sysInfo.Schedule.WindowList(WindowId).ProgramList.Count + 1}",
             .ImageIndex = 1,
             .SelectedImageIndex = 1,
             .ContextMenuStrip = ProgramMenuStrip
         }
         TreeView1.Nodes(WindowId).Nodes.Add(Tmpnode002)
+        TreeView1.Nodes(WindowId).ExpandAll()
 
         sysInfo.Schedule.WindowList(WindowId).ProgramList.Add(
             New ProgramInfo With {
@@ -830,7 +847,7 @@ Public Class MDIParentMain
                 If Not System.IO.File.Exists(i001.Path) Then
                     MsgBox($"{i001.Path} {sysInfo.Language.GetS("not found")}",
                            MsgBoxStyle.Information,
-                           sysInfo.Language.GetS("播放节目"))
+                           sysInfo.Language.GetS("Play Program"))
 
                     Exit Sub
                 End If
@@ -839,6 +856,7 @@ Public Class MDIParentMain
             .PlayProgramInfo = .ProgramList(ProgramId)
             .PlayMediaId = 0
             .PlayMediaTime = 0
+            .PlayDialog.Play(.PlayProgramInfo.MediaList(0).Path)
         End With
 
         sysInfo.Schedule.WindowList(WindowId) = TmpWindowInfo
@@ -847,6 +865,32 @@ Public Class MDIParentMain
 #End Region
 
 #Region "功能区"
+#Region "重新调整功能区内控件位置"
+    ''' <summary>
+    ''' 重新调整功能区内控件位置
+    ''' </summary>
+    Public Sub RecalcRibbonControlSize()
+        'For Each i001 As RibbonTabItem In RibbonControl1.TabGroups
+        '    For Each j001 As RibbonBar In i001.Panel.Controls
+        '        j001.RecalcLayout()
+        '    Next
+        'Next
+        RibbonBar1.RecalcLayout()
+        RibbonBar2.RecalcLayout()
+        RibbonBar4.RecalcLayout()
+        RibbonBar5.RecalcLayout()
+        RibbonBar6.RecalcLayout()
+        RibbonBar7.RecalcLayout()
+        RibbonBar8.RecalcLayout()
+        RibbonBar9.RecalcLayout()
+        'For i001 As Integer = 0 To RibbonControl1.TabGroups.Count - 1
+        '    For Each j001 As RibbonBar In RibbonControl1.Items(i001).SubItems
+        '        j001.RecalcLayout()
+        '    Next
+        'Next
+    End Sub
+#End Region
+
 #Region "文件"
 #Region "新建"
     ''' <summary>
@@ -854,11 +898,13 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ButtonItem20_Click(sender As Object, e As EventArgs) Handles ButtonItem20.Click
         '新建前保存旧文件
-        Select Case MsgBox("是否保存修改?", MsgBoxStyle.YesNoCancel, "保存")
+        Select Case MsgBox(sysInfo.Language.GetS("Do you want to save the changes"),
+                           MsgBoxStyle.YesNoCancel,
+                           sysInfo.Language.GetS("Save"))
             Case MsgBoxResult.Yes '保存
                 If sysInfo.HistoryFile = "" Then
                     Dim tmp1 As New SaveFileDialog
-                    tmp1.Filter = "播放方案文件|*.xml"
+                    tmp1.Filter = sysInfo.Language.GetS("Schedule") & "|*.xml"
                     If tmp1.ShowDialog() <> DialogResult.OK Then
                         Exit Sub
                     End If
@@ -872,6 +918,8 @@ Public Class MDIParentMain
             Case MsgBoxResult.Cancel '取消
                 Exit Sub
         End Select
+
+        ClearWindow()
 
         '新建空文件
         sysInfo.HistoryFile = ""
@@ -890,11 +938,13 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ButtonItem21_Click(sender As Object, e As EventArgs) Handles ButtonItem21.Click
         '新建前保存旧文件
-        Select Case MsgBox("是否保存修改?", MsgBoxStyle.YesNoCancel, "保存")
+        Select Case MsgBox(sysInfo.Language.GetS("Do you want to save the changes"),
+                           MsgBoxStyle.YesNoCancel,
+                           sysInfo.Language.GetS("Save"))
             Case MsgBoxResult.Yes '保存
                 If sysInfo.HistoryFile = "" Then
                     Dim tmp1 As New SaveFileDialog With {
-                        .Filter = "播放方案文件|*.xml"
+                        .Filter = sysInfo.Language.GetS("Schedule") & "|*.xml"
                     }
                     If tmp1.ShowDialog() <> DialogResult.OK Then
                         Exit Sub
@@ -917,6 +967,8 @@ Public Class MDIParentMain
         If tmp.ShowDialog() <> DialogResult.OK Then
             Exit Sub
         End If
+
+        ClearWindow()
 
         '文件打开异常则打开旧文件
         If Not LoadFile(tmp.FileName) Then
@@ -941,7 +993,7 @@ Public Class MDIParentMain
         If sysInfo.HistoryFile = "" Then
             Dim tmp1 As New SaveFileDialog
             'tmp.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-            tmp1.Filter = "播放方案文件|*.xml"
+            tmp1.Filter = sysInfo.Language.GetS("Schedule") & "|*.xml"
             If tmp1.ShowDialog() <> DialogResult.OK Then
                 Exit Sub
             End If
@@ -961,7 +1013,7 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ButtonItem23_Click(sender As Object, e As EventArgs) Handles ButtonItem23.Click
         Dim tmp As New SaveFileDialog With {
-            .Filter = "播放方案文件|*.xml"
+            .Filter = sysInfo.Language.GetS("Schedule") & "|*.xml"
         }
         If tmp.ShowDialog() <> DialogResult.OK Then
             Exit Sub
@@ -992,19 +1044,19 @@ Public Class MDIParentMain
     End Sub
 
 #Region "切换显示模式"
-    Private Sub ButtonItem14_Click(sender As Object, e As EventArgs) Handles ButtonItem14.Click
+    Private Sub ButtonItem14_Click_1(sender As Object, e As EventArgs) Handles ButtonItem14.Click
         SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.INTERACT)
     End Sub
 
-    Private Sub ButtonItem15_Click(sender As Object, e As EventArgs) Handles ButtonItem15.Click
+    Private Sub ButtonItem15_Click_1(sender As Object, e As EventArgs) Handles ButtonItem15.Click
         SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.TEST)
     End Sub
 
-    Private Sub ButtonItem16_Click(sender As Object, e As EventArgs) Handles ButtonItem16.Click
+    Private Sub ButtonItem16_Click_1(sender As Object, e As EventArgs) Handles ButtonItem16.Click
         SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.BLACK)
     End Sub
 
-    Private Sub ButtonItem17_Click(sender As Object, e As EventArgs) Handles ButtonItem17.Click
+    Private Sub ButtonItem17_Click_1(sender As Object, e As EventArgs) Handles ButtonItem17.Click
         If ButtonItem17.Visible = False Then
             Exit Sub
         End If
@@ -1026,7 +1078,7 @@ Public Class MDIParentMain
     ''' 触摸灵敏度
     ''' </summary>
     Private Sub ComboBoxItem10_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem10.SelectedIndexChanged
-        sysInfo.TouchSensitivity = ComboBoxItem10.SelectedIndex
+        sysInfo.TouchSensitivity = Val(ComboBoxItem10.Text)
     End Sub
 
     ''' <summary>
@@ -1088,17 +1140,19 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ButtonItem1_Click(sender As Object, e As EventArgs) Handles ButtonItem1.Click
         Dim TmpDialog As New Wangk.Resource.InputBox With {
-            .Title = "高级用户登陆",
-            .InputTips = "输入密码",
+            .Title = sysInfo.Language.GetS("PowerUser"),
+            .InputTips = sysInfo.Language.GetS("Input Password"),
             .PasswordChar = "*"
         }
         If TmpDialog.ShowDialog <> DialogResult.OK Then
             Exit Sub
         End If
 
-        If System.IO.Path.GetExtension(TmpDialog.InputStr).ToLower() = "yestech" Then
+        If TmpDialog.InputStr.ToLower() = "yestech" Then
             ButtonItem17.Visible = True
             ButtonItem1.Enabled = False
+
+            RecalcRibbonControlSize()
         End If
     End Sub
 #End Region
@@ -1108,9 +1162,16 @@ Public Class MDIParentMain
     ''' 用户手册
     ''' </summary>
     Private Sub ButtonItem24_Click(sender As Object, e As EventArgs) Handles ButtonItem24.Click
-        System.Diagnostics.Process.Start($"{My.Application.Info.Title} User Manual {[Enum].
-                                         GetName(GetType(Wangk.Resource.MultiLanguage.LANG),
-                                                 sysInfo.SelectLang)}.chm")
+        Try
+            System.Diagnostics.Process.Start($"{My.Application.Info.Title} User Manual {[Enum].
+                                                    GetName(GetType(Wangk.Resource.MultiLanguage.LANG),
+                                                            sysInfo.SelectLang)}.chm")
+        Catch ex As Exception
+            MsgBox(ex.Message,
+                   MsgBoxStyle.Information,
+                   sysInfo.Language.GetS("Help"))
+        End Try
+
         'todo:编写用户手册
     End Sub
 
@@ -1134,7 +1195,7 @@ Public Class MDIParentMain
     End Sub
 #End Region
 
-#Region "编辑窗口"
+#Region "编辑窗口 testing"
     ''' <summary>
     ''' 编辑窗口
     ''' </summary>
@@ -1147,6 +1208,13 @@ Public Class MDIParentMain
         UpdateWindowIdInScreen()
 
         UpdateWindow(TmpDialog.WindowId)
+
+        sysInfo.Schedule.WindowList(TmpDialog.WindowId).PlayDialog.UpdateWindow(True)
+
+        TreeView1.SelectedNode.Text = sysInfo.Schedule.WindowList(TmpDialog.WindowId).Remark
+        'For Each i001 In sysInfo.Schedule.WindowList
+        '    i001.PlayDialog.UpdateWindow(True)
+        'Next
     End Sub
 #End Region
 
@@ -1156,6 +1224,8 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub DeleteWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteWindowToolStripMenuItem.Click
         DeleteWindow(TreeView1.SelectedNode.Index)
+
+        WindowPlayDialog.Hide()
 
         UpdateWindowIdInScreen()
     End Sub
@@ -1193,13 +1263,14 @@ Public Class MDIParentMain
         Select Case e.Node.Level
             Case 0
                 '窗口
-                'GroupBox2.Text = "Window"
-                'WindowEditDialog.Show()
+                GroupBox2.Text = sysInfo.Language.GetS("Window")
                 ProgramEditDialog.Hide()
+                WindowPlayDialog.LoadWindow(e.Node.Index)
+                WindowPlayDialog.Show()
             Case 1
                 '节目
-                'GroupBox2.Text = "Program"
-                'WindowEditDialog.Hide()
+                GroupBox2.Text = sysInfo.Language.GetS("Program")
+                WindowPlayDialog.Hide()
                 ProgramEditDialog.LoadProgram(e.Node.Parent.Index, e.Node.Index)
                 ProgramEditDialog.Show()
         End Select
@@ -1254,7 +1325,7 @@ Public Class MDIParentMain
             Me.ButtonItem1.Text = .GetS("PowerUser")
             Me.RibbonBar6.Text = .GetS("General")
             Me.LabelItem1.Text = .GetS("Language")
-            Me.RibbonBar3.Text = .GetS("Display Mode")
+            Me.RibbonBar9.Text = .GetS("Display Mode")
             Me.ButtonItem14.Text = .GetS("Interact")
             Me.ButtonItem15.Text = .GetS("Test")
             Me.ButtonItem16.Text = .GetS("Black")

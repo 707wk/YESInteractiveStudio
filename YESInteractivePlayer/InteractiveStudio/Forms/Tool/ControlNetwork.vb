@@ -96,8 +96,8 @@ Public Class ControlNetwork
         For i As Integer = 0 To 4 - 1
             Dim tmpNum As Integer = Val(ipDataStrArr(i))
 
-            If tmpNum < 1 OrElse
-                tmpNum > 254 Then
+            If tmpNum < 0 OrElse
+                tmpNum > 255 Then
 
                 MsgBox(sysInfo.Language.GetS("Invalid Argument"),
                        MsgBoxStyle.Information,

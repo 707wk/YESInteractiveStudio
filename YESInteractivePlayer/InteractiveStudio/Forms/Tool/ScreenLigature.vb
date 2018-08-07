@@ -18,8 +18,8 @@
             .ShowItemToolTips = True
             .MultiSelect = False
 
-            .Columns.Add("序号", 40)
-            .Columns.Add("尺寸", 80)
+            .Columns.Add(sysInfo.Language.GetS("ID"), 40)
+            .Columns.Add(sysInfo.Language.GetS("Size"), 80)
         End With
 
         For i001 As Integer = 0 To sysInfo.ScreenList.Count - 1
@@ -79,7 +79,7 @@
         Dim tmpWidth As Integer =
             sysInfo.ScreenList(selectScreenId).DefSize.Width * 21 \ sysInfo.ScreenList(selectScreenId).DefScanBoardSize.Width
 
-        Dim LigatureBitmap As Bitmap = New Bitmap(tmpWidth, tmpHeight)
+        Dim LigatureBitmap As Bitmap = New Bitmap(tmpWidth + 1, tmpHeight + 1)
         Dim g As Graphics = Graphics.FromImage(LigatureBitmap)
         Dim mpen As New Pen(Color.Green)
 

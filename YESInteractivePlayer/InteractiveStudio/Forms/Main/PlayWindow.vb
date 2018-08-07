@@ -42,9 +42,9 @@ Public Class PlayWindow
     ''' </summary>
     Private DllControl As YESInteractiveSDK.IYESInterfaceSDK
     ''' <summary>
-    ''' 文件类型
+    ''' 文件类型 0无 1swf 2dll
     ''' </summary>
-    Dim FileType As Integer
+    Public FileType As Integer
 
 #Region "发送消息"
     '发送消息
@@ -143,18 +143,20 @@ Public Class PlayWindow
         ClearPlayControl()
 
         SetCaptureFlage = False
-        FileType = 0
+        FileType = 1
 
         FlashControl = New AxShockwaveFlashObjects.AxShockwaveFlash With {
-            .Dock = DockStyle.Fill,
-            .AlignMode = 5, '对齐方式
-            .ScaleMode = 2, '缩放模式
-            .Quality = 0, '画面质量
-            .BackgroundColor = 0,
-            .Movie = FilePath
+            .Dock = DockStyle.Fill
         }
         Me.Controls.Add(FlashControl)
 
+        With FlashControl
+            .AlignMode = 5 '对齐方式
+            .ScaleMode = 2 '缩放模式
+            .Quality = 0 '画面质量
+            .BackgroundColor = 0
+            .Movie = FilePath
+        End With
     End Sub
 #End Region
 
@@ -165,7 +167,7 @@ Public Class PlayWindow
     Public Sub PlayDLL(ByVal FilePath As String)
         ClearPlayControl()
 
-        FileType = 1
+        FileType = 2
 
         Dim ass = Assembly.LoadFrom(FilePath)
         Dim tp = ass.GetType($"{Path.GetFileNameWithoutExtension(FilePath)}.{Path.GetFileNameWithoutExtension(FilePath)}")
@@ -202,6 +204,10 @@ Public Class PlayWindow
     ''' </summary>
     Public Sub PlayMode()
         With sysInfo.Schedule.WindowList(WindowId)
+            If .PlayMediaId = -1 Then
+                Exit Sub
+            End If
+
             Play(.PlayProgramInfo.MediaList(.PlayMediaId).Path)
         End With
     End Sub
@@ -330,7 +336,7 @@ Public Class PlayWindow
 #End Region
 
                 Select Case FileType
-                    Case 0
+                    Case 1
 #Region "swf"
                         'swf
                         '非按下事件则丢弃
@@ -370,7 +376,7 @@ Public Class PlayWindow
 #End Region
                         End If
 #End Region
-                    Case 1
+                    Case 2
 #Region "dll"
                         'dll
                         DllControl.PointActive(New PointInfo() With {
@@ -408,7 +414,7 @@ Public Class PlayWindow
     ''' </summary>
     Public Sub ChangeControlsLanguage()
         With sysInfo.Language
-            Me.Text = .GetS("启动中 ...")
+
         End With
     End Sub
 #End Region

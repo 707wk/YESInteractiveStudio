@@ -39,3 +39,4 @@ T:\YESInteractivePlayer\InteractiveStudio\obj\x86\Debug\InteractiveStudio.AboutB
 T:\YESInteractivePlayer\InteractiveStudio\obj\x86\Debug\InteractiveStudio.ControlNetwork.resources
 T:\YESInteractivePlayer\InteractiveStudio\obj\x86\Debug\InteractiveStudio.ScanBoardOption.resources
 T:\YESInteractivePlayer\InteractiveStudio\obj\x86\Debug\InteractiveStudio.ScreenLigature.resources
+T:\YESInteractivePlayer\InteractiveStudio\obj\x86\Debug\InteractiveStudio.WindowPlay.resources

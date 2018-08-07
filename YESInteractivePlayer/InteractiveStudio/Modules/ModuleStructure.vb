@@ -455,6 +455,7 @@ Public Module ModuleStructure
         ''' <summary>
         ''' 查询时间间隔 ms
         ''' </summary>
+        <XmlIgnore>
         Dim InquireTimeSec As Integer
 #End Region
 #End Region

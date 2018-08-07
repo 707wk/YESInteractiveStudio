@@ -1,5 +1,5 @@
 ﻿Public Class ScreenSingleSelect
-    Public SelectScreenID As Integer
+    Public SelectScreenID As Integer = -1
 
     Private Sub ScreenSingleSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 #Region "样式设置"
@@ -14,8 +14,8 @@
             .ShowItemToolTips = True
             .MultiSelect = False
 
-            .Columns.Add("序号", 40)
-            .Columns.Add("尺寸", 80)
+            .Columns.Add(sysInfo.Language.GetS("ID"), 40)
+            .Columns.Add(sysInfo.Language.GetS("Size"), 80)
         End With
 
         'sysInfo.Language.GetS(Me)
@@ -34,7 +34,7 @@
         For Each i002 In TmpScreenList
             Dim TmpListViewItem As New ListViewItem
             With TmpListViewItem
-                .SubItems.Add(i002)
+                .Text = i002
                 .SubItems.Add($"{sysInfo.ScreenList(i002).DefSize.Width},{sysInfo.ScreenList(i002).DefSize.Height}")
             End With
 
@@ -42,6 +42,10 @@
         Next
 #End Region
 #End Region
+    End Sub
+
+    Private Sub ListView1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListView1.MouseDoubleClick
+        Button1_Click(Nothing, Nothing)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

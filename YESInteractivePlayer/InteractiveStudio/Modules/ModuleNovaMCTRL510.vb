@@ -62,9 +62,9 @@ Public Module ModuleNovaMCTRL510
 
                     Dim TmpStr As String = $"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)}"
                     If Not My.Computer.Network.Ping(TmpStr, 500) Then
-                        MsgBox($"{TmpStr} {sysInfo.Language.GetS("未能连通")}",
+                        MsgBox($"{TmpStr} {sysInfo.Language.GetS("Failed to connect")}",
                                MsgBoxStyle.Information,
-                               sysInfo.Language.GetS("测试连接"))
+                               sysInfo.Language.GetS("Test Connect"))
                         Return False
                         Exit Function
                     End If
@@ -73,13 +73,17 @@ Public Module ModuleNovaMCTRL510
         Catch ex As Exception
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
-                   sysInfo.Language.GetS("连接异常"))
+                   sysInfo.Language.GetS("Connect Exception"))
             Return False
             Exit Function
         End Try
 #End Region
 
         sysInfo.LinkFlage = True
+
+        SetResetSec(sysInfo.ResetSec, sysInfo.ScanBoardOldFlage)
+        SetResetTemp(sysInfo.ResetTemp, sysInfo.ScanBoardOldFlage)
+        SetTouchSensitivity(sysInfo.TouchSensitivity, sysInfo.ScanBoardOldFlage)
 
 #Region "建立连接并启动检测线程"
         '建立连接并启动检测线程
@@ -119,15 +123,11 @@ Public Module ModuleNovaMCTRL510
 
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
-                   sysInfo.Language.GetS("建立连接"))
+                   sysInfo.Language.GetS("Connected Exception"))
             Return False
             Exit Function
         End Try
 #End Region
-
-        SetResetSec(sysInfo.ResetSec, sysInfo.ScanBoardOldFlage)
-        SetResetTemp(sysInfo.ResetTemp, sysInfo.ScanBoardOldFlage)
-
         Return True
     End Function
 #End Region
@@ -197,11 +197,15 @@ Public Module ModuleNovaMCTRL510
         Dim readNum As Integer = 0
         '接收缓存
         Dim ReceiveQueue As New Queue(Of Byte())
+        ''接收的传感器数据
+        'Dim ReceDataArray As Byte(,)
+        'ReDim ReceDataArray(16 - 1, 1028 - 1)
 
         Do While sysInfo.LinkFlage
 #Region "刷新数据"
             If lastSec <> Now.Second Then
                 lastSec = Now.Second
+
                 exceptionNum = 0
                 sysInfo.SenderList(ControlID).MaxReadNum = readNum
                 readNum = 0
@@ -209,11 +213,11 @@ Public Module ModuleNovaMCTRL510
 #End Region
 
 #Region "异常处理"
-            If exceptionNum > 3 Then
+            If exceptionNum > 8 Then
                 Dim tmpThread As Thread = New Thread(AddressOf sysInfo.MainForm.DisposeControlOffLink) With {
                     .IsBackground = True
                     }
-                tmpThread.Start(sysInfo.LastErrorInfo)
+                tmpThread.Start(ControlID)
                 Exit Do
             End If
 #End Region
@@ -221,7 +225,7 @@ Public Module ModuleNovaMCTRL510
 #Region "接收传感器数据"
 #Region "控制器接收数据"
             Try
-                Dim ReceiveData() As Byte = Nothing
+                Dim ReceiveData(1024) As Byte
                 With sysInfo.SenderList(ControlID).CliSocket
                     .Send(Wangk.Hash.Hex2Bin("55D50902"))
                     .Receive(ReceiveData)
@@ -229,8 +233,9 @@ Public Module ModuleNovaMCTRL510
             Catch ex As SocketException
                 sysInfo.LastErrorInfo = ex.Message
                 exceptionNum += 1
-
-                Thread.Sleep(100)
+                'Debug.WriteLine("rec:" & ex.Message)
+                'Thread.Sleep(100)
+                Continue Do
             Catch ex As Exception
                 sysInfo.logger.LogThis("控制器接收数据", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
             End Try
@@ -243,7 +248,7 @@ Public Module ModuleNovaMCTRL510
 
                     Dim ReceiveData() As Byte
                     For i001 As Integer = 0 To 16 - 1
-                        ReceiveData = Nothing
+                        ReDim ReceiveData(1028 - 1)
 
                         .Receive(ReceiveData)
 
@@ -253,12 +258,13 @@ Public Module ModuleNovaMCTRL510
             Catch ex As SocketException
                 sysInfo.LastErrorInfo = ex.Message
                 exceptionNum += 1
-
-                Thread.Sleep(100)
+                'Debug.WriteLine("控制器上传数据:" & ex.Message)
             Catch ex As Exception
-                sysInfo.logger.LogThis("控制器接收数据", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
+                sysInfo.logger.LogThis("控制器上传数据", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
             End Try
 #End Region
+
+            'Debug.WriteLine("ReceiveQueue=" & ReceiveQueue.Count)
 
             readNum += 1
 #End Region

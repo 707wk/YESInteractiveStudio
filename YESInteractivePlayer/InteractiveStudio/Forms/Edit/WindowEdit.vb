@@ -21,6 +21,8 @@ Public Class WindowEdit
         For i001 As Integer = 0 To ScreenControls.Count - 1
             ScreenControls(i001).Visible = False
         Next
+
+        TextBox2.Clear()
     End Sub
 
     Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
@@ -68,6 +70,11 @@ Public Class WindowEdit
                 .Visible = False,
                 .ContextMenuStrip = ScreenMenuStrip
             }
+            With sysInfo.ScreenList(i001)
+                ScreenControls(i001).Text = $"Screen {i001}
+Size: { .DefSize.Width},{ .DefSize.Height}"
+            End With
+
             Panel1.Controls.Add(ScreenControls(i001))
 
             'AddHandler ScreenControls(i001).Click, AddressOf ScreenControls_Click
@@ -84,6 +91,8 @@ Public Class WindowEdit
             RemoveHandler ScreenControls(i001).MouseDown, AddressOf ScreenControls_MouseDown
             RemoveHandler ScreenControls(i001).MouseMove, AddressOf ScreenControls_MouseMove
         Next
+
+        GroupBox3_Leave(Nothing, Nothing)
     End Sub
 
 #Region "显示屏幕信息"
@@ -93,9 +102,11 @@ Public Class WindowEdit
     Private Sub ScreenControls_MouseDown(sender As Object, e As EventArgs)
         Dim TmpScreenButton As ScreenButton = CType(sender, ScreenButton)
 
-        TextBox2.Text = TmpScreenButton.ScreenId
+        TextBox2.Clear()
+
         NumericUpDown6.Value = TmpScreenButton.Location.X
         NumericUpDown5.Value = TmpScreenButton.Location.Y
+        TextBox2.Text = TmpScreenButton.ScreenId
     End Sub
 
     ''' <summary>
@@ -103,6 +114,11 @@ Public Class WindowEdit
     ''' </summary>
     Private Sub ScreenControls_MouseMove(sender As Object, e As EventArgs)
         Dim TmpScreenButton As ScreenButton = CType(sender, ScreenButton)
+
+        If TextBox2.Text = "" OrElse
+            TmpScreenButton.ScreenId <> Val(TextBox2.Text) Then
+            Exit Sub
+        End If
 
         NumericUpDown6.Value = TmpScreenButton.Location.X
         NumericUpDown5.Value = TmpScreenButton.Location.Y
@@ -121,11 +137,25 @@ Public Class WindowEdit
             Exit Sub
         End If
 
+        If TmpDialog.SelectScreenID = -1 Then
+            Exit Sub
+        End If
+
         sysInfo.Schedule.WindowList(WindowId).ScreenList.Add(TmpDialog.SelectScreenID)
 
         ScreenControls(TmpDialog.SelectScreenID).Location = New Point(0, 0)
         ScreenControls(TmpDialog.SelectScreenID).Size = sysInfo.ScreenList(TmpDialog.SelectScreenID).DefSize
         ScreenControls(TmpDialog.SelectScreenID).Visible = True
+    End Sub
+#End Region
+
+#Region "删除屏幕"
+    Private Sub DeleteScreenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteScreenToolStripMenuItem.Click
+        Dim deleteScreenId As Integer = Val(TextBox2.Text)
+
+        sysInfo.Schedule.WindowList(WindowId).ScreenList.Remove(deleteScreenId)
+        ScreenControls(deleteScreenId).Visible = False
+        TextBox2.Clear()
     End Sub
 #End Region
 
@@ -144,6 +174,8 @@ Public Class WindowEdit
             .ZoomPix.Width = NumericUpDown3.Value
             .ZoomPix.Height = NumericUpDown4.Value
         End With
+
+        sysInfo.Schedule.WindowList.Item(WindowId) = TmpWindowInfo
     End Sub
 
     ''' <summary>

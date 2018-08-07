@@ -35,6 +35,7 @@ Partial Class ScanBoardOption
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -86,6 +87,7 @@ Partial Class ScanBoardOption
         Me.GroupBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.CheckBox2)
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.ProgressBar1)
         Me.GroupBox2.Controls.Add(Me.Button2)
@@ -172,12 +174,22 @@ Partial Class ScanBoardOption
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(6, 20)
+        Me.CheckBox1.Location = New System.Drawing.Point(9, 20)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(150, 16)
         Me.CheckBox1.TabIndex = 0
         Me.CheckBox1.Text = "Old ScanBoard Version"
         Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(9, 172)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(114, 16)
+        Me.CheckBox2.TabIndex = 6
+        Me.CheckBox2.Text = "Old MCU Version"
+        Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'ScanBoardOption
         '
@@ -191,6 +203,7 @@ Partial Class ScanBoardOption
         Me.MinimizeBox = False
         Me.Name = "ScanBoardOption"
         Me.ShowIcon = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "ScanBoardOption"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -217,4 +230,5 @@ Partial Class ScanBoardOption
     Friend WithEvents Label2 As Label
     Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents Button2 As Button
+    Friend WithEvents CheckBox2 As CheckBox
 End Class
