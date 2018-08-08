@@ -85,6 +85,7 @@ Module ModuleFunction
             '       MsgBoxStyle.Information,
             '       "读取文件异常")
             'Return False
+            sysInfo.HistoryFile = ""
             sysInfo.Schedule.WindowList = New List(Of WindowInfo)
         End Try
 

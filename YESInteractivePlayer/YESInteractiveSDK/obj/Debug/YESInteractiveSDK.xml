@@ -77,19 +77,24 @@ YESInteractiveSDK
  YESInteractive插件需要实现的接口
  </summary>
 </member>
-<member name="M:YESInteractiveSDK.IYESInterfaceSDK.InitAddonFunc(System.Windows.Forms.Control@)">
+<member name="M:YESInteractiveSDK.IYESInterfaceSDK.InitAddonFunc(System.Windows.Forms.Control)">
  <summary>
  加载插件
  </summary>
  <param name="Parent">父控件</param>
 </member>
-<member name="M:YESInteractiveSDK.IYESInterfaceSDK.FinalizeAddonFunc(System.Windows.Forms.Control@)">
+<member name="M:YESInteractiveSDK.IYESInterfaceSDK.FinalizeAddonFunc(System.Windows.Forms.Control)">
  <summary>
  卸载插件
  </summary>
  <param name="Parent">父控件</param>
 </member>
 <member name="M:YESInteractiveSDK.IYESInterfaceSDK.PointActive(YESInteractiveSDK.ModuleStructure.PointInfo)">
+ <summary>
+ 点活动事件
+ </summary>
+</member>
+<member name="M:YESInteractiveSDK.IYESInterfaceSDK.PointActive(YESInteractiveSDK.ModuleStructure.PointInfo[])">
  <summary>
  点活动事件
  </summary>
