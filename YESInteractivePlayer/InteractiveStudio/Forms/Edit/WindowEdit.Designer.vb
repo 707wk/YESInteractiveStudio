@@ -56,6 +56,7 @@ Partial Class WindowEdit
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.ScreenMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DeleteScreenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -70,6 +71,7 @@ Partial Class WindowEdit
         Me.SplitContainer1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.ScreenMenuStrip.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -277,7 +279,7 @@ Partial Class WindowEdit
         '
         'SplitContainer1.Panel1
         '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.Panel1)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.Panel2)
         Me.SplitContainer1.Panel1.Controls.Add(Me.ToolStrip1)
         '
         'SplitContainer1.Panel2
@@ -290,12 +292,10 @@ Partial Class WindowEdit
         '
         'Panel1
         '
-        Me.Panel1.AutoScroll = True
         Me.Panel1.BackColor = System.Drawing.Color.LightGray
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(0, 25)
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(521, 426)
+        Me.Panel1.Size = New System.Drawing.Size(32768, 32768)
         Me.Panel1.TabIndex = 3
         '
         'ToolStrip1
@@ -373,6 +373,16 @@ Partial Class WindowEdit
         Me.DeleteScreenToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.DeleteScreenToolStripMenuItem.Text = "Delete Screen"
         '
+        'Panel2
+        '
+        Me.Panel2.AutoScroll = True
+        Me.Panel2.Controls.Add(Me.Panel1)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(0, 25)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(521, 426)
+        Me.Panel2.TabIndex = 4
+        '
         'WindowEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -402,6 +412,7 @@ Partial Class WindowEdit
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.ScreenMenuStrip.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -437,4 +448,5 @@ Partial Class WindowEdit
     Friend WithEvents DeleteScreenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Label5 As Label
+    Friend WithEvents Panel2 As Panel
 End Class
