@@ -30,6 +30,8 @@ Partial Class ProgramEdit
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
@@ -38,13 +40,12 @@ Partial Class ProgramEdit
         Me.Label2 = New System.Windows.Forms.Label()
         Me.MediaMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DeleteMediaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.PlayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.MediaMenuStrip.SuspendLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MediaMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -123,6 +124,25 @@ Partial Class ProgramEdit
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Media Setting"
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(293, 23)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(11, 12)
+        Me.Label5.TabIndex = 8
+        Me.Label5.Text = "s"
+        '
+        'NumericUpDown1
+        '
+        Me.NumericUpDown1.Location = New System.Drawing.Point(216, 20)
+        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
+        Me.NumericUpDown1.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Size = New System.Drawing.Size(71, 21)
+        Me.NumericUpDown1.TabIndex = 7
+        Me.NumericUpDown1.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
@@ -177,9 +197,9 @@ Partial Class ProgramEdit
         '
         'MediaMenuStrip
         '
-        Me.MediaMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteMediaToolStripMenuItem})
+        Me.MediaMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlayToolStripMenuItem, Me.DeleteMediaToolStripMenuItem})
         Me.MediaMenuStrip.Name = "MediaMenuStrip"
-        Me.MediaMenuStrip.Size = New System.Drawing.Size(155, 26)
+        Me.MediaMenuStrip.Size = New System.Drawing.Size(181, 70)
         '
         'DeleteMediaToolStripMenuItem
         '
@@ -187,24 +207,11 @@ Partial Class ProgramEdit
         Me.DeleteMediaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.DeleteMediaToolStripMenuItem.Text = "Delete Media"
         '
-        'NumericUpDown1
+        'PlayToolStripMenuItem
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(216, 20)
-        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
-        Me.NumericUpDown1.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(71, 21)
-        Me.NumericUpDown1.TabIndex = 7
-        Me.NumericUpDown1.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(293, 23)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(11, 12)
-        Me.Label5.TabIndex = 8
-        Me.Label5.Text = "s"
+        Me.PlayToolStripMenuItem.Name = "PlayToolStripMenuItem"
+        Me.PlayToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PlayToolStripMenuItem.Text = "Play"
         '
         'ProgramEdit
         '
@@ -224,8 +231,8 @@ Partial Class ProgramEdit
         Me.ToolStrip1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.MediaMenuStrip.ResumeLayout(False)
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MediaMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -248,4 +255,5 @@ Partial Class ProgramEdit
     Friend WithEvents DeleteMediaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label5 As Label
     Friend WithEvents NumericUpDown1 As NumericUpDown
+    Friend WithEvents PlayToolStripMenuItem As ToolStripMenuItem
 End Class

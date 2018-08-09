@@ -319,6 +319,10 @@ Public Class MDIParentMain
     ''' </summary>
     ''' <param name="Mode"></param>
     Public Sub SwitchDisplayMode(ByVal Mode As InteractiveOptions.DISPLAYMODE)
+        If Not sysInfo.LinkFlage Then
+            Exit Sub
+        End If
+
         sysInfo.DisplayMode = Mode
 
         SwitchDisplayModeIco(Mode)
@@ -334,7 +338,7 @@ Public Class MDIParentMain
     ''' 热键消息处理函数
     ''' </summary>
     Protected Overrides Sub WndProc(ByRef m As Message)
-        If m.Msg = WM_HOTKEY And sysInfo.LinkFlage Then '判断是否为热键消息
+        If m.Msg = WM_HOTKEY Then '判断是否为热键消息
             Select Case m.WParam.ToInt32 '判断热键消息的注册ID
                 Case 1
                     SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.INTERACT)
@@ -572,7 +576,7 @@ Public Class MDIParentMain
                 End If
 
                 .PlayMediaTime += 1
-                'todo:节目定时切换null异常
+                ''todo:节目定时切换null异常
                 If .PlayMediaTime >= .PlayProgramInfo.MediaList(.PlayMediaId).PlayTime Then
                     .PlayMediaTime = 0
                     .PlayMediaId = (.PlayMediaId + 1) Mod .PlayProgramInfo.MediaList.Count
@@ -856,7 +860,10 @@ Public Class MDIParentMain
             .PlayProgramInfo = .ProgramList(ProgramId)
             .PlayMediaId = 0
             .PlayMediaTime = 0
-            .PlayDialog.Play(.PlayProgramInfo.MediaList(0).Path)
+
+            If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
+                .PlayDialog.Play(.PlayProgramInfo.MediaList(0).Path)
+            End If
         End With
 
         sysInfo.Schedule.WindowList(WindowId) = TmpWindowInfo

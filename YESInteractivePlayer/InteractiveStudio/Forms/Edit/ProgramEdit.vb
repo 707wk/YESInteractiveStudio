@@ -182,6 +182,34 @@
     End Sub
 #End Region
 
+#Region "播放文件"
+    Private Sub PlayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlayToolStripMenuItem.Click
+        If ListView1.SelectedItems.Count < 1 Then
+            Exit Sub
+        End If
+
+        Dim mediaId As Integer = ListView1.SelectedItems(0).Index
+
+        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(WindowId)
+
+        With TmpWindowInfo
+            If .ProgramList(ProgramId).MediaList.Count = 0 Then
+                Exit Sub
+            End If
+
+            .PlayProgramInfo = .ProgramList(ProgramId)
+            .PlayMediaId = mediaId
+            .PlayMediaTime = 0
+
+            If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
+                .PlayDialog.Play(.PlayProgramInfo.MediaList(mediaId).Path)
+            End If
+        End With
+
+        sysInfo.Schedule.WindowList(WindowId) = TmpWindowInfo
+    End Sub
+#End Region
+
 #Region "切换控件语言"
     ''' <summary>
     ''' 切换控件语言
