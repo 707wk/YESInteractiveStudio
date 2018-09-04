@@ -9,6 +9,7 @@
     Public Sub LoadProgram(ByVal WindowId As Integer, ByVal ProgramId As Integer)
         Me.WindowId = WindowId
         Me.ProgramId = ProgramId
+        Me.ActiveControl = Me.ListView1
 
         With sysInfo.Schedule.WindowList(WindowId).ProgramList(ProgramId)
             TextBox1.Text = .Remark
@@ -225,8 +226,10 @@
             Me.Button1.Text = .GetS("Browse ...")
             Me.Label3.Text = .GetS("File")
             Me.Label2.Text = .GetS("ID")
+            Me.PlayToolStripMenuItem.Text = .GetS("Play")
             Me.DeleteMediaToolStripMenuItem.Text = .GetS("Delete Media")
             Me.Label5.Text = .GetS("s")
+            Me.Button2.Text = .GetS("Play")
         End With
     End Sub
 #End Region

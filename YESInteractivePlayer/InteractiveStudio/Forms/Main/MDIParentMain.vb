@@ -153,6 +153,9 @@ Public Class MDIParentMain
         '隐藏显示电容按钮
         ButtonItem17.Visible = False
 
+        '隐藏复位设置
+        RibbonBar5.Visible = False
+
         ''窗口编辑窗体
         'WindowEditDialog = New WindowEdit With {
         '    .FormBorderStyle = FormBorderStyle.None,
@@ -363,7 +366,7 @@ Public Class MDIParentMain
 #Region "关闭"
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
 #Region "退出前保存文件"
-        Select Case MsgBox(sysInfo.Language.GetS("Do you want to save the changes"),
+        Select Case MsgBox(sysInfo.Language.GetS("Do you want to save the changes of Schedule"),
                            MsgBoxStyle.YesNoCancel,
                            sysInfo.Language.GetS("Save"))
             Case MsgBoxResult.Yes '保存
@@ -371,6 +374,7 @@ Public Class MDIParentMain
                     Dim tmp1 As New SaveFileDialog
                     tmp1.Filter = "Schedule File|*.xml"
                     If tmp1.ShowDialog() <> DialogResult.OK Then
+                        e.Cancel = True
                         Exit Sub
                     End If
 
@@ -449,8 +453,24 @@ Public Class MDIParentMain
 
         '无窗口则不处理
         If sysInfo.Schedule.WindowList.Count = 0 Then
+            MsgBox(sysInfo.Language.GetS("No window added in Schedule"),
+                   MsgBoxStyle.Information,
+                   sysInfo.Language.GetS("Connect"))
             Exit Sub
         End If
+
+#Region "检测是否有屏幕显示"
+        Dim tmpScreenSum As Integer = 0
+        For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
+            tmpScreenSum += i001.ScreenList.Count
+        Next
+        If tmpScreenSum = 0 Then
+            MsgBox(sysInfo.Language.GetS("No screen added in window"),
+                   MsgBoxStyle.Information,
+                   sysInfo.Language.GetS("Connect"))
+            Exit Sub
+        End If
+#End Region
 
         If Not ConnectControl() Then
             Exit Sub
@@ -637,7 +657,7 @@ Public Class MDIParentMain
 #Region "添加窗体节点"
     Public Sub CreatWindowNode(ByVal WindowId As Integer)
         Dim Tmpnode001 As New TreeNode With {
-                        .Text = $"窗口{WindowId}",
+                        .Text = $"{sysInfo.Language.GetS("Window")}{WindowId}",
                         .ImageIndex = 0,
                         .SelectedImageIndex = 0,
                         .ContextMenuStrip = WindowMenuStrip
@@ -780,6 +800,24 @@ Public Class MDIParentMain
         Next
     End Sub
 #End Region
+
+#Region "隐藏/显示窗体"
+    Private Sub CheckBoxItem1_CheckedChanged(sender As Object, e As CheckBoxChangeEventArgs) Handles CheckBoxItem1.CheckedChanged
+        If Not CheckBoxItem1.Checked Then
+            '显示
+            For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
+                With i001
+                    .PlayDialog.UpdateWindow(True)
+                End With
+            Next
+        Else
+            '隐藏
+            For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
+                i001.PlayDialog.HideWindow(True)
+            Next
+        End If
+    End Sub
+#End Region
 #End Region
 
 #Region "节目操作"
@@ -905,7 +943,7 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ButtonItem20_Click(sender As Object, e As EventArgs) Handles ButtonItem20.Click
         '新建前保存旧文件
-        Select Case MsgBox(sysInfo.Language.GetS("Do you want to save the changes"),
+        Select Case MsgBox(sysInfo.Language.GetS("Do you want to save the changes of Schedule"),
                            MsgBoxStyle.YesNoCancel,
                            sysInfo.Language.GetS("Save"))
             Case MsgBoxResult.Yes '保存
@@ -944,8 +982,8 @@ Public Class MDIParentMain
     ''' 打开
     ''' </summary>
     Private Sub ButtonItem21_Click(sender As Object, e As EventArgs) Handles ButtonItem21.Click
-        '新建前保存旧文件
-        Select Case MsgBox(sysInfo.Language.GetS("Do you want to save the changes"),
+        '打开前保存旧文件
+        Select Case MsgBox(sysInfo.Language.GetS("Do you want to save the changes of Schedule"),
                            MsgBoxStyle.YesNoCancel,
                            sysInfo.Language.GetS("Save"))
             Case MsgBoxResult.Yes '保存
@@ -1115,6 +1153,14 @@ Public Class MDIParentMain
     ''' 显示语言
     ''' </summary>
     Private Sub ComboBoxItem1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem1.SelectedIndexChanged
+        'If sysInfo.SelectLang <> ComboBoxItem1.SelectedIndex Then
+        '    sysInfo.SelectLang = ComboBoxItem1.SelectedIndex
+
+        '    sysInfo.Language = New Wangk.Resource.MultiLanguage
+        '    sysInfo.Language.Init(ComboBoxItem1.SelectedIndex, My.Application.Info.Title)
+        '    ChangeControlsLanguage()
+        'End If
+
         sysInfo.SelectLang = ComboBoxItem1.SelectedIndex
     End Sub
 
@@ -1157,6 +1203,8 @@ Public Class MDIParentMain
 
         If TmpDialog.InputStr.ToLower() = "yestech" Then
             ButtonItem17.Visible = True
+            RibbonBar5.Visible = True
+
             ButtonItem1.Enabled = False
 
             RecalcRibbonControlSize()
@@ -1325,29 +1373,29 @@ Public Class MDIParentMain
             Me.LabelItem3.Text = .GetS("Anti-interference")
             Me.LabelItem4.Text = .GetS("Touch Sensitivity")
             Me.LabelItem7.Text = .GetS("Language")
-            Me.RibbonBar7.Text = .GetS("Screen Configuration")
+            'Me.RibbonBar7.Text = .GetS("Screen Configuration")
             Me.ButtonItem26.Text = .GetS("Ligature")
             Me.ButtonItem27.Text = .GetS("Controls")
             Me.ButtonItem28.Text = .GetS("ScanBoard")
             Me.ButtonItem1.Text = .GetS("PowerUser")
-            Me.RibbonBar6.Text = .GetS("General")
+            'Me.RibbonBar6.Text = .GetS("General")
             Me.LabelItem1.Text = .GetS("Language")
-            Me.RibbonBar9.Text = .GetS("Display Mode")
+            'Me.RibbonBar9.Text = .GetS("Display Mode")
             Me.ButtonItem14.Text = .GetS("Interact")
             Me.ButtonItem15.Text = .GetS("Test")
             Me.ButtonItem16.Text = .GetS("Black")
             Me.ButtonItem17.Text = .GetS("Debug")
-            Me.RibbonBar2.Text = .GetS("Control")
+            'Me.RibbonBar2.Text = .GetS("Control")
             Me.ButtonItem18.Text = .GetS("Connect")
             Me.ButtonItem19.Text = .GetS("Disconnect")
             Me.ButtonItem20.Text = .GetS("New")
             Me.ButtonItem21.Text = .GetS("Open")
             Me.ButtonItem22.Text = .GetS("Save")
             Me.ButtonItem23.Text = .GetS("Save As")
-            Me.RibbonBar5.Text = .GetS("Reset")
+            'Me.RibbonBar5.Text = .GetS("Reset")
             Me.LabelItem2.Text = .GetS("Temp Change Over")
             Me.LabelItem9.Text = .GetS("Reset Time Interval")
-            Me.RibbonBar4.Text = .GetS("Reaction")
+            'Me.RibbonBar4.Text = .GetS("Reaction")
             Me.LabelItem10.Text = .GetS("Anti-interference")
             Me.LabelItem11.Text = .GetS("Touch Sensitivity")
             Me.LabelItem8.Text = .GetS("TouchMode")
@@ -1367,6 +1415,7 @@ Public Class MDIParentMain
             Me.DeleteWindowToolStripMenuItem.Text = .GetS("Delete Window")
             Me.PlayToolStripMenuItem.Text = .GetS("Play")
             Me.DeleteProgramToolStripMenuItem.Text = .GetS("Delete Program")
+            Me.CheckBoxItem1.Text = .GetS("Hide Windows")
         End With
     End Sub
 #End Region

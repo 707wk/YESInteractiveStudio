@@ -25,7 +25,7 @@
         For i001 As Integer = 0 To sysInfo.ScreenList.Count - 1
             Dim TmpListViewItem As New ListViewItem
             With TmpListViewItem
-                .SubItems.Add(i001)
+                .Text = i001
                 .SubItems.Add($"{sysInfo.ScreenList(i001).DefSize.Width},{sysInfo.ScreenList(i001).DefSize.Height}")
             End With
 

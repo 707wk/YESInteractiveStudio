@@ -102,10 +102,11 @@ Invalid Argument_非法参数
 Program upgrade completed_程序升级完毕
 Upgrade command failed to send_升级指令发送失败
 Upgrade data failed to send_升级数据发送失败
-Do you want to save the changes_是否保存修改
+Do you want to save the changes of Schedule_是否保存对播放方案的修改
 Failed to Connect Nova Serve_连接Nova服务失败
 Failed to Reading display screen information_读显示屏信息失败
 Failed to set IP data!Please check the equipment and reset it_修改IP数据失败!请检查设备后重新设置
+Failed to get IP data!Please check the equipment and reset it_获取IP数据失败!请检查设备后重新设置
 No control system found_未找到控制系统
 No controller found_未找到控制器
 No display screen found_未找到屏幕
@@ -121,7 +122,9 @@ Control connection exception_控制器连接异常
 Play Program_播放节目
 Test Connect_测试连接
 Old MCU Version_旧版MCU程序
-PowerUser_高级用户登陆
 Input Password_输入密码
 Played Time_已播放时间
 Play File ID_播放文件序号
+No window added in Schedule_播放方案未添加窗口
+No screen added in window_播放窗口未添加屏幕
+Hide Windows_隐藏播放窗体

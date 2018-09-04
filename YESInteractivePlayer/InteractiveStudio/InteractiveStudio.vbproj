@@ -75,7 +75,7 @@
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.0, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
     <Reference Include="Nova.Mars.SDK.MarsInterface">
-      <HintPath>..\Nova\Nova.Mars.SDK.MarsInterface.dll</HintPath>
+      <HintPath>..\..\DotNetDLL\Nova\Nova.Mars.SDK.MarsInterface.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -266,6 +266,8 @@
     <Content Include="logo_32px.ico" />
     <Content Include="OPTION.txt" />
     <Content Include="README.txt" />
+    <None Include="res\play_16px.png" />
+    <None Include="res\play_24px.png" />
     <None Include="res\startLogo.png" />
     <None Include="res\Power_User_32px.png" />
     <None Include="res\startBackground.png" />
@@ -334,9 +336,9 @@ MKDIR .\DLL
 FOR /f "delims=" %25%25i IN ('dir /b "*.dll"') DO MOVE %25%25i "./DLL"
 
 %25复制SDK文件%25
-RD /S /Q .\Nova
-MKDIR .\Nova
-XCOPY ..\..\Nova .\Nova /E
+%25RD /S /Q .\Nova%25
+%25MKDIR .\Nova%25
+%25XCOPY ..\..\Nova .\Nova /E%25
 
 %25复制帮助文档%25
 DEL .\Help\*.chm 

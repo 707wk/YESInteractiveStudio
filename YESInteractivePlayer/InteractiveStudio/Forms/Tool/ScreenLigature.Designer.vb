@@ -96,6 +96,7 @@ Partial Class ScreenLigature
         Me.Controls.Add(Me.GroupBox1)
         Me.MinimizeBox = False
         Me.Name = "ScreenLigature"
+        Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "ScreenLigature"
         Me.GroupBox1.ResumeLayout(False)

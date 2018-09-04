@@ -99,7 +99,7 @@ Public Class DeviceInit
         Else
             '移除事件
             RemoveHandler sysInfo.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
-            ShowInfo($"ERROR:{sysInfo.Language.GetS("Failed to set IP data!Please check the equipment and reset it")}!")
+            ShowInfo($"ERROR:{sysInfo.Language.GetS("Failed to Get IP data!Please check the equipment and reset it")}!")
         End If
     End Sub
 #End Region
@@ -125,9 +125,9 @@ Public Class DeviceInit
 #End Region
 
 #Region "查找控制系统"
-        ShowInfo(sysInfo.Language.GetS("Searching Control System"))
         For i001 As Integer = 0 To 20 - 1
-            'Debug.WriteLine($"Searching Control System:{i001}")
+            ShowInfo(sysInfo.Language.GetS("Searching Control System") & i001)
+
             If sysInfo.RootClass.CtrlSystemCount() < 1 Then
                 If i001 = 20 - 1 Then
                     ShowInfo($"ERROR:{sysInfo.Language.GetS("No control system found")}")

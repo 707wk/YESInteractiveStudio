@@ -357,6 +357,7 @@ Public Class ScanBoardOption
             Me.Label1.Text = .GetS("File")
             Me.GroupBox3.Text = .GetS("ScanBoard Version")
             Me.CheckBox1.Text = .GetS("Old ScanBoard Version")
+            Me.CheckBox2.Text = .GetS("Old MCU Version")
         End With
     End Sub
 #End Region

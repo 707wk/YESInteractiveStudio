@@ -28,7 +28,6 @@ Partial Class ProgramEdit
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
@@ -39,8 +38,10 @@ Partial Class ProgramEdit
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.MediaMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.DeleteMediaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PlayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteMediaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.GroupBox1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -51,7 +52,7 @@ Partial Class ProgramEdit
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(4, 4)
+        Me.Label1.Location = New System.Drawing.Point(4, 8)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(41, 12)
         Me.Label1.TabIndex = 0
@@ -59,7 +60,7 @@ Partial Class ProgramEdit
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(51, 1)
+        Me.TextBox1.Location = New System.Drawing.Point(51, 4)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(100, 21)
         Me.TextBox1.TabIndex = 1
@@ -71,9 +72,9 @@ Partial Class ProgramEdit
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.ListView1)
         Me.GroupBox1.Controls.Add(Me.ToolStrip1)
-        Me.GroupBox1.Location = New System.Drawing.Point(6, 28)
+        Me.GroupBox1.Location = New System.Drawing.Point(6, 31)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(628, 260)
+        Me.GroupBox1.Size = New System.Drawing.Size(628, 257)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Media List"
@@ -84,7 +85,7 @@ Partial Class ProgramEdit
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListView1.Location = New System.Drawing.Point(3, 42)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(622, 215)
+        Me.ListView1.Size = New System.Drawing.Size(622, 212)
         Me.ListView1.TabIndex = 2
         Me.ListView1.UseCompatibleStateImageBehavior = False
         '
@@ -96,14 +97,6 @@ Partial Class ProgramEdit
         Me.ToolStrip1.Size = New System.Drawing.Size(622, 25)
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
-        '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.Image = Global.InteractiveStudio.My.Resources.Resources.mediaAdd_24px_
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(93, 22)
-        Me.ToolStripButton1.Text = "Add Media"
         '
         'GroupBox2
         '
@@ -199,25 +192,47 @@ Partial Class ProgramEdit
         '
         Me.MediaMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlayToolStripMenuItem, Me.DeleteMediaToolStripMenuItem})
         Me.MediaMenuStrip.Name = "MediaMenuStrip"
-        Me.MediaMenuStrip.Size = New System.Drawing.Size(181, 70)
-        '
-        'DeleteMediaToolStripMenuItem
-        '
-        Me.DeleteMediaToolStripMenuItem.Name = "DeleteMediaToolStripMenuItem"
-        Me.DeleteMediaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.DeleteMediaToolStripMenuItem.Text = "Delete Media"
+        Me.MediaMenuStrip.Size = New System.Drawing.Size(155, 48)
         '
         'PlayToolStripMenuItem
         '
         Me.PlayToolStripMenuItem.Name = "PlayToolStripMenuItem"
-        Me.PlayToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PlayToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.PlayToolStripMenuItem.Text = "Play"
+        '
+        'DeleteMediaToolStripMenuItem
+        '
+        Me.DeleteMediaToolStripMenuItem.Name = "DeleteMediaToolStripMenuItem"
+        Me.DeleteMediaToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.DeleteMediaToolStripMenuItem.Text = "Delete Media"
+        '
+        'Button2
+        '
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Image = Global.InteractiveStudio.My.Resources.Resources.play_16px
+        Me.Button2.Location = New System.Drawing.Point(157, 1)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(82, 26)
+        Me.Button2.TabIndex = 4
+        Me.Button2.Text = "Play"
+        Me.Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.Image = Global.InteractiveStudio.My.Resources.Resources.mediaAdd_24px_
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(93, 22)
+        Me.ToolStripButton1.Text = "Add Media"
         '
         'ProgramEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(639, 374)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.TextBox1)
@@ -256,4 +271,5 @@ Partial Class ProgramEdit
     Friend WithEvents Label5 As Label
     Friend WithEvents NumericUpDown1 As NumericUpDown
     Friend WithEvents PlayToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Button2 As Button
 End Class

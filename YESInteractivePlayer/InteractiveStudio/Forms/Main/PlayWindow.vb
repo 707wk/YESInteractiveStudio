@@ -113,6 +113,19 @@ Public Class PlayWindow
 
         Me.Close()
     End Sub
+
+    Public Delegate Sub HideWindowCallback(ByVal Value As Boolean)
+    ''' <summary>
+    ''' 隐藏窗体
+    ''' </summary>
+    Public Overloads Sub HideWindow(ByVal Value As Boolean)
+        If Me.InvokeRequired Then
+            Me.Invoke(New UpdateWindowCallback(AddressOf HideWindow), New Object() {Value})
+            Exit Sub
+        End If
+
+        Me.Size = New Size(0, 0)
+    End Sub
 #End Region
 
 #Region "播放文件"

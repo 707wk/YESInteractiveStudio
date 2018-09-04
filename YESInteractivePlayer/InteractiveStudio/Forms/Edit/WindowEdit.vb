@@ -146,6 +146,7 @@ Size: { .DefSize.Width},{ .DefSize.Height}"
         ScreenControls(TmpDialog.SelectScreenID).Location = New Point(0, 0)
         ScreenControls(TmpDialog.SelectScreenID).Size = sysInfo.ScreenList(TmpDialog.SelectScreenID).DefSize
         ScreenControls(TmpDialog.SelectScreenID).Visible = True
+        ScreenControls(TmpDialog.SelectScreenID).BringToFront()
     End Sub
 #End Region
 
@@ -190,8 +191,16 @@ Size: { .DefSize.Width},{ .DefSize.Height}"
         ScreenControls(Val(TextBox2.Text)).Location = sysInfo.Schedule.ScreenLocations(Val(TextBox2.Text))
     End Sub
 
+    Private Sub NumericUpDown6_TextChanged(sender As Object, e As EventArgs) Handles NumericUpDown6.TextChanged
+        NumericUpDown6.Validate()
+    End Sub
+
     Private Sub NumericUpDown6_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown6.ValueChanged
         ChangeScreenLocation()
+    End Sub
+
+    Private Sub NumericUpDown5_TextChanged(sender As Object, e As EventArgs) Handles NumericUpDown5.TextChanged
+        NumericUpDown5.Validate()
     End Sub
 
     Private Sub NumericUpDown5_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown5.ValueChanged

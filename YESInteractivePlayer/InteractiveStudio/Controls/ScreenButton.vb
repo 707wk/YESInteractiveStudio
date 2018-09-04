@@ -39,8 +39,14 @@
             Exit Sub
         End If
 
-        Location = New Point(Me.Location.X + e.X - oldPoint.X,
+        Dim TmpPoint As Point = New Point(Me.Location.X + e.X - oldPoint.X,
                              Me.Location.Y + e.Y - oldPoint.Y)
+        '设定移动范围
+        If TmpPoint.X < 0 OrElse TmpPoint.Y < 0 Then
+            TmpPoint = New Point(0, 0)
+        End If
+
+        Me.Location = TmpPoint
 
         sysInfo.Schedule.ScreenLocations(ScreenId) = Me.Location
 

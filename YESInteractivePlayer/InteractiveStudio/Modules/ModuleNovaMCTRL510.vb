@@ -167,9 +167,9 @@ Public Module ModuleNovaMCTRL510
             For j = -1 To 1
 
                 '屏幕边缘则跳过
-                If X = 0 Or
-                    Y = 0 Or
-                    Y = sysInfo.ScreenList(ScreenId).ClickHistoryMap.GetLength(0) - 1 Or
+                If X = 0 OrElse
+                    Y = 0 OrElse
+                    Y = sysInfo.ScreenList(ScreenId).ClickHistoryMap.GetLength(0) - 1 OrElse
                     X = sysInfo.ScreenList(ScreenId).ClickHistoryMap.GetLength(1) - 1 Then
                     Continue For
                 End If
@@ -197,11 +197,11 @@ Public Module ModuleNovaMCTRL510
         Dim readNum As Integer = 0
         '接收缓存
         Dim ReceiveQueue As New Queue(Of Byte())
-        ''接收的传感器数据
-        'Dim ReceDataArray As Byte(,)
-        'ReDim ReceDataArray(16 - 1, 1028 - 1)
 
+        Dim testTime As New Stopwatch
         Do While sysInfo.LinkFlage
+            testTime.Restart()
+
 #Region "刷新数据"
             If lastSec <> Now.Second Then
                 lastSec = Now.Second
@@ -526,6 +526,7 @@ Public Module ModuleNovaMCTRL510
             Catch ex As Exception
             End Try
 #End Region
+            Debug.WriteLine($"End {testTime.ElapsedMilliseconds}")
 
             Thread.Sleep(sysInfo.InquireTimeSec)
         Loop

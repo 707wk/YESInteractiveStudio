@@ -18,7 +18,7 @@ InteractiveStudio
 </member>
 <member name="P:InteractiveStudio.My.Resources.Resources.Culture">
 <summary>
-  使用此强类型资源类，为所有资源查找
+  重写当前线程的 CurrentUICulture 属性
   重写当前线程的 CurrentUICulture 属性。
 </summary>
 </member>
@@ -133,6 +133,16 @@ InteractiveStudio
 </summary>
 </member>
 <member name="P:InteractiveStudio.My.Resources.Resources.panel_add_24px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:InteractiveStudio.My.Resources.Resources.play_16px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:InteractiveStudio.My.Resources.Resources.play_24px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
@@ -681,6 +691,11 @@ InteractiveStudio
  刷新位置/尺寸
  </summary>
 </member>
+<member name="M:InteractiveStudio.PlayWindow.HideWindow(System.Boolean)">
+ <summary>
+ 隐藏窗体
+ </summary>
+</member>
 <member name="M:InteractiveStudio.PlayWindow.ClearPlayControl">
  <summary>
  清空播放控件
@@ -758,6 +773,11 @@ InteractiveStudio
 <member name="F:InteractiveStudio.ControlNetwork.senderArrayIndex">
  <summary>
  设置ip通知
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ControlNetwork.ShowMsgBox(System.String)">
+ <summary>
+ 提示信息
  </summary>
 </member>
 <member name="M:InteractiveStudio.ControlNetwork.ChangeControlsLanguage">

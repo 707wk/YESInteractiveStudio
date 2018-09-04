@@ -192,8 +192,7 @@ Partial Class WindowEdit
         'NumericUpDown5
         '
         Me.NumericUpDown5.Location = New System.Drawing.Point(96, 74)
-        Me.NumericUpDown5.Maximum = New Decimal(New Integer() {65536, 0, 0, 0})
-        Me.NumericUpDown5.Minimum = New Decimal(New Integer() {65536, 0, 0, -2147483648})
+        Me.NumericUpDown5.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
         Me.NumericUpDown5.Name = "NumericUpDown5"
         Me.NumericUpDown5.Size = New System.Drawing.Size(52, 21)
         Me.NumericUpDown5.TabIndex = 16
@@ -201,8 +200,7 @@ Partial Class WindowEdit
         'NumericUpDown6
         '
         Me.NumericUpDown6.Location = New System.Drawing.Point(96, 47)
-        Me.NumericUpDown6.Maximum = New Decimal(New Integer() {65536, 0, 0, 0})
-        Me.NumericUpDown6.Minimum = New Decimal(New Integer() {65536, 0, 0, -2147483648})
+        Me.NumericUpDown6.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
         Me.NumericUpDown6.Name = "NumericUpDown6"
         Me.NumericUpDown6.Size = New System.Drawing.Size(52, 21)
         Me.NumericUpDown6.TabIndex = 15

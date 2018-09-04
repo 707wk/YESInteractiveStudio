@@ -61,7 +61,7 @@ Module ModuleFunction
         Catch ex As Exception
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
-                   "保存配置异常")
+                   "Save Setting")
             Return False
         End Try
 
@@ -120,7 +120,7 @@ Module ModuleFunction
         Catch ex As Exception
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
-                   "保存文件异常")
+                   "Save File")
             Return False
         End Try
 

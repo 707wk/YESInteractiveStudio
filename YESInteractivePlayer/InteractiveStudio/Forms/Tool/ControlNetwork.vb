@@ -1,4 +1,5 @@
-﻿Imports Nova.Mars.SDK
+﻿Imports System.ComponentModel
+Imports Nova.Mars.SDK
 
 Public Class ControlNetwork
     Private Sub ControlNetwork_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -43,6 +44,11 @@ Public Class ControlNetwork
         '绑定设置到ip事件
         AddHandler sysInfo.MainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
 #End Region
+    End Sub
+
+    Private Sub ControlNetwork_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        '解绑设置到ip事件
+        RemoveHandler sysInfo.MainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
     End Sub
 
 #Region "右键选中"
@@ -147,19 +153,34 @@ Public Class ControlNetwork
                 sysInfo.MainClass.SetEquipmentIP(senderArrayIndex, sysInfo.SenderList(senderArrayIndex).TmpIpData)
             Else
                 sysInfo.SenderList(senderArrayIndex).IpDate = sysInfo.SenderList(senderArrayIndex).TmpIpData
-                MsgBox($"{sysInfo.Language.GetS("Modified Control IP successfully")}!",
-                       MsgBoxStyle.Information,
-                       Me.Text)
+                ShowMsgBox($"{sysInfo.Language.GetS("Modified Control IP successfully")}!")
             End If
         Else
-            MsgBox($"{sysInfo.Language.GetS("Control")}{senderArrayIndex} {sysInfo.Language.GetS("Failed to modify IP")}!",
-                   MsgBoxStyle.Information,
-                   Me.Text)
+            ShowMsgBox($"{sysInfo.Language.GetS("Control")}{senderArrayIndex} {sysInfo.Language.GetS("Failed to modify IP")}!")
         End If
     End Sub
 #End Region
 
+#Region "提示信息"
+    Public Delegate Sub ShowMsgBoxCallback(ByVal Str As String)
+    ''' <summary>
+    ''' 提示信息
+    ''' </summary>
+    Public Sub ShowMsgBox(ByVal Str As String)
+        If Me.InvokeRequired Then
+            Me.Invoke(New ShowMsgBoxCallback(AddressOf ShowMsgBox), New Object() {Str})
+            Exit Sub
+        End If
+
+        Button1.Enabled = True
+        MsgBox(Str,
+               MsgBoxStyle.Information,
+               Me.Text)
+    End Sub
+#End Region
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Button1.Enabled = False
         senderArrayIndex = 0
         sysInfo.MainClass.SetEquipmentIP(0, sysInfo.SenderList(senderArrayIndex).TmpIpData)
     End Sub

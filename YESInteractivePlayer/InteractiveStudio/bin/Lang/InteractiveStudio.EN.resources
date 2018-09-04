@@ -102,10 +102,11 @@ Invalid Argument_Invalid Argument
 Program upgrade completed_Program upgrade completed
 Upgrade command failed to send_Upgrade command failed to send
 Upgrade data failed to send_Upgrade data failed to send
-Do you want to save the changes_Do you want to save the changes
+Do you want to save the changes of Schedule_Do you want to save the changes of Schedule
 Failed to Connect Nova Serve_Failed to Connect Nova Serve
 Failed to Reading display screen information_Failed to Reading display screen information
 Failed to set IP data!Please check the equipment and reset it_Failed to set IP data!Please check the equipment and reset it
+Failed to get IP data!Please check the equipment and reset it_Failed to get IP data!Please check the equipment and reset it
 No control system found_No control system found
 No controller found_No controller found
 No display screen found_No display screen found
@@ -121,7 +122,9 @@ Control connection exception_Control connection exception
 Play Program_Play Program
 Test Connect_Test Connect
 Old MCU Version_Old MCU Version
-PowerUser_PowerUser
 Input Password_Input Password
 Played Time_Played Time
 Play File ID_Play File ID
+No window added in Schedule_No window added in Schedule
+No screen added in window_No screen added in window
+Hide Windows_Hide Windows
