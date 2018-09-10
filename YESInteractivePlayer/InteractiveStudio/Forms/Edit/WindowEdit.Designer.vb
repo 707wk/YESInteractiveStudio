@@ -348,11 +348,10 @@ Partial Class WindowEdit
         '
         'ToolStripButton3
         '
-        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton3.Image = Global.InteractiveStudio.My.Resources.Resources.screenAdd_24px
         Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton3.Size = New System.Drawing.Size(95, 22)
         Me.ToolStripButton3.Text = "Add Screen"
         '
         'ToolStripSeparator2
@@ -362,11 +361,10 @@ Partial Class WindowEdit
         '
         'ToolStripButton4
         '
-        Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton4.Image = Global.InteractiveStudio.My.Resources.Resources.trash_24px
         Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton4.Name = "ToolStripButton4"
-        Me.ToolStripButton4.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton4.Size = New System.Drawing.Size(58, 22)
         Me.ToolStripButton4.Text = "Clear"
         '
         'ScreenMenuStrip

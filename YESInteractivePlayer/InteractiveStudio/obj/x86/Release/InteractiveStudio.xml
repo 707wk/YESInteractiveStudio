@@ -930,6 +930,11 @@ InteractiveStudio
  索引坐标
  </summary>
 </member>
+<member name="F:InteractiveStudio.ModuleStructure.ActivePointInfo.Value">
+ <summary>
+ 读取的数值(点击状态+电容值)
+ </summary>
+</member>
 <member name="T:InteractiveStudio.ModuleStructure.ScreenInfo">
  <summary>
  显示屏信息

@@ -211,6 +211,32 @@
     End Sub
 #End Region
 
+#Region "播放节目"
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If ListView1.SelectedItems.Count < 1 Then
+            Exit Sub
+        End If
+
+        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(WindowId)
+
+        With TmpWindowInfo
+            If .ProgramList(ProgramId).MediaList.Count = 0 Then
+                Exit Sub
+            End If
+
+            .PlayProgramInfo = .ProgramList(ProgramId)
+            .PlayMediaId = 0
+            .PlayMediaTime = 0
+
+            If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
+                .PlayDialog.Play(.PlayProgramInfo.MediaList(0).Path)
+            End If
+        End With
+
+        sysInfo.Schedule.WindowList(WindowId) = TmpWindowInfo
+    End Sub
+#End Region
+
 #Region "切换控件语言"
     ''' <summary>
     ''' 切换控件语言

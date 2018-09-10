@@ -42,8 +42,12 @@
         Dim TmpPoint As Point = New Point(Me.Location.X + e.X - oldPoint.X,
                              Me.Location.Y + e.Y - oldPoint.Y)
         '设定移动范围
-        If TmpPoint.X < 0 OrElse TmpPoint.Y < 0 Then
-            TmpPoint = New Point(0, 0)
+        '20180910修复
+        If TmpPoint.X < 0 Then
+            TmpPoint = New Point(0, TmpPoint.Y)
+        End If
+        If TmpPoint.Y < 0 Then
+            TmpPoint = New Point(TmpPoint.X, 0)
         End If
 
         Me.Location = TmpPoint

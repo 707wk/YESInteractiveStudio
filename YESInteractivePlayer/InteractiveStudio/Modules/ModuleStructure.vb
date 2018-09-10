@@ -74,6 +74,32 @@ Public Module ModuleStructure
 #End Region
 
 #Region "显示屏信息"
+#Region "活动点信息"
+    ''' <summary>
+    ''' 活动点信息
+    ''' </summary>
+    Public Structure ActivePointInfo
+        ''' <summary>
+        ''' 动作
+        ''' </summary>
+        Dim Activity As YESInteractiveSDK.ModuleStructure.PointActivity
+
+        ''' <summary>
+        ''' 屏幕索引
+        ''' </summary>
+        Dim ScreenId As Integer
+        ''' <summary>
+        ''' 索引坐标
+        ''' </summary>
+        Dim Location As Point
+
+        ''' <summary>
+        ''' 读取的数值(点击状态+电容值)
+        ''' </summary>
+        Dim Value As Byte
+    End Structure
+#End Region
+
     ''' <summary>
     ''' 显示屏信息
     ''' </summary>
