@@ -76,13 +76,31 @@ Public Module ModuleStructure
 #Region "显示屏信息"
 #Region "活动点信息"
     ''' <summary>
+    ''' 触发动作
+    ''' </summary>
+    Public Enum PointState
+        ''' <summary>
+        ''' 抬起
+        ''' </summary>
+        UP
+        ''' <summary>
+        ''' 按下
+        ''' </summary>
+        DOWN
+        ''' <summary>
+        ''' 长按
+        ''' </summary>
+        PRESS
+    End Enum
+
+    ''' <summary>
     ''' 活动点信息
     ''' </summary>
     Public Structure ActivePointInfo
         ''' <summary>
         ''' 动作
         ''' </summary>
-        Dim Activity As YESInteractiveSDK.ModuleStructure.PointActivity
+        Dim Activity As PointState
 
         ''' <summary>
         ''' 屏幕索引

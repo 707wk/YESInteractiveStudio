@@ -910,6 +910,26 @@ InteractiveStudio
  每秒最大查询次数
  </summary>
 </member>
+<member name="T:InteractiveStudio.ModuleStructure.PointState">
+ <summary>
+ 触发动作
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.PointState.UP">
+ <summary>
+ 抬起
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.PointState.DOWN">
+ <summary>
+ 按下
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.PointState.PRESS">
+ <summary>
+ 长按
+ </summary>
+</member>
 <member name="T:InteractiveStudio.ModuleStructure.ActivePointInfo">
  <summary>
  活动点信息
@@ -928,6 +948,11 @@ InteractiveStudio
 <member name="F:InteractiveStudio.ModuleStructure.ActivePointInfo.Location">
  <summary>
  索引坐标
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.ActivePointInfo.Value">
+ <summary>
+ 读取的数值(点击状态+电容值)
  </summary>
 </member>
 <member name="T:InteractiveStudio.ModuleStructure.ScreenInfo">

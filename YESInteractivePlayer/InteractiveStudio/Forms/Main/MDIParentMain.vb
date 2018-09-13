@@ -1218,9 +1218,9 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ButtonItem24_Click(sender As Object, e As EventArgs) Handles ButtonItem24.Click
         Try
-            System.Diagnostics.Process.Start($"{My.Application.Info.Title} User Manual {[Enum].
+            System.Diagnostics.Process.Start($".\Help\{My.Application.Info.Title} User Manual {[Enum].
                                                     GetName(GetType(Wangk.Resource.MultiLanguage.LANG),
-                                                            sysInfo.SelectLang)}.chm")
+                                                            sysInfo.SelectLang)}.pdf")
         Catch ex As Exception
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
