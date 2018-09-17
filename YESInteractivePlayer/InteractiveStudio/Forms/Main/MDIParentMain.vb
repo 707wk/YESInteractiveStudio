@@ -1153,6 +1153,7 @@ Public Class MDIParentMain
     ''' 显示语言
     ''' </summary>
     Private Sub ComboBoxItem1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem1.SelectedIndexChanged
+        Static OldSelectLang = sysInfo.SelectLang
         'If sysInfo.SelectLang <> ComboBoxItem1.SelectedIndex Then
         '    sysInfo.SelectLang = ComboBoxItem1.SelectedIndex
 
@@ -1162,6 +1163,12 @@ Public Class MDIParentMain
         'End If
 
         sysInfo.SelectLang = ComboBoxItem1.SelectedIndex
+
+        If sysInfo.SelectLang <> OldSelectLang Then
+            MsgBox(sysInfo.Language.GetS("Restart the program to enable the language changes to take effect"),
+                   MsgBoxStyle.Information,
+                   sysInfo.Language.GetS("Change language"))
+        End If
     End Sub
 
     ''' <summary>

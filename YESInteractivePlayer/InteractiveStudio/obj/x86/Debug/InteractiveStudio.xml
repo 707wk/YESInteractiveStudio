@@ -912,12 +912,12 @@ InteractiveStudio
 </member>
 <member name="T:InteractiveStudio.ModuleStructure.PointState">
  <summary>
- 触发动作
+ 点状态
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.PointState.UP">
+<member name="F:InteractiveStudio.ModuleStructure.PointState.NOOPS">
  <summary>
- 抬起
+ 无操作
  </summary>
 </member>
 <member name="F:InteractiveStudio.ModuleStructure.PointState.DOWN">
@@ -930,29 +930,9 @@ InteractiveStudio
  长按
  </summary>
 </member>
-<member name="T:InteractiveStudio.ModuleStructure.ActivePointInfo">
+<member name="F:InteractiveStudio.ModuleStructure.PointState.UP">
  <summary>
- 活动点信息
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.ActivePointInfo.Activity">
- <summary>
- 动作
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.ActivePointInfo.ScreenId">
- <summary>
- 屏幕索引
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.ActivePointInfo.Location">
- <summary>
- 索引坐标
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.ActivePointInfo.Value">
- <summary>
- 读取的数值(点击状态+电容值)
+ 抬起
  </summary>
 </member>
 <member name="T:InteractiveStudio.ModuleStructure.ScreenInfo">
@@ -1005,9 +985,9 @@ InteractiveStudio
  缩放后感应单元尺寸
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.ScreenInfo.ClickHistoryMap">
+<member name="F:InteractiveStudio.ModuleStructure.ScreenInfo.SensorMap">
  <summary>
- 历史点击状态
+ 传感器点击状态
  </summary>
 </member>
 <member name="F:InteractiveStudio.ModuleStructure.ScreenInfo.SenderList">
@@ -1310,7 +1290,7 @@ InteractiveStudio
  断开控制器连接
  </summary>
 </member>
-<member name="M:InteractiveStudio.ModuleNovaMCTRL510.CheckAdjacencyPieceNums(System.Int32,System.Int32,System.Int32)">
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.CheckAdjacencyPieceNums(System.Int32,System.Drawing.Point)">
  <summary>
  检测相邻触发数是否大于等于抗干扰数
  </summary>

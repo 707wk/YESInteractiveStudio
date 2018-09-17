@@ -214,7 +214,7 @@ Public Class DeviceInit
 #End Region
 
                 '创建上次点击状态缓存
-                ReDim .ClickHistoryMap((.DefSize.Height \ .DefScanBoardSize.Height) * .SensorLayout.Height,
+                ReDim .SensorMap((.DefSize.Height \ .DefScanBoardSize.Height) * .SensorLayout.Height,
                                        (.DefSize.Width \ .DefScanBoardSize.Width) * .SensorLayout.Width)
 
 #Region "存储接收卡信息"

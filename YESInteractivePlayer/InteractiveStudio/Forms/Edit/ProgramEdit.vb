@@ -213,7 +213,7 @@
 
 #Region "播放节目"
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        If ListView1.SelectedItems.Count < 1 Then
+        If ListView1.Items.Count < 1 Then
             Exit Sub
         End If
 

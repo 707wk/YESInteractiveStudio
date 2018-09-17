@@ -74,15 +74,15 @@ Public Module ModuleStructure
 #End Region
 
 #Region "显示屏信息"
-#Region "活动点信息"
+#Region "点状态"
     ''' <summary>
-    ''' 触发动作
+    ''' 点状态
     ''' </summary>
     Public Enum PointState
         ''' <summary>
-        ''' 抬起
+        ''' 无操作
         ''' </summary>
-        UP
+        NOOPS
         ''' <summary>
         ''' 按下
         ''' </summary>
@@ -91,31 +91,37 @@ Public Module ModuleStructure
         ''' 长按
         ''' </summary>
         PRESS
+        ''' <summary>
+        ''' 抬起
+        ''' </summary>
+        UP
     End Enum
+#End Region
 
-    ''' <summary>
-    ''' 活动点信息
-    ''' </summary>
-    Public Structure ActivePointInfo
-        ''' <summary>
-        ''' 动作
-        ''' </summary>
-        Dim Activity As PointState
+#Region "活动点信息"
+    '''' <summary>
+    '''' 活动点信息
+    '''' </summary>
+    'Public Structure ActivePointInfo
+    '    ''' <summary>
+    '    ''' 动作
+    '    ''' </summary>
+    '    Dim Activity As PointState
 
-        ''' <summary>
-        ''' 屏幕索引
-        ''' </summary>
-        Dim ScreenId As Integer
-        ''' <summary>
-        ''' 索引坐标
-        ''' </summary>
-        Dim Location As Point
+    '    ''' <summary>
+    '    ''' 屏幕索引
+    '    ''' </summary>
+    '    Dim ScreenId As Integer
+    '    ''' <summary>
+    '    ''' 索引坐标
+    '    ''' </summary>
+    '    Dim Location As Point
 
-        ''' <summary>
-        ''' 读取的数值(点击状态+电容值)
-        ''' </summary>
-        Dim Value As Byte
-    End Structure
+    '    ''' <summary>
+    '    ''' 读取的数值(点击状态+电容值)
+    '    ''' </summary>
+    '    Dim Value As Byte
+    'End Structure
 #End Region
 
     ''' <summary>
@@ -168,9 +174,9 @@ Public Module ModuleStructure
         Dim ZoomSensorSize As Size
 
         ''' <summary>
-        ''' 历史点击状态
+        ''' 传感器点击状态
         ''' </summary>
-        Dim ClickHistoryMap(,) As Integer
+        Dim SensorMap(,) As PointState
 
         ''' <summary>
         ''' 屏幕所属的发送卡列表

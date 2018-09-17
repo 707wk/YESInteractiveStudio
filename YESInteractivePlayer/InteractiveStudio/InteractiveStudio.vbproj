@@ -264,8 +264,6 @@
     <Content Include="Forms\Main\README.txt" />
     <Content Include="Forms\Select\README.txt" />
     <Content Include="logo_32px.ico" />
-    <Content Include="OPTION.txt" />
-    <Content Include="README.txt" />
     <None Include="res\play_16px.png" />
     <None Include="res\play_24px.png" />
     <None Include="res\startLogo.png" />
