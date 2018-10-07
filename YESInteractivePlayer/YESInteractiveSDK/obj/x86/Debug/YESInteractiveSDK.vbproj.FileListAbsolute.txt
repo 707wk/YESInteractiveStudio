@@ -7,4 +7,3 @@ T:\YESInteractivePlayer\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.vbproj
 T:\YESInteractivePlayer\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.dll
 T:\YESInteractivePlayer\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.xml
 T:\YESInteractivePlayer\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.pdb
-T:\YESInteractivePlayer\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.vbprojAssemblyReference.cache

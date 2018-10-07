@@ -192,7 +192,8 @@ Size: { .DefSize.Width},{ .DefSize.Height}"
     End Sub
 
     Private Sub NumericUpDown6_TextChanged(sender As Object, e As EventArgs) Handles NumericUpDown6.TextChanged
-        NumericUpDown6.Validate()
+        Dim tmp As Integer = NumericUpDown6.Value
+        'NumericUpDown6.Validate()
     End Sub
 
     Private Sub NumericUpDown6_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown6.ValueChanged
@@ -200,7 +201,8 @@ Size: { .DefSize.Width},{ .DefSize.Height}"
     End Sub
 
     Private Sub NumericUpDown5_TextChanged(sender As Object, e As EventArgs) Handles NumericUpDown5.TextChanged
-        NumericUpDown5.Validate()
+        Dim tmp As Integer = NumericUpDown5.Value
+        'NumericUpDown5.Validate()
     End Sub
 
     Private Sub NumericUpDown5_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown5.ValueChanged

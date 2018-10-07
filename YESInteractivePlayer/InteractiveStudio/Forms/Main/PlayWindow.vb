@@ -216,13 +216,23 @@ Public Class PlayWindow
     ''' 播放文件
     ''' </summary>
     Public Sub PlayMode()
-        With sysInfo.Schedule.WindowList(WindowId)
-            If .PlayMediaId = -1 Then
+        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(WindowId)
+
+        With TmpWindowInfo
+            Me.Refresh()
+
+            If .PlayMediaId = -1 OrElse
+                .PlayProgramInfo.MediaList.Count = 0 Then
                 Exit Sub
             End If
 
+            If .PlayMediaId >= .PlayProgramInfo.MediaList.Count Then
+                .PlayMediaId = 0
+            End If
             Play(.PlayProgramInfo.MediaList(.PlayMediaId).Path)
         End With
+
+        sysInfo.Schedule.WindowList(WindowId) = TmpWindowInfo
     End Sub
 
     ''' <summary>

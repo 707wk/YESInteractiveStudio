@@ -1,9 +1,21 @@
 ﻿Imports System.ComponentModel
 Imports System.Net.Sockets
+Imports System.Runtime.InteropServices
 Imports System.Threading
 Imports DevComponents.DotNetBar
 
 Public Class MDIParentMain
+#Region "控制台窗口"
+    '调用控制台窗口
+    <DllImport(”kernel32.dll”)>
+    Public Shared Function AllocConsole() As Boolean
+    End Function
+    '释放控制台窗口
+    <DllImport(”kernel32.dll”)>
+    Public Shared Function FreeConsole() As Boolean
+    End Function
+#End Region
+
 #Region "注册/注销热键"
     ''' <summary>
     ''' 声明注册热键API函数
@@ -246,6 +258,8 @@ Public Class MDIParentMain
 
         'sysInfo.Language.GetS(Me)
         ChangeControlsLanguage()
+
+        'AllocConsole()
 #End Region
 
 #Region "注册全局快捷键"
@@ -330,9 +344,14 @@ Public Class MDIParentMain
 
         SwitchDisplayModeIco(Mode)
 
-        For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
-            i001.PlayDialog.SwitchDisplayMode(Mode)
+        For i001 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
+            With sysInfo.Schedule.WindowList(i001)
+                .PlayDialog.SwitchDisplayMode(Mode)
+            End With
         Next
+        'For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
+        '    i001.PlayDialog.SwitchDisplayMode(Mode)
+        'Next
     End Sub
 #End Region
 
@@ -424,6 +443,8 @@ Public Class MDIParentMain
         Catch ex As Exception
         End Try
 #End Region
+
+        'FreeConsole()
     End Sub
 #End Region
 #End Region
@@ -479,6 +500,8 @@ Public Class MDIParentMain
         SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.INTERACT)
 
         SetLinkControlState(sysInfo.LinkFlage)
+
+        sysInfo.logger.LogThis("控制器", "连接控制器", Wangk.Tools.Loglevel.Level_DEBUG)
     End Sub
 #End Region
 
@@ -494,6 +517,8 @@ Public Class MDIParentMain
         DisconnectControl()
 
         SetLinkControlState(sysInfo.LinkFlage)
+
+        sysInfo.logger.LogThis("控制器", "断开控制器", Wangk.Tools.Loglevel.Level_DEBUG)
     End Sub
 #End Region
 
@@ -566,11 +591,11 @@ Public Class MDIParentMain
             End With
         Next
 
-        If minReadNum < 40 AndAlso
+        If minReadNum < 20 AndAlso
             sysInfo.InquireTimeSec > 1 Then
 
             sysInfo.InquireTimeSec -= 1
-        ElseIf minReadNum > 42 AndAlso
+        ElseIf minReadNum > 22 AndAlso
              sysInfo.InquireTimeSec < 1000 Then
 
             sysInfo.InquireTimeSec += 1
@@ -591,13 +616,24 @@ Public Class MDIParentMain
             Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(i001)
 
             With TmpWindowInfo
-                If .PlayMediaId = -1 Then
+                If .PlayMediaId = -1 OrElse
+                    .PlayProgramInfo.MediaList.Count = 0 Then
                     Continue For
                 End If
 
+                ''todo:节目切换添加保护
+                'If PlayProgramInfo Is Nothing Then
+                '    Continue For
+                'End If
+
                 .PlayMediaTime += 1
                 ''todo:节目定时切换null异常
-                If .PlayMediaTime >= .PlayProgramInfo.MediaList(.PlayMediaId).PlayTime Then
+                If .PlayMediaId >= .PlayProgramInfo.MediaList.Count Then
+                    .PlayMediaTime = 0
+                    .PlayMediaId = 0
+
+                    .PlayDialog.Play(.PlayProgramInfo.MediaList(.PlayMediaId).Path)
+                ElseIf .PlayMediaTime > .PlayProgramInfo.MediaList(.PlayMediaId).PlayTime Then
                     .PlayMediaTime = 0
                     .PlayMediaId = (.PlayMediaId + 1) Mod .PlayProgramInfo.MediaList.Count
 
@@ -947,6 +983,7 @@ Public Class MDIParentMain
                            MsgBoxStyle.YesNoCancel,
                            sysInfo.Language.GetS("Save"))
             Case MsgBoxResult.Yes '保存
+                'todo:未显示保存对话框
                 If sysInfo.HistoryFile = "" Then
                     Dim tmp1 As New SaveFileDialog
                     tmp1.Filter = sysInfo.Language.GetS("Schedule") & "|*.xml"
@@ -1233,8 +1270,6 @@ Public Class MDIParentMain
                    MsgBoxStyle.Information,
                    sysInfo.Language.GetS("Help"))
         End Try
-
-        'todo:编写用户手册
     End Sub
 
     ''' <summary>
@@ -1360,10 +1395,6 @@ Public Class MDIParentMain
         With TreeView1.SelectedNode
             PlayProgram(.Parent.Index, .Index)
         End With
-    End Sub
-
-    Private Sub ComboBoxItem9_Click(sender As Object, e As EventArgs) Handles ComboBoxItem9.Click
-
     End Sub
 #End Region
 #End Region

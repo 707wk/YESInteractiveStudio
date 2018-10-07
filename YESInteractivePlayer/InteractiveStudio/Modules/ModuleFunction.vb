@@ -89,7 +89,7 @@ Module ModuleFunction
             sysInfo.Schedule.WindowList = New List(Of WindowInfo)
         End Try
 
-        sysInfo.InquireTimeSec = 20
+        sysInfo.InquireTimeSec = 50
         For Each i001 In sysInfo.Schedule.WindowList
             i001.PlayMediaId = -1
         Next

@@ -99,7 +99,8 @@ Public Module ModuleNovaMCTRL510
                                             SocketType.Stream,
                                             ProtocolType.Tcp) With {
                                             .SendTimeout = 100,
-                                            .ReceiveTimeout = 100
+                                            .ReceiveTimeout = 100,
+                                            .NoDelay = True
                     }
                     .CliSocket.Connect(TmpStr, 6000)
 
@@ -117,6 +118,11 @@ Public Module ModuleNovaMCTRL510
                     Try
                         .WorkThread.Join()
                     Catch ex002 As Exception
+                    End Try
+
+                    Try
+                        .CliSocket.Close()
+                    Catch ex003 As Exception
                     End Try
                 End With
             Next
@@ -203,7 +209,6 @@ Public Module ModuleNovaMCTRL510
         Dim ScanBoardDateQueue As New Queue(Of Byte())
         ''检测到的活动点队列
         'Dim NewClickList As New Queue(Of ActivePointInfo)
-
         'Dim testTime As New Stopwatch
         Do While sysInfo.LinkFlage
             'testTime.Restart()
@@ -219,7 +224,7 @@ Public Module ModuleNovaMCTRL510
 #End Region
 
 #Region "异常处理"
-            If exceptionNum > 8 Then
+            If exceptionNum > 3 Then
                 Dim tmpThread As Thread = New Thread(AddressOf sysInfo.MainForm.DisposeControlOffLink) With {
                     .IsBackground = True
                     }
@@ -228,41 +233,27 @@ Public Module ModuleNovaMCTRL510
             End If
 #End Region
 
-#Region "接收传感器数据"
-#Region "控制器接收数据"
             Try
-                Dim ReceiveData(1024) As Byte
+#Region "接收传感器数据"
+                '数据包
+                Dim ReceiveData(1024 - 1) As Byte
+
                 With sysInfo.SenderList(ControlID).CliSocket
+                    '控制器接收数据
                     .Send(Wangk.Hash.Hex2Bin("55D50902"))
                     .Receive(ReceiveData)
-                End With
-            Catch ex As SocketException
-                sysInfo.LastErrorInfo = ex.Message
-                exceptionNum += 1
-                'Debug.WriteLine("rec:" & ex.Message)
-                'Thread.Sleep(100)
-                Continue Do
-            Catch ex As Exception
-                sysInfo.logger.LogThis("控制器接收数据", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
-            End Try
-#End Region
 
-#Region "控制器上传数据"
-            Try
-                With sysInfo.SenderList(ControlID).CliSocket
+                    '控制器上传数据
                     .Send(Wangk.Hash.Hex2Bin("55D50905000000000400"))
 
-                    '数据包
-                    Dim ReceiveData() As Byte
                     '接收卡数据
                     Dim ScanBoardDate() As Byte
 
                     For i001 As Integer = 0 To 16 - 1
                         ReDim ReceiveData(1028 - 1)
-
                         .Receive(ReceiveData)
 
-#Region "预处理数据"
+                        '预处理数据
                         For PacketId As Integer = 4 To ReceiveData.Count - 1 Step 32
 #Region "有效性校验"
                             '有效数据头
@@ -343,10 +334,8 @@ Public Module ModuleNovaMCTRL510
                                         End If
 #End Region
 
-#Region "新点"
                                         '新点
                                         .SensorMap(Point.Y, Point.X) = PointState.DOWN
-#End Region
 
                                     Next
                                 Next
@@ -355,23 +344,12 @@ Public Module ModuleNovaMCTRL510
 #End Region
 
                         Next
-#End Region
+
                     Next
                 End With
-            Catch ex As SocketException
-                sysInfo.LastErrorInfo = ex.Message
-                exceptionNum += 1
-                'Debug.WriteLine("控制器上传数据:" & ex.Message)
-            Catch ex As Exception
-                sysInfo.logger.LogThis("控制器上传数据", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
-            End Try
-#End Region
-
-            readNum += 1
 #End Region
 
 #Region "处理数据"
-            Try
                 Do While ScanBoardDateQueue.Count > 0
                     Dim ScanBoardDate() As Byte = ScanBoardDateQueue.Dequeue
                     Dim tmpScanBoardInfo As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{ControlID}-{ScanBoardDate(1)}-{(ScanBoardDate(2) * 256 + ScanBoardDate(3))}")
@@ -379,8 +357,8 @@ Public Module ModuleNovaMCTRL510
 #Region "处理触发传感器"
                     With sysInfo.ScreenList(tmpScanBoardInfo.ScreenId)
                         If sysInfo.TouchMode = InteractiveOptions.TOUCHMODE.T121 OrElse
-                            sysInfo.DisplayMode <> 0 OrElse
-                            .SensorLayout.Width <> .SensorLayout.Height Then
+                                sysInfo.DisplayMode <> 0 OrElse
+                                .SensorLayout.Width <> .SensorLayout.Height Then
 #Region "1合1"
                             For rowID As Integer = 0 To 4 - 1
                                 If rowID >= .SensorLayout.Height Then
@@ -394,24 +372,24 @@ Public Module ModuleNovaMCTRL510
 
                                     Dim Value As Byte = ScanBoardDate(4 + rowID * 4 + colID）
                                     Dim Point As New Point(tmpScanBoardInfo.Location.X + colID,
-                                                           tmpScanBoardInfo.Location.Y + rowID)
+                                                               tmpScanBoardInfo.Location.Y + rowID)
 
                                     If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT OrElse
-                                            sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.TEST Then
+                                                sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.TEST Then
 #Region "无点"
                                         '无点
                                         If (Value And &H80) <> &H80 Then
                                             '抬起
                                             If .SensorMap(Point.Y, Point.X) = PointState.DOWN OrElse
-                                                .SensorMap(Point.Y, Point.X) = PointState.PRESS Then
+                                                    .SensorMap(Point.Y, Point.X) = PointState.PRESS Then
 
                                                 sysInfo.Schedule.WindowList.
-                                                    Item(.WindowId).
-                                                    PlayDialog.
-                                                    PointActive(tmpScanBoardInfo.ScreenId,
-                                                                Point,
-                                                                Value,
-                                                                YESInteractiveSDK.PointActivity.UP)
+                                                        Item(.WindowId).
+                                                        PlayDialog.
+                                                        PointActive(tmpScanBoardInfo.ScreenId,
+                                                                    Point,
+                                                                    Value,
+                                                                    YESInteractiveSDK.PointActivity.UP)
                                             End If
 
                                             Continue For
@@ -433,7 +411,7 @@ Public Module ModuleNovaMCTRL510
                                         'End If
                                         '新
                                         If Not CheckAdjacencyPieceNums(tmpScanBoardInfo.ScreenId, Point) AndAlso
-                                            sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
+                                                sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
 
                                             Continue For
                                         End If
@@ -443,12 +421,12 @@ Public Module ModuleNovaMCTRL510
 #Region "按下"
                                     '按下
                                     sysInfo.Schedule.WindowList.
-                                        Item(.WindowId).
-                                        PlayDialog.
-                                        PointActive(tmpScanBoardInfo.ScreenId,
-                                                    Point,
-                                                    Value,
-                                                    YESInteractiveSDK.PointActivity.DOWN)
+                                            Item(.WindowId).
+                                            PlayDialog.
+                                            PointActive(tmpScanBoardInfo.ScreenId,
+                                                        Point,
+                                                        Value,
+                                                        YESInteractiveSDK.PointActivity.DOWN)
 #End Region
                                 Next
                             Next
@@ -468,7 +446,7 @@ Public Module ModuleNovaMCTRL510
                                     NewPointActiveFlage = False
 
                                     Dim Point As New Point(tmpScanBoardInfo.Location.X + colID * 2,
-                                                           tmpScanBoardInfo.Location.Y + rowID * 2)
+                                                               tmpScanBoardInfo.Location.Y + rowID * 2)
 
                                     For lampRowID As Integer = 0 To 2 - 1
                                         For lampColID As Integer = 0 To 2 - 1
@@ -510,12 +488,12 @@ Public Module ModuleNovaMCTRL510
 #Region "按下"
                                     '按下
                                     sysInfo.Schedule.WindowList.
-                                        Item(.WindowId).
-                                        PlayDialog.
-                                        PointActive(tmpScanBoardInfo.ScreenId,
-                                                    Point,
-                                                    0,
-                                                    YESInteractiveSDK.PointActivity.DOWN)
+                                            Item(.WindowId).
+                                            PlayDialog.
+                                            PointActive(tmpScanBoardInfo.ScreenId,
+                                                        Point,
+                                                        0,
+                                                        YESInteractiveSDK.PointActivity.DOWN)
 #End Region
                                 Next
                             Next
@@ -535,7 +513,7 @@ Public Module ModuleNovaMCTRL510
                                     Dim Value As Byte = ScanBoardDate(4 + rowID * 4 + colID）
                                     'Dim ValueID As Integer = PacketId + 4 + rowId * 4 + colId
                                     Dim Point As New Point(tmpScanBoardInfo.Location.X + colID,
-                                                           tmpScanBoardInfo.Location.Y + rowID)
+                                                               tmpScanBoardInfo.Location.Y + rowID)
 
 #Region "无点"
                                     '无点
@@ -572,24 +550,38 @@ Public Module ModuleNovaMCTRL510
 #Region "按下"
                             '按下
                             sysInfo.Schedule.WindowList.
-                                        Item(.WindowId).
-                                        PlayDialog.
-                                        PointActive(tmpScanBoardInfo.ScreenId,
-                                                    tmpScanBoardInfo.Location,
-                                                    0,
-                                                    YESInteractiveSDK.PointActivity.DOWN)
+                                            Item(.WindowId).
+                                            PlayDialog.
+                                            PointActive(tmpScanBoardInfo.ScreenId,
+                                                        tmpScanBoardInfo.Location,
+                                                        0,
+                                                        YESInteractiveSDK.PointActivity.DOWN)
 #End Region
 #End Region
                         End If
                     End With
 #End Region
                 Loop
-            Catch ex As Exception
-            End Try
 #End Region
-            'Debug.WriteLine($"End {testTime.ElapsedMilliseconds}ms")
 
-            Thread.Sleep(sysInfo.InquireTimeSec)
+            Catch ex As Exception
+                With sysInfo.SenderList(ControlID).CliSocket
+                    sysInfo.LastErrorInfo = $"{ex.Message}
+IP Info       : { .RemoteEndPoint.ToString}
+Socket Connect: { .Connected}
+Exception     : { ex.ToString}"
+                End With
+
+                sysInfo.logger.LogThis("通信异常", sysInfo.LastErrorInfo, Wangk.Tools.Loglevel.Level_INFO)
+
+                exceptionNum += 1
+                'Catch ex As Exception
+                '    sysInfo.logger.LogThis("控制器通信异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
+            Finally
+                readNum += 1
+                Thread.Sleep(sysInfo.InquireTimeSec)
+            End Try
+
         Loop
 
         Try
