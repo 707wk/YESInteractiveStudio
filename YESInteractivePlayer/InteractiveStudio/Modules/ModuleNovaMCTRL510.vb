@@ -268,7 +268,7 @@ Public Module ModuleNovaMCTRL510
 
                             '黑屏则不处理
                             If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.BLACK Then
-                                Continue Do
+                                Continue For
                             End If
 
                             '查找接收卡位置[由像素改为索引]

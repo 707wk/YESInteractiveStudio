@@ -1,0 +1,132 @@
+File_文件
+ID_序号
+Play Time(s)_播放时长(s)
+Port_网口
+ScanBoard_接收卡
+Sender_发送卡
+Size_尺寸
+Version_版本
+MCU Bin_单片机程序
+Schedule_播放方案
+High Resolution_高分辨率
+Low Resolution_低分辨率
+Medium Resolution_中分辨率
+Window_窗口
+Program_节目
+Screen_屏幕
+Apply_应用
+Browse ..._浏览 …
+OK_确定
+Update_升级
+PowerUser_高级用户
+Interact_互动
+Test_测试
+Black_黑屏
+Debug_调试
+Connect_连接
+Disconnect_断开
+New_新建
+Open_打开
+Save_保存
+Save As_另存为
+User Manual_用户手册
+About_关于
+Ligature_走线
+Controls_控制器
+Old ScanBoard Version_旧版接收卡程序
+IP Address_IP 地址
+Gateway_网关
+Subnet Mask_子网掩码
+Delete Media_删除素材
+Delete Program_删除节目
+Delete Screen_删除屏幕
+Delete Window_删除窗口
+Edit Window_编辑窗口
+Control Network_控制器网络参数
+Media List_素材列表
+ScanBoard List_接收卡列表
+Screen List_屏幕列表
+MCU_单片机程序
+Media Setting_素材设置
+Screen Setting_屏幕设置
+ScanBoard Version_接收卡版本
+Window Setting_窗口设置
+Remark_备注
+X_X
+Location_位置
+0%_0%
+Copyright_版权
+CompanyName_公司
+Play Time_播放时长
+Y_Y
+s_s
+Actual Pixels_实际像素
+Zoom Pixels_缩放像素
+Language_语言
+Anti-interference_抗干扰等级
+Touch Sensitivity_触摸灵敏度
+Temp Change Over_温度复位幅度
+Reset Time Interval_时间复位间隔
+TouchMode_触摸模式
+WebUrl_主页
+Play_播放
+Control_控制器
+Display Mode_显示模式
+Reaction_感应
+Reset_复位
+General_一般
+Screen Configuration_屏幕配置
+Device_设备
+Interactivity_互动
+Settings_设置
+Help_帮助
+Not saved_未保存
+Screen Ligature_屏幕走线
+Select Screen_选择屏幕
+ToolStrip1_ToolStrip1
+Add Media_添加素材
+Add Window_添加窗口
+Get MCU Version_查询单片机程序版本
+Zoom In_放大
+Add Program_添加节目
+Zoom Out_缩小
+Add Screen_添加屏幕
+Clear_清空
+Zoom 100%_缩放 100%
+Start ..._启动 …
+not found_未找到
+Modified Control IP successfully_修改IP成功
+Please reconnect the control or restart the control_请重新连接控制器或重启控制器
+Failed to connect_未能连通
+Invalid Argument_非法参数
+Program upgrade completed_程序升级完毕
+Upgrade command failed to send_升级指令发送失败
+Upgrade data failed to send_升级数据发送失败
+Do you want to save the changes of Schedule_是否保存对播放方案的修改
+Failed to Connect Nova Serve_连接Nova服务失败
+Failed to Reading display screen information_读显示屏信息失败
+Failed to set IP data!Please check the equipment and reset it_修改IP数据失败!请检查设备后重新设置
+Failed to get IP data!Please check the equipment and reset it_获取IP数据失败!请检查设备后重新设置
+No control system found_未找到控制系统
+No controller found_未找到控制器
+No display screen found_未找到屏幕
+Start Nova Serve_启动Nova服务
+Connect Nova Serve ..._连接Nova服务
+Loading Completed_加载完成
+Loading screen information_载入屏幕信息
+Reading display screen information_读取显示屏信息
+Searching Control System_查找控制系统
+Connect Exception_连接异常
+Connected Exception_通信异常
+Control connection exception_控制器连接异常
+Play Program_播放节目
+Test Connect_测试连接
+Old MCU Version_旧版MCU程序
+Input Password_输入密码
+Played Time_已播放时间
+Play File ID_播放文件序号
+No window added in Schedule_播放方案未添加窗口
+No screen added in window_播放窗口未添加屏幕
+Hide Windows_隐藏播放窗体
+Restart the program to enable the language changes to take effect_重启程序以使语言更改生效
+Change language_更改语言
