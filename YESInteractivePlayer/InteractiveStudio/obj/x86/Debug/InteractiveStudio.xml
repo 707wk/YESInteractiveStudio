@@ -303,6 +303,11 @@ InteractiveStudio
  改变屏幕位置
  </summary>
 </member>
+<member name="M:InteractiveStudio.WindowEdit.ComboBox1_SelectedIndexChanged(System.Object,System.EventArgs)">
+ <summary>
+ 传感器阵列旋转角度
+ </summary>
+</member>
 <member name="M:InteractiveStudio.WindowEdit.ChangeControlsLanguage">
  <summary>
  切换控件语言
@@ -1095,6 +1100,21 @@ InteractiveStudio
  节目列表
  </summary>
 </member>
+<member name="T:InteractiveStudio.ModuleStructure.ScheduleScreenInfo">
+ <summary>
+ 播放方案屏幕信息
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.ScheduleScreenInfo.Loaction">
+ <summary>
+ 在窗口中的位置
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.ScheduleScreenInfo.BoxRotation">
+ <summary>
+ 箱体顺时针旋转角度
+ </summary>
+</member>
 <member name="T:InteractiveStudio.ModuleStructure.ScheduleInfo">
  <summary>
  播放方案
@@ -1105,7 +1125,7 @@ InteractiveStudio
  窗口列表 不能大于屏幕数
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.ScheduleInfo.ScreenLocations">
+<member name="F:InteractiveStudio.ModuleStructure.ScheduleInfo.ScreenList">
  <summary>
  屏幕位置
  </summary>

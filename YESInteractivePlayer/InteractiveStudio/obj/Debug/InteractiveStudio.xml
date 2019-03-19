@@ -18,7 +18,7 @@ InteractiveStudio
 </member>
 <member name="P:InteractiveStudio.My.Resources.Resources.Culture">
 <summary>
-  使用此强类型资源类，为所有资源查找
+  重写当前线程的 CurrentUICulture 属性
   重写当前线程的 CurrentUICulture 属性。
 </summary>
 </member>
@@ -133,6 +133,16 @@ InteractiveStudio
 </summary>
 </member>
 <member name="P:InteractiveStudio.My.Resources.Resources.panel_add_24px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:InteractiveStudio.My.Resources.Resources.play_16px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:InteractiveStudio.My.Resources.Resources.play_24px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
@@ -681,6 +691,11 @@ InteractiveStudio
  刷新位置/尺寸
  </summary>
 </member>
+<member name="M:InteractiveStudio.PlayWindow.HideWindow(System.Boolean)">
+ <summary>
+ 隐藏窗体
+ </summary>
+</member>
 <member name="M:InteractiveStudio.PlayWindow.ClearPlayControl">
  <summary>
  清空播放控件
@@ -758,6 +773,11 @@ InteractiveStudio
 <member name="F:InteractiveStudio.ControlNetwork.senderArrayIndex">
  <summary>
  设置ip通知
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ControlNetwork.ShowMsgBox(System.String)">
+ <summary>
+ 提示信息
  </summary>
 </member>
 <member name="M:InteractiveStudio.ControlNetwork.ChangeControlsLanguage">
@@ -890,6 +910,31 @@ InteractiveStudio
  每秒最大查询次数
  </summary>
 </member>
+<member name="T:InteractiveStudio.ModuleStructure.PointState">
+ <summary>
+ 点状态
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.PointState.NOOPS">
+ <summary>
+ 无操作
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.PointState.DOWN">
+ <summary>
+ 按下
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.PointState.PRESS">
+ <summary>
+ 长按
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.PointState.UP">
+ <summary>
+ 抬起
+ </summary>
+</member>
 <member name="T:InteractiveStudio.ModuleStructure.ScreenInfo">
  <summary>
  显示屏信息
@@ -940,9 +985,9 @@ InteractiveStudio
  缩放后感应单元尺寸
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.ScreenInfo.ClickHistoryMap">
+<member name="F:InteractiveStudio.ModuleStructure.ScreenInfo.SensorMap">
  <summary>
- 历史点击状态
+ 传感器点击状态
  </summary>
 </member>
 <member name="F:InteractiveStudio.ModuleStructure.ScreenInfo.SenderList">
@@ -1245,7 +1290,7 @@ InteractiveStudio
  断开控制器连接
  </summary>
 </member>
-<member name="M:InteractiveStudio.ModuleNovaMCTRL510.CheckAdjacencyPieceNums(System.Int32,System.Int32,System.Int32)">
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.CheckAdjacencyPieceNums(System.Int32,System.Drawing.Point)">
  <summary>
  检测相邻触发数是否大于等于抗干扰数
  </summary>

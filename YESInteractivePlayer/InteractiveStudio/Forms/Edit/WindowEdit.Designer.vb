@@ -41,9 +41,14 @@ Partial Class WindowEdit
         Me.NumericUpDown6 = New System.Windows.Forms.NumericUpDown()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -64,7 +69,9 @@ Partial Class WindowEdit
         CType(Me.NumericUpDown5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -76,8 +83,10 @@ Partial Class WindowEdit
         '
         'Label1
         '
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(48, 26)
+        Me.TableLayoutPanel2.SetColumnSpan(Me.Label1, 2)
+        Me.Label1.Location = New System.Drawing.Point(70, 6)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(41, 12)
         Me.Label1.TabIndex = 0
@@ -85,15 +94,17 @@ Partial Class WindowEdit
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(96, 23)
+        Me.TextBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox1.Location = New System.Drawing.Point(117, 3)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(91, 21)
+        Me.TextBox1.Size = New System.Drawing.Size(74, 21)
         Me.TextBox1.TabIndex = 1
         '
         'Label2
         '
+        Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(19, 50)
+        Me.Label2.Location = New System.Drawing.Point(43, 30)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(53, 12)
         Me.Label2.TabIndex = 2
@@ -101,44 +112,50 @@ Partial Class WindowEdit
         '
         'NumericUpDown1
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(96, 50)
+        Me.NumericUpDown1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.NumericUpDown1.Location = New System.Drawing.Point(117, 27)
         Me.NumericUpDown1.Maximum = New Decimal(New Integer() {65536, 0, 0, 0})
         Me.NumericUpDown1.Minimum = New Decimal(New Integer() {65536, 0, 0, -2147483648})
         Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(52, 21)
+        Me.NumericUpDown1.Size = New System.Drawing.Size(74, 21)
         Me.NumericUpDown1.TabIndex = 3
         '
         'NumericUpDown2
         '
-        Me.NumericUpDown2.Location = New System.Drawing.Point(96, 77)
+        Me.NumericUpDown2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.NumericUpDown2.Location = New System.Drawing.Point(117, 51)
         Me.NumericUpDown2.Maximum = New Decimal(New Integer() {65536, 0, 0, 0})
         Me.NumericUpDown2.Minimum = New Decimal(New Integer() {65536, 0, 0, -2147483648})
         Me.NumericUpDown2.Name = "NumericUpDown2"
-        Me.NumericUpDown2.Size = New System.Drawing.Size(52, 21)
+        Me.NumericUpDown2.Size = New System.Drawing.Size(74, 21)
         Me.NumericUpDown2.TabIndex = 4
         '
         'Label3
         '
+        Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(78, 50)
+        Me.Label3.Location = New System.Drawing.Point(102, 30)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(11, 12)
+        Me.Label3.Size = New System.Drawing.Size(9, 12)
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "X"
         '
         'Label4
         '
+        Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(78, 79)
+        Me.Label4.Location = New System.Drawing.Point(102, 54)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(11, 12)
+        Me.Label4.Size = New System.Drawing.Size(9, 12)
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Y"
         '
         'Label6
         '
+        Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(6, 106)
+        Me.TableLayoutPanel2.SetColumnSpan(Me.Label6, 2)
+        Me.Label6.Location = New System.Drawing.Point(28, 78)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(83, 12)
         Me.Label6.TabIndex = 8
@@ -146,17 +163,20 @@ Partial Class WindowEdit
         '
         'NumericUpDown3
         '
-        Me.NumericUpDown3.Location = New System.Drawing.Point(96, 104)
+        Me.NumericUpDown3.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.NumericUpDown3.Location = New System.Drawing.Point(117, 75)
         Me.NumericUpDown3.Maximum = New Decimal(New Integer() {65536, 0, 0, 0})
         Me.NumericUpDown3.Minimum = New Decimal(New Integer() {65536, 0, 0, -2147483648})
         Me.NumericUpDown3.Name = "NumericUpDown3"
-        Me.NumericUpDown3.Size = New System.Drawing.Size(52, 21)
+        Me.NumericUpDown3.Size = New System.Drawing.Size(74, 21)
         Me.NumericUpDown3.TabIndex = 9
         '
         'Label7
         '
+        Me.Label7.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(18, 133)
+        Me.TableLayoutPanel2.SetColumnSpan(Me.Label7, 2)
+        Me.Label7.Location = New System.Drawing.Point(40, 103)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(71, 12)
         Me.Label7.TabIndex = 10
@@ -164,51 +184,57 @@ Partial Class WindowEdit
         '
         'NumericUpDown4
         '
-        Me.NumericUpDown4.Location = New System.Drawing.Point(96, 131)
+        Me.NumericUpDown4.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.NumericUpDown4.Location = New System.Drawing.Point(117, 99)
         Me.NumericUpDown4.Maximum = New Decimal(New Integer() {65536, 0, 0, 0})
         Me.NumericUpDown4.Minimum = New Decimal(New Integer() {65536, 0, 0, -2147483648})
         Me.NumericUpDown4.Name = "NumericUpDown4"
-        Me.NumericUpDown4.Size = New System.Drawing.Size(52, 21)
+        Me.NumericUpDown4.Size = New System.Drawing.Size(74, 21)
         Me.NumericUpDown4.TabIndex = 11
         '
         'Label9
         '
+        Me.Label9.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(77, 76)
+        Me.Label9.Location = New System.Drawing.Point(105, 61)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(11, 12)
+        Me.Label9.Size = New System.Drawing.Size(9, 12)
         Me.Label9.TabIndex = 18
         Me.Label9.Text = "Y"
         '
         'Label10
         '
+        Me.Label10.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(77, 49)
+        Me.Label10.Location = New System.Drawing.Point(105, 34)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(11, 12)
+        Me.Label10.Size = New System.Drawing.Size(9, 12)
         Me.Label10.TabIndex = 17
         Me.Label10.Text = "X"
         '
         'NumericUpDown5
         '
-        Me.NumericUpDown5.Location = New System.Drawing.Point(96, 74)
+        Me.NumericUpDown5.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.NumericUpDown5.Location = New System.Drawing.Point(120, 57)
         Me.NumericUpDown5.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
         Me.NumericUpDown5.Name = "NumericUpDown5"
-        Me.NumericUpDown5.Size = New System.Drawing.Size(52, 21)
+        Me.NumericUpDown5.Size = New System.Drawing.Size(74, 21)
         Me.NumericUpDown5.TabIndex = 16
         '
         'NumericUpDown6
         '
-        Me.NumericUpDown6.Location = New System.Drawing.Point(96, 47)
+        Me.NumericUpDown6.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.NumericUpDown6.Location = New System.Drawing.Point(120, 30)
         Me.NumericUpDown6.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
         Me.NumericUpDown6.Name = "NumericUpDown6"
-        Me.NumericUpDown6.Size = New System.Drawing.Size(52, 21)
+        Me.NumericUpDown6.Size = New System.Drawing.Size(74, 21)
         Me.NumericUpDown6.TabIndex = 15
         '
         'Label11
         '
+        Me.Label11.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(18, 49)
+        Me.Label11.Location = New System.Drawing.Point(46, 34)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(53, 12)
         Me.Label11.TabIndex = 14
@@ -216,56 +242,130 @@ Partial Class WindowEdit
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.TextBox2)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.NumericUpDown6)
-        Me.GroupBox2.Controls.Add(Me.Label9)
-        Me.GroupBox2.Controls.Add(Me.Label11)
-        Me.GroupBox2.Controls.Add(Me.Label10)
-        Me.GroupBox2.Controls.Add(Me.NumericUpDown5)
+        Me.GroupBox2.Controls.Add(Me.TableLayoutPanel1)
         Me.GroupBox2.Location = New System.Drawing.Point(3, 173)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(200, 137)
+        Me.GroupBox2.Size = New System.Drawing.Size(226, 143)
         Me.GroupBox2.TabIndex = 19
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Screen Setting"
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 4
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.NumericUpDown5, 2, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.NumericUpDown6, 2, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.TextBox2, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label11, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label10, 1, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label9, 1, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label5, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label8, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.ComboBox1, 2, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label12, 3, 3)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(8, 20)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 4
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(212, 111)
+        Me.TableLayoutPanel1.TabIndex = 23
+        '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(96, 20)
+        Me.TextBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox2.Location = New System.Drawing.Point(120, 3)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(52, 21)
+        Me.TextBox2.Size = New System.Drawing.Size(74, 21)
         Me.TextBox2.TabIndex = 20
         '
         'Label5
         '
+        Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(71, 23)
+        Me.TableLayoutPanel1.SetColumnSpan(Me.Label5, 2)
+        Me.Label5.Location = New System.Drawing.Point(97, 7)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 19
         Me.Label5.Text = "ID"
         '
+        'Label8
+        '
+        Me.Label8.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.Label8.AutoSize = True
+        Me.TableLayoutPanel1.SetColumnSpan(Me.Label8, 2)
+        Me.Label8.Location = New System.Drawing.Point(37, 90)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(77, 12)
+        Me.Label8.TabIndex = 14
+        Me.Label8.Text = "Box Rotation"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"0", "90", "180", "270"})
+        Me.ComboBox1.Location = New System.Drawing.Point(120, 86)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(74, 20)
+        Me.ComboBox1.TabIndex = 21
+        '
+        'Label12
+        '
+        Me.Label12.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(200, 90)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(9, 12)
+        Me.Label12.TabIndex = 18
+        Me.Label12.Text = "°"
+        '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.TextBox1)
-        Me.GroupBox3.Controls.Add(Me.Label1)
-        Me.GroupBox3.Controls.Add(Me.NumericUpDown4)
-        Me.GroupBox3.Controls.Add(Me.Label2)
-        Me.GroupBox3.Controls.Add(Me.Label7)
-        Me.GroupBox3.Controls.Add(Me.NumericUpDown1)
-        Me.GroupBox3.Controls.Add(Me.NumericUpDown3)
-        Me.GroupBox3.Controls.Add(Me.NumericUpDown2)
-        Me.GroupBox3.Controls.Add(Me.Label6)
-        Me.GroupBox3.Controls.Add(Me.Label3)
-        Me.GroupBox3.Controls.Add(Me.Label4)
+        Me.GroupBox3.Controls.Add(Me.TableLayoutPanel2)
         Me.GroupBox3.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(200, 164)
+        Me.GroupBox3.Size = New System.Drawing.Size(226, 164)
         Me.GroupBox3.TabIndex = 20
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Window Setting"
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 3
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.Label1, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.NumericUpDown4, 2, 4)
+        Me.TableLayoutPanel2.Controls.Add(Me.TextBox1, 2, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.NumericUpDown3, 2, 3)
+        Me.TableLayoutPanel2.Controls.Add(Me.NumericUpDown1, 2, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.NumericUpDown2, 2, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label2, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label6, 0, 3)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label7, 0, 4)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label4, 1, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label3, 1, 1)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(8, 20)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 5
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(194, 123)
+        Me.TableLayoutPanel2.TabIndex = 12
         '
         'SplitContainer1
         '
@@ -284,8 +384,8 @@ Partial Class WindowEdit
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox3)
         Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox2)
-        Me.SplitContainer1.Size = New System.Drawing.Size(738, 451)
-        Me.SplitContainer1.SplitterDistance = 521
+        Me.SplitContainer1.Size = New System.Drawing.Size(899, 496)
+        Me.SplitContainer1.SplitterDistance = 660
         Me.SplitContainer1.TabIndex = 1
         '
         'Panel2
@@ -295,7 +395,7 @@ Partial Class WindowEdit
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 25)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(521, 426)
+        Me.Panel2.Size = New System.Drawing.Size(660, 471)
         Me.Panel2.TabIndex = 4
         '
         'Panel1
@@ -311,12 +411,13 @@ Partial Class WindowEdit
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripSeparator1, Me.ToolStripButton3, Me.ToolStripSeparator2, Me.ToolStripButton4})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(521, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(660, 25)
         Me.ToolStrip1.TabIndex = 2
         Me.ToolStrip1.Text = "ToolStrip1"
         '
         'ToolStripLabel1
         '
+        Me.ToolStripLabel1.Enabled = False
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
         Me.ToolStripLabel1.Size = New System.Drawing.Size(78, 22)
         Me.ToolStripLabel1.Text = "Zoom 100%"
@@ -383,7 +484,7 @@ Partial Class WindowEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(738, 451)
+        Me.ClientSize = New System.Drawing.Size(899, 496)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimizeBox = False
@@ -397,9 +498,11 @@ Partial Class WindowEdit
         CType(Me.NumericUpDown5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel1.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.TableLayoutPanel2.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.PerformLayout()
         Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -445,4 +548,9 @@ Partial Class WindowEdit
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Panel2 As Panel
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents Label8 As Label
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents Label12 As Label
 End Class

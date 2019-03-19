@@ -49,7 +49,7 @@ Public Class WindowEdit
                     Continue For
                 End If
 
-                ScreenControls(i001).Location = sysInfo.Schedule.ScreenLocations(i001)
+                ScreenControls(i001).Location = sysInfo.Schedule.ScreenList(i001).Loaction
                 ScreenControls(i001).Size = sysInfo.ScreenList(i001).DefSize
                 ScreenControls(i001).Visible = True
             Next
@@ -62,6 +62,14 @@ Public Class WindowEdit
 
         'sysInfo.Language.GetS(Me)
         ChangeControlsLanguage()
+
+#Region "样式设置"
+        'With ComboBox1
+        '    .DropDownStyle = ComboBoxStyle.DropDownList
+        '    .Sorted = False
+        '    .Items.AddRange({"0", "90", "180", "270"})
+        'End With
+#End Region
 
         ReDim ScreenControls(sysInfo.ScreenList.Count - 1)
         For i001 As Integer = 0 To ScreenControls.Count - 1
@@ -107,6 +115,9 @@ Size: { .DefSize.Width},{ .DefSize.Height}"
         NumericUpDown6.Value = TmpScreenButton.Location.X
         NumericUpDown5.Value = TmpScreenButton.Location.Y
         TextBox2.Text = TmpScreenButton.ScreenId
+
+        ComboBox1.Text = sysInfo.Schedule.ScreenList(TmpScreenButton.ScreenId).BoxRotation
+        'ComboBox1.SelectedItem = $"{sysInfo.ScreenList(TmpScreenButton.ScreenId).SensorAngle}"
     End Sub
 
     ''' <summary>
@@ -179,6 +190,7 @@ Size: { .DefSize.Width},{ .DefSize.Height}"
         sysInfo.Schedule.WindowList.Item(WindowId) = TmpWindowInfo
     End Sub
 
+#Region "改变屏幕位置"
     ''' <summary>
     ''' 改变屏幕位置
     ''' </summary>
@@ -187,13 +199,12 @@ Size: { .DefSize.Width},{ .DefSize.Height}"
             Exit Sub
         End If
 
-        sysInfo.Schedule.ScreenLocations(Val(TextBox2.Text)) = New Point(NumericUpDown6.Value, NumericUpDown5.Value)
-        ScreenControls(Val(TextBox2.Text)).Location = sysInfo.Schedule.ScreenLocations(Val(TextBox2.Text))
+        sysInfo.Schedule.ScreenList(Val(TextBox2.Text)).Loaction = New Point(NumericUpDown6.Value, NumericUpDown5.Value)
+        ScreenControls(Val(TextBox2.Text)).Location = sysInfo.Schedule.ScreenList(Val(TextBox2.Text)).Loaction
     End Sub
 
     Private Sub NumericUpDown6_TextChanged(sender As Object, e As EventArgs) Handles NumericUpDown6.TextChanged
         Dim tmp As Integer = NumericUpDown6.Value
-        'NumericUpDown6.Validate()
     End Sub
 
     Private Sub NumericUpDown6_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown6.ValueChanged
@@ -202,11 +213,22 @@ Size: { .DefSize.Width},{ .DefSize.Height}"
 
     Private Sub NumericUpDown5_TextChanged(sender As Object, e As EventArgs) Handles NumericUpDown5.TextChanged
         Dim tmp As Integer = NumericUpDown5.Value
-        'NumericUpDown5.Validate()
     End Sub
 
     Private Sub NumericUpDown5_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown5.ValueChanged
         ChangeScreenLocation()
+    End Sub
+#End Region
+
+    ''' <summary>
+    ''' 传感器阵列旋转角度
+    ''' </summary>
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        If TextBox2.Text = "" Then
+            Exit Sub
+        End If
+
+        sysInfo.Schedule.ScreenList(Val(TextBox2.Text)).BoxRotation = Val(ComboBox1.Text)
     End Sub
 #End Region
 
@@ -234,6 +256,7 @@ Size: { .DefSize.Width},{ .DefSize.Height}"
             Me.ToolStripButton3.Text = .GetS("Add Screen")
             Me.ToolStripButton4.Text = .GetS("Clear")
             Me.DeleteScreenToolStripMenuItem.Text = .GetS("Delete Screen")
+            Me.Label8.Text = .GetS("Box Rotation")
         End With
     End Sub
 #End Region

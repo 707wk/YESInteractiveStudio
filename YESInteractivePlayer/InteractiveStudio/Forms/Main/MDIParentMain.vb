@@ -284,14 +284,14 @@ Public Class MDIParentMain
     Private Sub MDIParentMain_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 #Region "显示新程序更新内容"
         With My.Application.Info
-            '    If sysInfo.VersionArray(0) <> .Version.Major + 1 OrElse
-            '        sysInfo.VersionArray(1) <> .Version.Minor OrElse
-            '        sysInfo.VersionArray(2) <> .Version.Build Then
-            '        MsgBox($"新功能提示                                        
+            'If sysInfo.VersionArray(0) <> .Version.Major + 1 OrElse
+            '    sysInfo.VersionArray(1) <> .Version.Minor OrElse
+            '    sysInfo.VersionArray(2) <> .Version.Build Then
+            '    MsgBox($"更新说明                                        
             '1.界面优化
             '2.性能优化
             '3.修复已知问题", MsgBoxStyle.Information, "更新内容")
-            '    End If
+            'End If
 
             sysInfo.VersionArray(0) = .Version.Major
             sysInfo.VersionArray(1) = .Version.Minor
@@ -767,7 +767,7 @@ Public Class MDIParentMain
                     Continue For
                 End If
 
-                Dim TmpPoint As Point = sysInfo.Schedule.ScreenLocations(i001)
+                Dim TmpPoint As Point = sysInfo.Schedule.ScreenList(i001).Loaction
 
                 '查找最大宽度
                 If .Size.Width < TmpPoint.X + sysInfo.ScreenList(i001).DefSize.Width Then
@@ -983,7 +983,6 @@ Public Class MDIParentMain
                            MsgBoxStyle.YesNoCancel,
                            sysInfo.Language.GetS("Save"))
             Case MsgBoxResult.Yes '保存
-                'todo:未显示保存对话框
                 If sysInfo.HistoryFile = "" Then
                     Dim tmp1 As New SaveFileDialog
                     tmp1.Filter = sysInfo.Language.GetS("Schedule") & "|*.xml"

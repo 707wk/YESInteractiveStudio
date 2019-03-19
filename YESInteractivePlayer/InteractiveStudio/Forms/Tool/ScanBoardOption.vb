@@ -241,7 +241,7 @@ Public Class ScanBoardOption
                     fs.Close()
                     MsgBox(sysInfo.Language.GetS("Upgrade data failed to send"),
                            MsgBoxStyle.Information,
-                           {sysInfo.Language.GetS("Update")})
+                           sysInfo.Language.GetS("Update"))
                     Exit Sub
                 End If
             Next

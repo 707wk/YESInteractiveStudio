@@ -288,6 +288,48 @@ Public Module ModuleNovaMCTRL510
                             For i002 As Integer = 0 To ScanBoardDate.Count - 1
                                 ScanBoardDate(i002) = ReceiveData(PacketId + i002)
                             Next
+
+#Region "旋转传感器位置"
+                            Dim tmpDate(16 - 1) As Byte
+                            For i002 As Integer = 0 To 16 - 1
+                                tmpDate(i002) = ScanBoardDate(4 + i002)
+                            Next
+
+                            Select Case sysInfo.Schedule.ScreenList(tmpScanBoardInfo.ScreenId).BoxRotation
+                                Case 0
+                                Case 90
+#Region "90°"
+                                    Dim index As Integer = 0
+                                    For j002 As Integer = 4 - 1 To 0 Step -1
+                                        For i002 As Integer = 0 To 4 - 1
+                                            ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
+                                            index += 1
+                                        Next
+                                    Next
+#End Region
+                                Case 180
+#Region "180°"
+                                    Dim index As Integer = 0
+                                    For i002 As Integer = 4 - 1 To 0 Step -1
+                                        For j002 As Integer = 4 - 1 To 0 Step -1
+                                            ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
+                                            index += 1
+                                        Next
+                                    Next
+#End Region
+                                Case 270
+#Region "270°"
+                                    Dim index As Integer = 0
+                                    For j002 As Integer = 0 To 4 - 1
+                                        For i002 As Integer = 4 - 1 To 0 Step -1
+                                            ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
+                                            index += 1
+                                        Next
+                                    Next
+#End Region
+                            End Select
+#End Region
+
                             ScanBoardDateQueue.Enqueue(ScanBoardDate)
 #End Region
 
@@ -354,7 +396,6 @@ Public Module ModuleNovaMCTRL510
                     Dim ScanBoardDate() As Byte = ScanBoardDateQueue.Dequeue
                     Dim tmpScanBoardInfo As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{ControlID}-{ScanBoardDate(1)}-{(ScanBoardDate(2) * 256 + ScanBoardDate(3))}")
 
-#Region "处理触发传感器"
                     With sysInfo.ScreenList(tmpScanBoardInfo.ScreenId)
                         If sysInfo.TouchMode = InteractiveOptions.TOUCHMODE.T121 OrElse
                                 sysInfo.DisplayMode <> 0 OrElse
@@ -560,7 +601,6 @@ Public Module ModuleNovaMCTRL510
 #End Region
                         End If
                     End With
-#End Region
                 Loop
 #End Region
 

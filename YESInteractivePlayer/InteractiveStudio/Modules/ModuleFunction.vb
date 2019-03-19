@@ -9,11 +9,15 @@ Module ModuleFunction
     ''' 读取配置
     ''' </summary>
     Public Function LoadSetting() As Boolean
-        System.IO.Directory.CreateDirectory("./Data")
+        Dim Path As String = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+        System.IO.Directory.CreateDirectory($"{Path}\Yes Tech")
+        System.IO.Directory.CreateDirectory($"{Path}\Yes Tech\{My.Application.Info.Title}")
+        System.IO.Directory.CreateDirectory($"{Path}\Yes Tech\{My.Application.Info.Title}\Data")
 
         '反序列化
         Try
-            Using fStream As New FileStream("./Data/Setting.xml", FileMode.Open)
+            Using fStream As New FileStream($"{Path}\Yes Tech\{My.Application.Info.Title}\Data\Setting.xml",
+                                            FileMode.Open)
                 Dim XmlSerializer As XmlSerializer = New XmlSerializer(GetType(SystemInfo))
                 sysInfo = XmlSerializer.Deserialize(fStream)
             End Using
@@ -43,11 +47,15 @@ Module ModuleFunction
     ''' 保存配置
     ''' </summary>
     Public Function SaveSetting() As Boolean
-        System.IO.Directory.CreateDirectory("./Data")
+        Dim Path As String = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+        System.IO.Directory.CreateDirectory($"{Path}\Yes Tech")
+        System.IO.Directory.CreateDirectory($"{Path}\Yes Tech\{My.Application.Info.Title}")
+        System.IO.Directory.CreateDirectory($"{Path}\Yes Tech\{My.Application.Info.Title}\Data")
 
         '序列化
         Try
-            Using fStream As New FileStream("./Data/Setting.xml", FileMode.Create)
+            Using fStream As New FileStream($"{Path}\Yes Tech\{My.Application.Info.Title}\Data\Setting.xml",
+                                            FileMode.Create)
                 Dim ns As XmlSerializerNamespaces = New XmlSerializerNamespaces()
                 ns.Add("", "") '删除命名空间
                 '添加编码属性
@@ -93,7 +101,7 @@ Module ModuleFunction
         For Each i001 In sysInfo.Schedule.WindowList
             i001.PlayMediaId = -1
         Next
-        ReDim Preserve sysInfo.Schedule.ScreenLocations(sysInfo.ScreenList.Count - 1)
+        ReDim Preserve sysInfo.Schedule.ScreenList(sysInfo.ScreenList.Count - 1)
 
         Return True
     End Function

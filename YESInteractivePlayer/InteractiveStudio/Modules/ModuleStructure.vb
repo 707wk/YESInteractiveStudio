@@ -247,7 +247,7 @@ Public Module ModuleStructure
     End Structure
 #End Region
 
-#Region "窗口主信息"
+#Region "窗口信息"
     ''' <summary>
     ''' 窗口信息
     ''' </summary>
@@ -312,6 +312,23 @@ Public Module ModuleStructure
     End Structure
 #End Region
 
+#Region "播放方案屏幕信息"
+    ''' <summary>
+    ''' 播放方案屏幕信息
+    ''' </summary>
+    Structure ScheduleScreenInfo
+        ''' <summary>
+        ''' 在窗口中的位置
+        ''' </summary>
+        Dim Loaction As Point
+
+        ''' <summary>
+        ''' 箱体顺时针旋转角度
+        ''' </summary>
+        Dim BoxRotation As Integer
+    End Structure
+#End Region
+
     ''' <summary>
     ''' 播放方案
     ''' </summary>
@@ -324,7 +341,12 @@ Public Module ModuleStructure
         ''' <summary>
         ''' 屏幕位置
         ''' </summary>
-        Dim ScreenLocations As Point()
+        Dim ScreenList As ScheduleScreenInfo()
+
+        '''' <summary>
+        '''' 传感器阵列旋转角度
+        '''' </summary>
+        'Dim SensorAngle As Integer
     End Structure
 #End Region
 

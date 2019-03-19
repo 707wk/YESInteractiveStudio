@@ -42,11 +42,13 @@ Partial Class ProgramEdit
         Me.PlayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteMediaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MediaMenuStrip.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -110,14 +112,10 @@ Partial Class ProgramEdit
         '
         Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.NumericUpDown1)
-        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.TableLayoutPanel1)
         Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Controls.Add(Me.TextBox3)
         Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.TextBox2)
-        Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Location = New System.Drawing.Point(6, 294)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(628, 77)
@@ -127,8 +125,9 @@ Partial Class ProgramEdit
         '
         'Label5
         '
+        Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(293, 23)
+        Me.Label5.Location = New System.Drawing.Point(274, 6)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(11, 12)
         Me.Label5.TabIndex = 8
@@ -136,7 +135,8 @@ Partial Class ProgramEdit
         '
         'NumericUpDown1
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(216, 20)
+        Me.NumericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.NumericUpDown1.Location = New System.Drawing.Point(197, 3)
         Me.NumericUpDown1.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
         Me.NumericUpDown1.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown1.Name = "NumericUpDown1"
@@ -146,8 +146,9 @@ Partial Class ProgramEdit
         '
         'Label4
         '
+        Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(151, 23)
+        Me.Label4.Location = New System.Drawing.Point(132, 6)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(59, 12)
         Me.Label4.TabIndex = 5
@@ -181,7 +182,8 @@ Partial Class ProgramEdit
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(45, 20)
+        Me.TextBox2.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.TextBox2.Location = New System.Drawing.Point(26, 3)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
         Me.TextBox2.Size = New System.Drawing.Size(100, 21)
@@ -189,8 +191,9 @@ Partial Class ProgramEdit
         '
         'Label2
         '
+        Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(18, 23)
+        Me.Label2.Location = New System.Drawing.Point(3, 6)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(17, 12)
         Me.Label2.TabIndex = 0
@@ -227,6 +230,26 @@ Partial Class ProgramEdit
         Me.Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 5
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label5, 4, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.TextBox2, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.NumericUpDown1, 3, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label4, 2, 0)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(8, 17)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(304, 24)
+        Me.TableLayoutPanel1.TabIndex = 9
+        '
         'ProgramEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -248,6 +271,8 @@ Partial Class ProgramEdit
         Me.GroupBox2.PerformLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MediaMenuStrip.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -272,4 +297,5 @@ Partial Class ProgramEdit
     Friend WithEvents NumericUpDown1 As NumericUpDown
     Friend WithEvents PlayToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Button2 As Button
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
 End Class
