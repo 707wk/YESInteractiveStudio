@@ -9,24 +9,22 @@ Module ModuleFunction
     ''' 读取配置
     ''' </summary>
     Public Function LoadSetting() As Boolean
-        Dim Path As String = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-        System.IO.Directory.CreateDirectory($"{Path}\Yes Tech")
-        System.IO.Directory.CreateDirectory($"{Path}\Yes Tech\{My.Application.Info.Title}")
-        System.IO.Directory.CreateDirectory($"{Path}\Yes Tech\{My.Application.Info.Title}\Data")
+        Dim Path As String = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+
+        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech")
+        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.Title}")
+        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.Title}\Data")
 
         '反序列化
         Try
-            Using fStream As New FileStream($"{Path}\Yes Tech\{My.Application.Info.Title}\Data\Setting.xml",
+            Using fStream As New FileStream($"{Path}\Hunan Yestech\{My.Application.Info.Title}\Data\Setting.xml",
                                             FileMode.Open)
                 Dim XmlSerializer As XmlSerializer = New XmlSerializer(GetType(SystemInfo))
                 sysInfo = XmlSerializer.Deserialize(fStream)
             End Using
-        Catch ex As Exception
-            'MsgBox(ex.Message,
-            '       MsgBoxStyle.Information,
-            '       "读取配置异常")
 
-            '第一次使用初始化参数
+        Catch ex As FileNotFoundException
+            '使用默认参数
             With sysInfo
                 .HistoryFile = ""
                 .TouchSensitivity = 5
@@ -36,6 +34,10 @@ Module ModuleFunction
                 .TouchMode = 1
             End With
             Return False
+        Catch ex2 As Exception
+            MsgBox(ex2.Message,
+                   MsgBoxStyle.Information,
+                   "读取配置异常")
         End Try
 
         Return True
@@ -47,14 +49,15 @@ Module ModuleFunction
     ''' 保存配置
     ''' </summary>
     Public Function SaveSetting() As Boolean
-        Dim Path As String = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-        System.IO.Directory.CreateDirectory($"{Path}\Yes Tech")
-        System.IO.Directory.CreateDirectory($"{Path}\Yes Tech\{My.Application.Info.Title}")
-        System.IO.Directory.CreateDirectory($"{Path}\Yes Tech\{My.Application.Info.Title}\Data")
+        Dim Path As String = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+
+        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech")
+        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.Title}")
+        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.Title}\Data")
 
         '序列化
         Try
-            Using fStream As New FileStream($"{Path}\Yes Tech\{My.Application.Info.Title}\Data\Setting.xml",
+            Using fStream As New FileStream($"{Path}\Hunan Yestech\{My.Application.Info.Title}\Data\Setting.xml",
                                             FileMode.Create)
                 Dim ns As XmlSerializerNamespaces = New XmlSerializerNamespaces()
                 ns.Add("", "") '删除命名空间

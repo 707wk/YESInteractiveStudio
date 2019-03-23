@@ -52,6 +52,8 @@ Public Class WindowEdit
                 ScreenControls(i001).Location = sysInfo.Schedule.ScreenList(i001).Loaction
                 ScreenControls(i001).Size = sysInfo.ScreenList(i001).DefSize
                 ScreenControls(i001).Visible = True
+
+                UpdateScreenControlInfo(i001)
             Next
         End With
     End Sub
@@ -78,10 +80,12 @@ Public Class WindowEdit
                 .Visible = False,
                 .ContextMenuStrip = ScreenMenuStrip
             }
-            With sysInfo.ScreenList(i001)
-                ScreenControls(i001).Text = $"Screen {i001}
-Size: { .DefSize.Width},{ .DefSize.Height}"
-            End With
+            '            With sysInfo.ScreenList(i001)
+            '                ScreenControls(i001).Text = $"Screen {i001}
+            'Size: { .DefSize.ToString}
+            'Location:{sysInfo.Schedule.ScreenList(i001).Loaction.ToString}
+            'Rotation:{sysInfo.Schedule.ScreenList(i001).BoxRotation}°"
+            '            End With
 
             Panel1.Controls.Add(ScreenControls(i001))
 
@@ -158,6 +162,8 @@ Size: { .DefSize.Width},{ .DefSize.Height}"
         ScreenControls(TmpDialog.SelectScreenID).Size = sysInfo.ScreenList(TmpDialog.SelectScreenID).DefSize
         ScreenControls(TmpDialog.SelectScreenID).Visible = True
         ScreenControls(TmpDialog.SelectScreenID).BringToFront()
+
+        UpdateScreenControlInfo(TmpDialog.SelectScreenID)
     End Sub
 #End Region
 
@@ -201,6 +207,8 @@ Size: { .DefSize.Width},{ .DefSize.Height}"
 
         sysInfo.Schedule.ScreenList(Val(TextBox2.Text)).Loaction = New Point(NumericUpDown6.Value, NumericUpDown5.Value)
         ScreenControls(Val(TextBox2.Text)).Location = sysInfo.Schedule.ScreenList(Val(TextBox2.Text)).Loaction
+
+        UpdateScreenControlInfo(Val(TextBox2.Text))
     End Sub
 
     Private Sub NumericUpDown6_TextChanged(sender As Object, e As EventArgs) Handles NumericUpDown6.TextChanged
@@ -229,6 +237,21 @@ Size: { .DefSize.Width},{ .DefSize.Height}"
         End If
 
         sysInfo.Schedule.ScreenList(Val(TextBox2.Text)).BoxRotation = Val(ComboBox1.Text)
+
+        UpdateScreenControlInfo(Val(TextBox2.Text))
+    End Sub
+
+    ''' <summary>
+    ''' 更新控件信息
+    ''' </summary>
+    ''' <param name="ScreenID"></param>
+    Private Sub UpdateScreenControlInfo(ScreenID As Integer)
+        With sysInfo.ScreenList(ScreenID)
+            ScreenControls(ScreenID).Text = $"Screen {ScreenID}
+Size: { .DefSize.ToString}
+Location:{sysInfo.Schedule.ScreenList(ScreenID).Loaction.ToString}
+Rotation:{sysInfo.Schedule.ScreenList(ScreenID).BoxRotation}°"
+        End With
     End Sub
 #End Region
 

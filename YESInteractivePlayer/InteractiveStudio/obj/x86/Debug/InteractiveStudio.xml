@@ -308,6 +308,12 @@ InteractiveStudio
  传感器阵列旋转角度
  </summary>
 </member>
+<member name="M:InteractiveStudio.WindowEdit.UpdateScreenControlInfo(System.Int32)">
+ <summary>
+ 更新控件信息
+ </summary>
+ <param name="ScreenID"></param>
+</member>
 <member name="M:InteractiveStudio.WindowEdit.ChangeControlsLanguage">
  <summary>
  切换控件语言
