@@ -250,9 +250,9 @@ Public Class WindowEdit
     Private Sub UpdateScreenControlInfo(ScreenID As Integer)
         With sysInfo.ScreenList(ScreenID)
             ScreenControls(ScreenID).Text = $"Screen {ScreenID}
-Size: { .DefSize.ToString}
-Location:{sysInfo.Schedule.ScreenList(ScreenID).Loaction.ToString}
-Rotation:{sysInfo.Schedule.ScreenList(ScreenID).BoxRotation}°"
+Size    : Width={ .DefSize.Width},Height={ .DefSize.Height}
+Location: X={sysInfo.Schedule.ScreenList(ScreenID).Loaction.X},Y={sysInfo.Schedule.ScreenList(ScreenID).Loaction.Y}
+Rotation: {sysInfo.Schedule.ScreenList(ScreenID).BoxRotation}°"
         End With
     End Sub
 #End Region
