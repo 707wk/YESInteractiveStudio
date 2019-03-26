@@ -137,6 +137,8 @@ Public Class WindowEdit
 
         NumericUpDown6.Value = TmpScreenButton.Location.X
         NumericUpDown5.Value = TmpScreenButton.Location.Y
+
+        UpdateScreenControlInfo(TmpScreenButton.ScreenId)
     End Sub
 #End Region
 

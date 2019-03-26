@@ -54,10 +54,10 @@
 
         sysInfo.Schedule.ScreenList(ScreenId).Loaction = Me.Location
 
-        With sysInfo.ScreenList(ScreenId)
-            Me.Text = $"Screen {ScreenId}
-Size: { .DefSize.Width},{ .DefSize.Height}"
-        End With
+        '        With sysInfo.ScreenList(ScreenId)
+        '            Me.Text = $"Screen {ScreenId}
+        'Size: { .DefSize.Width},{ .DefSize.Height}"
+        '        End With
     End Sub
 
     Private Sub ScreenSizeClass_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
