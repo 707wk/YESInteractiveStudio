@@ -42,9 +42,14 @@ Public Class PlayWindow
     ''' </summary>
     Private DllControl As YESInteractiveSDK.IYESInterfaceSDK
     ''' <summary>
-    ''' 文件类型 0无 1swf 2dll
+    ''' 文件类型 0无 1swf 2dll 3Unity
     ''' </summary>
     Public FileType As Integer
+
+    ''' <summary>
+    ''' Unity播放控件
+    ''' </summary>
+    Private UnityControl As UnityPlayControl
 
 #Region "发送消息"
     '发送消息
@@ -145,6 +150,12 @@ Public Class PlayWindow
             DllControl.FinalizeAddonFunc(Me)
             DllControl = Nothing
         End If
+
+        If UnityControl IsNot Nothing Then
+            Me.Controls.Remove(UnityControl)
+            UnityControl.Dispose()
+            UnityControl = Nothing
+        End If
     End Sub
 #End Region
 
@@ -191,6 +202,30 @@ Public Class PlayWindow
     End Sub
 #End Region
 
+#Region "播放Unity"
+    ''' <summary>
+    ''' 播放Unity
+    ''' </summary>
+    Public Sub PlayUnity(ByVal FilePath As String)
+        ClearPlayControl()
+
+        FileType = 3
+
+        If UnityControl IsNot Nothing Then
+            UnityControl.Dispose()
+        End If
+
+        UnityControl = New UnityPlayControl(FilePath)
+
+        Me.Controls.Add(UnityControl)
+        With UnityControl
+            .Visible = True
+            .Dock = DockStyle.Fill
+        End With
+        UnityControl.ParentFormShown()
+    End Sub
+#End Region
+
     Public Delegate Sub PlayCallback(ByVal FilePath As String)
     ''' <summary>
     ''' 播放文件
@@ -206,6 +241,8 @@ Public Class PlayWindow
                 PlaySwf(FilePath)
             Case ".dll"
                 PlayDLL(FilePath)
+            Case ".exe"
+                PlayUnity(FilePath)
         End Select
 
     End Sub
@@ -408,6 +445,12 @@ Public Class PlayWindow
                                                .Activity = Active
                                                })
 #End Region
+                    Case 3
+#Region "Unity"
+                        'If Active = PointActivity.UP Then sysInfo.logger.LogThis([Enum].GetName(GetType(PointActivity), Active))
+                        '第一段为ID,第二段为X坐标,第三段为Y坐标,第四段为动作."DOWN"为按下,"PRESS"为长按,"UP"为抬起
+                        UnityControl.PutMessage($"{txp + (typ << 16)},{txp},{Me.Height - typ},{[Enum].GetName(GetType(PointActivity), Active)}")
+#End Region
                 End Select
 #End Region
 
@@ -428,6 +471,20 @@ Public Class PlayWindow
 #End Region
 
         End Select
+    End Sub
+#End Region
+
+#Region "Unity事件"
+    Private Sub PlayWindow_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+        If UnityControl IsNot Nothing Then
+            UnityControl.ParentFormActivated()
+        End If
+    End Sub
+
+    Private Sub PlayWindow_Deactivate(sender As Object, e As EventArgs) Handles Me.Deactivate
+        If UnityControl IsNot Nothing Then
+            UnityControl.ParentFormDeactivate()
+        End If
     End Sub
 #End Region
 

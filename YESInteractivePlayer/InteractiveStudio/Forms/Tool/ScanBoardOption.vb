@@ -181,12 +181,12 @@ Public Class ScanBoardOption
 
         Thread.Sleep(60)
 
-        For i As Integer = 0 To 10
+        For i As Integer = 0 To 100
             If CheckUpdataRecData(Wangk.Hash.Hex2Bin("1a1b")) Then
                 Exit For
             End If
 
-            If i = 10 Then
+            If i = 100 Then
                 'Putlog($"升级指令发送失败")
                 MsgBox(sysInfo.Language.GetS("Upgrade command failed to send"),
                            MsgBoxStyle.Information,
@@ -223,7 +223,7 @@ Public Class ScanBoardOption
             sendByte(129) = (checkSum \ 256) Mod 256
             sendByte(130) = checkSum Mod 256
 
-            For i As Integer = 0 To 10
+            For i As Integer = 0 To 100
                 If Not sysInfo.ScanBoardOldFlage Then
                     sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
                 Else
@@ -236,7 +236,7 @@ Public Class ScanBoardOption
                     Exit For
                 End If
 
-                If i = 10 Then
+                If i = 100 Then
                     re.Close()
                     fs.Close()
                     MsgBox(sysInfo.Language.GetS("Upgrade data failed to send"),
@@ -336,7 +336,7 @@ Public Class ScanBoardOption
             Return False
         End If
 
-        Return If(recSum > 0, True, False)
+        Return If(recSum = sysInfo.ScanBoardTable.Count, True, False)
     End Function
 #End Region
 

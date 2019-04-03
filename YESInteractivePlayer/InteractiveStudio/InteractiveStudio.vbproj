@@ -73,6 +73,9 @@
     <ApplicationIcon>logo_32px.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CopyDataStruct">
+      <HintPath>..\CopyDataStruct.dll</HintPath>
+    </Reference>
     <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.0, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
     <Reference Include="Nova.Mars.SDK.MarsInterface">
       <HintPath>..\..\DotNetDLL\Nova\Nova.Mars.SDK.MarsInterface.dll</HintPath>
@@ -117,6 +120,12 @@
   <ItemGroup>
     <Compile Include="Controls\ScreenButton.vb">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\UnityPlayControl.Designer.vb">
+      <DependentUpon>UnityPlayControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UnityPlayControl.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Edit\ProgramEdit.Designer.vb">
       <DependentUpon>ProgramEdit.vb</DependentUpon>
@@ -205,6 +214,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\UnityPlayControl.resx">
+      <DependentUpon>UnityPlayControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Edit\ProgramEdit.resx">
       <DependentUpon>ProgramEdit.vb</DependentUpon>
     </EmbeddedResource>

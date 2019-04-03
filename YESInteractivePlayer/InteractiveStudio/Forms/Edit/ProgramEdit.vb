@@ -71,7 +71,7 @@
     ''' <param name="e"></param>
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         Dim TmpDialog As New OpenFileDialog With {
-            .Filter = "Flash or DLL|*.SWF;*.DLL",
+            .Filter = "Flash or DLL or Unity|*.swf;*.dll;*.exe",
             .Multiselect = True
         }
         If TmpDialog.ShowDialog() <> DialogResult.OK Then

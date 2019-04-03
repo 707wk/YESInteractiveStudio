@@ -694,7 +694,12 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.PlayWindow.FileType">
  <summary>
- 文件类型 0无 1swf 2dll
+ 文件类型 0无 1swf 2dll 3Unity
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindow.UnityControl">
+ <summary>
+ Unity播放控件
  </summary>
 </member>
 <member name="M:InteractiveStudio.PlayWindow.UpdateWindow(System.Boolean)">
@@ -720,6 +725,11 @@ InteractiveStudio
 <member name="M:InteractiveStudio.PlayWindow.PlayDLL(System.String)">
  <summary>
  播放DLL
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.PlayUnity(System.String)">
+ <summary>
+ 播放Unity
  </summary>
 </member>
 <member name="M:InteractiveStudio.PlayWindow.Play(System.String)">

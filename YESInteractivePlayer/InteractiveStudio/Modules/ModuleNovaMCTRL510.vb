@@ -249,7 +249,7 @@ Public Module ModuleNovaMCTRL510
                     '接收卡数据
                     Dim ScanBoardDate() As Byte
 
-                    For i001 As Integer = 0 To 16 - 1
+                    For receiveID As Integer = 0 To 16 - 1
                         ReDim ReceiveData(1028 - 1)
                         .Receive(ReceiveData)
 
@@ -309,23 +309,41 @@ Public Module ModuleNovaMCTRL510
 #End Region
                                 Case 180
 #Region "180°"
-                                    Dim index As Integer = 0
-                                    For i002 As Integer = 4 - 1 To 0 Step -1
-                                        For j002 As Integer = 4 - 1 To 0 Step -1
-                                            ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
-                                            index += 1
+                                    If sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
+                                        '单元布局4*4
+                                        Dim index As Integer = 0
+                                        For i002 As Integer = 4 - 1 To 0 Step -1
+                                            For j002 As Integer = 4 - 1 To 0 Step -1
+                                                ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
+                                                index += 1
+                                            Next
                                         Next
-                                    Next
+                                    Else
+                                        '单元布局1*4/4*1
+                                        For i002 As Integer = 0 To 4 - 1
+                                            ScanBoardDate(4 + i002 * 4) = tmpDate((3 - i002) * 4)
+                                        Next
+                                    End If
+
 #End Region
                                 Case 270
 #Region "270°"
-                                    Dim index As Integer = 0
-                                    For j002 As Integer = 0 To 4 - 1
-                                        For i002 As Integer = 4 - 1 To 0 Step -1
-                                            ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
-                                            index += 1
+                                    If sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
+                                        '单元布局4*4
+                                        Dim index As Integer = 0
+                                        For j002 As Integer = 0 To 4 - 1
+                                            For i002 As Integer = 4 - 1 To 0 Step -1
+                                                ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
+                                                index += 1
+                                            Next
                                         Next
-                                    Next
+                                    Else
+                                        '单元布局1*4/4*1
+                                        For j002 As Integer = 1 To 4 - 1
+                                            ScanBoardDate(4 + j002) = tmpDate(j002 * 4)
+                                        Next
+                                    End If
+
 #End Region
                             End Select
 #End Region
@@ -359,6 +377,8 @@ Public Module ModuleNovaMCTRL510
                                                 .SensorMap(Point.Y, Point.X) = PointState.PRESS Then
 
                                                 .SensorMap(Point.Y, Point.X) = PointState.UP
+
+                                                Continue For
                                             End If
 
                                             .SensorMap(Point.Y, Point.X) = PointState.NOOPS
@@ -417,12 +437,22 @@ Public Module ModuleNovaMCTRL510
 
                                     If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT OrElse
                                                 sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.TEST Then
+
+                                        'If .SensorMap(Point.Y, Point.X) <> PointState.NOOPS Then
+                                        '    sysInfo.logger.LogThis($"{Point.X},{Point.Y},{[Enum].GetName(GetType(PointState), .SensorMap(Point.Y, Point.X))}")
+                                        'End If
+
 #Region "无点"
                                         '无点
                                         If (Value And &H80) <> &H80 Then
                                             '抬起
-                                            If .SensorMap(Point.Y, Point.X) = PointState.DOWN OrElse
-                                                    .SensorMap(Point.Y, Point.X) = PointState.PRESS Then
+                                            'If .SensorMap(Point.Y, Point.X) = PointState.DOWN OrElse
+                                            '    .SensorMap(Point.Y, Point.X) = PointState.PRESS Then
+                                            'If .SensorMap(Point.Y, Point.X) <> PointState.NOOPS Then
+                                            '    sysInfo.logger.LogThis([Enum].GetName(GetType(PointState), .SensorMap(Point.Y, Point.X)))
+                                            'End If
+
+                                            If .SensorMap(Point.Y, Point.X) = PointState.UP Then
 
                                                 sysInfo.Schedule.WindowList.
                                                         Item(.WindowId).

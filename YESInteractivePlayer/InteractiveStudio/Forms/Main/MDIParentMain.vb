@@ -1418,10 +1418,10 @@ Public Class MDIParentMain
             'Me.RibbonBar6.Text = .GetS("General")
             Me.LabelItem1.Text = .GetS("Language")
             'Me.RibbonBar9.Text = .GetS("Display Mode")
-            Me.ButtonItem14.Text = .GetS("Interact")
-            Me.ButtonItem15.Text = .GetS("Test")
-            Me.ButtonItem16.Text = .GetS("Black")
-            Me.ButtonItem17.Text = .GetS("Debug")
+            Me.ButtonItem14.Text = .GetS("Interact") & "(F1)"
+            Me.ButtonItem15.Text = .GetS("Test") & "(F2)"
+            Me.ButtonItem16.Text = .GetS("Black") & "(F3)"
+            Me.ButtonItem17.Text = .GetS("Debug") & "(F4)"
             'Me.RibbonBar2.Text = .GetS("Control")
             Me.ButtonItem18.Text = .GetS("Connect")
             Me.ButtonItem19.Text = .GetS("Disconnect")
