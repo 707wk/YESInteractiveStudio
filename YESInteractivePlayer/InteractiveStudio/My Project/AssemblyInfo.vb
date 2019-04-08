@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("Hunan Yestech Optoelectronic Co., LTD.")>
 <Assembly: AssemblyProduct("Interactive Studio")>
-<Assembly: AssemblyCopyright("Copyright ©  2018 Yestech All Rights Reserved")>
+<Assembly: AssemblyCopyright("Copyright ©  2019 Yestech All Rights Reserved")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' 方法是按如下所示使用“*”: :
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.1.1.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("1.2.0.0")>
+<Assembly: AssemblyFileVersion("1.2.0.0")>
