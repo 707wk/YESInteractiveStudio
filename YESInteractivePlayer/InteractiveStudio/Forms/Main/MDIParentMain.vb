@@ -213,13 +213,13 @@ Public Class MDIParentMain
         End With
 
         '触摸模式
-        With ComboBoxItem11
-            .Items.Add(sysInfo.Language.GetS("High Resolution"))
-            .Items.Add(sysInfo.Language.GetS("Medium Resolution"))
-            .Items.Add(sysInfo.Language.GetS("Low Resolution"))
+        'With ComboBoxItem11
+        '    .Items.Add(sysInfo.Language.GetS("High Resolution"))
+        '    .Items.Add(sysInfo.Language.GetS("Medium Resolution"))
+        '    .Items.Add(sysInfo.Language.GetS("Low Resolution"))
 
-            .SelectedIndex = sysInfo.TouchMode
-        End With
+        '    .SelectedIndex = sysInfo.TouchMode
+        'End With
 #End Region
 
 #Region "复位时间"
@@ -579,23 +579,23 @@ Public Class MDIParentMain
     ''' 修正查询时间间隔
     ''' </summary>
     Public Sub CorrectionInquireTime()
-        Dim minReadNum As Integer = &H7FFFFFFF
+        'Dim minReadNum As Integer = &H7FFFFFFF
 
-        For Each i001 As SenderInfo In sysInfo.SenderList
-            With i001
-                If Not .LinkFlage Then
-                    Continue For
-                End If
+        'For Each i001 As SenderInfo In sysInfo.SenderList
+        '    With i001
+        '        If Not .LinkFlage Then
+        '            Continue For
+        '        End If
 
-                minReadNum = If(minReadNum > .MaxReadNum, .MaxReadNum, minReadNum)
-            End With
-        Next
+        '        minReadNum = If(minReadNum > .MaxReadNum, .MaxReadNum, minReadNum)
+        '    End With
+        'Next
 
-        If minReadNum < 20 AndAlso
+        If sysInfo.ReadNum < 20 AndAlso
             sysInfo.InquireTimeSec > 1 Then
 
             sysInfo.InquireTimeSec -= 1
-        ElseIf minReadNum > 22 AndAlso
+        ElseIf sysInfo.ReadNum > 22 AndAlso
              sysInfo.InquireTimeSec < 1000 Then
 
             sysInfo.InquireTimeSec += 1
@@ -654,13 +654,13 @@ Public Class MDIParentMain
 #End Region
 
 #Region "控制器离线"
-    Public Delegate Sub DisposeControlOffLinkCallback(ByVal ControlID As Integer)
+    Public Delegate Sub DisposeControlOffLinkCallback(ByVal value As Boolean)
     ''' <summary>
     ''' 控制器离线处理
     ''' </summary>
-    Public Sub DisposeControlOffLink(ByVal ControlID As Integer)
+    Public Sub DisposeControlOffLink(ByVal value As Boolean)
         If Me.InvokeRequired Then
-            Me.Invoke(New DisposeControlOffLinkCallback(AddressOf DisposeControlOffLink), New Object() {ControlID})
+            Me.Invoke(New DisposeControlOffLinkCallback(AddressOf DisposeControlOffLink), New Object() {value})
             Exit Sub
         End If
 
@@ -1162,12 +1162,12 @@ Public Class MDIParentMain
         sysInfo.TouchSensitivity = Val(ComboBoxItem10.Text)
     End Sub
 
-    ''' <summary>
-    ''' 触摸模式
-    ''' </summary>
-    Private Sub ComboBoxItem11_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem11.SelectedIndexChanged
-        sysInfo.TouchMode = ComboBoxItem11.SelectedIndex
-    End Sub
+    '''' <summary>
+    '''' 触摸模式
+    '''' </summary>
+    'Private Sub ComboBoxItem11_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem11.SelectedIndexChanged
+    '    sysInfo.TouchMode = ComboBoxItem11.SelectedIndex
+    'End Sub
 
     ''' <summary>
     ''' 复位温度
@@ -1435,7 +1435,7 @@ Public Class MDIParentMain
             'Me.RibbonBar4.Text = .GetS("Reaction")
             Me.LabelItem10.Text = .GetS("Anti-interference")
             Me.LabelItem11.Text = .GetS("Touch Sensitivity")
-            Me.LabelItem8.Text = .GetS("TouchMode")
+            'Me.LabelItem8.Text = .GetS("TouchMode")
             Me.ButtonItem24.Text = .GetS("User Manual")
             Me.ButtonItem25.Text = .GetS("About")
             Me.RibbonTabItem1.Text = .GetS("Schedule")
@@ -1454,6 +1454,10 @@ Public Class MDIParentMain
             Me.DeleteProgramToolStripMenuItem.Text = .GetS("Delete Program")
             Me.CheckBoxItem1.Text = .GetS("Hide Windows")
         End With
+    End Sub
+
+    Private Sub ComboBoxItem11_Click(sender As Object, e As EventArgs)
+
     End Sub
 #End Region
 End Class

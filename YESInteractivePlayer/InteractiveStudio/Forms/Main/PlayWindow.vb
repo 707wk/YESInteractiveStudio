@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.Reflection
+Imports Newtonsoft.Json
 Imports YESInteractiveSDK
 
 Public Class PlayWindow
@@ -342,135 +343,124 @@ Public Class PlayWindow
 #End Region
 
 #Region "点击事件"
-    Public Delegate Sub PointActiveCallback(ByVal ScreenID As Integer,
-                                            ByVal Location As Point,
-                                            ByVal Value As Byte,
-                                            ByVal Active As PointActivity)
+    Public Delegate Sub PointActiveCallback(values As List(Of PointInfo))
     ''' <summary>
     ''' 点击事件
     ''' </summary>
-    ''' <param name="ScreenID">屏幕ID</param>
-    ''' <param name="Location">点击位置</param>
-    ''' <param name="Value">电容值</param>
-    ''' <param name="Active">操作</param>
-    Public Sub PointActive(ByVal ScreenID As Integer,
-                           ByVal Location As Point,
-                           ByVal Value As Byte,
-                           ByVal Active As PointActivity)
+    Public Sub PointActive(values As List(Of PointInfo))
         If Me.InvokeRequired Then
             Me.Invoke(New PointActiveCallback(AddressOf PointActive),
-                      New Object() {ScreenID, Location, Value, Active})
+                      New Object() {values})
             Exit Sub
         End If
 
-        '计算尺寸及位置
-        Dim SensorWidth As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Width
-        Dim SensorHeight As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Height
-        Dim txp As Int16 = sysInfo.ScreenList(ScreenID).ZoomLocation.X + Location.X * SensorWidth
-        Dim typ As Int32 = sysInfo.ScreenList(ScreenID).ZoomLocation.Y + Location.Y * SensorHeight
+        ''计算尺寸及位置
+        'Dim SensorWidth As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Width
+        'Dim SensorHeight As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Height
+        'Dim txp As Int16 = sysInfo.ScreenList(ScreenID).ZoomLocation.X + Location.X * SensorWidth + (SensorWidth \ 2)
+        'Dim typ As Int32 = sysInfo.ScreenList(ScreenID).ZoomLocation.Y + Location.Y * SensorHeight + (SensorHeight \ 2)
 
         Select Case sysInfo.DisplayMode
             Case InteractiveOptions.DISPLAYMODE.INTERACT
 #Region "互动"
                 '互动
-#Region "按照触摸模式计算点击位置"
-                If sysInfo.TouchMode = InteractiveOptions.TOUCHMODE.T121 OrElse
-                        sysInfo.DisplayMode <> 0 OrElse
-                        sysInfo.ScreenList(ScreenID).SensorLayout.Width <>
-                        sysInfo.ScreenList(ScreenID).SensorLayout.Height Then
-
-                    txp = txp + SensorWidth \ 2
-                    typ = typ + SensorHeight \ 2
-
-                ElseIf sysInfo.TouchMode = InteractiveOptions.TOUCHMODE.T421 Then
-
-                    txp = txp + SensorWidth
-                    typ = typ + SensorHeight
-
-                Else 'If sysInfo.TouchMode = InteractiveOptions.TOUCHMODE.T1621 Then
-
-                    txp = txp + SensorWidth * 2
-                    typ = typ + SensorHeight * 2
-
-                End If
-#End Region
-
                 Select Case FileType
                     Case 1
 #Region "swf"
-                        'swf
-                        '非按下事件则丢弃
-                        If Active <> PointActivity.DOWN Then
-                            Exit Sub
-                        End If
+                        For Each i001 As PointInfo In values
+                            'swf
+                            '非按下事件则丢弃
+                            If i001.Activity <> PointActivity.DOWN Then
+                                Exit Sub
+                            End If
 
-                        If Not SetCaptureFlage Then
+                            If Not SetCaptureFlage Then
 #Region "启用接口"
-                            '启用接口
-                            Try
-                                FlashControl.
-                                    CallFunction($"<invoke name=""pointActive"" returntype=""xml""><arguments><string>{txp}</string><string>{typ}</string></arguments></invoke>")
-                            Catch ex As Exception
-                                SetCaptureFlage = True
-                            End Try
+                                '启用接口
+                                Try
+                                    FlashControl.
+                                    CallFunction($"<invoke name=""pointActive"" returntype=""xml""><arguments><string>{i001.X}</string><string>{i001.Y}</string></arguments></invoke>")
+                                Catch ex As Exception
+                                    SetCaptureFlage = True
+                                End Try
 #End Region
-                        Else
+                            Else
 #Region "捕获鼠标"
-                            '捕获鼠标
-                            Dim ttp As Int32 = txp + (typ << 16)
-                            Dim ttp2 As Int32 = txp + ((typ + 2) << 16)
+                                '捕获鼠标
+                                Dim ttp As Int32 = i001.X + (i001.Y << 16)
+                                Dim ttp2 As Int32 = i001.X + ((i001.Y + 2) << 16)
 
-                            '点击-移动 - 松开
-                            PostMessage(FlashControl.Handle,
+                                '点击-移动 - 松开
+                                PostMessage(FlashControl.Handle,
                                     WM_LBUTTONDOWN,
                                     0,
                                     ttp)
-                            PostMessage(FlashControl.Handle,
+                                PostMessage(FlashControl.Handle,
                                     WM_MOUSEMOVE,
                                     0,
                                     ttp2)
-                            PostMessage(FlashControl.Handle,
+                                PostMessage(FlashControl.Handle,
                                     WM_LBUTTONUP,
                                     0,
                                     ttp)
 #End Region
-                        End If
+                            End If
+                        Next
 #End Region
                     Case 2
 #Region "dll"
                         'dll
-                        DllControl.PointActive(New PointInfo() With {
-                                               .X = txp,
-                                               .Y = typ,
-                                               .Activity = Active
-                                               })
+                        DllControl.PointActive(values.ToArray)
 #End Region
                     Case 3
 #Region "Unity"
-                        'If Active = PointActivity.UP Then sysInfo.logger.LogThis([Enum].GetName(GetType(PointActivity), Active))
-                        '第一段为ID,第二段为X坐标,第三段为Y坐标,第四段为动作."DOWN"为按下,"PRESS"为长按,"UP"为抬起
-                        UnityControl.PutMessage($"{txp + (typ << 16)},{txp},{Me.Height - typ},{[Enum].GetName(GetType(PointActivity), Active)}")
+                        Dim tmpArray = values.ToArray
+                        For i001 = 0 To tmpArray.Count - 1
+                            tmpArray(i001).Y = Me.Height - tmpArray(i001).Y
+                        Next
+
+                        UnityControl.PutMessage(JsonConvert.SerializeObject(tmpArray))
 #End Region
                 End Select
 #End Region
 
             Case InteractiveOptions.DISPLAYMODE.TEST
 #Region "测试"
-                '非按下事件则丢弃
-                If Active <> PointActivity.DOWN Then
-                    Exit Sub
-                End If
+                For Each i001 As PointInfo In values
+                    '非按下事件则丢弃
+                    If i001.Activity <> PointActivity.DOWN Then
+                        Exit Sub
+                    End If
 
-                gBack.DrawString($"√", gFont, gBrush, txp + 1, typ + 1)
+                    gBack.DrawString($"√", gFont, gBrush, i001.X - gFont.SizeInPoints + 2, i001.Y - gFont.SizeInPoints + 2)
+                Next
 #End Region
 
-            Case InteractiveOptions.DISPLAYMODE.DEBUG
-#Region "调试"
-                '显示电容
-                gBack.DrawString($"{Value And &H7F}", gFont, gBrush, txp + 1, typ + 1)
-#End Region
+                '            Case InteractiveOptions.DISPLAYMODE.DEBUG
+                '#Region "调试"
+                '                For Each i001 As PointInfo In values
+                '                    'todo:显示电容
+                '                    'gBack.DrawString($"{i001.Value And &H7F}", gFont, gBrush, i001.X - gFont.SizeInPoints / 2, i001.Y - gFont.SizeInPoints / 2)
+                '                Next
+                '#End Region
 
         End Select
+    End Sub
+#End Region
+
+#Region "显示电容值"
+    Public Delegate Sub ShowCapacitanceCallback(x As Integer, y As Integer, Value As Byte)
+    ''' <summary>
+    ''' 显示电容值
+    ''' </summary>
+    Public Sub ShowCapacitance(x As Integer, y As Integer, Value As Byte)
+        If Me.InvokeRequired Then
+            Me.Invoke(New ShowCapacitanceCallback(AddressOf ShowCapacitance),
+                      New Object() {x, y, Value})
+            Exit Sub
+        End If
+
+        gBack.DrawString($"{Value And &H7F}", gFont, gBrush, x - gFont.SizeInPoints + 2, y - gFont.SizeInPoints + 2)
     End Sub
 #End Region
 

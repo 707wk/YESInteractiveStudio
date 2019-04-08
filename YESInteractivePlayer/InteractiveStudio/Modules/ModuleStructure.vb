@@ -62,14 +62,18 @@ Public Module ModuleStructure
         ''' </summary>
         Dim CliSocket As Socket
 
+        '''' <summary>
+        '''' 状态检测线程
+        '''' </summary>
+        'Dim WorkThread As Thread
+        '''' <summary>
+        '''' 每秒最大查询次数
+        '''' </summary>
+        'Dim MaxReadNum As Integer
         ''' <summary>
-        ''' 状态检测线程
+        '''  接收缓存
         ''' </summary>
-        Dim WorkThread As Thread
-        ''' <summary>
-        ''' 每秒最大查询次数
-        ''' </summary>
-        Dim MaxReadNum As Integer
+        Dim ScanBoardDateQueue As Queue(Of Byte())
     End Structure
 #End Region
 
@@ -379,24 +383,24 @@ Public Module ModuleStructure
         End Enum
 #End Region
 
-#Region "触摸模式"
-        ''' <summary>
-        ''' 触摸模式
-        ''' </summary>
-        Public Enum TOUCHMODE
-            ''' <summary>
-            ''' 1合1
-            ''' </summary>
-            T121
-            ''' <summary>
-            ''' 4合1
-            ''' </summary>
-            T421
-            ''' <summary>
-            ''' 16合1
-            ''' </summary>
-            T1621
-        End Enum
+#Region "触摸模式 20190404 汪恳 [屏蔽]"
+        '''' <summary>
+        '''' 触摸模式
+        '''' </summary>
+        'Public Enum TOUCHMODE
+        '    ''' <summary>
+        '    ''' 1合1
+        '    ''' </summary>
+        '    T121
+        '    ''' <summary>
+        '    ''' 4合1
+        '    ''' </summary>
+        '    T421
+        '    ''' <summary>
+        '    ''' 16合1
+        '    ''' </summary>
+        '    T1621
+        'End Enum
 #End Region
     End Structure
 #End Region
@@ -502,10 +506,10 @@ Public Module ModuleStructure
         ''' </summary>
         <XmlIgnore>
         Dim DisplayMode As InteractiveOptions.DISPLAYMODE
-        ''' <summary>
-        ''' 触摸模式
-        ''' </summary>
-        Dim TouchMode As InteractiveOptions.TOUCHMODE
+        '''' <summary>
+        '''' 触摸模式  20190404 汪恳 [屏蔽]
+        '''' </summary>
+        'Dim TouchMode As InteractiveOptions.TOUCHMODE
         ''' <summary>
         ''' 触摸灵敏度 低1-9高
         ''' </summary>
@@ -529,6 +533,16 @@ Public Module ModuleStructure
         ''' </summary>
         <XmlIgnore>
         Dim InquireTimeSec As Integer
+
+        ''' <summary>
+        ''' 状态检测线程
+        ''' </summary>
+        <XmlIgnore>
+        Dim WorkThread As Thread
+        ''' <summary>
+        ''' 每秒最大查询次数
+        ''' </summary>
+        Dim ReadNum As Integer
 #End Region
 #End Region
     End Structure

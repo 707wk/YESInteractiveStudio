@@ -1,4 +1,6 @@
-﻿Public Class UnityPlayControl
+﻿Imports YESInteractiveSDK
+
+Public Class UnityPlayControl
     Declare Function MoveWindow Lib "User32.dll" (handle As IntPtr,
                                                   x As Integer,
                                                   y As Integer,
@@ -20,7 +22,7 @@
     Declare Function SendMessage Lib "User32.dll" Alias "SendMessageW" (hWnd As Integer,
                                                    Msg As Integer,
                                                    wParam As Integer,
-                                                   ByRef lParam As CopyDataStruct.COPYDATASTRUCT) As Integer
+                                                   ByRef lParam As COPYDATASTRUCT) As Integer
 
     Private UnityProcess As Process
     Private UnityHwnd As IntPtr = IntPtr.Zero
@@ -114,11 +116,12 @@
     End Sub
 
     Public Sub PutMessage(Value As String)
-        Dim cds As CopyDataStruct.COPYDATASTRUCT
+        Dim cds As COPYDATASTRUCT
         cds.dwData = CType(0, IntPtr)
         cds.cbData = Value.Length + 1
         cds.lpData = Value
 
         SendMessage(UnityHwnd, WM_COPYDATA, 0, cds)
+        SendMessage(UnityProcess.MainWindowHandle, WM_COPYDATA, 0, cds)
     End Sub
 End Class

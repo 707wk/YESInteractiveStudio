@@ -31,9 +31,9 @@ Module ModuleFunction
                 .ClickValidNums = 2
                 .ResetTemp = 5
                 .ResetSec = 25
-                .TouchMode = 1
+                '.TouchMode = 1
             End With
-            Return False
+            Return True
         Catch ex2 As Exception
             MsgBox(ex2.Message,
                    MsgBoxStyle.Information,
@@ -56,8 +56,8 @@ Module ModuleFunction
         System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.Title}\Data")
 
         '序列化
-        Try
-            Using fStream As New FileStream($"{Path}\Hunan Yestech\{My.Application.Info.Title}\Data\Setting.xml",
+        'Try
+        Using fStream As New FileStream($"{Path}\Hunan Yestech\{My.Application.Info.Title}\Data\Setting.xml",
                                             FileMode.Create)
                 Dim ns As XmlSerializerNamespaces = New XmlSerializerNamespaces()
                 ns.Add("", "") '删除命名空间
@@ -69,12 +69,12 @@ Module ModuleFunction
                 sfFormatter.Serialize(tmpXmlTextWriter, sysInfo, ns)
             End Using
 
-        Catch ex As Exception
-            MsgBox(ex.Message,
-                   MsgBoxStyle.Information,
-                   "Save Setting")
-            Return False
-        End Try
+        'Catch ex As Exception
+        '    MsgBox(ex.Message,
+        '           MsgBoxStyle.Information,
+        '           "Save Setting")
+        '    Return False
+        'End Try
 
         Return True
     End Function

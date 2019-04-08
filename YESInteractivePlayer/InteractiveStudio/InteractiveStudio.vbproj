@@ -73,10 +73,10 @@
     <ApplicationIcon>logo_32px.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CopyDataStruct">
-      <HintPath>..\CopyDataStruct.dll</HintPath>
-    </Reference>
     <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.0, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Nova.Mars.SDK.MarsInterface">
       <HintPath>..\..\DotNetDLL\Nova\Nova.Mars.SDK.MarsInterface.dll</HintPath>
       <Private>False</Private>
@@ -276,6 +276,7 @@
     <Content Include="Forms\Main\README.txt" />
     <Content Include="Forms\Select\README.txt" />
     <Content Include="logo_32px.ico" />
+    <None Include="packages.config" />
     <None Include="res\play_16px.png" />
     <None Include="res\play_24px.png" />
     <None Include="res\startLogo.png" />

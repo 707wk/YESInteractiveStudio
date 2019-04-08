@@ -37,19 +37,14 @@ YESInteractiveSDK
  Y坐标
  </summary>
 </member>
-<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.GroupID">
+<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.ID">
  <summary>
- 分组ID
+ ID
  </summary>
 </member>
 <member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.Activity">
  <summary>
  动作
- </summary>
-</member>
-<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.TickTime">
- <summary>
- 点击时长
  </summary>
 </member>
 <member name="T:YESInteractiveSDK.ModuleStructure.PointActivity">

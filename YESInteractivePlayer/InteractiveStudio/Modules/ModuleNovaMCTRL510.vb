@@ -1,5 +1,6 @@
 ﻿Imports System.Net.Sockets
 Imports System.Threading
+Imports YESInteractiveSDK.ModuleStructure
 
 Public Module ModuleNovaMCTRL510
 #Region "连接控制器"
@@ -94,6 +95,8 @@ Public Module ModuleNovaMCTRL510
                         Continue For
                     End If
 
+                    .ScanBoardDateQueue = New Queue(Of Byte())
+
                     Dim TmpStr As String = $"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)}"
                     .CliSocket = New Socket(AddressFamily.InterNetwork,
                                             SocketType.Stream,
@@ -104,22 +107,22 @@ Public Module ModuleNovaMCTRL510
                     }
                     .CliSocket.Connect(TmpStr, 6000)
 
-                    .WorkThread = New Threading.Thread(AddressOf ControlWorkThread) With {
-                        .IsBackground = True'后台启动
-                    }
-                    .WorkThread.Start(i002)
+                    '.WorkThread = New Threading.Thread(AddressOf ControlWorkThread) With {
+                    '    .IsBackground = True'后台启动
+                    '}
+                    '.WorkThread.Start(i002)
                 End With
             Next
         Catch ex As Exception
             sysInfo.LinkFlage = False
 
+            'Try
+            '    sysInfo.WorkThread.Join()
+            'Catch ex002 As Exception
+            'End Try
+
             For Each i003 As SenderInfo In sysInfo.SenderList
                 With i003
-                    Try
-                        .WorkThread.Join()
-                    Catch ex002 As Exception
-                    End Try
-
                     Try
                         .CliSocket.Close()
                     Catch ex003 As Exception
@@ -133,6 +136,11 @@ Public Module ModuleNovaMCTRL510
             Return False
             Exit Function
         End Try
+
+        sysInfo.WorkThread = New Threading.Thread(AddressOf ControlWorkThread) With {
+                        .IsBackground = True'后台启动
+        }
+        sysInfo.WorkThread.Start()
 #End Region
         Return True
     End Function
@@ -145,13 +153,17 @@ Public Module ModuleNovaMCTRL510
     Public Function DisconnectControl() As Boolean
         sysInfo.LinkFlage = False
 
-        For Each i001 As SenderInfo In sysInfo.SenderList
-            With i001
-                If .WorkThread IsNot Nothing Then
-                    .WorkThread.Join()
-                End If
-            End With
-        Next
+        If sysInfo.WorkThread IsNot Nothing Then
+            sysInfo.WorkThread.Join()
+        End If
+
+        'For Each i001 As SenderInfo In sysInfo.SenderList
+        '    With i001
+        '        If .WorkThread IsNot Nothing Then
+        '            .WorkThread.Join()
+        '        End If
+        '    End With
+        'Next
 
         SetResetSec(0, sysInfo.ScanBoardOldFlage)
         SetResetTemp(0, sysInfo.ScanBoardOldFlage)
@@ -180,8 +192,7 @@ Public Module ModuleNovaMCTRL510
                     Continue For
                 End If
 
-                If sysInfo.ScreenList(ScreenId).SensorMap(Point.Y + rowID, Point.X + colID) = PointState.DOWN OrElse
-                    sysInfo.ScreenList(ScreenId).SensorMap(Point.Y + rowID, Point.X + colID) = PointState.PRESS Then
+                If sysInfo.ScreenList(ScreenId).SensorMap(Point.Y + rowID, Point.X + colID) <> PointState.NOOPS Then
                     checkNums += 1
                 End If
             Next
@@ -193,11 +204,33 @@ Public Module ModuleNovaMCTRL510
     End Function
 #End Region
 
+#Region "计算坐标"
+    ''' <summary>
+    ''' 计算坐标
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function CalcPointPointInfo(ScreenID As Integer,
+                                       Location As Point,
+                                       Active As PointActivity) As PointInfo
+        '计算尺寸及位置
+        Dim SensorWidth As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Width
+        Dim SensorHeight As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Height
+        Dim txp As Int16 = sysInfo.ScreenList(ScreenID).ZoomLocation.X + Location.X * SensorWidth + (SensorWidth \ 2)
+        Dim typ As Int32 = sysInfo.ScreenList(ScreenID).ZoomLocation.Y + Location.Y * SensorHeight + (SensorHeight \ 2)
+
+        Return New PointInfo With {
+            .ID = txp + (typ << 16),
+            .X = txp,
+            .Y = typ,
+            .Activity = Active
+        }
+    End Function
+#End Region
+
     ''' <summary>
     ''' 处理线程
     ''' </summary>
-    ''' <param name="ControlID">控制器ID</param>
-    Public Sub ControlWorkThread(ByVal ControlID As Integer)
+    Public Sub ControlWorkThread()
         '定时刷新
         Dim lastSec As Integer = -1
         '异常次数
@@ -205,20 +238,30 @@ Public Module ModuleNovaMCTRL510
         '读取次数
         Dim readNum As Integer = 0
 
-        '接收缓存
-        Dim ScanBoardDateQueue As New Queue(Of Byte())
-        ''检测到的活动点队列
-        'Dim NewClickList As New Queue(Of ActivePointInfo)
+        ''接收缓存
+        'Dim ScanBoardDateDictionary As New Dictionary(Of Integer, Byte())
+        '检测到的活动点队列
+        Dim WindowPointList As List(Of PointInfo)()
+        ReDim WindowPointList(sysInfo.Schedule.WindowList.Count - 1)
+        For wID = 0 To WindowPointList.Count - 1
+            WindowPointList(wID) = New List(Of PointInfo)
+        Next
+
+        '定时器
         'Dim testTime As New Stopwatch
+
+
         Do While sysInfo.LinkFlage
-            'testTime.Restart()
+            For wID = 0 To WindowPointList.Count - 1
+                WindowPointList(wID).Clear()
+            Next
 
 #Region "刷新数据"
             If lastSec <> Now.Second Then
                 lastSec = Now.Second
 
                 exceptionNum = 0
-                sysInfo.SenderList(ControlID).MaxReadNum = readNum
+                sysInfo.ReadNum = readNum
                 readNum = 0
             End If
 #End Region
@@ -228,7 +271,7 @@ Public Module ModuleNovaMCTRL510
                 Dim tmpThread As Thread = New Thread(AddressOf sysInfo.MainForm.DisposeControlOffLink) With {
                     .IsBackground = True
                     }
-                tmpThread.Start(ControlID)
+                tmpThread.Start(True)
                 Exit Do
             End If
 #End Region
@@ -238,188 +281,199 @@ Public Module ModuleNovaMCTRL510
                 '数据包
                 Dim ReceiveData(1024 - 1) As Byte
 
-                With sysInfo.SenderList(ControlID).CliSocket
-                    '控制器接收数据
-                    .Send(Wangk.Hash.Hex2Bin("55D50902"))
-                    .Receive(ReceiveData)
+                For ControlID = 0 To sysInfo.SenderList.Count - 1
+                    With sysInfo.SenderList(ControlID)
+                        If Not .LinkFlage Then
+                            Continue For
+                        End If
 
-                    '控制器上传数据
-                    .Send(Wangk.Hash.Hex2Bin("55D50905000000000400"))
+                        'With sysInfo.SenderList(ControlID)
 
-                    '接收卡数据
-                    Dim ScanBoardDate() As Byte
+                        '控制器接收数据
+                        .CliSocket.Send(Wangk.Hash.Hex2Bin("55D50902"))
+                        .CliSocket.Receive(ReceiveData)
 
-                    For receiveID As Integer = 0 To 16 - 1
-                        ReDim ReceiveData(1028 - 1)
-                        .Receive(ReceiveData)
+                        '控制器上传数据
+                        .CliSocket.Send(Wangk.Hash.Hex2Bin("55D50905000000000400"))
 
-                        '预处理数据
-                        For PacketId As Integer = 4 To ReceiveData.Count - 1 Step 32
+                        '接收卡数据
+                        Dim ScanBoardDate() As Byte
+
+                        For receiveID As Integer = 0 To 16 - 1
+                            ReDim ReceiveData(1028 - 1)
+                            .CliSocket.Receive(ReceiveData)
+
+                            '预处理数据
+                            For PacketId As Integer = 4 To ReceiveData.Count - 1 Step 32
 #Region "有效性校验"
-                            '有效数据头
-                            If ReceiveData(PacketId) <> &H55 Then
-                                Continue For
-                            End If
+                                '有效数据头
+                                If ReceiveData(PacketId) <> &H55 Then
+                                    Continue For
+                                End If
 
-                            '网口号不大于4
-                            If ReceiveData(PacketId + 1) > 4 Then
-                                Continue For
-                            End If
+                                '网口号不大于4
+                                If ReceiveData(PacketId + 1) > 4 Then
+                                    Continue For
+                                End If
 
-                            '黑屏则不处理
-                            If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.BLACK Then
-                                Continue For
-                            End If
+                                '黑屏则不处理
+                                If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.BLACK Then
+                                    Continue For
+                                End If
 
-                            '查找接收卡位置[由像素改为索引]
-                            If sysInfo.ScanBoardTable.Item($"{ControlID}-{ReceiveData(PacketId + 1)}-{(ReceiveData(PacketId + 2) * 256 + ReceiveData(PacketId + 3))}") Is Nothing Then
-                                Continue For
-                            End If
-                            Dim tmpScanBoardInfo As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{ControlID}-{ReceiveData(PacketId + 1)}-{(ReceiveData(PacketId + 2) * 256 + ReceiveData(PacketId + 3))}")
+                                '查找接收卡位置[由像素改为索引]
+                                If sysInfo.ScanBoardTable.Item($"{ControlID}-{ReceiveData(PacketId + 1)}-{(ReceiveData(PacketId + 2) * 256 + ReceiveData(PacketId + 3))}") Is Nothing Then
+                                    Continue For
+                                End If
+                                Dim tmpScanBoardInfo As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{ControlID}-{ReceiveData(PacketId + 1)}-{(ReceiveData(PacketId + 2) * 256 + ReceiveData(PacketId + 3))}")
 
-                            '未显示则跳过
-                            If sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).WindowId < 0 Then
-                                Continue For
-                            End If
+                                '未显示则跳过
+                                If sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).WindowId < 0 Then
+                                    Continue For
+                                End If
 #End Region
 
 #Region "添加到待处理队列"
-                            ReDim ScanBoardDate(32 - 1)
-                            For i002 As Integer = 0 To ScanBoardDate.Count - 1
-                                ScanBoardDate(i002) = ReceiveData(PacketId + i002)
-                            Next
+                                ReDim ScanBoardDate(32 - 1)
+                                For i002 As Integer = 0 To ScanBoardDate.Count - 1
+                                    ScanBoardDate(i002) = ReceiveData(PacketId + i002)
+                                Next
 
 #Region "旋转传感器位置"
-                            Dim tmpDate(16 - 1) As Byte
-                            For i002 As Integer = 0 To 16 - 1
-                                tmpDate(i002) = ScanBoardDate(4 + i002)
-                            Next
+                                Dim tmpDate(16 - 1) As Byte
+                                For i002 As Integer = 0 To 16 - 1
+                                    tmpDate(i002) = ScanBoardDate(4 + i002)
+                                Next
 
-                            Select Case sysInfo.Schedule.ScreenList(tmpScanBoardInfo.ScreenId).BoxRotation
-                                Case 0
-                                Case 90
+                                Select Case sysInfo.Schedule.ScreenList(tmpScanBoardInfo.ScreenId).BoxRotation
+                                    Case 0
+                                    Case 90
 #Region "90°"
-                                    Dim index As Integer = 0
-                                    For j002 As Integer = 4 - 1 To 0 Step -1
-                                        For i002 As Integer = 0 To 4 - 1
-                                            ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
-                                            index += 1
+                                        Dim index As Integer = 0
+                                        For j002 As Integer = 4 - 1 To 0 Step -1
+                                            For i002 As Integer = 0 To 4 - 1
+                                                ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
+                                                index += 1
+                                            Next
                                         Next
-                                    Next
 #End Region
-                                Case 180
+                                    Case 180
 #Region "180°"
-                                    If sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
-                                        '单元布局4*4
-                                        Dim index As Integer = 0
-                                        For i002 As Integer = 4 - 1 To 0 Step -1
-                                            For j002 As Integer = 4 - 1 To 0 Step -1
-                                                ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
-                                                index += 1
-                                            Next
-                                        Next
-                                    Else
-                                        '单元布局1*4/4*1
-                                        For i002 As Integer = 0 To 4 - 1
-                                            ScanBoardDate(4 + i002 * 4) = tmpDate((3 - i002) * 4)
-                                        Next
-                                    End If
-
-#End Region
-                                Case 270
-#Region "270°"
-                                    If sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
-                                        '单元布局4*4
-                                        Dim index As Integer = 0
-                                        For j002 As Integer = 0 To 4 - 1
+                                        If sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
+                                            '单元布局4*4
+                                            Dim index As Integer = 0
                                             For i002 As Integer = 4 - 1 To 0 Step -1
-                                                ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
-                                                index += 1
+                                                For j002 As Integer = 4 - 1 To 0 Step -1
+                                                    ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
+                                                    index += 1
+                                                Next
                                             Next
-                                        Next
-                                    Else
-                                        '单元布局1*4/4*1
-                                        For j002 As Integer = 1 To 4 - 1
-                                            ScanBoardDate(4 + j002) = tmpDate(j002 * 4)
-                                        Next
-                                    End If
+                                        Else
+                                            '单元布局1*4/4*1
+                                            For i002 As Integer = 0 To 4 - 1
+                                                ScanBoardDate(4 + i002 * 4) = tmpDate((3 - i002) * 4)
+                                            Next
+                                        End If
 
 #End Region
-                            End Select
+                                    Case 270
+#Region "270°"
+                                        If sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
+                                            '单元布局4*4
+                                            Dim index As Integer = 0
+                                            For j002 As Integer = 0 To 4 - 1
+                                                For i002 As Integer = 4 - 1 To 0 Step -1
+                                                    ScanBoardDate(4 + i002 * 4 + j002) = tmpDate(index)
+                                                    index += 1
+                                                Next
+                                            Next
+                                        Else
+                                            '单元布局1*4/4*1
+                                            For j002 As Integer = 1 To 4 - 1
+                                                ScanBoardDate(4 + j002) = tmpDate(j002 * 4)
+                                            Next
+                                        End If
+
+#End Region
+                                End Select
 #End Region
 
-                            ScanBoardDateQueue.Enqueue(ScanBoardDate)
+                                .ScanBoardDateQueue.Enqueue(ScanBoardDate)
+                                'ScanBoardDateDictionary.Add(ControlID, ScanBoardDate)
 #End Region
 
 #Region "更新点状态"
-                            With sysInfo.ScreenList(tmpScanBoardInfo.ScreenId)
-                                '行
-                                For rowID As Integer = 0 To 4 - 1
-                                    If rowID >= .SensorLayout.Height Then
-                                        Exit For
-                                    End If
-
-                                    '列
-                                    For colID As Integer = 0 To 4 - 1
-                                        If colID >= .SensorLayout.Width Then
+                                With sysInfo.ScreenList(tmpScanBoardInfo.ScreenId)
+                                    '行
+                                    For rowID As Integer = 0 To 4 - 1
+                                        If rowID >= .SensorLayout.Height Then
                                             Exit For
                                         End If
 
-                                        Dim Value As Byte = ScanBoardDate(4 + rowID * 4 + colID）
-                                        Dim Point As New Point(tmpScanBoardInfo.Location.X + colID,
+                                        '列
+                                        For colID As Integer = 0 To 4 - 1
+                                            If colID >= .SensorLayout.Width Then
+                                                Exit For
+                                            End If
+
+                                            Dim Value As Byte = ScanBoardDate(4 + rowID * 4 + colID）
+                                            Dim Point As New Point(tmpScanBoardInfo.Location.X + colID,
                                                            tmpScanBoardInfo.Location.Y + rowID)
 
 #Region "无点"
-                                        '无点
-                                        If (Value And &H80) <> &H80 Then
-                                            '抬起
-                                            If .SensorMap(Point.Y, Point.X) = PointState.DOWN OrElse
+                                            '无点
+                                            If (Value And &H80) <> &H80 Then
+                                                '抬起
+                                                If .SensorMap(Point.Y, Point.X) = PointState.DOWN OrElse
                                                 .SensorMap(Point.Y, Point.X) = PointState.PRESS Then
 
-                                                .SensorMap(Point.Y, Point.X) = PointState.UP
+                                                    .SensorMap(Point.Y, Point.X) = PointState.UP
 
+                                                    Continue For
+                                                End If
+
+                                                .SensorMap(Point.Y, Point.X) = PointState.NOOPS
                                                 Continue For
                                             End If
-
-                                            .SensorMap(Point.Y, Point.X) = PointState.NOOPS
-                                            Continue For
-                                        End If
 #End Region
 
 #Region "旧点"
-                                        '旧点
-                                        If .SensorMap(Point.Y, Point.X) = PointState.DOWN OrElse
+                                            '旧点
+                                            If .SensorMap(Point.Y, Point.X) = PointState.DOWN OrElse
                                             .SensorMap(Point.Y, Point.X) = PointState.PRESS Then
 
-                                            .SensorMap(Point.Y, Point.X) = PointState.PRESS
-                                            Continue For
-                                        End If
+                                                .SensorMap(Point.Y, Point.X) = PointState.PRESS
+                                                Continue For
+                                            End If
 #End Region
 
-                                        '新点
-                                        .SensorMap(Point.Y, Point.X) = PointState.DOWN
+                                            '新点
+                                            .SensorMap(Point.Y, Point.X) = PointState.DOWN
 
+                                        Next
                                     Next
-                                Next
 
-                            End With
+                                End With
 #End Region
+
+                            Next
 
                         Next
-
-                    Next
-                End With
+                    End With
+                Next
 #End Region
 
 #Region "处理数据"
-                Do While ScanBoardDateQueue.Count > 0
-                    Dim ScanBoardDate() As Byte = ScanBoardDateQueue.Dequeue
-                    Dim tmpScanBoardInfo As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{ControlID}-{ScanBoardDate(1)}-{(ScanBoardDate(2) * 256 + ScanBoardDate(3))}")
+                For ControlID = 0 To sysInfo.SenderList.Count - 1
+                    'For Each ControlID As Integer In ScanBoardDateDictionary.Keys
+                    Do While sysInfo.SenderList(ControlID).ScanBoardDateQueue.Count > 0
+                        Dim ScanBoardDate() As Byte = sysInfo.SenderList(ControlID).ScanBoardDateQueue.Dequeue
+                        Dim tmpScanBoardInfo As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{ControlID}-{ScanBoardDate(1)}-{(ScanBoardDate(2) * 256 + ScanBoardDate(3))}")
 
-                    With sysInfo.ScreenList(tmpScanBoardInfo.ScreenId)
-                        If sysInfo.TouchMode = InteractiveOptions.TOUCHMODE.T121 OrElse
-                                sysInfo.DisplayMode <> 0 OrElse
-                                .SensorLayout.Width <> .SensorLayout.Height Then
+                        With sysInfo.ScreenList(tmpScanBoardInfo.ScreenId)
+                            'If sysInfo.TouchMode = InteractiveOptions.TOUCHMODE.T121 OrElse
+                            '        sysInfo.DisplayMode <> 0 OrElse
+                            '        .SensorLayout.Width <> .SensorLayout.Height Then
 #Region "1合1"
                             For rowID As Integer = 0 To 4 - 1
                                 If rowID >= .SensorLayout.Height Then
@@ -433,10 +487,10 @@ Public Module ModuleNovaMCTRL510
 
                                     Dim Value As Byte = ScanBoardDate(4 + rowID * 4 + colID）
                                     Dim Point As New Point(tmpScanBoardInfo.Location.X + colID,
-                                                               tmpScanBoardInfo.Location.Y + rowID)
+                                                                   tmpScanBoardInfo.Location.Y + rowID)
 
                                     If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT OrElse
-                                                sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.TEST Then
+                                        sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.TEST Then
 
                                         'If .SensorMap(Point.Y, Point.X) <> PointState.NOOPS Then
                                         '    sysInfo.logger.LogThis($"{Point.X},{Point.Y},{[Enum].GetName(GetType(PointState), .SensorMap(Point.Y, Point.X))}")
@@ -446,21 +500,11 @@ Public Module ModuleNovaMCTRL510
                                         '无点
                                         If (Value And &H80) <> &H80 Then
                                             '抬起
-                                            'If .SensorMap(Point.Y, Point.X) = PointState.DOWN OrElse
-                                            '    .SensorMap(Point.Y, Point.X) = PointState.PRESS Then
-                                            'If .SensorMap(Point.Y, Point.X) <> PointState.NOOPS Then
-                                            '    sysInfo.logger.LogThis([Enum].GetName(GetType(PointState), .SensorMap(Point.Y, Point.X)))
-                                            'End If
-
-                                            If .SensorMap(Point.Y, Point.X) = PointState.UP Then
-
-                                                sysInfo.Schedule.WindowList.
-                                                        Item(.WindowId).
-                                                        PlayDialog.
-                                                        PointActive(tmpScanBoardInfo.ScreenId,
-                                                                    Point,
-                                                                    Value,
-                                                                    YESInteractiveSDK.PointActivity.UP)
+                                            If .SensorMap(Point.Y, Point.X) = PointState.UP AndAlso
+                                                CheckAdjacencyPieceNums(tmpScanBoardInfo.ScreenId, Point) Then
+                                                WindowPointList(.WindowId).Add(CalcPointPointInfo(tmpScanBoardInfo.ScreenId,
+                                                                                                  Point,
+                                                                                                  PointActivity.UP))
                                             End If
 
                                             Continue For
@@ -469,21 +513,18 @@ Public Module ModuleNovaMCTRL510
 
 #Region "旧点"
                                         '旧点
-                                        If .SensorMap(Point.Y, Point.X) = PointState.PRESS Then
+                                        If .SensorMap(Point.Y, Point.X) = PointState.PRESS AndAlso
+                                            CheckAdjacencyPieceNums(tmpScanBoardInfo.ScreenId, Point) Then
+                                            WindowPointList(.WindowId).Add(CalcPointPointInfo(tmpScanBoardInfo.ScreenId,
+                                                                                              Point,
+                                                                                              PointActivity.PRESS))
                                             Continue For
                                         End If
 #End Region
 
                                         '互动模式下抗干扰启用
-                                        '旧
-                                        'If activateSensorNum < sysInfo.ClickValidNums AndAlso
-                                        '        sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
-                                        '    Continue For
-                                        'End If
-                                        '新
                                         If Not CheckAdjacencyPieceNums(tmpScanBoardInfo.ScreenId, Point) AndAlso
-                                                sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
-
+                                            sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
                                             Continue For
                                         End If
 
@@ -491,162 +532,51 @@ Public Module ModuleNovaMCTRL510
 
 #Region "按下"
                                     '按下
-                                    sysInfo.Schedule.WindowList.
-                                            Item(.WindowId).
-                                            PlayDialog.
-                                            PointActive(tmpScanBoardInfo.ScreenId,
-                                                        Point,
-                                                        Value,
-                                                        YESInteractiveSDK.PointActivity.DOWN)
+                                    Dim tmpPointInfo = CalcPointPointInfo(tmpScanBoardInfo.ScreenId,
+                                                                         Point,
+                                                                         PointActivity.DOWN)
+
+                                    If sysInfo.DisplayMode <> InteractiveOptions.DISPLAYMODE.DEBUG Then
+                                        '互动
+                                        WindowPointList(.WindowId).Add(tmpPointInfo)
+                                    Else
+                                        '显示电容
+                                        sysInfo.Schedule.WindowList.
+                                        Item(.WindowId).
+                                        PlayDialog.ShowCapacitance(tmpPointInfo.X, tmpPointInfo.Y, Value)
+                                    End If
+
 #End Region
                                 Next
                             Next
 #End Region
-                        ElseIf sysInfo.TouchMode = InteractiveOptions.TOUCHMODE.T421 Then
-#Region "4合1"
-                            '新点点击标记
-                            Dim NewPointActiveFlage As Boolean = False
-                            '触发传感器个数
-                            Dim activateSensorNum As Integer = 0
-                            For i001 As Integer = 0 To 16 - 1
-                                activateSensorNum += If(ScanBoardDate(4 + i001) And &H80, 1, 0)
-                            Next
-
-                            For rowID As Integer = 0 To 2 - 1
-                                For colID As Integer = 0 To 2 - 1
-                                    NewPointActiveFlage = False
-
-                                    Dim Point As New Point(tmpScanBoardInfo.Location.X + colID * 2,
-                                                               tmpScanBoardInfo.Location.Y + rowID * 2)
-
-                                    For lampRowID As Integer = 0 To 2 - 1
-                                        For lampColID As Integer = 0 To 2 - 1
-                                            Dim xID As Integer = Point.X + lampColID
-                                            Dim yID As Integer = Point.Y + lampRowID
-                                            Dim Value As Byte = ScanBoardDate(4 + rowID * 8 + colID * 2 + lampRowID * 4 + lampColID）
-#Region "无点"
-                                            '无点
-                                            If (Value And &H80) <> &H80 Then
-                                                Continue For
-                                            End If
+                        End With
+                    Loop
+                Next
 #End Region
 
-#Region "旧点"
-                                            '旧点
-                                            If .SensorMap(yID, xID) = PointState.PRESS Then
-                                                Continue For
-                                            End If
-#End Region
-
-#Region "新点"
-                                            '新点
-                                            NewPointActiveFlage = True
-#End Region
-
-                                        Next
-                                    Next
-
-                                    '互动模式下抗干扰启用
-                                    If activateSensorNum < sysInfo.ClickValidNums Then
-                                        Continue For
-                                    End If
-
-                                    '没有新点则不触发
-                                    If Not NewPointActiveFlage Then
-                                        Continue For
-                                    End If
-
-#Region "按下"
-                                    '按下
-                                    sysInfo.Schedule.WindowList.
-                                            Item(.WindowId).
-                                            PlayDialog.
-                                            PointActive(tmpScanBoardInfo.ScreenId,
-                                                        Point,
-                                                        0,
-                                                        YESInteractiveSDK.PointActivity.DOWN)
-#End Region
-                                Next
-                            Next
-#End Region
-                        Else 'If sysInfo.TouchMode = InteractiveOptions.TOUCHMODE.T1621 Then
-#Region "16合1"
-                            '新点点击标记
-                            Dim NewPointActiveFlage As Boolean = False
-                            '触发传感器个数
-                            Dim activateSensorNum As Integer = 0
-                            For i001 As Integer = 0 To 16 - 1
-                                activateSensorNum += If(ScanBoardDate(4 + i001) And &H80, 1, 0)
-                            Next
-
-                            For rowID As Integer = 0 To 4 - 1
-                                For colID As Integer = 0 To 4 - 1
-                                    Dim Value As Byte = ScanBoardDate(4 + rowID * 4 + colID）
-                                    'Dim ValueID As Integer = PacketId + 4 + rowId * 4 + colId
-                                    Dim Point As New Point(tmpScanBoardInfo.Location.X + colID,
-                                                               tmpScanBoardInfo.Location.Y + rowID)
-
-#Region "无点"
-                                    '无点
-                                    If (Value And &H80) <> &H80 Then
-                                        Continue For
-                                    End If
-#End Region
-
-#Region "旧点"
-                                    '旧点
-                                    If .SensorMap(Point.Y, Point.X) = PointState.PRESS Then
-                                        Continue For
-                                    End If
-#End Region
-
-#Region "新点"
-                                    '新点
-                                    NewPointActiveFlage = True
-#End Region
-
-                                Next
-                            Next
-
-                            '互动模式下抗干扰启用
-                            If activateSensorNum < sysInfo.ClickValidNums Then
-                                Continue Do
-                            End If
-
-                            '没有新点则不触发
-                            If Not NewPointActiveFlage Then
-                                Continue Do
-                            End If
-
-#Region "按下"
-                            '按下
-                            sysInfo.Schedule.WindowList.
-                                            Item(.WindowId).
-                                            PlayDialog.
-                                            PointActive(tmpScanBoardInfo.ScreenId,
-                                                        tmpScanBoardInfo.Location,
-                                                        0,
-                                                        YESInteractiveSDK.PointActivity.DOWN)
-#End Region
-#End Region
-                        End If
-                    End With
-                Loop
+#Region "发送数据"
+                'sysInfo.Schedule.WindowList.
+                '            Item(.WindowId).
+                '            PlayDialog.
+                '            PointActive(tmpScanBoardInfo.ScreenId,
+                '                        Point,
+                '                        Value,
+                '                        YESInteractiveSDK.PointActivity.UP)
+                For wID = 0 To WindowPointList.Count - 1
+                    sysInfo.Schedule.WindowList.
+                        Item(wID).
+                        PlayDialog.
+                        PointActive(WindowPointList(wID))
+                Next
 #End Region
 
             Catch ex As Exception
-                With sysInfo.SenderList(ControlID).CliSocket
-                    sysInfo.LastErrorInfo = $"{ex.Message}
-IP Info       : { .RemoteEndPoint.ToString}
-Socket Connect: { .Connected}
-Exception     : { ex.ToString}"
-                End With
+                sysInfo.LastErrorInfo = ex.ToString
 
                 sysInfo.logger.LogThis("通信异常", sysInfo.LastErrorInfo, Wangk.Tools.Loglevel.Level_INFO)
 
                 exceptionNum += 1
-                'Catch ex As Exception
-                '    sysInfo.logger.LogThis("控制器通信异常", ex.ToString, Wangk.Tools.Loglevel.Level_DEBUG)
             Finally
                 readNum += 1
                 Thread.Sleep(sysInfo.InquireTimeSec)
@@ -654,12 +584,21 @@ Exception     : { ex.ToString}"
 
         Loop
 
-        Try
-            sysInfo.SenderList(ControlID).CliSocket.Close()
-        Catch ex As Exception
-        End Try
+        For ControlID = 0 To sysInfo.SenderList.Count - 1
+            With sysInfo.SenderList(ControlID)
+                'If Not .LinkFlage Then
+                '    Continue For
+                'End If
 
-        Debug.WriteLine($"Control:{ControlID} Exit")
+                Try
+                    .CliSocket.Close()
+                Catch ex As Exception
+                End Try
+            End With
+        Next
+
+
+        Debug.WriteLine($"Control:Exit")
     End Sub
 #End Region
 

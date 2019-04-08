@@ -82,5 +82,6 @@ T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.vbproj
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.exe
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.xml
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.pdb
-T:\YESInteractiveStudio\InteractiveStudio\bin\CopyDataStruct.dll
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.UnityPlayControl.resources
+T:\YESInteractiveStudio\InteractiveStudio\bin\Newtonsoft.Json.dll
+T:\YESInteractiveStudio\InteractiveStudio\bin\Newtonsoft.Json.xml

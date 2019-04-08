@@ -460,7 +460,7 @@ InteractiveStudio
  节目定时切换
  </summary>
 </member>
-<member name="M:InteractiveStudio.MDIParentMain.DisposeControlOffLink(System.Int32)">
+<member name="M:InteractiveStudio.MDIParentMain.DisposeControlOffLink(System.Boolean)">
  <summary>
  控制器离线处理
  </summary>
@@ -560,11 +560,6 @@ InteractiveStudio
 <member name="M:InteractiveStudio.MDIParentMain.ComboBoxItem10_SelectedIndexChanged(System.Object,System.EventArgs)">
  <summary>
  触摸灵敏度
- </summary>
-</member>
-<member name="M:InteractiveStudio.MDIParentMain.ComboBoxItem11_SelectedIndexChanged(System.Object,System.EventArgs)">
- <summary>
- 触摸模式
  </summary>
 </member>
 <member name="M:InteractiveStudio.MDIParentMain.ComboBoxItem7_SelectedIndexChanged(System.Object,System.EventArgs)">
@@ -757,14 +752,15 @@ InteractiveStudio
  切换显示模式
  </summary>
 </member>
-<member name="M:InteractiveStudio.PlayWindow.PointActive(System.Int32,System.Drawing.Point,System.Byte,YESInteractiveSDK.ModuleStructure.PointActivity)">
+<member name="M:InteractiveStudio.PlayWindow.PointActive(System.Collections.Generic.List{YESInteractiveSDK.ModuleStructure.PointInfo})">
  <summary>
  点击事件
  </summary>
- <param name="ScreenID">屏幕ID</param>
- <param name="Location">点击位置</param>
- <param name="Value">电容值</param>
- <param name="Active">操作</param>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.ShowCapacitance(System.Int32,System.Int32,System.Byte)">
+ <summary>
+ 显示电容值
+ </summary>
 </member>
 <member name="M:InteractiveStudio.PlayWindow.ChangeControlsLanguage">
  <summary>
@@ -921,14 +917,9 @@ InteractiveStudio
  socket连接变量
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.SenderInfo.WorkThread">
+<member name="F:InteractiveStudio.ModuleStructure.SenderInfo.ScanBoardDateQueue">
  <summary>
- 状态检测线程
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.SenderInfo.MaxReadNum">
- <summary>
- 每秒最大查询次数
+  接收缓存
  </summary>
 </member>
 <member name="T:InteractiveStudio.ModuleStructure.PointState">
@@ -1176,26 +1167,6 @@ InteractiveStudio
  调试
  </summary>
 </member>
-<member name="T:InteractiveStudio.ModuleStructure.InteractiveOptions.TOUCHMODE">
- <summary>
- 触摸模式
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.InteractiveOptions.TOUCHMODE.T121">
- <summary>
- 1合1
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.InteractiveOptions.TOUCHMODE.T421">
- <summary>
- 4合1
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.InteractiveOptions.TOUCHMODE.T1621">
- <summary>
- 16合1
- </summary>
-</member>
 <member name="T:InteractiveStudio.ModuleStructure.SystemInfo">
  <summary>
  系统配置
@@ -1281,11 +1252,6 @@ InteractiveStudio
  显示模式
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.TouchMode">
- <summary>
- 触摸模式
- </summary>
-</member>
 <member name="F:InteractiveStudio.ModuleStructure.SystemInfo.TouchSensitivity">
  <summary>
  触摸灵敏度 低1-9高
@@ -1311,6 +1277,16 @@ InteractiveStudio
  查询时间间隔 ms
  </summary>
 </member>
+<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.WorkThread">
+ <summary>
+ 状态检测线程
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.ReadNum">
+ <summary>
+ 每秒最大查询次数
+ </summary>
+</member>
 <member name="F:InteractiveStudio.ModuleVar.sysInfo">
  <summary>
  系统配置变量
@@ -1331,11 +1307,16 @@ InteractiveStudio
  检测相邻触发数是否大于等于抗干扰数
  </summary>
 </member>
-<member name="M:InteractiveStudio.ModuleNovaMCTRL510.ControlWorkThread(System.Int32)">
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.CalcPointPointInfo(System.Int32,System.Drawing.Point,YESInteractiveSDK.ModuleStructure.PointActivity)">
+ <summary>
+ 计算坐标
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.ControlWorkThread">
  <summary>
  处理线程
  </summary>
- <param name="ControlID">控制器ID</param>
 </member>
 <member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetTouchSensitivity(System.Int32,System.Boolean)">
  <summary>

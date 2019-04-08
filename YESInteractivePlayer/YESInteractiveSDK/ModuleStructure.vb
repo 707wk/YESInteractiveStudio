@@ -12,17 +12,21 @@
         ''' </summary>
         Dim Y As Integer
         ''' <summary>
-        ''' 分组ID
+        ''' ID
         ''' </summary>
-        Dim GroupID As Integer
+        Dim ID As Integer
         ''' <summary>
         ''' 动作
         ''' </summary>
         Dim Activity As PointActivity
-        ''' <summary>
-        ''' 点击时长
-        ''' </summary>
-        Dim TickTime As Integer
+        '''' <summary>
+        '''' 点击时长
+        '''' </summary>
+        'Dim TickTime As Integer
+        '''' <summary>
+        '''' 内部保留
+        '''' </summary>
+        'Dim Value As Byte
     End Structure
 
     ''' <summary>
