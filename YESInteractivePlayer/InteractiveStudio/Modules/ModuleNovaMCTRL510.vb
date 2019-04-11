@@ -134,11 +134,12 @@ Public Module ModuleNovaMCTRL510
                    MsgBoxStyle.Information,
                    sysInfo.Language.GetS("Connected Exception"))
             Return False
+
             Exit Function
         End Try
 
         sysInfo.WorkThread = New Threading.Thread(AddressOf ControlWorkThread) With {
-                        .IsBackground = True'后台启动
+            .IsBackground = True'后台启动
         }
         sysInfo.WorkThread.Start()
 #End Region
@@ -571,6 +572,7 @@ Public Module ModuleNovaMCTRL510
                 Next
 #End Region
 
+                Thread.Sleep(sysInfo.InquireTimeSec)
             Catch ex As Exception
                 sysInfo.LastErrorInfo = ex.ToString
 
@@ -579,20 +581,23 @@ Public Module ModuleNovaMCTRL510
                 exceptionNum += 1
             Finally
                 readNum += 1
-                Thread.Sleep(sysInfo.InquireTimeSec)
+                'Thread.Sleep(sysInfo.InquireTimeSec)
             End Try
 
         Loop
 
         For ControlID = 0 To sysInfo.SenderList.Count - 1
             With sysInfo.SenderList(ControlID)
-                'If Not .LinkFlage Then
-                '    Continue For
-                'End If
+                If Not .LinkFlage Then
+                    sysInfo.logger.LogThis($"第{ControlID}个控制器未连接")
+                    Continue For
+                End If
 
+                sysInfo.logger.LogThis($"关闭第{ControlID}个控制器")
                 Try
                     .CliSocket.Close()
                 Catch ex As Exception
+                    sysInfo.logger.LogThis($"关闭第{ControlID}个控制器异常{ex.ToString}")
                 End Try
             End With
         Next

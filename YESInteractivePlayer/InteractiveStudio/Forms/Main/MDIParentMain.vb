@@ -516,6 +516,12 @@ Public Class MDIParentMain
 
         DisconnectControl()
 
+        For i001 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
+            With sysInfo.Schedule.WindowList(i001)
+                .PlayDialog.SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.BLACK)
+            End With
+        Next
+
         SetLinkControlState(sysInfo.LinkFlage)
 
         sysInfo.logger.LogThis("控制器", "断开控制器", Wangk.Tools.Loglevel.Level_DEBUG)
@@ -596,7 +602,7 @@ Public Class MDIParentMain
 
             sysInfo.InquireTimeSec -= 1
         ElseIf sysInfo.ReadNum > 22 AndAlso
-             sysInfo.InquireTimeSec < 1000 Then
+             sysInfo.InquireTimeSec < 100 Then
 
             sysInfo.InquireTimeSec += 1
         End If
