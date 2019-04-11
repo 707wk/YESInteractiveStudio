@@ -572,18 +572,16 @@ Public Module ModuleNovaMCTRL510
                 Next
 #End Region
 
-                Thread.Sleep(sysInfo.InquireTimeSec)
             Catch ex As Exception
                 sysInfo.LastErrorInfo = ex.ToString
 
                 sysInfo.logger.LogThis("通信异常", sysInfo.LastErrorInfo, Wangk.Tools.Loglevel.Level_INFO)
 
                 exceptionNum += 1
-            Finally
-                readNum += 1
-                'Thread.Sleep(sysInfo.InquireTimeSec)
             End Try
 
+            readNum += 1
+            Thread.Sleep(sysInfo.InquireTimeSec)
         Loop
 
         For ControlID = 0 To sysInfo.SenderList.Count - 1
