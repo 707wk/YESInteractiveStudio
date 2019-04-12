@@ -173,7 +173,7 @@ Public Module ModuleNovaMCTRL510
     End Function
 #End Region
 
-#Region "处理线程"
+#Region "传感器数据处理线程"
 #Region "检测相邻触发数是否大于等于抗干扰数"
     ''' <summary>
     ''' 检测相邻触发数是否大于等于抗干扰数
@@ -211,8 +211,7 @@ Public Module ModuleNovaMCTRL510
     ''' </summary>
     ''' <returns></returns>
     Public Function CalcPointPointInfo(ScreenID As Integer,
-                                       Location As Point,
-                                       Active As PointActivity) As PointInfo
+                                       Location As Point) As PointInfo
         '计算尺寸及位置
         Dim SensorWidth As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Width
         Dim SensorHeight As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Height
@@ -222,8 +221,7 @@ Public Module ModuleNovaMCTRL510
         Return New PointInfo With {
             .ID = txp + (typ << 16),
             .X = txp,
-            .Y = typ,
-            .Activity = Active
+            .Y = typ
         }
     End Function
 #End Region
@@ -239,8 +237,6 @@ Public Module ModuleNovaMCTRL510
         '读取次数
         Dim readNum As Integer = 0
 
-        ''接收缓存
-        'Dim ScanBoardDateDictionary As New Dictionary(Of Integer, Byte())
         '检测到的活动点队列
         Dim WindowPointList As List(Of PointInfo)()
         ReDim WindowPointList(sysInfo.Schedule.WindowList.Count - 1)
@@ -250,7 +246,6 @@ Public Module ModuleNovaMCTRL510
 
         '定时器
         'Dim testTime As New Stopwatch
-
 
         Do While sysInfo.LinkFlage
             For wID = 0 To WindowPointList.Count - 1
@@ -287,8 +282,6 @@ Public Module ModuleNovaMCTRL510
                         If Not .LinkFlage Then
                             Continue For
                         End If
-
-                        'With sysInfo.SenderList(ControlID)
 
                         '控制器接收数据
                         .CliSocket.Send(Wangk.Hash.Hex2Bin("55D50902"))
@@ -466,16 +459,14 @@ Public Module ModuleNovaMCTRL510
 
 #Region "处理数据"
                 For ControlID = 0 To sysInfo.SenderList.Count - 1
-                    'For Each ControlID As Integer In ScanBoardDateDictionary.Keys
+
                     Do While sysInfo.SenderList(ControlID).ScanBoardDateQueue.Count > 0
+
                         Dim ScanBoardDate() As Byte = sysInfo.SenderList(ControlID).ScanBoardDateQueue.Dequeue
                         Dim tmpScanBoardInfo As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{ControlID}-{ScanBoardDate(1)}-{(ScanBoardDate(2) * 256 + ScanBoardDate(3))}")
 
                         With sysInfo.ScreenList(tmpScanBoardInfo.ScreenId)
-                            'If sysInfo.TouchMode = InteractiveOptions.TOUCHMODE.T121 OrElse
-                            '        sysInfo.DisplayMode <> 0 OrElse
-                            '        .SensorLayout.Width <> .SensorLayout.Height Then
-#Region "1合1"
+
                             For rowID As Integer = 0 To 4 - 1
                                 If rowID >= .SensorLayout.Height Then
                                     Exit For
@@ -493,32 +484,9 @@ Public Module ModuleNovaMCTRL510
                                     If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT OrElse
                                         sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.TEST Then
 
-                                        'If .SensorMap(Point.Y, Point.X) <> PointState.NOOPS Then
-                                        '    sysInfo.logger.LogThis($"{Point.X},{Point.Y},{[Enum].GetName(GetType(PointState), .SensorMap(Point.Y, Point.X))}")
-                                        'End If
-
 #Region "无点"
                                         '无点
                                         If (Value And &H80) <> &H80 Then
-                                            '抬起
-                                            If .SensorMap(Point.Y, Point.X) = PointState.UP AndAlso
-                                                CheckAdjacencyPieceNums(tmpScanBoardInfo.ScreenId, Point) Then
-                                                WindowPointList(.WindowId).Add(CalcPointPointInfo(tmpScanBoardInfo.ScreenId,
-                                                                                                  Point,
-                                                                                                  PointActivity.UP))
-                                            End If
-
-                                            Continue For
-                                        End If
-#End Region
-
-#Region "旧点"
-                                        '旧点
-                                        If .SensorMap(Point.Y, Point.X) = PointState.PRESS AndAlso
-                                            CheckAdjacencyPieceNums(tmpScanBoardInfo.ScreenId, Point) Then
-                                            WindowPointList(.WindowId).Add(CalcPointPointInfo(tmpScanBoardInfo.ScreenId,
-                                                                                              Point,
-                                                                                              PointActivity.PRESS))
                                             Continue For
                                         End If
 #End Region
@@ -534,8 +502,7 @@ Public Module ModuleNovaMCTRL510
 #Region "按下"
                                     '按下
                                     Dim tmpPointInfo = CalcPointPointInfo(tmpScanBoardInfo.ScreenId,
-                                                                         Point,
-                                                                         PointActivity.DOWN)
+                                                                         Point)
 
                                     If sysInfo.DisplayMode <> InteractiveOptions.DISPLAYMODE.DEBUG Then
                                         '互动
@@ -546,24 +513,18 @@ Public Module ModuleNovaMCTRL510
                                         Item(.WindowId).
                                         PlayDialog.ShowCapacitance(tmpPointInfo.X, tmpPointInfo.Y, Value)
                                     End If
-
 #End Region
                                 Next
+
                             Next
-#End Region
+
                         End With
+
                     Loop
                 Next
 #End Region
 
 #Region "发送数据"
-                'sysInfo.Schedule.WindowList.
-                '            Item(.WindowId).
-                '            PlayDialog.
-                '            PointActive(tmpScanBoardInfo.ScreenId,
-                '                        Point,
-                '                        Value,
-                '                        YESInteractiveSDK.PointActivity.UP)
                 For wID = 0 To WindowPointList.Count - 1
                     sysInfo.Schedule.WindowList.
                         Item(wID).
@@ -584,24 +545,21 @@ Public Module ModuleNovaMCTRL510
             Thread.Sleep(sysInfo.InquireTimeSec)
         Loop
 
+#Region "关闭网络连接"
         For ControlID = 0 To sysInfo.SenderList.Count - 1
             With sysInfo.SenderList(ControlID)
                 If Not .LinkFlage Then
-                    sysInfo.logger.LogThis($"第{ControlID}个控制器未连接")
                     Continue For
                 End If
 
-                sysInfo.logger.LogThis($"关闭第{ControlID}个控制器")
                 Try
                     .CliSocket.Close()
                 Catch ex As Exception
-                    sysInfo.logger.LogThis($"关闭第{ControlID}个控制器异常{ex.ToString}")
                 End Try
             End With
         Next
+#End Region
 
-
-        Debug.WriteLine($"Control:Exit")
     End Sub
 #End Region
 

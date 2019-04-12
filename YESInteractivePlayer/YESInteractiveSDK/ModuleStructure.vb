@@ -4,6 +4,10 @@
     ''' </summary>
     Structure PointInfo
         ''' <summary>
+        ''' ID
+        ''' </summary>
+        Dim ID As Integer
+        ''' <summary>
         ''' X坐标
         ''' </summary>
         Dim X As Integer
@@ -11,39 +15,32 @@
         ''' Y坐标
         ''' </summary>
         Dim Y As Integer
-        ''' <summary>
-        ''' ID
-        ''' </summary>
-        Dim ID As Integer
-        ''' <summary>
-        ''' 动作
-        ''' </summary>
-        Dim Activity As PointActivity
+
+        '''' <summary>
+        '''' 动作
+        '''' </summary>
+        'Dim Activity As PointActivity
         '''' <summary>
         '''' 点击时长
         '''' </summary>
         'Dim TickTime As Integer
-        '''' <summary>
-        '''' 内部保留
-        '''' </summary>
-        'Dim Value As Byte
     End Structure
 
-    ''' <summary>
-    ''' 触发动作
-    ''' </summary>
-    Enum PointActivity
-        ''' <summary>
-        ''' 按下
-        ''' </summary>
-        DOWN
-        ''' <summary>
-        ''' 长按
-        ''' </summary>
-        PRESS
-        ''' <summary>
-        ''' 抬起
-        ''' </summary>
-        UP
-    End Enum
+    '''' <summary>
+    '''' 触发动作
+    '''' </summary>
+    'Enum PointActivity
+    '    ''' <summary>
+    '    ''' 按下
+    '    ''' </summary>
+    '    DOWN
+    '    ''' <summary>
+    '    ''' 长按
+    '    ''' </summary>
+    '    PRESS
+    '    ''' <summary>
+    '    ''' 抬起
+    '    ''' </summary>
+    '    UP
+    'End Enum
 End Module

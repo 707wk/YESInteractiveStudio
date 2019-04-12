@@ -83,3 +83,6 @@ T:\YESInteractiveStudio\InteractiveStudio\obj\Debug\InteractiveStudio.vbproj.Cop
 T:\YESInteractiveStudio\InteractiveStudio\obj\Debug\InteractiveStudio.exe
 T:\YESInteractiveStudio\InteractiveStudio\obj\Debug\InteractiveStudio.xml
 T:\YESInteractiveStudio\InteractiveStudio\obj\Debug\InteractiveStudio.pdb
+T:\YESInteractiveStudio\InteractiveStudio\bin\Newtonsoft.Json.dll
+T:\YESInteractiveStudio\InteractiveStudio\bin\Newtonsoft.Json.xml
+T:\YESInteractiveStudio\InteractiveStudio\obj\Debug\InteractiveStudio.UnityPlayControl.resources

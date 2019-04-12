@@ -70,6 +70,7 @@ Public Module ModuleStructure
         '''' 每秒最大查询次数
         '''' </summary>
         'Dim MaxReadNum As Integer
+
         ''' <summary>
         '''  接收缓存
         ''' </summary>

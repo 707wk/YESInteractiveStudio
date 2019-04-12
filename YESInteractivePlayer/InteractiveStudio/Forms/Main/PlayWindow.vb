@@ -369,10 +369,10 @@ Public Class PlayWindow
 #Region "swf"
                         For Each i001 As PointInfo In values
                             'swf
-                            '非按下事件则丢弃
-                            If i001.Activity <> PointActivity.DOWN Then
-                                Exit Sub
-                            End If
+                            ''非按下事件则丢弃
+                            'If i001.Activity <> PointActivity.DOWN Then
+                            '    Exit Sub
+                            'End If
 
                             If Not SetCaptureFlage Then
 #Region "启用接口"
@@ -427,10 +427,10 @@ Public Class PlayWindow
             Case InteractiveOptions.DISPLAYMODE.TEST
 #Region "测试"
                 For Each i001 As PointInfo In values
-                    '非按下事件则丢弃
-                    If i001.Activity <> PointActivity.DOWN Then
-                        Exit Sub
-                    End If
+                    ''非按下事件则丢弃
+                    'If i001.Activity <> PointActivity.DOWN Then
+                    '    Exit Sub
+                    'End If
 
                     gBack.DrawString($"√", gFont, gBrush, i001.X - gFont.SizeInPoints + 2, i001.Y - gFont.SizeInPoints + 2)
                 Next
