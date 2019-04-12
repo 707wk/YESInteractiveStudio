@@ -42,6 +42,11 @@ YESInteractiveSDK
  Y坐标
  </summary>
 </member>
+<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.Old">
+ <summary>
+ 旧点
+ </summary>
+</member>
 <member name="T:YESInteractiveSDK.IYESInterfaceSDK">
  <summary>
  YESInteractive插件需要实现的接口

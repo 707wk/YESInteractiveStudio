@@ -16,6 +16,11 @@
         ''' </summary>
         Dim Y As Integer
 
+        ''' <summary>
+        ''' 旧点
+        ''' </summary>
+        Dim Old As Byte
+
         '''' <summary>
         '''' 动作
         '''' </summary>

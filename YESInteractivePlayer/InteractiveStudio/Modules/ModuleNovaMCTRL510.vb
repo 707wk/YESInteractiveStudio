@@ -211,7 +211,8 @@ Public Module ModuleNovaMCTRL510
     ''' </summary>
     ''' <returns></returns>
     Public Function CalcPointPointInfo(ScreenID As Integer,
-                                       Location As Point) As PointInfo
+                                       Location As Point,
+                                       Old As Byte) As PointInfo
         '计算尺寸及位置
         Dim SensorWidth As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Width
         Dim SensorHeight As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Height
@@ -221,7 +222,8 @@ Public Module ModuleNovaMCTRL510
         Return New PointInfo With {
             .ID = txp + (typ << 16),
             .X = txp,
-            .Y = typ
+            .Y = typ,
+            .Old = Old
         }
     End Function
 #End Region
@@ -491,6 +493,16 @@ Public Module ModuleNovaMCTRL510
                                         End If
 #End Region
 
+#Region "旧点"
+                                        If .SensorMap(Point.Y, Point.X) = PointState.PRESS AndAlso
+                                            CheckAdjacencyPieceNums(tmpScanBoardInfo.ScreenId, Point) Then
+                                            WindowPointList(.WindowId).Add(CalcPointPointInfo(tmpScanBoardInfo.ScreenId,
+                                                                                              Point,
+                                                                                              1))
+                                            Continue For
+                                        End If
+#End Region
+
                                         '互动模式下抗干扰启用
                                         If Not CheckAdjacencyPieceNums(tmpScanBoardInfo.ScreenId, Point) AndAlso
                                             sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
@@ -499,10 +511,10 @@ Public Module ModuleNovaMCTRL510
 
                                     End If
 
-#Region "按下"
-                                    '按下
+#Region "新点"
                                     Dim tmpPointInfo = CalcPointPointInfo(tmpScanBoardInfo.ScreenId,
-                                                                         Point)
+                                                                         Point,
+                                                                         0)
 
                                     If sysInfo.DisplayMode <> InteractiveOptions.DISPLAYMODE.DEBUG Then
                                         '互动

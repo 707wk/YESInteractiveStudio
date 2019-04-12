@@ -1307,7 +1307,7 @@ InteractiveStudio
  检测相邻触发数是否大于等于抗干扰数
  </summary>
 </member>
-<member name="M:InteractiveStudio.ModuleNovaMCTRL510.CalcPointPointInfo(System.Int32,System.Drawing.Point)">
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.CalcPointPointInfo(System.Int32,System.Drawing.Point,System.Byte)">
  <summary>
  计算坐标
  </summary>
