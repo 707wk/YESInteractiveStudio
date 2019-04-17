@@ -216,7 +216,7 @@ Public Class PlayWindow
             UnityControl.Dispose()
         End If
 
-        UnityControl = New UnityPlayControl(FilePath)
+        UnityControl = New UnityPlayControl(FilePath, $"{Me.Top},{Me.Left},{Me.Width},{Me.Height}")
 
         Me.Controls.Add(UnityControl)
         With UnityControl

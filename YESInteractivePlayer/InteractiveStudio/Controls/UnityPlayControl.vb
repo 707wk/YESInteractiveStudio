@@ -1,4 +1,9 @@
-﻿Imports YESInteractiveSDK
+﻿Imports System.IO
+Imports System.Text
+Imports System.Xml
+Imports System.Xml.Serialization
+Imports InteractiveStudio.UnityConfig.ModuleUnityConfig
+Imports YESInteractiveSDK
 
 Public Class UnityPlayControl
     Declare Function MoveWindow Lib "User32.dll" (handle As IntPtr,
@@ -32,23 +37,61 @@ Public Class UnityPlayControl
     Private ReadOnly WA_ACTIVE As IntPtr = New IntPtr(1)
     Private ReadOnly WA_INACTIVE As IntPtr = New IntPtr(0)
 
-    Public Sub New(UnityPath As String)
+    Public Sub New(UnityPath As String, SizeStr As String)
 
         ' 此调用是设计器所必需的。
         InitializeComponent()
 
         ' 在 InitializeComponent() 调用之后添加任何初始化。
         UnityProcess = New Process
-        UnityProcess.StartInfo.FileName = UnityPath
-    End Sub
 
-    Private Sub UserControl1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         With UnityProcess.StartInfo
-            .Arguments = $"-parentHWND {Panel1.Handle.ToInt32} {Environment.CommandLine}"
+            UnityProcess.StartInfo.FileName = UnityPath
+            .Arguments = $"{SizeStr} -parentHWND {Panel1.Handle.ToInt32} {Environment.CommandLine}"
             .UseShellExecute = False
             .CreateNoWindow = True
             .WorkingDirectory = IO.Path.GetDirectoryName(.FileName)
         End With
+    End Sub
+
+    Private Sub UserControl1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+#Region "写入位置及尺寸"
+        'Dim tmpConfig As applicationConfig
+
+        'Using fStream As New FileStream($"{IO.Path.GetDirectoryName(UnityProcess.StartInfo.FileName)}\config.xml", FileMode.Open)
+        '    Dim XmlSerializer As XmlSerializer = New XmlSerializer(GetType(applicationConfig))
+        '    tmpConfig = XmlSerializer.Deserialize(fStream)
+        'End Using
+
+        'For i001 = 0 To tmpConfig.MovieControl.Count - 1
+        '    Select Case tmpConfig.MovieControl(i001).key
+        '        Case "Top"
+        '            tmpConfig.MovieControl(i001).value = Me.Top
+
+        '        Case "Left"
+        '            tmpConfig.MovieControl(i001).value = Me.Left
+
+        '        Case "Width"
+        '            tmpConfig.MovieControl(i001).value = Me.Width
+
+        '        Case "Height"
+        '            tmpConfig.MovieControl(i001).value = Me.Height
+
+        '    End Select
+        'Next
+
+        'Using fStream As New FileStream($"{IO.Path.GetDirectoryName(UnityProcess.StartInfo.FileName)}\config.xml", FileMode.Create)
+        '    Dim ns As XmlSerializerNamespaces = New XmlSerializerNamespaces()
+        '    ns.Add("", "") '删除命名空间
+        '    '添加编码属性
+        '    Dim tmpXmlTextWriter As XmlTextWriter = New XmlTextWriter(fStream, Encoding.UTF8) With {
+        '        .Formatting = Formatting.Indented '子节点缩进
+        '    }
+        '    Dim sfFormatter As New XmlSerializer(GetType(applicationConfig))
+        '    sfFormatter.Serialize(tmpXmlTextWriter, tmpConfig, ns)
+        'End Using
+#End Region
+
         UnityProcess.Start()
 
         UnityProcess.WaitForInputIdle()
