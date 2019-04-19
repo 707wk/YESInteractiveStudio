@@ -8,11 +8,11 @@ Public Class MDIParentMain
 #Region "控制台窗口"
     '调用控制台窗口
     <DllImport(”kernel32.dll”)>
-    Public Shared Function AllocConsole() As Boolean
+    Private Shared Function AllocConsole() As Boolean
     End Function
     '释放控制台窗口
     <DllImport(”kernel32.dll”)>
-    Public Shared Function FreeConsole() As Boolean
+    Private Shared Function FreeConsole() As Boolean
     End Function
 #End Region
 
@@ -20,12 +20,12 @@ Public Class MDIParentMain
     ''' <summary>
     ''' 声明注册热键API函数
     ''' </summary>
-    Public Declare Function RegisterHotKey Lib "user32" (ByVal hWnd As Integer, ByVal id As Integer,
+    Private Declare Function RegisterHotKey Lib "user32" (ByVal hWnd As Integer, ByVal id As Integer,
                                                     ByVal fsModifiers As Integer, ByVal vk As Integer) As Integer
     ''' <summary>
     ''' 声明注销热键API函数
     ''' </summary>
-    Public Declare Function UnregisterHotKey Lib "user32" (ByVal hWnd As Integer, ByVal id As Integer) As Integer
+    Private Declare Function UnregisterHotKey Lib "user32" (ByVal hWnd As Integer, ByVal id As Integer) As Integer
     ''' <summary>
     ''' 热键消息ID
     ''' </summary>

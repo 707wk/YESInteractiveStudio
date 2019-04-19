@@ -6,25 +6,25 @@ Imports InteractiveStudio.UnityConfig.ModuleUnityConfig
 Imports YESInteractiveSDK
 
 Public Class UnityPlayControl
-    Declare Function MoveWindow Lib "User32.dll" (handle As IntPtr,
+    Private Declare Function MoveWindow Lib "User32.dll" (handle As IntPtr,
                                                   x As Integer,
                                                   y As Integer,
                                                   width As Integer,
                                                   height As Integer,
                                                   redraw As Boolean) As Boolean
 
-    Delegate Function WindowEnumProc(hwnd As IntPtr, lparam As IntPtr) As Integer
+    Private Delegate Function WindowEnumProc(hwnd As IntPtr, lparam As IntPtr) As Integer
 
-    Declare Function EnumChildWindows Lib "User32.dll" (hwnd As IntPtr,
+    Private Declare Function EnumChildWindows Lib "User32.dll" (hwnd As IntPtr,
                                                         func As WindowEnumProc,
                                                         lParam As IntPtr) As Boolean
 
-    Declare Function SendMessageW Lib "User32.dll" (hwnd As IntPtr,
+    Private Declare Function SendMessageW Lib "User32.dll" (hwnd As IntPtr,
                                                     msg As Integer,
                                                     wParam As IntPtr,
                                                     lParam As IntPtr) As Integer
 
-    Declare Function SendMessage Lib "User32.dll" Alias "SendMessageW" (hWnd As Integer,
+    Private Declare Function SendMessage Lib "User32.dll" Alias "SendMessageW" (hWnd As Integer,
                                                    Msg As Integer,
                                                    wParam As Integer,
                                                    ByRef lParam As COPYDATASTRUCT) As Integer
@@ -164,7 +164,12 @@ Public Class UnityPlayControl
         cds.cbData = Value.Length + 1
         cds.lpData = Value
 
-        SendMessage(UnityHwnd, WM_COPYDATA, 0, cds)
-        SendMessage(UnityProcess.MainWindowHandle, WM_COPYDATA, 0, cds)
+        If UnityHwnd <> &H0 Then
+            'Unity播放窗口
+            SendMessage(UnityHwnd, WM_COPYDATA, 0, cds)
+        Else
+            '非Unity程序
+            SendMessage(UnityProcess.MainWindowHandle, WM_COPYDATA, 0, cds)
+        End If
     End Sub
 End Class
