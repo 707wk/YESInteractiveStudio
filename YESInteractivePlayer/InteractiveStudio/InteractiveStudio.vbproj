@@ -346,10 +346,6 @@ DEL *.dll.config
 %25移动DLL文件到DLL文件夹%25
 MKDIR .\DLL
 FOR /f "delims=" %25%25i IN ('dir /b "*.dll"') DO MOVE %25%25i "./DLL"
-
-%25复制SDK文件%25
-%25RD /S /Q .\Nova%25
-%25MKDIR .\Nova%25
-%25XCOPY ..\..\Nova .\Nova /E%25</PostBuildEvent>
+</PostBuildEvent>
   </PropertyGroup>
 </Project>
