@@ -359,92 +359,97 @@ Public Class PlayWindow
         'Dim SensorHeight As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Height
         'Dim txp As Int16 = sysInfo.ScreenList(ScreenID).ZoomLocation.X + Location.X * SensorWidth + (SensorWidth \ 2)
         'Dim typ As Int32 = sysInfo.ScreenList(ScreenID).ZoomLocation.Y + Location.Y * SensorHeight + (SensorHeight \ 2)
+        Try
 
-        Select Case sysInfo.DisplayMode
-            Case InteractiveOptions.DISPLAYMODE.INTERACT
+            Select Case sysInfo.DisplayMode
+                Case InteractiveOptions.DISPLAYMODE.INTERACT
 #Region "互动"
-                '互动
-                Select Case FileType
-                    Case 1
+                    '互动
+                    Select Case FileType
+                        Case 1
 #Region "swf"
-                        For Each i001 As PointInfo In values
-                            'swf
-                            '非第一次按下则丢弃
-                            If i001.Old Then
-                                Exit Sub
-                            End If
+                            For Each i001 As PointInfo In values
+                                'swf
+                                '非第一次按下则丢弃
+                                If i001.Old Then
+                                    Continue For
+                                End If
 
-                            If Not SetCaptureFlage Then
+                                If Not SetCaptureFlage Then
 #Region "启用接口"
-                                '启用接口
-                                Try
-                                    FlashControl.
-                                    CallFunction($"<invoke name=""pointActive"" returntype=""xml""><arguments><string>{i001.X}</string><string>{i001.Y}</string></arguments></invoke>")
-                                Catch ex As Exception
-                                    SetCaptureFlage = True
-                                End Try
+                                    '启用接口
+                                    Try
+                                        FlashControl.
+                                        CallFunction($"<invoke name=""pointActive"" returntype=""xml""><arguments><string>{i001.X}</string><string>{i001.Y}</string></arguments></invoke>")
+                                    Catch ex As Exception
+                                        SetCaptureFlage = True
+                                    End Try
 #End Region
-                            Else
+                                Else
 #Region "捕获鼠标"
-                                '捕获鼠标
-                                Dim ttp As Int32 = i001.X + (i001.Y << 16)
-                                Dim ttp2 As Int32 = i001.X + ((i001.Y + 2) << 16)
+                                    '捕获鼠标
+                                    Dim ttp As Int32 = i001.X + (i001.Y << 16)
+                                    Dim ttp2 As Int32 = i001.X + ((i001.Y + 2) << 16)
 
-                                '点击-移动 - 松开
-                                PostMessage(FlashControl.Handle,
-                                    WM_LBUTTONDOWN,
-                                    0,
-                                    ttp)
-                                PostMessage(FlashControl.Handle,
-                                    WM_MOUSEMOVE,
-                                    0,
-                                    ttp2)
-                                PostMessage(FlashControl.Handle,
-                                    WM_LBUTTONUP,
-                                    0,
-                                    ttp)
+                                    '点击-移动 - 松开
+                                    PostMessage(FlashControl.Handle,
+                                        WM_LBUTTONDOWN,
+                                        0,
+                                        ttp)
+                                    PostMessage(FlashControl.Handle,
+                                        WM_MOUSEMOVE,
+                                        0,
+                                        ttp2)
+                                    PostMessage(FlashControl.Handle,
+                                        WM_LBUTTONUP,
+                                        0,
+                                        ttp)
 #End Region
-                            End If
-                        Next
+                                End If
+                            Next
 #End Region
-                    Case 2
+                        Case 2
 #Region "dll"
-                        'dll
-                        DllControl.PointActive(values.ToArray)
+                            'dll
+                            DllControl.PointActive(values.ToArray)
 #End Region
-                    Case 3
+                        Case 3
 #Region "Unity"
-                        Dim tmpArray = values.ToArray
-                        For i001 = 0 To tmpArray.Count - 1
-                            tmpArray(i001).Y = Me.Height - tmpArray(i001).Y
-                        Next
+                            Dim tmpArray = values.ToArray
+                            For i001 = 0 To tmpArray.Count - 1
+                                tmpArray(i001).Y = Me.Height - tmpArray(i001).Y
+                            Next
 
-                        UnityControl.PutMessage(JsonConvert.SerializeObject(tmpArray))
+                            UnityControl.PutMessage(JsonConvert.SerializeObject(tmpArray))
 #End Region
-                End Select
+                    End Select
 #End Region
 
-            Case InteractiveOptions.DISPLAYMODE.TEST
+                Case InteractiveOptions.DISPLAYMODE.TEST
 #Region "测试"
-                For Each i001 As PointInfo In values
-                    '非按第一次按下则丢弃
-                    If i001.Old Then
-                        Exit Sub
-                    End If
+                    For Each i001 As PointInfo In values
+                        '非按第一次按下则丢弃
+                        If i001.Old Then
+                            Continue For
+                        End If
 
-                    gBack.DrawString($"√", gFont, gBrush, i001.X - gFont.SizeInPoints + 2, i001.Y - gFont.SizeInPoints + 2)
-                Next
+                        gBack.DrawString($"√", gFont, gBrush, i001.X - gFont.SizeInPoints + 2, i001.Y - gFont.SizeInPoints + 2)
+                    Next
 #End Region
 
-                '            Case InteractiveOptions.DISPLAYMODE.DEBUG
-                '#Region "调试"
-                '                For Each i001 As PointInfo In values
-                '                    'todo:显示电容
-                '                    'gBack.DrawString($"{i001.Value And &H7F}", gFont, gBrush, i001.X - gFont.SizeInPoints / 2, i001.Y - gFont.SizeInPoints / 2)
-                '                Next
-                '#End Region
+                    '            Case InteractiveOptions.DISPLAYMODE.DEBUG
+                    '#Region "调试"
+                    '                For Each i001 As PointInfo In values
+                    '                    'todo:显示电容
+                    '                    'gBack.DrawString($"{i001.Value And &H7F}", gFont, gBrush, i001.X - gFont.SizeInPoints / 2, i001.Y - gFont.SizeInPoints / 2)
+                    '                Next
+                    '#End Region
 
-        End Select
+            End Select
+
+        Catch ex As Exception
+
+        End Try
     End Sub
 #End Region
 

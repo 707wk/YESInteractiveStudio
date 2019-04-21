@@ -24,11 +24,11 @@ Partial Class ControlNetwork
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -60,6 +60,16 @@ Partial Class ControlNetwork
         Me.DataGridView1.Size = New System.Drawing.Size(404, 135)
         Me.DataGridView1.TabIndex = 0
         '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.Location = New System.Drawing.Point(347, 173)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 1
+        Me.Button1.Text = "Apply"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'Column1
         '
         Me.Column1.HeaderText = "ID"
@@ -74,23 +84,13 @@ Partial Class ControlNetwork
         '
         'Column3
         '
-        Me.Column3.HeaderText = "Gateway"
+        Me.Column3.HeaderText = "Subnet Mask"
         Me.Column3.Name = "Column3"
         '
         'Column4
         '
-        Me.Column4.HeaderText = "Subnet Mask"
+        Me.Column4.HeaderText = "Gateway"
         Me.Column4.Name = "Column4"
-        '
-        'Button1
-        '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(347, 173)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Apply"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'ControlNetwork
         '
@@ -114,9 +114,9 @@ Partial Class ControlNetwork
 
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents Button1 As Button
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
-    Friend WithEvents Button1 As Button
 End Class

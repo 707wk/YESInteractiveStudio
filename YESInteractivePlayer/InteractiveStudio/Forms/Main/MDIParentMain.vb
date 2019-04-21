@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Net.Sockets
 Imports System.Runtime.InteropServices
 Imports System.Threading
@@ -638,10 +639,18 @@ Public Class MDIParentMain
                     .PlayMediaTime = 0
                     .PlayMediaId = 0
 
+                    If Not File.Exists(.PlayProgramInfo.MediaList(.PlayMediaId).Path) Then
+                        Continue For
+                    End If
                     .PlayDialog.Play(.PlayProgramInfo.MediaList(.PlayMediaId).Path)
+
                 ElseIf .PlayMediaTime > .PlayProgramInfo.MediaList(.PlayMediaId).PlayTime Then
                     .PlayMediaTime = 0
                     .PlayMediaId = (.PlayMediaId + 1) Mod .PlayProgramInfo.MediaList.Count
+
+                    If Not File.Exists(.PlayProgramInfo.MediaList(.PlayMediaId).Path) Then
+                        Continue For
+                    End If
 
                     .PlayDialog.Play(.PlayProgramInfo.MediaList(.PlayMediaId).Path)
                 End If
