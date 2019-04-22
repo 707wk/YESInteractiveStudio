@@ -46,9 +46,9 @@ Partial Class DeviceInit
         '
         Me.StatusStrip1.BackColor = System.Drawing.Color.Transparent
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 98)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 104)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(380, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(512, 22)
         Me.StatusStrip1.SizingGrip = False
         Me.StatusStrip1.TabIndex = 1
         Me.StatusStrip1.Text = "StatusStrip1"
@@ -68,7 +68,7 @@ Partial Class DeviceInit
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.InteractiveStudio.My.Resources.Resources.startBackground
-        Me.ClientSize = New System.Drawing.Size(380, 120)
+        Me.ClientSize = New System.Drawing.Size(512, 126)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
