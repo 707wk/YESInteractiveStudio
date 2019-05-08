@@ -1287,7 +1287,7 @@ InteractiveStudio
  每秒最大查询次数
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleVar.sysInfo">
+<member name="F:InteractiveStudio.ModuleVar.AppSetting">
  <summary>
  系统配置变量
  </summary>

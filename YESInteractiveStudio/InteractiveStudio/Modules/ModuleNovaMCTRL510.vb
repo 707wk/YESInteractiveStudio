@@ -10,8 +10,8 @@ Public Module ModuleNovaMCTRL510
     Public Function ConnectControl() As Boolean
 #Region "重建历史点击状态"
         '重建历史点击状态
-        For i001 As Integer = 0 To sysInfo.ScreenList.Count - 1
-            With sysInfo.ScreenList(i001)
+        For i001 As Integer = 0 To AppSetting.ScreenList.Count - 1
+            With AppSetting.ScreenList(i001)
                 .WindowId = -1
 
                 ReDim .SensorMap((.DefSize.Height \ .DefScanBoardSize.Height) * .SensorLayout.Height,
@@ -21,31 +21,31 @@ Public Module ModuleNovaMCTRL510
 #End Region
 
 #Region "标记要连接的控制器"
-        For i002 As Integer = 0 To sysInfo.SenderList.Count - 1
-            With sysInfo.SenderList(i002)
+        For i002 As Integer = 0 To AppSetting.SenderList.Count - 1
+            With AppSetting.SenderList(i002)
                 .LinkFlage = False
             End With
         Next
 
-        For i003 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
-            With sysInfo.Schedule.WindowList(i003)
+        For i003 As Integer = 0 To AppSetting.Schedule.WindowList.Count - 1
+            With AppSetting.Schedule.WindowList(i003)
                 '遍历窗口内屏幕
                 For Each j003 As Integer In .ScreenList
                     '屏幕不存在则跳过
-                    If j003 > sysInfo.ScreenList.Count - 1 Then
+                    If j003 > AppSetting.ScreenList.Count - 1 Then
                         Continue For
                     End If
 
-                    sysInfo.ScreenList(j003).WindowId = i003
+                    AppSetting.ScreenList(j003).WindowId = i003
 
                     '遍历屏幕所在控制器
-                    For Each k003 As Integer In sysInfo.ScreenList(j003).SenderList
+                    For Each k003 As Integer In AppSetting.ScreenList(j003).SenderList
                         '控制器不存在则跳过
-                        If k003 > sysInfo.SenderList.Count - 1 Then
+                        If k003 > AppSetting.SenderList.Count - 1 Then
                             Continue For
                         End If
 
-                        sysInfo.SenderList(k003).LinkFlage = True
+                        AppSetting.SenderList(k003).LinkFlage = True
                     Next
                 Next
             End With
@@ -55,7 +55,7 @@ Public Module ModuleNovaMCTRL510
 #Region "检测是否连通"
         '检测是否连通
         Try
-            For Each i001 As SenderInfo In sysInfo.SenderList
+            For Each i001 As SenderInfo In AppSetting.SenderList
                 With i001
                     If Not .LinkFlage Then
                         Continue For
@@ -63,9 +63,9 @@ Public Module ModuleNovaMCTRL510
 
                     Dim TmpStr As String = $"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)}"
                     If Not My.Computer.Network.Ping(TmpStr, 500) Then
-                        MsgBox($"{TmpStr} {sysInfo.Language.GetS("Failed to connect")}",
+                        MsgBox($"{TmpStr} {AppSetting.Language.GetS("Failed to connect")}",
                                MsgBoxStyle.Information,
-                               sysInfo.Language.GetS("Test Connect"))
+                               AppSetting.Language.GetS("Test Connect"))
                         Return False
                         Exit Function
                     End If
@@ -74,23 +74,23 @@ Public Module ModuleNovaMCTRL510
         Catch ex As Exception
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
-                   sysInfo.Language.GetS("Connect Exception"))
+                   AppSetting.Language.GetS("Connect Exception"))
             Return False
             Exit Function
         End Try
 #End Region
 
-        sysInfo.LinkFlage = True
+        AppSetting.LinkFlage = True
 
-        SetResetSec(sysInfo.ResetSec, sysInfo.ScanBoardOldFlage)
-        SetResetTemp(sysInfo.ResetTemp, sysInfo.ScanBoardOldFlage)
-        SetTouchSensitivity(sysInfo.TouchSensitivity, sysInfo.ScanBoardOldFlage)
+        SetResetSec(AppSetting.ResetSec, AppSetting.ScanBoardOldFlage)
+        SetResetTemp(AppSetting.ResetTemp, AppSetting.ScanBoardOldFlage)
+        SetTouchSensitivity(AppSetting.TouchSensitivity, AppSetting.ScanBoardOldFlage)
 
 #Region "建立连接并启动检测线程"
         '建立连接并启动检测线程
         Try
-            For i002 As Integer = 0 To sysInfo.SenderList.Count - 1
-                With sysInfo.SenderList(i002)
+            For i002 As Integer = 0 To AppSetting.SenderList.Count - 1
+                With AppSetting.SenderList(i002)
                     If Not .LinkFlage Then
                         Continue For
                     End If
@@ -114,14 +114,14 @@ Public Module ModuleNovaMCTRL510
                 End With
             Next
         Catch ex As Exception
-            sysInfo.LinkFlage = False
+            AppSetting.LinkFlage = False
 
             'Try
             '    sysInfo.WorkThread.Join()
             'Catch ex002 As Exception
             'End Try
 
-            For Each i003 As SenderInfo In sysInfo.SenderList
+            For Each i003 As SenderInfo In AppSetting.SenderList
                 With i003
                     Try
                         .CliSocket.Close()
@@ -132,16 +132,16 @@ Public Module ModuleNovaMCTRL510
 
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
-                   sysInfo.Language.GetS("Connected Exception"))
+                   AppSetting.Language.GetS("Connected Exception"))
             Return False
 
             Exit Function
         End Try
 
-        sysInfo.WorkThread = New Threading.Thread(AddressOf ControlWorkThread) With {
+        AppSetting.WorkThread = New Threading.Thread(AddressOf ControlWorkThread) With {
             .IsBackground = True'后台启动
         }
-        sysInfo.WorkThread.Start()
+        AppSetting.WorkThread.Start()
 #End Region
         Return True
     End Function
@@ -152,10 +152,10 @@ Public Module ModuleNovaMCTRL510
     ''' 断开控制器连接
     ''' </summary>
     Public Function DisconnectControl() As Boolean
-        sysInfo.LinkFlage = False
+        AppSetting.LinkFlage = False
 
-        If sysInfo.WorkThread IsNot Nothing Then
-            sysInfo.WorkThread.Join()
+        If AppSetting.WorkThread IsNot Nothing Then
+            AppSetting.WorkThread.Join()
         End If
 
         'For Each i001 As SenderInfo In sysInfo.SenderList
@@ -166,8 +166,8 @@ Public Module ModuleNovaMCTRL510
         '    End With
         'Next
 
-        SetResetSec(0, sysInfo.ScanBoardOldFlage)
-        SetResetTemp(0, sysInfo.ScanBoardOldFlage)
+        SetResetSec(0, AppSetting.ScanBoardOldFlage)
+        SetResetTemp(0, AppSetting.ScanBoardOldFlage)
 
         Return True
     End Function
@@ -188,12 +188,12 @@ Public Module ModuleNovaMCTRL510
                 '屏幕边缘则跳过
                 If Point.X + colID < 0 OrElse
                    Point.Y + rowID < 0 OrElse
-                    Point.Y + rowID >= sysInfo.ScreenList(ScreenId).SensorMap.GetLength(0) - 1 OrElse
-                    Point.X + colID >= sysInfo.ScreenList(ScreenId).SensorMap.GetLength(1) - 1 Then
+                    Point.Y + rowID >= AppSetting.ScreenList(ScreenId).SensorMap.GetLength(0) - 1 OrElse
+                    Point.X + colID >= AppSetting.ScreenList(ScreenId).SensorMap.GetLength(1) - 1 Then
                     Continue For
                 End If
 
-                If sysInfo.ScreenList(ScreenId).SensorMap(Point.Y + rowID, Point.X + colID) <> PointState.NOOPS Then
+                If AppSetting.ScreenList(ScreenId).SensorMap(Point.Y + rowID, Point.X + colID) <> PointState.NOOPS Then
                     checkNums += 1
                 End If
             Next
@@ -201,7 +201,7 @@ Public Module ModuleNovaMCTRL510
 
         'Debug.WriteLine($"{ScreenId} {Point.X},{Point.Y}:{checkNums}")
 
-        Return checkNums >= sysInfo.ClickValidNums
+        Return checkNums >= AppSetting.ClickValidNums
     End Function
 #End Region
 
@@ -214,10 +214,10 @@ Public Module ModuleNovaMCTRL510
                                        Location As Point,
                                        Old As Byte) As PointInfo
         '计算尺寸及位置
-        Dim SensorWidth As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Width
-        Dim SensorHeight As Integer = sysInfo.ScreenList(ScreenID).ZoomSensorSize.Height
-        Dim txp As Int16 = sysInfo.ScreenList(ScreenID).ZoomLocation.X + Location.X * SensorWidth + (SensorWidth \ 2)
-        Dim typ As Int32 = sysInfo.ScreenList(ScreenID).ZoomLocation.Y + Location.Y * SensorHeight + (SensorHeight \ 2)
+        Dim SensorWidth As Integer = AppSetting.ScreenList(ScreenID).ZoomSensorSize.Width
+        Dim SensorHeight As Integer = AppSetting.ScreenList(ScreenID).ZoomSensorSize.Height
+        Dim txp As Int16 = AppSetting.ScreenList(ScreenID).ZoomLocation.X + Location.X * SensorWidth + (SensorWidth \ 2)
+        Dim typ As Int32 = AppSetting.ScreenList(ScreenID).ZoomLocation.Y + Location.Y * SensorHeight + (SensorHeight \ 2)
 
         Return New PointInfo With {
             .ID = txp + (typ << 16),
@@ -241,7 +241,7 @@ Public Module ModuleNovaMCTRL510
 
         '检测到的活动点队列
         Dim WindowPointList As List(Of PointInfo)()
-        ReDim WindowPointList(sysInfo.Schedule.WindowList.Count - 1)
+        ReDim WindowPointList(AppSetting.Schedule.WindowList.Count - 1)
         For wID = 0 To WindowPointList.Count - 1
             WindowPointList(wID) = New List(Of PointInfo)
         Next
@@ -249,7 +249,7 @@ Public Module ModuleNovaMCTRL510
         '定时器
         'Dim testTime As New Stopwatch
 
-        Do While sysInfo.LinkFlage
+        Do While AppSetting.LinkFlage
             For wID = 0 To WindowPointList.Count - 1
                 WindowPointList(wID).Clear()
             Next
@@ -259,14 +259,14 @@ Public Module ModuleNovaMCTRL510
                 lastSec = Now.Second
 
                 exceptionNum = 0
-                sysInfo.ReadNum = readNum
+                AppSetting.ReadNum = readNum
                 readNum = 0
             End If
 #End Region
 
 #Region "异常处理"
             If exceptionNum > 3 Then
-                Dim tmpThread As Thread = New Thread(AddressOf sysInfo.MainForm.DisposeControlOffLink) With {
+                Dim tmpThread As Thread = New Thread(AddressOf AppSetting.MainForm.DisposeControlOffLink) With {
                     .IsBackground = True
                     }
                 tmpThread.Start(True)
@@ -279,8 +279,8 @@ Public Module ModuleNovaMCTRL510
                 '数据包
                 Dim ReceiveData(1024 - 1) As Byte
 
-                For ControlID = 0 To sysInfo.SenderList.Count - 1
-                    With sysInfo.SenderList(ControlID)
+                For ControlID = 0 To AppSetting.SenderList.Count - 1
+                    With AppSetting.SenderList(ControlID)
                         If Not .LinkFlage Then
                             Continue For
                         End If
@@ -313,18 +313,18 @@ Public Module ModuleNovaMCTRL510
                                 End If
 
                                 '黑屏则不处理
-                                If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.BLACK Then
+                                If AppSetting.DisplayMode = InteractiveOptions.DISPLAYMODE.BLACK Then
                                     Continue For
                                 End If
 
                                 '查找接收卡位置[由像素改为索引]
-                                If sysInfo.ScanBoardTable.Item($"{ControlID}-{ReceiveData(PacketId + 1)}-{(ReceiveData(PacketId + 2) * 256 + ReceiveData(PacketId + 3))}") Is Nothing Then
+                                If AppSetting.ScanBoardTable.Item($"{ControlID}-{ReceiveData(PacketId + 1)}-{(ReceiveData(PacketId + 2) * 256 + ReceiveData(PacketId + 3))}") Is Nothing Then
                                     Continue For
                                 End If
-                                Dim tmpScanBoardInfo As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{ControlID}-{ReceiveData(PacketId + 1)}-{(ReceiveData(PacketId + 2) * 256 + ReceiveData(PacketId + 3))}")
+                                Dim tmpScanBoardInfo As ScanBoardInfo = AppSetting.ScanBoardTable.Item($"{ControlID}-{ReceiveData(PacketId + 1)}-{(ReceiveData(PacketId + 2) * 256 + ReceiveData(PacketId + 3))}")
 
                                 '未显示则跳过
-                                If sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).WindowId < 0 Then
+                                If AppSetting.ScreenList(tmpScanBoardInfo.ScreenId).WindowId < 0 Then
                                     Continue For
                                 End If
 #End Region
@@ -341,7 +341,7 @@ Public Module ModuleNovaMCTRL510
                                     tmpDate(i002) = ScanBoardDate(4 + i002)
                                 Next
 
-                                Select Case sysInfo.Schedule.ScreenList(tmpScanBoardInfo.ScreenId).BoxRotation
+                                Select Case AppSetting.Schedule.ScreenList(tmpScanBoardInfo.ScreenId).BoxRotation
                                     Case 0
                                     Case 90
 #Region "90°"
@@ -355,7 +355,7 @@ Public Module ModuleNovaMCTRL510
 #End Region
                                     Case 180
 #Region "180°"
-                                        If sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
+                                        If AppSetting.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = AppSetting.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
                                             '单元布局4*4
                                             Dim index As Integer = 0
                                             For i002 As Integer = 4 - 1 To 0 Step -1
@@ -374,7 +374,7 @@ Public Module ModuleNovaMCTRL510
 #End Region
                                     Case 270
 #Region "270°"
-                                        If sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = sysInfo.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
+                                        If AppSetting.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = AppSetting.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
                                             '单元布局4*4
                                             Dim index As Integer = 0
                                             For j002 As Integer = 0 To 4 - 1
@@ -399,7 +399,7 @@ Public Module ModuleNovaMCTRL510
 #End Region
 
 #Region "更新点状态"
-                                With sysInfo.ScreenList(tmpScanBoardInfo.ScreenId)
+                                With AppSetting.ScreenList(tmpScanBoardInfo.ScreenId)
                                     '行
                                     For rowID As Integer = 0 To 4 - 1
                                         If rowID >= .SensorLayout.Height Then
@@ -460,14 +460,14 @@ Public Module ModuleNovaMCTRL510
 #End Region
 
 #Region "处理数据"
-                For ControlID = 0 To sysInfo.SenderList.Count - 1
+                For ControlID = 0 To AppSetting.SenderList.Count - 1
 
-                    Do While sysInfo.SenderList(ControlID).ScanBoardDateQueue.Count > 0
+                    Do While AppSetting.SenderList(ControlID).ScanBoardDateQueue.Count > 0
 
-                        Dim ScanBoardDate() As Byte = sysInfo.SenderList(ControlID).ScanBoardDateQueue.Dequeue
-                        Dim tmpScanBoardInfo As ScanBoardInfo = sysInfo.ScanBoardTable.Item($"{ControlID}-{ScanBoardDate(1)}-{(ScanBoardDate(2) * 256 + ScanBoardDate(3))}")
+                        Dim ScanBoardDate() As Byte = AppSetting.SenderList(ControlID).ScanBoardDateQueue.Dequeue
+                        Dim tmpScanBoardInfo As ScanBoardInfo = AppSetting.ScanBoardTable.Item($"{ControlID}-{ScanBoardDate(1)}-{(ScanBoardDate(2) * 256 + ScanBoardDate(3))}")
 
-                        With sysInfo.ScreenList(tmpScanBoardInfo.ScreenId)
+                        With AppSetting.ScreenList(tmpScanBoardInfo.ScreenId)
 
                             For rowID As Integer = 0 To 4 - 1
                                 If rowID >= .SensorLayout.Height Then
@@ -483,8 +483,8 @@ Public Module ModuleNovaMCTRL510
                                     Dim Point As New Point(tmpScanBoardInfo.Location.X + colID,
                                                                    tmpScanBoardInfo.Location.Y + rowID)
 
-                                    If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT OrElse
-                                        sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.TEST Then
+                                    If AppSetting.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT OrElse
+                                        AppSetting.DisplayMode = InteractiveOptions.DISPLAYMODE.TEST Then
 
 #Region "无点"
                                         '无点
@@ -505,23 +505,25 @@ Public Module ModuleNovaMCTRL510
 
                                         '互动模式下抗干扰启用
                                         If Not CheckAdjacencyPieceNums(tmpScanBoardInfo.ScreenId, Point) AndAlso
-                                            sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
+                                            AppSetting.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
                                             Continue For
                                         End If
 
                                     End If
 
 #Region "新点"
+                                    'AppSetting.logger.LogThis($"X:{Point.X},Y:{Point.Y}")
+
                                     Dim tmpPointInfo = CalcPointPointInfo(tmpScanBoardInfo.ScreenId,
                                                                          Point,
                                                                          0)
 
-                                    If sysInfo.DisplayMode <> InteractiveOptions.DISPLAYMODE.DEBUG Then
+                                    If AppSetting.DisplayMode <> InteractiveOptions.DISPLAYMODE.DEBUG Then
                                         '互动
                                         WindowPointList(.WindowId).Add(tmpPointInfo)
                                     Else
                                         '显示电容
-                                        sysInfo.Schedule.WindowList.
+                                        AppSetting.Schedule.WindowList.
                                         Item(.WindowId).
                                         PlayDialog.ShowCapacitance(tmpPointInfo.X, tmpPointInfo.Y, Value)
                                     End If
@@ -538,7 +540,7 @@ Public Module ModuleNovaMCTRL510
 
 #Region "发送数据"
                 For wID = 0 To WindowPointList.Count - 1
-                    sysInfo.Schedule.WindowList.
+                    AppSetting.Schedule.WindowList.
                         Item(wID).
                         PlayDialog.
                         PointActive(WindowPointList(wID))
@@ -546,20 +548,20 @@ Public Module ModuleNovaMCTRL510
 #End Region
 
             Catch ex As Exception
-                sysInfo.LastErrorInfo = ex.ToString
+                AppSetting.LastErrorInfo = ex.ToString
 
-                sysInfo.logger.LogThis("通信异常", sysInfo.LastErrorInfo, Wangk.Tools.Loglevel.Level_INFO)
+                AppSetting.logger.LogThis("通信异常", AppSetting.LastErrorInfo, Wangk.Tools.Loglevel.Level_INFO)
 
                 exceptionNum += 1
             End Try
 
             readNum += 1
-            Thread.Sleep(sysInfo.InquireTimeSec)
+            Thread.Sleep(AppSetting.InquireTimeSec)
         Loop
 
 #Region "关闭网络连接"
-        For ControlID = 0 To sysInfo.SenderList.Count - 1
-            With sysInfo.SenderList(ControlID)
+        For ControlID = 0 To AppSetting.SenderList.Count - 1
+            With AppSetting.SenderList(ControlID)
                 If Not .LinkFlage Then
                     Continue For
                 End If
@@ -593,14 +595,14 @@ Public Module ModuleNovaMCTRL510
 
         Dim result As Boolean
         If Not OldFlage Then
-            result = sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+            result = AppSetting.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
         Else
-            result = sysInfo.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+            result = AppSetting.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
         End If
 
         If result Then
             '触摸灵敏度
-            sysInfo.TouchSensitivity = Value
+            AppSetting.TouchSensitivity = Value
         End If
 
         '等待MCU接收完毕
@@ -619,9 +621,9 @@ Public Module ModuleNovaMCTRL510
         sendByte(4) = Value
 
         If Not OldFlage Then
-            sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+            AppSetting.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
         Else
-            sysInfo.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+            AppSetting.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
         End If
 
         '等待MCU接收完毕
@@ -640,9 +642,9 @@ Public Module ModuleNovaMCTRL510
         sendByte(4) = Value
 
         If Not OldFlage Then
-            sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+            AppSetting.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
         Else
-            sysInfo.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+            AppSetting.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
         End If
 
         '等待MCU接收完毕

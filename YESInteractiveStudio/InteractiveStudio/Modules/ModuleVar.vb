@@ -2,5 +2,5 @@
     ''' <summary>
     ''' 系统配置变量
     ''' </summary>
-    Public sysInfo As SystemInfo
+    Public AppSetting As SystemInfo
 End Module

@@ -1,7 +1,7 @@
 ﻿Public Class AboutBox
     Private Sub AboutBox_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 #Region "样式设置"
-        Me.Text = sysInfo.Language.GetS("About")
+        Me.Text = AppSetting.Language.GetS("About")
 
         With My.Application.Info
             Label1.Text = $"V{ .Version.Major}.{ .Version.Minor}.{ .Version.Build}"
@@ -24,7 +24,7 @@
     ''' 切换控件语言
     ''' </summary>
     Public Sub ChangeControlsLanguage()
-        With sysInfo.Language
+        With AppSetting.Language
 
         End With
     End Sub

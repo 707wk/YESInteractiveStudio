@@ -5,7 +5,7 @@ Public Class ScanBoardOption
     Private Sub ScanBoardOption_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ''todo:接收卡单片机升级
 #Region "样式设置"
-        Me.Text = sysInfo.Language.GetS("ScanBoard")
+        Me.Text = AppSetting.Language.GetS("ScanBoard")
 
         With ListView1
             .View = View.Details
@@ -13,13 +13,13 @@ Public Class ScanBoardOption
             .FullRowSelect = True
             .CheckBoxes = False
             .ShowItemToolTips = True
-            .Columns.Add(sysInfo.Language.GetS("Sender"), 60, HorizontalAlignment.Left)
-            .Columns.Add(sysInfo.Language.GetS("Port"), 60, HorizontalAlignment.Left)
-            .Columns.Add(sysInfo.Language.GetS("ScanBoard"), 60, HorizontalAlignment.Left)
-            .Columns.Add(sysInfo.Language.GetS("Version"), 60, HorizontalAlignment.Left)
+            .Columns.Add(AppSetting.Language.GetS("Sender"), 60, HorizontalAlignment.Left)
+            .Columns.Add(AppSetting.Language.GetS("Port"), 60, HorizontalAlignment.Left)
+            .Columns.Add(AppSetting.Language.GetS("ScanBoard"), 60, HorizontalAlignment.Left)
+            .Columns.Add(AppSetting.Language.GetS("Version"), 60, HorizontalAlignment.Left)
         End With
 
-        CheckBox1.Checked = sysInfo.ScanBoardOldFlage
+        CheckBox1.Checked = AppSetting.ScanBoardOldFlage
 
         'sysInfo.Language.GetS(Me)
         ChangeControlsLanguage()
@@ -28,7 +28,7 @@ Public Class ScanBoardOption
 
 #Region "MCU旧版标记"
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-        sysInfo.ScanBoardOldFlage = CheckBox1.Checked
+        AppSetting.ScanBoardOldFlage = CheckBox1.Checked
     End Sub
 #End Region
 
@@ -45,7 +45,7 @@ Public Class ScanBoardOption
 
         ListView1.Items.Clear()
 
-        For i001 As Integer = 0 To sysInfo.SenderList.Count - 1
+        For i001 As Integer = 0 To AppSetting.SenderList.Count - 1
             GetSenderMCUVersion(i001)
         Next
 
@@ -58,10 +58,10 @@ Public Class ScanBoardOption
     ''' 获取发送卡下MCU版本号
     ''' </summary>
     Public Sub GetSenderMCUVersion(ByVal SenderId As Integer)
-        If Not sysInfo.ScanBoardOldFlage Then
-            sysInfo.MainClass.SetNewScanBoardData(SenderId, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
+        If Not AppSetting.ScanBoardOldFlage Then
+            AppSetting.MainClass.SetNewScanBoardData(SenderId, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
         Else
-            sysInfo.MainClass.SetOldScanBoardData(SenderId, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
+            AppSetting.MainClass.SetOldScanBoardData(SenderId, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
         End If
 
         If CheckBox2.Checked Then
@@ -76,7 +76,7 @@ Public Class ScanBoardOption
                 .ReceiveTimeout = 500
             }
             '连接
-            With sysInfo.SenderList(SenderId)
+            With AppSetting.SenderList(SenderId)
                 cliSocket.Connect(
                     String.Format("{0}.{1}.{2}.{3}", .IpDate(3), .IpDate(2), .IpDate(1), .IpDate(0)),
                     6000)
@@ -117,7 +117,7 @@ Public Class ScanBoardOption
         Catch ex As Exception
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
-                   sysInfo.Language.GetS("Connect Exception"))
+                   AppSetting.Language.GetS("Connect Exception"))
             Exit Sub
         End Try
     End Sub
@@ -131,7 +131,7 @@ Public Class ScanBoardOption
     ''' </summary>
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim TmpDialog As New OpenFileDialog With {
-            .Filter = sysInfo.Language.GetS("MCU Bin") & "|*.bin"
+            .Filter = AppSetting.Language.GetS("MCU Bin") & "|*.bin"
         }
         If TmpDialog.ShowDialog() <> DialogResult.OK Then
             Exit Sub
@@ -173,10 +173,10 @@ Public Class ScanBoardOption
         sendByte(4) = binLength \ 256
         sendByte(5) = binLength Mod 256
 
-        If Not sysInfo.ScanBoardOldFlage Then
-            sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        If Not AppSetting.ScanBoardOldFlage Then
+            AppSetting.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
         Else
-            sysInfo.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+            AppSetting.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
         End If
 
         Thread.Sleep(60)
@@ -188,9 +188,9 @@ Public Class ScanBoardOption
 
             If i = 100 Then
                 'Putlog($"升级指令发送失败")
-                MsgBox(sysInfo.Language.GetS("Upgrade command failed to send"),
+                MsgBox(AppSetting.Language.GetS("Upgrade command failed to send"),
                            MsgBoxStyle.Information,
-                           sysInfo.Language.GetS("Update"))
+                           AppSetting.Language.GetS("Update"))
                 Exit Sub
             End If
         Next
@@ -224,10 +224,10 @@ Public Class ScanBoardOption
             sendByte(130) = checkSum Mod 256
 
             For i As Integer = 0 To 100
-                If Not sysInfo.ScanBoardOldFlage Then
-                    sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+                If Not AppSetting.ScanBoardOldFlage Then
+                    AppSetting.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
                 Else
-                    sysInfo.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+                    AppSetting.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
                 End If
 
                 Thread.Sleep(60)
@@ -239,9 +239,9 @@ Public Class ScanBoardOption
                 If i = 100 Then
                     re.Close()
                     fs.Close()
-                    MsgBox(sysInfo.Language.GetS("Upgrade data failed to send"),
+                    MsgBox(AppSetting.Language.GetS("Upgrade data failed to send"),
                            MsgBoxStyle.Information,
-                           sysInfo.Language.GetS("Update"))
+                           AppSetting.Language.GetS("Update"))
                     Exit Sub
                 End If
             Next
@@ -258,18 +258,18 @@ Public Class ScanBoardOption
 
 
         '发送完毕指令
-        If Not sysInfo.ScanBoardOldFlage Then
-            sysInfo.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0909"))
+        If Not AppSetting.ScanBoardOldFlage Then
+            AppSetting.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0909"))
         Else
-            sysInfo.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0909"))
+            AppSetting.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0909"))
         End If
 
         re.Close()
         fs.Close()
 
-        MsgBox(sysInfo.Language.GetS("Program upgrade completed"),
+        MsgBox(AppSetting.Language.GetS("Program upgrade completed"),
                MsgBoxStyle.Information,
-               sysInfo.Language.GetS("Update"))
+               AppSetting.Language.GetS("Update"))
     End Sub
 #End Region
 
@@ -281,7 +281,7 @@ Public Class ScanBoardOption
         Dim recSum As Integer = 0
         Dim errorSum As Integer = 0
 
-        For Each sender As SenderInfo In sysInfo.SenderList
+        For Each sender As SenderInfo In AppSetting.SenderList
             Dim cliSocket As Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {
             .SendTimeout = 1000,
                 .ReceiveTimeout = 1000
@@ -336,7 +336,7 @@ Public Class ScanBoardOption
             Return False
         End If
 
-        Return If(recSum = sysInfo.ScanBoardTable.Count, True, False)
+        Return If(recSum = AppSetting.ScanBoardTable.Count, True, False)
     End Function
 #End Region
 
@@ -347,7 +347,7 @@ Public Class ScanBoardOption
     ''' 切换控件语言
     ''' </summary>
     Public Sub ChangeControlsLanguage()
-        With sysInfo.Language
+        With AppSetting.Language
             Me.GroupBox1.Text = .GetS("ScanBoard List")
             Me.ToolStripButton1.Text = .GetS("Get MCU Version")
             Me.GroupBox2.Text = .GetS("MCU")

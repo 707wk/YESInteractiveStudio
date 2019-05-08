@@ -20,12 +20,12 @@ Module ModuleFunction
             Using fStream As New FileStream($"{Path}\Hunan Yestech\{My.Application.Info.Title}\Data\Setting.xml",
                                             FileMode.Open)
                 Dim XmlSerializer As XmlSerializer = New XmlSerializer(GetType(SystemInfo))
-                sysInfo = XmlSerializer.Deserialize(fStream)
+                AppSetting = XmlSerializer.Deserialize(fStream)
             End Using
 
-        Catch ex As FileNotFoundException
+        Catch ex As Exception
             '使用默认参数
-            With sysInfo
+            With AppSetting
                 .HistoryFile = ""
                 .TouchSensitivity = 5
                 .ClickValidNums = 2
@@ -34,10 +34,10 @@ Module ModuleFunction
                 '.TouchMode = 1
             End With
             Return True
-        Catch ex2 As Exception
-            MsgBox(ex2.Message,
-                   MsgBoxStyle.Information,
-                   "读取配置异常")
+            'Catch ex2 As Exception
+            '    MsgBox(ex2.Message,
+            '           MsgBoxStyle.Information,
+            '           "读取配置异常")
         End Try
 
         Return True
@@ -66,7 +66,7 @@ Module ModuleFunction
                     .Formatting = Formatting.Indented '子节点缩进
                 }
                 Dim sfFormatter As New XmlSerializer(GetType(SystemInfo))
-                sfFormatter.Serialize(tmpXmlTextWriter, sysInfo, ns)
+                sfFormatter.Serialize(tmpXmlTextWriter, AppSetting, ns)
             End Using
 
         'Catch ex As Exception
@@ -89,22 +89,22 @@ Module ModuleFunction
         Try
             Using fStream As New FileStream(Path, FileMode.Open)
                 Dim XmlSerializer As XmlSerializer = New XmlSerializer(GetType(ScheduleInfo))
-                sysInfo.Schedule = XmlSerializer.Deserialize(fStream)
+                AppSetting.Schedule = XmlSerializer.Deserialize(fStream)
             End Using
         Catch ex As Exception
             'MsgBox(ex.Message,
             '       MsgBoxStyle.Information,
             '       "读取文件异常")
             'Return False
-            sysInfo.HistoryFile = ""
-            sysInfo.Schedule.WindowList = New List(Of WindowInfo)
+            AppSetting.HistoryFile = ""
+            AppSetting.Schedule.WindowList = New List(Of WindowInfo)
         End Try
 
-        sysInfo.InquireTimeSec = 50
-        For Each i001 In sysInfo.Schedule.WindowList
+        AppSetting.InquireTimeSec = 50
+        For Each i001 In AppSetting.Schedule.WindowList
             i001.PlayMediaId = -1
         Next
-        ReDim Preserve sysInfo.Schedule.ScreenList(sysInfo.ScreenList.Count - 1)
+        ReDim Preserve AppSetting.Schedule.ScreenList(AppSetting.ScreenList.Count - 1)
 
         Return True
     End Function
@@ -125,7 +125,7 @@ Module ModuleFunction
                     .Formatting = Formatting.Indented '子节点缩进
                 }
                 Dim sfFormatter As New XmlSerializer(GetType(ScheduleInfo))
-                sfFormatter.Serialize(tmpXmlTextWriter, sysInfo.Schedule, ns)
+                sfFormatter.Serialize(tmpXmlTextWriter, AppSetting.Schedule, ns)
             End Using
 
         Catch ex As Exception

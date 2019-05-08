@@ -23,7 +23,7 @@
         WindowId = WinId
 
         Try
-            With sysInfo.Schedule.WindowList(WindowId)
+            With AppSetting.Schedule.WindowList(WindowId)
                 Label1.Text = .PlayMediaId + 1
                 Label4.Text = .PlayMediaTime
 
@@ -52,9 +52,9 @@
             .ShowItemToolTips = True
             .MultiSelect = False
 
-            .Columns.Add(sysInfo.Language.GetS("ID"), 40)
-            .Columns.Add(sysInfo.Language.GetS("File"), 400)
-            .Columns.Add(sysInfo.Language.GetS("Play Time(s)"), 100)
+            .Columns.Add(AppSetting.Language.GetS("ID"), 40)
+            .Columns.Add(AppSetting.Language.GetS("File"), 400)
+            .Columns.Add(AppSetting.Language.GetS("Play Time(s)"), 100)
         End With
 
         Timer1.Interval = 1000
@@ -67,7 +67,7 @@
 #Region "定时刷新界面"
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Try
-            With sysInfo.Schedule.WindowList(WindowId)
+            With AppSetting.Schedule.WindowList(WindowId)
                 Label1.Text = .PlayMediaId + 1
                 Label4.Text = .PlayMediaTime
             End With
@@ -89,7 +89,7 @@
     ''' 切换控件语言
     ''' </summary>
     Public Sub ChangeControlsLanguage()
-        With sysInfo.Language
+        With AppSetting.Language
             Me.Label2.Text = .GetS("Play File ID")
             Me.GroupBox1.Text = .GetS("Media List")
             Me.Label3.Text = .GetS("Played Time")

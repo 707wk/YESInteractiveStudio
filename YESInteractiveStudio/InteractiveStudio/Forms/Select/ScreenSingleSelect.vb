@@ -3,7 +3,7 @@
 
     Private Sub ScreenSingleSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 #Region "样式设置"
-        Me.Text = sysInfo.Language.GetS("Select Screen")
+        Me.Text = AppSetting.Language.GetS("Select Screen")
 
         With ListView1
             .View = View.Details
@@ -14,8 +14,8 @@
             .ShowItemToolTips = True
             .MultiSelect = False
 
-            .Columns.Add(sysInfo.Language.GetS("ID"), 40)
-            .Columns.Add(sysInfo.Language.GetS("Size"), 80)
+            .Columns.Add(AppSetting.Language.GetS("ID"), 40)
+            .Columns.Add(AppSetting.Language.GetS("Size"), 80)
         End With
 
         'sysInfo.Language.GetS(Me)
@@ -23,10 +23,10 @@
 
 #Region "排除已选择的屏幕"
         Dim TmpScreenList As New List(Of Integer)
-        For i001 As Integer = 0 To sysInfo.ScreenList.Count - 1
+        For i001 As Integer = 0 To AppSetting.ScreenList.Count - 1
             TmpScreenList.Add(i001)
         Next
-        For Each i002 As WindowInfo In sysInfo.Schedule.WindowList
+        For Each i002 As WindowInfo In AppSetting.Schedule.WindowList
             For Each j002 As Integer In i002.ScreenList
                 TmpScreenList.Remove(j002)
             Next
@@ -35,7 +35,7 @@
             Dim TmpListViewItem As New ListViewItem
             With TmpListViewItem
                 .Text = i002
-                .SubItems.Add($"{sysInfo.ScreenList(i002).DefSize.Width},{sysInfo.ScreenList(i002).DefSize.Height}")
+                .SubItems.Add($"{AppSetting.ScreenList(i002).DefSize.Width},{AppSetting.ScreenList(i002).DefSize.Height}")
             End With
 
             ListView1.Items.Add(TmpListViewItem)
@@ -65,7 +65,7 @@
     ''' 切换控件语言
     ''' </summary>
     Public Sub ChangeControlsLanguage()
-        With sysInfo.Language
+        With AppSetting.Language
             Me.Button1.Text = .GetS("OK")
         End With
     End Sub

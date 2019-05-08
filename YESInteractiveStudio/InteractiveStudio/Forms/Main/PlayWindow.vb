@@ -83,7 +83,7 @@ Public Class PlayWindow
             Exit Sub
         End If
 
-        With sysInfo.Schedule.WindowList(WindowId)
+        With AppSetting.Schedule.WindowList(WindowId)
             Me.Location = .Location
             Me.Size = .Size
             Me.gFont = New Font("宋体", Convert.ToSingle(12 / (.ZoomPix.Width / .ZoomPix.Height)), FontStyle.Regular)
@@ -254,7 +254,7 @@ Public Class PlayWindow
     ''' 播放文件
     ''' </summary>
     Public Sub PlayMode()
-        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(WindowId)
+        Dim TmpWindowInfo As WindowInfo = AppSetting.Schedule.WindowList(WindowId)
 
         With TmpWindowInfo
             Me.Refresh()
@@ -270,7 +270,7 @@ Public Class PlayWindow
             Play(.PlayProgramInfo.MediaList(.PlayMediaId).Path)
         End With
 
-        sysInfo.Schedule.WindowList(WindowId) = TmpWindowInfo
+        AppSetting.Schedule.WindowList(WindowId) = TmpWindowInfo
     End Sub
 
     ''' <summary>
@@ -282,8 +282,8 @@ Public Class PlayWindow
         Me.BackColor = Color.Black
         Me.Refresh()
 
-        For Each tmp As Integer In sysInfo.Schedule.WindowList.Item(WindowId).ScreenList
-            With sysInfo.ScreenList(tmp)
+        For Each tmp As Integer In AppSetting.Schedule.WindowList.Item(WindowId).ScreenList
+            With AppSetting.ScreenList(tmp)
                 '缩放后触摸单元高度
                 For i As Integer = 0 To .ZoomSize.Height Step .ZoomSensorSize.Height
                     gBack.DrawLine(gPen,
@@ -361,7 +361,7 @@ Public Class PlayWindow
         'Dim typ As Int32 = sysInfo.ScreenList(ScreenID).ZoomLocation.Y + Location.Y * SensorHeight + (SensorHeight \ 2)
         Try
 
-            Select Case sysInfo.DisplayMode
+            Select Case AppSetting.DisplayMode
                 Case InteractiveOptions.DISPLAYMODE.INTERACT
 #Region "互动"
                     '互动
@@ -488,7 +488,7 @@ Public Class PlayWindow
     ''' 切换控件语言
     ''' </summary>
     Public Sub ChangeControlsLanguage()
-        With sysInfo.Language
+        With AppSetting.Language
 
         End With
     End Sub

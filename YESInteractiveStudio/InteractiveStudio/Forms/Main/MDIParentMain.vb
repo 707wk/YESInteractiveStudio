@@ -66,7 +66,7 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ShowToolBarInfo()
         With My.Application.Info
-            Me.Text = $"{ .ProductName} V{ .Version.Major}.{ .Version.Minor}.{ .Version.Build} [{If(sysInfo.HistoryFile = "", sysInfo.Language.GetS("Not saved"), sysInfo.HistoryFile)}]"
+            Me.Text = $"{ .ProductName} V{ .Version.Major}.{ .Version.Minor}.{ .Version.Build} [{If(AppSetting.HistoryFile = "", AppSetting.Language.GetS("Not saved"), AppSetting.HistoryFile)}]"
         End With
     End Sub
 #End Region
@@ -80,25 +80,25 @@ Public Class MDIParentMain
         WindowPlayDialog.Hide()
         ProgramEditDialog.Hide()
 
-        LoadFile(sysInfo.HistoryFile)
+        LoadFile(AppSetting.HistoryFile)
 
         TreeView1.Nodes.Clear()
 
-        For i001 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
-            Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(i001)
+        For i001 As Integer = 0 To AppSetting.Schedule.WindowList.Count - 1
+            Dim TmpWindowInfo As WindowInfo = AppSetting.Schedule.WindowList(i001)
             With TmpWindowInfo
                 .PlayMediaId = -1
                 .PlayMediaTime = 0
             End With
-            sysInfo.Schedule.WindowList(i001) = TmpWindowInfo
+            AppSetting.Schedule.WindowList(i001) = TmpWindowInfo
 
             Dim Tmpnode001 As New TreeNode With {
-                        .Text = sysInfo.Schedule.WindowList.Item(i001).Remark,
+                        .Text = AppSetting.Schedule.WindowList.Item(i001).Remark,
                         .ImageIndex = 0,
                         .SelectedImageIndex = 0,
                         .ContextMenuStrip = WindowMenuStrip
                     }
-            For Each j001 As ProgramInfo In sysInfo.Schedule.WindowList.Item(i001).ProgramList
+            For Each j001 As ProgramInfo In AppSetting.Schedule.WindowList.Item(i001).ProgramList
                 Dim Tmpnode002 As New TreeNode With {
                     .Text = j001.Remark,
                     .ImageIndex = 1,
@@ -132,7 +132,7 @@ Public Class MDIParentMain
 #Region "初始化变量"
         LoadSetting()
 
-        With sysInfo
+        With AppSetting
             If .VersionArray Is Nothing Then
                 ReDim .VersionArray(3 - 1)
             End If
@@ -148,7 +148,7 @@ Public Class MDIParentMain
                 .writelevel = Wangk.Tools.Loglevel.Level_DEBUG,
                 .saveDaysMax = 30
             }
-            sysInfo.logger.Init()
+            AppSetting.logger.Init()
         End With
 
         Timer1.Interval = 1000
@@ -202,7 +202,7 @@ Public Class MDIParentMain
             For i001 As Integer = 1 To 9
                 .Items.Add(i001)
             Next
-            .Text = sysInfo.ClickValidNums
+            .Text = AppSetting.ClickValidNums
         End With
 
         '触摸灵敏度
@@ -210,7 +210,7 @@ Public Class MDIParentMain
             For i001 As Integer = 1 To 9
                 .Items.Add(i001)
             Next
-            .Text = sysInfo.TouchSensitivity
+            .Text = AppSetting.TouchSensitivity
         End With
 
         '触摸模式
@@ -231,7 +231,7 @@ Public Class MDIParentMain
                 .Items.Add(i001)
             Next
 
-            .Text = sysInfo.ResetTemp
+            .Text = AppSetting.ResetTemp
         End With
 
         '复位时间
@@ -241,7 +241,7 @@ Public Class MDIParentMain
                 .Items.Add(i001)
             Next
 
-            .Text = sysInfo.ResetSec
+            .Text = AppSetting.ResetSec
         End With
 #End Region
 
@@ -251,7 +251,7 @@ Public Class MDIParentMain
             .Items.Add("中文")
             .Items.Add("English")
 
-            .SelectedIndex = sysInfo.SelectLang
+            .SelectedIndex = AppSetting.SelectLang
         End With
 #End Region
 
@@ -274,7 +274,7 @@ Public Class MDIParentMain
         DeviceInit.ShowDialog()
 
         '加载最后打开文件
-        LoadFile(sysInfo.HistoryFile)
+        LoadFile(AppSetting.HistoryFile)
         LoadSchedule()
         'sysInfo.Schedule.WindowList = New List(Of WindowInfo)
         'End If
@@ -294,9 +294,9 @@ Public Class MDIParentMain
             '3.修复已知问题", MsgBoxStyle.Information, "更新内容")
             'End If
 
-            sysInfo.VersionArray(0) = .Version.Major
-            sysInfo.VersionArray(1) = .Version.Minor
-            sysInfo.VersionArray(2) = .Version.Build
+            AppSetting.VersionArray(0) = .Version.Major
+            AppSetting.VersionArray(1) = .Version.Minor
+            AppSetting.VersionArray(2) = .Version.Build
         End With
 #End Region
 
@@ -337,16 +337,16 @@ Public Class MDIParentMain
     ''' </summary>
     ''' <param name="Mode"></param>
     Public Sub SwitchDisplayMode(ByVal Mode As InteractiveOptions.DISPLAYMODE)
-        If Not sysInfo.LinkFlage Then
+        If Not AppSetting.LinkFlage Then
             Exit Sub
         End If
 
-        sysInfo.DisplayMode = Mode
+        AppSetting.DisplayMode = Mode
 
         SwitchDisplayModeIco(Mode)
 
-        For i001 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
-            With sysInfo.Schedule.WindowList(i001)
+        For i001 As Integer = 0 To AppSetting.Schedule.WindowList.Count - 1
+            With AppSetting.Schedule.WindowList(i001)
                 .PlayDialog.SwitchDisplayMode(Mode)
             End With
         Next
@@ -386,11 +386,11 @@ Public Class MDIParentMain
 #Region "关闭"
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
 #Region "退出前保存文件"
-        Select Case MsgBox(sysInfo.Language.GetS("Do you want to save the changes of Schedule"),
+        Select Case MsgBox(AppSetting.Language.GetS("Do you want to save the changes of Schedule"),
                            MsgBoxStyle.YesNoCancel,
-                           sysInfo.Language.GetS("Save"))
+                           AppSetting.Language.GetS("Save"))
             Case MsgBoxResult.Yes '保存
-                If sysInfo.HistoryFile = "" Then
+                If AppSetting.HistoryFile = "" Then
                     Dim tmp1 As New SaveFileDialog
                     tmp1.Filter = "Schedule File|*.xml"
                     If tmp1.ShowDialog() <> DialogResult.OK Then
@@ -398,10 +398,10 @@ Public Class MDIParentMain
                         Exit Sub
                     End If
 
-                    sysInfo.HistoryFile = tmp1.FileName
+                    AppSetting.HistoryFile = tmp1.FileName
                 End If
 
-                SaveFile(sysInfo.HistoryFile)
+                SaveFile(AppSetting.HistoryFile)
 
                 ''todo:断开连接
                 DisconnectControl()
@@ -426,7 +426,7 @@ Public Class MDIParentMain
 
 #Region "关闭播放窗体"
         '关闭播放窗体
-        For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
+        For Each i001 As WindowInfo In AppSetting.Schedule.WindowList
             i001.PlayDialog.Close(True)
         Next
 #End Region
@@ -436,11 +436,11 @@ Public Class MDIParentMain
 #Region "释放nova资源"
         '释放nova资源
         Try
-            sysInfo.MainClass.UnInitialize()
+            AppSetting.MainClass.UnInitialize()
         Catch ex As Exception
         End Try
         Try
-            sysInfo.RootClass.UnInitialize()
+            AppSetting.RootClass.UnInitialize()
         Catch ex As Exception
         End Try
 #End Region
@@ -469,27 +469,27 @@ Public Class MDIParentMain
     ''' 连接操作
     ''' </summary>
     Public Sub SetLinkControl()
-        If sysInfo.LinkFlage Then
+        If AppSetting.LinkFlage Then
             Exit Sub
         End If
 
         '无窗口则不处理
-        If sysInfo.Schedule.WindowList.Count = 0 Then
-            MsgBox(sysInfo.Language.GetS("No window added in Schedule"),
+        If AppSetting.Schedule.WindowList.Count = 0 Then
+            MsgBox(AppSetting.Language.GetS("No window added in Schedule"),
                    MsgBoxStyle.Information,
-                   sysInfo.Language.GetS("Connect"))
+                   AppSetting.Language.GetS("Connect"))
             Exit Sub
         End If
 
 #Region "检测是否有屏幕显示"
         Dim tmpScreenSum As Integer = 0
-        For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
+        For Each i001 As WindowInfo In AppSetting.Schedule.WindowList
             tmpScreenSum += i001.ScreenList.Count
         Next
         If tmpScreenSum = 0 Then
-            MsgBox(sysInfo.Language.GetS("No screen added in window"),
+            MsgBox(AppSetting.Language.GetS("No screen added in window"),
                    MsgBoxStyle.Information,
-                   sysInfo.Language.GetS("Connect"))
+                   AppSetting.Language.GetS("Connect"))
             Exit Sub
         End If
 #End Region
@@ -500,9 +500,9 @@ Public Class MDIParentMain
 
         SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.INTERACT)
 
-        SetLinkControlState(sysInfo.LinkFlage)
+        SetLinkControlState(AppSetting.LinkFlage)
 
-        sysInfo.logger.LogThis("控制器", "连接控制器", Wangk.Tools.Loglevel.Level_DEBUG)
+        AppSetting.logger.LogThis("控制器", "连接控制器", Wangk.Tools.Loglevel.Level_DEBUG)
     End Sub
 #End Region
 
@@ -511,21 +511,21 @@ Public Class MDIParentMain
     ''' 断开操作
     ''' </summary>
     Public Sub SetOffLinkControl()
-        If Not sysInfo.LinkFlage Then
+        If Not AppSetting.LinkFlage Then
             Exit Sub
         End If
 
         DisconnectControl()
 
-        For i001 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
-            With sysInfo.Schedule.WindowList(i001)
+        For i001 As Integer = 0 To AppSetting.Schedule.WindowList.Count - 1
+            With AppSetting.Schedule.WindowList(i001)
                 .PlayDialog.SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.BLACK)
             End With
         Next
 
-        SetLinkControlState(sysInfo.LinkFlage)
+        SetLinkControlState(AppSetting.LinkFlage)
 
-        sysInfo.logger.LogThis("控制器", "断开控制器", Wangk.Tools.Loglevel.Level_DEBUG)
+        AppSetting.logger.LogThis("控制器", "断开控制器", Wangk.Tools.Loglevel.Level_DEBUG)
     End Sub
 #End Region
 
@@ -598,14 +598,14 @@ Public Class MDIParentMain
         '    End With
         'Next
 
-        If sysInfo.ReadNum < 20 AndAlso
-            sysInfo.InquireTimeSec > 1 Then
+        If AppSetting.ReadNum < 20 AndAlso
+            AppSetting.InquireTimeSec > 1 Then
 
-            sysInfo.InquireTimeSec -= 1
-        ElseIf sysInfo.ReadNum > 22 AndAlso
-             sysInfo.InquireTimeSec < 100 Then
+            AppSetting.InquireTimeSec -= 1
+        ElseIf AppSetting.ReadNum > 22 AndAlso
+             AppSetting.InquireTimeSec < 100 Then
 
-            sysInfo.InquireTimeSec += 1
+            AppSetting.InquireTimeSec += 1
         End If
     End Sub
 #End Region
@@ -615,12 +615,12 @@ Public Class MDIParentMain
     ''' 节目定时切换
     ''' </summary>
     Public Sub ChangePlayMedia()
-        If sysInfo.DisplayMode <> InteractiveOptions.DISPLAYMODE.INTERACT Then
+        If AppSetting.DisplayMode <> InteractiveOptions.DISPLAYMODE.INTERACT Then
             Exit Sub
         End If
 
-        For i001 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
-            Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(i001)
+        For i001 As Integer = 0 To AppSetting.Schedule.WindowList.Count - 1
+            Dim TmpWindowInfo As WindowInfo = AppSetting.Schedule.WindowList(i001)
 
             With TmpWindowInfo
                 If .PlayMediaId = -1 OrElse
@@ -656,7 +656,7 @@ Public Class MDIParentMain
                 End If
             End With
 
-            sysInfo.Schedule.WindowList(i001) = TmpWindowInfo
+            AppSetting.Schedule.WindowList(i001) = TmpWindowInfo
         Next
     End Sub
 #End Region
@@ -681,11 +681,11 @@ Public Class MDIParentMain
 
         SetOffLinkControl()
 
-        sysInfo.logger.LogThis("控制器离线", sysInfo.LastErrorInfo, Wangk.Tools.Loglevel.Level_DEBUG)
+        AppSetting.logger.LogThis("控制器离线", AppSetting.LastErrorInfo, Wangk.Tools.Loglevel.Level_DEBUG)
 
-        MsgBox($"{sysInfo.LastErrorInfo},{sysInfo.Language.GetS("Please reconnect the control or restart the control")}",
+        MsgBox($"{AppSetting.LastErrorInfo},{AppSetting.Language.GetS("Please reconnect the control or restart the control")}",
                MsgBoxStyle.Information,
-               sysInfo.Language.GetS("Control connection exception"))
+               AppSetting.Language.GetS("Control connection exception"))
     End Sub
 #End Region
 
@@ -695,11 +695,11 @@ Public Class MDIParentMain
     ''' 创建窗体
     ''' </summary>
     Public Sub CreatWindowThread(ByVal WindowId As Integer)
-        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList.Item(WindowId)
+        Dim TmpWindowInfo As WindowInfo = AppSetting.Schedule.WindowList.Item(WindowId)
         TmpWindowInfo.PlayDialog = New PlayWindow With {
             .WindowId = WindowId
         }
-        sysInfo.Schedule.WindowList.Item(WindowId) = TmpWindowInfo
+        AppSetting.Schedule.WindowList.Item(WindowId) = TmpWindowInfo
 
         TmpWindowInfo.PlayDialog.ShowDialog()
     End Sub
@@ -708,7 +708,7 @@ Public Class MDIParentMain
 #Region "添加窗体节点"
     Public Sub CreatWindowNode(ByVal WindowId As Integer)
         Dim Tmpnode001 As New TreeNode With {
-                        .Text = $"{sysInfo.Language.GetS("Window")}{WindowId}",
+                        .Text = $"{AppSetting.Language.GetS("Window")}{WindowId}",
                         .ImageIndex = 0,
                         .SelectedImageIndex = 0,
                         .ContextMenuStrip = WindowMenuStrip
@@ -722,10 +722,10 @@ Public Class MDIParentMain
     ''' 添加播放窗口
     ''' </summary>
     Public Sub AddNewWindow()
-        CreatWindowNode(sysInfo.Schedule.WindowList.Count + 1)
+        CreatWindowNode(AppSetting.Schedule.WindowList.Count + 1)
 
         Dim TmpWindowInfo As New WindowInfo With {
-            .Remark = $"{sysInfo.Language.GetS("Window")}{sysInfo.Schedule.WindowList.Count + 1}",
+            .Remark = $"{AppSetting.Language.GetS("Window")}{AppSetting.Schedule.WindowList.Count + 1}",
             .ShowFlage = True,
             .Size = New Size(1, 1),
             .ScreenList = New List(Of Integer),
@@ -733,14 +733,14 @@ Public Class MDIParentMain
             .ProgramList = New List(Of ProgramInfo),
             .PlayMediaId = -1
         }
-        sysInfo.Schedule.WindowList.Add(TmpWindowInfo)
+        AppSetting.Schedule.WindowList.Add(TmpWindowInfo)
 
 #Disable Warning BC40000 ' 类型或成员已过时
         Dim tmpThread As New Threading.Thread(AddressOf CreatWindowThread) With {
             .ApartmentState = ApartmentState.STA,
             .IsBackground = True
         }
-        tmpThread.Start(sysInfo.Schedule.WindowList.Count - 1)
+        tmpThread.Start(AppSetting.Schedule.WindowList.Count - 1)
 #Enable Warning BC40000 ' 类型或成员已过时
     End Sub
 #End Region
@@ -750,17 +750,17 @@ Public Class MDIParentMain
     ''' 更新屏幕的窗口ID
     ''' </summary>
     Public Sub UpdateWindowIdInScreen()
-        For i002 As Integer = 0 To sysInfo.ScreenList.Count - 1
-            With sysInfo.ScreenList(i002)
+        For i002 As Integer = 0 To AppSetting.ScreenList.Count - 1
+            With AppSetting.ScreenList(i002)
                 .WindowId = -1
             End With
         Next
 
-        For i001 As Integer = 0 To sysInfo.Schedule.WindowList.Count - 1
-            sysInfo.Schedule.WindowList.Item(i001).PlayDialog.WindowId = i001
+        For i001 As Integer = 0 To AppSetting.Schedule.WindowList.Count - 1
+            AppSetting.Schedule.WindowList.Item(i001).PlayDialog.WindowId = i001
 
-            For Each j001 As Integer In sysInfo.Schedule.WindowList.Item(i001).ScreenList
-                sysInfo.ScreenList(j001).WindowId = i001
+            For Each j001 As Integer In AppSetting.Schedule.WindowList.Item(i001).ScreenList
+                AppSetting.ScreenList(j001).WindowId = i001
             Next
         Next
     End Sub
@@ -771,30 +771,30 @@ Public Class MDIParentMain
     ''' 更新播放窗体尺寸
     ''' </summary>
     Public Sub UpdateWindow(ByVal WindowId As Integer)
-        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList.Item(WindowId)
+        Dim TmpWindowInfo As WindowInfo = AppSetting.Schedule.WindowList.Item(WindowId)
         With TmpWindowInfo
             .Size = New Size(0, 0)
             Dim zoomProportion As Double = .ZoomPix.Width / .ZoomPix.Height
 
             For Each i001 As Integer In .ScreenList
                 '屏幕不存在则跳过
-                If i001 > sysInfo.ScreenList.Count - 1 Then
+                If i001 > AppSetting.ScreenList.Count - 1 Then
                     Continue For
                 End If
 
-                Dim TmpPoint As Point = sysInfo.Schedule.ScreenList(i001).Loaction
+                Dim TmpPoint As Point = AppSetting.Schedule.ScreenList(i001).Loaction
 
                 '查找最大宽度
-                If .Size.Width < TmpPoint.X + sysInfo.ScreenList(i001).DefSize.Width Then
-                    .Size.Width = TmpPoint.X + sysInfo.ScreenList(i001).DefSize.Width
+                If .Size.Width < TmpPoint.X + AppSetting.ScreenList(i001).DefSize.Width Then
+                    .Size.Width = TmpPoint.X + AppSetting.ScreenList(i001).DefSize.Width
                 End If
                 '查找最大高度
-                If .Size.Height < TmpPoint.Y + sysInfo.ScreenList(i001).DefSize.Height Then
-                    .Size.Height = TmpPoint.Y + sysInfo.ScreenList(i001).DefSize.Height
+                If .Size.Height < TmpPoint.Y + AppSetting.ScreenList(i001).DefSize.Height Then
+                    .Size.Height = TmpPoint.Y + AppSetting.ScreenList(i001).DefSize.Height
                 End If
 
                 '更新屏幕参数
-                With sysInfo.ScreenList(i001)
+                With AppSetting.ScreenList(i001)
                     '位置
                     .ZoomLocation.X = TmpPoint.X / zoomProportion
                     .ZoomLocation.Y = TmpPoint.Y / zoomProportion
@@ -815,7 +815,7 @@ Public Class MDIParentMain
             .Size.Height = .Size.Height / zoomProportion
         End With
 
-        sysInfo.Schedule.WindowList.Item(WindowId) = TmpWindowInfo
+        AppSetting.Schedule.WindowList.Item(WindowId) = TmpWindowInfo
     End Sub
 #End Region
 
@@ -832,7 +832,7 @@ Public Class MDIParentMain
     Public Sub DeleteWindow(ByVal WindowId As Integer)
         DeleteWindowNode(WindowId)
 
-        With sysInfo.Schedule.WindowList
+        With AppSetting.Schedule.WindowList
             .Item(WindowId).PlayDialog.Close(True)
             .RemoveAt(WindowId)
         End With
@@ -844,7 +844,7 @@ Public Class MDIParentMain
     ''' 关闭所有窗体
     ''' </summary>
     Public Sub ClearWindow()
-        For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
+        For Each i001 As WindowInfo In AppSetting.Schedule.WindowList
             If i001.PlayDialog IsNot Nothing Then
                 i001.PlayDialog.Close(True)
             End If
@@ -856,14 +856,14 @@ Public Class MDIParentMain
     Private Sub CheckBoxItem1_CheckedChanged(sender As Object, e As CheckBoxChangeEventArgs) Handles CheckBoxItem1.CheckedChanged
         If Not CheckBoxItem1.Checked Then
             '显示
-            For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
+            For Each i001 As WindowInfo In AppSetting.Schedule.WindowList
                 With i001
                     .PlayDialog.UpdateWindow(True)
                 End With
             Next
         Else
             '隐藏
-            For Each i001 As WindowInfo In sysInfo.Schedule.WindowList
+            For Each i001 As WindowInfo In AppSetting.Schedule.WindowList
                 i001.PlayDialog.HideWindow(True)
             Next
         End If
@@ -878,7 +878,7 @@ Public Class MDIParentMain
     ''' </summary>
     Public Sub AddNewProgram(ByVal WindowId As Integer)
         Dim Tmpnode002 As New TreeNode With {
-            .Text = $"{sysInfo.Language.GetS("Program")}{sysInfo.Schedule.WindowList(WindowId).ProgramList.Count + 1}",
+            .Text = $"{AppSetting.Language.GetS("Program")}{AppSetting.Schedule.WindowList(WindowId).ProgramList.Count + 1}",
             .ImageIndex = 1,
             .SelectedImageIndex = 1,
             .ContextMenuStrip = ProgramMenuStrip
@@ -886,7 +886,7 @@ Public Class MDIParentMain
         TreeView1.Nodes(WindowId).Nodes.Add(Tmpnode002)
         TreeView1.Nodes(WindowId).ExpandAll()
 
-        sysInfo.Schedule.WindowList(WindowId).ProgramList.Add(
+        AppSetting.Schedule.WindowList(WindowId).ProgramList.Add(
             New ProgramInfo With {
             .Remark = Tmpnode002.Text,
             .MediaList = New List(Of MediaInfo)
@@ -899,7 +899,7 @@ Public Class MDIParentMain
     ''' 更新节目
     ''' </summary>
     Public Sub UpdateProgram(ByVal WindowId As Integer, ByVal ProgramId As Integer)
-        TreeView1.Nodes(WindowId).Nodes(ProgramId).Text = sysInfo.Schedule.WindowList(WindowId).ProgramList(ProgramId).Remark
+        TreeView1.Nodes(WindowId).Nodes(ProgramId).Text = AppSetting.Schedule.WindowList(WindowId).ProgramList(ProgramId).Remark
     End Sub
 #End Region
 
@@ -912,7 +912,7 @@ Public Class MDIParentMain
     Public Sub DeleteProgram(ByVal WindowId As Integer, ByVal ProgramId As Integer)
         TreeView1.Nodes(WindowId).Nodes.RemoveAt(ProgramId)
 
-        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(WindowId)
+        Dim TmpWindowInfo As WindowInfo = AppSetting.Schedule.WindowList(WindowId)
         With TmpWindowInfo
             If .ProgramList(ProgramId).Remark = .PlayProgramInfo.Remark Then
                 .PlayProgramInfo = Nothing
@@ -921,7 +921,7 @@ Public Class MDIParentMain
 
             .ProgramList.RemoveAt(ProgramId)
         End With
-        sysInfo.Schedule.WindowList(WindowId) = TmpWindowInfo
+        AppSetting.Schedule.WindowList(WindowId) = TmpWindowInfo
     End Sub
 #End Region
 
@@ -930,7 +930,7 @@ Public Class MDIParentMain
     ''' 播放节目
     ''' </summary>
     Public Sub PlayProgram(ByVal WindowId As Integer, ByVal ProgramId As Integer)
-        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(WindowId)
+        Dim TmpWindowInfo As WindowInfo = AppSetting.Schedule.WindowList(WindowId)
 
         With TmpWindowInfo
             If .ProgramList(ProgramId).MediaList.Count = 0 Then
@@ -938,9 +938,9 @@ Public Class MDIParentMain
             End If
             For Each i001 As MediaInfo In .ProgramList(ProgramId).MediaList
                 If Not System.IO.File.Exists(i001.Path) Then
-                    MsgBox($"{i001.Path} {sysInfo.Language.GetS("not found")}",
+                    MsgBox($"{i001.Path} {AppSetting.Language.GetS("not found")}",
                            MsgBoxStyle.Information,
-                           sysInfo.Language.GetS("Play Program"))
+                           AppSetting.Language.GetS("Play Program"))
 
                     Exit Sub
                 End If
@@ -950,12 +950,12 @@ Public Class MDIParentMain
             .PlayMediaId = 0
             .PlayMediaTime = 0
 
-            If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
+            If AppSetting.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
                 .PlayDialog.Play(.PlayProgramInfo.MediaList(0).Path)
             End If
         End With
 
-        sysInfo.Schedule.WindowList(WindowId) = TmpWindowInfo
+        AppSetting.Schedule.WindowList(WindowId) = TmpWindowInfo
     End Sub
 #End Region
 #End Region
@@ -994,21 +994,21 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ButtonItem20_Click(sender As Object, e As EventArgs) Handles ButtonItem20.Click
         '新建前保存旧文件
-        Select Case MsgBox(sysInfo.Language.GetS("Do you want to save the changes of Schedule"),
+        Select Case MsgBox(AppSetting.Language.GetS("Do you want to save the changes of Schedule"),
                            MsgBoxStyle.YesNoCancel,
-                           sysInfo.Language.GetS("Save"))
+                           AppSetting.Language.GetS("Save"))
             Case MsgBoxResult.Yes '保存
-                If sysInfo.HistoryFile = "" Then
+                If AppSetting.HistoryFile = "" Then
                     Dim tmp1 As New SaveFileDialog
-                    tmp1.Filter = sysInfo.Language.GetS("Schedule") & "|*.xml"
+                    tmp1.Filter = AppSetting.Language.GetS("Schedule") & "|*.xml"
                     If tmp1.ShowDialog() <> DialogResult.OK Then
                         Exit Sub
                     End If
 
-                    sysInfo.HistoryFile = tmp1.FileName
+                    AppSetting.HistoryFile = tmp1.FileName
                 End If
 
-                SaveFile(sysInfo.HistoryFile)
+                SaveFile(AppSetting.HistoryFile)
             Case MsgBoxResult.No '不保存
 
             Case MsgBoxResult.Cancel '取消
@@ -1018,8 +1018,8 @@ Public Class MDIParentMain
         ClearWindow()
 
         '新建空文件
-        sysInfo.HistoryFile = ""
-        LoadFile(sysInfo.HistoryFile)
+        AppSetting.HistoryFile = ""
+        LoadFile(AppSetting.HistoryFile)
 
         ShowToolBarInfo()
 
@@ -1034,22 +1034,22 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ButtonItem21_Click(sender As Object, e As EventArgs) Handles ButtonItem21.Click
         '打开前保存旧文件
-        Select Case MsgBox(sysInfo.Language.GetS("Do you want to save the changes of Schedule"),
+        Select Case MsgBox(AppSetting.Language.GetS("Do you want to save the changes of Schedule"),
                            MsgBoxStyle.YesNoCancel,
-                           sysInfo.Language.GetS("Save"))
+                           AppSetting.Language.GetS("Save"))
             Case MsgBoxResult.Yes '保存
-                If sysInfo.HistoryFile = "" Then
+                If AppSetting.HistoryFile = "" Then
                     Dim tmp1 As New SaveFileDialog With {
-                        .Filter = sysInfo.Language.GetS("Schedule") & "|*.xml"
+                        .Filter = AppSetting.Language.GetS("Schedule") & "|*.xml"
                     }
                     If tmp1.ShowDialog() <> DialogResult.OK Then
                         Exit Sub
                     End If
 
-                    sysInfo.HistoryFile = tmp1.FileName
+                    AppSetting.HistoryFile = tmp1.FileName
                 End If
 
-                SaveFile(sysInfo.HistoryFile)
+                SaveFile(AppSetting.HistoryFile)
             Case MsgBoxResult.No '不保存
 
             Case MsgBoxResult.Cancel '取消
@@ -1068,9 +1068,9 @@ Public Class MDIParentMain
 
         '文件打开异常则打开旧文件
         If Not LoadFile(tmp.FileName) Then
-            LoadFile(sysInfo.HistoryFile)
+            LoadFile(AppSetting.HistoryFile)
         Else
-            sysInfo.HistoryFile = tmp.FileName
+            AppSetting.HistoryFile = tmp.FileName
         End If
 
         ShowToolBarInfo()
@@ -1086,18 +1086,18 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ButtonItem22_Click(sender As Object, e As EventArgs) Handles ButtonItem22.Click
         '新文件则选择保存路径
-        If sysInfo.HistoryFile = "" Then
+        If AppSetting.HistoryFile = "" Then
             Dim tmp1 As New SaveFileDialog
             'tmp.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-            tmp1.Filter = sysInfo.Language.GetS("Schedule") & "|*.xml"
+            tmp1.Filter = AppSetting.Language.GetS("Schedule") & "|*.xml"
             If tmp1.ShowDialog() <> DialogResult.OK Then
                 Exit Sub
             End If
 
-            sysInfo.HistoryFile = tmp1.FileName
+            AppSetting.HistoryFile = tmp1.FileName
         End If
 
-        SaveFile(sysInfo.HistoryFile)
+        SaveFile(AppSetting.HistoryFile)
 
         ShowToolBarInfo()
     End Sub
@@ -1109,15 +1109,15 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ButtonItem23_Click(sender As Object, e As EventArgs) Handles ButtonItem23.Click
         Dim tmp As New SaveFileDialog With {
-            .Filter = sysInfo.Language.GetS("Schedule") & "|*.xml"
+            .Filter = AppSetting.Language.GetS("Schedule") & "|*.xml"
         }
         If tmp.ShowDialog() <> DialogResult.OK Then
             Exit Sub
         End If
 
-        sysInfo.HistoryFile = tmp.FileName
+        AppSetting.HistoryFile = tmp.FileName
 
-        SaveFile(sysInfo.HistoryFile)
+        SaveFile(AppSetting.HistoryFile)
 
         ShowToolBarInfo()
     End Sub
@@ -1167,14 +1167,14 @@ Public Class MDIParentMain
     ''' 抗干扰等级
     ''' </summary>
     Private Sub ComboBoxItem9_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem9.SelectedIndexChanged
-        sysInfo.ClickValidNums = Val(ComboBoxItem9.Text)
+        AppSetting.ClickValidNums = Val(ComboBoxItem9.Text)
     End Sub
 
     ''' <summary>
     ''' 触摸灵敏度
     ''' </summary>
     Private Sub ComboBoxItem10_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem10.SelectedIndexChanged
-        sysInfo.TouchSensitivity = Val(ComboBoxItem10.Text)
+        AppSetting.TouchSensitivity = Val(ComboBoxItem10.Text)
     End Sub
 
     '''' <summary>
@@ -1188,14 +1188,14 @@ Public Class MDIParentMain
     ''' 复位温度
     ''' </summary>
     Private Sub ComboBoxItem7_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem7.SelectedIndexChanged
-        sysInfo.ResetTemp = Val(ComboBoxItem7.Text)
+        AppSetting.ResetTemp = Val(ComboBoxItem7.Text)
     End Sub
 
     ''' <summary>
     ''' 复位时间
     ''' </summary>
     Private Sub ComboBoxItem8_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem8.SelectedIndexChanged
-        sysInfo.ResetSec = Val(ComboBoxItem8.Text)
+        AppSetting.ResetSec = Val(ComboBoxItem8.Text)
     End Sub
 #End Region
 
@@ -1204,7 +1204,7 @@ Public Class MDIParentMain
     ''' 显示语言
     ''' </summary>
     Private Sub ComboBoxItem1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxItem1.SelectedIndexChanged
-        Static OldSelectLang = sysInfo.SelectLang
+        Static OldSelectLang = AppSetting.SelectLang
         'If sysInfo.SelectLang <> ComboBoxItem1.SelectedIndex Then
         '    sysInfo.SelectLang = ComboBoxItem1.SelectedIndex
 
@@ -1213,12 +1213,12 @@ Public Class MDIParentMain
         '    ChangeControlsLanguage()
         'End If
 
-        sysInfo.SelectLang = ComboBoxItem1.SelectedIndex
+        AppSetting.SelectLang = ComboBoxItem1.SelectedIndex
 
-        If sysInfo.SelectLang <> OldSelectLang Then
-            MsgBox(sysInfo.Language.GetS("Restart the program to enable the language changes to take effect"),
+        If AppSetting.SelectLang <> OldSelectLang Then
+            MsgBox(AppSetting.Language.GetS("Restart the program to enable the language changes to take effect"),
                    MsgBoxStyle.Information,
-                   sysInfo.Language.GetS("Change language"))
+                   AppSetting.Language.GetS("Change language"))
         End If
     End Sub
 
@@ -1251,8 +1251,8 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ButtonItem1_Click(sender As Object, e As EventArgs) Handles ButtonItem1.Click
         Dim TmpDialog As New Wangk.Resource.InputBox With {
-            .Title = sysInfo.Language.GetS("PowerUser"),
-            .InputTips = sysInfo.Language.GetS("Input Password"),
+            .Title = AppSetting.Language.GetS("PowerUser"),
+            .InputTips = AppSetting.Language.GetS("Input Password"),
             .PasswordChar = "*"
         }
         If TmpDialog.ShowDialog <> DialogResult.OK Then
@@ -1278,11 +1278,11 @@ Public Class MDIParentMain
         Try
             System.Diagnostics.Process.Start($".\Help\{My.Application.Info.Title} User Manual {[Enum].
                                                     GetName(GetType(Wangk.Resource.MultiLanguage.LANG),
-                                                            sysInfo.SelectLang)}.pdf")
+                                                            AppSetting.SelectLang)}.pdf")
         Catch ex As Exception
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
-                   sysInfo.Language.GetS("Help"))
+                   AppSetting.Language.GetS("Help"))
         End Try
     End Sub
 
@@ -1320,9 +1320,9 @@ Public Class MDIParentMain
 
         UpdateWindow(TmpDialog.WindowId)
 
-        sysInfo.Schedule.WindowList(TmpDialog.WindowId).PlayDialog.UpdateWindow(True)
+        AppSetting.Schedule.WindowList(TmpDialog.WindowId).PlayDialog.UpdateWindow(True)
 
-        TreeView1.SelectedNode.Text = sysInfo.Schedule.WindowList(TmpDialog.WindowId).Remark
+        TreeView1.SelectedNode.Text = AppSetting.Schedule.WindowList(TmpDialog.WindowId).Remark
         'For Each i001 In sysInfo.Schedule.WindowList
         '    i001.PlayDialog.UpdateWindow(True)
         'Next
@@ -1374,13 +1374,13 @@ Public Class MDIParentMain
         Select Case e.Node.Level
             Case 0
                 '窗口
-                GroupBox2.Text = sysInfo.Language.GetS("Window")
+                GroupBox2.Text = AppSetting.Language.GetS("Window")
                 ProgramEditDialog.Hide()
                 WindowPlayDialog.LoadWindow(e.Node.Index)
                 WindowPlayDialog.Show()
             Case 1
                 '节目
-                GroupBox2.Text = sysInfo.Language.GetS("Program")
+                GroupBox2.Text = AppSetting.Language.GetS("Program")
                 WindowPlayDialog.Hide()
                 ProgramEditDialog.LoadProgram(e.Node.Parent.Index, e.Node.Index)
                 ProgramEditDialog.Show()
@@ -1419,7 +1419,7 @@ Public Class MDIParentMain
     ''' 切换控件语言
     ''' </summary>
     Public Sub ChangeControlsLanguage()
-        With sysInfo.Language
+        With AppSetting.Language
             Me.LabelItem5.Text = .GetS("Temp Change Over")
             Me.LabelItem6.Text = .GetS("Reset Time Interval")
             Me.LabelItem3.Text = .GetS("Anti-interference")

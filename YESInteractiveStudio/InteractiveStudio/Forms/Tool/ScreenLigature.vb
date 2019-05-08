@@ -7,7 +7,7 @@
     Private Sub ScreenLigature_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ''todo:屏幕走线
 #Region "样式设置"
-        Me.Text = sysInfo.Language.GetS("Screen Ligature")
+        Me.Text = AppSetting.Language.GetS("Screen Ligature")
 
         With ListView1
             .View = View.Details
@@ -18,15 +18,15 @@
             .ShowItemToolTips = True
             .MultiSelect = False
 
-            .Columns.Add(sysInfo.Language.GetS("ID"), 40)
-            .Columns.Add(sysInfo.Language.GetS("Size"), 80)
+            .Columns.Add(AppSetting.Language.GetS("ID"), 40)
+            .Columns.Add(AppSetting.Language.GetS("Size"), 80)
         End With
 
-        For i001 As Integer = 0 To sysInfo.ScreenList.Count - 1
+        For i001 As Integer = 0 To AppSetting.ScreenList.Count - 1
             Dim TmpListViewItem As New ListViewItem
             With TmpListViewItem
                 .Text = i001
-                .SubItems.Add($"{sysInfo.ScreenList(i001).DefSize.Width},{sysInfo.ScreenList(i001).DefSize.Height}")
+                .SubItems.Add($"{AppSetting.ScreenList(i001).DefSize.Width},{AppSetting.ScreenList(i001).DefSize.Height}")
             End With
 
             ListView1.Items.Add(TmpListViewItem)
@@ -49,8 +49,8 @@
         TmpDataTable.Columns.Add("Y", System.Type.GetType("System.Int32"))
 
         '载入数据
-        For Each i In sysInfo.ScanBoardTable.Keys
-            Dim qwe As ScanBoardInfo = sysInfo.ScanBoardTable.Item(i)
+        For Each i In AppSetting.ScanBoardTable.Keys
+            Dim qwe As ScanBoardInfo = AppSetting.ScanBoardTable.Item(i)
 
             Dim row As DataRow = TmpDataTable.NewRow()
             row("ScreenIndex") = qwe.ScreenId
@@ -72,12 +72,12 @@
         End If
 
         Dim selectScreenId As Integer = ListView1.SelectedItems(0).Index
-        GroupBox2.Text = $"{sysInfo.Language.GetS("Screen")} {selectScreenId} {sysInfo.Language.GetS("Ligature")}"
+        GroupBox2.Text = $"{AppSetting.Language.GetS("Screen")} {selectScreenId} {AppSetting.Language.GetS("Ligature")}"
 
         Dim tmpHeight As Integer =
-            sysInfo.ScreenList(selectScreenId).DefSize.Height * 21 \ sysInfo.ScreenList(selectScreenId).DefScanBoardSize.Height
+            AppSetting.ScreenList(selectScreenId).DefSize.Height * 21 \ AppSetting.ScreenList(selectScreenId).DefScanBoardSize.Height
         Dim tmpWidth As Integer =
-            sysInfo.ScreenList(selectScreenId).DefSize.Width * 21 \ sysInfo.ScreenList(selectScreenId).DefScanBoardSize.Width
+            AppSetting.ScreenList(selectScreenId).DefSize.Width * 21 \ AppSetting.ScreenList(selectScreenId).DefScanBoardSize.Width
 
         Dim LigatureBitmap As Bitmap = New Bitmap(tmpWidth + 1, tmpHeight + 1)
         Dim g As Graphics = Graphics.FromImage(LigatureBitmap)
@@ -101,8 +101,8 @@
         mpen.Color = Color.Red
         mpen.Width = 3
         For i As Integer = 0 To dataRow.Length - 1
-            Dim tmpX As Integer = (dataRow(i).Item(4) \ sysInfo.ScreenList(selectScreenId).SensorLayout.Width) * 21 + 10
-            Dim tmpY As Integer = (dataRow(i).Item(5) \ sysInfo.ScreenList(selectScreenId).SensorLayout.Height) * 21 + 10
+            Dim tmpX As Integer = (dataRow(i).Item(4) \ AppSetting.ScreenList(selectScreenId).SensorLayout.Width) * 21 + 10
+            Dim tmpY As Integer = (dataRow(i).Item(5) \ AppSetting.ScreenList(selectScreenId).SensorLayout.Height) * 21 + 10
 
             If dataRow(i).Item(1) = lastSenderIndex And dataRow(i).Item(2) = lastPortIndex Then
                 g.DrawLine(mpen, lastX, lastY, tmpX, tmpY)
@@ -127,7 +127,7 @@
     ''' 切换控件语言
     ''' </summary>
     Public Sub ChangeControlsLanguage()
-        With sysInfo.Language
+        With AppSetting.Language
             Me.GroupBox1.Text = .GetS("Screen List")
             Me.GroupBox2.Text = .GetS("Ligature")
         End With

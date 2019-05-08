@@ -52,7 +52,7 @@
 
         Me.Location = TmpPoint
 
-        sysInfo.Schedule.ScreenList(ScreenId).Loaction = Me.Location
+        AppSetting.Schedule.ScreenList(ScreenId).Loaction = Me.Location
 
         '        With sysInfo.ScreenList(ScreenId)
         '            Me.Text = $"Screen {ScreenId}

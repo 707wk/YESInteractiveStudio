@@ -5,7 +5,7 @@ Public Class ControlNetwork
     Private Sub ControlNetwork_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ''todo:控制器ip设置
 #Region "样式设置"
-        Me.Text = sysInfo.Language.GetS("Control Network")
+        Me.Text = AppSetting.Language.GetS("Control Network")
 
         With DataGridView1
             .BorderStyle = BorderStyle.None
@@ -25,16 +25,16 @@ Public Class ControlNetwork
             Next
         End With
 
-        For i As Integer = 0 To sysInfo.SenderList.Length - 1
+        For i As Integer = 0 To AppSetting.SenderList.Length - 1
             DataGridView1.Rows.Add(i,
-                                   $"{sysInfo.SenderList(i).IpDate(3)}.{sysInfo.SenderList(i).IpDate(2)}.{sysInfo.SenderList(i).IpDate(1)}.{sysInfo.SenderList(i).IpDate(0)}",
-                                   $"{sysInfo.SenderList(i).IpDate(7)}.{sysInfo.SenderList(i).IpDate(6)}.{sysInfo.SenderList(i).IpDate(5)}.{sysInfo.SenderList(i).IpDate(4)}",
-                                   $"{sysInfo.SenderList(i).IpDate(11)}.{sysInfo.SenderList(i).IpDate(10)}.{sysInfo.SenderList(i).IpDate(9)}.{sysInfo.SenderList(i).IpDate(8)}")
+                                   $"{AppSetting.SenderList(i).IpDate(3)}.{AppSetting.SenderList(i).IpDate(2)}.{AppSetting.SenderList(i).IpDate(1)}.{AppSetting.SenderList(i).IpDate(0)}",
+                                   $"{AppSetting.SenderList(i).IpDate(7)}.{AppSetting.SenderList(i).IpDate(6)}.{AppSetting.SenderList(i).IpDate(5)}.{AppSetting.SenderList(i).IpDate(4)}",
+                                   $"{AppSetting.SenderList(i).IpDate(11)}.{AppSetting.SenderList(i).IpDate(10)}.{AppSetting.SenderList(i).IpDate(9)}.{AppSetting.SenderList(i).IpDate(8)}")
         Next
 
-        For i As Integer = 0 To sysInfo.SenderList.Length - 1
+        For i As Integer = 0 To AppSetting.SenderList.Length - 1
             For j As Integer = 0 To 12 - 1
-                sysInfo.SenderList(i).TmpIpData(j) = sysInfo.SenderList(i).IpDate(j)
+                AppSetting.SenderList(i).TmpIpData(j) = AppSetting.SenderList(i).IpDate(j)
             Next
         Next
 
@@ -42,13 +42,13 @@ Public Class ControlNetwork
         ChangeControlsLanguage()
 
         '绑定设置到ip事件
-        AddHandler sysInfo.MainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
+        AddHandler AppSetting.MainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
 #End Region
     End Sub
 
     Private Sub ControlNetwork_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         '解绑设置到ip事件
-        RemoveHandler sysInfo.MainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
+        RemoveHandler AppSetting.MainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
     End Sub
 
 #Region "右键选中"
@@ -73,11 +73,11 @@ Public Class ControlNetwork
     ''' </summary>
     Private Sub UpdataIp(i As Integer)
         DataGridView1.Rows(i).Cells(1).Value =
-            $"{sysInfo.SenderList(i).TmpIpData(3)}.{sysInfo.SenderList(i).TmpIpData(2)}.{sysInfo.SenderList(i).TmpIpData(1)}.{sysInfo.SenderList(i).TmpIpData(0)}"
+            $"{AppSetting.SenderList(i).TmpIpData(3)}.{AppSetting.SenderList(i).TmpIpData(2)}.{AppSetting.SenderList(i).TmpIpData(1)}.{AppSetting.SenderList(i).TmpIpData(0)}"
         DataGridView1.Rows(i).Cells(2).Value =
-            $"{sysInfo.SenderList(i).TmpIpData(7)}.{sysInfo.SenderList(i).TmpIpData(6)}.{sysInfo.SenderList(i).TmpIpData(5)}.{sysInfo.SenderList(i).TmpIpData(4)}"
+            $"{AppSetting.SenderList(i).TmpIpData(7)}.{AppSetting.SenderList(i).TmpIpData(6)}.{AppSetting.SenderList(i).TmpIpData(5)}.{AppSetting.SenderList(i).TmpIpData(4)}"
         DataGridView1.Rows(i).Cells(3).Value =
-            $"{sysInfo.SenderList(i).TmpIpData(11)}.{sysInfo.SenderList(i).TmpIpData(10)}.{sysInfo.SenderList(i).TmpIpData(9)}.{sysInfo.SenderList(i).TmpIpData(8)}"
+            $"{AppSetting.SenderList(i).TmpIpData(11)}.{AppSetting.SenderList(i).TmpIpData(10)}.{AppSetting.SenderList(i).TmpIpData(9)}.{AppSetting.SenderList(i).TmpIpData(8)}"
     End Sub
 #End Region
 
@@ -91,7 +91,7 @@ Public Class ControlNetwork
 
         '判断长度
         If ipDataStrArr.Length <> 4 Then
-            MsgBox(sysInfo.Language.GetS("Invalid Argument"),
+            MsgBox(AppSetting.Language.GetS("Invalid Argument"),
                    MsgBoxStyle.Information,
                    Me.Text)
             UpdataIp(e.RowIndex)
@@ -105,7 +105,7 @@ Public Class ControlNetwork
             If tmpNum < 0 OrElse
                 tmpNum > 255 Then
 
-                MsgBox(sysInfo.Language.GetS("Invalid Argument"),
+                MsgBox(AppSetting.Language.GetS("Invalid Argument"),
                        MsgBoxStyle.Information,
                        Me.Text)
                 UpdataIp(e.RowIndex)
@@ -117,22 +117,22 @@ Public Class ControlNetwork
         Select Case e.ColumnIndex
             Case 1
                 'ip
-                sysInfo.SenderList(e.RowIndex).TmpIpData(3) = Val(ipDataStrArr(0))
-                sysInfo.SenderList(e.RowIndex).TmpIpData(2) = Val(ipDataStrArr(1))
-                sysInfo.SenderList(e.RowIndex).TmpIpData(1) = Val(ipDataStrArr(2))
-                sysInfo.SenderList(e.RowIndex).TmpIpData(0) = Val(ipDataStrArr(3))
+                AppSetting.SenderList(e.RowIndex).TmpIpData(3) = Val(ipDataStrArr(0))
+                AppSetting.SenderList(e.RowIndex).TmpIpData(2) = Val(ipDataStrArr(1))
+                AppSetting.SenderList(e.RowIndex).TmpIpData(1) = Val(ipDataStrArr(2))
+                AppSetting.SenderList(e.RowIndex).TmpIpData(0) = Val(ipDataStrArr(3))
             Case 2
                 '子网掩码
-                sysInfo.SenderList(e.RowIndex).TmpIpData(7) = Val(ipDataStrArr(0))
-                sysInfo.SenderList(e.RowIndex).TmpIpData(6) = Val(ipDataStrArr(1))
-                sysInfo.SenderList(e.RowIndex).TmpIpData(5) = Val(ipDataStrArr(2))
-                sysInfo.SenderList(e.RowIndex).TmpIpData(4) = Val(ipDataStrArr(3))
+                AppSetting.SenderList(e.RowIndex).TmpIpData(7) = Val(ipDataStrArr(0))
+                AppSetting.SenderList(e.RowIndex).TmpIpData(6) = Val(ipDataStrArr(1))
+                AppSetting.SenderList(e.RowIndex).TmpIpData(5) = Val(ipDataStrArr(2))
+                AppSetting.SenderList(e.RowIndex).TmpIpData(4) = Val(ipDataStrArr(3))
             Case 3
                 '网关
-                sysInfo.SenderList(e.RowIndex).TmpIpData(11) = Val(ipDataStrArr(0))
-                sysInfo.SenderList(e.RowIndex).TmpIpData(10) = Val(ipDataStrArr(1))
-                sysInfo.SenderList(e.RowIndex).TmpIpData(9) = Val(ipDataStrArr(2))
-                sysInfo.SenderList(e.RowIndex).TmpIpData(8) = Val(ipDataStrArr(3))
+                AppSetting.SenderList(e.RowIndex).TmpIpData(11) = Val(ipDataStrArr(0))
+                AppSetting.SenderList(e.RowIndex).TmpIpData(10) = Val(ipDataStrArr(1))
+                AppSetting.SenderList(e.RowIndex).TmpIpData(9) = Val(ipDataStrArr(2))
+                AppSetting.SenderList(e.RowIndex).TmpIpData(8) = Val(ipDataStrArr(3))
         End Select
     End Sub
 #End Region
@@ -145,18 +145,18 @@ Public Class ControlNetwork
     Private Sub SendEquipmentIPData(sender As Object, e As MarsEquipmentIPEventArgs)
         'Static Dim senderArrayIndex As Integer = 0
         If e.IsExecResult Then
-            If senderArrayIndex < sysInfo.SenderList.Length - 1 Then
-                sysInfo.SenderList(senderArrayIndex).IpDate = sysInfo.SenderList(senderArrayIndex).TmpIpData
+            If senderArrayIndex < AppSetting.SenderList.Length - 1 Then
+                AppSetting.SenderList(senderArrayIndex).IpDate = AppSetting.SenderList(senderArrayIndex).TmpIpData
 
                 senderArrayIndex += 1
 
-                sysInfo.MainClass.SetEquipmentIP(senderArrayIndex, sysInfo.SenderList(senderArrayIndex).TmpIpData)
+                AppSetting.MainClass.SetEquipmentIP(senderArrayIndex, AppSetting.SenderList(senderArrayIndex).TmpIpData)
             Else
-                sysInfo.SenderList(senderArrayIndex).IpDate = sysInfo.SenderList(senderArrayIndex).TmpIpData
-                ShowMsgBox($"{sysInfo.Language.GetS("Modified Control IP successfully")}!")
+                AppSetting.SenderList(senderArrayIndex).IpDate = AppSetting.SenderList(senderArrayIndex).TmpIpData
+                ShowMsgBox($"{AppSetting.Language.GetS("Modified Control IP successfully")}!")
             End If
         Else
-            ShowMsgBox($"{sysInfo.Language.GetS("Control")}{senderArrayIndex} {sysInfo.Language.GetS("Failed to modify IP")}!")
+            ShowMsgBox($"{AppSetting.Language.GetS("Control")}{senderArrayIndex} {AppSetting.Language.GetS("Failed to modify IP")}!")
         End If
     End Sub
 #End Region
@@ -182,7 +182,7 @@ Public Class ControlNetwork
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Button1.Enabled = False
         senderArrayIndex = 0
-        sysInfo.MainClass.SetEquipmentIP(0, sysInfo.SenderList(senderArrayIndex).TmpIpData)
+        AppSetting.MainClass.SetEquipmentIP(0, AppSetting.SenderList(senderArrayIndex).TmpIpData)
     End Sub
 #End Region
 
@@ -191,7 +191,7 @@ Public Class ControlNetwork
     ''' 切换控件语言
     ''' </summary>
     Public Sub ChangeControlsLanguage()
-        With sysInfo.Language
+        With AppSetting.Language
             Me.GroupBox1.Text = .GetS("Control Network")
             Me.Column1.HeaderText = .GetS("ID")
             Me.Column2.HeaderText = .GetS("IP Address")

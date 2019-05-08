@@ -46,7 +46,7 @@ Public Class DeviceInit
         '判断诺瓦服务是否启动
         If System.Diagnostics.Process.GetProcessesByName("MarsServerProvider").Length = 0 Then
             Dim tmpProcessHwnd As Process = Process.Start($".\Nova\Server\MarsServerProvider.exe")
-            ShowInfo($"{sysInfo.Language.GetS("Start Nova Serve")}：{If(tmpProcessHwnd.Handle, True, False)}")
+            ShowInfo($"{AppSetting.Language.GetS("Start Nova Serve")}：{If(tmpProcessHwnd.Handle, True, False)}")
             Thread.Sleep(5000)
         End If
 
@@ -85,21 +85,21 @@ Public Class DeviceInit
         Static Dim senderArrayId As Integer = 0
 
         If e.IsExecResult Then
-            sysInfo.SenderList(senderArrayId).IpDate = e.Data
+            AppSetting.SenderList(senderArrayId).IpDate = e.Data
 
             senderArrayId += 1
-            If senderArrayId < sysInfo.SenderList.Length Then
-                sysInfo.MainClass.GetEquipmentIP(senderArrayId)
+            If senderArrayId < AppSetting.SenderList.Length Then
+                AppSetting.MainClass.GetEquipmentIP(senderArrayId)
             Else
-                ShowInfo(sysInfo.Language.GetS("Loading Completed"))
+                ShowInfo(AppSetting.Language.GetS("Loading Completed"))
                 '移除事件
-                RemoveHandler sysInfo.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+                RemoveHandler AppSetting.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
                 Me.Close(True)
             End If
         Else
             '移除事件
-            RemoveHandler sysInfo.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
-            ShowInfo($"ERROR:{sysInfo.Language.GetS("Failed to Get IP data!Please check the equipment and reset it")}!")
+            RemoveHandler AppSetting.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+            ShowInfo($"ERROR:{AppSetting.Language.GetS("Failed to Get IP data!Please check the equipment and reset it")}!")
         End If
     End Sub
 #End Region
@@ -116,21 +116,21 @@ Public Class DeviceInit
         End If
 
 #Region "连接Nova服务"
-        ShowInfo(sysInfo.Language.GetS("Connect Nova Serve ..."))
-        sysInfo.RootClass = New MarsHardwareEnumerator
-        If Not sysInfo.RootClass.Initialize() Then
-            ShowInfo($"ERROR:{sysInfo.Language.GetS("Failed to Connect Nova Serve")}")
+        ShowInfo(AppSetting.Language.GetS("Connect Nova Serve ..."))
+        AppSetting.RootClass = New MarsHardwareEnumerator
+        If Not AppSetting.RootClass.Initialize() Then
+            ShowInfo($"ERROR:{AppSetting.Language.GetS("Failed to Connect Nova Serve")}")
             Exit Sub
         End If
 #End Region
 
 #Region "查找控制系统"
         For i001 As Integer = 0 To 20 - 1
-            ShowInfo(sysInfo.Language.GetS("Searching Control System") & i001)
+            ShowInfo(AppSetting.Language.GetS("Searching Control System") & i001)
 
-            If sysInfo.RootClass.CtrlSystemCount() < 1 Then
+            If AppSetting.RootClass.CtrlSystemCount() < 1 Then
                 If i001 = 20 - 1 Then
-                    ShowInfo($"ERROR:{sysInfo.Language.GetS("No control system found")}")
+                    ShowInfo($"ERROR:{AppSetting.Language.GetS("No control system found")}")
                     Exit Sub
                 End If
 
@@ -142,51 +142,51 @@ Public Class DeviceInit
         Next
 #End Region
 
-        sysInfo.MainClass = New MarsControlSystem(sysInfo.RootClass)
+        AppSetting.MainClass = New MarsControlSystem(AppSetting.RootClass)
         '绑定读取到ip事件
-        AddHandler sysInfo.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+        AddHandler AppSetting.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
 
         Dim screenCount As Integer
         Dim senderCount As Integer
         Dim tmpstr As String = Nothing
-        sysInfo.RootClass.GetComNameOfControlSystem(0, tmpstr)
-        sysInfo.MainClass.Initialize(tmpstr, screenCount, senderCount)
+        AppSetting.RootClass.GetComNameOfControlSystem(0, tmpstr)
+        AppSetting.MainClass.Initialize(tmpstr, screenCount, senderCount)
 
         If senderCount = 0 Then
-            ShowInfo($"ERROR:{sysInfo.Language.GetS("No controller found")}")
+            ShowInfo($"ERROR:{AppSetting.Language.GetS("No controller found")}")
             Exit Sub
         End If
 
-        ShowInfo(sysInfo.Language.GetS("Reading display screen information"))
+        ShowInfo(AppSetting.Language.GetS("Reading display screen information"))
         Dim LEDScreenInfoList As List(Of LEDScreenInfo) = Nothing
-        If sysInfo.MainClass.ReadLEDScreenInfo(LEDScreenInfoList) Then
-            ShowInfo($"ERROR:{sysInfo.Language.GetS("Failed to Reading display screen information")}")
+        If AppSetting.MainClass.ReadLEDScreenInfo(LEDScreenInfoList) Then
+            ShowInfo($"ERROR:{AppSetting.Language.GetS("Failed to Reading display screen information")}")
             Exit Sub
         End If
 
         If LEDScreenInfoList Is Nothing OrElse
             LEDScreenInfoList.Count = 0 Then
-            ShowInfo($"ERROR:{sysInfo.Language.GetS("No display screen found")}")
+            ShowInfo($"ERROR:{AppSetting.Language.GetS("No display screen found")}")
             Exit Sub
         End If
 
-        ShowInfo(sysInfo.Language.GetS("Loading screen information"))
-        sysInfo.ScanBoardTable = New Hashtable
-        ReDim sysInfo.ScreenList(screenCount - 1)
-        ReDim sysInfo.SenderList(senderCount - 1)
-        For i As Integer = 0 To sysInfo.SenderList.Length - 1
-            ReDim sysInfo.SenderList(i).TmpIpData(12 - 1)
+        ShowInfo(AppSetting.Language.GetS("Loading screen information"))
+        AppSetting.ScanBoardTable = New Hashtable
+        ReDim AppSetting.ScreenList(screenCount - 1)
+        ReDim AppSetting.SenderList(senderCount - 1)
+        For i As Integer = 0 To AppSetting.SenderList.Length - 1
+            ReDim AppSetting.SenderList(i).TmpIpData(12 - 1)
         Next
 
 #Region "遍历屏幕"
         '遍历屏幕
         For LEDScreenId As Integer = 0 To screenCount - 1
-            With sysInfo.ScreenList(LEDScreenId)
+            With AppSetting.ScreenList(LEDScreenId)
 
                 Dim x As Integer
                 Dim y As Integer
                 '获取起始位置 大小
-                sysInfo.MainClass.GetScreenLocation(LEDScreenId,
+                AppSetting.MainClass.GetScreenLocation(LEDScreenId,
                                             x,
                                             y,
                                             .DefSize.Width,
@@ -226,7 +226,7 @@ Public Class DeviceInit
                         Continue For
                     End If
 
-                    sysInfo.ScreenList(LEDScreenId).SenderList.Add(i001.SenderIndex)
+                    AppSetting.ScreenList(LEDScreenId).SenderList.Add(i001.SenderIndex)
 
                     Dim tmpScanBoardInfo As New ScanBoardInfo With {
                         .ScreenId = LEDScreenId,'屏幕索引
@@ -238,14 +238,14 @@ Public Class DeviceInit
                     tmpScanBoardInfo.Location.X = (i001.X \ .DefScanBoardSize.Width) * .SensorLayout.Width
                     tmpScanBoardInfo.Location.Y = (i001.Y \ .DefScanBoardSize.Height) * .SensorLayout.Height
 
-                    sysInfo.ScanBoardTable.Add($"{i001.SenderIndex}-{i001.PortIndex}-{i001.ConnectIndex}", tmpScanBoardInfo)
+                    AppSetting.ScanBoardTable.Add($"{i001.SenderIndex}-{i001.PortIndex}-{i001.ConnectIndex}", tmpScanBoardInfo)
                 Next
 #End Region
             End With
         Next
 #End Region
 
-        sysInfo.MainClass.GetEquipmentIP(0)
+        AppSetting.MainClass.GetEquipmentIP(0)
     End Sub
 #End Region
 
@@ -254,7 +254,7 @@ Public Class DeviceInit
     ''' 切换控件语言
     ''' </summary>
     Public Sub ChangeControlsLanguage()
-        With sysInfo.Language
+        With AppSetting.Language
             Me.ToolStripStatusLabel1.Text = .GetS("Start ...")
         End With
     End Sub

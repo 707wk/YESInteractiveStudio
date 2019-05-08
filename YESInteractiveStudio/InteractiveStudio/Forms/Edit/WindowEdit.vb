@@ -16,7 +16,7 @@ Public Class WindowEdit
     ''' 清空屏幕
     ''' </summary>
     Public Sub ClearScreen()
-        sysInfo.Schedule.WindowList(WindowId).ScreenList.Clear()
+        AppSetting.Schedule.WindowList(WindowId).ScreenList.Clear()
 
         For i001 As Integer = 0 To ScreenControls.Count - 1
             ScreenControls(i001).Visible = False
@@ -35,7 +35,7 @@ Public Class WindowEdit
     ''' 加载窗体信息
     ''' </summary>
     Public Sub LoadWindow()
-        With sysInfo.Schedule.WindowList(WindowId)
+        With AppSetting.Schedule.WindowList(WindowId)
             TextBox1.Text = .Remark
 
             NumericUpDown1.Value = .Location.X
@@ -49,8 +49,8 @@ Public Class WindowEdit
                     Continue For
                 End If
 
-                ScreenControls(i001).Location = sysInfo.Schedule.ScreenList(i001).Loaction
-                ScreenControls(i001).Size = sysInfo.ScreenList(i001).DefSize
+                ScreenControls(i001).Location = AppSetting.Schedule.ScreenList(i001).Loaction
+                ScreenControls(i001).Size = AppSetting.ScreenList(i001).DefSize
                 ScreenControls(i001).Visible = True
 
                 UpdateScreenControlInfo(i001)
@@ -60,7 +60,7 @@ Public Class WindowEdit
 #End Region
 
     Private Sub WindowEdit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = sysInfo.Schedule.WindowList.Item(WindowId).Remark
+        Me.Text = AppSetting.Schedule.WindowList.Item(WindowId).Remark
 
         'sysInfo.Language.GetS(Me)
         ChangeControlsLanguage()
@@ -73,7 +73,7 @@ Public Class WindowEdit
         'End With
 #End Region
 
-        ReDim ScreenControls(sysInfo.ScreenList.Count - 1)
+        ReDim ScreenControls(AppSetting.ScreenList.Count - 1)
         For i001 As Integer = 0 To ScreenControls.Count - 1
             ScreenControls(i001) = New ScreenButton With {
                 .ScreenId = i001,
@@ -120,7 +120,7 @@ Public Class WindowEdit
         NumericUpDown5.Value = TmpScreenButton.Location.Y
         TextBox2.Text = TmpScreenButton.ScreenId
 
-        ComboBox1.Text = sysInfo.Schedule.ScreenList(TmpScreenButton.ScreenId).BoxRotation
+        ComboBox1.Text = AppSetting.Schedule.ScreenList(TmpScreenButton.ScreenId).BoxRotation
         'ComboBox1.SelectedItem = $"{sysInfo.ScreenList(TmpScreenButton.ScreenId).SensorAngle}"
     End Sub
 
@@ -158,10 +158,10 @@ Public Class WindowEdit
             Exit Sub
         End If
 
-        sysInfo.Schedule.WindowList(WindowId).ScreenList.Add(TmpDialog.SelectScreenID)
+        AppSetting.Schedule.WindowList(WindowId).ScreenList.Add(TmpDialog.SelectScreenID)
 
         ScreenControls(TmpDialog.SelectScreenID).Location = New Point(0, 0)
-        ScreenControls(TmpDialog.SelectScreenID).Size = sysInfo.ScreenList(TmpDialog.SelectScreenID).DefSize
+        ScreenControls(TmpDialog.SelectScreenID).Size = AppSetting.ScreenList(TmpDialog.SelectScreenID).DefSize
         ScreenControls(TmpDialog.SelectScreenID).Visible = True
         ScreenControls(TmpDialog.SelectScreenID).BringToFront()
 
@@ -173,7 +173,7 @@ Public Class WindowEdit
     Private Sub DeleteScreenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteScreenToolStripMenuItem.Click
         Dim deleteScreenId As Integer = Val(TextBox2.Text)
 
-        sysInfo.Schedule.WindowList(WindowId).ScreenList.Remove(deleteScreenId)
+        AppSetting.Schedule.WindowList(WindowId).ScreenList.Remove(deleteScreenId)
         ScreenControls(deleteScreenId).Visible = False
         TextBox2.Clear()
     End Sub
@@ -184,7 +184,7 @@ Public Class WindowEdit
     ''' 窗口信息
     ''' </summary>
     Private Sub GroupBox3_Leave(sender As Object, e As EventArgs) Handles GroupBox3.Leave
-        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList.Item(WindowId)
+        Dim TmpWindowInfo As WindowInfo = AppSetting.Schedule.WindowList.Item(WindowId)
         With TmpWindowInfo
             .Remark = TextBox1.Text
 
@@ -195,7 +195,7 @@ Public Class WindowEdit
             .ZoomPix.Height = NumericUpDown4.Value
         End With
 
-        sysInfo.Schedule.WindowList.Item(WindowId) = TmpWindowInfo
+        AppSetting.Schedule.WindowList.Item(WindowId) = TmpWindowInfo
     End Sub
 
 #Region "改变屏幕位置"
@@ -207,8 +207,8 @@ Public Class WindowEdit
             Exit Sub
         End If
 
-        sysInfo.Schedule.ScreenList(Val(TextBox2.Text)).Loaction = New Point(NumericUpDown6.Value, NumericUpDown5.Value)
-        ScreenControls(Val(TextBox2.Text)).Location = sysInfo.Schedule.ScreenList(Val(TextBox2.Text)).Loaction
+        AppSetting.Schedule.ScreenList(Val(TextBox2.Text)).Loaction = New Point(NumericUpDown6.Value, NumericUpDown5.Value)
+        ScreenControls(Val(TextBox2.Text)).Location = AppSetting.Schedule.ScreenList(Val(TextBox2.Text)).Loaction
 
         UpdateScreenControlInfo(Val(TextBox2.Text))
     End Sub
@@ -238,7 +238,7 @@ Public Class WindowEdit
             Exit Sub
         End If
 
-        sysInfo.Schedule.ScreenList(Val(TextBox2.Text)).BoxRotation = Val(ComboBox1.Text)
+        AppSetting.Schedule.ScreenList(Val(TextBox2.Text)).BoxRotation = Val(ComboBox1.Text)
 
         UpdateScreenControlInfo(Val(TextBox2.Text))
     End Sub
@@ -248,11 +248,11 @@ Public Class WindowEdit
     ''' </summary>
     ''' <param name="ScreenID"></param>
     Private Sub UpdateScreenControlInfo(ScreenID As Integer)
-        With sysInfo.ScreenList(ScreenID)
+        With AppSetting.ScreenList(ScreenID)
             ScreenControls(ScreenID).Text = $"Screen {ScreenID}
 Size    : Width={ .DefSize.Width},Height={ .DefSize.Height}
-Location: X={sysInfo.Schedule.ScreenList(ScreenID).Loaction.X},Y={sysInfo.Schedule.ScreenList(ScreenID).Loaction.Y}
-Rotation: {sysInfo.Schedule.ScreenList(ScreenID).BoxRotation}°"
+Location: X={AppSetting.Schedule.ScreenList(ScreenID).Loaction.X},Y={AppSetting.Schedule.ScreenList(ScreenID).Loaction.Y}
+Rotation: {AppSetting.Schedule.ScreenList(ScreenID).BoxRotation}°"
         End With
     End Sub
 #End Region
@@ -262,7 +262,7 @@ Rotation: {sysInfo.Schedule.ScreenList(ScreenID).BoxRotation}°"
     ''' 切换控件语言
     ''' </summary>
     Public Sub ChangeControlsLanguage()
-        With sysInfo.Language
+        With AppSetting.Language
             Me.Label1.Text = .GetS("Remark")
             Me.Label2.Text = .GetS("Location")
             Me.Label3.Text = .GetS("X")

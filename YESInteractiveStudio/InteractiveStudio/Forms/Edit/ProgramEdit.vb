@@ -11,7 +11,7 @@
         Me.ProgramId = ProgramId
         Me.ActiveControl = Me.ListView1
 
-        With sysInfo.Schedule.WindowList(WindowId).ProgramList(ProgramId)
+        With AppSetting.Schedule.WindowList(WindowId).ProgramList(ProgramId)
             TextBox1.Text = .Remark
 
             ListView1.Items.Clear()
@@ -39,9 +39,9 @@
             .ShowItemToolTips = True
             .MultiSelect = False
 
-            .Columns.Add(sysInfo.Language.GetS("ID"), 40)
-            .Columns.Add(sysInfo.Language.GetS("File"), 400)
-            .Columns.Add(sysInfo.Language.GetS("Play Time(s)"), 100)
+            .Columns.Add(AppSetting.Language.GetS("ID"), 40)
+            .Columns.Add(AppSetting.Language.GetS("File"), 400)
+            .Columns.Add(AppSetting.Language.GetS("Play Time(s)"), 100)
             .ContextMenuStrip = MediaMenuStrip
         End With
 
@@ -85,7 +85,7 @@
             ListView1.Items(ListView1.Items.Count - 1).SubItems.Add(TmpDialog.FileNames(i001))
             ListView1.Items(ListView1.Items.Count - 1).SubItems.Add(60)
 
-            sysInfo.Schedule.WindowList(WindowId).ProgramList(ProgramId).MediaList.Add(
+            AppSetting.Schedule.WindowList(WindowId).ProgramList(ProgramId).MediaList.Add(
                 New MediaInfo With {
                 .Path = TmpDialog.FileNames(i001),
                 .PlayTime = 60
@@ -110,7 +110,7 @@
         Dim mediaId As Integer = ListView1.SelectedItems(0).Index
 
         ListView1.Items.RemoveAt(mediaId)
-        sysInfo.Schedule.WindowList(WindowId).ProgramList(ProgramId).MediaList.RemoveAt(mediaId)
+        AppSetting.Schedule.WindowList(WindowId).ProgramList(ProgramId).MediaList.RemoveAt(mediaId)
         TextBox2.Clear()
 
         UpdateID()
@@ -119,11 +119,11 @@
 
 #Region "保存节目"
     Private Sub TextBox1_LostFocus(sender As Object, e As EventArgs) Handles TextBox1.LostFocus
-        Dim TmpProgram As ProgramInfo = sysInfo.Schedule.WindowList(WindowId).ProgramList(ProgramId)
+        Dim TmpProgram As ProgramInfo = AppSetting.Schedule.WindowList(WindowId).ProgramList(ProgramId)
 
         TmpProgram.Remark = TextBox1.Text
 
-        sysInfo.Schedule.WindowList(WindowId).ProgramList(ProgramId) = TmpProgram
+        AppSetting.Schedule.WindowList(WindowId).ProgramList(ProgramId) = TmpProgram
 
         MDIParentMain.UpdateProgram(WindowId, ProgramId)
     End Sub
@@ -133,8 +133,8 @@
 #Region "显示文件"
     Public Sub ShowMedia(ByVal MediaId As Integer)
         TextBox2.Text = MediaId + 1
-        TextBox3.Text = sysInfo.Schedule.WindowList(WindowId).ProgramList(ProgramId).MediaList(MediaId).Path
-        NumericUpDown1.Value = sysInfo.Schedule.WindowList(WindowId).ProgramList(ProgramId).MediaList(MediaId).PlayTime
+        TextBox3.Text = AppSetting.Schedule.WindowList(WindowId).ProgramList(ProgramId).MediaList(MediaId).Path
+        NumericUpDown1.Value = AppSetting.Schedule.WindowList(WindowId).ProgramList(ProgramId).MediaList(MediaId).PlayTime
     End Sub
 #End Region
 
@@ -171,12 +171,12 @@
 
         mediaId -= 1
 
-        Dim TmpMedia As MediaInfo = sysInfo.Schedule.WindowList(WindowId).ProgramList(ProgramId).MediaList(mediaId)
+        Dim TmpMedia As MediaInfo = AppSetting.Schedule.WindowList(WindowId).ProgramList(ProgramId).MediaList(mediaId)
 
         TmpMedia.Path = TextBox3.Text
         TmpMedia.PlayTime = NumericUpDown1.Value
 
-        sysInfo.Schedule.WindowList(WindowId).ProgramList(ProgramId).MediaList(mediaId) = TmpMedia
+        AppSetting.Schedule.WindowList(WindowId).ProgramList(ProgramId).MediaList(mediaId) = TmpMedia
 
         ListView1.Items(mediaId).SubItems(1).Text = TextBox3.Text
         ListView1.Items(mediaId).SubItems(2).Text = NumericUpDown1.Value
@@ -191,7 +191,7 @@
 
         Dim mediaId As Integer = ListView1.SelectedItems(0).Index
 
-        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(WindowId)
+        Dim TmpWindowInfo As WindowInfo = AppSetting.Schedule.WindowList(WindowId)
 
         With TmpWindowInfo
             If .ProgramList(ProgramId).MediaList.Count = 0 Then
@@ -202,12 +202,12 @@
             .PlayMediaId = mediaId
             .PlayMediaTime = 0
 
-            If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
+            If AppSetting.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
                 .PlayDialog.Play(.PlayProgramInfo.MediaList(mediaId).Path)
             End If
         End With
 
-        sysInfo.Schedule.WindowList(WindowId) = TmpWindowInfo
+        AppSetting.Schedule.WindowList(WindowId) = TmpWindowInfo
     End Sub
 #End Region
 
@@ -217,7 +217,7 @@
             Exit Sub
         End If
 
-        Dim TmpWindowInfo As WindowInfo = sysInfo.Schedule.WindowList(WindowId)
+        Dim TmpWindowInfo As WindowInfo = AppSetting.Schedule.WindowList(WindowId)
 
         With TmpWindowInfo
             If .ProgramList(ProgramId).MediaList.Count = 0 Then
@@ -228,12 +228,12 @@
             .PlayMediaId = 0
             .PlayMediaTime = 0
 
-            If sysInfo.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
+            If AppSetting.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
                 .PlayDialog.Play(.PlayProgramInfo.MediaList(0).Path)
             End If
         End With
 
-        sysInfo.Schedule.WindowList(WindowId) = TmpWindowInfo
+        AppSetting.Schedule.WindowList(WindowId) = TmpWindowInfo
     End Sub
 #End Region
 
@@ -242,7 +242,7 @@
     ''' 切换控件语言
     ''' </summary>
     Public Sub ChangeControlsLanguage()
-        With sysInfo.Language
+        With AppSetting.Language
             Me.Label1.Text = .GetS("Remark")
             Me.GroupBox1.Text = .GetS("Media List")
             Me.ToolStrip1.Text = .GetS("ToolStrip1")
