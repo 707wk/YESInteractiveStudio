@@ -335,13 +335,6 @@ InteractiveStudio
  切换控件语言
  </summary>
 </member>
-<member name="M:InteractiveStudio.DeviceInit.BackgroundWorker1_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
- <summary>
- 后台线程
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
 <member name="T:InteractiveStudio.DeviceInit.ShowInfoCallback">
  <summary>
  显示信息
@@ -350,11 +343,6 @@ InteractiveStudio
 <member name="M:InteractiveStudio.DeviceInit.GetEquipmentIPData(System.Object,Nova.Mars.SDK.MarsEquipmentIPEventArgs)">
  <summary>
  获取ip通知
- </summary>
-</member>
-<member name="T:InteractiveStudio.DeviceInit.novaInitializeCallback">
- <summary>
- 读取屏幕信息
  </summary>
 </member>
 <member name="M:InteractiveStudio.DeviceInit.ChangeControlsLanguage">
@@ -672,11 +660,6 @@ InteractiveStudio
  背景字体
  </summary>
 </member>
-<member name="F:InteractiveStudio.PlayWindow.FlashControl">
- <summary>
- Flash播放器控件
- </summary>
-</member>
 <member name="F:InteractiveStudio.PlayWindow.SetCaptureFlage">
  <summary>
  捕获鼠标
@@ -710,11 +693,6 @@ InteractiveStudio
 <member name="M:InteractiveStudio.PlayWindow.ClearPlayControl">
  <summary>
  清空播放控件
- </summary>
-</member>
-<member name="M:InteractiveStudio.PlayWindow.PlaySwf(System.String)">
- <summary>
- 播放Flash
  </summary>
 </member>
 <member name="M:InteractiveStudio.PlayWindow.PlayDLL(System.String)">
@@ -1217,19 +1195,14 @@ InteractiveStudio
  屏幕列表
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.RootClass">
+<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.NovaMarsHardware">
  <summary>
  Nova连接变量
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.MainClass">
+<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.NovaMarsControl">
  <summary>
  Nova配置变量
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.ScanBoardOldFlage">
- <summary>
- MCU程序旧版标记
  </summary>
 </member>
 <member name="F:InteractiveStudio.ModuleStructure.SystemInfo.LinkFlage">
@@ -1318,26 +1291,23 @@ InteractiveStudio
  处理线程
  </summary>
 </member>
-<member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetTouchSensitivity(System.Int32,System.Boolean)">
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetTouchSensitivity(System.Int32)">
  <summary>
  MCU传感器灵敏度
  </summary>
  <param name="Value">1-9级,越大越灵敏</param>
- <param name="OldFlage">启用旧版SDK</param>
 </member>
-<member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetResetTemp(System.Int32,System.Boolean)">
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetResetTemp(System.Int32)">
  <summary>
  MCU传感器温度增量复位
  </summary>
  <param name="Value">绝对变化值 0-255度</param>
- <param name="OldFlage">启用旧版SDK</param>
 </member>
-<member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetResetSec(System.Int32,System.Boolean)">
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetResetSec(System.Int32)">
  <summary>
  MCU传感器定时复位
  </summary>
  <param name="Value">0-255秒</param>
- <param name="OldFlage">启用旧版SDK</param>
 </member>
 <member name="T:InteractiveStudio.UnityConfig.ModuleUnityConfig">
  <summary>

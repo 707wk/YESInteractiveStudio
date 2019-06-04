@@ -5,23 +5,13 @@ Imports Nova.Mars.SDK
 Public Class DeviceInit
 #Region "窗体初始化/关闭"
     Private Sub DeviceInit_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'MsgBox($"{My.Application.Info.Title}.{[Enum].GetName(GetType(Wangk.Resource.MultiLanguage.LANG),
-        '                                                     Wangk.Resource.MultiLanguage.LANG.EN)}.resources")
-        'Dim TmpDialog As New AboutBox
-        'TmpDialog.ShowDialog()
-        'End
+        Timer1.Interval = 500
 
-        'sysInfo.Language.GetS(Me)
         ChangeControlsLanguage()
     End Sub
 
     Private Sub DeviceInit_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        '启动后台线程
-        BackgroundWorker1.RunWorkerAsync()
-    End Sub
-
-    Private Sub DeviceInit_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-
+        Timer1.Start()
     End Sub
 
     '关闭窗体
@@ -36,44 +26,24 @@ Public Class DeviceInit
     End Sub
 #End Region
 
-#Region "后台线程"
-    ''' <summary>
-    ''' 后台线程
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub BackgroundWorker1_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-        '判断诺瓦服务是否启动
-        If System.Diagnostics.Process.GetProcessesByName("MarsServerProvider").Length = 0 Then
-            Dim tmpProcessHwnd As Process = Process.Start($".\Nova\Server\MarsServerProvider.exe")
-            ShowInfo($"{AppSetting.Language.GetS("Start Nova Serve")}：{If(tmpProcessHwnd.Handle, True, False)}")
-            Thread.Sleep(5000)
-        End If
-
-        NovaInitialize(True)
-    End Sub
-#End Region
-
 #Region "显示信息"
     ''' <summary>
     ''' 显示信息
     ''' </summary>
-    Public Delegate Sub ShowInfoCallback(ByVal text As String)
-    Public Sub ShowInfo(ByVal text As String)
+    Public Delegate Sub ShowInfoCallback(ByVal text As String, ExitFlag As Boolean)
+    Public Sub ShowInfo(ByVal text As String, Optional ExitFlag As Boolean = False)
         If Me.InvokeRequired Then
-            Me.Invoke(New ShowInfoCallback(AddressOf ShowInfo), New Object() {text})
+            Me.Invoke(New ShowInfoCallback(AddressOf ShowInfo), New Object() {text, ExitFlag})
             Exit Sub
         End If
 
         ToolStripStatusLabel1.Text = text
-        '有错误则提示并退出
-        If text.IndexOf("ERROR") = -1 Then
-            Exit Sub
+
+        If ExitFlag Then
+            MsgBox(text, MsgBoxStyle.Information, Me.Text)
+            End
         End If
 
-        MsgBox($"{text}", MsgBoxStyle.Information, Me.Text)
-
-        End
     End Sub
 #End Region
 
@@ -89,48 +59,62 @@ Public Class DeviceInit
 
             senderArrayId += 1
             If senderArrayId < AppSetting.SenderList.Length Then
-                AppSetting.MainClass.GetEquipmentIP(senderArrayId)
+                AppSetting.NovaMarsControl.GetEquipmentIP(senderArrayId)
             Else
                 ShowInfo(AppSetting.Language.GetS("Loading Completed"))
                 '移除事件
-                RemoveHandler AppSetting.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+                RemoveHandler AppSetting.NovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
                 Me.Close(True)
             End If
         Else
             '移除事件
-            RemoveHandler AppSetting.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
-            ShowInfo($"ERROR:{AppSetting.Language.GetS("Failed to Get IP data!Please check the equipment and reset it")}!")
+            RemoveHandler AppSetting.NovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+            ShowInfo(AppSetting.Language.GetS("Failed to Get IP data!Please check the equipment and reset it"), True)
         End If
     End Sub
 #End Region
 
-#Region "读取屏幕信息"
-    ''' <summary>
-    ''' 读取屏幕信息
-    ''' </summary>
-    Public Delegate Sub novaInitializeCallback(ByVal text As String)
-    Public Sub NovaInitialize(ByVal text As String)
-        If Me.InvokeRequired Then
-            Me.Invoke(New novaInitializeCallback(AddressOf NovaInitialize), New Object() {text})
-            Exit Sub
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Timer1.Stop()
+
+        '判断Nova服务是否启动
+        ShowInfo(AppSetting.Language.GetS("Start Nova Serve"))
+        If System.Diagnostics.Process.GetProcessesByName("MarsServerProvider").Length = 0 Then
+            Process.Start($".\Nova\Server\MarsServerProvider.exe")
         End If
 
 #Region "连接Nova服务"
         ShowInfo(AppSetting.Language.GetS("Connect Nova Serve ..."))
-        AppSetting.RootClass = New MarsHardwareEnumerator
-        If Not AppSetting.RootClass.Initialize() Then
-            ShowInfo($"ERROR:{AppSetting.Language.GetS("Failed to Connect Nova Serve")}")
-            Exit Sub
-        End If
+
+        AppSetting.NovaMarsHardware = New MarsHardwareEnumerator
+        For i001 = 0 To 10 - 1
+            ShowInfo($"{AppSetting.Language.GetS("Connect Nova Serve ...")}{"".PadRight(i001, ".")}")
+
+            Thread.Sleep(500)
+
+            If AppSetting.NovaMarsHardware.Initialize() Then
+                If AppSetting.NovaMarsHardware.CommPortListOfCtrlSystem.Count > 0 Then
+                    Exit For
+                End If
+
+                AppSetting.NovaMarsHardware.UnInitialize()
+            End If
+
+            If i001 = 10 - 1 Then
+                ShowInfo(AppSetting.Language.GetS("Failed to Connect Nova Serve"), True)
+                Exit Sub
+            End If
+
+        Next
 #End Region
 
 #Region "查找控制系统"
-        For i001 As Integer = 0 To 20 - 1
-            ShowInfo(AppSetting.Language.GetS("Searching Control System") & i001)
+        For i001 As Integer = 0 To 5 - 1
+            ShowInfo(AppSetting.Language.GetS("Searching Control System") & "".PadRight(i001, "."))
 
-            If AppSetting.RootClass.CtrlSystemCount() < 1 Then
+            If AppSetting.NovaMarsHardware.CtrlSystemCount() < 1 Then
                 If i001 = 20 - 1 Then
-                    ShowInfo($"ERROR:{AppSetting.Language.GetS("No control system found")}")
+                    ShowInfo(AppSetting.Language.GetS("No control system found"), True)
                     Exit Sub
                 End If
 
@@ -142,31 +126,31 @@ Public Class DeviceInit
         Next
 #End Region
 
-        AppSetting.MainClass = New MarsControlSystem(AppSetting.RootClass)
+        AppSetting.NovaMarsControl = New MarsControlSystem(AppSetting.NovaMarsHardware)
         '绑定读取到ip事件
-        AddHandler AppSetting.MainClass.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+        AddHandler AppSetting.NovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
 
         Dim screenCount As Integer
         Dim senderCount As Integer
         Dim tmpstr As String = Nothing
-        AppSetting.RootClass.GetComNameOfControlSystem(0, tmpstr)
-        AppSetting.MainClass.Initialize(tmpstr, screenCount, senderCount)
+        AppSetting.NovaMarsHardware.GetComNameOfControlSystem(0, tmpstr)
+        AppSetting.NovaMarsControl.Initialize(tmpstr, screenCount, senderCount)
 
         If senderCount = 0 Then
-            ShowInfo($"ERROR:{AppSetting.Language.GetS("No controller found")}")
+            ShowInfo(AppSetting.Language.GetS("No controller found"), True)
             Exit Sub
         End If
 
         ShowInfo(AppSetting.Language.GetS("Reading display screen information"))
         Dim LEDScreenInfoList As List(Of LEDScreenInfo) = Nothing
-        If AppSetting.MainClass.ReadLEDScreenInfo(LEDScreenInfoList) Then
-            ShowInfo($"ERROR:{AppSetting.Language.GetS("Failed to Reading display screen information")}")
+        If AppSetting.NovaMarsControl.ReadLEDScreenInfo(LEDScreenInfoList) Then
+            ShowInfo(AppSetting.Language.GetS("Failed to Reading display screen information"), True)
             Exit Sub
         End If
 
         If LEDScreenInfoList Is Nothing OrElse
             LEDScreenInfoList.Count = 0 Then
-            ShowInfo($"ERROR:{AppSetting.Language.GetS("No display screen found")}")
+            ShowInfo(AppSetting.Language.GetS("No display screen found"), True)
             Exit Sub
         End If
 
@@ -186,7 +170,7 @@ Public Class DeviceInit
                 Dim x As Integer
                 Dim y As Integer
                 '获取起始位置 大小
-                AppSetting.MainClass.GetScreenLocation(LEDScreenId,
+                AppSetting.NovaMarsControl.GetScreenLocation(LEDScreenId,
                                             x,
                                             y,
                                             .DefSize.Width,
@@ -245,9 +229,9 @@ Public Class DeviceInit
         Next
 #End Region
 
-        AppSetting.MainClass.GetEquipmentIP(0)
+        AppSetting.NovaMarsControl.GetEquipmentIP(0)
+
     End Sub
-#End Region
 
 #Region "切换控件语言"
     ''' <summary>

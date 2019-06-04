@@ -469,17 +469,17 @@ Public Module ModuleStructure
         ''' Nova连接变量
         ''' </summary>
         <XmlIgnore>
-        Dim RootClass As MarsHardwareEnumerator
+        Dim NovaMarsHardware As MarsHardwareEnumerator
         ''' <summary>
         ''' Nova配置变量
         ''' </summary>
         <XmlIgnore>
-        Dim MainClass As MarsControlSystem
+        Dim NovaMarsControl As MarsControlSystem
 
-        ''' <summary>
-        ''' MCU程序旧版标记
-        ''' </summary>
-        Dim ScanBoardOldFlage As Boolean
+        '''' <summary>
+        '''' MCU程序旧版标记
+        '''' </summary>
+        'Dim ScanBoardOldFlage As Boolean
 #End Region
 
 #Region "运行参数"

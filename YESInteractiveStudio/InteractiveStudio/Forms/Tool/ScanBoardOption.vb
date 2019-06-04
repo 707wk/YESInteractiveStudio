@@ -19,18 +19,12 @@ Public Class ScanBoardOption
             .Columns.Add(AppSetting.Language.GetS("Version"), 60, HorizontalAlignment.Left)
         End With
 
-        CheckBox1.Checked = AppSetting.ScanBoardOldFlage
+        'CheckBox1.Checked = AppSetting.ScanBoardOldFlage
 
         'sysInfo.Language.GetS(Me)
         ChangeControlsLanguage()
 #End Region
     End Sub
-
-#Region "MCU旧版标记"
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-        AppSetting.ScanBoardOldFlage = CheckBox1.Checked
-    End Sub
-#End Region
 
 #Region "查询MCU版本号"
 #Region "按钮事件"
@@ -58,11 +52,7 @@ Public Class ScanBoardOption
     ''' 获取发送卡下MCU版本号
     ''' </summary>
     Public Sub GetSenderMCUVersion(ByVal SenderId As Integer)
-        If Not AppSetting.ScanBoardOldFlage Then
-            AppSetting.MainClass.SetNewScanBoardData(SenderId, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
-        Else
-            AppSetting.MainClass.SetOldScanBoardData(SenderId, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
-        End If
+        AppSetting.NovaMarsControl.SetScanBoardData(SenderId, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
 
         If CheckBox2.Checked Then
             Thread.Sleep(50)
@@ -173,20 +163,18 @@ Public Class ScanBoardOption
         sendByte(4) = binLength \ 256
         sendByte(5) = binLength Mod 256
 
-        If Not AppSetting.ScanBoardOldFlage Then
-            AppSetting.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
-        Else
-            AppSetting.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
-        End If
+        AppSetting.NovaMarsControl.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
 
         Thread.Sleep(60)
 
-        For i As Integer = 0 To 100
+        For i As Integer = 0 To 10
             If CheckUpdataRecData(Wangk.Hash.Hex2Bin("1a1b")) Then
                 Exit For
             End If
 
-            If i = 100 Then
+            Thread.Sleep(60)
+
+            If i = 10 Then
                 'Putlog($"升级指令发送失败")
                 MsgBox(AppSetting.Language.GetS("Upgrade command failed to send"),
                            MsgBoxStyle.Information,
@@ -223,12 +211,8 @@ Public Class ScanBoardOption
             sendByte(129) = (checkSum \ 256) Mod 256
             sendByte(130) = checkSum Mod 256
 
-            For i As Integer = 0 To 100
-                If Not AppSetting.ScanBoardOldFlage Then
-                    AppSetting.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
-                Else
-                    AppSetting.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
-                End If
+            For i As Integer = 0 To 10
+                AppSetting.NovaMarsControl.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
 
                 Thread.Sleep(60)
 
@@ -236,7 +220,7 @@ Public Class ScanBoardOption
                     Exit For
                 End If
 
-                If i = 100 Then
+                If i = 10 Then
                     re.Close()
                     fs.Close()
                     MsgBox(AppSetting.Language.GetS("Upgrade data failed to send"),
@@ -258,11 +242,7 @@ Public Class ScanBoardOption
 
 
         '发送完毕指令
-        If Not AppSetting.ScanBoardOldFlage Then
-            AppSetting.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0909"))
-        Else
-            AppSetting.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0909"))
-        End If
+        AppSetting.NovaMarsControl.SetScanBoardData(&HFF, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0909"))
 
         re.Close()
         fs.Close()
@@ -336,7 +316,8 @@ Public Class ScanBoardOption
             Return False
         End If
 
-        Return If(recSum = AppSetting.ScanBoardTable.Count, True, False)
+        'Return If(recSum = AppSetting.ScanBoardTable.Count, True, False)
+        Return If(recSum > 0, True, False)
     End Function
 #End Region
 
@@ -355,8 +336,6 @@ Public Class ScanBoardOption
             Me.Button2.Text = .GetS("Update")
             Me.Button1.Text = .GetS("Browse ...")
             Me.Label1.Text = .GetS("File")
-            Me.GroupBox3.Text = .GetS("ScanBoard Version")
-            Me.CheckBox1.Text = .GetS("Old ScanBoard Version")
             Me.CheckBox2.Text = .GetS("Old MCU Version")
         End With
     End Sub

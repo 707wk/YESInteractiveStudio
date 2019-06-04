@@ -71,7 +71,7 @@
     ''' <param name="e"></param>
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         Dim TmpDialog As New OpenFileDialog With {
-            .Filter = "Flash or DLL or Unity|*.swf;*.dll;*.exe",
+            .Filter = "DLL or Unity|*.dll;*.exe",
             .Multiselect = True
         }
         If TmpDialog.ShowDialog() <> DialogResult.OK Then
@@ -141,7 +141,7 @@
 #Region "更新文件"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim TmpDialog As New OpenFileDialog With {
-            .Filter = "Flash or DLL|*.SWF;*.DLL",
+            .Filter = "DLL or Unity|*.dll;*.exe",
             .Multiselect = False
         }
         If TmpDialog.ShowDialog() <> DialogResult.OK Then
@@ -203,7 +203,9 @@
             .PlayMediaTime = 0
 
             If AppSetting.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
-                .PlayDialog.Play(.PlayProgramInfo.MediaList(mediaId).Path)
+                If .PlayDialog IsNot Nothing Then
+                    .PlayDialog.Play(.PlayProgramInfo.MediaList(mediaId).Path)
+                End If
             End If
         End With
 
@@ -229,7 +231,9 @@
             .PlayMediaTime = 0
 
             If AppSetting.DisplayMode = InteractiveOptions.DISPLAYMODE.INTERACT Then
-                .PlayDialog.Play(.PlayProgramInfo.MediaList(0).Path)
+                If .PlayDialog IsNot Nothing Then
+                    .PlayDialog.Play(.PlayProgramInfo.MediaList(0).Path)
+                End If
             End If
         End With
 

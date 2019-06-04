@@ -347,6 +347,10 @@ Public Class MDIParentMain
 
         For i001 As Integer = 0 To AppSetting.Schedule.WindowList.Count - 1
             With AppSetting.Schedule.WindowList(i001)
+                If .PlayDialog Is Nothing Then
+                    Continue For
+                End If
+
                 .PlayDialog.SwitchDisplayMode(Mode)
             End With
         Next
@@ -427,6 +431,10 @@ Public Class MDIParentMain
 #Region "关闭播放窗体"
         '关闭播放窗体
         For Each i001 As WindowInfo In AppSetting.Schedule.WindowList
+            If i001.PlayDialog Is Nothing Then
+                Continue For
+            End If
+
             i001.PlayDialog.Close(True)
         Next
 #End Region
@@ -436,11 +444,11 @@ Public Class MDIParentMain
 #Region "释放nova资源"
         '释放nova资源
         Try
-            AppSetting.MainClass.UnInitialize()
+            AppSetting.NovaMarsControl.UnInitialize()
         Catch ex As Exception
         End Try
         Try
-            AppSetting.RootClass.UnInitialize()
+            AppSetting.NovaMarsHardware.UnInitialize()
         Catch ex As Exception
         End Try
 #End Region
@@ -519,6 +527,10 @@ Public Class MDIParentMain
 
         For i001 As Integer = 0 To AppSetting.Schedule.WindowList.Count - 1
             With AppSetting.Schedule.WindowList(i001)
+                If .PlayDialog Is Nothing Then
+                    Continue For
+                End If
+
                 .PlayDialog.SwitchDisplayMode(InteractiveOptions.DISPLAYMODE.BLACK)
             End With
         Next
@@ -623,6 +635,10 @@ Public Class MDIParentMain
             Dim TmpWindowInfo As WindowInfo = AppSetting.Schedule.WindowList(i001)
 
             With TmpWindowInfo
+                If .PlayDialog Is Nothing Then
+                    Continue For
+                End If
+
                 If .PlayMediaId = -1 OrElse
                     .PlayProgramInfo.MediaList.Count = 0 Then
                     Continue For
@@ -757,7 +773,10 @@ Public Class MDIParentMain
         Next
 
         For i001 As Integer = 0 To AppSetting.Schedule.WindowList.Count - 1
-            AppSetting.Schedule.WindowList.Item(i001).PlayDialog.WindowId = i001
+
+            If AppSetting.Schedule.WindowList.Item(i001).PlayDialog IsNot Nothing Then
+                AppSetting.Schedule.WindowList.Item(i001).PlayDialog.WindowId = i001
+            End If
 
             For Each j001 As Integer In AppSetting.Schedule.WindowList.Item(i001).ScreenList
                 AppSetting.ScreenList(j001).WindowId = i001
@@ -833,7 +852,10 @@ Public Class MDIParentMain
         DeleteWindowNode(WindowId)
 
         With AppSetting.Schedule.WindowList
-            .Item(WindowId).PlayDialog.Close(True)
+            If .Item(WindowId).PlayDialog IsNot Nothing Then
+                .Item(WindowId).PlayDialog.Close(True)
+            End If
+
             .RemoveAt(WindowId)
         End With
     End Sub
@@ -858,13 +880,23 @@ Public Class MDIParentMain
             '显示
             For Each i001 As WindowInfo In AppSetting.Schedule.WindowList
                 With i001
+                    If .PlayDialog Is Nothing Then
+                        Continue For
+                    End If
+
                     .PlayDialog.UpdateWindow(True)
                 End With
             Next
         Else
             '隐藏
             For Each i001 As WindowInfo In AppSetting.Schedule.WindowList
-                i001.PlayDialog.HideWindow(True)
+                With i001
+                    If .PlayDialog Is Nothing Then
+                        Continue For
+                    End If
+
+                    .PlayDialog.HideWindow(True)
+                End With
             Next
         End If
     End Sub
@@ -933,9 +965,14 @@ Public Class MDIParentMain
         Dim TmpWindowInfo As WindowInfo = AppSetting.Schedule.WindowList(WindowId)
 
         With TmpWindowInfo
+            If .PlayDialog Is Nothing Then
+                Exit Sub
+            End If
+
             If .ProgramList(ProgramId).MediaList.Count = 0 Then
                 Exit Sub
             End If
+
             For Each i001 As MediaInfo In .ProgramList(ProgramId).MediaList
                 If Not System.IO.File.Exists(i001.Path) Then
                     MsgBox($"{i001.Path} {AppSetting.Language.GetS("not found")}",
@@ -1251,15 +1288,14 @@ Public Class MDIParentMain
     ''' </summary>
     Private Sub ButtonItem1_Click(sender As Object, e As EventArgs) Handles ButtonItem1.Click
         Dim TmpDialog As New Wangk.Resource.InputBox With {
-            .Title = AppSetting.Language.GetS("PowerUser"),
-            .InputTips = AppSetting.Language.GetS("Input Password"),
+            .Text = AppSetting.Language.GetS("Input Password"),
             .PasswordChar = "*"
         }
         If TmpDialog.ShowDialog <> DialogResult.OK Then
             Exit Sub
         End If
 
-        If TmpDialog.InputStr.ToLower() = "yestech" Then
+        If TmpDialog.InputText.ToLower() = "yestech" Then
             ButtonItem17.Visible = True
             RibbonBar5.Visible = True
 
@@ -1320,7 +1356,9 @@ Public Class MDIParentMain
 
         UpdateWindow(TmpDialog.WindowId)
 
-        AppSetting.Schedule.WindowList(TmpDialog.WindowId).PlayDialog.UpdateWindow(True)
+        If AppSetting.Schedule.WindowList(TmpDialog.WindowId).PlayDialog IsNot Nothing Then
+            AppSetting.Schedule.WindowList(TmpDialog.WindowId).PlayDialog.UpdateWindow(True)
+        End If
 
         TreeView1.SelectedNode.Text = AppSetting.Schedule.WindowList(TmpDialog.WindowId).Remark
         'For Each i001 In sysInfo.Schedule.WindowList

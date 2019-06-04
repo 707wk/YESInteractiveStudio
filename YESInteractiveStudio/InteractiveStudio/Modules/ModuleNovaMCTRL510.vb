@@ -82,9 +82,9 @@ Public Module ModuleNovaMCTRL510
 
         AppSetting.LinkFlage = True
 
-        SetResetSec(AppSetting.ResetSec, AppSetting.ScanBoardOldFlage)
-        SetResetTemp(AppSetting.ResetTemp, AppSetting.ScanBoardOldFlage)
-        SetTouchSensitivity(AppSetting.TouchSensitivity, AppSetting.ScanBoardOldFlage)
+        SetResetSec(AppSetting.ResetSec)
+        SetResetTemp(AppSetting.ResetTemp)
+        SetTouchSensitivity(AppSetting.TouchSensitivity)
 
 #Region "建立连接并启动检测线程"
         '建立连接并启动检测线程
@@ -166,8 +166,8 @@ Public Module ModuleNovaMCTRL510
         '    End With
         'Next
 
-        SetResetSec(0, AppSetting.ScanBoardOldFlage)
-        SetResetTemp(0, AppSetting.ScanBoardOldFlage)
+        SetResetSec(0)
+        SetResetTemp(0)
 
         Return True
     End Function
@@ -512,8 +512,6 @@ Public Module ModuleNovaMCTRL510
                                     End If
 
 #Region "新点"
-                                    'AppSetting.logger.LogThis($"X:{Point.X},Y:{Point.Y}")
-
                                     Dim tmpPointInfo = CalcPointPointInfo(tmpScanBoardInfo.ScreenId,
                                                                          Point,
                                                                          0)
@@ -521,6 +519,9 @@ Public Module ModuleNovaMCTRL510
                                     If AppSetting.DisplayMode <> InteractiveOptions.DISPLAYMODE.DEBUG Then
                                         '互动
                                         WindowPointList(.WindowId).Add(tmpPointInfo)
+                                        '记录点击次数,实验室用
+                                        'AppSetting.logger.LogThis($"X:{Point.X},Y:{Point.Y}")
+
                                     Else
                                         '显示电容
                                         AppSetting.Schedule.WindowList.
@@ -550,7 +551,7 @@ Public Module ModuleNovaMCTRL510
             Catch ex As Exception
                 AppSetting.LastErrorInfo = ex.ToString
 
-                AppSetting.logger.LogThis("通信异常", AppSetting.LastErrorInfo, Wangk.Tools.Loglevel.Level_INFO)
+                AppSetting.logger.LogThis("通信异常", AppSetting.LastErrorInfo, Wangk.Tools.Loglevel.Level_DEBUG)
 
                 exceptionNum += 1
             End Try
@@ -582,8 +583,7 @@ Public Module ModuleNovaMCTRL510
     ''' MCU传感器灵敏度
     ''' </summary>
     ''' <param name="Value">1-9级,越大越灵敏</param>
-    ''' <param name="OldFlage">启用旧版SDK</param>
-    Public Sub SetTouchSensitivity(ByVal Value As Integer, ByVal OldFlage As Boolean)
+    Public Sub SetTouchSensitivity(ByVal Value As Integer)
         If Value < 1 Then
             Value = 1
         ElseIf Value > 9 Then
@@ -593,14 +593,7 @@ Public Module ModuleNovaMCTRL510
         Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb0305")
         sendByte(3) = Value
 
-        Dim result As Boolean
-        If Not OldFlage Then
-            result = AppSetting.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
-        Else
-            result = AppSetting.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
-        End If
-
-        If result Then
+        If AppSetting.NovaMarsControl.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
             '触摸灵敏度
             AppSetting.TouchSensitivity = Value
         End If
@@ -615,16 +608,11 @@ Public Module ModuleNovaMCTRL510
     ''' MCU传感器温度增量复位
     ''' </summary>
     ''' <param name="Value">绝对变化值 0-255度</param>
-    ''' <param name="OldFlage">启用旧版SDK</param>
-    Private Sub SetResetTemp(ByVal Value As Integer, ByVal OldFlage As Boolean)
+    Private Sub SetResetTemp(ByVal Value As Integer)
         Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb010300")
         sendByte(4) = Value
 
-        If Not OldFlage Then
-            AppSetting.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
-        Else
-            AppSetting.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
-        End If
+        AppSetting.NovaMarsControl.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
 
         '等待MCU接收完毕
         Thread.Sleep(100)
@@ -636,16 +624,11 @@ Public Module ModuleNovaMCTRL510
     ''' MCU传感器定时复位
     ''' </summary>
     ''' <param name="Value">0-255秒</param>
-    ''' <param name="OldFlage">启用旧版SDK</param>
-    Private Sub SetResetSec(ByVal Value As Integer, ByVal OldFlage As Boolean)
+    Private Sub SetResetSec(ByVal Value As Integer)
         Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb010200")
         sendByte(4) = Value
 
-        If Not OldFlage Then
-            AppSetting.MainClass.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
-        Else
-            AppSetting.MainClass.SetOldScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
-        End If
+        AppSetting.NovaMarsControl.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
 
         '等待MCU接收完毕
         Thread.Sleep(100)

@@ -42,13 +42,13 @@ Public Class ControlNetwork
         ChangeControlsLanguage()
 
         '绑定设置到ip事件
-        AddHandler AppSetting.MainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
+        AddHandler AppSetting.NovaMarsControl.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
 #End Region
     End Sub
 
     Private Sub ControlNetwork_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         '解绑设置到ip事件
-        RemoveHandler AppSetting.MainClass.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
+        RemoveHandler AppSetting.NovaMarsControl.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
     End Sub
 
 #Region "右键选中"
@@ -150,7 +150,7 @@ Public Class ControlNetwork
 
                 senderArrayIndex += 1
 
-                AppSetting.MainClass.SetEquipmentIP(senderArrayIndex, AppSetting.SenderList(senderArrayIndex).TmpIpData)
+                AppSetting.NovaMarsControl.SetEquipmentIP(senderArrayIndex, AppSetting.SenderList(senderArrayIndex).TmpIpData)
             Else
                 AppSetting.SenderList(senderArrayIndex).IpDate = AppSetting.SenderList(senderArrayIndex).TmpIpData
                 ShowMsgBox($"{AppSetting.Language.GetS("Modified Control IP successfully")}!")
@@ -182,7 +182,7 @@ Public Class ControlNetwork
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Button1.Enabled = False
         senderArrayIndex = 0
-        AppSetting.MainClass.SetEquipmentIP(0, AppSetting.SenderList(senderArrayIndex).TmpIpData)
+        AppSetting.NovaMarsControl.SetEquipmentIP(0, AppSetting.SenderList(senderArrayIndex).TmpIpData)
     End Sub
 #End Region
 
@@ -195,8 +195,8 @@ Public Class ControlNetwork
             Me.GroupBox1.Text = .GetS("Control Network")
             Me.Column1.HeaderText = .GetS("ID")
             Me.Column2.HeaderText = .GetS("IP Address")
-            Me.Column3.HeaderText = .GetS("Gateway")
-            Me.Column4.HeaderText = .GetS("Subnet Mask")
+            Me.Column3.HeaderText = .GetS("Subnet Mask")
+            Me.Column4.HeaderText = .GetS("Gateway")
             Me.Button1.Text = .GetS("Apply")
         End With
     End Sub
