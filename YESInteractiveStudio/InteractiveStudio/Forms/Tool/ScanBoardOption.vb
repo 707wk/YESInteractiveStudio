@@ -52,7 +52,7 @@ Public Class ScanBoardOption
     ''' 获取发送卡下MCU版本号
     ''' </summary>
     Public Sub GetSenderMCUVersion(ByVal SenderId As Integer)
-        AppSetting.NovaMarsControl.SetScanBoardData(SenderId, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
+        AppSetting.NovaMarsControl.SetNewScanBoardData(SenderId, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
 
         If CheckBox2.Checked Then
             Thread.Sleep(50)
@@ -163,7 +163,7 @@ Public Class ScanBoardOption
         sendByte(4) = binLength \ 256
         sendByte(5) = binLength Mod 256
 
-        AppSetting.NovaMarsControl.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        AppSetting.NovaMarsControl.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
 
         Thread.Sleep(60)
 
@@ -212,7 +212,7 @@ Public Class ScanBoardOption
             sendByte(130) = checkSum Mod 256
 
             For i As Integer = 0 To 10
-                AppSetting.NovaMarsControl.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+                AppSetting.NovaMarsControl.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
 
                 Thread.Sleep(60)
 
@@ -242,7 +242,7 @@ Public Class ScanBoardOption
 
 
         '发送完毕指令
-        AppSetting.NovaMarsControl.SetScanBoardData(&HFF, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0909"))
+        AppSetting.NovaMarsControl.SetNewScanBoardData(&HFF, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0909"))
 
         re.Close()
         fs.Close()

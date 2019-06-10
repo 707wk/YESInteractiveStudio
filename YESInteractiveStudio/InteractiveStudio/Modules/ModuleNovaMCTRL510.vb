@@ -593,7 +593,7 @@ Public Module ModuleNovaMCTRL510
         Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb0305")
         sendByte(3) = Value
 
-        If AppSetting.NovaMarsControl.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
+        If AppSetting.NovaMarsControl.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
             '触摸灵敏度
             AppSetting.TouchSensitivity = Value
         End If
@@ -612,7 +612,7 @@ Public Module ModuleNovaMCTRL510
         Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb010300")
         sendByte(4) = Value
 
-        AppSetting.NovaMarsControl.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        AppSetting.NovaMarsControl.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
 
         '等待MCU接收完毕
         Thread.Sleep(100)
@@ -628,7 +628,7 @@ Public Module ModuleNovaMCTRL510
         Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb010200")
         sendByte(4) = Value
 
-        AppSetting.NovaMarsControl.SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
+        AppSetting.NovaMarsControl.SetNewScanBoardData(&HFF, &HFF, &HFFFF, sendByte)
 
         '等待MCU接收完毕
         Thread.Sleep(100)
