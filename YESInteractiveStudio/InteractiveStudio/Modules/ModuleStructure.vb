@@ -384,7 +384,7 @@ Public Module ModuleStructure
         End Enum
 #End Region
 
-#Region "触摸模式 20190404 汪恳 [屏蔽]"
+#Region "触摸模式"
         '''' <summary>
         '''' 触摸模式
         '''' </summary>
@@ -508,7 +508,7 @@ Public Module ModuleStructure
         <XmlIgnore>
         Dim DisplayMode As InteractiveOptions.DISPLAYMODE
         '''' <summary>
-        '''' 触摸模式  20190404 汪恳 [屏蔽]
+        '''' 触摸模式
         '''' </summary>
         'Dim TouchMode As InteractiveOptions.TOUCHMODE
         ''' <summary>

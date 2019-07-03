@@ -71,7 +71,7 @@
     ''' <param name="e"></param>
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         Dim TmpDialog As New OpenFileDialog With {
-            .Filter = "DLL or Unity|*.dll;*.exe",
+            .Filter = "Flash or DLL or Unity|*.swf;*.dll;*.exe",
             .Multiselect = True
         }
         If TmpDialog.ShowDialog() <> DialogResult.OK Then
@@ -141,7 +141,7 @@
 #Region "更新文件"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim TmpDialog As New OpenFileDialog With {
-            .Filter = "DLL or Unity|*.dll;*.exe",
+            .Filter = "Flash or DLL or Unity|*.swf;*.dll;*.exe",
             .Multiselect = False
         }
         If TmpDialog.ShowDialog() <> DialogResult.OK Then

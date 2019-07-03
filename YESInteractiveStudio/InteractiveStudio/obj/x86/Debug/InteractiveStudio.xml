@@ -660,6 +660,11 @@ InteractiveStudio
  背景字体
  </summary>
 </member>
+<member name="F:InteractiveStudio.PlayWindow.FlashControl">
+ <summary>
+ Flash播放器控件
+ </summary>
+</member>
 <member name="F:InteractiveStudio.PlayWindow.SetCaptureFlage">
  <summary>
  捕获鼠标
@@ -693,6 +698,11 @@ InteractiveStudio
 <member name="M:InteractiveStudio.PlayWindow.ClearPlayControl">
  <summary>
  清空播放控件
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.PlaySwf(System.String)">
+ <summary>
+ 播放Flash
  </summary>
 </member>
 <member name="M:InteractiveStudio.PlayWindow.PlayDLL(System.String)">

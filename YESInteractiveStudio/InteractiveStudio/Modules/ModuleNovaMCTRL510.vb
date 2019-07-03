@@ -166,8 +166,8 @@ Public Module ModuleNovaMCTRL510
         '    End With
         'Next
 
-        SetResetSec(0)
-        SetResetTemp(0)
+        'SetResetSec(0)
+        'SetResetTemp(0)
 
         Return True
     End Function

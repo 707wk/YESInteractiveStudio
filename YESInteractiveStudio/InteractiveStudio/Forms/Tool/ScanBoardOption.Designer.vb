@@ -47,7 +47,7 @@ Partial Class ScanBoardOption
         Me.GroupBox1.Controls.Add(Me.ToolStrip1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(259, 319)
+        Me.GroupBox1.Size = New System.Drawing.Size(259, 351)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "ScanBoard List"
@@ -58,7 +58,7 @@ Partial Class ScanBoardOption
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListView1.Location = New System.Drawing.Point(3, 42)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(253, 274)
+        Me.ListView1.Size = New System.Drawing.Size(253, 306)
         Me.ListView1.TabIndex = 0
         Me.ListView1.UseCompatibleStateImageBehavior = False
         '
@@ -167,7 +167,7 @@ Partial Class ScanBoardOption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(276, 343)
+        Me.ClientSize = New System.Drawing.Size(276, 375)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.MaximizeBox = False

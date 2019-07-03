@@ -29,10 +29,10 @@ Public Class PlayWindow
     Private gFont As Font
 #End Region
 
-    '''' <summary>
-    '''' Flash播放器控件
-    '''' </summary>
-    'Private FlashControl As AxShockwaveFlashObjects.AxShockwaveFlash
+    ''' <summary>
+    ''' Flash播放器控件
+    ''' </summary>
+    Private FlashControl As AxShockwaveFlashObjects.AxShockwaveFlash
     ''' <summary>
     ''' 捕获鼠标
     ''' </summary>
@@ -140,11 +140,11 @@ Public Class PlayWindow
     ''' 清空播放控件
     ''' </summary>
     Public Sub ClearPlayControl()
-        'If FlashControl IsNot Nothing Then
-        '    Me.Controls.Remove(FlashControl)
-        '    FlashControl.Dispose()
-        '    FlashControl = Nothing
-        'End If
+        If FlashControl IsNot Nothing Then
+            Me.Controls.Remove(FlashControl)
+            FlashControl.Dispose()
+            FlashControl = Nothing
+        End If
 
         If DllControl IsNot Nothing Then
             Me.Controls.Remove(DllControl)
@@ -161,28 +161,28 @@ Public Class PlayWindow
 #End Region
 
 #Region "播放Flash"
-    '''' <summary>
-    '''' 播放Flash
-    '''' </summary>
-    'Public Sub PlaySwf(ByVal FilePath As String)
-    '    ClearPlayControl()
+    ''' <summary>
+    ''' 播放Flash
+    ''' </summary>
+    Public Sub PlaySwf(ByVal FilePath As String)
+        ClearPlayControl()
 
-    '    SetCaptureFlage = False
-    '    FileType = 1
+        SetCaptureFlage = False
+        FileType = 1
 
-    '    FlashControl = New AxShockwaveFlashObjects.AxShockwaveFlash With {
-    '        .Dock = DockStyle.Fill
-    '    }
-    '    Me.Controls.Add(FlashControl)
+        FlashControl = New AxShockwaveFlashObjects.AxShockwaveFlash With {
+            .Dock = DockStyle.Fill
+        }
+        Me.Controls.Add(FlashControl)
 
-    '    With FlashControl
-    '        .AlignMode = 5 '对齐方式
-    '        .ScaleMode = 2 '缩放模式
-    '        .Quality = 0 '画面质量
-    '        .BackgroundColor = 0
-    '        .Movie = FilePath
-    '    End With
-    'End Sub
+        With FlashControl
+            .AlignMode = 5 '对齐方式
+            .ScaleMode = 2 '缩放模式
+            .Quality = 0 '画面质量
+            .BackgroundColor = 0
+            .Movie = FilePath
+        End With
+    End Sub
 #End Region
 
 #Region "播放DLL"
@@ -238,8 +238,8 @@ Public Class PlayWindow
         End If
 
         Select Case System.IO.Path.GetExtension(FilePath).ToLower()
-            'Case ".swf"
-            '    PlaySwf(FilePath)
+            Case ".swf"
+                PlaySwf(FilePath)
             Case ".dll"
                 PlayDLL(FilePath)
             Case ".exe"
@@ -368,45 +368,45 @@ Public Class PlayWindow
                     Select Case FileType
                         Case 1
 #Region "swf"
-'                            For Each i001 As PointInfo In values
-'                                'swf
-'                                '非第一次按下则丢弃
-'                                If i001.Old Then
-'                                    Continue For
-'                                End If
+                            For Each i001 As PointInfo In values
+                                'swf
+                                '非第一次按下则丢弃
+                                If i001.Old Then
+                                    Continue For
+                                End If
 
-'                                If Not SetCaptureFlage Then
-'#Region "启用接口"
-'                                    '启用接口
-'                                    Try
-'                                        FlashControl.
-'                                        CallFunction($"<invoke name=""pointActive"" returntype=""xml""><arguments><string>{i001.X}</string><string>{i001.Y}</string></arguments></invoke>")
-'                                    Catch ex As Exception
-'                                        SetCaptureFlage = True
-'                                    End Try
-'#End Region
-'                                Else
-'#Region "捕获鼠标"
-'                                    '捕获鼠标
-'                                    Dim ttp As Int32 = i001.X + (i001.Y << 16)
-'                                    Dim ttp2 As Int32 = i001.X + ((i001.Y + 2) << 16)
+                                If Not SetCaptureFlage Then
+#Region "启用接口"
+                                    '启用接口
+                                    Try
+                                        FlashControl.
+                                        CallFunction($"<invoke name=""pointActive"" returntype=""xml""><arguments><string>{i001.X}</string><string>{i001.Y}</string></arguments></invoke>")
+                                    Catch ex As Exception
+                                        SetCaptureFlage = True
+                                    End Try
+#End Region
+                                Else
+#Region "捕获鼠标"
+                                    '捕获鼠标
+                                    Dim ttp As Int32 = i001.X + (i001.Y << 16)
+                                    Dim ttp2 As Int32 = i001.X + ((i001.Y + 2) << 16)
 
-'                                    '点击-移动 - 松开
-'                                    PostMessage(FlashControl.Handle,
-'                                        WM_LBUTTONDOWN,
-'                                        0,
-'                                        ttp)
-'                                    PostMessage(FlashControl.Handle,
-'                                        WM_MOUSEMOVE,
-'                                        0,
-'                                        ttp2)
-'                                    PostMessage(FlashControl.Handle,
-'                                        WM_LBUTTONUP,
-'                                        0,
-'                                        ttp)
-'#End Region
-'                                End If
-'                            Next
+                                    '点击-移动 - 松开
+                                    PostMessage(FlashControl.Handle,
+                                        WM_LBUTTONDOWN,
+                                        0,
+                                        ttp)
+                                    PostMessage(FlashControl.Handle,
+                                        WM_MOUSEMOVE,
+                                        0,
+                                        ttp2)
+                                    PostMessage(FlashControl.Handle,
+                                        WM_LBUTTONUP,
+                                        0,
+                                        ttp)
+#End Region
+                                End If
+                            Next
 #End Region
                         Case 2
 #Region "dll"
