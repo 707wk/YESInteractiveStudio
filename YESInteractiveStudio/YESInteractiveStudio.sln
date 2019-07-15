@@ -10,10 +10,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.txt = README.txt
 	EndProjectSection
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "InteractiveStudio", "InteractiveStudio\InteractiveStudio.vbproj", "{62AB8461-7AA4-41D0-B4C6-84418C8C54FE}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "InteractiveStudioOld", "InteractiveStudioOld\InteractiveStudioOld.vbproj", "{62AB8461-7AA4-41D0-B4C6-84418C8C54FE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{428BC1BB-BC3F-4D04-AC36-85DF1EA25285} = {428BC1BB-BC3F-4D04-AC36-85DF1EA25285}
 	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "InteractiveStudio", "InteractiveStudio\InteractiveStudio.vbproj", "{0F524E2A-3E82-4C92-B4CA-9AB263C8D3AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{62AB8461-7AA4-41D0-B4C6-84418C8C54FE}.Debug|x86.Build.0 = Debug|x86
 		{62AB8461-7AA4-41D0-B4C6-84418C8C54FE}.Release|x86.ActiveCfg = Release|x86
 		{62AB8461-7AA4-41D0-B4C6-84418C8C54FE}.Release|x86.Build.0 = Release|x86
+		{0F524E2A-3E82-4C92-B4CA-9AB263C8D3AD}.Debug|x86.ActiveCfg = Debug|x86
+		{0F524E2A-3E82-4C92-B4CA-9AB263C8D3AD}.Debug|x86.Build.0 = Debug|x86
+		{0F524E2A-3E82-4C92-B4CA-9AB263C8D3AD}.Release|x86.ActiveCfg = Release|x86
+		{0F524E2A-3E82-4C92-B4CA-9AB263C8D3AD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+YESInteractiveSDK
+</name>
+</assembly>
+<members>
+<member name="T:YESInteractiveSDK.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:YESInteractiveSDK.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:YESInteractiveSDK.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:YESInteractiveSDK.ModuleStructure.PointInfo">
+ <summary>
+ 触发点信息
+ </summary>
+</member>
+<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.ID">
+ <summary>
+ ID
+ </summary>
+</member>
+<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.X">
+ <summary>
+ X坐标
+ </summary>
+</member>
+<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.Y">
+ <summary>
+ Y坐标
+ </summary>
+</member>
+<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.Old">
+ <summary>
+ 旧点
+ </summary>
+</member>
+<member name="T:YESInteractiveSDK.IYESInterfaceSDK">
+ <summary>
+ YESInteractive插件需要实现的接口
+ </summary>
+</member>
+<member name="M:YESInteractiveSDK.IYESInterfaceSDK.InitAddonFunc(System.Windows.Forms.Control)">
+ <summary>
+ 加载插件
+ </summary>
+ <param name="Parent">父控件</param>
+</member>
+<member name="M:YESInteractiveSDK.IYESInterfaceSDK.FinalizeAddonFunc(System.Windows.Forms.Control)">
+ <summary>
+ 卸载插件
+ </summary>
+ <param name="Parent">父控件</param>
+</member>
+<member name="M:YESInteractiveSDK.IYESInterfaceSDK.PointActive(YESInteractiveSDK.ModuleStructure.PointInfo)">
+ <summary>
+ 点活动事件
+ </summary>
+</member>
+<member name="M:YESInteractiveSDK.IYESInterfaceSDK.PointActive(YESInteractiveSDK.ModuleStructure.PointInfo[])">
+ <summary>
+ 点活动事件
+ </summary>
+</member>
+</members>
+</doc>

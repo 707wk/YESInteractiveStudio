@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{62AB8461-7AA4-41D0-B4C6-84418C8C54FE}</ProjectGuid>
+    <ProjectGuid>{0F524E2A-3E82-4C92-B4CA-9AB263C8D3AD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <StartupObject>InteractiveStudio.My.MyApplication</StartupObject>
     <RootNamespace>InteractiveStudio</RootNamespace>
@@ -13,6 +13,7 @@
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -91,18 +92,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="Wangk.Hash">
-      <HintPath>..\..\WangkNamespace\DLL\Wangk.Hash.dll</HintPath>
-    </Reference>
-    <Reference Include="Wangk.Resource">
-      <HintPath>..\..\WangkNamespace\DLL\Wangk.Resource.dll</HintPath>
-    </Reference>
-    <Reference Include="Wangk.Tools">
-      <HintPath>..\..\WangkNamespace\DLL\Wangk.Tools.dll</HintPath>
-    </Reference>
-    <Reference Include="YESInteractiveSDK">
-      <HintPath>..\YESInteractiveSDK\bin\YESInteractiveSDK.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -118,86 +107,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ScreenButton.vb">
-      <SubType>Component</SubType>
+    <Compile Include="Forms\MainForm.Designer.vb">
+      <DependentUpon>MainForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UnityPlayControl.Designer.vb">
-      <DependentUpon>UnityPlayControl.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\UnityPlayControl.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Edit\ProgramEdit.Designer.vb">
-      <DependentUpon>ProgramEdit.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Edit\ProgramEdit.vb">
+    <Compile Include="Forms\MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Edit\WindowEdit.Designer.vb">
-      <DependentUpon>WindowEdit.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Edit\WindowEdit.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Edit\WindowPlay.Designer.vb">
-      <DependentUpon>WindowPlay.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Edit\WindowPlay.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Main\DeviceInit.Designer.vb">
-      <DependentUpon>DeviceInit.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Main\DeviceInit.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Main\MDIParentMain.Designer.vb">
-      <DependentUpon>MDIParentMain.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Main\MDIParentMain.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Main\PlayWindow.Designer.vb">
-      <DependentUpon>PlayWindow.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Main\PlayWindow.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Select\ScreenSingleSelect.Designer.vb">
-      <DependentUpon>ScreenSingleSelect.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Select\ScreenSingleSelect.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Tool\AboutBox.Designer.vb">
-      <DependentUpon>AboutBox.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Tool\AboutBox.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Tool\ControlNetwork.Designer.vb">
-      <DependentUpon>ControlNetwork.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Tool\ControlNetwork.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Tool\ScanBoardOption.Designer.vb">
-      <DependentUpon>ScanBoardOption.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Tool\ScanBoardOption.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Tool\ScreenLigature.Designer.vb">
-      <DependentUpon>ScreenLigature.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Tool\ScreenLigature.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Modules\ModuleFunction.vb" />
-    <Compile Include="Modules\ModuleStructure.vb" />
-    <Compile Include="Modules\ModuleVar.vb" />
-    <Compile Include="Modules\ModuleNovaMCTRL510.vb" />
-    <Compile Include="Modules\ModuleUnityConfig.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -215,41 +130,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\UnityPlayControl.resx">
-      <DependentUpon>UnityPlayControl.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Edit\ProgramEdit.resx">
-      <DependentUpon>ProgramEdit.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Edit\WindowEdit.resx">
-      <DependentUpon>WindowEdit.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Edit\WindowPlay.resx">
-      <DependentUpon>WindowPlay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\DeviceInit.resx">
-      <DependentUpon>DeviceInit.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\MDIParentMain.resx">
-      <DependentUpon>MDIParentMain.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\PlayWindow.resx">
-      <DependentUpon>PlayWindow.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Select\ScreenSingleSelect.resx">
-      <DependentUpon>ScreenSingleSelect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tool\AboutBox.resx">
-      <DependentUpon>AboutBox.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tool\ControlNetwork.resx">
-      <DependentUpon>ControlNetwork.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tool\ScanBoardOption.resx">
-      <DependentUpon>ScanBoardOption.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tool\ScreenLigature.resx">
-      <DependentUpon>ScreenLigature.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -271,32 +153,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Forms\Option\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Forms\Main\README.txt" />
-    <Content Include="Forms\Select\README.txt" />
     <Content Include="logo_32px.ico" />
-    <None Include="packages.config" />
-    <None Include="res\play_16px.png" />
-    <None Include="res\play_24px.png" />
-    <None Include="res\startLogo.png" />
-    <None Include="res\Power_User_32px.png" />
-    <None Include="res\startBackground.png" />
-    <None Include="res\moveDown.png" />
-    <None Include="res\moveUp.png" />
-    <None Include="res\mediaAdd_24px_.png" />
-    <None Include="res\trash_24px.png" />
-    <None Include="res\screenAdd_24px.png" />
-    <None Include="res\zoomOut_24px.png" />
-    <None Include="res\zoomIn_24px.png" />
-    <None Include="res\User_Manual_32px.png" />
-    <None Include="res\about_32px.png" />
-    <None Include="res\program_add_24px.png" />
-    <None Include="res\panel_add_24px.png" />
     <None Include="res\MCU_32px.png" />
-    <None Include="res\controls_32px.png" />
-    <None Include="res\Ligature_32px.png" />
+    <None Include="packages.config" />
+    <None Include="res\usb_disconnect_32px.png" />
+    <None Include="res\usb_connect_32px.png" />
+    <None Include="res\screenLayout_32px.png" />
+    <None Include="res\download_32px.png" />
     <None Include="res\DisplayMode3G_32px.png" />
     <None Include="res\DisplayMode3_32px.png" />
     <None Include="res\DisplayMode2G_32px.png" />
@@ -305,36 +168,7 @@
     <None Include="res\DisplayMode1_32px.png" />
     <None Include="res\DisplayMode0G_32px.png" />
     <None Include="res\DisplayMode0_32px.png" />
-    <None Include="res\usb_disconnect_32px.png" />
-    <None Include="res\usb_connect_32px.png" />
-    <None Include="res\usb_disconnect_24px.png" />
-    <None Include="res\usb_connect_24px.png" />
-    <None Include="res\file_save_as_24px.png" />
-    <None Include="res\file_save_24px.png" />
-    <None Include="res\file_open_24px.png" />
-    <None Include="res\file_new_24px.png" />
-    <None Include="res\logo_16px.png" />
-    <None Include="res\logo_32px.png" />
-    <None Include="res\logo_24px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="AxShockwaveFlashObjects">
-      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="ShockwaveFlashObjects">
-      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
+    <None Include="res\control_32px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
