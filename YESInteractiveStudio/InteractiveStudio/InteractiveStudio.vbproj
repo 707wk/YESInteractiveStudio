@@ -107,10 +107,52 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\MainForm.Designer.vb">
+    <Compile Include="Forms\MainForm\ChildForm\SerialPortSelectForm.Designer.vb">
+      <DependentUpon>SerialPortSelectForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm\ChildForm\SerialPortSelectForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm\ChildForm\ControlSettings\ControlSettingsForm.Designer.vb">
+      <DependentUpon>ControlSettingsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm\ChildForm\ControlSettings\ControlSettingsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm\MainForm.Designer.vb">
       <DependentUpon>MainForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MainForm.vb">
+    <Compile Include="Forms\MainForm\MainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm\Control\WindowProgramControl.Designer.vb">
+      <DependentUpon>WindowProgramControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm\Control\WindowProgramControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm\ChildForm\PlayWindowSettings\PlayWindowSettingsForm.Designer.vb">
+      <DependentUpon>PlayWindowSettingsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm\ChildForm\PlayWindowSettings\PlayWindowSettingsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm\ChildForm\PlayWindowSettings\Control\PlayWindowSettingControl.Designer.vb">
+      <DependentUpon>PlayWindowSettingControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm\ChildForm\PlayWindowSettings\Control\PlayWindowSettingControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm\ChildForm\ReadScreenInformation\ReadScreenInformationForm.Designer.vb">
+      <DependentUpon>ReadScreenInformationForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm\ChildForm\ReadScreenInformation\ReadScreenInformationForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm\ChildForm\SensorSettings\SensorSettingsForm.Designer.vb">
+      <DependentUpon>SensorSettingsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm\ChildForm\SensorSettings\SensorSettingsForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -130,8 +172,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm\ChildForm\SerialPortSelectForm.resx">
+      <DependentUpon>SerialPortSelectForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm\ChildForm\ControlSettings\ControlSettingsForm.resx">
+      <DependentUpon>ControlSettingsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm\MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm\Control\WindowProgramControl.resx">
+      <DependentUpon>WindowProgramControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm\ChildForm\PlayWindowSettings\PlayWindowSettingsForm.resx">
+      <DependentUpon>PlayWindowSettingsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm\ChildForm\PlayWindowSettings\Control\PlayWindowSettingControl.resx">
+      <DependentUpon>PlayWindowSettingControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm\ChildForm\ReadScreenInformation\ReadScreenInformationForm.resx">
+      <DependentUpon>ReadScreenInformationForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm\ChildForm\SensorSettings\SensorSettingsForm.resx">
+      <DependentUpon>SensorSettingsForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -154,6 +217,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo_32px.ico" />
+    <None Include="res\sensor_24px.png" />
+    <None Include="res\addBlack_24px.png" />
+    <None Include="res\empty_24px.png" />
+    <None Include="res\zoomOut_24px.png" />
+    <None Include="res\zoomIn_24px.png" />
+    <None Include="res\refresh_24px.png" />
+    <None Include="res\stop_24px.png" />
+    <None Include="res\play_24px.png" />
+    <None Include="res\add_24px.png" />
+    <None Include="res\window_32px.png" />
     <None Include="res\MCU_32px.png" />
     <None Include="packages.config" />
     <None Include="res\usb_disconnect_32px.png" />
@@ -169,6 +242,9 @@
     <None Include="res\DisplayMode0G_32px.png" />
     <None Include="res\DisplayMode0_32px.png" />
     <None Include="res\control_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forms\MainForm\ChildForm\MCUSettings\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

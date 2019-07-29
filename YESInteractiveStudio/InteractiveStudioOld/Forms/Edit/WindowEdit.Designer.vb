@@ -54,14 +54,14 @@ Partial Class WindowEdit
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.ScreenMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DeleteScreenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -422,6 +422,28 @@ Partial Class WindowEdit
         Me.ToolStripLabel1.Size = New System.Drawing.Size(78, 22)
         Me.ToolStripLabel1.Text = "Zoom 100%"
         '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
+        'ScreenMenuStrip
+        '
+        Me.ScreenMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteScreenToolStripMenuItem})
+        Me.ScreenMenuStrip.Name = "ScreenMenuStrip"
+        Me.ScreenMenuStrip.Size = New System.Drawing.Size(157, 26)
+        '
+        'DeleteScreenToolStripMenuItem
+        '
+        Me.DeleteScreenToolStripMenuItem.Name = "DeleteScreenToolStripMenuItem"
+        Me.DeleteScreenToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.DeleteScreenToolStripMenuItem.Text = "Delete Screen"
+        '
         'ToolStripButton1
         '
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -442,11 +464,6 @@ Partial Class WindowEdit
         Me.ToolStripButton2.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton2.Text = "Zoom Out"
         '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
         'ToolStripButton3
         '
         Me.ToolStripButton3.Image = Global.InteractiveStudio.My.Resources.Resources.screenAdd_24px
@@ -455,11 +472,6 @@ Partial Class WindowEdit
         Me.ToolStripButton3.Size = New System.Drawing.Size(95, 22)
         Me.ToolStripButton3.Text = "Add Screen"
         '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
-        '
         'ToolStripButton4
         '
         Me.ToolStripButton4.Image = Global.InteractiveStudio.My.Resources.Resources.trash_24px
@@ -467,18 +479,6 @@ Partial Class WindowEdit
         Me.ToolStripButton4.Name = "ToolStripButton4"
         Me.ToolStripButton4.Size = New System.Drawing.Size(58, 22)
         Me.ToolStripButton4.Text = "Clear"
-        '
-        'ScreenMenuStrip
-        '
-        Me.ScreenMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteScreenToolStripMenuItem})
-        Me.ScreenMenuStrip.Name = "ScreenMenuStrip"
-        Me.ScreenMenuStrip.Size = New System.Drawing.Size(157, 26)
-        '
-        'DeleteScreenToolStripMenuItem
-        '
-        Me.DeleteScreenToolStripMenuItem.Name = "DeleteScreenToolStripMenuItem"
-        Me.DeleteScreenToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.DeleteScreenToolStripMenuItem.Text = "Delete Screen"
         '
         'WindowEdit
         '

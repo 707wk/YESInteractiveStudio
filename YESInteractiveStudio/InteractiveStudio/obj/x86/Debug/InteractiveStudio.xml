@@ -22,6 +22,16 @@ InteractiveStudio
   重写当前线程的 CurrentUICulture 属性。
 </summary>
 </member>
+<member name="P:InteractiveStudio.My.Resources.Resources.add_24px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:InteractiveStudio.My.Resources.Resources.addBlack_24px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
 <member name="P:InteractiveStudio.My.Resources.Resources.control_32px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
@@ -72,12 +82,32 @@ InteractiveStudio
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
+<member name="P:InteractiveStudio.My.Resources.Resources.empty_24px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
 <member name="P:InteractiveStudio.My.Resources.Resources.MCU_32px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
+<member name="P:InteractiveStudio.My.Resources.Resources.play_24px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:InteractiveStudio.My.Resources.Resources.refresh_24px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
 <member name="P:InteractiveStudio.My.Resources.Resources.screenLayout_32px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:InteractiveStudio.My.Resources.Resources.stop_24px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
@@ -91,6 +121,26 @@ InteractiveStudio
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
+</member>
+<member name="P:InteractiveStudio.My.Resources.Resources.window_32px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:InteractiveStudio.My.Resources.Resources.zoomIn_24px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="P:InteractiveStudio.My.Resources.Resources.zoomOut_24px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindowSettingsForm.AddWindowButton">
+ <summary>
+ 添加播放窗体按钮
+ </summary>
 </member>
 </members>
 </doc>
