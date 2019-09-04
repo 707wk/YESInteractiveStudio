@@ -17,3 +17,4 @@ T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.vbproj
 T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.dll
 T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.xml
 T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.pdb
+T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.vbprojAssemblyReference.cache

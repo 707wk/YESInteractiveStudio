@@ -191,22 +191,6 @@ Public Module ModuleStructure
 #End Region
 
 #Region "播放方案"
-#Region "窗口中的屏幕信息"
-    '''' <summary>
-    '''' 窗口中的屏幕信息
-    '''' </summary>
-    'Structure ScreenInWindow
-    '    ''' <summary>
-    '    ''' 屏幕ID
-    '    ''' </summary>
-    '    Dim ScreenID As Integer
-    '    ''' <summary>
-    '    ''' 屏幕在窗口中位置
-    '    ''' 编辑后需写入到ScreenInfo的DefLocation
-    '    ''' </summary>
-    '    Dim Location As Point
-    'End Structure
-#End Region
 
 #Region "文件信息"
     ''' <summary>
@@ -430,13 +414,13 @@ Public Module ModuleStructure
         ''' <summary>
         ''' 切换语言类
         ''' </summary>
-        <XmlIgnore>
+        <Newtonsoft.Json.JsonIgnore>
         Dim Language As Wangk.Resource.MultiLanguage
 
         ''' <summary>
         ''' 日志记录
         ''' </summary>
-        <XmlIgnore>
+        <Newtonsoft.Json.JsonIgnore>
         Dim logger As Wangk.Tools.Logger
 #End Region
 
