@@ -44,9 +44,6 @@ Partial Class WindowEdit
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
@@ -54,14 +51,14 @@ Partial Class WindowEdit
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ScreenMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.DeleteScreenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
+        Me.ScreenMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DeleteScreenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -196,7 +193,7 @@ Partial Class WindowEdit
         '
         Me.Label9.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(105, 61)
+        Me.Label9.Location = New System.Drawing.Point(105, 62)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(9, 12)
         Me.Label9.TabIndex = 18
@@ -245,7 +242,7 @@ Partial Class WindowEdit
         Me.GroupBox2.Controls.Add(Me.TableLayoutPanel1)
         Me.GroupBox2.Location = New System.Drawing.Point(3, 173)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(226, 143)
+        Me.GroupBox2.Size = New System.Drawing.Size(226, 114)
         Me.GroupBox2.TabIndex = 19
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Screen Setting"
@@ -264,17 +261,13 @@ Partial Class WindowEdit
         Me.TableLayoutPanel1.Controls.Add(Me.Label10, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Label9, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Label5, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label8, 0, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.ComboBox1, 2, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label12, 3, 3)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(8, 20)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 4
+        Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(212, 111)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(212, 82)
         Me.TableLayoutPanel1.TabIndex = 23
         '
         'TextBox2
@@ -296,38 +289,6 @@ Partial Class WindowEdit
         Me.Label5.Size = New System.Drawing.Size(17, 12)
         Me.Label5.TabIndex = 19
         Me.Label5.Text = "ID"
-        '
-        'Label8
-        '
-        Me.Label8.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.Label8.AutoSize = True
-        Me.TableLayoutPanel1.SetColumnSpan(Me.Label8, 2)
-        Me.Label8.Location = New System.Drawing.Point(37, 90)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(77, 12)
-        Me.Label8.TabIndex = 14
-        Me.Label8.Text = "Box Rotation"
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"0", "90", "180", "270"})
-        Me.ComboBox1.Location = New System.Drawing.Point(120, 86)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(74, 20)
-        Me.ComboBox1.TabIndex = 21
-        '
-        'Label12
-        '
-        Me.Label12.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(200, 90)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(9, 12)
-        Me.Label12.TabIndex = 18
-        Me.Label12.Text = "°"
         '
         'GroupBox3
         '
@@ -422,28 +383,6 @@ Partial Class WindowEdit
         Me.ToolStripLabel1.Size = New System.Drawing.Size(78, 22)
         Me.ToolStripLabel1.Text = "Zoom 100%"
         '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
-        '
-        'ScreenMenuStrip
-        '
-        Me.ScreenMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteScreenToolStripMenuItem})
-        Me.ScreenMenuStrip.Name = "ScreenMenuStrip"
-        Me.ScreenMenuStrip.Size = New System.Drawing.Size(157, 26)
-        '
-        'DeleteScreenToolStripMenuItem
-        '
-        Me.DeleteScreenToolStripMenuItem.Name = "DeleteScreenToolStripMenuItem"
-        Me.DeleteScreenToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.DeleteScreenToolStripMenuItem.Text = "Delete Screen"
-        '
         'ToolStripButton1
         '
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -464,6 +403,11 @@ Partial Class WindowEdit
         Me.ToolStripButton2.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton2.Text = "Zoom Out"
         '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
         'ToolStripButton3
         '
         Me.ToolStripButton3.Image = Global.InteractiveStudio.My.Resources.Resources.screenAdd_24px
@@ -472,6 +416,11 @@ Partial Class WindowEdit
         Me.ToolStripButton3.Size = New System.Drawing.Size(95, 22)
         Me.ToolStripButton3.Text = "Add Screen"
         '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
         'ToolStripButton4
         '
         Me.ToolStripButton4.Image = Global.InteractiveStudio.My.Resources.Resources.trash_24px
@@ -479,6 +428,18 @@ Partial Class WindowEdit
         Me.ToolStripButton4.Name = "ToolStripButton4"
         Me.ToolStripButton4.Size = New System.Drawing.Size(58, 22)
         Me.ToolStripButton4.Text = "Clear"
+        '
+        'ScreenMenuStrip
+        '
+        Me.ScreenMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteScreenToolStripMenuItem})
+        Me.ScreenMenuStrip.Name = "ScreenMenuStrip"
+        Me.ScreenMenuStrip.Size = New System.Drawing.Size(157, 26)
+        '
+        'DeleteScreenToolStripMenuItem
+        '
+        Me.DeleteScreenToolStripMenuItem.Name = "DeleteScreenToolStripMenuItem"
+        Me.DeleteScreenToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.DeleteScreenToolStripMenuItem.Text = "Delete Screen"
         '
         'WindowEdit
         '
@@ -550,7 +511,4 @@ Partial Class WindowEdit
     Friend WithEvents Panel2 As Panel
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
-    Friend WithEvents Label8 As Label
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents Label12 As Label
 End Class

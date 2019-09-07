@@ -3,8 +3,11 @@
 #Region "样式设置"
         Me.Text = AppSetting.Language.GetS("About")
 
+        Dim assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location
+        Dim versionStr = System.Diagnostics.FileVersionInfo.GetVersionInfo(assemblyLocation).ProductVersion
+
         With My.Application.Info
-            Label1.Text = $"V{ .Version.Major}.{ .Version.Minor}.{ .Version.Build}"
+            Label1.Text = $"V{versionStr}"
             Label2.Text = .Copyright
             Label3.Text = .CompanyName
             LinkLabel1.Text = "www.yes-led.com"

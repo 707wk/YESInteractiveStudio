@@ -1,5 +1,6 @@
 ﻿Imports System.Net.Sockets
 Imports System.Threading
+Imports Nova.LCT.GigabitSystem.Common
 Imports YESInteractiveSDK.ModuleStructure
 
 Public Module ModuleNovaMCTRL510
@@ -341,9 +342,9 @@ Public Module ModuleNovaMCTRL510
                                     tmpDate(i002) = ScanBoardDate(4 + i002)
                                 Next
 
-                                Select Case AppSetting.Schedule.ScreenList(tmpScanBoardInfo.ScreenId).BoxRotation
-                                    Case 0
-                                    Case 90
+                                Select Case tmpScanBoardInfo.BoxRotateAngle
+                                    Case RotateAngle.R_360
+                                    Case RotateAngle.R_90
 #Region "90°"
                                         Dim index As Integer = 0
                                         For j002 As Integer = 4 - 1 To 0 Step -1
@@ -353,7 +354,7 @@ Public Module ModuleNovaMCTRL510
                                             Next
                                         Next
 #End Region
-                                    Case 180
+                                    Case RotateAngle.R_180
 #Region "180°"
                                         If AppSetting.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = AppSetting.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
                                             '单元布局4*4
@@ -372,7 +373,7 @@ Public Module ModuleNovaMCTRL510
                                         End If
 
 #End Region
-                                    Case 270
+                                    Case RotateAngle.R_360
 #Region "270°"
                                         If AppSetting.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = AppSetting.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
                                             '单元布局4*4

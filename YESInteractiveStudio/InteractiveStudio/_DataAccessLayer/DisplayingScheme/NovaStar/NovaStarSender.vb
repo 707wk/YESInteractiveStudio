@@ -22,6 +22,16 @@ Public Class NovaStarSender
     ''' </summary>
     Public IpData As Byte()
 
+    ''' <summary>
+    ''' 传感器查找表 Key=网口*100000+接收卡*100+传感器
+    ''' </summary>
+    Public SensorDictionary As New Dictionary(Of Integer, Sensor)
+
+    ''' <summary>
+    ''' 活动点列表
+    ''' </summary>
+    Public ActiveSensorList As New List(Of Sensor)
+
     Private _state As SenderConnectState
     ''' <summary>
     ''' 连接状态
@@ -106,7 +116,10 @@ Public Class NovaStarSender
 
             '异常次数
             Dim exceptionCount As Integer = 0
+            '最后异常信息
             Dim exceptionStr As String
+            '临时存储
+            Dim tmpSensor As Sensor = Nothing
 
             Do While Not IsDisConnect
 
@@ -122,44 +135,65 @@ Public Class NovaStarSender
                     '控制器上传数据
                     socket.Send(Wangk.Hash.Hex2Bin("55D50905000000000400"))
 
+                    ActiveSensorList.Clear()
+
                     For receiveID As Integer = 0 To 16 - 1
                         socket.Receive(ReceiveData)
 
                         '预处理数据
-                        For PacketId As Integer = 4 To ReceiveData.Count - 1 Step 32
+                        For packetID As Integer = 4 To ReceiveData.Count - 1 Step 32
 #Region "有效性校验"
                             '有效数据头
-                            If ReceiveData(PacketId) <> &H55 Then
+                            If ReceiveData(packetID) <> &H55 Then
                                 Continue For
                             End If
 
                             '网口号不大于4
-                            If ReceiveData(PacketId + 1) > 4 Then
+                            If ReceiveData(packetID + 1) > 4 Then
                                 Continue For
                             End If
-
-                            Dim portID As Integer = ReceiveData(PacketId + 1)
-                            Dim scannerID As Integer = ReceiveData(PacketId + 2) * 256 + ReceiveData(PacketId + 3)
-                            Dim novaStarScanBoardDictionaryKey As Integer = ID * 10000 + portID * 1000 + scannerID
-
-                            '查找接收卡位置
-                            If Not AppSettingManager.Settings.DisplayingScheme.NovaStarScanBoardDictionary.ContainsKey(novaStarScanBoardDictionaryKey) Then
-                                Continue For
-                            End If
-
-                            Dim tmpScanBoardInfo As NovaStarScanBoard =
-                                AppSettingManager.Settings.DisplayingScheme.NovaStarScanBoardDictionary(novaStarScanBoardDictionaryKey)
-
-                            '未显示则跳过
-
 #End Region
 
+                            Dim portID As Integer = ReceiveData(packetID + 1)
+                            Dim scannerID As Integer = ReceiveData(packetID + 2) * 256 + ReceiveData(packetID + 3)
+                            '网口*100000+接收卡*100+传感器
+                            Dim novaStarScanBoardKey As Integer = portID * 100000 + scannerID * 100
+
+                            For sensorID = 0 To 16 - 1
+
+                                If Not SensorDictionary.TryGetValue(novaStarScanBoardKey + sensorID, tmpSensor) Then
+                                    Continue For
+                                End If
+
+                                '未感应
+                                If (ReceiveData(packetID + 4 + sensorID) And &H80) <> &H80 Then
+
+                                    If tmpSensor.State = SensorState.DOWN OrElse
+                                        tmpSensor.State = SensorState.PRESS Then
+
+                                        tmpSensor.State = SensorState.UP
+                                    Else
+
+                                        tmpSensor.State = SensorState.NOOPS
+                                    End If
+
+                                    Continue For
+                                End If
+
+                                If tmpSensor.State = SensorState.DOWN Then
+                                    tmpSensor.State = SensorState.UP
+                                End If
+
+                                ActiveSensorList.Add(tmpSensor)
+
+                            Next
 
                         Next
 
                     Next
 #End Region
 
+                    exceptionCount = 0
 
                 Catch ex As Exception
                     exceptionStr = ex.ToString

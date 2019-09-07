@@ -267,24 +267,14 @@ InteractiveStudio
  播放窗口列表
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingScheme.NovaStarSenderArray">
- <summary>
- 发送卡数组
- </summary>
-</member>
-<member name="F:InteractiveStudio.DisplayingScheme.NovaStarScanBoardDictionary">
- <summary>
- 接收卡查找表 Key=发送卡*10000+网口*1000+接收卡
- </summary>
-</member>
-<member name="F:InteractiveStudio.DisplayingScheme.SensorDictionary">
- <summary>
- 传感器查找表 Key=发送卡*1000000+网口*100000+接收卡*100+行*10+列
- </summary>
-</member>
 <member name="F:InteractiveStudio.DisplayingScheme.NovaStarScreenArray">
  <summary>
  屏幕数组
+ </summary>
+</member>
+<member name="F:InteractiveStudio.DisplayingScheme.NovaStarSenderArray">
+ <summary>
+ 发送卡数组
  </summary>
 </member>
 <member name="T:InteractiveStudio.DisplayingWindow">
@@ -302,19 +292,24 @@ InteractiveStudio
  显示位置
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingWindow.Size">
+<member name="F:InteractiveStudio.DisplayingWindow.SizeOfOriginal">
  <summary>
- 显示尺寸
+ 原始显示尺寸
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingWindow.ScreenList">
+<member name="F:InteractiveStudio.DisplayingWindow.SizeOfZoom">
+ <summary>
+ 缩放后显示尺寸
+ </summary>
+</member>
+<member name="F:InteractiveStudio.DisplayingWindow.ScreenIDList">
  <summary>
  窗口内屏幕索引列表
  </summary>
 </member>
 <member name="F:InteractiveStudio.DisplayingWindow.Magnificine">
  <summary>
- 缩放系数 0.5/1/2
+ 缩放系数 25%/50%/100%
  </summary>
 </member>
 <member name="F:InteractiveStudio.DisplayingWindow.PlayWindowForm">
@@ -417,6 +412,16 @@ InteractiveStudio
  IP信息
  </summary>
 </member>
+<member name="F:InteractiveStudio.NovaStarSender.SensorDictionary">
+ <summary>
+ 传感器查找表 Key=网口*100000+接收卡*100+传感器
+ </summary>
+</member>
+<member name="F:InteractiveStudio.NovaStarSender.ActiveSensorList">
+ <summary>
+ 活动点列表
+ </summary>
+</member>
 <member name="P:InteractiveStudio.NovaStarSender.State">
  <summary>
  连接状态
@@ -472,14 +477,19 @@ InteractiveStudio
  电容值
  </summary>
 </member>
+<member name="F:InteractiveStudio.Sensor.LocationOfCenter">
+ <summary>
+ 点击中心坐标(screen偏移+传感器旋转后位置)
+ </summary>
+</member>
 <member name="F:InteractiveStudio.Sensor.Location">
  <summary>
- 点击中心坐标 screen偏移+传感器旋转后位置
+ 左上角坐标
  </summary>
 </member>
 <member name="F:InteractiveStudio.Sensor.Size">
  <summary>
- 显示尺寸 缩放后显示尺寸
+ 显示尺寸(缩放后显示尺寸)
  </summary>
 </member>
 <member name="T:InteractiveStudio.InteractiveOptions">
@@ -550,6 +560,11 @@ InteractiveStudio
 <member name="F:InteractiveStudio.InteractiveOptions.SenderConnectState.OnLine">
  <summary>
  在线
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MainForm.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
  </summary>
 </member>
 <member name="F:InteractiveStudio.PlayWindowSettingsForm.AddWindowButton">

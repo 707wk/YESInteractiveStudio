@@ -72,11 +72,12 @@ Partial Class SensorSettingsForm
         'TrackBar1
         '
         Me.TrackBar1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TrackBar1.LargeChange = 1
         Me.TrackBar1.Location = New System.Drawing.Point(223, 3)
         Me.TrackBar1.Maximum = 9
         Me.TrackBar1.Minimum = 1
         Me.TrackBar1.Name = "TrackBar1"
-        Me.TrackBar1.Size = New System.Drawing.Size(177, 40)
+        Me.TrackBar1.Size = New System.Drawing.Size(177, 41)
         Me.TrackBar1.TabIndex = 10
         Me.TrackBar1.Value = 1
         '
@@ -84,7 +85,7 @@ Partial Class SensorSettingsForm
         '
         Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(76, 63)
+        Me.Label2.Location = New System.Drawing.Point(76, 64)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(101, 12)
         Me.Label2.TabIndex = 11
@@ -94,7 +95,7 @@ Partial Class SensorSettingsForm
         '
         Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(58, 110)
+        Me.Label3.Location = New System.Drawing.Point(58, 111)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(119, 12)
         Me.Label3.TabIndex = 11
@@ -103,7 +104,7 @@ Partial Class SensorSettingsForm
         'NumericUpDown1
         '
         Me.NumericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.NumericUpDown1.Location = New System.Drawing.Point(223, 58)
+        Me.NumericUpDown1.Location = New System.Drawing.Point(223, 60)
         Me.NumericUpDown1.Name = "NumericUpDown1"
         Me.NumericUpDown1.Size = New System.Drawing.Size(98, 21)
         Me.NumericUpDown1.TabIndex = 12
@@ -111,7 +112,7 @@ Partial Class SensorSettingsForm
         'NumericUpDown2
         '
         Me.NumericUpDown2.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.NumericUpDown2.Location = New System.Drawing.Point(223, 106)
+        Me.NumericUpDown2.Location = New System.Drawing.Point(223, 107)
         Me.NumericUpDown2.Name = "NumericUpDown2"
         Me.NumericUpDown2.Size = New System.Drawing.Size(98, 21)
         Me.NumericUpDown2.TabIndex = 12

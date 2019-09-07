@@ -6,6 +6,12 @@
         Dim assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location
         Dim versionStr = System.Diagnostics.FileVersionInfo.GetVersionInfo(assemblyLocation).ProductVersion
         Me.Text = $"{My.Application.Info.ProductName} V{versionStr}"
+
+#End Region
+
+#Region "初始化配置"
+        '默认互动模式
+        InteractCheckBox.Checked = True
 #End Region
 
     End Sub
@@ -51,4 +57,16 @@
         tmpDialog.ShowDialog()
     End Sub
 #End Region
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With Wangk.Resource.MultiLanguageManager.Lang
+            Me.Text = .GetS("Temp Change Over")
+        End With
+    End Sub
+#End Region
+
 End Class

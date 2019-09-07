@@ -303,11 +303,6 @@ InteractiveStudio
  改变屏幕位置
  </summary>
 </member>
-<member name="M:InteractiveStudio.WindowEdit.ComboBox1_SelectedIndexChanged(System.Object,System.EventArgs)">
- <summary>
- 传感器阵列旋转角度
- </summary>
-</member>
 <member name="M:InteractiveStudio.WindowEdit.UpdateScreenControlInfo(System.Int32)">
  <summary>
  更新控件信息
@@ -875,9 +870,9 @@ InteractiveStudio
  索引坐标
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.ScanBoardInfo.Angles">
+<member name="F:InteractiveStudio.ModuleStructure.ScanBoardInfo.BoxRotateAngle">
  <summary>
- 旋转角度
+ 箱体旋转角度
  </summary>
 </member>
 <member name="T:InteractiveStudio.ModuleStructure.SenderInfo">
@@ -1103,11 +1098,6 @@ InteractiveStudio
 <member name="F:InteractiveStudio.ModuleStructure.ScheduleScreenInfo.Loaction">
  <summary>
  在窗口中的位置
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.ScheduleScreenInfo.BoxRotation">
- <summary>
- 箱体顺时针旋转角度
  </summary>
 </member>
 <member name="T:InteractiveStudio.ModuleStructure.ScheduleInfo">

@@ -120,7 +120,7 @@ Public Class WindowEdit
         NumericUpDown5.Value = TmpScreenButton.Location.Y
         TextBox2.Text = TmpScreenButton.ScreenId
 
-        ComboBox1.Text = AppSetting.Schedule.ScreenList(TmpScreenButton.ScreenId).BoxRotation
+        'ComboBox1.Text = AppSetting.Schedule.ScreenList(TmpScreenButton.ScreenId).BoxRotation
         'ComboBox1.SelectedItem = $"{sysInfo.ScreenList(TmpScreenButton.ScreenId).SensorAngle}"
     End Sub
 
@@ -230,18 +230,18 @@ Public Class WindowEdit
     End Sub
 #End Region
 
-    ''' <summary>
-    ''' 传感器阵列旋转角度
-    ''' </summary>
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-        If TextBox2.Text = "" Then
-            Exit Sub
-        End If
+    '''' <summary>
+    '''' 传感器阵列旋转角度
+    '''' </summary>
+    'Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
+    '    If TextBox2.Text = "" Then
+    '        Exit Sub
+    '    End If
 
-        AppSetting.Schedule.ScreenList(Val(TextBox2.Text)).BoxRotation = Val(ComboBox1.Text)
+    '    AppSetting.Schedule.ScreenList(Val(TextBox2.Text)).BoxRotation = Val(ComboBox1.Text)
 
-        UpdateScreenControlInfo(Val(TextBox2.Text))
-    End Sub
+    '    UpdateScreenControlInfo(Val(TextBox2.Text))
+    'End Sub
 
     ''' <summary>
     ''' 更新控件信息
@@ -251,8 +251,7 @@ Public Class WindowEdit
         With AppSetting.ScreenList(ScreenID)
             ScreenControls(ScreenID).Text = $"Screen {ScreenID}
 Size    : Width={ .DefSize.Width},Height={ .DefSize.Height}
-Location: X={AppSetting.Schedule.ScreenList(ScreenID).Loaction.X},Y={AppSetting.Schedule.ScreenList(ScreenID).Loaction.Y}
-Rotation: {AppSetting.Schedule.ScreenList(ScreenID).BoxRotation}°"
+Location: X={AppSetting.Schedule.ScreenList(ScreenID).Loaction.X},Y={AppSetting.Schedule.ScreenList(ScreenID).Loaction.Y}"
         End With
     End Sub
 #End Region
@@ -281,7 +280,6 @@ Rotation: {AppSetting.Schedule.ScreenList(ScreenID).BoxRotation}°"
             Me.ToolStripButton3.Text = .GetS("Add Screen")
             Me.ToolStripButton4.Text = .GetS("Clear")
             Me.DeleteScreenToolStripMenuItem.Text = .GetS("Delete Screen")
-            Me.Label8.Text = .GetS("Box Rotation")
         End With
     End Sub
 #End Region

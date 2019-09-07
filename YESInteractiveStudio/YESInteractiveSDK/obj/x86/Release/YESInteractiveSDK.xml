@@ -27,6 +27,11 @@ YESInteractiveSDK
  触发点信息
  </summary>
 </member>
+<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.ID">
+ <summary>
+ ID
+ </summary>
+</member>
 <member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.X">
  <summary>
  X坐标
@@ -37,39 +42,9 @@ YESInteractiveSDK
  Y坐标
  </summary>
 </member>
-<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.GroupID">
+<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.Old">
  <summary>
- 分组ID
- </summary>
-</member>
-<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.Activity">
- <summary>
- 动作
- </summary>
-</member>
-<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.TickTime">
- <summary>
- 点击时长
- </summary>
-</member>
-<member name="T:YESInteractiveSDK.ModuleStructure.PointActivity">
- <summary>
- 触发动作
- </summary>
-</member>
-<member name="F:YESInteractiveSDK.ModuleStructure.PointActivity.DOWN">
- <summary>
- 按下
- </summary>
-</member>
-<member name="F:YESInteractiveSDK.ModuleStructure.PointActivity.PRESS">
- <summary>
- 长按
- </summary>
-</member>
-<member name="F:YESInteractiveSDK.ModuleStructure.PointActivity.UP">
- <summary>
- 抬起
+ 旧点
  </summary>
 </member>
 <member name="T:YESInteractiveSDK.IYESInterfaceSDK">

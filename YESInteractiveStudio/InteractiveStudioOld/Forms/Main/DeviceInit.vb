@@ -78,10 +78,11 @@ Public Class DeviceInit
         Timer1.Stop()
 
         '判断Nova服务是否启动
-        ShowInfo(AppSetting.Language.GetS("Start Nova Serve"))
-        If System.Diagnostics.Process.GetProcessesByName("MarsServerProvider").Length = 0 Then
-            Process.Start($".\Nova\Server\MarsServerProvider.exe")
+        Dim tmpProcess = System.Diagnostics.Process.GetProcessesByName("MarsServerProvider")
+        If tmpProcess.Length > 0 Then
+            tmpProcess(0).Kill()
         End If
+        Process.Start($".\Nova\Server\MarsServerProvider.exe")
 
 #Region "连接Nova服务"
         ShowInfo(AppSetting.Language.GetS("Connect Nova Serve ..."))
@@ -218,6 +219,13 @@ Public Class DeviceInit
                         .PortId = i001.PortIndex,'网口索引
                         .ConnectId = i001.ConnectIndex'接收卡索引
                     }
+
+                    '箱体旋转角度
+                    AppSetting.NovaMarsControl.ReadCabinetRotateAngle(tmpScanBoardInfo.SenderId,
+                                                                      tmpScanBoardInfo.PortId,
+                                                                      tmpScanBoardInfo.ConnectId,
+                                                                      tmpScanBoardInfo.BoxRotateAngle)
+
                     '屏幕块位置
                     tmpScanBoardInfo.Location.X = (i001.X \ .DefScanBoardSize.Width) * .SensorLayout.Width
                     tmpScanBoardInfo.Location.Y = (i001.Y \ .DefScanBoardSize.Height) * .SensorLayout.Height

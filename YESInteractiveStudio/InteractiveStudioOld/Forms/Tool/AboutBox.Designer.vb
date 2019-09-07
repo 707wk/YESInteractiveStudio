@@ -93,7 +93,7 @@ Partial Class AboutBox
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(498, 117)
+        Me.ClientSize = New System.Drawing.Size(531, 117)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)

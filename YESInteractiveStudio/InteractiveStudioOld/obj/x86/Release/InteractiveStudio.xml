@@ -303,6 +303,12 @@ InteractiveStudio
  改变屏幕位置
  </summary>
 </member>
+<member name="M:InteractiveStudio.WindowEdit.UpdateScreenControlInfo(System.Int32)">
+ <summary>
+ 更新控件信息
+ </summary>
+ <param name="ScreenID"></param>
+</member>
 <member name="M:InteractiveStudio.WindowEdit.ChangeControlsLanguage">
  <summary>
  切换控件语言
@@ -324,13 +330,6 @@ InteractiveStudio
  切换控件语言
  </summary>
 </member>
-<member name="M:InteractiveStudio.DeviceInit.BackgroundWorker1_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
- <summary>
- 后台线程
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
 <member name="T:InteractiveStudio.DeviceInit.ShowInfoCallback">
  <summary>
  显示信息
@@ -339,11 +338,6 @@ InteractiveStudio
 <member name="M:InteractiveStudio.DeviceInit.GetEquipmentIPData(System.Object,Nova.Mars.SDK.MarsEquipmentIPEventArgs)">
  <summary>
  获取ip通知
- </summary>
-</member>
-<member name="T:InteractiveStudio.DeviceInit.novaInitializeCallback">
- <summary>
- 读取屏幕信息
  </summary>
 </member>
 <member name="M:InteractiveStudio.DeviceInit.ChangeControlsLanguage">
@@ -449,7 +443,7 @@ InteractiveStudio
  节目定时切换
  </summary>
 </member>
-<member name="M:InteractiveStudio.MDIParentMain.DisposeControlOffLink(System.Int32)">
+<member name="M:InteractiveStudio.MDIParentMain.DisposeControlOffLink(System.Boolean)">
  <summary>
  控制器离线处理
  </summary>
@@ -549,11 +543,6 @@ InteractiveStudio
 <member name="M:InteractiveStudio.MDIParentMain.ComboBoxItem10_SelectedIndexChanged(System.Object,System.EventArgs)">
  <summary>
  触摸灵敏度
- </summary>
-</member>
-<member name="M:InteractiveStudio.MDIParentMain.ComboBoxItem11_SelectedIndexChanged(System.Object,System.EventArgs)">
- <summary>
- 触摸模式
  </summary>
 </member>
 <member name="M:InteractiveStudio.MDIParentMain.ComboBoxItem7_SelectedIndexChanged(System.Object,System.EventArgs)">
@@ -683,7 +672,12 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.PlayWindow.FileType">
  <summary>
- 文件类型 0无 1swf 2dll
+ 文件类型 0无 1swf 2dll 3Unity
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindow.UnityControl">
+ <summary>
+ Unity播放控件
  </summary>
 </member>
 <member name="M:InteractiveStudio.PlayWindow.UpdateWindow(System.Boolean)">
@@ -711,6 +705,11 @@ InteractiveStudio
  播放DLL
  </summary>
 </member>
+<member name="M:InteractiveStudio.PlayWindow.PlayUnity(System.String)">
+ <summary>
+ 播放Unity
+ </summary>
+</member>
 <member name="M:InteractiveStudio.PlayWindow.Play(System.String)">
  <summary>
  播放文件
@@ -736,14 +735,15 @@ InteractiveStudio
  切换显示模式
  </summary>
 </member>
-<member name="M:InteractiveStudio.PlayWindow.PointActive(System.Int32,System.Drawing.Point,System.Byte,YESInteractiveSDK.ModuleStructure.PointActivity)">
+<member name="M:InteractiveStudio.PlayWindow.PointActive(System.Collections.Generic.List{YESInteractiveSDK.ModuleStructure.PointInfo})">
  <summary>
  点击事件
  </summary>
- <param name="ScreenID">屏幕ID</param>
- <param name="Location">点击位置</param>
- <param name="Value">电容值</param>
- <param name="Active">操作</param>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.ShowCapacitance(System.Int32,System.Int32,System.Byte)">
+ <summary>
+ 显示电容值
+ </summary>
 </member>
 <member name="M:InteractiveStudio.PlayWindow.ChangeControlsLanguage">
  <summary>
@@ -870,9 +870,9 @@ InteractiveStudio
  索引坐标
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.ScanBoardInfo.Angles">
+<member name="F:InteractiveStudio.ModuleStructure.ScanBoardInfo.BoxRotateAngle">
  <summary>
- 旋转角度
+ 箱体旋转角度
  </summary>
 </member>
 <member name="T:InteractiveStudio.ModuleStructure.SenderInfo">
@@ -900,39 +900,34 @@ InteractiveStudio
  socket连接变量
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.SenderInfo.WorkThread">
+<member name="F:InteractiveStudio.ModuleStructure.SenderInfo.ScanBoardDateQueue">
  <summary>
- 状态检测线程
+  接收缓存
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.SenderInfo.MaxReadNum">
+<member name="T:InteractiveStudio.ModuleStructure.PointState">
  <summary>
- 每秒最大查询次数
+ 点状态
  </summary>
 </member>
-<member name="T:InteractiveStudio.ModuleStructure.ActivePointInfo">
+<member name="F:InteractiveStudio.ModuleStructure.PointState.NOOPS">
  <summary>
- 活动点信息
+ 无操作
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.ActivePointInfo.Activity">
+<member name="F:InteractiveStudio.ModuleStructure.PointState.DOWN">
  <summary>
- 动作
+ 按下
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.ActivePointInfo.ScreenId">
+<member name="F:InteractiveStudio.ModuleStructure.PointState.PRESS">
  <summary>
- 屏幕索引
+ 长按
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.ActivePointInfo.Location">
+<member name="F:InteractiveStudio.ModuleStructure.PointState.UP">
  <summary>
- 索引坐标
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.ActivePointInfo.Value">
- <summary>
- 读取的数值(点击状态+电容值)
+ 抬起
  </summary>
 </member>
 <member name="T:InteractiveStudio.ModuleStructure.ScreenInfo">
@@ -985,9 +980,9 @@ InteractiveStudio
  缩放后感应单元尺寸
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.ScreenInfo.ClickHistoryMap">
+<member name="F:InteractiveStudio.ModuleStructure.ScreenInfo.SensorMap">
  <summary>
- 历史点击状态
+ 传感器点击状态
  </summary>
 </member>
 <member name="F:InteractiveStudio.ModuleStructure.ScreenInfo.SenderList">
@@ -1095,6 +1090,16 @@ InteractiveStudio
  节目列表
  </summary>
 </member>
+<member name="T:InteractiveStudio.ModuleStructure.ScheduleScreenInfo">
+ <summary>
+ 播放方案屏幕信息
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.ScheduleScreenInfo.Loaction">
+ <summary>
+ 在窗口中的位置
+ </summary>
+</member>
 <member name="T:InteractiveStudio.ModuleStructure.ScheduleInfo">
  <summary>
  播放方案
@@ -1105,7 +1110,7 @@ InteractiveStudio
  窗口列表 不能大于屏幕数
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.ScheduleInfo.ScreenLocations">
+<member name="F:InteractiveStudio.ModuleStructure.ScheduleInfo.ScreenList">
  <summary>
  屏幕位置
  </summary>
@@ -1138,26 +1143,6 @@ InteractiveStudio
 <member name="F:InteractiveStudio.ModuleStructure.InteractiveOptions.DISPLAYMODE.DEBUG">
  <summary>
  调试
- </summary>
-</member>
-<member name="T:InteractiveStudio.ModuleStructure.InteractiveOptions.TOUCHMODE">
- <summary>
- 触摸模式
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.InteractiveOptions.TOUCHMODE.T121">
- <summary>
- 1合1
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.InteractiveOptions.TOUCHMODE.T421">
- <summary>
- 4合1
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.InteractiveOptions.TOUCHMODE.T1621">
- <summary>
- 16合1
  </summary>
 </member>
 <member name="T:InteractiveStudio.ModuleStructure.SystemInfo">
@@ -1210,19 +1195,14 @@ InteractiveStudio
  屏幕列表
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.RootClass">
+<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.NovaMarsHardware">
  <summary>
  Nova连接变量
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.MainClass">
+<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.NovaMarsControl">
  <summary>
  Nova配置变量
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.ScanBoardOldFlage">
- <summary>
- MCU程序旧版标记
  </summary>
 </member>
 <member name="F:InteractiveStudio.ModuleStructure.SystemInfo.LinkFlage">
@@ -1243,11 +1223,6 @@ InteractiveStudio
 <member name="F:InteractiveStudio.ModuleStructure.SystemInfo.DisplayMode">
  <summary>
  显示模式
- </summary>
-</member>
-<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.TouchMode">
- <summary>
- 触摸模式
  </summary>
 </member>
 <member name="F:InteractiveStudio.ModuleStructure.SystemInfo.TouchSensitivity">
@@ -1275,7 +1250,17 @@ InteractiveStudio
  查询时间间隔 ms
  </summary>
 </member>
-<member name="F:InteractiveStudio.ModuleVar.sysInfo">
+<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.WorkThread">
+ <summary>
+ 状态检测线程
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleStructure.SystemInfo.ReadNum">
+ <summary>
+ 每秒最大查询次数
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ModuleVar.AppSetting">
  <summary>
  系统配置变量
  </summary>
@@ -1290,37 +1275,44 @@ InteractiveStudio
  断开控制器连接
  </summary>
 </member>
-<member name="M:InteractiveStudio.ModuleNovaMCTRL510.CheckAdjacencyPieceNums(System.Int32,System.Int32,System.Int32)">
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.CheckAdjacencyPieceNums(System.Int32,System.Drawing.Point)">
  <summary>
  检测相邻触发数是否大于等于抗干扰数
  </summary>
 </member>
-<member name="M:InteractiveStudio.ModuleNovaMCTRL510.ControlWorkThread(System.Int32)">
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.CalcPointPointInfo(System.Int32,System.Drawing.Point,System.Byte)">
+ <summary>
+ 计算坐标
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.ControlWorkThread">
  <summary>
  处理线程
  </summary>
- <param name="ControlID">控制器ID</param>
 </member>
-<member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetTouchSensitivity(System.Int32,System.Boolean)">
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetTouchSensitivity(System.Int32)">
  <summary>
  MCU传感器灵敏度
  </summary>
  <param name="Value">1-9级,越大越灵敏</param>
- <param name="OldFlage">启用旧版SDK</param>
 </member>
-<member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetResetTemp(System.Int32,System.Boolean)">
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetResetTemp(System.Int32)">
  <summary>
  MCU传感器温度增量复位
  </summary>
  <param name="Value">绝对变化值 0-255度</param>
- <param name="OldFlage">启用旧版SDK</param>
 </member>
-<member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetResetSec(System.Int32,System.Boolean)">
+<member name="M:InteractiveStudio.ModuleNovaMCTRL510.SetResetSec(System.Int32)">
  <summary>
  MCU传感器定时复位
  </summary>
  <param name="Value">0-255秒</param>
- <param name="OldFlage">启用旧版SDK</param>
+</member>
+<member name="T:InteractiveStudio.UnityConfig.ModuleUnityConfig">
+ <summary>
+ Unity素材配置文件
+ </summary>
 </member>
 </members>
 </doc>

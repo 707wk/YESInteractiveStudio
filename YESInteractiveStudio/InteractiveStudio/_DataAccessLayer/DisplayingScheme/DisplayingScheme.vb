@@ -23,9 +23,9 @@ Public Class DisplayingScheme
     '''' </summary>
     'Public NovaStarScanBoardDictionary As Dictionary(Of Integer, NovaStarScanBoard)
 
-    ''' <summary>
-    ''' 传感器查找表 Key=发送卡*1000000+网口*100000+接收卡*100+传感器
-    ''' </summary>
-    Public SensorDictionary As Dictionary(Of Integer, Sensor)
+    '''' <summary>
+    '''' 传感器查找表 Key=发送卡*1000000+网口*100000+接收卡*100+传感器
+    '''' </summary>
+    'Public SensorDictionary As Dictionary(Of Integer, Sensor)
 
 End Class

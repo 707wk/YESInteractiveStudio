@@ -65,8 +65,12 @@ Public Class MDIParentMain
     ''' 显示程序名/版本号/文件路径
     ''' </summary>
     Private Sub ShowToolBarInfo()
+        '文件版本号
+        Dim assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location
+        Dim versionStr = System.Diagnostics.FileVersionInfo.GetVersionInfo(assemblyLocation).ProductVersion
+
         With My.Application.Info
-            Me.Text = $"{ .ProductName} V{ .Version.Major}.{ .Version.Minor}.{ .Version.Build} [{If(AppSetting.HistoryFile = "", AppSetting.Language.GetS("Not saved"), AppSetting.HistoryFile)}]"
+            Me.Text = $"{ .ProductName} V{versionStr} [{If(AppSetting.HistoryFile = "", AppSetting.Language.GetS("Not saved"), AppSetting.HistoryFile)}]"
         End With
     End Sub
 #End Region

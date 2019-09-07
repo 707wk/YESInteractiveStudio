@@ -31,9 +31,10 @@ Partial Class MainForm
         Me.ItemContainer1 = New DevComponents.DotNetBar.ItemContainer()
         Me.HideWindowsCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonBar2 = New DevComponents.DotNetBar.RibbonBar()
-        Me.InteractButton = New DevComponents.DotNetBar.ButtonItem()
-        Me.TestButton = New DevComponents.DotNetBar.ButtonItem()
-        Me.BlackButton = New DevComponents.DotNetBar.ButtonItem()
+        Me.InteractCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.TestCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.BlackCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.DebugCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonPanel2 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar5 = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer4 = New DevComponents.DotNetBar.ItemContainer()
@@ -54,11 +55,10 @@ Partial Class MainForm
         Me.SettingsTab = New DevComponents.DotNetBar.RibbonTabItem()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.WindowProgramControl1 = New InteractiveStudio.WindowProgramControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.DebugButton = New DevComponents.DotNetBar.ButtonItem()
+        Me.WindowProgramControl1 = New InteractiveStudio.WindowProgramControl()
+        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.RibbonControl1.SuspendLayout()
         Me.RibbonPanel1.SuspendLayout()
         Me.RibbonPanel2.SuspendLayout()
@@ -149,7 +149,7 @@ Partial Class MainForm
         Me.RibbonBar3.DragDropSupport = True
         Me.RibbonBar3.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer1})
         Me.RibbonBar3.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar3.Location = New System.Drawing.Point(355, 0)
+        Me.RibbonBar3.Location = New System.Drawing.Point(339, 0)
         Me.RibbonBar3.Name = "RibbonBar3"
         Me.RibbonBar3.Size = New System.Drawing.Size(149, 75)
         Me.RibbonBar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -203,11 +203,11 @@ Partial Class MainForm
         Me.RibbonBar2.ContainerControlProcessDialogKey = True
         Me.RibbonBar2.Dock = System.Windows.Forms.DockStyle.Left
         Me.RibbonBar2.DragDropSupport = True
-        Me.RibbonBar2.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.InteractButton, Me.TestButton, Me.BlackButton, Me.DebugButton})
+        Me.RibbonBar2.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.InteractCheckBox, Me.TestCheckBox, Me.BlackCheckBox, Me.DebugCheckBox})
         Me.RibbonBar2.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar2.Location = New System.Drawing.Point(3, 0)
         Me.RibbonBar2.Name = "RibbonBar2"
-        Me.RibbonBar2.Size = New System.Drawing.Size(352, 75)
+        Me.RibbonBar2.Size = New System.Drawing.Size(336, 75)
         Me.RibbonBar2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar2.TabIndex = 1
         Me.RibbonBar2.Text = "RibbonBar2"
@@ -221,32 +221,41 @@ Partial Class MainForm
         Me.RibbonBar2.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonBar2.TitleVisible = False
         '
-        'InteractButton
+        'InteractCheckBox
         '
-        Me.InteractButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.InteractButton.Image = Global.InteractiveStudio.My.Resources.Resources.DisplayMode0_32px
-        Me.InteractButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.InteractButton.Name = "InteractButton"
-        Me.InteractButton.SubItemsExpandWidth = 14
-        Me.InteractButton.Text = "Interact"
+        Me.InteractCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode0_32px
+        Me.InteractCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode0G_32px
+        Me.InteractCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
+        Me.InteractCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.InteractCheckBox.Name = "InteractCheckBox"
+        Me.InteractCheckBox.Text = "Interact"
         '
-        'TestButton
+        'TestCheckBox
         '
-        Me.TestButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.TestButton.Image = Global.InteractiveStudio.My.Resources.Resources.DisplayMode1_32px
-        Me.TestButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.TestButton.Name = "TestButton"
-        Me.TestButton.SubItemsExpandWidth = 14
-        Me.TestButton.Text = "Test"
+        Me.TestCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode1_32px
+        Me.TestCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode1G_32px
+        Me.TestCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
+        Me.TestCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.TestCheckBox.Name = "TestCheckBox"
+        Me.TestCheckBox.Text = "Test"
         '
-        'BlackButton
+        'BlackCheckBox
         '
-        Me.BlackButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.BlackButton.Image = Global.InteractiveStudio.My.Resources.Resources.DisplayMode2_32px
-        Me.BlackButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.BlackButton.Name = "BlackButton"
-        Me.BlackButton.SubItemsExpandWidth = 14
-        Me.BlackButton.Text = "Black"
+        Me.BlackCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode2_32px
+        Me.BlackCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode2G_32px
+        Me.BlackCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
+        Me.BlackCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.BlackCheckBox.Name = "BlackCheckBox"
+        Me.BlackCheckBox.Text = "Black"
+        '
+        'DebugCheckBox
+        '
+        Me.DebugCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode3_32px
+        Me.DebugCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode3G_32px
+        Me.DebugCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
+        Me.DebugCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.DebugCheckBox.Name = "DebugCheckBox"
+        Me.DebugCheckBox.Text = "Debug"
         '
         'RibbonPanel2
         '
@@ -505,14 +514,6 @@ Partial Class MainForm
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "window 1"
         '
-        'WindowProgramControl1
-        '
-        Me.WindowProgramControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.WindowProgramControl1.Location = New System.Drawing.Point(3, 3)
-        Me.WindowProgramControl1.Name = "WindowProgramControl1"
-        Me.WindowProgramControl1.Size = New System.Drawing.Size(745, 286)
-        Me.WindowProgramControl1.TabIndex = 0
-        '
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
@@ -525,28 +526,29 @@ Partial Class MainForm
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 425)
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 424)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(754, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(754, 23)
         Me.StatusStrip1.TabIndex = 3
         Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'ToolStripStatusLabel1
+        'WindowProgramControl1
         '
-        Me.ToolStripStatusLabel1.Image = Global.InteractiveStudio.My.Resources.Resources.usb_disconnect_32px
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(162, 17)
-        Me.ToolStripStatusLabel1.Text = "Connection abnormality"
+        Me.WindowProgramControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.WindowProgramControl1.Location = New System.Drawing.Point(3, 3)
+        Me.WindowProgramControl1.Name = "WindowProgramControl1"
+        Me.WindowProgramControl1.Size = New System.Drawing.Size(745, 286)
+        Me.WindowProgramControl1.TabIndex = 0
         '
-        'DebugButton
+        'ToolStripDropDownButton1
         '
-        Me.DebugButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.DebugButton.Image = Global.InteractiveStudio.My.Resources.Resources.DisplayMode3_32px
-        Me.DebugButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.DebugButton.Name = "DebugButton"
-        Me.DebugButton.SubItemsExpandWidth = 14
-        Me.DebugButton.Text = "Debug"
+        Me.ToolStripDropDownButton1.Image = Global.InteractiveStudio.My.Resources.Resources.usb_disconnect_32px
+        Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
+        Me.ToolStripDropDownButton1.ShowDropDownArrow = False
+        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(166, 21)
+        Me.ToolStripDropDownButton1.Text = "Connection abnormality"
         '
         'MainForm
         '
@@ -580,7 +582,6 @@ Partial Class MainForm
     Friend WithEvents ItemContainer1 As DevComponents.DotNetBar.ItemContainer
     Friend WithEvents HideWindowsCheckBox As DevComponents.DotNetBar.CheckBoxItem
     Friend WithEvents RibbonBar2 As DevComponents.DotNetBar.RibbonBar
-    Friend WithEvents InteractButton As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents RibbonPanel2 As DevComponents.DotNetBar.RibbonPanel
     Friend WithEvents RibbonBar5 As DevComponents.DotNetBar.RibbonBar
     Friend WithEvents LabelItem1 As DevComponents.DotNetBar.LabelItem
@@ -602,10 +603,11 @@ Partial Class MainForm
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents WindowProgramControl1 As WindowProgramControl
     Friend WithEvents StatusStrip1 As StatusStrip
-    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
-    Friend WithEvents TestButton As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents BlackButton As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents MCUButton As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents AccuracyButton As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents DebugButton As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents InteractCheckBox As DevComponents.DotNetBar.CheckBoxItem
+    Friend WithEvents TestCheckBox As DevComponents.DotNetBar.CheckBoxItem
+    Friend WithEvents BlackCheckBox As DevComponents.DotNetBar.CheckBoxItem
+    Friend WithEvents DebugCheckBox As DevComponents.DotNetBar.CheckBoxItem
+    Friend WithEvents ToolStripDropDownButton1 As ToolStripDropDownButton
 End Class

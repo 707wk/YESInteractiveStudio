@@ -23,6 +23,11 @@ Public Class Sensor
     ''' <summary>
     ''' 点击中心坐标(screen偏移+传感器旋转后位置)
     ''' </summary>
+    Public LocationOfCenter As Point
+
+    ''' <summary>
+    ''' 左上角坐标
+    ''' </summary>
     Public Location As Point
 
     ''' <summary>

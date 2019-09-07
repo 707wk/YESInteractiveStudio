@@ -31,10 +31,16 @@ Public Module ModuleStructure
         ''' </summary>
         Dim Location As Point
 
+        '''' <summary>
+        '''' 旋转角度
+        '''' </summary>
+        'Dim Angles As Integer
+
         ''' <summary>
-        ''' 旋转角度
+        ''' 箱体旋转角度
         ''' </summary>
-        Dim Angles As Integer
+        Public BoxRotateAngle As Nova.LCT.GigabitSystem.Common.RotateAngle
+
     End Structure
 #End Region
 
@@ -311,10 +317,10 @@ Public Module ModuleStructure
         ''' </summary>
         Dim Loaction As Point
 
-        ''' <summary>
-        ''' 箱体顺时针旋转角度
-        ''' </summary>
-        Dim BoxRotation As Integer
+        '''' <summary>
+        '''' 箱体顺时针旋转角度
+        '''' </summary>
+        'Dim BoxRotation As Integer
     End Structure
 #End Region
 
