@@ -157,34 +157,130 @@ InteractiveStudio
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
-<member name="T:InteractiveStudio.AppSettingManager">
+<member name="T:InteractiveStudio.DisplayingSchemeProcessingHelper">
  <summary>
- 全局参数管理器
+ 播放方案处理辅助类
  </summary>
 </member>
-<member name="F:InteractiveStudio.AppSettingManager.instance">
+<member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.ShowALLDisplayingWindow">
+ <summary>
+ 显示所有播放窗体
+ </summary>
+</member>
+<member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.ComputeSizeAndLocationForALLScreenAndScanBoard">
+ <summary>
+ 计算屏幕/接收卡尺寸及坐标
+ </summary>
+</member>
+<member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.CloseALLDisplayingWindow">
+ <summary>
+ 关闭所有播放窗体
+ </summary>
+</member>
+<member name="T:InteractiveStudio.SensorDataProcessingHelper">
+ <summary>
+ 传感器数据处理辅助类
+ </summary>
+</member>
+<member name="F:InteractiveStudio.SensorDataProcessingHelper.WorkThread">
+ <summary>
+ 数据处理线程
+ </summary>
+</member>
+<member name="F:InteractiveStudio.SensorDataProcessingHelper.EndOfReadSensorDataEvent">
+ <summary>
+ 读取传感器数据完毕信号
+ </summary>
+</member>
+<member name="F:InteractiveStudio.SensorDataProcessingHelper.EndOfCompletedSensorDataEvent">
+ <summary>
+ 处理传感器数据完毕信号
+ </summary>
+</member>
+<member name="P:InteractiveStudio.SensorDataProcessingHelper.IsRunning">
+ <summary>
+ 是否运行
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:InteractiveStudio.SensorDataProcessingHelper.StartAsync">
+ <summary>
+ 开始异步处理传感器数据
+ </summary>
+</member>
+<member name="M:InteractiveStudio.SensorDataProcessingHelper.StopAsync">
+ <summary>
+ 停止异步处理传感器数据
+ </summary>
+</member>
+<member name="M:InteractiveStudio.SensorDataProcessingHelper.WorkFunction">
+ <summary>
+ 主处理函数
+ </summary>
+</member>
+<member name="T:InteractiveStudio.WindowsHotKeyHelper">
+ <summary>
+ Windows热键处理辅助类
+ </summary>
+</member>
+<member name="M:InteractiveStudio.WindowsHotKeyHelper.RegisterHotKey(System.Int32,System.Int32,System.Int32,System.Int32)">
+ <summary>
+ 注册热键
+ </summary>
+</member>
+<member name="M:InteractiveStudio.WindowsHotKeyHelper.UnregisterHotKey(System.Int32,System.Int32)">
+ <summary>
+ 注销热键
+ </summary>
+</member>
+<member name="F:InteractiveStudio.WindowsHotKeyHelper.WM_HOTKEY">
+ <summary>
+ 热键消息ID
+ </summary>
+</member>
+<member name="F:InteractiveStudio.WindowsHotKeyHelper.MOD_ALT">
+ <summary>
+ ALT
+ </summary>
+</member>
+<member name="F:InteractiveStudio.WindowsHotKeyHelper.MOD_CONTROL">
+ <summary>
+ Ctrl
+ </summary>
+</member>
+<member name="F:InteractiveStudio.WindowsHotKeyHelper.MOD_SHIFT">
+ <summary>
+ Shift
+ </summary>
+</member>
+<member name="T:InteractiveStudio.AppSettingHelper">
+ <summary>
+ 全局配置辅助类
+ </summary>
+</member>
+<member name="F:InteractiveStudio.AppSettingHelper.instance">
  <summary>
  实例
  </summary>
 </member>
-<member name="P:InteractiveStudio.AppSettingManager.Settings">
+<member name="P:InteractiveStudio.AppSettingHelper.Settings">
  <summary>
  参数
  </summary>
 </member>
-<member name="M:InteractiveStudio.AppSettingManager.LoadFromLocaltion">
+<member name="M:InteractiveStudio.AppSettingHelper.LoadFromLocaltion">
  <summary>
  从本地读取配置
  </summary>
 </member>
-<member name="M:InteractiveStudio.AppSettingManager.SaveToLocaltion">
+<member name="M:InteractiveStudio.AppSettingHelper.SaveToLocaltion">
  <summary>
  保存配置到本地
  </summary>
 </member>
 <member name="T:InteractiveStudio.AppSetting">
  <summary>
- 全局参数类
+ 全局配置类
  </summary>
 </member>
 <member name="F:InteractiveStudio.AppSetting.SelectLang">
@@ -252,7 +348,7 @@ InteractiveStudio
  名称
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingProgram.FileList">
+<member name="F:InteractiveStudio.DisplayingProgram.FileItems">
  <summary>
  播放文件
  </summary>
@@ -262,17 +358,17 @@ InteractiveStudio
  播放方案类
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingScheme.DisplayingWindowList">
+<member name="F:InteractiveStudio.DisplayingScheme.DisplayingWindowItems">
  <summary>
  播放窗口列表
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingScheme.NovaStarScreenArray">
+<member name="F:InteractiveStudio.DisplayingScheme.NovaStarScreenItems">
  <summary>
  屏幕数组
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingScheme.NovaStarSenderArray">
+<member name="F:InteractiveStudio.DisplayingScheme.NovaStarSenderItems">
  <summary>
  发送卡数组
  </summary>
@@ -302,7 +398,7 @@ InteractiveStudio
  缩放后显示尺寸
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingWindow.ScreenIDList">
+<member name="F:InteractiveStudio.DisplayingWindow.ScreenIDItems">
  <summary>
  窗口内屏幕索引列表
  </summary>
@@ -327,14 +423,29 @@ InteractiveStudio
  当前播放文件索引
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingWindow.PlayProgramList">
+<member name="F:InteractiveStudio.DisplayingWindow.PlayProgramItems">
  <summary>
  播放节目列表
+ </summary>
+</member>
+<member name="F:InteractiveStudio.DisplayingWindow.ActiveSensorItems">
+ <summary>
+ 活动点列表
+ </summary>
+</member>
+<member name="F:InteractiveStudio.DisplayingWindow.StartOfCompletedSensorDataEvent">
+ <summary>
+ 开始处理传感器数据信号
  </summary>
 </member>
 <member name="T:InteractiveStudio.NovaStarScanBoard">
  <summary>
  Nova接收卡信息
+ </summary>
+</member>
+<member name="F:InteractiveStudio.NovaStarScanBoard.DisplayingWindowID">
+ <summary>
+ 所属播放窗口索引
  </summary>
 </member>
 <member name="F:InteractiveStudio.NovaStarScanBoard.SenderID">
@@ -357,9 +468,19 @@ InteractiveStudio
  原始坐标
  </summary>
 </member>
+<member name="F:InteractiveStudio.NovaStarScanBoard.LocationOfZoom">
+ <summary>
+ 缩放后坐标
+ </summary>
+</member>
 <member name="F:InteractiveStudio.NovaStarScanBoard.SizeOfOriginal">
  <summary>
  原始尺寸
+ </summary>
+</member>
+<member name="F:InteractiveStudio.NovaStarScanBoard.SizeOfZoom">
+ <summary>
+ 缩放后尺寸
  </summary>
 </member>
 <member name="F:InteractiveStudio.NovaStarScanBoard.BoxRotateAngle">
@@ -392,7 +513,7 @@ InteractiveStudio
  缩放后尺寸
  </summary>
 </member>
-<member name="F:InteractiveStudio.NovaStarScreen.NovaStarScanBoardList">
+<member name="F:InteractiveStudio.NovaStarScreen.NovaStarScanBoardItems">
  <summary>
  接收卡列表
  </summary>
@@ -400,11 +521,6 @@ InteractiveStudio
 <member name="T:InteractiveStudio.NovaStarSender">
  <summary>
  Nova发送卡信息
- </summary>
-</member>
-<member name="F:InteractiveStudio.NovaStarSender.ID">
- <summary>
- 发送卡索引
  </summary>
 </member>
 <member name="F:InteractiveStudio.NovaStarSender.IpData">
@@ -417,7 +533,7 @@ InteractiveStudio
  传感器查找表 Key=网口*100000+接收卡*100+传感器
  </summary>
 </member>
-<member name="F:InteractiveStudio.NovaStarSender.ActiveSensorList">
+<member name="F:InteractiveStudio.NovaStarSender.ActiveSensorItems">
  <summary>
  活动点列表
  </summary>
@@ -432,9 +548,14 @@ InteractiveStudio
  工作线程
  </summary>
 </member>
-<member name="F:InteractiveStudio.NovaStarSender.IsDisConnect">
+<member name="F:InteractiveStudio.NovaStarSender.StartOfReadSensorDataEvent">
  <summary>
- 是否断开连接
+ 开始读取传感器数据信号
+ </summary>
+</member>
+<member name="F:InteractiveStudio.NovaStarSender.IsConnect">
+ <summary>
+ 是否已连接
  </summary>
 </member>
 <member name="M:InteractiveStudio.NovaStarSender.Connect">

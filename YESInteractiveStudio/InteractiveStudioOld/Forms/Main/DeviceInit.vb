@@ -12,6 +12,9 @@ Public Class DeviceInit
 
     Private Sub DeviceInit_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Timer1.Start()
+
+        'Dim tmp As New Thread(AddressOf Timer1_Tick) With {.IsBackground = True}
+        'tmp.Start()
     End Sub
 
     '关闭窗体
@@ -75,6 +78,7 @@ Public Class DeviceInit
 #End Region
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        'Private Sub Timer1_Tick()
         Timer1.Stop()
 
         '判断Nova服务是否启动
@@ -114,7 +118,7 @@ Public Class DeviceInit
             ShowInfo(AppSetting.Language.GetS("Searching Control System") & "".PadRight(i001, "."))
 
             If AppSetting.NovaMarsHardware.CtrlSystemCount() < 1 Then
-                If i001 = 20 - 1 Then
+                If i001 = 5 - 1 Then
                     ShowInfo(AppSetting.Language.GetS("No control system found"), True)
                     Exit Sub
                 End If
@@ -210,6 +214,10 @@ Public Class DeviceInit
                     If i001.SenderIndex = &HFF Then
                         Continue For
                     End If
+
+                    'With i001
+                    '    Debug.WriteLine($"{ .SenderIndex}-{ .PortIndex}-{ .ConnectIndex}: location:{ .X},{ .Y} size:{ .Width},{ .Height}")
+                    'End With
 
                     AppSetting.ScreenList(LEDScreenId).SenderList.Add(i001.SenderIndex)
 

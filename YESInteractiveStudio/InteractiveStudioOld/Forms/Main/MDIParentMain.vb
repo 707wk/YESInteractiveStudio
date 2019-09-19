@@ -65,7 +65,7 @@ Public Class MDIParentMain
     ''' 显示程序名/版本号/文件路径
     ''' </summary>
     Private Sub ShowToolBarInfo()
-        '文件版本号
+        '产品版本号
         Dim assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location
         Dim versionStr = System.Diagnostics.FileVersionInfo.GetVersionInfo(assemblyLocation).ProductVersion
 
@@ -149,7 +149,7 @@ Public Class MDIParentMain
 
             '日志
             .logger = New Wangk.Tools.Logger With {
-                .writelevel = Wangk.Tools.Loglevel.Level_DEBUG,
+                .writeLevel = Wangk.Tools.Logger.LogLevel.Level_DEBUG,
                 .saveDaysMax = 30
             }
             AppSetting.logger.Init()
@@ -514,7 +514,7 @@ Public Class MDIParentMain
 
         SetLinkControlState(AppSetting.LinkFlage)
 
-        AppSetting.logger.LogThis("控制器", "连接控制器", Wangk.Tools.Loglevel.Level_DEBUG)
+        AppSetting.logger.LogThis("控制器", "连接控制器", Wangk.Tools.Logger.LogLevel.Level_DEBUG)
     End Sub
 #End Region
 
@@ -541,7 +541,7 @@ Public Class MDIParentMain
 
         SetLinkControlState(AppSetting.LinkFlage)
 
-        AppSetting.logger.LogThis("控制器", "断开控制器", Wangk.Tools.Loglevel.Level_DEBUG)
+        AppSetting.logger.LogThis("控制器", "断开控制器", Wangk.Tools.Logger.LogLevel.Level_DEBUG)
     End Sub
 #End Region
 
@@ -701,7 +701,7 @@ Public Class MDIParentMain
 
         SetOffLinkControl()
 
-        AppSetting.logger.LogThis("控制器离线", AppSetting.LastErrorInfo, Wangk.Tools.Loglevel.Level_DEBUG)
+        AppSetting.logger.LogThis("控制器离线", AppSetting.LastErrorInfo, Wangk.Tools.Logger.LogLevel.Level_DEBUG)
 
         MsgBox($"{AppSetting.LastErrorInfo},{AppSetting.Language.GetS("Please reconnect the control or restart the control")}",
                MsgBoxStyle.Information,

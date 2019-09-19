@@ -373,7 +373,7 @@ Public Module ModuleNovaMCTRL510
                                         End If
 
 #End Region
-                                    Case RotateAngle.R_360
+                                    Case RotateAngle.R_270
 #Region "270°"
                                         If AppSetting.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Width = AppSetting.ScreenList(tmpScanBoardInfo.ScreenId).SensorLayout.Height Then
                                             '单元布局4*4
@@ -552,7 +552,7 @@ Public Module ModuleNovaMCTRL510
             Catch ex As Exception
                 AppSetting.LastErrorInfo = ex.ToString
 
-                AppSetting.logger.LogThis("通信异常", AppSetting.LastErrorInfo, Wangk.Tools.Loglevel.Level_DEBUG)
+                AppSetting.logger.LogThis("通信异常", AppSetting.LastErrorInfo, Wangk.Tools.Logger.LogLevel.Level_DEBUG)
 
                 exceptionNum += 1
             End Try

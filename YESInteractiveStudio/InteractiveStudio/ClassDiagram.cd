@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="InteractiveStudio.DisplayingSchemeProcessingHelper">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAgAAAAQAAAAAAAAAgAAAABAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>02.BusinessLogicLayer\DisplayingSchemeProcessingHelper.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractiveStudio.SensorDataProcessingHelper">
+    <Position X="21.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAwAQAAAAAAAAAAEAYAAAAAAAEA=</HashCode>
+      <FileName>02.BusinessLogicLayer\SensorDataProcessingHelper.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractiveStudio.WindowsHotKeyHelper">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAgAAIAQ=</HashCode>
+      <FileName>02.BusinessLogicLayer\WindowsHotKeyHelper.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractiveStudio.AppSetting">
+    <Position X="4" Y="11.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAABAAAAAAAAABAAAAABAAAAABAgAAQAAQAAAAA=</HashCode>
+      <FileName>03.DataAccessLayer\AppSetting\AppSetting.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="DisplayingScheme" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="InteractiveStudio.AppSettingHelper">
+    <Position X="0.75" Y="12.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAgAAAAAAAACA=</HashCode>
+      <FileName>03.DataAccessLayer\AppSetting\AppSettingHelper.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="instance" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="InteractiveStudio.DisplayingScheme">
+    <Position X="7.25" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQ=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\DisplayingScheme.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="NovaStarScreenItems" />
+      <Field Name="NovaStarSenderItems" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="DisplayingWindowItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="InteractiveStudio.DisplayingFile">
+    <Position X="13.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\DisplayingWindow\DisplayingFile.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractiveStudio.DisplayingProgram">
+    <Position X="13.75" Y="10.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\DisplayingWindow\DisplayingProgram.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="FileItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="InteractiveStudio.DisplayingWindow">
+    <Position X="7.75" Y="10.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>QEAAQAAACAAQAAAAAAKACAQAAAABAAADAAAAAAAAAAA=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\DisplayingWindow\DisplayingWindow.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="PlayProgramItems" />
+      <Field Name="ActiveSensorItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="InteractiveStudio.NovaStarScanBoard">
+    <Position X="13.75" Y="6.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAgACEAAAAAQAAAAAABAAAAAQACAAgAAAA=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\NovaStar\NovaStarScanBoard.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractiveStudio.NovaStarScreen">
+    <Position X="10.25" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAABAAAAAKAAAAgAAAA=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\NovaStar\NovaStarScreen.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="NovaStarScanBoardItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="InteractiveStudio.NovaStarSender">
+    <Position X="3.75" Y="6.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAEAAAAAAAABASACIBAAAABAAAAAAAIBAAAAEA=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\NovaStar\NovaStarSender.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="ActiveSensorItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="InteractiveStudio.Sensor">
+    <Position X="0.5" Y="8.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgCAAAQIAAAAAAAAAAAAAAAAgBAAAAAA=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\Sensor.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractiveStudio.InteractiveOptions">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="InteractiveStudio.InteractiveOptions.DISPLAYMODE">
+        <TypeIdentifier>
+          <NewMemberFileName>03.DataAccessLayer\InteractiveOptions.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="InteractiveStudio.InteractiveOptions.SensorState">
+        <TypeIdentifier>
+          <NewMemberFileName>03.DataAccessLayer\InteractiveOptions.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="InteractiveStudio.InteractiveOptions.SenderConnectState">
+        <TypeIdentifier>
+          <NewMemberFileName>03.DataAccessLayer\InteractiveOptions.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>03.DataAccessLayer\InteractiveOptions.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractiveStudio.YesTechBaseBox">
+    <Position X="8.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gAIAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgBAQAAA=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\YesTech\YesTechBaseBox.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractiveStudio.YesTechMG11">
+    <Position X="8.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgBAQAAA=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\YesTech\YesTechMG11.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractiveStudio.YesTechMG15">
+    <Position X="6.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgBAQAAA=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\YesTech\YesTechMG15.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractiveStudio.YesTechMG7">
+    <Position X="10.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgBAQAAA=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\YesTech\YesTechMG7.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
