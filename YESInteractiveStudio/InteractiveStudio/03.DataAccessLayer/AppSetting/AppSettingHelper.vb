@@ -1,4 +1,5 @@
-﻿Imports Newtonsoft.Json
+﻿Imports System.Runtime.InteropServices
+Imports Newtonsoft.Json
 ''' <summary>
 ''' 全局配置辅助类
 ''' </summary>
@@ -53,13 +54,19 @@ Public Class AppSettingHelper
 
         Catch ex As Exception
             '使用默认参数
-            instance = New AppSetting With {
-                .ClickValidNums = 2,
-                .SensorTouchSensitivity = 5,
-                .SensorResetTemp = 5,
-                .SensorResetSec = 25,
+            instance = New AppSetting
+            With instance
+                .PositionaIAccuracy = 50
+                .SensorTouchSensitivity = 5
+                .SensorResetTemp = 5
+                .SensorResetSec = 25
                 .SelectLang = Wangk.Resource.MultiLanguage.LANG.EN
-            }
+                .DisplayingScheme = New DisplayingScheme
+                With .DisplayingScheme
+                    .DisplayingWindowItems = New List(Of DisplayingWindow)
+                End With
+
+            End With
 
         End Try
 
@@ -93,6 +100,31 @@ Public Class AppSettingHelper
         End Try
 
     End Sub
+#End Region
+
+#Region "控制台窗口"
+    '''' <summary>
+    '''' 调用控制台窗口
+    '''' </summary>
+    '<DllImport(”kernel32.dll”)>
+    'Public Shared Function AllocConsole() As Boolean
+    'End Function
+    '''' <summary>
+    '''' 调用控制台窗口
+    '''' </summary>
+    Public Declare Function AllocConsole Lib "kernel32" Alias "AllocConsole" () As Boolean
+
+    '''' <summary>
+    '''' 释放控制台窗口
+    '''' </summary>
+    '<DllImport(”kernel32.dll”)>
+    'Public Shared Function FreeConsole() As Boolean
+    'End Function
+    ''' <summary>
+    ''' 释放控制台窗口
+    ''' </summary>
+    Public Declare Function FreeConsole Lib "kernel32" Alias "FreeConsole" () As Boolean
+
 #End Region
 
 End Class

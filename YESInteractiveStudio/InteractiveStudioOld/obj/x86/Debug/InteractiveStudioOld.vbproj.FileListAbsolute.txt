@@ -38,7 +38,6 @@ T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Debug\InteractiveStudio.Sca
 T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Debug\InteractiveStudio.ScreenLigature.resources
 T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Debug\InteractiveStudio.Resources.resources
 T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Debug\InteractiveStudioOld.vbproj.GenerateResource.cache
-T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Debug\InteractiveStudioOld.vbproj.CoreCompileInputs.cache
 T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Debug\InteractiveStudioOld.vbproj.CopyComplete
 T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Debug\InteractiveStudio.exe
 T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Debug\InteractiveStudio.xml

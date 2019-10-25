@@ -13,7 +13,10 @@ T:\YESInteractiveStudio\YESInteractiveSDK\bin\YESInteractiveSDK.pdb
 T:\YESInteractiveStudio\YESInteractiveSDK\bin\YESInteractiveSDK.xml
 T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.Resources.resources
 T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.vbproj.GenerateResource.cache
-T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.vbproj.CoreCompileInputs.cache
 T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.dll
 T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.xml
 T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.pdb
+T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.vbprojAssemblyReference.cache
+T:\YESInteractiveStudio\YESInteractiveSDK\bin\Newtonsoft.Json.dll
+T:\YESInteractiveStudio\YESInteractiveSDK\bin\Newtonsoft.Json.xml
+T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.vbproj.CopyComplete

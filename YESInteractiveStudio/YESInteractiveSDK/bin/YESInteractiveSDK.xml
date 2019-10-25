@@ -22,29 +22,29 @@ YESInteractiveSDK
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
-<member name="T:YESInteractiveSDK.ModuleStructure.PointInfo">
+<member name="T:YESInteractiveSDK.PointInfo">
  <summary>
  触发点信息
  </summary>
 </member>
-<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.ID">
+<member name="F:YESInteractiveSDK.PointInfo.ID">
  <summary>
  ID
  </summary>
 </member>
-<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.X">
+<member name="F:YESInteractiveSDK.PointInfo.X">
  <summary>
  X坐标
  </summary>
 </member>
-<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.Y">
+<member name="F:YESInteractiveSDK.PointInfo.Y">
  <summary>
  Y坐标
  </summary>
 </member>
-<member name="F:YESInteractiveSDK.ModuleStructure.PointInfo.Old">
+<member name="F:YESInteractiveSDK.PointInfo.Old">
  <summary>
- 旧点
+ 旧点1,新点0
  </summary>
 </member>
 <member name="T:YESInteractiveSDK.IYESInterfaceSDK">
@@ -52,24 +52,13 @@ YESInteractiveSDK
  YESInteractive插件需要实现的接口
  </summary>
 </member>
-<member name="M:YESInteractiveSDK.IYESInterfaceSDK.InitAddonFunc(System.Windows.Forms.Control)">
+<member name="M:YESInteractiveSDK.IYESInterfaceSDK.InitAddonFunc(System.Windows.Forms.Control.ControlCollection)">
  <summary>
  加载插件
  </summary>
- <param name="Parent">父控件</param>
+ <param name="controls">父控件</param>
 </member>
-<member name="M:YESInteractiveSDK.IYESInterfaceSDK.FinalizeAddonFunc(System.Windows.Forms.Control)">
- <summary>
- 卸载插件
- </summary>
- <param name="Parent">父控件</param>
-</member>
-<member name="M:YESInteractiveSDK.IYESInterfaceSDK.PointActive(YESInteractiveSDK.ModuleStructure.PointInfo)">
- <summary>
- 点活动事件
- </summary>
-</member>
-<member name="M:YESInteractiveSDK.IYESInterfaceSDK.PointActive(YESInteractiveSDK.ModuleStructure.PointInfo[])">
+<member name="M:YESInteractiveSDK.IYESInterfaceSDK.PointActive(System.Collections.Generic.List{YESInteractiveSDK.PointInfo})">
  <summary>
  点活动事件
  </summary>

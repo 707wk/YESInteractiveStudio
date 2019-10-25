@@ -8,7 +8,7 @@ Public Class DisplayingFile
     Public Path As String
 
     ''' <summary>
-    ''' 播放时长
+    ''' 播放时长(s)
     ''' </summary>
     Public PlaySecond As Integer
 End Class

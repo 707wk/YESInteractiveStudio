@@ -23,6 +23,12 @@ Public Class NovaStarScreen
     ''' <summary>
     ''' 接收卡列表
     ''' </summary>
-    Public NovaStarScanBoardItems As List(Of NovaStarScanBoard)
+    Public NovaStarScanBoardItems As New List(Of NovaStarScanBoard)
+
+    ''' <summary>
+    ''' 是否被使用
+    ''' </summary>
+    <Newtonsoft.Json.JsonIgnore>
+    Public IsUsed As Boolean
 
 End Class

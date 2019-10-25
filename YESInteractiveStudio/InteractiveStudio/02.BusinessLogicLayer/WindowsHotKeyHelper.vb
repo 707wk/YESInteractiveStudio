@@ -1,7 +1,7 @@
 ﻿''' <summary>
 ''' Windows热键处理辅助类
 ''' </summary>
-Public Class WindowsHotKeyHelper
+Public NotInheritable Class WindowsHotKeyHelper
     Private Sub New()
     End Sub
 

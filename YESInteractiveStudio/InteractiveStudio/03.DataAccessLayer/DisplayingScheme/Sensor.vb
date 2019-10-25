@@ -9,6 +9,11 @@ Public Class Sensor
     Public DisplayingWindowID As Integer
 
     ''' <summary>
+    ''' 索引(网口*100000+接收卡*100+传感器)
+    ''' </summary>
+    Public Key As Integer
+
+    ''' <summary>
     ''' 点击状态
     ''' </summary>
     <Newtonsoft.Json.JsonIgnore>
@@ -33,6 +38,6 @@ Public Class Sensor
     ''' <summary>
     ''' 显示尺寸(缩放后显示尺寸)
     ''' </summary>
-    Public Size As Size
+    Public Size As Integer
 
 End Class

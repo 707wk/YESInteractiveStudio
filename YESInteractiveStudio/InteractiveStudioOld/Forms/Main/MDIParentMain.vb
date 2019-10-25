@@ -150,7 +150,8 @@ Public Class MDIParentMain
             '日志
             .logger = New Wangk.Tools.Logger With {
                 .writeLevel = Wangk.Tools.Logger.LogLevel.Level_DEBUG,
-                .saveDaysMax = 30
+                .saveDaysMax = 30,
+                .path = "./Log"
             }
             AppSetting.logger.Init()
         End With
@@ -282,6 +283,8 @@ Public Class MDIParentMain
         LoadSchedule()
         'sysInfo.Schedule.WindowList = New List(Of WindowInfo)
         'End If
+
+        'AllocConsole()
     End Sub
 #End Region
 
@@ -783,6 +786,10 @@ Public Class MDIParentMain
             End If
 
             For Each j001 As Integer In AppSetting.Schedule.WindowList.Item(i001).ScreenList
+                If j001 >= AppSetting.ScreenList.Count Then
+                    Continue For
+                End If
+
                 AppSetting.ScreenList(j001).WindowId = i001
             Next
         Next
@@ -1291,7 +1298,7 @@ Public Class MDIParentMain
     ''' 高级用户
     ''' </summary>
     Private Sub ButtonItem1_Click(sender As Object, e As EventArgs) Handles ButtonItem1.Click
-        Dim TmpDialog As New Wangk.Resource.InputBox With {
+        Dim TmpDialog As New Wangk.Resource.InputTextDialog With {
             .Text = AppSetting.Language.GetS("Input Password"),
             .PasswordChar = "*"
         }
@@ -1299,7 +1306,7 @@ Public Class MDIParentMain
             Exit Sub
         End If
 
-        If TmpDialog.InputText.ToLower() = "yestech" Then
+        If TmpDialog.Value.ToLower() = "yestech" Then
             ButtonItem17.Visible = True
             RibbonBar5.Visible = True
 

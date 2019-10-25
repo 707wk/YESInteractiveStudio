@@ -22,22 +22,23 @@ Partial Class SerialPortSelectForm
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ReadButton = New System.Windows.Forms.Button()
+        Me.ConnectButton = New System.Windows.Forms.Button()
         Me.RefreshButton = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ReadButton
+        'ConnectButton
         '
-        Me.ReadButton.Location = New System.Drawing.Point(57, 67)
-        Me.ReadButton.Name = "ReadButton"
-        Me.ReadButton.Size = New System.Drawing.Size(207, 27)
-        Me.ReadButton.TabIndex = 7
-        Me.ReadButton.Text = "Connect to Control"
-        Me.ReadButton.UseVisualStyleBackColor = True
+        Me.ConnectButton.Location = New System.Drawing.Point(73, 67)
+        Me.ConnectButton.Name = "ConnectButton"
+        Me.ConnectButton.Size = New System.Drawing.Size(207, 27)
+        Me.ConnectButton.TabIndex = 7
+        Me.ConnectButton.Text = "Connect to Control"
+        Me.ConnectButton.UseVisualStyleBackColor = True
         '
         'RefreshButton
         '
@@ -79,20 +80,31 @@ Partial Class SerialPortSelectForm
         Me.TableLayoutPanel1.Controls.Add(Me.ComboBox1, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.RefreshButton, 2, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 12)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(33, 12)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(296, 44)
         Me.TableLayoutPanel1.TabIndex = 8
         '
+        'Label2
+        '
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label2.Location = New System.Drawing.Point(0, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(375, 106)
+        Me.Label2.TabIndex = 9
+        Me.Label2.Text = "Waiting..."
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'SerialPortSelectForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(320, 106)
+        Me.ClientSize = New System.Drawing.Size(375, 106)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Controls.Add(Me.ReadButton)
+        Me.Controls.Add(Me.ConnectButton)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "SerialPortSelectForm"
@@ -106,9 +118,10 @@ Partial Class SerialPortSelectForm
 
     End Sub
 
-    Friend WithEvents ReadButton As Button
+    Friend WithEvents ConnectButton As Button
     Friend WithEvents RefreshButton As Button
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents Label2 As Label
 End Class

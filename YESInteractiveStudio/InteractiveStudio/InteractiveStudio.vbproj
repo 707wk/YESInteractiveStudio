@@ -120,23 +120,65 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\HardwareSettings\ChildForm\ScanBoardSelectForm.Designer.vb">
+      <DependentUpon>ScanBoardSelectForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\HardwareSettings\ChildForm\ScanBoardSelectForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\HardwareSettings\HardwareSettingsForm.Designer.vb">
+      <DependentUpon>HardwareSettingsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\HardwareSettings\HardwareSettingsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindowSettings\ChildForm\ScreenIDSelectForm.Designer.vb">
+      <DependentUpon>ScreenIDSelectForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindowSettings\ChildForm\ScreenIDSelectForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindowSettings\Control\ScreenButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\IPlayBaseControl.vb" />
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\PlayDllControl.vb" />
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\PlayFlashControl.vb" />
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\PlayUnityControl.vb" />
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\PlayUnityControl\UnityControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\PlayWindow.Designer.vb">
+      <DependentUpon>PlayWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\PlayWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01.UserInterfaceLayer\MainForm\Control\ChildForm\EditPlayFileForm.Designer.vb">
+      <DependentUpon>EditPlayFileForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01.UserInterfaceLayer\MainForm\Control\ChildForm\EditPlayFileForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="02.BusinessLogicLayer\DisplayingSchemeProcessingHelper.vb" />
     <Compile Include="02.BusinessLogicLayer\SensorDataProcessingHelper.vb" />
     <Compile Include="02.BusinessLogicLayer\WindowsHotKeyHelper.vb" />
     <Compile Include="03.DataAccessLayer\AppSetting\AppSettingHelper.vb" />
     <Compile Include="03.DataAccessLayer\AppSetting\AppSetting.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\DisplayingWindow\DisplayingFile.vb" />
-    <Compile Include="03.DataAccessLayer\DisplayingScheme\DisplayingWindow\DisplayingProgram.vb" />
+    <Compile Include="03.DataAccessLayer\DisplayingScheme\00Discard\DisplayingProgram.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\DisplayingScheme.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\DisplayingWindow\DisplayingWindow.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\NovaStar\NovaStarScanBoard.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\NovaStar\NovaStarScreen.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\NovaStar\NovaStarSender.vb" />
+    <Compile Include="03.DataAccessLayer\DisplayingScheme\PointOfMerge.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\Sensor.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\YesTech\YesTechBaseBox.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\YesTech\YesTechMG11.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\YesTech\YesTechMG15.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\YesTech\YesTechMG7.vb" />
+    <Compile Include="03.DataAccessLayer\DisplayingScheme\YesTech\YesTechBoxFactory.vb" />
     <Compile Include="03.DataAccessLayer\InteractiveOptions.vb" />
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\AccuracySettings\AccuracySettingsForm.Designer.vb">
       <DependentUpon>AccuracySettingsForm.vb</DependentUpon>
@@ -144,10 +186,10 @@
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\AccuracySettings\AccuracySettingsForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\MCUSettings\MCUSettingsForm.Designer.vb">
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\MCUSettings\MCUSettingsForm.Designer.vb">
       <DependentUpon>MCUSettingsForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\MCUSettings\MCUSettingsForm.vb">
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\MCUSettings\MCUSettingsForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\SerialPortSelectForm.Designer.vb">
@@ -156,10 +198,10 @@
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\SerialPortSelectForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\ControlSettings\ControlSettingsForm.Designer.vb">
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\ControlSettings\ControlSettingsForm.Designer.vb">
       <DependentUpon>ControlSettingsForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\ControlSettings\ControlSettingsForm.vb">
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\ControlSettings\ControlSettingsForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="01.UserInterfaceLayer\MainForm\MainForm.Designer.vb">
@@ -186,16 +228,10 @@
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindowSettings\Control\PlayWindowSettingControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\ReadScreenInformation\ReadScreenInformationForm.Designer.vb">
-      <DependentUpon>ReadScreenInformationForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\ReadScreenInformation\ReadScreenInformationForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\SensorSettings\SensorSettingsForm.Designer.vb">
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\SensorSettings\SensorSettingsForm.Designer.vb">
       <DependentUpon>SensorSettingsForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\SensorSettings\SensorSettingsForm.vb">
+    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\SensorSettings\SensorSettingsForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -218,14 +254,29 @@
     <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\AccuracySettings\AccuracySettingsForm.resx">
       <DependentUpon>AccuracySettingsForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\MCUSettings\MCUSettingsForm.resx">
+    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\MCUSettings\MCUSettingsForm.resx">
       <DependentUpon>MCUSettingsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\HardwareSettings\ChildForm\ScanBoardSelectForm.resx">
+      <DependentUpon>ScanBoardSelectForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\HardwareSettings\HardwareSettingsForm.resx">
+      <DependentUpon>HardwareSettingsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindowSettings\ChildForm\ScreenIDSelectForm.resx">
+      <DependentUpon>ScreenIDSelectForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\PlayWindow.resx">
+      <DependentUpon>PlayWindow.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\SerialPortSelectForm.resx">
       <DependentUpon>SerialPortSelectForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\ControlSettings\ControlSettingsForm.resx">
+    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\ControlSettings\ControlSettingsForm.resx">
       <DependentUpon>ControlSettingsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\Control\ChildForm\EditPlayFileForm.resx">
+      <DependentUpon>EditPlayFileForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
@@ -239,10 +290,7 @@
     <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindowSettings\Control\PlayWindowSettingControl.resx">
       <DependentUpon>PlayWindowSettingControl.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\ReadScreenInformation\ReadScreenInformationForm.resx">
-      <DependentUpon>ReadScreenInformationForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\SensorSettings\SensorSettingsForm.resx">
+    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\SensorSettings\SensorSettingsForm.resx">
       <DependentUpon>SensorSettingsForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -296,7 +344,25 @@
     <None Include="res\DisplayMode0_32px.png" />
     <None Include="res\control_32px.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="AxShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="ShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YESInteractiveSDK\YESInteractiveSDK.vbproj">
       <Project>{428bc1bb-bc3f-4d04-ac36-85df1ea25285}</Project>

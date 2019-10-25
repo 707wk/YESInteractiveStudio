@@ -25,7 +25,7 @@ Public Class NovaStarScanBoard
     ''' </summary>
     Public LocationOfOriginal As Point
     ''' <summary>
-    ''' 在播放窗体的坐标
+    ''' 在播放窗口的坐标
     ''' </summary>
     Public LocationInDisplayingWindow As Point
 
@@ -39,7 +39,7 @@ Public Class NovaStarScanBoard
     Public SizeOfZoom As Size
 
     ''' <summary>
-    ''' 箱体旋转角度
+    ''' 箱体顺时针旋转角度
     ''' </summary>
     Public BoxRotateAngle As Nova.LCT.GigabitSystem.Common.RotateAngle
 

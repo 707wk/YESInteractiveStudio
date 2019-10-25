@@ -7,6 +7,11 @@ Public MustInherit Class YesTechBaseBox
     ''' </summary>
     Friend ScanBoard As NovaStarScanBoard
 
+    ''' <summary>
+    ''' 传感器集合
+    ''' </summary>
+    Friend SensorItems As New List(Of Sensor)
+
     Public Sub New(value As NovaStarScanBoard)
         ScanBoard = value
     End Sub
@@ -29,6 +34,11 @@ Public MustInherit Class YesTechBaseBox
                 BoxRotateAngle270()
 
         End Select
+
+        For Each tmpSensor In SensorItems
+            AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(ScanBoard.SenderID).SensorItems.Add(tmpSensor.Key, tmpSensor)
+        Next
+
     End Sub
 
     Friend MustOverride Sub BoxRotateAngle360()
@@ -38,26 +48,5 @@ Public MustInherit Class YesTechBaseBox
     Friend MustOverride Sub BoxRotateAngle180()
 
     Friend MustOverride Sub BoxRotateAngle270()
-
-    ''' <summary>
-    ''' 判断箱体类型
-    ''' </summary>
-    Public Shared Function GetBoxType(size As Size) As Type
-        If size.Width = size.Height Then
-            Return GetType(YesTechMG7)
-
-        ElseIf size.Width = size.Height \ 4 OrElse
-            size.Width \ 4 = size.Height Then
-            Return GetType(YesTechMG11)
-
-        ElseIf size.Width = size.Height \ 2 OrElse
-            size.Width \ 2 = size.Height Then
-            Return GetType(YesTechMG15)
-
-        Else
-            Throw New Exception($"未知箱体:{size.ToString}")
-        End If
-
-    End Function
 
 End Class

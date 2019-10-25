@@ -8,7 +8,7 @@ Public Class DisplayingProgram
     Public Name As String
 
     ''' <summary>
-    ''' 播放文件
+    ''' 播放文件列表
     ''' </summary>
     Public FileItems As List(Of DisplayingFile)
 

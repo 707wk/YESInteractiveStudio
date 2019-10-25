@@ -157,6 +157,189 @@ InteractiveStudio
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
+<member name="F:InteractiveStudio.HardwareSettingsForm.NovaMarsControl">
+ <summary>
+ Nova配置变量
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HardwareSettingsForm.SetEquipmentIPDataEvent">
+ <summary>
+ 写入IP标志
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HardwareSettingsForm.SetEquipmentIPDataResult">
+ <summary>
+ 写入结果
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HardwareSettingsForm.SendEquipmentIPData(System.Object,Nova.Mars.SDK.MarsEquipmentIPEventArgs)">
+ <summary>
+ 发送设备IP回调事件
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HardwareSettingsForm.UpdateMCUProgram(Wangk.Resource.BackgroundWorkEventArgs)">
+ <summary>
+ 升级单片机程序
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HardwareSettingsForm.CheckScanBoardData(System.Byte,System.Byte,System.Byte,System.Byte[],System.Int32)">
+ <summary>
+ 比较收到的数据
+ </summary>
+ <param name="SenderIndex">发送卡序号</param>
+ <param name="PortIndex">输出口序号</param>
+ <param name="ConnectIndex">在输出口的第几个</param>
+ <param name="checkData">比较的数据</param>
+ <param name="TimeSec">超时(s)</param>
+</member>
+<member name="M:InteractiveStudio.HardwareSettingsForm.IsAllZero(System.Byte[],System.Int32)">
+ <summary>
+ 是否全0
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HardwareSettingsForm.CheckDataIsSame(System.Byte[],System.Byte[])">
+ <summary>
+ 判断数据是否相同
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HardwareSettingsForm.GetScanBoardData(System.Byte,System.Byte,System.UInt16)">
+ <summary>
+ 获取指定接收卡数据
+ </summary>
+ <param name="senderIndex"></param>
+ <param name="portIndex"></param>
+ <param name="scanIndex"></param>
+</member>
+<member name="M:InteractiveStudio.HardwareSettingsForm.QueryMCUProgramVersions(System.Int32,System.Windows.Forms.TreeNode,System.Collections.Generic.HashSet{System.Int32})">
+ <summary>
+ 查询单片机版本
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HardwareSettingsForm.SetScanBoardData(System.Byte,System.Byte,System.UInt16,System.Byte[])">
+ <summary>
+ 发送数据给接收卡
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ScreenButton.ScreenId">
+ <summary>
+ 屏幕ID
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ScreenButton.oldMousePoint">
+ <summary>
+ 按下时鼠标的屏幕坐标
+ </summary>
+</member>
+<member name="F:InteractiveStudio.ScreenButton.OperateType">
+ <summary>
+ 操作类型 0无 1移动
+ </summary>
+</member>
+<member name="T:InteractiveStudio.IPlayBaseControl">
+ <summary>
+ 播放基础控件
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayDllControl.DllControl">
+ <summary>
+ DLL播放器控件
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayFlashControl.FlashControl">
+ <summary>
+ Flash播放器控件
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayFlashControl.SetCaptureFlage">
+ <summary>
+ 捕获鼠标
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayUnityControl.UnityControl">
+ <summary>
+ Unity播放控件
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindow.DisplayingWindow">
+ <summary>
+ 播放窗口信息
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.ChangeToTestMode">
+ <summary>
+ 切换成测试模式
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.ChangeToBlackMode">
+ <summary>
+ 切换成黑屏模式
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.ChangeToDebugMode">
+ <summary>
+ 切换成调试模式
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.DrawScanBoardRectangle">
+ <summary>
+ 绘制接收卡边框
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindow.IsClose">
+ <summary>
+ 是否关闭窗体
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindow.WorkThread">
+ <summary>
+ 工作线程
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindow.PointOfMergeItems">
+ <summary>
+ 活动点列表
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindow.PointInfoItems">
+ <summary>
+ 合并点列表
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.WorkFunction">
+ <summary>
+ 数据处理主函数
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.WorkFunctionInInteractMode">
+ <summary>
+ 互动模式时数据处理方式
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.WorkFunctionInTestMode">
+ <summary>
+ 测试模式时数据处理方式
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindow.StrStringFormat">
+ <summary>
+ 自绘字体格式
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.WorkFunctionInDebugMode">
+ <summary>
+ 调试模式时数据处理方式
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindow.PointActive(System.Collections.Generic.List{YESInteractiveSDK.PointInfo})">
+ <summary>
+ 点击事件
+ </summary>
+</member>
+<member name="F:InteractiveStudio.EditPlayFileForm.DisplayingFile">
+ <summary>
+ 播放文件信息
+ </summary>
+</member>
 <member name="T:InteractiveStudio.DisplayingSchemeProcessingHelper">
  <summary>
  播放方案处理辅助类
@@ -164,12 +347,12 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.DisplayingSchemeProcessingHelper.IsShowWindow">
  <summary>
- 是否已显示播放窗体
+ 是否已显示播放窗口
  </summary>
 </member>
-<member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.ShowALLDisplayingWindow">
+<member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.ShowFormForALLDisplayingWindow">
  <summary>
- 显示所有播放窗体
+ 显示所有播放窗口
  </summary>
 </member>
 <member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.ComputeSizeAndLocationForALLScreenAndScanBoard">
@@ -182,14 +365,24 @@ InteractiveStudio
  计算所有传感器尺寸及坐标
  </summary>
 </member>
-<member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.ComputeSizeAndLocationForSensor(InteractiveStudio.NovaStarScanBoard)">
+<member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.ComputeSizeForALLDisplayingWindow">
  <summary>
- 计算单个传感器尺寸及坐标
+ 计算所有播放窗口尺寸
  </summary>
 </member>
-<member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.CloseALLDisplayingWindow">
+<member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.CloseFormForALLDisplayingWindow">
  <summary>
- 关闭所有播放窗体
+ 关闭所有播放窗口
+ </summary>
+</member>
+<member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.HideFormForALLDisplayingWindow(System.Boolean)">
+ <summary>
+ 隐藏/显示所有播放窗口
+ </summary>
+</member>
+<member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.ChangeDisplayModeForALLDisplayingWindow">
+ <summary>
+ 切换所有窗口显示模式
  </summary>
 </member>
 <member name="T:InteractiveStudio.SensorDataProcessingHelper">
@@ -293,6 +486,11 @@ InteractiveStudio
  保存配置到本地
  </summary>
 </member>
+<member name="M:InteractiveStudio.AppSettingHelper.FreeConsole">
+ <summary>
+ 释放控制台窗口
+ </summary>
+</member>
 <member name="T:InteractiveStudio.AppSetting">
  <summary>
  全局配置类
@@ -313,14 +511,9 @@ InteractiveStudio
  显示模式
  </summary>
 </member>
-<member name="F:InteractiveStudio.AppSetting.TouchPrecision">
+<member name="F:InteractiveStudio.AppSetting.PositionaIAccuracy">
  <summary>
- 感应精度 范围 高 1-9 低
- </summary>
-</member>
-<member name="F:InteractiveStudio.AppSetting.ClickValidNums">
- <summary>
- 感应点抗干扰 相邻点击数大于等于几个有效 范围 1-9
+ 定位精度(点合并范围) 默认50像素
  </summary>
 </member>
 <member name="F:InteractiveStudio.AppSetting.SensorTouchSensitivity">
@@ -338,6 +531,16 @@ InteractiveStudio
  传感器定时复位时间阈值″ 范围 0-255
  </summary>
 </member>
+<member name="F:InteractiveStudio.AppSetting.OldScanBoardBin">
+ <summary>
+ 接收卡程序版本标志
+ </summary>
+</member>
+<member name="F:InteractiveStudio.AppSetting.IsAutoRun">
+ <summary>
+ 是否自启
+ </summary>
+</member>
 <member name="T:InteractiveStudio.DisplayingFile">
  <summary>
  播放文件
@@ -350,7 +553,7 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.DisplayingFile.PlaySecond">
  <summary>
- 播放时长
+ 播放时长(s)
  </summary>
 </member>
 <member name="T:InteractiveStudio.DisplayingProgram">
@@ -365,7 +568,7 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.DisplayingProgram.FileItems">
  <summary>
- 播放文件
+ 播放文件列表
  </summary>
 </member>
 <member name="T:InteractiveStudio.DisplayingScheme">
@@ -375,7 +578,7 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.DisplayingScheme.DisplayingWindowItems">
  <summary>
- 播放窗口列表
+ 播放窗口集合
  </summary>
 </member>
 <member name="F:InteractiveStudio.DisplayingScheme.NovaStarScreenItems">
@@ -403,11 +606,6 @@ InteractiveStudio
  显示位置
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingWindow.SizeOfOriginal">
- <summary>
- 原始显示尺寸
- </summary>
-</member>
 <member name="F:InteractiveStudio.DisplayingWindow.SizeOfZoom">
  <summary>
  缩放后显示尺寸
@@ -420,27 +618,32 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.DisplayingWindow.Magnificine">
  <summary>
- 缩放系数 25%/50%/100%
+ 缩放系数 0.25/0.5/1
  </summary>
 </member>
 <member name="F:InteractiveStudio.DisplayingWindow.PlayWindowForm">
  <summary>
- 播放窗体
+ 播放窗口
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingWindow.PlayProgramID">
+<member name="F:InteractiveStudio.DisplayingWindow.PlayWindowThreadOfCreate">
  <summary>
- 当前播放节目索引
+ 创建播放窗口线程
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingWindow.PlayProgramFileID">
+<member name="F:InteractiveStudio.DisplayingWindow.PlayFileID">
  <summary>
  当前播放文件索引
  </summary>
 </member>
-<member name="F:InteractiveStudio.DisplayingWindow.PlayProgramItems">
+<member name="F:InteractiveStudio.DisplayingWindow.PlayFileItems">
  <summary>
- 播放节目列表
+ 播放文件列表
+ </summary>
+</member>
+<member name="F:InteractiveStudio.DisplayingWindow.IsAutoPlay">
+ <summary>
+ 是否自动播放
  </summary>
 </member>
 <member name="F:InteractiveStudio.DisplayingWindow.ActiveSensorItems">
@@ -485,7 +688,7 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.NovaStarScanBoard.LocationInDisplayingWindow">
  <summary>
- 缩放后坐标
+ 在播放窗口的坐标
  </summary>
 </member>
 <member name="F:InteractiveStudio.NovaStarScanBoard.SizeOfOriginal">
@@ -500,7 +703,7 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.NovaStarScanBoard.BoxRotateAngle">
  <summary>
- 箱体旋转角度
+ 箱体顺时针旋转角度
  </summary>
 </member>
 <member name="T:InteractiveStudio.NovaStarScreen">
@@ -533,6 +736,11 @@ InteractiveStudio
  接收卡列表
  </summary>
 </member>
+<member name="F:InteractiveStudio.NovaStarScreen.IsUsed">
+ <summary>
+ 是否被使用
+ </summary>
+</member>
 <member name="T:InteractiveStudio.NovaStarSender">
  <summary>
  Nova发送卡信息
@@ -543,9 +751,24 @@ InteractiveStudio
  IP信息
  </summary>
 </member>
-<member name="F:InteractiveStudio.NovaStarSender.SensorDictionary">
+<member name="P:InteractiveStudio.NovaStarSender.IPAddress">
  <summary>
- 传感器查找表 Key=网口*100000+接收卡*100+传感器
+ IP地址
+ </summary>
+</member>
+<member name="P:InteractiveStudio.NovaStarSender.IPSubnetMask">
+ <summary>
+ 获取字符串形式的子网掩码
+ </summary>
+</member>
+<member name="P:InteractiveStudio.NovaStarSender.IPGateway">
+ <summary>
+ 获取字符串形式的网关地址
+ </summary>
+</member>
+<member name="F:InteractiveStudio.NovaStarSender.SensorItems">
+ <summary>
+ 传感器查找表
  </summary>
 </member>
 <member name="F:InteractiveStudio.NovaStarSender.ActiveSensorItems">
@@ -593,6 +816,41 @@ InteractiveStudio
  获取传感器数据
  </summary>
 </member>
+<member name="T:InteractiveStudio.PointOfMerge">
+ <summary>
+ 合并点信息
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PointOfMerge.X">
+ <summary>
+ X坐标
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PointOfMerge.Y">
+ <summary>
+ Y坐标
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PointOfMerge.XSum">
+ <summary>
+ X坐标和
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PointOfMerge.YSum">
+ <summary>
+ Y坐标和
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PointOfMerge.SensorCount">
+ <summary>
+ 待合并点数量
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PointOfMerge.IsNew">
+ <summary>
+ 是否是新点
+ </summary>
+</member>
 <member name="T:InteractiveStudio.Sensor">
  <summary>
  传感器信息
@@ -601,6 +859,11 @@ InteractiveStudio
 <member name="F:InteractiveStudio.Sensor.DisplayingWindowID">
  <summary>
  所属播放窗口索引
+ </summary>
+</member>
+<member name="F:InteractiveStudio.Sensor.Key">
+ <summary>
+ 索引(网口*100000+接收卡*100+传感器)
  </summary>
 </member>
 <member name="F:InteractiveStudio.Sensor.State">
@@ -633,10 +896,47 @@ InteractiveStudio
  基础箱体
  </summary>
 </member>
-<member name="F:InteractiveStudio.YesTechBaseBox.BoxRotateAngle">
+<member name="F:InteractiveStudio.YesTechBaseBox.ScanBoard">
  <summary>
- 箱体旋转角度
+ 接收卡信息
  </summary>
+</member>
+<member name="F:InteractiveStudio.YesTechBaseBox.SensorItems">
+ <summary>
+ 传感器集合
+ </summary>
+</member>
+<member name="M:InteractiveStudio.YesTechBaseBox.SaveSensorToSenderCache">
+ <summary>
+ 将传感器数据存入接收卡缓存
+ </summary>
+</member>
+<member name="T:InteractiveStudio.YesTechMG11">
+ <summary>
+ 4行*1列传感器布局的长方形箱体
+ </summary>
+</member>
+<member name="T:InteractiveStudio.YesTechMG15">
+ <summary>
+ 4行*2列传感器布局的长方形箱体
+ </summary>
+</member>
+<member name="T:InteractiveStudio.YesTechMG7">
+ <summary>
+ 4行*4列传感器布局的正方形箱体,兼容 扇形/三角形箱体
+ </summary>
+</member>
+<member name="T:InteractiveStudio.YesTechBoxFactory">
+ <summary>
+ 箱体工厂类
+ </summary>
+</member>
+<member name="M:InteractiveStudio.YesTechBoxFactory.Create(InteractiveStudio.NovaStarScanBoard)">
+ <summary>
+ 根据箱体尺寸创建不同类型箱体实例
+ </summary>
+ <param name="scanBoard"></param>
+ <returns></returns>
 </member>
 <member name="T:InteractiveStudio.InteractiveOptions">
  <summary>
@@ -708,14 +1008,84 @@ InteractiveStudio
  在线
  </summary>
 </member>
+<member name="F:InteractiveStudio.SerialPortSelectForm.NovaMarsHardware">
+ <summary>
+ Nova连接变量
+ </summary>
+</member>
+<member name="F:InteractiveStudio.SerialPortSelectForm.NovaMarsControl">
+ <summary>
+ Nova配置变量
+ </summary>
+</member>
+<member name="F:InteractiveStudio.SerialPortSelectForm.selectedSerialPort">
+ <summary>
+ 选择的串口号
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MainForm.ShowDisplayingProgram">
+ <summary>
+ 显示节目列表
+ </summary>
+</member>
+<member name="F:InteractiveStudio.MainForm.GetEquipmentIPDataEvent">
+ <summary>
+ 读取到IP标志
+ </summary>
+</member>
+<member name="F:InteractiveStudio.MainForm.SenderIPData">
+ <summary>
+ 读到的发送卡IP
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MainForm.GetEquipmentIPData(System.Object,Nova.Mars.SDK.MarsEquipmentIPEventArgs)">
+ <summary>
+ 获取IP通知
+ </summary>
+</member>
 <member name="M:InteractiveStudio.MainForm.ChangeControlsLanguage">
  <summary>
  切换控件语言
  </summary>
 </member>
+<member name="M:InteractiveStudio.MainForm.ShowNovaStarSenderList">
+ <summary>
+ 显示接收卡列表
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MainForm.Timer1_Tick(System.Object,System.EventArgs)">
+ <summary>
+ 显示接收卡状态
+ </summary>
+</member>
+<member name="F:InteractiveStudio.WindowProgramControl.DisplayingWindow">
+ <summary>
+ 播放窗口信息
+ </summary>
+</member>
+<member name="M:InteractiveStudio.WindowProgramControl.ShowFileItems">
+ <summary>
+ 显示文件列表
+ </summary>
+</member>
 <member name="F:InteractiveStudio.PlayWindowSettingsForm.AddWindowButton">
  <summary>
- 添加播放窗体按钮
+ 添加播放窗口按钮
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindowSettingsForm.IsWindowSettingDataCheckoutOk">
+ <summary>
+ 窗口设置数据校验
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindowSettingControl.DisplayingWindow">
+ <summary>
+ 播放窗口信息
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindowSettingControl.PlayFileItems">
+ <summary>
+ 播放文件列表
  </summary>
 </member>
 </members>

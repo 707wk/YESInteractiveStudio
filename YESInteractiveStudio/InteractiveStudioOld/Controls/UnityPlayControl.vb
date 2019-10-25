@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Runtime.InteropServices
 Imports System.Text
 Imports System.Xml
 Imports System.Xml.Serialization
@@ -6,6 +7,18 @@ Imports InteractiveStudio.UnityConfig.ModuleUnityConfig
 Imports YESInteractiveSDK
 
 Public Class UnityPlayControl
+
+#Region "消息结构"
+    Public Structure COPYDATASTRUCT
+        Public dwData As IntPtr
+
+        Public cbData As Integer
+
+        <MarshalAs(UnmanagedType.LPStr)>
+        Public lpData As String
+    End Structure
+#End Region
+
     Private Declare Function MoveWindow Lib "User32.dll" (handle As IntPtr,
                                                   x As Integer,
                                                   y As Integer,

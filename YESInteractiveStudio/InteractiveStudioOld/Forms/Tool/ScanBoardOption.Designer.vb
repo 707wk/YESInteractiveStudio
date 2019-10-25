@@ -56,6 +56,7 @@ Partial Class ScanBoardOption
         '
         Me.ListView1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ListView1.HideSelection = False
         Me.ListView1.Location = New System.Drawing.Point(3, 42)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(253, 306)
@@ -167,7 +168,7 @@ Partial Class ScanBoardOption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(276, 375)
+        Me.ClientSize = New System.Drawing.Size(727, 375)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.MaximizeBox = False

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class PlayWindowSettingControl
     Inherits System.Windows.Forms.UserControl
 
     'UserControl 重写释放以清理组件列表。
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,8 +20,9 @@ Partial Class PlayWindowSettingControl
     '注意: 以下过程是 Windows 窗体设计器所必需的
     '可以使用 Windows 窗体设计器修改它。  
     '不要使用代码编辑器修改它。
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -32,30 +33,24 @@ Partial Class PlayWindowSettingControl
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New DevComponents.DotNetBar.Controls.DataGridViewTextBoxDropDownColumn()
-        Me.Column2 = New DevComponents.DotNetBar.Controls.DataGridViewTextBoxDropDownColumn()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ToolStrip1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.ToolStrip2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -92,6 +87,7 @@ Partial Class PlayWindowSettingControl
         Me.NumericUpDown1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NumericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.NumericUpDown1.Location = New System.Drawing.Point(111, 62)
+        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {60000, 0, 0, 0})
         Me.NumericUpDown1.Name = "NumericUpDown1"
         Me.NumericUpDown1.Size = New System.Drawing.Size(116, 21)
         Me.NumericUpDown1.TabIndex = 3
@@ -121,16 +117,19 @@ Partial Class PlayWindowSettingControl
         Me.NumericUpDown2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NumericUpDown2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.NumericUpDown2.Location = New System.Drawing.Point(111, 91)
+        Me.NumericUpDown2.Maximum = New Decimal(New Integer() {60000, 0, 0, 0})
         Me.NumericUpDown2.Name = "NumericUpDown2"
         Me.NumericUpDown2.Size = New System.Drawing.Size(116, 21)
         Me.NumericUpDown2.TabIndex = 3
         '
         'GroupBox1
         '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.TableLayoutPanel1)
         Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(248, 187)
+        Me.GroupBox1.Size = New System.Drawing.Size(248, 552)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "property"
@@ -170,70 +169,42 @@ Partial Class PlayWindowSettingControl
         Me.Label5.TabIndex = 2
         Me.Label5.Text = "Magnificine"
         '
-        'GroupBox2
+        'ComboBox1
         '
-        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.DataGridView1)
-        Me.GroupBox2.Controls.Add(Me.ToolStrip1)
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 196)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(248, 359)
-        Me.GroupBox2.TabIndex = 5
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Screen List"
+        Me.ComboBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"0.25", "0.5", "1"})
+        Me.ComboBox1.Location = New System.Drawing.Point(111, 122)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(116, 20)
+        Me.ComboBox1.TabIndex = 4
         '
-        'DataGridView1
+        'GroupBox3
         '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2})
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(3, 42)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.RowHeadersVisible = False
-        Me.DataGridView1.RowTemplate.Height = 23
-        Me.DataGridView1.Size = New System.Drawing.Size(242, 314)
-        Me.DataGridView1.TabIndex = 2
+        Me.GroupBox3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox3.BackColor = System.Drawing.SystemColors.Control
+        Me.GroupBox3.Controls.Add(Me.Panel1)
+        Me.GroupBox3.Controls.Add(Me.ToolStrip1)
+        Me.GroupBox3.Location = New System.Drawing.Point(257, 3)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(762, 552)
+        Me.GroupBox3.TabIndex = 6
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Layout Preview"
         '
-        'Column1
+        'Panel1
         '
-        Me.Column1.BackColor = System.Drawing.SystemColors.Window
-        '
-        '
-        '
-        Me.Column1.BackgroundStyle.Class = "DataGridViewIpAddressBorder"
-        Me.Column1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Column1.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Column1.HeaderText = "Name"
-        Me.Column1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Column1.Name = "Column1"
-        Me.Column1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.Column1.ReadOnly = True
-        Me.Column1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Column1.Text = ""
-        Me.Column1.Width = 160
-        '
-        'Column2
-        '
-        Me.Column2.BackColor = System.Drawing.SystemColors.Window
-        '
-        '
-        '
-        Me.Column2.BackgroundStyle.Class = "DataGridViewIpAddressBorder"
-        Me.Column2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Column2.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Column2.HeaderText = "Location"
-        Me.Column2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Column2.Name = "Column2"
-        Me.Column2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.Column2.ReadOnly = True
-        Me.Column2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Column2.Text = ""
-        Me.Column2.Width = 80
+        Me.Panel1.AutoScroll = True
+        Me.Panel1.BackColor = System.Drawing.SystemColors.Control
+        Me.Panel1.Controls.Add(Me.Panel2)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(3, 42)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(756, 507)
+        Me.Panel1.TabIndex = 0
         '
         'ToolStrip1
         '
@@ -242,8 +213,8 @@ Partial Class PlayWindowSettingControl
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.ToolStripButton4})
         Me.ToolStrip1.Location = New System.Drawing.Point(3, 17)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(242, 25)
-        Me.ToolStrip1.TabIndex = 1
+        Me.ToolStrip1.Size = New System.Drawing.Size(756, 25)
+        Me.ToolStrip1.TabIndex = 2
         Me.ToolStrip1.Text = "ToolStrip1"
         '
         'ToolStripButton1
@@ -267,73 +238,25 @@ Partial Class PlayWindowSettingControl
         Me.ToolStripButton4.Size = New System.Drawing.Size(64, 22)
         Me.ToolStripButton4.Text = "Empty"
         '
-        'GroupBox3
+        'ContextMenuStrip1
         '
-        Me.GroupBox3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox3.BackColor = System.Drawing.SystemColors.Control
-        Me.GroupBox3.Controls.Add(Me.Panel1)
-        Me.GroupBox3.Controls.Add(Me.ToolStrip2)
-        Me.GroupBox3.Location = New System.Drawing.Point(257, 3)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(762, 552)
-        Me.GroupBox3.TabIndex = 6
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Layout Preview"
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(124, 26)
         '
-        'Panel1
+        'RemoveToolStripMenuItem
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.AppWorkspace
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(3, 42)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(756, 507)
-        Me.Panel1.TabIndex = 0
+        Me.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem"
+        Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RemoveToolStripMenuItem.Text = "Remove"
         '
-        'ToolStrip2
+        'Panel2
         '
-        Me.ToolStrip2.BackColor = System.Drawing.SystemColors.Control
-        Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton3, Me.ToolStripLabel1, Me.ToolStripButton2})
-        Me.ToolStrip2.Location = New System.Drawing.Point(3, 17)
-        Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.Size = New System.Drawing.Size(756, 25)
-        Me.ToolStrip2.TabIndex = 1
-        Me.ToolStrip2.Text = "ToolStrip2"
-        '
-        'ToolStripButton3
-        '
-        Me.ToolStripButton3.Image = Global.InteractiveStudio.My.Resources.Resources.zoomOut_24px
-        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(85, 22)
-        Me.ToolStripButton3.Text = "Zoom out"
-        '
-        'ToolStripLabel1
-        '
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(40, 22)
-        Me.ToolStripLabel1.Text = "100%"
-        '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.Image = Global.InteractiveStudio.My.Resources.Resources.zoomIn_24px
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(76, 22)
-        Me.ToolStripButton2.Text = "Zoom in"
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"25%", "50%", "100%"})
-        Me.ComboBox1.Location = New System.Drawing.Point(111, 122)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(116, 20)
-        Me.ComboBox1.TabIndex = 4
+        Me.Panel2.BackColor = System.Drawing.SystemColors.AppWorkspace
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(10000, 10000)
+        Me.Panel2.TabIndex = 0
         '
         'PlayWindowSettingControl
         '
@@ -341,7 +264,6 @@ Partial Class PlayWindowSettingControl
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "PlayWindowSettingControl"
         Me.Size = New System.Drawing.Size(1022, 558)
@@ -350,15 +272,12 @@ Partial Class PlayWindowSettingControl
         Me.GroupBox1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.ToolStrip2.ResumeLayout(False)
-        Me.ToolStrip2.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -371,21 +290,16 @@ Partial Class PlayWindowSettingControl
     Friend WithEvents Label4 As Label
     Friend WithEvents NumericUpDown2 As NumericUpDown
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents ToolStrip1 As ToolStrip
-    Friend WithEvents ToolStripButton1 As ToolStripButton
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents ToolStrip2 As ToolStrip
-    Friend WithEvents ToolStripButton2 As ToolStripButton
-    Friend WithEvents ToolStripButton3 As ToolStripButton
-    Friend WithEvents ToolStripLabel1 As ToolStripLabel
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
-    Friend WithEvents ToolStripButton4 As ToolStripButton
-    Friend WithEvents Column1 As DevComponents.DotNetBar.Controls.DataGridViewTextBoxDropDownColumn
-    Friend WithEvents Column2 As DevComponents.DotNetBar.Controls.DataGridViewTextBoxDropDownColumn
     Friend WithEvents Label5 As Label
     Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents ToolStripButton1 As ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ToolStripButton4 As ToolStripButton
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents RemoveToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Panel2 As Panel
 End Class

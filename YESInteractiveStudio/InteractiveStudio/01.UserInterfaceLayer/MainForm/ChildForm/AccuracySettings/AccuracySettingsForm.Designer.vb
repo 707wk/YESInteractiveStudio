@@ -29,6 +29,7 @@ Partial Class AccuracySettingsForm
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TrackBar2 = New System.Windows.Forms.TrackBar()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -36,7 +37,7 @@ Partial Class AccuracySettingsForm
         'Button2
         '
         Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button2.Location = New System.Drawing.Point(333, 85)
+        Me.Button2.Location = New System.Drawing.Point(440, 85)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(123, 26)
         Me.Button2.TabIndex = 15
@@ -46,7 +47,7 @@ Partial Class AccuracySettingsForm
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(204, 85)
+        Me.Button1.Location = New System.Drawing.Point(311, 85)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(123, 26)
         Me.Button1.TabIndex = 14
@@ -55,27 +56,29 @@ Partial Class AccuracySettingsForm
         '
         'TableLayoutPanel1
         '
-        Me.TableLayoutPanel1.ColumnCount = 4
+        Me.TableLayoutPanel1.ColumnCount = 5
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Label6, 3, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label5, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.TrackBar2, 2, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label1, 4, 0)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 12)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(443, 54)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(551, 54)
         Me.TableLayoutPanel1.TabIndex = 16
         '
         'Label6
         '
         Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(406, 21)
+        Me.Label6.Location = New System.Drawing.Point(484, 21)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(23, 12)
         Me.Label6.TabIndex = 0
@@ -99,7 +102,7 @@ Partial Class AccuracySettingsForm
         Me.TrackBar2.Maximum = 128
         Me.TrackBar2.Minimum = 1
         Me.TrackBar2.Name = "TrackBar2"
-        Me.TrackBar2.Size = New System.Drawing.Size(177, 45)
+        Me.TrackBar2.Size = New System.Drawing.Size(255, 45)
         Me.TrackBar2.TabIndex = 10
         Me.TrackBar2.Value = 1
         '
@@ -113,11 +116,21 @@ Partial Class AccuracySettingsForm
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "PositionaI accuracy"
         '
+        'Label1
+        '
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(524, 21)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(23, 12)
+        Me.Label1.TabIndex = 11
+        Me.Label1.Text = "256"
+        '
         'AccuracySettingsForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(468, 123)
+        Me.ClientSize = New System.Drawing.Size(575, 123)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TableLayoutPanel1)
@@ -141,4 +154,5 @@ Partial Class AccuracySettingsForm
     Friend WithEvents Label4 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents TrackBar2 As TrackBar
+    Friend WithEvents Label1 As Label
 End Class

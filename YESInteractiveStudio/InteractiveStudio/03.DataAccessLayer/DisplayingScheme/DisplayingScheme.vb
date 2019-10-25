@@ -4,7 +4,7 @@
 Public Class DisplayingScheme
 
     ''' <summary>
-    ''' 播放窗口列表
+    ''' 播放窗口集合
     ''' </summary>
     Public DisplayingWindowItems As List(Of DisplayingWindow)
 
@@ -19,12 +19,12 @@ Public Class DisplayingScheme
     Public NovaStarSenderItems As NovaStarSender()
 
     '''' <summary>
-    '''' 接收卡查找表 Key=发送卡*10000+网口*1000+接收卡
+    '''' 接收卡查找表
     '''' </summary>
     'Public NovaStarScanBoardDictionary As Dictionary(Of Integer, NovaStarScanBoard)
 
     '''' <summary>
-    '''' 传感器查找表 Key=发送卡*1000000+网口*100000+接收卡*100+传感器
+    '''' 传感器查找表
     '''' </summary>
     'Public SensorDictionary As Dictionary(Of Integer, Sensor)
 

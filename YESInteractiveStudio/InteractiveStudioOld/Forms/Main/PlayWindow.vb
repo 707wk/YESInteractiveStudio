@@ -148,7 +148,7 @@ Public Class PlayWindow
 
         If DllControl IsNot Nothing Then
             Me.Controls.Remove(DllControl)
-            DllControl.FinalizeAddonFunc(Me)
+            'DllControl.FinalizeAddonFunc(Me)
             DllControl = Nothing
         End If
 
@@ -198,7 +198,7 @@ Public Class PlayWindow
         Dim tp = ass.GetType($"{Path.GetFileNameWithoutExtension(FilePath)}.{Path.GetFileNameWithoutExtension(FilePath)}")
         Dim obj = System.Activator.CreateInstance(tp)
         DllControl = CType(obj, YESInteractiveSDK.IYESInterfaceSDK)
-        DllControl.InitAddonFunc(Me)
+        DllControl.InitAddonFunc(Me.Controls)
 
     End Sub
 #End Region
@@ -283,6 +283,10 @@ Public Class PlayWindow
         Me.Refresh()
 
         For Each tmp As Integer In AppSetting.Schedule.WindowList.Item(WindowId).ScreenList
+            If tmp >= AppSetting.ScreenList.Count Then
+                Continue For
+            End If
+
             With AppSetting.ScreenList(tmp)
                 '缩放后触摸单元高度
                 For i As Integer = 0 To .ZoomSize.Height Step .ZoomSensorSize.Height
@@ -411,7 +415,7 @@ Public Class PlayWindow
                         Case 2
 #Region "dll"
                             'dll
-                            DllControl.PointActive(values.ToArray)
+                            DllControl.PointActive(values)
 #End Region
                         Case 3
 #Region "Unity"

@@ -3,7 +3,7 @@
 ''' <summary>
 ''' 传感器数据处理辅助类
 ''' </summary>
-Public Class SensorDataProcessingHelper
+Public NotInheritable Class SensorDataProcessingHelper
     Private Sub New()
     End Sub
 
@@ -23,7 +23,7 @@ Public Class SensorDataProcessingHelper
     Public Shared EndOfCompletedSensorDataEvent As CountdownEvent
 
 #Region "是否运行"
-    Private Shared _IsRunning As Boolean
+    Private Shared _IsRunning As Boolean = False
     ''' <summary>
     ''' 是否运行
     ''' </summary>
@@ -40,10 +40,15 @@ Public Class SensorDataProcessingHelper
     ''' 开始异步处理传感器数据
     ''' </summary>
     Public Shared Sub StartAsync()
+
         If _IsRunning Then
             Exit Sub
         End If
         _IsRunning = True
+
+        If AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Count = 0 Then
+            Exit Sub
+        End If
 
         EndOfReadSensorDataEvent = New CountdownEvent(AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems.Count)
         EndOfCompletedSensorDataEvent = New CountdownEvent(AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Count)
@@ -65,10 +70,15 @@ Public Class SensorDataProcessingHelper
     ''' 停止异步处理传感器数据
     ''' </summary>
     Public Shared Sub StopAsync()
+
         If Not _IsRunning Then
             Exit Sub
         End If
         _IsRunning = False
+
+        If AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Count = 0 Then
+            Exit Sub
+        End If
 
         '停止读取传感器数据
         For Each tmpNovaStarSender As NovaStarSender In AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems
@@ -89,6 +99,7 @@ Public Class SensorDataProcessingHelper
     ''' 主处理函数
     ''' </summary>
     Private Shared Sub WorkFunction()
+
         Do While _IsRunning
 
             '读取传感器数据
@@ -97,7 +108,7 @@ Public Class SensorDataProcessingHelper
             Next
 
             '等待读取完毕
-            EndOfReadSensorDataEvent.Wait()
+            EndOfReadSensorDataEvent.Wait(100)
             EndOfReadSensorDataEvent.Reset()
 
             '数据分发
@@ -109,14 +120,20 @@ Public Class SensorDataProcessingHelper
                 Next
             Next
 
+            EndOfCompletedSensorDataEvent.Reset()
             '开始处理
             For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
                 tmpDisplayingWindow.StartOfCompletedSensorDataEvent.Set()
             Next
-
             '等待处理完毕
             EndOfCompletedSensorDataEvent.Wait()
-            EndOfCompletedSensorDataEvent.Reset()
+
+            '清除旧数据
+            For Each item In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+                item.ActiveSensorItems.Clear()
+            Next
+
+            Thread.Sleep(20)
 
         Loop
 

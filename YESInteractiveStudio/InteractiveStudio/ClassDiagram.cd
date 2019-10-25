@@ -3,15 +3,8 @@
   <Class Name="InteractiveStudio.DisplayingSchemeProcessingHelper">
     <Position X="16.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAgAAAAQAAAAAAAAAgAAAABAAAAAAAAAAAAABAAAA=</HashCode>
+      <HashCode>AAAAAAAAIQAAAAAAAAAgAAAAFACAAAAAAAAAAAAAQAE=</HashCode>
       <FileName>02.BusinessLogicLayer\DisplayingSchemeProcessingHelper.vb</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="InteractiveStudio.SensorDataProcessingHelper">
-    <Position X="21.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAABAAAAAAwAQAAAAAAAAAAEAYAAAAAAAEA=</HashCode>
-      <FileName>02.BusinessLogicLayer\SensorDataProcessingHelper.vb</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="InteractiveStudio.WindowsHotKeyHelper">
@@ -22,9 +15,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="InteractiveStudio.AppSetting">
-    <Position X="4" Y="11.5" Width="2" />
+    <Position X="7" Y="9.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAQAABAAAAAAAAABAAAAABAAAAABAgAAQAAQAAAAA=</HashCode>
+      <HashCode>AAAAQAABAAgAAAAAABAAAAAAAAAAAABgAAQAAQAACAA=</HashCode>
       <FileName>03.DataAccessLayer\AppSetting\AppSetting.vb</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -32,7 +25,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="InteractiveStudio.AppSettingHelper">
-    <Position X="0.75" Y="12.25" Width="1.75" />
+    <Position X="3.5" Y="9" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAgAAAAAAAACA=</HashCode>
       <FileName>03.DataAccessLayer\AppSetting\AppSettingHelper.vb</FileName>
@@ -42,7 +35,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="InteractiveStudio.DisplayingScheme">
-    <Position X="7.25" Y="8.25" Width="1.75" />
+    <Position X="10" Y="14" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQ=</HashCode>
       <FileName>03.DataAccessLayer\DisplayingScheme\DisplayingScheme.vb</FileName>
@@ -56,44 +49,34 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="InteractiveStudio.DisplayingFile">
-    <Position X="13.75" Y="12.75" Width="1.5" />
+    <Position X="10.75" Y="20.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
       <FileName>03.DataAccessLayer\DisplayingScheme\DisplayingWindow\DisplayingFile.vb</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="InteractiveStudio.DisplayingProgram">
-    <Position X="13.75" Y="10.5" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>03.DataAccessLayer\DisplayingScheme\DisplayingWindow\DisplayingProgram.vb</FileName>
-    </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Field Name="FileItems" />
-    </ShowAsCollectionAssociation>
-  </Class>
   <Class Name="InteractiveStudio.DisplayingWindow">
-    <Position X="7.75" Y="10.25" Width="2.75" />
+    <Position X="10.5" Y="16.25" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>QEAAQAAACAAQAAAAAAKACAQAAAABAAADAAAAAAAAAAA=</HashCode>
+      <HashCode>QEAAAAAIAAAQBAAAAAIAAAQAQAABAAQDAAAAAAAAAAA=</HashCode>
       <FileName>03.DataAccessLayer\DisplayingScheme\DisplayingWindow\DisplayingWindow.vb</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Field Name="PlayProgramItems" />
+      <Field Name="PlayFileItems" />
       <Field Name="ActiveSensorItems" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="InteractiveStudio.NovaStarScanBoard">
-    <Position X="13.75" Y="6.25" Width="2.5" />
+    <Position X="9.75" Y="7.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAgACEAAAAAQAAAAAABAAAAAQACAAgAAAA=</HashCode>
       <FileName>03.DataAccessLayer\DisplayingScheme\NovaStar\NovaStarScanBoard.vb</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="InteractiveStudio.NovaStarScreen">
-    <Position X="10.25" Y="7.75" Width="1.75" />
+    <Position X="10" Y="10.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAABAAAAAKAAAAgAAAA=</HashCode>
+      <HashCode>BAAAQAAAAAAAAAAAAAAAAAAAAAABAAAAAKAAAAgAAAA=</HashCode>
       <FileName>03.DataAccessLayer\DisplayingScheme\NovaStar\NovaStarScreen.vb</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -101,9 +84,9 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="InteractiveStudio.NovaStarSender">
-    <Position X="3.75" Y="6.75" Width="2.5" />
+    <Position X="13.75" Y="12.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAAAEAAAAAAAABASACIBAAAABAAAAAAAIBAAAAEA=</HashCode>
+      <HashCode>QAAAAAAEAAAAAAAABASACIBAAAABAAAEAAAIBAAiAEA=</HashCode>
       <FileName>03.DataAccessLayer\DisplayingScheme\NovaStar\NovaStarSender.vb</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -111,9 +94,9 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="InteractiveStudio.Sensor">
-    <Position X="0.5" Y="8.5" Width="2" />
+    <Position X="14" Y="17.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgCAAAQIAAAAAAAAAAAAAAAAgBAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAgCQAAQIAAAAAAAAAAAAAAAAgBAAAAAA=</HashCode>
       <FileName>03.DataAccessLayer\DisplayingScheme\Sensor.vb</FileName>
     </TypeIdentifier>
   </Class>
@@ -145,32 +128,80 @@
     </TypeIdentifier>
   </Class>
   <Class Name="InteractiveStudio.YesTechBaseBox">
-    <Position X="8.25" Y="0.5" Width="2.25" />
+    <Position X="8.5" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>gAIAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgBAQAAA=</HashCode>
+      <HashCode>gSIAAAAAAAAAAAAAAACAAAAAAAAACAAAAAAAAAAAAIA=</HashCode>
       <FileName>03.DataAccessLayer\DisplayingScheme\YesTech\YesTechBaseBox.vb</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="InteractiveStudio.YesTechMG11">
-    <Position X="8.5" Y="3.75" Width="1.5" />
+    <Position X="8.75" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgBAQAAA=</HashCode>
+      <HashCode>ASAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAgAAAAAAAIA=</HashCode>
       <FileName>03.DataAccessLayer\DisplayingScheme\YesTech\YesTechMG11.vb</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="InteractiveStudio.YesTechMG15">
-    <Position X="6.25" Y="3.75" Width="1.5" />
+    <Position X="6.25" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgBAQAAA=</HashCode>
+      <HashCode>ASAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAgAAAAAAAIA=</HashCode>
       <FileName>03.DataAccessLayer\DisplayingScheme\YesTech\YesTechMG15.vb</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="InteractiveStudio.YesTechMG7">
-    <Position X="10.75" Y="3.75" Width="1.5" />
+    <Position X="11.25" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgBAQAAA=</HashCode>
+      <HashCode>ASAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAgAAAAAAAIA=</HashCode>
       <FileName>03.DataAccessLayer\DisplayingScheme\YesTech\YesTechMG7.vb</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="InteractiveStudio.YesTechBoxFactory">
+    <Position X="6.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>03.DataAccessLayer\DisplayingScheme\YesTech\YesTechBoxFactory.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractiveStudio.SensorDataProcessingHelper">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAwAQAAAAAAAAAAEAYAAAAAAAEA=</HashCode>
+      <FileName>02.BusinessLogicLayer\SensorDataProcessingHelper.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractiveStudio.PlayDllControl" Collapsed="true">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAACAAAABAAAAABAAAAAIAAQAAAAACAAAAAAA=</HashCode>
+      <FileName>01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\PlayDllControl.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.221" />
+  </Class>
+  <Class Name="InteractiveStudio.PlayFlashControl" Collapsed="true">
+    <Position X="2.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AKAAACAAACAAAgCAAAAABABAAAIAAQAAAAACAJEEAAQ=</HashCode>
+      <FileName>01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\PlayFlashControl.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="InteractiveStudio.PlayUnityControl" Collapsed="true">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAACEAAAAAAAAABAAAAAIAAQAAAAACAAAAAAA=</HashCode>
+      <FileName>01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\PlayUnityControl.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="InteractiveStudio.IPlayBaseControl">
+    <Position X="0.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAABAAAAAIAAQAAAAACAAAAAAA=</HashCode>
+      <FileName>01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\IPlayBaseControl.vb</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Microsoft YaHei UI" Size="9" />
 </ClassDiagram>

@@ -1,6 +1,7 @@
 ﻿Imports System.Net.Sockets
 Imports System.Threading
 Imports Nova.LCT.GigabitSystem.Common
+Imports YESInteractiveSDK
 Imports YESInteractiveSDK.ModuleStructure
 
 Public Module ModuleNovaMCTRL510
@@ -102,8 +103,8 @@ Public Module ModuleNovaMCTRL510
                     .CliSocket = New Socket(AddressFamily.InterNetwork,
                                             SocketType.Stream,
                                             ProtocolType.Tcp) With {
-                                            .SendTimeout = 100,
-                                            .ReceiveTimeout = 100,
+                                            .SendTimeout = 50,
+                                            .ReceiveTimeout = 50,
                                             .NoDelay = True
                     }
                     .CliSocket.Connect(TmpStr, 6000)
@@ -251,6 +252,7 @@ Public Module ModuleNovaMCTRL510
         'Dim testTime As New Stopwatch
 
         Do While AppSetting.LinkFlage
+            'Console.WriteLine($"{Now.ToLongTimeString} 读取数据")
             For wID = 0 To WindowPointList.Count - 1
                 WindowPointList(wID).Clear()
             Next
@@ -259,7 +261,6 @@ Public Module ModuleNovaMCTRL510
             If lastSec <> Now.Second Then
                 lastSec = Now.Second
 
-                exceptionNum = 0
                 AppSetting.ReadNum = readNum
                 readNum = 0
             End If
@@ -286,7 +287,26 @@ Public Module ModuleNovaMCTRL510
                             Continue For
                         End If
 
+                        'AppSetting.logger.LogThis($"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)} 读取数据")
+
+                        '    Try
+                        '        .CliSocket.Send(Wangk.Hash.Hex2Bin("55D50902"))
+                        '    Catch ex As Exception
+                        '        AppSetting.logger.LogThis($"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)} 通信超时")
+                        '        .CliSocket.Dispose()
+                        '        Dim TmpStr As String = $"{ .IpDate(3)}.{ .IpDate(2)}.{ .IpDate(1)}.{ .IpDate(0)}"
+                        '        .CliSocket = New Socket(AddressFamily.InterNetwork,
+                        '                        SocketType.Stream,
+                        '                        ProtocolType.Tcp) With {
+                        '                        .SendTimeout = 50,
+                        '                        .ReceiveTimeout = 50,
+                        '                        .NoDelay = True
+                        '}
+                        '        .CliSocket.Connect(TmpStr, 6000)
+                        '        .CliSocket.Send(Wangk.Hash.Hex2Bin("55D50902"))
+                        '    End Try
                         '控制器接收数据
+                        'Console.WriteLine($"{Now.ToLongTimeString} 控制器接收数据")
                         .CliSocket.Send(Wangk.Hash.Hex2Bin("55D50902"))
                         .CliSocket.Receive(ReceiveData)
 
@@ -297,6 +317,7 @@ Public Module ModuleNovaMCTRL510
                         Dim ScanBoardDate() As Byte
 
                         For receiveID As Integer = 0 To 16 - 1
+                            'Console.WriteLine($"{Now.ToLongTimeString} 控制器上传数据{receiveID}")
                             ReDim ReceiveData(1028 - 1)
                             .CliSocket.Receive(ReceiveData)
 
@@ -549,7 +570,10 @@ Public Module ModuleNovaMCTRL510
                 Next
 #End Region
 
+                exceptionNum = 0
+
             Catch ex As Exception
+                'Console.WriteLine(ex.ToString)
                 AppSetting.LastErrorInfo = ex.ToString
 
                 AppSetting.logger.LogThis("通信异常", AppSetting.LastErrorInfo, Wangk.Tools.Logger.LogLevel.Level_DEBUG)

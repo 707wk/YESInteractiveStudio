@@ -10,10 +10,8 @@ T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.MainFo
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.WindowProgramControl.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.PlayWindowSettingsForm.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.PlayWindowSettingControl.resources
-T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.ReadScreenInformationForm.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.Resources.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.vbproj.GenerateResource.cache
-T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.vbproj.CoreCompileInputs.cache
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.vbproj.CopyComplete
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.exe
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.xml
@@ -36,3 +34,13 @@ T:\YESInteractiveStudio\InteractiveStudio\bin\YESInteractiveSDK.xml
 T:\YESInteractiveStudio\InteractiveStudio\bin\Wangk.Hash.dll
 T:\YESInteractiveStudio\InteractiveStudio\bin\Wangk.Hash.pdb
 T:\YESInteractiveStudio\InteractiveStudio\bin\Wangk.Hash.xml
+T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.PlayWindow.resources
+T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.EditPlayFileForm.resources
+T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.HardwareSettingsForm.resources
+T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.ScreenIDSelectForm.resources
+T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.ScanBoardSelectForm.resources
+T:\YESInteractiveStudio\InteractiveStudio\bin\Interop.ShockwaveFlashObjects.dll
+T:\YESInteractiveStudio\InteractiveStudio\bin\AxInterop.ShockwaveFlashObjects.dll
+T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\Interop.ShockwaveFlashObjects.dll
+T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\AxInterop.ShockwaveFlashObjects.dll
+T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.vbproj.ResolveComReference.cache

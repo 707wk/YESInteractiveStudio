@@ -735,7 +735,7 @@ InteractiveStudio
  切换显示模式
  </summary>
 </member>
-<member name="M:InteractiveStudio.PlayWindow.PointActive(System.Collections.Generic.List{YESInteractiveSDK.ModuleStructure.PointInfo})">
+<member name="M:InteractiveStudio.PlayWindow.PointActive(System.Collections.Generic.List{YESInteractiveSDK.PointInfo})">
  <summary>
  点击事件
  </summary>
