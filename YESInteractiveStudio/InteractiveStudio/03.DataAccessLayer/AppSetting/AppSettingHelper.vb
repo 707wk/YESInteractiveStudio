@@ -23,7 +23,7 @@ Public Class AppSettingHelper
                 '初始化
                 With instance
                     '语言包
-                    Wangk.Resource.MultiLanguageHelper.Init(.SelectLang, My.Application.Info.Title)
+                    Wangk.Resource.MultiLanguageHelper.Init(.SelectLang, My.Application.Info.ProductName)
 
                     '日志
                     Wangk.Tools.LoggerHelper.Init(saveDaysMax:=90)
@@ -43,13 +43,13 @@ Public Class AppSettingHelper
         Dim Path As String = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
 
         System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech")
-        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.Title}")
-        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.Title}\Data")
+        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.ProductName}")
+        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.ProductName}\Data")
 
         '反序列化
         Try
             instance = JsonConvert.DeserializeObject(Of AppSetting)(
-                System.IO.File.ReadAllText($"{Path}\Hunan Yestech\{My.Application.Info.Title}\Data\Setting.json",
+                System.IO.File.ReadAllText($"{Path}\Hunan Yestech\{My.Application.Info.ProductName}\Data\Setting.json",
                                            System.Text.Encoding.UTF8))
 
         Catch ex As Exception
@@ -81,13 +81,13 @@ Public Class AppSettingHelper
         Dim Path As String = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
 
         System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech")
-        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.Title}")
-        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.Title}\Data")
+        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.ProductName}")
+        System.IO.Directory.CreateDirectory($"{Path}\Hunan Yestech\{My.Application.Info.ProductName}\Data")
 
         '序列化
         Try
             Using t As System.IO.StreamWriter = New System.IO.StreamWriter(
-                    $"{Path}\Hunan Yestech\{My.Application.Info.Title}\Data\Setting.json",
+                    $"{Path}\Hunan Yestech\{My.Application.Info.ProductName}\Data\Setting.json",
                     False,
                     System.Text.Encoding.UTF8)
 
@@ -95,7 +95,7 @@ Public Class AppSettingHelper
             End Using
 
         Catch ex As Exception
-            MsgBox(ex.ToString, MsgBoxStyle.Information, My.Application.Info.Title)
+            MsgBox(ex.ToString, MsgBoxStyle.Information, My.Application.Info.ProductName)
 
         End Try
 

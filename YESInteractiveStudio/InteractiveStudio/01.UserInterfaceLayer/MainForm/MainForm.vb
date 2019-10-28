@@ -542,20 +542,20 @@ Public Class MainForm
         Try
             If AutoRunCheckBox.Checked Then
 
-                Dim shortcutPath As String = $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Startup) }\{My.Application.Info.Title}.lnk"
+                Dim shortcutPath As String = $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Startup) }\{My.Application.Info.ProductName}.lnk"
                 Dim tmpWshShell = New IWshRuntimeLibrary.WshShell()
                 Dim tmpIWshShortcut As IWshRuntimeLibrary.IWshShortcut = tmpWshShell.CreateShortcut(shortcutPath)
                 With tmpIWshShortcut
                     .TargetPath = Application.ExecutablePath
                     .WorkingDirectory = IO.Path.GetDirectoryName(Application.ExecutablePath)
                     .WindowStyle = 1
-                    .Description = My.Application.Info.Title
+                    .Description = My.Application.Info.ProductName
                     .IconLocation = .TargetPath
                     .Save()
                 End With
 
             Else
-                Dim shortcutPath As String = $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Startup) }\{My.Application.Info.Title}.lnk"
+                Dim shortcutPath As String = $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Startup) }\{My.Application.Info.ProductName}.lnk"
                 Try
                     IO.File.Delete(shortcutPath)
                 Catch ex As Exception

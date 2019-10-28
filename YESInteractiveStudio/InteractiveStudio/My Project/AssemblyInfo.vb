@@ -11,7 +11,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("InteractiveStudio")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("Hunan Yestech Optoelectronic Co., LTD.")>
-<Assembly: AssemblyProduct("Interactive Studio")>
+<Assembly: AssemblyProduct("InteractiveStudio")>
 <Assembly: AssemblyCopyright("Copyright ©  2019 Yestech All Rights Reserved")>
 <Assembly: AssemblyTrademark("")>
 
