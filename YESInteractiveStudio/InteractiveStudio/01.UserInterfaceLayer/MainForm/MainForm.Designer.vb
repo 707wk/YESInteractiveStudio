@@ -26,17 +26,6 @@ Partial Class MainForm
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
         Me.RibbonControl1 = New DevComponents.DotNetBar.RibbonControl()
-        Me.RibbonPanel1 = New DevComponents.DotNetBar.RibbonPanel()
-        Me.RibbonBar3 = New DevComponents.DotNetBar.RibbonBar()
-        Me.ItemContainer1 = New DevComponents.DotNetBar.ItemContainer()
-        Me.ItemContainer6 = New DevComponents.DotNetBar.ItemContainer()
-        Me.LabelItem3 = New DevComponents.DotNetBar.LabelItem()
-        Me.HideWindowsCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.RibbonBar1 = New DevComponents.DotNetBar.RibbonBar()
-        Me.InteractCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.TestCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.BlackCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.DebugCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonPanel2 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar5 = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer4 = New DevComponents.DotNetBar.ItemContainer()
@@ -51,6 +40,17 @@ Partial Class MainForm
         Me.PlayWindowSettingsButton = New DevComponents.DotNetBar.ButtonItem()
         Me.AccuracyButton = New DevComponents.DotNetBar.ButtonItem()
         Me.HardwareButton = New DevComponents.DotNetBar.ButtonItem()
+        Me.RibbonPanel1 = New DevComponents.DotNetBar.RibbonPanel()
+        Me.RibbonBar3 = New DevComponents.DotNetBar.RibbonBar()
+        Me.ItemContainer1 = New DevComponents.DotNetBar.ItemContainer()
+        Me.ItemContainer6 = New DevComponents.DotNetBar.ItemContainer()
+        Me.LabelItem3 = New DevComponents.DotNetBar.LabelItem()
+        Me.HideWindowsCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.RibbonBar1 = New DevComponents.DotNetBar.RibbonBar()
+        Me.InteractCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.TestCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.BlackCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.DebugCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
         Me.StartTab = New DevComponents.DotNetBar.RibbonTabItem()
         Me.SettingsTab = New DevComponents.DotNetBar.RibbonTabItem()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
@@ -58,8 +58,8 @@ Partial Class MainForm
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.RibbonControl1.SuspendLayout()
-        Me.RibbonPanel1.SuspendLayout()
         Me.RibbonPanel2.SuspendLayout()
+        Me.RibbonPanel1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -104,176 +104,6 @@ Partial Class MainForm
         Me.RibbonControl1.TabGroupHeight = 14
         Me.RibbonControl1.TabIndex = 1
         Me.RibbonControl1.Text = "RibbonControl1"
-        '
-        'RibbonPanel1
-        '
-        Me.RibbonPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonPanel1.Controls.Add(Me.RibbonBar3)
-        Me.RibbonPanel1.Controls.Add(Me.RibbonBar1)
-        Me.RibbonPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RibbonPanel1.Location = New System.Drawing.Point(0, 25)
-        Me.RibbonPanel1.Name = "RibbonPanel1"
-        Me.RibbonPanel1.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
-        Me.RibbonPanel1.Size = New System.Drawing.Size(740, 77)
-        '
-        '
-        '
-        Me.RibbonPanel1.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel1.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonPanel1.TabIndex = 1
-        '
-        'RibbonBar3
-        '
-        Me.RibbonBar3.AutoOverflowEnabled = True
-        '
-        '
-        '
-        Me.RibbonBar3.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar3.ContainerControlProcessDialogKey = True
-        Me.RibbonBar3.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar3.DragDropSupport = True
-        Me.RibbonBar3.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer1})
-        Me.RibbonBar3.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar3.Location = New System.Drawing.Point(324, 0)
-        Me.RibbonBar3.Name = "RibbonBar3"
-        Me.RibbonBar3.Size = New System.Drawing.Size(143, 75)
-        Me.RibbonBar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar3.TabIndex = 4
-        Me.RibbonBar3.Text = "RibbonBar3"
-        '
-        '
-        '
-        Me.RibbonBar3.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar3.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar3.TitleVisible = False
-        '
-        'ItemContainer1
-        '
-        '
-        '
-        '
-        Me.ItemContainer1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer1.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
-        Me.ItemContainer1.Name = "ItemContainer1"
-        Me.ItemContainer1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer6})
-        '
-        '
-        '
-        Me.ItemContainer1.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer1.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'ItemContainer6
-        '
-        '
-        '
-        '
-        Me.ItemContainer6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer6.Name = "ItemContainer6"
-        Me.ItemContainer6.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItem3, Me.HideWindowsCheckBox})
-        '
-        '
-        '
-        Me.ItemContainer6.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer6.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'LabelItem3
-        '
-        Me.LabelItem3.Name = "LabelItem3"
-        Me.LabelItem3.Text = "Hide windows"
-        '
-        'HideWindowsCheckBox
-        '
-        Me.HideWindowsCheckBox.Name = "HideWindowsCheckBox"
-        Me.HideWindowsCheckBox.Text = "Hide windows"
-        Me.HideWindowsCheckBox.TextVisible = False
-        '
-        'RibbonBar1
-        '
-        Me.RibbonBar1.AutoOverflowEnabled = True
-        '
-        '
-        '
-        Me.RibbonBar1.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar1.ContainerControlProcessDialogKey = True
-        Me.RibbonBar1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar1.DragDropSupport = True
-        Me.RibbonBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.InteractCheckBox, Me.TestCheckBox, Me.BlackCheckBox, Me.DebugCheckBox})
-        Me.RibbonBar1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar1.Location = New System.Drawing.Point(3, 0)
-        Me.RibbonBar1.Name = "RibbonBar1"
-        Me.RibbonBar1.Size = New System.Drawing.Size(321, 75)
-        Me.RibbonBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar1.TabIndex = 3
-        Me.RibbonBar1.Text = "RibbonBar1"
-        '
-        '
-        '
-        Me.RibbonBar1.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar1.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar1.TitleVisible = False
-        '
-        'InteractCheckBox
-        '
-        Me.InteractCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode0_32px
-        Me.InteractCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode0G_32px
-        Me.InteractCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
-        Me.InteractCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.InteractCheckBox.Name = "InteractCheckBox"
-        Me.InteractCheckBox.Text = "Interact"
-        '
-        'TestCheckBox
-        '
-        Me.TestCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode1_32px
-        Me.TestCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode1G_32px
-        Me.TestCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
-        Me.TestCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.TestCheckBox.Name = "TestCheckBox"
-        Me.TestCheckBox.Text = "Test"
-        '
-        'BlackCheckBox
-        '
-        Me.BlackCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode2_32px
-        Me.BlackCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode2G_32px
-        Me.BlackCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
-        Me.BlackCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.BlackCheckBox.Name = "BlackCheckBox"
-        Me.BlackCheckBox.Text = "Black"
-        '
-        'DebugCheckBox
-        '
-        Me.DebugCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode3_32px
-        Me.DebugCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode3G_32px
-        Me.DebugCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
-        Me.DebugCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.DebugCheckBox.Name = "DebugCheckBox"
-        Me.DebugCheckBox.Text = "Debug"
         '
         'RibbonPanel2
         '
@@ -475,6 +305,176 @@ Partial Class MainForm
         Me.HardwareButton.SubItemsExpandWidth = 14
         Me.HardwareButton.Text = "Hardware settings"
         '
+        'RibbonPanel1
+        '
+        Me.RibbonPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonPanel1.Controls.Add(Me.RibbonBar3)
+        Me.RibbonPanel1.Controls.Add(Me.RibbonBar1)
+        Me.RibbonPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RibbonPanel1.Location = New System.Drawing.Point(0, 25)
+        Me.RibbonPanel1.Name = "RibbonPanel1"
+        Me.RibbonPanel1.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
+        Me.RibbonPanel1.Size = New System.Drawing.Size(740, 77)
+        '
+        '
+        '
+        Me.RibbonPanel1.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel1.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonPanel1.TabIndex = 1
+        '
+        'RibbonBar3
+        '
+        Me.RibbonBar3.AutoOverflowEnabled = True
+        '
+        '
+        '
+        Me.RibbonBar3.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar3.ContainerControlProcessDialogKey = True
+        Me.RibbonBar3.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar3.DragDropSupport = True
+        Me.RibbonBar3.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer1})
+        Me.RibbonBar3.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar3.Location = New System.Drawing.Point(324, 0)
+        Me.RibbonBar3.Name = "RibbonBar3"
+        Me.RibbonBar3.Size = New System.Drawing.Size(143, 75)
+        Me.RibbonBar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar3.TabIndex = 4
+        Me.RibbonBar3.Text = "RibbonBar3"
+        '
+        '
+        '
+        Me.RibbonBar3.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar3.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar3.TitleVisible = False
+        '
+        'ItemContainer1
+        '
+        '
+        '
+        '
+        Me.ItemContainer1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer1.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
+        Me.ItemContainer1.Name = "ItemContainer1"
+        Me.ItemContainer1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer6})
+        '
+        '
+        '
+        Me.ItemContainer1.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer1.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'ItemContainer6
+        '
+        '
+        '
+        '
+        Me.ItemContainer6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer6.Name = "ItemContainer6"
+        Me.ItemContainer6.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItem3, Me.HideWindowsCheckBox})
+        '
+        '
+        '
+        Me.ItemContainer6.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer6.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'LabelItem3
+        '
+        Me.LabelItem3.Name = "LabelItem3"
+        Me.LabelItem3.Text = "Hide windows"
+        '
+        'HideWindowsCheckBox
+        '
+        Me.HideWindowsCheckBox.Name = "HideWindowsCheckBox"
+        Me.HideWindowsCheckBox.Text = "Hide windows"
+        Me.HideWindowsCheckBox.TextVisible = False
+        '
+        'RibbonBar1
+        '
+        Me.RibbonBar1.AutoOverflowEnabled = True
+        '
+        '
+        '
+        Me.RibbonBar1.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar1.ContainerControlProcessDialogKey = True
+        Me.RibbonBar1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar1.DragDropSupport = True
+        Me.RibbonBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.InteractCheckBox, Me.TestCheckBox, Me.BlackCheckBox, Me.DebugCheckBox})
+        Me.RibbonBar1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar1.Location = New System.Drawing.Point(3, 0)
+        Me.RibbonBar1.Name = "RibbonBar1"
+        Me.RibbonBar1.Size = New System.Drawing.Size(321, 75)
+        Me.RibbonBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar1.TabIndex = 3
+        Me.RibbonBar1.Text = "RibbonBar1"
+        '
+        '
+        '
+        Me.RibbonBar1.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar1.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar1.TitleVisible = False
+        '
+        'InteractCheckBox
+        '
+        Me.InteractCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode0_32px
+        Me.InteractCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode0G_32px
+        Me.InteractCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
+        Me.InteractCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.InteractCheckBox.Name = "InteractCheckBox"
+        Me.InteractCheckBox.Text = "Interact"
+        '
+        'TestCheckBox
+        '
+        Me.TestCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode1_32px
+        Me.TestCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode1G_32px
+        Me.TestCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
+        Me.TestCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.TestCheckBox.Name = "TestCheckBox"
+        Me.TestCheckBox.Text = "Test"
+        '
+        'BlackCheckBox
+        '
+        Me.BlackCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode2_32px
+        Me.BlackCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode2G_32px
+        Me.BlackCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
+        Me.BlackCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.BlackCheckBox.Name = "BlackCheckBox"
+        Me.BlackCheckBox.Text = "Black"
+        '
+        'DebugCheckBox
+        '
+        Me.DebugCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode3_32px
+        Me.DebugCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode3G_32px
+        Me.DebugCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
+        Me.DebugCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.DebugCheckBox.Name = "DebugCheckBox"
+        Me.DebugCheckBox.Text = "Debug"
+        '
         'StartTab
         '
         Me.StartTab.Checked = True
@@ -536,8 +536,8 @@ Partial Class MainForm
         Me.Text = "MainForm"
         Me.RibbonControl1.ResumeLayout(False)
         Me.RibbonControl1.PerformLayout()
-        Me.RibbonPanel1.ResumeLayout(False)
         Me.RibbonPanel2.ResumeLayout(False)
+        Me.RibbonPanel1.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)

@@ -20,7 +20,6 @@ T:\YESInteractiveStudio\InteractiveStudioOld\bin\YESInteractiveSDK.pdb
 T:\YESInteractiveStudio\InteractiveStudioOld\bin\YESInteractiveSDK.xml
 T:\YESInteractiveStudio\InteractiveStudioOld\bin\Interop.ShockwaveFlashObjects.dll
 T:\YESInteractiveStudio\InteractiveStudioOld\bin\AxInterop.ShockwaveFlashObjects.dll
-T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Release\InteractiveStudioOld.vbprojAssemblyReference.cache
 T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Release\Interop.ShockwaveFlashObjects.dll
 T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Release\AxInterop.ShockwaveFlashObjects.dll
 T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Release\InteractiveStudioOld.vbproj.ResolveComReference.cache
@@ -42,3 +41,4 @@ T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Release\InteractiveStudioOl
 T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Release\InteractiveStudio.exe
 T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Release\InteractiveStudio.xml
 T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Release\InteractiveStudio.pdb
+T:\YESInteractiveStudio\InteractiveStudioOld\obj\x86\Release\InteractiveStudioOld.vbprojAssemblyReference.cache

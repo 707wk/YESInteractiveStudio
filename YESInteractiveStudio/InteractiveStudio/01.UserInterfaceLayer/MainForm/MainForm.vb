@@ -77,7 +77,7 @@ Public Class MainForm
 
             tmpBackgroundWorkDialog.Start(Sub()
                                               DisplayingSchemeProcessingHelper.ShowFormForALLDisplayingWindow()
-                                              Thread.Sleep(2000)
+                                              'Thread.Sleep(2000)
                                               SensorDataProcessingHelper.StartAsync()
                                           End Sub)
 
@@ -90,7 +90,7 @@ Public Class MainForm
         InteractCheckBox.Checked = True
 
         '更新接收卡状态
-        Timer1.Interval = 5000
+        Timer1.Interval = 2
         Timer1.Start()
 
         '自启后最小化
@@ -322,6 +322,9 @@ Public Class MainForm
                 }
 
             tmpBackgroundWorkDialog.Start(Sub()
+                                              '关闭nova连接
+                                              tmpSerialPortSelectForm?.Dispose()
+
                                               SensorDataProcessingHelper.StopAsync()
                                               DisplayingSchemeProcessingHelper.CloseFormForALLDisplayingWindow()
                                               AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Clear()
@@ -334,15 +337,12 @@ Public Class MainForm
         AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems = tmpNovaStarScreenItems
         AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems = tmpNovaStarSenderItems
 
-        '显示硬件设置窗体
-        Using tmpHardwareSettingsForm As New HardwareSettingsForm With {
-            .NovaMarsControl = tmpSerialPortSelectForm.NovaMarsControl
-        }
-            tmpHardwareSettingsForm.ShowDialog()
-        End Using
-
-        '关闭nova连接
-        tmpSerialPortSelectForm.Dispose()
+        ''显示硬件设置窗体
+        'Using tmpHardwareSettingsForm As New HardwareSettingsForm With {
+        '    .NovaMarsControl = tmpSerialPortSelectForm.NovaMarsControl
+        '}
+        '    tmpHardwareSettingsForm.ShowDialog()
+        'End Using
 
         '显示播放窗口编辑窗体
         Using tmpPlayWindowSettingsForm As New PlayWindowSettingsForm
@@ -364,7 +364,6 @@ Public Class MainForm
                                               DisplayingSchemeProcessingHelper.ComputeSizeForALLDisplayingWindow()
 
                                               DisplayingSchemeProcessingHelper.ShowFormForALLDisplayingWindow()
-                                              Thread.Sleep(2000)
                                               SensorDataProcessingHelper.StartAsync()
                                           End Sub)
 
@@ -442,7 +441,6 @@ Public Class MainForm
                                               End If
 
                                               DisplayingSchemeProcessingHelper.ShowFormForALLDisplayingWindow()
-                                              Thread.Sleep(2000)
                                               SensorDataProcessingHelper.StartAsync()
                                           End Sub)
 
@@ -487,11 +485,11 @@ Public Class MainForm
             }
 
                     Dim tmpNovaMarsControl = tmpSerialPortSelectForm.NovaMarsControl
+                    Dim screenCount As Integer
+                    Dim senderCount As Integer
 
                     tmpBackgroundWorkDialog.Start(Sub(uie As Wangk.Resource.BackgroundWorkEventArgs)
 #Region "初始化"
-                                                      Dim screenCount As Integer
-                                                      Dim senderCount As Integer
                                                       tmpNovaMarsControl.Initialize(tmpSerialPortSelectForm.selectedSerialPort, screenCount, senderCount)
 
                                                       If screenCount = 0 Then Throw New Exception("No Screen found")
@@ -500,10 +498,17 @@ Public Class MainForm
                                                   End Sub)
 
                     If tmpBackgroundWorkDialog.Error Is Nothing Then
-                        Dim tmpDialog As New HardwareSettingsForm With {
+                        Dim tmpDialog As New HardwareSettingsForm
+                        With tmpDialog
                             .NovaMarsControl = tmpSerialPortSelectForm.NovaMarsControl
-                        }
+                            ReDim .NovaStarSenderItems(senderCount - 1)
+                        End With
+
                         tmpDialog.ShowDialog()
+                    Else
+                        MsgBox(tmpBackgroundWorkDialog.Error.Message,
+                               MsgBoxStyle.Information,
+                               tmpBackgroundWorkDialog.Text)
                     End If
 
                 End Using
@@ -537,19 +542,24 @@ Public Class MainForm
         Try
             If AutoRunCheckBox.Checked Then
 
-                Using R_local As RegistryKey = Registry.CurrentUser
-                    Using R_run As RegistryKey = R_local.CreateSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run")
-                        R_run.SetValue(My.Application.Info.Title, $"""{Application.ExecutablePath}""")
-                    End Using
-                End Using
+                Dim shortcutPath As String = $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Startup) }\{My.Application.Info.Title}.lnk"
+                Dim tmpWshShell = New IWshRuntimeLibrary.WshShell()
+                Dim tmpIWshShortcut As IWshRuntimeLibrary.IWshShortcut = tmpWshShell.CreateShortcut(shortcutPath)
+                With tmpIWshShortcut
+                    .TargetPath = Application.ExecutablePath
+                    .WorkingDirectory = IO.Path.GetDirectoryName(Application.ExecutablePath)
+                    .WindowStyle = 1
+                    .Description = My.Application.Info.Title
+                    .IconLocation = .TargetPath
+                    .Save()
+                End With
 
             Else
-
-                Using R_local As RegistryKey = Registry.CurrentUser
-                    Using R_run As RegistryKey = R_local.CreateSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run")
-                        R_run.DeleteValue(My.Application.Info.Title, False)
-                    End Using
-                End Using
+                Dim shortcutPath As String = $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Startup) }\{My.Application.Info.Title}.lnk"
+                Try
+                    IO.File.Delete(shortcutPath)
+                Catch ex As Exception
+                End Try
 
             End If
 

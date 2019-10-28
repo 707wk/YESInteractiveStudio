@@ -17,6 +17,3 @@ T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.dll
 T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.xml
 T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.pdb
 T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.vbprojAssemblyReference.cache
-T:\YESInteractiveStudio\YESInteractiveSDK\bin\Newtonsoft.Json.dll
-T:\YESInteractiveStudio\YESInteractiveSDK\bin\Newtonsoft.Json.xml
-T:\YESInteractiveStudio\YESInteractiveSDK\obj\x86\Debug\YESInteractiveSDK.vbproj.CopyComplete

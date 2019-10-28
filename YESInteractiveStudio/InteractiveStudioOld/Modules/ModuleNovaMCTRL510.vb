@@ -2,7 +2,6 @@
 Imports System.Threading
 Imports Nova.LCT.GigabitSystem.Common
 Imports YESInteractiveSDK
-Imports YESInteractiveSDK.ModuleStructure
 
 Public Module ModuleNovaMCTRL510
 #Region "连接控制器"

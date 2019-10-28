@@ -1,0 +1,100 @@
+2019/10/28 15:49:52.019> 程序启动
+2019/10/28 15:51:25.765> 程序启动
+2019/10/28 15:51:39.969> 程序启动
+2019/10/28 15:53:00.748> 程序启动
+2019/10/28 15:54:43.388> 程序启动
+2019/10/28 15:54:57.836> 程序启动
+2019/10/28 15:56:40.533> 程序启动
+------------------------------------------------------------------------------
+Times  :  2019/10/28 15:57:02.116
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 192.168.11.2:6000
+   在 System.Net.Sockets.Socket.Connect(IPAddress[] addresses, Int32 port)
+   在 System.Net.Sockets.Socket.Connect(String host, Int32 port)
+   在 InteractiveStudio.NovaStarSender.GetSensorData()
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/10/28 15:57:38.171
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 192.168.11.2:6000
+   在 System.Net.Sockets.Socket.Connect(IPAddress[] addresses, Int32 port)
+   在 System.Net.Sockets.Socket.Connect(String host, Int32 port)
+   在 InteractiveStudio.NovaStarSender.GetSensorData()
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/10/28 15:58:13.823
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 192.168.11.2:6000
+   在 System.Net.Sockets.Socket.Connect(IPAddress[] addresses, Int32 port)
+   在 System.Net.Sockets.Socket.Connect(String host, Int32 port)
+   在 InteractiveStudio.NovaStarSender.GetSensorData()
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/10/28 15:58:35.880
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 192.168.11.2:6000
+   在 System.Net.Sockets.Socket.Connect(IPAddress[] addresses, Int32 port)
+   在 System.Net.Sockets.Socket.Connect(String host, Int32 port)
+   在 InteractiveStudio.NovaStarSender.GetSensorData()
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/10/28 15:58:57.935
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 192.168.11.2:6000
+   在 System.Net.Sockets.Socket.Connect(IPAddress[] addresses, Int32 port)
+   在 System.Net.Sockets.Socket.Connect(String host, Int32 port)
+   在 InteractiveStudio.NovaStarSender.GetSensorData()
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/10/28 15:59:19.968
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 192.168.11.2:6000
+   在 System.Net.Sockets.Socket.Connect(IPAddress[] addresses, Int32 port)
+   在 System.Net.Sockets.Socket.Connect(String host, Int32 port)
+   在 InteractiveStudio.NovaStarSender.GetSensorData()
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+2019/10/28 16:01:23.066> 程序启动
+------------------------------------------------------------------------------
+Times  :  2019/10/28 16:01:44.643
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 192.168.11.2:6000
+   在 System.Net.Sockets.Socket.Connect(IPAddress[] addresses, Int32 port)
+   在 System.Net.Sockets.Socket.Connect(String host, Int32 port)
+   在 InteractiveStudio.NovaStarSender.GetSensorData()
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+2019/10/28 16:02:42.608> 程序启动
+2019/10/28 16:04:58.356> 程序启动
+2019/10/28 16:06:13.396> 程序启动
+2019/10/28 16:12:02.322> 程序启动
+2019/10/28 16:12:19.598> 程序启动
+2019/10/28 16:16:32.779> 程序启动
+2019/10/28 16:18:20.104> 程序启动
+2019/10/28 16:18:47.262> 程序启动
+2019/10/28 16:19:19.145> 程序启动
+2019/10/28 16:21:29.470> 程序启动
+2019/10/28 16:22:04.314> 程序启动
+2019/10/28 16:23:03.520> 程序启动
+2019/10/28 16:24:50.101> 程序启动
+2019/10/28 16:26:16.947> 程序启动
+2019/10/28 16:27:00.633> 程序启动
+2019/10/28 16:27:58.803> 程序启动
+2019/10/28 16:29:34.231> 程序启动
+2019/10/28 16:29:51.097> 程序启动
+2019/10/28 16:30:12.813> 程序启动
+2019/10/28 17:11:27.153> 程序启动
+2019/10/28 17:14:44.531> 程序启动
+2019/10/28 17:15:03.212> 程序启动

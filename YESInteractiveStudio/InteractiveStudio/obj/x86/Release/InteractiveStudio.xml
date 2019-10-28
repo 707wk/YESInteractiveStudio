@@ -162,6 +162,11 @@ InteractiveStudio
  Nova配置变量
  </summary>
 </member>
+<member name="F:InteractiveStudio.HardwareSettingsForm.NovaStarSenderItems">
+ <summary>
+ 读取到的发送卡数据
+ </summary>
+</member>
 <member name="F:InteractiveStudio.HardwareSettingsForm.SetEquipmentIPDataEvent">
  <summary>
  写入IP标志
@@ -170,6 +175,21 @@ InteractiveStudio
 <member name="F:InteractiveStudio.HardwareSettingsForm.SetEquipmentIPDataResult">
  <summary>
  写入结果
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HardwareSettingsForm.GetEquipmentIPDataEvent">
+ <summary>
+ 读取到IP标志
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HardwareSettingsForm.SenderIPData">
+ <summary>
+ 读到的发送卡IP
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HardwareSettingsForm.GetEquipmentIPData(System.Object,Nova.Mars.SDK.MarsEquipmentIPEventArgs)">
+ <summary>
+ 获取IP通知
  </summary>
 </member>
 <member name="M:InteractiveStudio.HardwareSettingsForm.SendEquipmentIPData(System.Object,Nova.Mars.SDK.MarsEquipmentIPEventArgs)">

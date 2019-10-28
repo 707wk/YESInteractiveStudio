@@ -44,3 +44,4 @@ T:\YESInteractiveStudio\InteractiveStudio\bin\AxInterop.ShockwaveFlashObjects.dl
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\Interop.ShockwaveFlashObjects.dll
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\AxInterop.ShockwaveFlashObjects.dll
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.vbproj.ResolveComReference.cache
+T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\Interop.IWshRuntimeLibrary.dll

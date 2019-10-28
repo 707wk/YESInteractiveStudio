@@ -64,7 +64,7 @@ Public Class PlayWindow
                 If AppSettingHelper.Settings.DisplayMode = LastDisplayMode Then
                     Exit Sub
                 End If
-                StartPlay(True)
+                StartPlay(DisplayingWindow.IsAutoPlay)
 
             Case InteractiveOptions.DISPLAYMODE.TEST
                 StartPlay(False)
@@ -153,7 +153,9 @@ Public Class PlayWindow
             Exit Sub
         End If
 
-        If value Then
+        If value AndAlso
+            DisplayingWindow.PlayFileItems.Count > 0 Then
+
             Timer1.Interval = DisplayingWindow.PlayFileItems(DisplayingWindow.PlayFileID).PlaySecond * 1000
             Timer1.Start()
             PlayMedia()
@@ -173,12 +175,11 @@ Public Class PlayWindow
     End Sub
 
     Private Sub PlayWindow_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        If DisplayingWindow.IsAutoPlay AndAlso
-            DisplayingWindow.PlayFileItems.Count > 0 Then
+        'If DisplayingWindow.IsAutoPlay AndAlso
+        '    DisplayingWindow.PlayFileItems.Count > 0 Then
 
-            StartPlay(True)
-
-        End If
+        '    StartPlay(True)
+        'End If
 
         ''todo:开启处理数据线程
         WorkThread = New Threading.Thread(AddressOf WorkFunction) With {
@@ -371,9 +372,7 @@ Public Class PlayWindow
             Exit Sub
         End If
 
-        If PlayControl IsNot Nothing Then
-            PlayControl.PointActive(values)
-        End If
+        PlayControl?.PointActive(values)
 
     End Sub
 #End Region
@@ -390,6 +389,16 @@ Public Class PlayWindow
 
 #Region "播放文件"
     Private PlayControl As IPlayBaseControl
+
+    Public Sub New()
+
+        ' 此调用是设计器所必需的。
+        InitializeComponent()
+
+        ' 在 InitializeComponent() 调用之后添加任何初始化。
+        'Me.TopMost = True
+
+    End Sub
 
     Private Sub PlayMedia()
         ClearPlayControl()
@@ -410,24 +419,19 @@ Public Class PlayWindow
     End Sub
 
     Private Sub ClearPlayControl()
-        If PlayControl IsNot Nothing Then
-            PlayControl.Remove(Me.Controls)
-            PlayControl.Dispose()
-            PlayControl = Nothing
-        End If
+
+        PlayControl?.Dispose()
+        PlayControl = Nothing
+
     End Sub
 
 #Region "Unity事件"
     Private Sub PlayWindow_Activated(sender As Object, e As EventArgs) Handles Me.Activated
-        If PlayControl IsNot Nothing Then
-            PlayControl.FormActivated()
-        End If
+        PlayControl?.FormActivated()
     End Sub
 
     Private Sub PlayWindow_Deactivate(sender As Object, e As EventArgs) Handles Me.Deactivate
-        If PlayControl IsNot Nothing Then
-            PlayControl.FormDeactivate()
-        End If
+        PlayControl?.FormDeactivate()
     End Sub
 #End Region
 

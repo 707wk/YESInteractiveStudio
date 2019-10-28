@@ -44,3 +44,4 @@ T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\AxInterop.ShockwaveFla
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.vbproj.ResolveComReference.cache
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.ScanBoardSelectForm.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.ScreenIDSelectForm.resources
+T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\Interop.IWshRuntimeLibrary.dll

@@ -198,6 +198,10 @@ Public Class NovaStarSender
         Do While IsConnect
 
             Try
+                If Not My.Computer.Network.Ping(Me.IPAddress, 500) Then
+                    Exit Try
+                End If
+
                 GetSensorData()
 
             Catch ex As Exception
@@ -217,11 +221,12 @@ Public Class NovaStarSender
     ''' </summary>
     Private Sub GetSensorData()
 
+        'todo:socket超时时间
         Using socket = New Socket(AddressFamily.InterNetwork,
                                   SocketType.Stream,
                                   ProtocolType.Tcp) With {
-                                  .SendTimeout = 500,
-                                  .ReceiveTimeout = 500,
+                                  .SendTimeout = 50,
+                                  .ReceiveTimeout = 50,
                                   .NoDelay = True
         }
             socket.Connect(Me.IPAddress(), 6000)

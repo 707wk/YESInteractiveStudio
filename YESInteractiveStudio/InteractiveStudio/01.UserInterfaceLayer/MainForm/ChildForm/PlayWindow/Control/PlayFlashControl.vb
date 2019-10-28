@@ -12,12 +12,40 @@ Public Class PlayFlashControl
 
     End Sub
 
-    Protected Sub Dispose() Implements IPlayBaseControl.Dispose
-        If FlashControl IsNot Nothing Then
-            FlashControl.Dispose()
+#Region "IDisposable Support"
+    Private disposedValue As Boolean ' 要检测冗余调用
+
+    ' IDisposable
+    Protected Overridable Sub Dispose(disposing As Boolean)
+        If Not disposedValue Then
+            If disposing Then
+                '' TODO: 释放托管状态(托管对象)。
+            End If
+
+            FlashControl?.Dispose()
             FlashControl = Nothing
+
+            '' TODO: 释放未托管资源(未托管对象)并在以下内容中替代 Finalize()。
+            '' TODO: 将大型字段设置为 null。
         End If
+        disposedValue = True
     End Sub
+
+    '' TODO: 仅当以上 Dispose(disposing As Boolean)拥有用于释放未托管资源的代码时才替代 Finalize()。
+    'Protected Overrides Sub Finalize()
+    '    ' 请勿更改此代码。将清理代码放入以上 Dispose(disposing As Boolean)中。
+    '    Dispose(False)
+    '    MyBase.Finalize()
+    'End Sub
+
+    ' Visual Basic 添加此代码以正确实现可释放模式。
+    Public Sub Dispose() Implements IDisposable.Dispose
+        ' 请勿更改此代码。将清理代码放入以上 Dispose(disposing As Boolean)中。
+        Dispose(True)
+        '' TODO: 如果在以上内容中替代了 Finalize()，则取消注释以下行。
+        GC.SuppressFinalize(Me)
+    End Sub
+#End Region
 
     ''' <summary>
     ''' Flash播放器控件
@@ -35,15 +63,15 @@ Public Class PlayFlashControl
                         ByVal wParam As Int32,
                         ByVal lParam As Int32) As Int32
     '鼠标事件常量 　　
-    Private Const WM_LBUTTONDBLCLK = &H203
+    'Private Const WM_LBUTTONDBLCLK = &H203
     Private Const WM_LBUTTONDOWN = &H201
     Private Const WM_LBUTTONUP = &H202
-    Private Const WM_MBUTTONDBLCLK = &H209
-    Private Const WM_MBUTTONDOWN = &H207
-    Private Const WM_MBUTTONUP = &H208
-    Private Const WM_RBUTTONDBLCLK = &H206
-    Private Const WM_RBUTTONDOWN = &H204
-    Private Const WM_RBUTTONUP = &H205
+    'Private Const WM_MBUTTONDBLCLK = &H209
+    'Private Const WM_MBUTTONDOWN = &H207
+    'Private Const WM_MBUTTONUP = &H208
+    'Private Const WM_RBUTTONDBLCLK = &H206
+    'Private Const WM_RBUTTONDOWN = &H204
+    'Private Const WM_RBUTTONUP = &H205
     Private Const WM_MOUSEMOVE = &H200
 #End Region
 
@@ -64,13 +92,13 @@ Public Class PlayFlashControl
         Return True
     End Function
 
-    Public Function Remove(controls As Control.ControlCollection) As Boolean Implements IPlayBaseControl.Remove
-        controls.Remove(FlashControl)
-        FlashControl.Dispose()
-        FlashControl = Nothing
+    'Public Function Remove(controls As Control.ControlCollection) As Boolean Implements IPlayBaseControl.Remove
+    '    controls.Remove(FlashControl)
+    '    FlashControl.Dispose()
+    '    FlashControl = Nothing
 
-        Return True
-    End Function
+    '    Return True
+    'End Function
 
     Public Function PointActive(values As List(Of PointInfo)) As Boolean Implements IPlayBaseControl.PointActive
 
@@ -87,8 +115,10 @@ Public Class PlayFlashControl
                 Try
                     FlashControl.
                     CallFunction($"<invoke name=""pointActive"" returntype=""xml""><arguments><string>{i001.X}</string><string>{i001.Y}</string></arguments></invoke>")
+#Disable Warning CA1031 ' Do not catch general exception types
                 Catch ex As Exception
                     SetCaptureFlage = True
+#Enable Warning CA1031 ' Do not catch general exception types
                 End Try
 #End Region
             Else

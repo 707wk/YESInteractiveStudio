@@ -6,7 +6,7 @@ Public Interface IPlayBaseControl
     Inherits IDisposable
 
     Function Init(controls As ControlCollection, path As String) As Boolean
-    Function Remove(controls As ControlCollection) As Boolean
+    'Function Remove(controls As ControlCollection) As Boolean
     Function PointActive(values As List(Of YESInteractiveSDK.PointInfo)) As Boolean
 
     Sub FormActivated()

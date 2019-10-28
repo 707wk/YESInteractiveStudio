@@ -21,32 +21,28 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
         End If
         IsShowWindow = True
 
-        Try
-            For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
 
-                tmpDisplayingWindow.PlayWindowForm = New PlayWindow With {
-                    .DisplayingWindow = tmpDisplayingWindow
-                }
+        For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+
+            tmpDisplayingWindow.PlayWindowForm = New PlayWindow With {
+                .DisplayingWindow = tmpDisplayingWindow
+            }
 
 #Disable Warning BC40000 ' 类型或成员已过时
-                tmpDisplayingWindow.PlayWindowThreadOfCreate = New Threading.Thread(Sub()
-                                                                                        tmpDisplayingWindow.PlayWindowForm.Location = tmpDisplayingWindow.Location
-                                                                                        tmpDisplayingWindow.PlayWindowForm.Size = tmpDisplayingWindow.SizeOfZoom
+            tmpDisplayingWindow.PlayWindowThreadOfCreate = New Threading.Thread(Sub()
+                                                                                    tmpDisplayingWindow.PlayWindowForm.Location = tmpDisplayingWindow.Location
+                                                                                    tmpDisplayingWindow.PlayWindowForm.Size = tmpDisplayingWindow.SizeOfZoom
 
-                                                                                        tmpDisplayingWindow.PlayWindowForm.ShowDialog()
+                                                                                    tmpDisplayingWindow.PlayWindowForm.ShowDialog()
 
-                                                                                    End Sub) With {
-                                                                                    .ApartmentState = Threading.ApartmentState.STA,
-                                                                                    .IsBackground = True
-                }
+                                                                                End Sub) With {
+                                                                                .ApartmentState = Threading.ApartmentState.STA,
+                                                                                .IsBackground = True
+            }
 #Enable Warning BC40000 ' 类型或成员已过时
-                tmpDisplayingWindow.PlayWindowThreadOfCreate.Start()
+            tmpDisplayingWindow.PlayWindowThreadOfCreate.Start()
 
             Next
-
-        Catch ex As Exception
-
-        End Try
 
     End Sub
 #End Region
@@ -182,15 +178,9 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
         End If
         IsShowWindow = False
 
-        Try
-            For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
-
-                tmpDisplayingWindow.PlayWindowForm.CloseForm()
-            Next
-
-        Catch ex As Exception
-
-        End Try
+        For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+            tmpDisplayingWindow?.PlayWindowForm?.CloseForm()
+        Next
 
     End Sub
 #End Region
@@ -201,15 +191,9 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
     ''' </summary>
     Public Shared Sub HideFormForALLDisplayingWindow(value As Boolean)
 
-        Try
-            For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
-
-                tmpDisplayingWindow.PlayWindowForm.HideForm(value)
-            Next
-
-        Catch ex As Exception
-
-        End Try
+        For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+            tmpDisplayingWindow.PlayWindowForm?.HideForm(value)
+        Next
 
     End Sub
 #End Region
@@ -220,15 +204,9 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
     ''' </summary>
     Public Shared Sub ChangeDisplayModeForALLDisplayingWindow()
 
-        Try
-            For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
-
-                tmpDisplayingWindow.PlayWindowForm.DisplayModeChange()
-            Next
-
-        Catch ex As Exception
-
-        End Try
+        For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+            tmpDisplayingWindow?.PlayWindowForm?.DisplayModeChange()
+        Next
 
     End Sub
 #End Region

@@ -95,7 +95,7 @@
         DisplayingWindow.PlayFileID = 0
         DisplayingWindow.IsAutoPlay = True
 
-        DisplayingWindow.PlayWindowForm.StartPlay(True)
+        DisplayingWindow.PlayWindowForm?.StartPlay(True)
 
     End Sub
 #End Region
@@ -115,7 +115,7 @@
         DisplayingWindow.PlayFileID = ListView1.SelectedItems(0).Index
         DisplayingWindow.IsAutoPlay = True
 
-        DisplayingWindow.PlayWindowForm.StartPlay(True)
+        DisplayingWindow.PlayWindowForm?.StartPlay(True)
 
     End Sub
 #End Region
@@ -128,7 +128,7 @@
 
         DisplayingWindow.IsAutoPlay = False
 
-        DisplayingWindow.PlayWindowForm.StartPlay(False)
+        DisplayingWindow.PlayWindowForm?.StartPlay(False)
 
     End Sub
 #End Region

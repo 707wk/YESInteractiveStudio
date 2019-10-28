@@ -80,13 +80,13 @@ Public NotInheritable Class SensorDataProcessingHelper
             Exit Sub
         End If
 
+        WorkThread.Abort()
+        WorkThread = Nothing
+
         '停止读取传感器数据
         For Each tmpNovaStarSender As NovaStarSender In AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems
             tmpNovaStarSender.DisConnect()
         Next
-
-        WorkThread.Abort()
-        WorkThread = Nothing
 
         EndOfReadSensorDataEvent = Nothing
         EndOfCompletedSensorDataEvent = Nothing
@@ -108,7 +108,7 @@ Public NotInheritable Class SensorDataProcessingHelper
             Next
 
             '等待读取完毕
-            EndOfReadSensorDataEvent.Wait(100)
+            EndOfReadSensorDataEvent.Wait(50)
             EndOfReadSensorDataEvent.Reset()
 
             '数据分发
@@ -133,6 +133,7 @@ Public NotInheritable Class SensorDataProcessingHelper
                 item.ActiveSensorItems.Clear()
             Next
 
+            'todo:读取间隔
             Thread.Sleep(20)
 
         Loop

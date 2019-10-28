@@ -27,8 +27,8 @@ Public Class SerialPortSelectForm
     End Sub
 
     Private Sub SerialPortSelectForm_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
-        If NovaMarsControl IsNot Nothing Then NovaMarsControl.UnInitialize()
-        If NovaMarsHardware IsNot Nothing Then NovaMarsHardware.UnInitialize()
+        NovaMarsControl?.UnInitialize()
+        NovaMarsHardware?.UnInitialize()
     End Sub
 
     Private Sub SerialPortSelectForm_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -45,8 +45,8 @@ Public Class SerialPortSelectForm
         ConnectButton.Enabled = False
 
         Try
-            NovaMarsHardware.UnInitialize()
-            NovaMarsHardware.Initialize()
+            NovaMarsHardware?.UnInitialize()
+            NovaMarsHardware?.Initialize()
 
         Catch ex As Exception
         End Try

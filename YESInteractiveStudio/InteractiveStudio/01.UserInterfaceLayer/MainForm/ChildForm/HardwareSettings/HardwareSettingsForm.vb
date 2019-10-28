@@ -9,6 +9,10 @@ Public Class HardwareSettingsForm
     ''' Nova配置变量
     ''' </summary>
     Public NovaMarsControl As MarsControlSystem
+    ''' <summary>
+    ''' 读取到的发送卡数据
+    ''' </summary>
+    Public NovaStarSenderItems As NovaStarSender()
 
     Private Sub HardwareSettingsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 #Region "样式设置"
@@ -60,9 +64,43 @@ Public Class HardwareSettingsForm
 
     Private Sub HardwareSettingsForm_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 #Region "控制器"
-        For Each item In AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems
-            DataGridView1.Rows.Add({item.IPAddress, item.IPSubnetMask, item.IPGateway, "Apply"})
-        Next
+        Using tmpDialog As New Wangk.Resource.BackgroundWorkDialog
+            tmpDialog.Start(Sub()
+#Region "读取接收卡IP"
+                                AddHandler NovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+
+                                For itemID = 0 To NovaStarSenderItems.Count - 1
+                                    NovaStarSenderItems(itemID) = New NovaStarSender
+
+                                    SenderIPData = Nothing
+
+                                    NovaMarsControl.GetEquipmentIP(itemID)
+                                    GetEquipmentIPDataEvent.WaitOne()
+
+                                    If SenderIPData Is Nothing Then Throw New Exception($"Sender {itemID} no support for interactive")
+
+                                    NovaStarSenderItems(itemID).IpData = SenderIPData
+                                    DataGridView1.Rows.Add({NovaStarSenderItems(itemID).IPAddress,
+                                                           NovaStarSenderItems(itemID).IPSubnetMask,
+                                                           NovaStarSenderItems(itemID).IPGateway,
+                                                           "Apply"})
+                                Next
+
+                                RemoveHandler NovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+#End Region
+                            End Sub)
+
+            If tmpDialog.Error IsNot Nothing Then
+                MsgBox(tmpDialog.Error.Message,
+                       MsgBoxStyle.Information,
+                       tmpDialog.Text)
+                Me.Close()
+            End If
+
+        End Using
+        'For Each item In AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems
+        '    DataGridView1.Rows.Add({item.IPAddress, item.IPSubnetMask, item.IPGateway, "Apply"})
+        'Next
 #End Region
 
         If AppSettingHelper.Settings.OldScanBoardBin Then
@@ -150,13 +188,37 @@ Public Class HardwareSettingsForm
         End Using
 
         If SetEquipmentIPDataResult Then
-            AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(e.RowIndex).IpData = TmpIpData
+            'AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(e.RowIndex).IpData = TmpIpData
             MsgBox("IP modify successfully")
         Else
             MsgBox("Fail to modify IP")
         End If
 
     End Sub
+
+#Region "获取发送卡IP"
+    ''' <summary>
+    ''' 读取到IP标志
+    ''' </summary>
+    Private GetEquipmentIPDataEvent As New AutoResetEvent(False)
+    ''' <summary>
+    ''' 读到的发送卡IP
+    ''' </summary>
+    Private SenderIPData As Byte()
+
+    ''' <summary>
+    ''' 获取IP通知
+    ''' </summary>
+    Private Sub GetEquipmentIPData(sender As Object, e As Nova.Mars.SDK.MarsEquipmentIPEventArgs)
+        Static Dim senderArrayId As Integer = 0
+
+        If e.IsExecResult Then
+            SenderIPData = e.Data
+        End If
+
+        GetEquipmentIPDataEvent.Set()
+    End Sub
+#End Region
 
 #Region "发送设备IP回调事件"
     ''' <summary>
@@ -532,7 +594,7 @@ Public Class HardwareSettingsForm
             With tmpSocket
                 .SendTimeout = 500
                 .ReceiveTimeout = 500
-                .Connect(AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(senderIndex).IPAddress, 6000)
+                .Connect(NovaStarSenderItems(senderIndex).IPAddress, 6000)
             End With
 
             Try
@@ -599,9 +661,9 @@ Public Class HardwareSettingsForm
 
                                 Dim tmpRootNode As New TreeNode
 
-                                For senderID = 0 To AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems.Count - 1
+                                For senderID = 0 To NovaStarSenderItems.Count - 1
 
-                                    uie.Write(CInt(senderID * 100 \ AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems.Count))
+                                    uie.Write(CInt(senderID * 100 \ NovaStarSenderItems.Count))
 
                                     QueryMCUProgramVersions(senderID, tmpRootNode, sacnnerItemsInVirtual)
                                 Next
@@ -675,7 +737,7 @@ Public Class HardwareSettingsForm
             With tmpSocket
                 .SendTimeout = 500
                 .ReceiveTimeout = 500
-                .Connect(AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(senderID).IPAddress, 6000)
+                .Connect(NovaStarSenderItems(senderID).IPAddress, 6000)
             End With
 
             Dim tmpReceiveBytes(1028 - 1) As Byte
