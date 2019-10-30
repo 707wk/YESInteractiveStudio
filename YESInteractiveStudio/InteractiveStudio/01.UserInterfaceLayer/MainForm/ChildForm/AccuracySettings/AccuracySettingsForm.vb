@@ -3,10 +3,12 @@
 Public Class AccuracySettingsForm
     Private Sub AccuracySettingsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TrackBar2.Value = AppSettingHelper.Settings.PositionaIAccuracy
+        NumericUpDown1.Value = AppSettingHelper.Settings.ValidSensorMinimum
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         AppSettingHelper.Settings.PositionaIAccuracy = TrackBar2.Value
+        AppSettingHelper.Settings.ValidSensorMinimum = NumericUpDown1.Value
 
         Me.DialogResult = DialogResult.OK
         Me.Close()

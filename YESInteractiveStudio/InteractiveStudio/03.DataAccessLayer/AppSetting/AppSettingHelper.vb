@@ -57,6 +57,7 @@ Public Class AppSettingHelper
             instance = New AppSetting
             With instance
                 .PositionaIAccuracy = 50
+                .ValidSensorMinimum = 2
                 .SensorTouchSensitivity = 5
                 .SensorResetTemp = 5
                 .SensorResetSec = 25
@@ -69,6 +70,8 @@ Public Class AppSettingHelper
             End With
 
         End Try
+
+        instance.ValidSensorMinimum = If(instance.ValidSensorMinimum > 0, instance.ValidSensorMinimum, 2)
 
     End Sub
 #End Region

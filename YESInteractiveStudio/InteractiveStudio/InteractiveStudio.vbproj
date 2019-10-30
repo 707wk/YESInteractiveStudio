@@ -166,7 +166,6 @@
     <Compile Include="03.DataAccessLayer\AppSetting\AppSettingHelper.vb" />
     <Compile Include="03.DataAccessLayer\AppSetting\AppSetting.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\DisplayingWindow\DisplayingFile.vb" />
-    <Compile Include="03.DataAccessLayer\DisplayingScheme\00Discard\DisplayingProgram.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\DisplayingScheme.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\DisplayingWindow\DisplayingWindow.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\NovaStar\NovaStarScanBoard.vb" />
@@ -186,22 +185,10 @@
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\AccuracySettings\AccuracySettingsForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\MCUSettings\MCUSettingsForm.Designer.vb">
-      <DependentUpon>MCUSettingsForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\MCUSettings\MCUSettingsForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\SerialPortSelectForm.Designer.vb">
       <DependentUpon>SerialPortSelectForm.vb</DependentUpon>
     </Compile>
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\SerialPortSelectForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\ControlSettings\ControlSettingsForm.Designer.vb">
-      <DependentUpon>ControlSettingsForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\ControlSettings\ControlSettingsForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="01.UserInterfaceLayer\MainForm\MainForm.Designer.vb">
@@ -228,12 +215,6 @@
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindowSettings\Control\PlayWindowSettingControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\SensorSettings\SensorSettingsForm.Designer.vb">
-      <DependentUpon>SensorSettingsForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\SensorSettings\SensorSettingsForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -254,9 +235,6 @@
     <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\AccuracySettings\AccuracySettingsForm.resx">
       <DependentUpon>AccuracySettingsForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\MCUSettings\MCUSettingsForm.resx">
-      <DependentUpon>MCUSettingsForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\HardwareSettings\ChildForm\ScanBoardSelectForm.resx">
       <DependentUpon>ScanBoardSelectForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -271,9 +249,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\SerialPortSelectForm.resx">
       <DependentUpon>SerialPortSelectForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\ControlSettings\ControlSettingsForm.resx">
-      <DependentUpon>ControlSettingsForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\Control\ChildForm\EditPlayFileForm.resx">
       <DependentUpon>EditPlayFileForm.vb</DependentUpon>
@@ -290,14 +265,11 @@
     <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindowSettings\Control\PlayWindowSettingControl.resx">
       <DependentUpon>PlayWindowSettingControl.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="01.UserInterfaceLayer\MainForm\ChildForm\00Discard\SensorSettings\SensorSettingsForm.resx">
-      <DependentUpon>SensorSettingsForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -316,23 +288,15 @@
   <ItemGroup>
     <Content Include="logo_32px.ico" />
     <None Include="res\cross_24px.png" />
-    <None Include="res\selectAll_24px.png" />
-    <None Include="res\invertSelect_24px.png" />
-    <None Include="res\sensor_24px.png" />
-    <None Include="res\addBlack_24px.png" />
     <None Include="res\empty_24px.png" />
-    <None Include="res\zoomOut_24px.png" />
-    <None Include="res\zoomIn_24px.png" />
     <None Include="res\refresh_24px.png" />
     <None Include="res\stop_24px.png" />
     <None Include="res\play_24px.png" />
     <None Include="res\add_24px.png" />
     <None Include="res\window_32px.png" />
-    <None Include="res\MCU_32px.png" />
     <None Include="packages.config" />
     <None Include="res\usb_disconnect_32px.png" />
     <None Include="res\usb_connect_32px.png" />
-    <None Include="res\screenLayout_32px.png" />
     <None Include="res\download_32px.png" />
     <None Include="res\DisplayMode3G_32px.png" />
     <None Include="res\DisplayMode3_32px.png" />

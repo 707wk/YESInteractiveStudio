@@ -134,7 +134,7 @@ Public NotInheritable Class SensorDataProcessingHelper
             Next
 
             'todo:读取间隔
-            Thread.Sleep(20)
+            Thread.Sleep(15)
 
         Loop
 

@@ -90,7 +90,7 @@ Public Class MainForm
         InteractCheckBox.Checked = True
 
         '更新接收卡状态
-        Timer1.Interval = 2
+        Timer1.Interval = 2000
         Timer1.Start()
 
         '自启后最小化
@@ -159,6 +159,7 @@ Public Class MainForm
                 Case 1
                     InteractCheckBox.Checked = True
                 Case 2
+                    BlackCheckBox.Checked = True
                     TestCheckBox.Checked = True
                 Case 3
                     BlackCheckBox.Checked = True
@@ -167,6 +168,7 @@ Public Class MainForm
                         Exit Select
                     End If
 
+                    BlackCheckBox.Checked = True
                     DebugCheckBox.Checked = True
             End Select
         End If
@@ -284,7 +286,7 @@ Public Class MainForm
                                               Next
 #End Region
 
-#Region "读取接收卡IP"
+#Region "读取发送卡IP"
                                               AddHandler tmpNovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
 
                                               For itemID = 0 To tmpNovaStarSenderItems.Count - 1
@@ -345,8 +347,10 @@ Public Class MainForm
         'End Using
 
         '显示播放窗口编辑窗体
-        Using tmpPlayWindowSettingsForm As New PlayWindowSettingsForm
-            PlayWindowSettingsForm.ShowDialog()
+        Using tmpPlayWindowSettingsForm As New PlayWindowSettingsForm With {
+            .IsMustSave = True
+        }
+            tmpPlayWindowSettingsForm.ShowDialog()
         End Using
 
         ShowNovaStarSenderList()
@@ -480,9 +484,9 @@ Public Class MainForm
 
                 '开始读取
                 Using tmpBackgroundWorkDialog As New Wangk.Resource.BackgroundWorkDialog With {
-                .Text = "Reading screen information",
-                .ProgressBarStyle = ProgressBarStyle.Marquee
-            }
+                    .Text = "Reading screen information",
+                    .ProgressBarStyle = ProgressBarStyle.Marquee
+                }
 
                     Dim tmpNovaMarsControl = tmpSerialPortSelectForm.NovaMarsControl
                     Dim screenCount As Integer
@@ -514,6 +518,7 @@ Public Class MainForm
                 End Using
 
             End If
+
         End Using
 
 #Region "开始互动"
@@ -666,5 +671,6 @@ Public Class MainForm
         End Try
 
     End Sub
+
 #End Region
 End Class

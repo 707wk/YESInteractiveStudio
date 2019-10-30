@@ -20,14 +20,11 @@ T:\YESInteractiveStudio\InteractiveStudio\bin\Wangk.Tools.pdb
 T:\YESInteractiveStudio\InteractiveStudio\bin\Wangk.Tools.xml
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.vbprojAssemblyReference.cache
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.AccuracySettingsForm.resources
-T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.MCUSettingsForm.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.SerialPortSelectForm.resources
-T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.ControlSettingsForm.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.MainForm.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.WindowProgramControl.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.PlayWindowSettingsForm.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.PlayWindowSettingControl.resources
-T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.SensorSettingsForm.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.Resources.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.vbproj.GenerateResource.cache
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.vbproj.CopyComplete

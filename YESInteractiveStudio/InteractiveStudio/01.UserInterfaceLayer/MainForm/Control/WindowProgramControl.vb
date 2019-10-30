@@ -11,6 +11,7 @@
 
         ListView1.ContextMenuStrip = ContextMenuStrip1
         ListView1.MultiSelect = False
+        ListView1.FullRowSelect = True
 
         ToolStripButton2.Enabled = False
 
@@ -110,6 +111,8 @@
             Exit Sub
         End If
 
+        ToolStripButton1.Enabled = False
+        ContextMenuStrip1.Enabled = False
         ToolStripButton2.Enabled = True
 
         DisplayingWindow.PlayFileID = ListView1.SelectedItems(0).Index

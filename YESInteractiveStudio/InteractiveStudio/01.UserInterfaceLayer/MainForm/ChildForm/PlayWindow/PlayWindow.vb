@@ -153,6 +153,8 @@ Public Class PlayWindow
             Exit Sub
         End If
 
+        Me.Refresh()
+
         If value AndAlso
             DisplayingWindow.PlayFileItems.Count > 0 Then
 
@@ -247,6 +249,7 @@ Public Class PlayWindow
         '网格距离法
         'https://www.cnblogs.com/LBSer/p/4417127.html
         Dim distance2Pow = Math.Pow(AppSettingHelper.Settings.PositionaIAccuracy, 2)
+        Dim ValidSensorMinimum = AppSettingHelper.Settings.ValidSensorMinimum
 
         PointOfMergeItems.Clear()
         PointOfMergeItems.Add(New PointOfMerge() With {
@@ -290,7 +293,7 @@ Public Class PlayWindow
         '过滤及转换
         PointInfoItems.Clear()
         For Each item In PointOfMergeItems
-            If item.SensorCount = 1 Then
+            If item.SensorCount < ValidSensorMinimum Then
                 Continue For
             End If
 
@@ -298,7 +301,7 @@ Public Class PlayWindow
             item.Y = item.YSum \ item.SensorCount
 
             PointInfoItems.Add(New PointInfo With {
-                               .ID = item.X + (item.Y << 16),
+                               .ID = PointInfoItems.Count + 1,
                                .X = item.X,
                                .Y = item.Y,
                                .Old = If(item.IsNew, 0, 1)
@@ -414,7 +417,10 @@ Public Class PlayWindow
                 PlayControl = New PlayUnityControl()
         End Select
 
-        PlayControl.Init(Me.Controls, path)
+        Try
+            PlayControl.Init(Me.Controls, path)
+        Catch ex As Exception
+        End Try
 
     End Sub
 

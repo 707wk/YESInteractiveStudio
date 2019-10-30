@@ -40,10 +40,10 @@ Public Class InteractiveOptions
         ''' 长按
         ''' </summary>
         PRESS
-        ''' <summary>
-        ''' 抬起
-        ''' </summary>
-        UP
+        '''' <summary>
+        '''' 抬起
+        '''' </summary>
+        'UP
     End Enum
 
     ''' <summary>

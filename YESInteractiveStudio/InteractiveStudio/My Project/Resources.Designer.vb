@@ -73,16 +73,6 @@ Namespace My.Resources
         '''<summary>
         '''  查找 System.Drawing.Bitmap 类型的本地化资源。
         '''</summary>
-        Friend ReadOnly Property addBlack_24px() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("addBlack_24px", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
-        '''</summary>
         Friend ReadOnly Property control_32px() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("control_32px", resourceCulture)
@@ -203,26 +193,6 @@ Namespace My.Resources
         '''<summary>
         '''  查找 System.Drawing.Bitmap 类型的本地化资源。
         '''</summary>
-        Friend ReadOnly Property invertSelect_24px() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("invertSelect_24px", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
-        '''</summary>
-        Friend ReadOnly Property MCU_32px() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("MCU_32px", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
-        '''</summary>
         Friend ReadOnly Property play_24px() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("play_24px", resourceCulture)
@@ -236,36 +206,6 @@ Namespace My.Resources
         Friend ReadOnly Property refresh_24px() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("refresh_24px", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
-        '''</summary>
-        Friend ReadOnly Property screenLayout_32px() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("screenLayout_32px", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
-        '''</summary>
-        Friend ReadOnly Property selectAll_24px() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("selectAll_24px", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
-        '''</summary>
-        Friend ReadOnly Property sensor_24px() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("sensor_24px", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -306,26 +246,6 @@ Namespace My.Resources
         Friend ReadOnly Property window_32px() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("window_32px", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
-        '''</summary>
-        Friend ReadOnly Property zoomIn_24px() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("zoomIn_24px", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
-        '''</summary>
-        Friend ReadOnly Property zoomOut_24px() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("zoomOut_24px", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

@@ -296,21 +296,22 @@ Public Class NovaStarSender
                                         '未感应
                                         If (ReceiveData(packetID + 4 + sensorID) And &H80) <> &H80 Then
 
-                                            If tmpSensor.State = SensorState.DOWN OrElse
-                                                tmpSensor.State = SensorState.PRESS Then
+                                            'If tmpSensor.State = SensorState.DOWN OrElse
+                                            '    tmpSensor.State = SensorState.PRESS Then
 
-                                                tmpSensor.State = SensorState.UP
-                                            Else
+                                            '    tmpSensor.State = SensorState.UP
+                                            'Else
 
-                                                tmpSensor.State = SensorState.NOOPS
-                                            End If
+                                            tmpSensor.State = SensorState.NOOPS
+                                            'End If
 
                                             Continue For
                                         End If
 
-                                        If tmpSensor.State = SensorState.DOWN Then
+                                        If tmpSensor.State = SensorState.DOWN OrElse
+                                            tmpSensor.State = SensorState.PRESS Then
+
                                             tmpSensor.State = SensorState.PRESS
-                                            Exit Select
                                         Else
                                             tmpSensor.State = SensorState.DOWN
                                         End If

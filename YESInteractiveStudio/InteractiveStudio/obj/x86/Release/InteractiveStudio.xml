@@ -27,11 +27,6 @@ InteractiveStudio
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
-<member name="P:InteractiveStudio.My.Resources.Resources.addBlack_24px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
 <member name="P:InteractiveStudio.My.Resources.Resources.control_32px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
@@ -92,37 +87,12 @@ InteractiveStudio
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
-<member name="P:InteractiveStudio.My.Resources.Resources.invertSelect_24px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
-<member name="P:InteractiveStudio.My.Resources.Resources.MCU_32px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
 <member name="P:InteractiveStudio.My.Resources.Resources.play_24px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
 <member name="P:InteractiveStudio.My.Resources.Resources.refresh_24px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
-<member name="P:InteractiveStudio.My.Resources.Resources.screenLayout_32px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
-<member name="P:InteractiveStudio.My.Resources.Resources.selectAll_24px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
-<member name="P:InteractiveStudio.My.Resources.Resources.sensor_24px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
@@ -143,16 +113,6 @@ InteractiveStudio
 </summary>
 </member>
 <member name="P:InteractiveStudio.My.Resources.Resources.window_32px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
-<member name="P:InteractiveStudio.My.Resources.Resources.zoomIn_24px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
-<member name="P:InteractiveStudio.My.Resources.Resources.zoomOut_24px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
@@ -536,6 +496,11 @@ InteractiveStudio
  定位精度(点合并范围) 默认50像素
  </summary>
 </member>
+<member name="F:InteractiveStudio.AppSetting.ValidSensorMinimum">
+ <summary>
+ 有效最小感应点数
+ </summary>
+</member>
 <member name="F:InteractiveStudio.AppSetting.SensorTouchSensitivity">
  <summary>
  传感器触摸灵敏度 范围 低 1-9 高
@@ -574,21 +539,6 @@ InteractiveStudio
 <member name="F:InteractiveStudio.DisplayingFile.PlaySecond">
  <summary>
  播放时长(s)
- </summary>
-</member>
-<member name="T:InteractiveStudio.DisplayingProgram">
- <summary>
- 播放节目
- </summary>
-</member>
-<member name="F:InteractiveStudio.DisplayingProgram.Name">
- <summary>
- 名称
- </summary>
-</member>
-<member name="F:InteractiveStudio.DisplayingProgram.FileItems">
- <summary>
- 播放文件列表
  </summary>
 </member>
 <member name="T:InteractiveStudio.DisplayingScheme">
@@ -1008,11 +958,6 @@ InteractiveStudio
  长按
  </summary>
 </member>
-<member name="F:InteractiveStudio.InteractiveOptions.SensorState.UP">
- <summary>
- 抬起
- </summary>
-</member>
 <member name="T:InteractiveStudio.InteractiveOptions.SenderConnectState">
  <summary>
  发送卡连接状态
@@ -1091,6 +1036,16 @@ InteractiveStudio
 <member name="F:InteractiveStudio.PlayWindowSettingsForm.AddWindowButton">
  <summary>
  添加播放窗口按钮
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindowSettingsForm.IsMustSave">
+ <summary>
+ 是否必须保存
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindowSettingsForm.IsSave">
+ <summary>
+ 是否已保存
  </summary>
 </member>
 <member name="M:InteractiveStudio.PlayWindowSettingsForm.IsWindowSettingDataCheckoutOk">

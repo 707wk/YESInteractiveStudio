@@ -32,6 +32,11 @@ Public Class AppSetting
     ''' </summary>
     Public PositionaIAccuracy As Integer
 
+    ''' <summary>
+    ''' 有效最小感应点数
+    ''' </summary>
+    Public ValidSensorMinimum As Integer
+
     '''' <summary>
     '''' 感应点抗干扰 相邻点击数大于等于几个有效 范围 1-9
     '''' </summary>

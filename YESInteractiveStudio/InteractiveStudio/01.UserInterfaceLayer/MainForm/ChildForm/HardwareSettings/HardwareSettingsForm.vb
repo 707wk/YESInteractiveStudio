@@ -80,10 +80,7 @@ Public Class HardwareSettingsForm
                                     If SenderIPData Is Nothing Then Throw New Exception($"Sender {itemID} no support for interactive")
 
                                     NovaStarSenderItems(itemID).IpData = SenderIPData
-                                    DataGridView1.Rows.Add({NovaStarSenderItems(itemID).IPAddress,
-                                                           NovaStarSenderItems(itemID).IPSubnetMask,
-                                                           NovaStarSenderItems(itemID).IPGateway,
-                                                           "Apply"})
+
                                 Next
 
                                 RemoveHandler NovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
@@ -95,6 +92,13 @@ Public Class HardwareSettingsForm
                        MsgBoxStyle.Information,
                        tmpDialog.Text)
                 Me.Close()
+            Else
+                For Each item In NovaStarSenderItems
+                    DataGridView1.Rows.Add({item.IPAddress,
+                                           item.IPSubnetMask,
+                                           item.IPGateway,
+                                           "Apply"})
+                Next
             End If
 
         End Using

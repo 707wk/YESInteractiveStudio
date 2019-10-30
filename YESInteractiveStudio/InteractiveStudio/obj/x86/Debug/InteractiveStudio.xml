@@ -1008,11 +1008,6 @@ InteractiveStudio
  长按
  </summary>
 </member>
-<member name="F:InteractiveStudio.InteractiveOptions.SensorState.UP">
- <summary>
- 抬起
- </summary>
-</member>
 <member name="T:InteractiveStudio.InteractiveOptions.SenderConnectState">
  <summary>
  发送卡连接状态
@@ -1091,6 +1086,16 @@ InteractiveStudio
 <member name="F:InteractiveStudio.PlayWindowSettingsForm.AddWindowButton">
  <summary>
  添加播放窗口按钮
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindowSettingsForm.IsMustSave">
+ <summary>
+ 是否必须保存
+ </summary>
+</member>
+<member name="F:InteractiveStudio.PlayWindowSettingsForm.IsSave">
+ <summary>
+ 是否已保存
  </summary>
 </member>
 <member name="M:InteractiveStudio.PlayWindowSettingsForm.IsWindowSettingDataCheckoutOk">

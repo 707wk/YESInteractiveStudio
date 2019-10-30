@@ -7,6 +7,15 @@ Public Class PlayWindowSettingsForm
     ''' </summary>
     Private AddWindowButton As ButtonItem
 
+    ''' <summary>
+    ''' 是否必须保存
+    ''' </summary>
+    Public IsMustSave As Boolean
+    ''' <summary>
+    ''' 是否已保存
+    ''' </summary>
+    Private IsSave As Boolean = False
+
     Private Sub PlayWindowSettingsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 #Region "添加窗口按钮"
@@ -47,6 +56,8 @@ Public Class PlayWindowSettingsForm
         tab.AttachedControl.Controls.Add(New PlayWindowSettingControl With {
                                          .DisplayingWindow = New DisplayingWindow With {.Name = s}
                                          })
+        SuperTabControl1.SelectedTabIndex = SuperTabControl1.Tabs.Count - 1
+
     End Sub
 #End Region
 
@@ -60,10 +71,17 @@ Public Class PlayWindowSettingsForm
                                              })
         Next
 
+        For pageID = 0 To SuperTabControl1.Tabs.Count - 1
+            SuperTabControl1.SelectedTabIndex = pageID
+        Next
+        SuperTabControl1.SelectedTabIndex = 0
+
     End Sub
 
     Private Sub PlayWindowSettingsForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        If Not IsWindowSettingDataCheckoutOk() Then
+        If Not IsWindowSettingDataCheckoutOk() OrElse
+            (IsMustSave AndAlso Not IsSave) Then
+
             e.Cancel = True
             Exit Sub
         End If
@@ -105,6 +123,7 @@ Public Class PlayWindowSettingsForm
 
         Next
 
+        IsSave = True
         Me.DialogResult = DialogResult.OK
         Me.Close()
     End Sub
