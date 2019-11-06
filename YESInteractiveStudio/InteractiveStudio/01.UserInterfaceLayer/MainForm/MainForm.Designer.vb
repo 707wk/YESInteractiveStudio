@@ -33,7 +33,13 @@ Partial Class MainForm
         Me.LabelItem3 = New DevComponents.DotNetBar.LabelItem()
         Me.HideWindowsCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonBar1 = New DevComponents.DotNetBar.RibbonBar()
+        Me.InteractCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.TestCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.BlackCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.DebugCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonBar2 = New DevComponents.DotNetBar.RibbonBar()
+        Me.ReadScreenInformationButton = New DevComponents.DotNetBar.ButtonItem()
+        Me.PlayWindowSettingsButton = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar5 = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer4 = New DevComponents.DotNetBar.ItemContainer()
@@ -44,20 +50,14 @@ Partial Class MainForm
         Me.LabelItem2 = New DevComponents.DotNetBar.LabelItem()
         Me.AutoRunCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonBar4 = New DevComponents.DotNetBar.RibbonBar()
+        Me.AccuracyButton = New DevComponents.DotNetBar.ButtonItem()
+        Me.HardwareButton = New DevComponents.DotNetBar.ButtonItem()
         Me.StartTab = New DevComponents.DotNetBar.RibbonTabItem()
         Me.SettingsTab = New DevComponents.DotNetBar.RibbonTabItem()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.InteractCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.TestCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.BlackCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.DebugCheckBox = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.ReadScreenInformationButton = New DevComponents.DotNetBar.ButtonItem()
-        Me.PlayWindowSettingsButton = New DevComponents.DotNetBar.ButtonItem()
-        Me.AccuracyButton = New DevComponents.DotNetBar.ButtonItem()
-        Me.HardwareButton = New DevComponents.DotNetBar.ButtonItem()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.RibbonControl1.SuspendLayout()
         Me.RibbonPanel1.SuspendLayout()
         Me.RibbonPanel2.SuspendLayout()
@@ -241,6 +241,42 @@ Partial Class MainForm
         Me.RibbonBar1.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonBar1.TitleVisible = False
         '
+        'InteractCheckBox
+        '
+        Me.InteractCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode0_32px
+        Me.InteractCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode0G_32px
+        Me.InteractCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
+        Me.InteractCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.InteractCheckBox.Name = "InteractCheckBox"
+        Me.InteractCheckBox.Text = "Interact"
+        '
+        'TestCheckBox
+        '
+        Me.TestCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode1_32px
+        Me.TestCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode1G_32px
+        Me.TestCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
+        Me.TestCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.TestCheckBox.Name = "TestCheckBox"
+        Me.TestCheckBox.Text = "Test"
+        '
+        'BlackCheckBox
+        '
+        Me.BlackCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode2_32px
+        Me.BlackCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode2G_32px
+        Me.BlackCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
+        Me.BlackCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.BlackCheckBox.Name = "BlackCheckBox"
+        Me.BlackCheckBox.Text = "Black"
+        '
+        'DebugCheckBox
+        '
+        Me.DebugCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode3_32px
+        Me.DebugCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode3G_32px
+        Me.DebugCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
+        Me.DebugCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.DebugCheckBox.Name = "DebugCheckBox"
+        Me.DebugCheckBox.Text = "Debug"
+        '
         'RibbonBar2
         '
         Me.RibbonBar2.AutoOverflowEnabled = True
@@ -272,6 +308,24 @@ Partial Class MainForm
         '
         Me.RibbonBar2.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonBar2.TitleVisible = False
+        '
+        'ReadScreenInformationButton
+        '
+        Me.ReadScreenInformationButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ReadScreenInformationButton.Image = Global.InteractiveStudio.My.Resources.Resources.download_32px
+        Me.ReadScreenInformationButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.ReadScreenInformationButton.Name = "ReadScreenInformationButton"
+        Me.ReadScreenInformationButton.SubItemsExpandWidth = 14
+        Me.ReadScreenInformationButton.Text = "Read screen information"
+        '
+        'PlayWindowSettingsButton
+        '
+        Me.PlayWindowSettingsButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.PlayWindowSettingsButton.Image = Global.InteractiveStudio.My.Resources.Resources.window_32px
+        Me.PlayWindowSettingsButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.PlayWindowSettingsButton.Name = "PlayWindowSettingsButton"
+        Me.PlayWindowSettingsButton.SubItemsExpandWidth = 14
+        Me.PlayWindowSettingsButton.Text = "Play window settings"
         '
         'RibbonPanel2
         '
@@ -437,6 +491,24 @@ Partial Class MainForm
         Me.RibbonBar4.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonBar4.TitleVisible = False
         '
+        'AccuracyButton
+        '
+        Me.AccuracyButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.AccuracyButton.Image = Global.InteractiveStudio.My.Resources.Resources.cross_24px
+        Me.AccuracyButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.AccuracyButton.Name = "AccuracyButton"
+        Me.AccuracyButton.SubItemsExpandWidth = 14
+        Me.AccuracyButton.Text = "Accuracy settings"
+        '
+        'HardwareButton
+        '
+        Me.HardwareButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.HardwareButton.Image = Global.InteractiveStudio.My.Resources.Resources.control_32px
+        Me.HardwareButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.HardwareButton.Name = "HardwareButton"
+        Me.HardwareButton.SubItemsExpandWidth = 14
+        Me.HardwareButton.Text = "Hardware settings"
+        '
         'StartTab
         '
         Me.StartTab.Checked = True
@@ -472,9 +544,6 @@ Partial Class MainForm
         Me.StatusStrip1.TabIndex = 3
         Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'Timer1
-        '
-        '
         'ToolStripDropDownButton1
         '
         Me.ToolStripDropDownButton1.Image = Global.InteractiveStudio.My.Resources.Resources.usb_disconnect_32px
@@ -484,77 +553,8 @@ Partial Class MainForm
         Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(166, 21)
         Me.ToolStripDropDownButton1.Text = "Connection abnormality"
         '
-        'InteractCheckBox
+        'Timer1
         '
-        Me.InteractCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode0_32px
-        Me.InteractCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode0G_32px
-        Me.InteractCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
-        Me.InteractCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.InteractCheckBox.Name = "InteractCheckBox"
-        Me.InteractCheckBox.Text = "Interact"
-        '
-        'TestCheckBox
-        '
-        Me.TestCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode1_32px
-        Me.TestCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode1G_32px
-        Me.TestCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
-        Me.TestCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.TestCheckBox.Name = "TestCheckBox"
-        Me.TestCheckBox.Text = "Test"
-        '
-        'BlackCheckBox
-        '
-        Me.BlackCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode2_32px
-        Me.BlackCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode2G_32px
-        Me.BlackCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
-        Me.BlackCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.BlackCheckBox.Name = "BlackCheckBox"
-        Me.BlackCheckBox.Text = "Black"
-        '
-        'DebugCheckBox
-        '
-        Me.DebugCheckBox.CheckBoxImageChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode3_32px
-        Me.DebugCheckBox.CheckBoxImageUnChecked = Global.InteractiveStudio.My.Resources.Resources.DisplayMode3G_32px
-        Me.DebugCheckBox.CheckBoxPosition = DevComponents.DotNetBar.eCheckBoxPosition.Top
-        Me.DebugCheckBox.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.DebugCheckBox.Name = "DebugCheckBox"
-        Me.DebugCheckBox.Text = "Debug"
-        '
-        'ReadScreenInformationButton
-        '
-        Me.ReadScreenInformationButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ReadScreenInformationButton.Image = Global.InteractiveStudio.My.Resources.Resources.download_32px
-        Me.ReadScreenInformationButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.ReadScreenInformationButton.Name = "ReadScreenInformationButton"
-        Me.ReadScreenInformationButton.SubItemsExpandWidth = 14
-        Me.ReadScreenInformationButton.Text = "Read screen information"
-        '
-        'PlayWindowSettingsButton
-        '
-        Me.PlayWindowSettingsButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.PlayWindowSettingsButton.Image = Global.InteractiveStudio.My.Resources.Resources.window_32px
-        Me.PlayWindowSettingsButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.PlayWindowSettingsButton.Name = "PlayWindowSettingsButton"
-        Me.PlayWindowSettingsButton.SubItemsExpandWidth = 14
-        Me.PlayWindowSettingsButton.Text = "Play window settings"
-        '
-        'AccuracyButton
-        '
-        Me.AccuracyButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.AccuracyButton.Image = Global.InteractiveStudio.My.Resources.Resources.cross_24px
-        Me.AccuracyButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.AccuracyButton.Name = "AccuracyButton"
-        Me.AccuracyButton.SubItemsExpandWidth = 14
-        Me.AccuracyButton.Text = "Accuracy settings"
-        '
-        'HardwareButton
-        '
-        Me.HardwareButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.HardwareButton.Image = Global.InteractiveStudio.My.Resources.Resources.control_32px
-        Me.HardwareButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.HardwareButton.Name = "HardwareButton"
-        Me.HardwareButton.SubItemsExpandWidth = 14
-        Me.HardwareButton.Text = "Hardware settings"
         '
         'MainForm
         '

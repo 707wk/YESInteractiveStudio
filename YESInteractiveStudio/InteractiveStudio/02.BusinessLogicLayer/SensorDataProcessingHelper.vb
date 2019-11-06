@@ -133,8 +133,8 @@ Public NotInheritable Class SensorDataProcessingHelper
                 item.ActiveSensorItems.Clear()
             Next
 
-            'todo:读取间隔
-            Thread.Sleep(15)
+            ''todo:读取间隔
+            Thread.Sleep(10)
 
         Loop
 

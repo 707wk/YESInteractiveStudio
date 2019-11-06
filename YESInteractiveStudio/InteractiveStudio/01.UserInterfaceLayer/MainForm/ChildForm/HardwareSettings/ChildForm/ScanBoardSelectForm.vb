@@ -1,4 +1,6 @@
-﻿Public Class ScanBoardSelectForm
+﻿Imports Wangk.Resource
+
+Public Class ScanBoardSelectForm
     Public Value As String
 
     Private Sub ScanBoardSelectForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -9,6 +11,8 @@
             .ShowLines = True
             .ShowRootLines = True
         End With
+
+        ChangeControlsLanguage()
 
     End Sub
 
@@ -23,5 +27,16 @@
         Me.DialogResult = DialogResult.OK
         Me.Close()
     End Sub
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With MultiLanguageHelper.Lang
+            Me.Text = "ScanBoardSelectForm"
+        End With
+    End Sub
+#End Region
 
 End Class

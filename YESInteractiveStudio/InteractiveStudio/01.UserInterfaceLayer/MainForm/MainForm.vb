@@ -2,6 +2,7 @@
 Imports System.Threading
 Imports DevComponents.DotNetBar
 Imports Microsoft.Win32
+Imports Wangk.Resource
 
 Public Class MainForm
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -10,27 +11,15 @@ Public Class MainForm
         '初始化配置
         AppSettingHelper.Settings.ToString()
 
-#Region "重新启动Nova服务"
-        ''todo:重新启动Nova服务
-        Dim tmpProcess = System.Diagnostics.Process.GetProcessesByName("MarsServerProvider")
-        If tmpProcess.Length > 0 Then
-            tmpProcess(0).Kill()
-        End If
-        Process.Start($".\Nova\Server\MarsServerProvider.exe")
-#End Region
-
 #Region "样式设置"
         StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.VisualStudio2012Light
 
         '产品版本号
-        Dim assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location
-        Dim versionStr = System.Diagnostics.FileVersionInfo.GetVersionInfo(assemblyLocation).ProductVersion
-        Me.Text = $"{My.Application.Info.ProductName} V{versionStr}"
+        Me.Text = $"{My.Application.Info.ProductName} V{AppSettingHelper.ProductVersion}"
 
         Me.KeyPreview = True
 
         DebugCheckBox.Visible = False
-        RibbonBar1.RecalcLayout()
 
         LanguageComboBox.DropDownStyle = ComboBoxStyle.DropDownList
         For Each LANGStr In [Enum].GetNames(GetType(Wangk.Resource.MultiLanguage.LANG))
@@ -38,8 +27,9 @@ Public Class MainForm
         Next
         LanguageComboBox.SelectedIndex = AppSettingHelper.Settings.SelectLang
 
-        '切换语言
         ChangeControlsLanguage()
+
+        RibbonBar2.Width = 256
 #End Region
 
 #Region "显示模式切换"
@@ -71,7 +61,7 @@ Public Class MainForm
 
 #Region "显示播放窗口/连接控制器"
         Using tmpBackgroundWorkDialog As New Wangk.Resource.BackgroundWorkDialog With {
-                    .Text = "Dispose screen information",
+                    .Text = MultiLanguageHelper.Lang.GetS("Dispose screen information"),
                     .ProgressBarStyle = ProgressBarStyle.Marquee
                 }
 
@@ -82,6 +72,7 @@ Public Class MainForm
                                           End Sub)
 
         End Using
+        Me.Activate()
 #End Region
 
         ShowDisplayingProgram()
@@ -204,129 +195,127 @@ Public Class MainForm
         Dim tmpNovaStarScreenItems() As NovaStarScreen = Nothing
         Dim tmpNovaStarSenderItems() As NovaStarSender = Nothing
 
-        '选择串口
-        Dim tmpSerialPortSelectForm As New SerialPortSelectForm
-        If tmpSerialPortSelectForm.ShowDialog() <> DialogResult.OK Then
-            Exit Sub
-        End If
+        ''todo:选择串口
+        Using tmpSerialPortSelectForm As New SerialPortSelectForm
+            If tmpSerialPortSelectForm.ShowDialog() <> DialogResult.OK Then
+                Exit Sub
+            End If
 
-        '开始读取
-        Using tmpBackgroundWorkDialog As New Wangk.Resource.BackgroundWorkDialog With {
-            .Text = "Reading screen information",
-            .ProgressBarStyle = ProgressBarStyle.Marquee
-        }
+            '开始读取
+            Using tmpBackgroundWorkDialog As New Wangk.Resource.BackgroundWorkDialog With {
+                .Text = MultiLanguageHelper.Lang.GetS("Reading screen information"),
+                .ProgressBarStyle = ProgressBarStyle.Marquee
+            }
 
-            Dim tmpNovaMarsControl = tmpSerialPortSelectForm.NovaMarsControl
+                Dim tmpNovaMarsControl = tmpSerialPortSelectForm.NovaMarsControl
 
-            tmpBackgroundWorkDialog.Start(Sub(uie As Wangk.Resource.BackgroundWorkEventArgs)
+                tmpBackgroundWorkDialog.Start(Sub(uie As Wangk.Resource.BackgroundWorkEventArgs)
 #Region "初始化"
-                                              Dim screenCount As Integer
-                                              Dim senderCount As Integer
-                                              tmpNovaMarsControl.Initialize(tmpSerialPortSelectForm.selectedSerialPort, screenCount, senderCount)
+                                                  Dim screenCount As Integer
+                                                  Dim senderCount As Integer
+                                                  tmpNovaMarsControl.Initialize(tmpSerialPortSelectForm.selectedSerialPort, screenCount, senderCount)
 
-                                              If screenCount = 0 Then Throw New Exception("No Screen found")
-                                              If senderCount = 0 Then Throw New Exception("No Sender found")
+                                                  If screenCount = 0 Then Throw New Exception(MultiLanguageHelper.Lang.GetS("No Screen found"))
+                                                  If senderCount = 0 Then Throw New Exception(MultiLanguageHelper.Lang.GetS("No Sender found"))
 #End Region
 
 #Region "读取屏幕信息"
-                                              ReDim tmpNovaStarScreenItems(screenCount - 1)
-                                              ReDim tmpNovaStarSenderItems(senderCount - 1)
+                                                  ReDim tmpNovaStarScreenItems(screenCount - 1)
+                                                  ReDim tmpNovaStarSenderItems(senderCount - 1)
 
-                                              Dim tmpLEDScreenInfoList As List(Of Nova.Mars.SDK.LEDScreenInfo) = Nothing
-                                              If tmpNovaMarsControl.ReadLEDScreenInfo(tmpLEDScreenInfoList) <>
-                                              Nova.Mars.SDK.OperateResult.OK Then
+                                                  Dim tmpLEDScreenInfoList As List(Of Nova.Mars.SDK.LEDScreenInfo) = Nothing
+                                                  If tmpNovaMarsControl.ReadLEDScreenInfo(tmpLEDScreenInfoList) <>
+                                                  Nova.Mars.SDK.OperateResult.OK Then
 
-                                                  Throw New Exception("Failed to reading screen information")
-                                              End If
+                                                      Throw New Exception(MultiLanguageHelper.Lang.GetS("Failed to reading screen information"))
+                                                  End If
 
 #End Region
 
 #Region "遍历屏幕"
-                                              For itemID = 0 To tmpNovaStarScreenItems.Count - 1
-                                                  tmpNovaStarScreenItems(itemID) = New NovaStarScreen
+                                                  For itemID = 0 To tmpNovaStarScreenItems.Count - 1
+                                                      tmpNovaStarScreenItems(itemID) = New NovaStarScreen
 
-                                                  With tmpNovaStarScreenItems(itemID)
-                                                      tmpNovaMarsControl.GetScreenLocation(itemID,
-                                                                                           .LocationOfOriginal.X,
-                                                                                           .LocationOfOriginal.Y,
-                                                                                           .SizeOfOriginal.Width,
-                                                                                           .SizeOfOriginal.Height)
+                                                      With tmpNovaStarScreenItems(itemID)
+                                                          tmpNovaMarsControl.GetScreenLocation(itemID,
+                                                                                               .LocationOfOriginal.X,
+                                                                                               .LocationOfOriginal.Y,
+                                                                                               .SizeOfOriginal.Width,
+                                                                                               .SizeOfOriginal.Height)
 
 
 #Region "读取接收卡信息"
-                                                      For Each tmpScanBoard In tmpLEDScreenInfoList(itemID).ScanBoardInfoList
-                                                          '接收卡留空则不添加
-                                                          If tmpScanBoard.SenderIndex = &HFF Then Continue For
+                                                          For Each tmpScanBoard In tmpLEDScreenInfoList(itemID).ScanBoardInfoList
+                                                              '接收卡留空则不添加
+                                                              If tmpScanBoard.SenderIndex = &HFF Then Continue For
 
-                                                          '连接位置
-                                                          Dim tmpNovaStarScanBoard As New NovaStarScanBoard
-                                                          With tmpNovaStarScanBoard
-                                                              .SenderID = tmpScanBoard.SenderIndex
-                                                              .PortID = tmpScanBoard.PortIndex
-                                                              .ScannerID = tmpScanBoard.ConnectIndex
-                                                              .LocationOfOriginal.X = tmpScanBoard.X
-                                                              .LocationOfOriginal.Y = tmpScanBoard.Y
-                                                              .SizeOfOriginal.Width = tmpScanBoard.Width
-                                                              .SizeOfOriginal.Height = tmpScanBoard.Height
-                                                          End With
+                                                              '连接位置
+                                                              Dim tmpNovaStarScanBoard As New NovaStarScanBoard
+                                                              With tmpNovaStarScanBoard
+                                                                  .SenderID = tmpScanBoard.SenderIndex
+                                                                  .PortID = tmpScanBoard.PortIndex
+                                                                  .ScannerID = tmpScanBoard.ConnectIndex
+                                                                  .LocationOfOriginal.X = tmpScanBoard.X
+                                                                  .LocationOfOriginal.Y = tmpScanBoard.Y
+                                                                  .SizeOfOriginal.Width = tmpScanBoard.Width
+                                                                  .SizeOfOriginal.Height = tmpScanBoard.Height
+                                                              End With
 
-                                                          '箱体旋转角度
-                                                          tmpNovaMarsControl.ReadCabinetRotateAngle(tmpNovaStarScanBoard.SenderID,
-                                                                                                    tmpNovaStarScanBoard.PortID,
-                                                                                                    tmpNovaStarScanBoard.ScannerID,
-                                                                                                    tmpNovaStarScanBoard.BoxRotateAngle)
+                                                              '箱体旋转角度
+                                                              tmpNovaMarsControl.ReadCabinetRotateAngle(tmpNovaStarScanBoard.SenderID,
+                                                                                                        tmpNovaStarScanBoard.PortID,
+                                                                                                        tmpNovaStarScanBoard.ScannerID,
+                                                                                                        tmpNovaStarScanBoard.BoxRotateAngle)
 
-                                                          .NovaStarScanBoardItems.Add(tmpNovaStarScanBoard)
+                                                              .NovaStarScanBoardItems.Add(tmpNovaStarScanBoard)
 
-                                                      Next
+                                                          Next
 #End Region
 
-                                                  End With
+                                                      End With
 
-                                              Next
+                                                  Next
 #End Region
 
 #Region "读取发送卡IP"
-                                              AddHandler tmpNovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+                                                  AddHandler tmpNovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
 
-                                              For itemID = 0 To tmpNovaStarSenderItems.Count - 1
-                                                  tmpNovaStarSenderItems(itemID) = New NovaStarSender
+                                                  For itemID = 0 To tmpNovaStarSenderItems.Count - 1
+                                                      tmpNovaStarSenderItems(itemID) = New NovaStarSender
 
-                                                  SenderIPData = Nothing
+                                                      SenderIPData = Nothing
 
-                                                  tmpNovaMarsControl.GetEquipmentIP(itemID)
-                                                  GetEquipmentIPDataEvent.WaitOne()
+                                                      tmpNovaMarsControl.GetEquipmentIP(itemID)
+                                                      GetEquipmentIPDataEvent.WaitOne()
 
-                                                  If SenderIPData Is Nothing Then Throw New Exception($"Sender {itemID} no support for interactive")
+                                                      If SenderIPData Is Nothing Then Throw New Exception($"{MultiLanguageHelper.Lang.GetS("Sender")} {itemID} {MultiLanguageHelper.Lang.GetS("no support for interactive")}")
 
-                                                  tmpNovaStarSenderItems(itemID).IpData = SenderIPData
+                                                      tmpNovaStarSenderItems(itemID).IpData = SenderIPData
 
-                                              Next
+                                                  Next
 
-                                              RemoveHandler tmpNovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
+                                                  RemoveHandler tmpNovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
 #End Region
 
-                                          End Sub)
+                                              End Sub)
 
-            If tmpBackgroundWorkDialog.Error IsNot Nothing Then
-                MsgBox(tmpBackgroundWorkDialog.Error.Message,
-                       MsgBoxStyle.Information,
-                       tmpBackgroundWorkDialog.Text)
-                Exit Sub
-            End If
+                If tmpBackgroundWorkDialog.Error IsNot Nothing Then
+                    MsgBox(tmpBackgroundWorkDialog.Error.Message,
+                           MsgBoxStyle.Information,
+                           tmpBackgroundWorkDialog.Text)
+                    Exit Sub
+                End If
 
+            End Using
         End Using
 
 #Region "清空旧播放窗体/发送卡列表/屏幕列表"
         Using tmpBackgroundWorkDialog As New Wangk.Resource.BackgroundWorkDialog With {
-                    .Text = "Clear old screen information",
+                    .Text = MultiLanguageHelper.Lang.GetS("Clear old screen information"),
                     .ProgressBarStyle = ProgressBarStyle.Marquee
                 }
 
             tmpBackgroundWorkDialog.Start(Sub()
-                                              '关闭nova连接
-                                              tmpSerialPortSelectForm?.Dispose()
-
                                               SensorDataProcessingHelper.StopAsync()
                                               DisplayingSchemeProcessingHelper.CloseFormForALLDisplayingWindow()
                                               AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Clear()
@@ -357,7 +346,7 @@ Public Class MainForm
 
 #Region "显示播放窗口/连接控制器"
         Using tmpBackgroundWorkDialog As New Wangk.Resource.BackgroundWorkDialog With {
-                    .Text = "Dispose screen information",
+                    .Text = MultiLanguageHelper.Lang.GetS("Dispose screen information"),
                     .ProgressBarStyle = ProgressBarStyle.Marquee
                 }
 
@@ -415,7 +404,7 @@ Public Class MainForm
 
 #Region "清空旧播放窗体"
         Using tmpBackgroundWorkDialog As New Wangk.Resource.BackgroundWorkDialog With {
-                    .Text = "Dispose screen information",
+                    .Text = MultiLanguageHelper.Lang.GetS("Dispose screen information"),
                     .ProgressBarStyle = ProgressBarStyle.Marquee
                 }
 
@@ -432,7 +421,7 @@ Public Class MainForm
 
 #Region "显示播放窗口/连接控制器"
         Using tmpBackgroundWorkDialog As New Wangk.Resource.BackgroundWorkDialog With {
-                    .Text = "Dispose screen information",
+                    .Text = MultiLanguageHelper.Lang.GetS("Dispose screen information"),
                     .ProgressBarStyle = ProgressBarStyle.Marquee
                 }
 
@@ -449,6 +438,7 @@ Public Class MainForm
                                           End Sub)
 
         End Using
+        Me.Activate()
 #End Region
 
         ShowDisplayingProgram()
@@ -467,7 +457,7 @@ Public Class MainForm
     Private Sub HardwareButton_Click(sender As Object, e As EventArgs) Handles HardwareButton.Click
 #Region "停止互动"
         Using tmpBackgroundWorkDialog As New Wangk.Resource.BackgroundWorkDialog With {
-                    .Text = "Dispose screen information",
+                    .Text = MultiLanguageHelper.Lang.GetS("Dispose screen information"),
                     .ProgressBarStyle = ProgressBarStyle.Marquee
                 }
 
@@ -478,58 +468,60 @@ Public Class MainForm
         End Using
 #End Region
 
-        '选择串口
-        Using tmpSerialPortSelectForm As New SerialPortSelectForm
-            If tmpSerialPortSelectForm.ShowDialog() = DialogResult.OK Then
+        ''todo:选择串口
+        Dim tmpSerialPortSelectForm As New SerialPortSelectForm
+        If tmpSerialPortSelectForm.ShowDialog() = DialogResult.OK Then
 
-                '开始读取
-                Using tmpBackgroundWorkDialog As New Wangk.Resource.BackgroundWorkDialog With {
-                    .Text = "Reading screen information",
+            '开始读取
+            Using tmpBackgroundWorkDialog As New Wangk.Resource.BackgroundWorkDialog With {
+                    .Text = MultiLanguageHelper.Lang.GetS("Reading screen information"),
                     .ProgressBarStyle = ProgressBarStyle.Marquee
                 }
 
-                    Dim tmpNovaMarsControl = tmpSerialPortSelectForm.NovaMarsControl
-                    Dim screenCount As Integer
-                    Dim senderCount As Integer
+                Dim tmpNovaMarsControl = tmpSerialPortSelectForm.NovaMarsControl
+                Dim screenCount As Integer
+                Dim senderCount As Integer
 
-                    tmpBackgroundWorkDialog.Start(Sub(uie As Wangk.Resource.BackgroundWorkEventArgs)
+                tmpBackgroundWorkDialog.Start(Sub(uie As Wangk.Resource.BackgroundWorkEventArgs)
 #Region "初始化"
-                                                      tmpNovaMarsControl.Initialize(tmpSerialPortSelectForm.selectedSerialPort, screenCount, senderCount)
+                                                  tmpNovaMarsControl.Initialize(tmpSerialPortSelectForm.selectedSerialPort, screenCount, senderCount)
 
-                                                      If screenCount = 0 Then Throw New Exception("No Screen found")
-                                                      If senderCount = 0 Then Throw New Exception("No Sender found")
+                                                  If screenCount = 0 Then Throw New Exception(MultiLanguageHelper.Lang.GetS("No Screen found"))
+                                                  If senderCount = 0 Then Throw New Exception(MultiLanguageHelper.Lang.GetS("No Sender found"))
 #End Region
-                                                  End Sub)
+                                              End Sub)
 
-                    If tmpBackgroundWorkDialog.Error Is Nothing Then
-                        Dim tmpDialog As New HardwareSettingsForm
-                        With tmpDialog
-                            .NovaMarsControl = tmpSerialPortSelectForm.NovaMarsControl
-                            ReDim .NovaStarSenderItems(senderCount - 1)
-                        End With
+                If tmpBackgroundWorkDialog.Error Is Nothing Then
+                    Dim tmpDialog As New HardwareSettingsForm
+                    With tmpDialog
+                        .NovaMarsControl = tmpSerialPortSelectForm.NovaMarsControl
+                        ReDim .NovaStarSenderItems(senderCount - 1)
+                    End With
 
-                        tmpDialog.ShowDialog()
-                    Else
-                        MsgBox(tmpBackgroundWorkDialog.Error.Message,
+                    tmpDialog.ShowDialog()
+                Else
+                    MsgBox(tmpBackgroundWorkDialog.Error.Message,
                                MsgBoxStyle.Information,
                                tmpBackgroundWorkDialog.Text)
-                    End If
+                End If
 
-                End Using
+            End Using
 
-            End If
-
-        End Using
+        End If
 
 #Region "开始互动"
-        Using tmpBackgroundWorkDialog As New Wangk.Resource.BackgroundWorkDialog With {
-                    .Text = "Dispose screen information",
-                    .ProgressBarStyle = ProgressBarStyle.Marquee
-                }
+        Using tmpDialog As New Wangk.Resource.UIWorkDialog With {
+                    .Text = MultiLanguageHelper.Lang.GetS("Dispose screen information")
+        }
 
-            tmpBackgroundWorkDialog.Start(Sub()
-                                              SensorDataProcessingHelper.StartAsync()
-                                          End Sub)
+            tmpDialog.Start(Sub()
+                                Try
+                                    tmpSerialPortSelectForm.Dispose()
+                                Catch ex As Exception
+                                End Try
+
+                                SensorDataProcessingHelper.StartAsync()
+                            End Sub)
 
         End Using
 #End Region
@@ -574,7 +566,7 @@ Public Class MainForm
         Catch ex As Exception
             MsgBox(ex.ToString,
                    MsgBoxStyle.Information,
-                   Wangk.Resource.MultiLanguageHelper.Lang.GetS("开机自启失败"))
+                   MultiLanguageHelper.Lang.GetS("Setup failed"))
         End Try
 
     End Sub
@@ -587,9 +579,9 @@ Public Class MainForm
         AppSettingHelper.Settings.SelectLang = LanguageComboBox.SelectedIndex
 
         If oldValue <> AppSettingHelper.Settings.SelectLang Then
-            MsgBox(Wangk.Resource.MultiLanguageHelper.Lang.GetS("Restart the program to enable the language changes to take effect"),
+            MsgBox(MultiLanguageHelper.Lang.GetS("Restart the program to enable the language changes to take effect"),
                    MsgBoxStyle.Information,
-                   Wangk.Resource.MultiLanguageHelper.Lang.GetS("Change language"))
+                   MultiLanguageHelper.Lang.GetS("Change language"))
         End If
 
         AppSettingHelper.SaveToLocaltion()
@@ -601,8 +593,23 @@ Public Class MainForm
     ''' 切换控件语言
     ''' </summary>
     Public Sub ChangeControlsLanguage()
-        With Wangk.Resource.MultiLanguageHelper.Lang
-            'Me.Text = .GetS("Temp Change Over")
+        With MultiLanguageHelper.Lang
+            Me.LabelItem3.Text = .GetS("Hide windows")
+            Me.HideWindowsCheckBox.Text = .GetS("Hide windows")
+            Me.InteractCheckBox.Text = .GetS("Interact") & "(F1)"
+            Me.TestCheckBox.Text = .GetS("Test") & "(F2)"
+            Me.BlackCheckBox.Text = .GetS("Black") & "(F3)"
+            Me.DebugCheckBox.Text = .GetS("Debug") & "(F4)"
+            Me.ReadScreenInformationButton.Text = .GetS("Read screen information")
+            Me.PlayWindowSettingsButton.Text = .GetS("Play window settings")
+            Me.LabelItem1.Text = .GetS("Language")
+            Me.LabelItem2.Text = .GetS("Auto run")
+            Me.AutoRunCheckBox.Text = .GetS("AutoRun")
+            Me.AccuracyButton.Text = .GetS("Accuracy settings")
+            Me.HardwareButton.Text = .GetS("Hardware settings")
+            Me.StartTab.Text = .GetS("Start")
+            Me.SettingsTab.Text = .GetS("Settings")
+            Me.ToolStripDropDownButton1.Text = .GetS("Connection abnormality")
         End With
     End Sub
 #End Region
@@ -626,7 +633,7 @@ Public Class MainForm
 
         For Each tmpNovaStarSender In AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems
             ToolStripDropDownButton1.DropDownItems.Add(New ToolStripMenuItem(
-                                                       $"{Wangk.Resource.MultiLanguageHelper.Lang.GetS("Sender")}:{tmpNovaStarSender.IPAddress}",
+                                                       $"{MultiLanguageHelper.Lang.GetS("Sender")}:{tmpNovaStarSender.IPAddress}",
                                                        My.Resources.usb_disconnect_32px)
                                                        )
         Next
@@ -658,11 +665,11 @@ Public Class MainForm
 
             If stateOfOK Then
                 ToolStripDropDownButton1.Image = InteractiveStudio.My.Resources.Resources.usb_connect_32px
-                ToolStripDropDownButton1.Text = Wangk.Resource.MultiLanguageHelper.Lang.GetS("Normal Connection")
+                ToolStripDropDownButton1.Text = MultiLanguageHelper.Lang.GetS("Normal Connection")
 
             Else
                 ToolStripDropDownButton1.Image = InteractiveStudio.My.Resources.Resources.usb_disconnect_32px
-                ToolStripDropDownButton1.Text = Wangk.Resource.MultiLanguageHelper.Lang.GetS("Connection abnormality")
+                ToolStripDropDownButton1.Text = MultiLanguageHelper.Lang.GetS("Connection abnormality")
 
             End If
 

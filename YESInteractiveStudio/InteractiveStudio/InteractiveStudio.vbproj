@@ -215,6 +215,7 @@
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindowSettings\Control\PlayWindowSettingControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="GlobalSuppressions.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

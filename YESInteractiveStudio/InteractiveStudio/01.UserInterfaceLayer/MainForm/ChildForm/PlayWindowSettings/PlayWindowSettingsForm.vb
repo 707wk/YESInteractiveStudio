@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports DevComponents.DotNetBar
+Imports Wangk.Resource
 
 Public Class PlayWindowSettingsForm
     ''' <summary>
@@ -22,7 +23,7 @@ Public Class PlayWindowSettingsForm
         AddWindowButton = New ButtonItem()
         With AddWindowButton
             .ButtonStyle = eButtonStyle.ImageAndText
-            .Text = "Add Play Window"
+            .Text = MultiLanguageHelper.Lang.GetS("Add Play Window")
             .Image = My.Resources.add_24px
             .CustomColorName = "AddPlayWindow"
 
@@ -46,11 +47,13 @@ Public Class PlayWindowSettingsForm
             Next
         Next
 
+        ChangeControlsLanguage()
+
     End Sub
 
 #Region "添加窗口"
     Private Sub AddTabClick(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim s As String = $"Window {SuperTabControl1.Tabs.Count + 1}"
+        Dim s As String = $"{MultiLanguageHelper.Lang.GetS("Window")} {SuperTabControl1.Tabs.Count + 1}"
         Dim tab As SuperTabItem = SuperTabControl1.CreateTab(s)
 
         tab.AttachedControl.Controls.Add(New PlayWindowSettingControl With {
@@ -79,8 +82,8 @@ Public Class PlayWindowSettingsForm
     End Sub
 
     Private Sub PlayWindowSettingsForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        If Not IsWindowSettingDataCheckoutOk() OrElse
-            (IsMustSave AndAlso Not IsSave) Then
+        If (IsMustSave AndAlso Not IsSave) AndAlso
+            Not IsWindowSettingDataCheckoutOk() Then
 
             e.Cancel = True
             Exit Sub
@@ -112,7 +115,7 @@ Public Class PlayWindowSettingsForm
                     .ScreenIDItems.Add(tmpScreenButton.ScreenId)
 
                     AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(tmpScreenButton.ScreenId).LocationOfOriginal =
-                        tmpPlayWindowSettingControl.Location
+                        tmpScreenButton.Location
                 Next
 
                 .PlayFileItems = tmpPlayWindowSettingControl.PlayFileItems
@@ -136,18 +139,18 @@ Public Class PlayWindowSettingsForm
         Try
 
             If SuperTabControl1.Tabs.Count = 0 Then
-                Throw New Exception("Window count cannot be 0")
+                Throw New Exception(MultiLanguageHelper.Lang.GetS("Window count cannot be 0"))
             End If
 
             For Each tmpSuperTabItem As SuperTabItem In SuperTabControl1.Tabs
                 Dim tmpPlayWindowSettingControl = CType(tmpSuperTabItem.AttachedControl.Controls.Item(0), PlayWindowSettingControl)
 
                 If tmpPlayWindowSettingControl.TextBox1.Text = "" Then
-                    Throw New Exception("Window name cannot be empty")
+                    Throw New Exception(MultiLanguageHelper.Lang.GetS("Window name cannot be empty"))
                 End If
 
                 If tmpPlayWindowSettingControl.Panel2.Controls.Count = 0 Then
-                    Throw New Exception($"Window {tmpPlayWindowSettingControl} Screen cannot be empty")
+                    Throw New Exception($"{MultiLanguageHelper.Lang.GetS("Window")} {tmpPlayWindowSettingControl} {MultiLanguageHelper.Lang.GetS("Screen cannot be empty")}")
                 End If
 
             Next
@@ -171,4 +174,18 @@ Public Class PlayWindowSettingsForm
         Dim tmpPlayWindowSettingControl = CType(tmpSuperTabItem.AttachedControl.Controls.Item(0), PlayWindowSettingControl)
         tmpPlayWindowSettingControl.ToolStripButton4_Click(Nothing, Nothing)
     End Sub
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With MultiLanguageHelper.Lang
+            Me.Text = .GetS("PlayWindowSettingsForm")
+            Me.Button1.Text = .GetS("Save changes")
+            Me.Button2.Text = .GetS("Cancel")
+        End With
+    End Sub
+#End Region
+
 End Class

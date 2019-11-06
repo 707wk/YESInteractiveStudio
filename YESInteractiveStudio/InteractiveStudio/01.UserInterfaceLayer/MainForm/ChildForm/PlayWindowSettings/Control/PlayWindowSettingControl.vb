@@ -1,4 +1,6 @@
-﻿Public Class PlayWindowSettingControl
+﻿Imports Wangk.Resource
+
+Public Class PlayWindowSettingControl
     ''' <summary>
     ''' 播放窗口信息
     ''' </summary>
@@ -31,6 +33,8 @@
         Next
 
         PlayFileItems = DisplayingWindow.PlayFileItems
+
+        ChangeControlsLanguage()
 
     End Sub
 
@@ -75,4 +79,23 @@
 
         Panel2.Controls.Clear()
     End Sub
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With MultiLanguageHelper.Lang
+            Me.Label1.Text = .GetS("Name")
+            Me.Label2.Text = .GetS("Offset")
+            Me.GroupBox1.Text = .GetS("property")
+            Me.Label5.Text = .GetS("Magnificine")
+            Me.GroupBox3.Text = .GetS("Layout Preview")
+            Me.ToolStripButton1.Text = .GetS("Add screen")
+            Me.ToolStripButton4.Text = .GetS("Empty")
+            Me.RemoveToolStripMenuItem.Text = .GetS("Remove")
+        End With
+    End Sub
+#End Region
+
 End Class

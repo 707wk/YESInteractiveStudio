@@ -1,4 +1,5 @@
 ﻿Imports Nova.Mars.SDK
+Imports Wangk.Resource
 
 Public Class SerialPortSelectForm
 
@@ -24,6 +25,20 @@ Public Class SerialPortSelectForm
         ConnectButton.Enabled = False
         Label2.BringToFront()
 
+#Region "重新启动Nova服务"
+        Try
+            ''todo:重新启动Nova服务
+            Dim tmpProcess = System.Diagnostics.Process.GetProcessesByName("MarsServerProvider")
+            If tmpProcess.Length > 0 Then
+                tmpProcess(0).Kill()
+            End If
+            Process.Start($".\Nova\Server\MarsServerProvider.exe")
+        Catch ex As Exception
+        End Try
+#End Region
+
+        ChangeControlsLanguage()
+
     End Sub
 
     Private Sub SerialPortSelectForm_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
@@ -41,6 +56,7 @@ Public Class SerialPortSelectForm
     End Sub
 
     Private Sub RefreshButton_Click(Optional sender As Object = Nothing, Optional e As EventArgs = Nothing) Handles RefreshButton.Click
+
         ComboBox1.Items.Clear()
         ConnectButton.Enabled = False
 
@@ -71,5 +87,19 @@ Public Class SerialPortSelectForm
 
         Me.Close()
     End Sub
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With MultiLanguageHelper.Lang
+            Me.Text = .GetS("SerialPortSelectForm")
+            Me.ConnectButton.Text = .GetS("Connect to Control")
+            Me.Label1.Text = .GetS("Serial Port")
+            Me.Label2.Text = .GetS("Waiting...")
+        End With
+    End Sub
+#End Region
 
 End Class

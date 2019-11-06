@@ -65,13 +65,13 @@ Partial Class AccuracySettingsForm
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.Label6, 3, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label5, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.TrackBar2, 2, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label1, 4, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.NumericUpDown1, 2, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label5, 3, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label6, 1, 0)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 12)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
@@ -84,7 +84,7 @@ Partial Class AccuracySettingsForm
         '
         Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(484, 15)
+        Me.Label6.Location = New System.Drawing.Point(183, 15)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(23, 12)
         Me.Label6.TabIndex = 0
@@ -94,7 +94,7 @@ Partial Class AccuracySettingsForm
         '
         Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(188, 15)
+        Me.Label5.Location = New System.Drawing.Point(489, 15)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(29, 12)
         Me.Label5.TabIndex = 0
@@ -105,7 +105,7 @@ Partial Class AccuracySettingsForm
         Me.TrackBar2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TrackBar2.LargeChange = 1
         Me.TrackBar2.Location = New System.Drawing.Point(223, 3)
-        Me.TrackBar2.Maximum = 128
+        Me.TrackBar2.Maximum = 256
         Me.TrackBar2.Minimum = 1
         Me.TrackBar2.Name = "TrackBar2"
         Me.TrackBar2.Size = New System.Drawing.Size(255, 37)

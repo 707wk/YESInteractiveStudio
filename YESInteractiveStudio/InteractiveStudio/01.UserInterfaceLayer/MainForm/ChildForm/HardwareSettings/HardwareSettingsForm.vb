@@ -60,6 +60,9 @@ Public Class HardwareSettingsForm
             .ShowRootLines = True
         End With
 #End Region
+
+        ChangeControlsLanguage()
+
     End Sub
 
     Private Sub HardwareSettingsForm_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -77,7 +80,7 @@ Public Class HardwareSettingsForm
                                     NovaMarsControl.GetEquipmentIP(itemID)
                                     GetEquipmentIPDataEvent.WaitOne()
 
-                                    If SenderIPData Is Nothing Then Throw New Exception($"Sender {itemID} no support for interactive")
+                                    If SenderIPData Is Nothing Then Throw New Exception($"{MultiLanguageHelper.Lang.GetS("Sender")} {itemID} {MultiLanguageHelper.Lang.GetS("no support for interactive")}")
 
                                     NovaStarSenderItems(itemID).IpData = SenderIPData
 
@@ -97,7 +100,7 @@ Public Class HardwareSettingsForm
                     DataGridView1.Rows.Add({item.IPAddress,
                                            item.IPSubnetMask,
                                            item.IPGateway,
-                                           "Apply"})
+                                           MultiLanguageHelper.Lang.GetS("Apply")})
                 Next
             End If
 
@@ -134,17 +137,19 @@ Public Class HardwareSettingsForm
     End Sub
 
 #Region "修改IP信息"
+#Disable Warning IDE0069 ' 应释放可释放的字段
     ''' <summary>
     ''' 写入IP标志
     ''' </summary>
-    Private SetEquipmentIPDataEvent As New Threading.AutoResetEvent(False)
+    Private ReadOnly SetEquipmentIPDataEvent As New Threading.AutoResetEvent(False)
+#Enable Warning IDE0069 ' 应释放可释放的字段
     ''' <summary>
     ''' 写入结果
     ''' </summary>
     Private SetEquipmentIPDataResult As Boolean
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-        If DataGridView1.Columns(e.ColumnIndex).HeaderText <> "Apply Changes" Then Exit Sub
+        If DataGridView1.Columns(e.ColumnIndex).HeaderText <> MultiLanguageHelper.Lang.GetS("Apply Changes") Then Exit Sub
         If e.RowIndex < 0 Then Exit Sub
 
         'ip校验正确性
@@ -152,7 +157,7 @@ Public Class HardwareSettingsForm
             If Not System.Net.IPAddress.TryParse(DataGridView1.Rows(e.RowIndex).Cells(itemID).Value, Nothing) OrElse
                 $"{DataGridView1.Rows(e.RowIndex).Cells(itemID).Value}".Split(".").Count <> 4 Then
 
-                MsgBox($"{DataGridView1.Columns(itemID).HeaderText} formal error", MsgBoxStyle.Information, Me.Text)
+                MsgBox($"{DataGridView1.Columns(itemID).HeaderText} {MultiLanguageHelper.Lang.GetS("formal error")}", MsgBoxStyle.Information, Me.Text)
                 Exit Sub
             End If
         Next
@@ -179,7 +184,7 @@ Public Class HardwareSettingsForm
         TmpIpData(8) = Val(tmpIPStr(3))
 
         Using tmpDialog As New Wangk.Resource.BackgroundWorkDialog With {
-            .Text = "Apply Changes",
+            .Text = MultiLanguageHelper.Lang.GetS("Apply Changes"),
             .ProgressBarStyle = ProgressBarStyle.Marquee
         }
 
@@ -193,18 +198,20 @@ Public Class HardwareSettingsForm
 
         If SetEquipmentIPDataResult Then
             'AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(e.RowIndex).IpData = TmpIpData
-            MsgBox("IP modify successfully")
+            MsgBox(MultiLanguageHelper.Lang.GetS("IP modify successfully"))
         Else
-            MsgBox("Fail to modify IP")
+            MsgBox(MultiLanguageHelper.Lang.GetS("Fail to modify IP"))
         End If
 
     End Sub
 
 #Region "获取发送卡IP"
+#Disable Warning IDE0069 ' 应释放可释放的字段
     ''' <summary>
     ''' 读取到IP标志
     ''' </summary>
-    Private GetEquipmentIPDataEvent As New AutoResetEvent(False)
+    Private ReadOnly GetEquipmentIPDataEvent As New AutoResetEvent(False)
+#Enable Warning IDE0069 ' 应释放可释放的字段
     ''' <summary>
     ''' 读到的发送卡IP
     ''' </summary>
@@ -237,6 +244,7 @@ Public Class HardwareSettingsForm
     Private Sub HardwareSettingsForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         '解绑IP设置事件
         RemoveHandler NovaMarsControl.SendEquipmentIPDataEvent, AddressOf SendEquipmentIPData
+
     End Sub
 #End Region
 
@@ -248,9 +256,9 @@ Public Class HardwareSettingsForm
 
         If SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
             AppSettingHelper.Settings.SensorTouchSensitivity = TrackBar1.Value
-            MsgBox("Updated successfully", MsgBoxStyle.Information, Me.Text)
+            MsgBox(MultiLanguageHelper.Lang.GetS("Updated successfully"), MsgBoxStyle.Information, Me.Text)
         Else
-            MsgBox("Fail to modify")
+            MsgBox(MultiLanguageHelper.Lang.GetS("Fail to modify"))
         End If
 
         Threading.Thread.Sleep(200)
@@ -263,9 +271,9 @@ Public Class HardwareSettingsForm
 
         If SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
             AppSettingHelper.Settings.SensorResetTemp = Val(ComboBox1.Text)
-            MsgBox("Updated successfully", MsgBoxStyle.Information, Me.Text)
+            MsgBox(MultiLanguageHelper.Lang.GetS("Updated successfully"), MsgBoxStyle.Information, Me.Text)
         Else
-            MsgBox("Fail to modify")
+            MsgBox(MultiLanguageHelper.Lang.GetS("Fail to modify"))
         End If
 
         Threading.Thread.Sleep(200)
@@ -278,9 +286,9 @@ Public Class HardwareSettingsForm
 
         If SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
             AppSettingHelper.Settings.SensorResetSec = Val(ComboBox2.Text)
-            MsgBox("Updated successfully", MsgBoxStyle.Information, Me.Text)
+            MsgBox(MultiLanguageHelper.Lang.GetS("Updated successfully"), MsgBoxStyle.Information, Me.Text)
         Else
-            MsgBox("Fail to modify")
+            MsgBox(MultiLanguageHelper.Lang.GetS("Fail to modify"))
         End If
 
         Threading.Thread.Sleep(200)
@@ -289,14 +297,17 @@ Public Class HardwareSettingsForm
 
 #Region "单片机信息"
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim tmpDialog As New OpenFileDialog With {
+        Using tmpDialog As New OpenFileDialog With {
             .Filter = $"{MultiLanguageHelper.Lang.GetS("Bin File")}|*.bin"
         }
-        If tmpDialog.ShowDialog <> DialogResult.OK Then
-            Exit Sub
-        End If
 
-        TextBox3.Text = tmpDialog.FileName
+            If tmpDialog.ShowDialog <> DialogResult.OK Then
+                Exit Sub
+            End If
+
+            TextBox3.Text = tmpDialog.FileName
+
+        End Using
     End Sub
 
     '全选子项
@@ -313,7 +324,7 @@ Public Class HardwareSettingsForm
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         '检查文件
-        If TextBox3.Text = "" Then
+        If String.IsNullOrEmpty(TextBox3.Text) Then
             MsgBox(MultiLanguageHelper.Lang.GetS("Not Select Bin File"),
                    MsgBoxStyle.Information,
                    MultiLanguageHelper.Lang.GetS("Update program"))
@@ -321,39 +332,39 @@ Public Class HardwareSettingsForm
             Exit Sub
         End If
 
-        Dim tmpScanBoardSelectForm As New ScanBoardSelectForm
-        For Each item As TreeNode In TreeView1.Nodes
-            tmpScanBoardSelectForm.TreeView1.Nodes.Add(item.Clone)
-        Next
-        If tmpScanBoardSelectForm.ShowDialog <> DialogResult.OK Then
-            Exit Sub
-        End If
+        Using tmpScanBoardSelectForm As New ScanBoardSelectForm
+            For Each item As TreeNode In TreeView1.Nodes
+                tmpScanBoardSelectForm.TreeView1.Nodes.Add(item.Clone)
+            Next
+            If tmpScanBoardSelectForm.ShowDialog <> DialogResult.OK Then
+                Exit Sub
+            End If
 
-        'Try
-        '    UpdateMCUSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-        '    With UpdateMCUSocket
-        '        .SendTimeout = 500
-        '        .ReceiveTimeout = 500
-        '        .Connect(AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(CByte(tmpScanBoardSelectForm.Value.Split(",")(0))).IPAddress, 6000)
-        '    End With
+            'Try
+            '    UpdateMCUSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            '    With UpdateMCUSocket
+            '        .SendTimeout = 500
+            '        .ReceiveTimeout = 500
+            '        .Connect(AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(CByte(tmpScanBoardSelectForm.Value.Split(",")(0))).IPAddress, 6000)
+            '    End With
 
-        Using tmpDialog As New BackgroundWorkDialog With {
-                .Text = MultiLanguageHelper.Lang.GetS("Update program")
-            }
+            Using tmpDialog As New BackgroundWorkDialog With {
+                    .Text = MultiLanguageHelper.Lang.GetS("Update program")
+                }
                 tmpDialog.Start(AddressOf UpdateMCUProgram, tmpScanBoardSelectForm.Value)
 
                 If tmpDialog.Error IsNot Nothing Then
                     MsgBox(tmpDialog.Error.Message,
                            MsgBoxStyle.Information,
                            Button5.Text)
-                Else
-                    MsgBox("升级成功",
-                           MsgBoxStyle.Information,
-                           Button5.Text)
+                    'Else
+                    '    MsgBox("升级成功",
+                    '           MsgBoxStyle.Information,
+                    '           Button5.Text)
                 End If
 
             End Using
-
+        End Using
         '    UpdateMCUSocket.Close()
 
         'Catch ex As Exception
@@ -401,7 +412,7 @@ Public Class HardwareSettingsForm
         '读取
         If Not CheckScanBoardData(senderID, portID, scannerID, Wangk.Hash.Hex2Bin("1a1b"), 2) Then
             '失败
-            Throw New Exception("升级指令发送失败")
+            Throw New Exception(MultiLanguageHelper.Lang.GetS("Switch to upgrade mode failed"))
         End If
 #End Region
 
@@ -456,7 +467,7 @@ Public Class HardwareSettingsForm
                     For trySendID = 0 To 20
                         If trySendID = 20 Then
                             '20次后发送则标记为发送失败
-                            Throw New Exception("升级文件发送失败")
+                            Throw New Exception(MultiLanguageHelper.Lang.GetS("Update program failed"))
                         End If
 
                         'Console.WriteLine($"{sendID} 重复发送 {trySendID + 1}")
@@ -552,7 +563,7 @@ Public Class HardwareSettingsForm
     ''' <summary>
     ''' 是否全0
     ''' </summary>
-    Public Function IsAllZero(dataArray As Byte(), length As Integer) As Boolean
+    Public Shared Function IsAllZero(dataArray As Byte(), length As Integer) As Boolean
         For i001 = 0 To length - 1
             If dataArray(i001) <> &H0 Then
                 Return False
@@ -567,7 +578,7 @@ Public Class HardwareSettingsForm
     ''' <summary>
     ''' 判断数据是否相同
     ''' </summary>
-    Public Function CheckDataIsSame(scanBoardData() As Byte,
+    Public Shared Function CheckDataIsSame(scanBoardData() As Byte,
                                      checkData() As Byte) As Boolean
         For i001 = 0 To checkData.Length - 1
             If checkData(i001) <> scanBoardData(i001) Then
@@ -632,7 +643,9 @@ Public Class HardwareSettingsForm
                     Next
                 Next
 
+#Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
+#Enable Warning CA1031 ' Do not catch general exception types
             End Try
 
         End Using
@@ -831,7 +844,40 @@ Public Class HardwareSettingsForm
 
     End Function
 
-    Private Sub Wj8qAE9yA7gbBDDCCMMpCh2w8ECBuvRFv()
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With MultiLanguageHelper.Lang
+            Me.Column3.HeaderText = .GetS("Subnet Mask")
+            Me.TabPage1.Text = .GetS("Control")
+            Me.GroupBox3.Text = .GetS("Control IP")
+            Me.Column2.HeaderText = .GetS("IP Address")
+            Me.Column4.HeaderText = .GetS("Gateway")
+            Me.Column1.HeaderText = .GetS("Apply Changes")
+            Me.TabPage2.Text = .GetS("Sensor")
+            Me.GroupBox2.Text = .GetS("Sensor option")
+            Me.Label7.Text = .GetS("High")
+            Me.Label8.Text = .GetS("Low")
+            Me.Label3.Text = .GetS("Reset Time Interval")
+            Me.Label1.Text = .GetS("Sensitivity")
+            Me.Label2.Text = .GetS("Temp Change Over")
+            Me.Button1.Text = .GetS("Apply")
+            Me.Button2.Text = .GetS("Apply")
+            Me.Button3.Text = .GetS("Apply")
+            Me.TabPage3.Text = .GetS("MCU")
+            Me.Label5.Text = .GetS("Update Bin file")
+            Me.Button4.Text = .GetS("Select")
+            Me.Button5.Text = .GetS("Update hardware program")
+            Me.Button6.Text = .GetS("Query MCU program information")
+            Me.GroupBox1.Text = .GetS("MCU information")
+            Me.Label4.Text = .GetS("Scanner versions")
+            Me.RadioButton2.Text = .GetS("4.4.0.0 And above")
+            Me.RadioButton1.Text = .GetS("Under 4.4.0.0")
+            Me.Text = .GetS("HardwareSettingsForm")
+        End With
     End Sub
+#End Region
 
 End Class

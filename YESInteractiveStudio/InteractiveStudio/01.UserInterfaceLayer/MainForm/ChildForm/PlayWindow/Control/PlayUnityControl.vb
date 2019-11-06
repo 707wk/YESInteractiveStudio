@@ -74,15 +74,6 @@ Public Class PlayUnityControl
         Return True
     End Function
 
-    'Public Function Remove(controls As Control.ControlCollection) As Boolean Implements IPlayBaseControl.Remove
-    '    If UnityControl IsNot Nothing Then
-    '        UnityControl.Dispose()
-    '        UnityControl = Nothing
-    '    End If
-
-    '    Return True
-    'End Function
-
     Public Function PointActive(values As List(Of PointInfo)) As Boolean Implements IPlayBaseControl.PointActive
         Dim tmpArray = values.ToArray
         For Each item In tmpArray

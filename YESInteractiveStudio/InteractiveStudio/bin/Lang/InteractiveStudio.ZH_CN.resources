@@ -1,134 +1,104 @@
-File_文件
-ID_序号
-Play Time(s)_播放时长(s)
-Port_网口
-ScanBoard_接收卡
+Save changes_保存修改
+Cancel_取消
+Low_小
+High_大
+PositionaI accuracy_合并范围
+Valid Sensor Minimum_有效最小感应点数
+AccuracySettingsForm_精度设置
 Sender_发送卡
-Size_尺寸
-Version_版本
-MCU Bin_单片机程序
-Schedule_播放方案
-High Resolution_高分辨率
-Low Resolution_低分辨率
-Medium Resolution_中分辨率
-Window_窗口
-Program_节目
-Screen_屏幕
+no support for interactive_不支持互动
 Apply_应用
-Browse ..._浏览 …
+Apply Changes_应用修改
+formal error_格式错误
+IP modify successfully_IP 地址修改成功
+Fail to modify IP_IP 地址修改失败
+Updated successfully_更新成功
+Fail to modify_修改失败
+Bin File_升级文件
+Not Select Bin File_未选择升级文件
+Update program_升级程序
+Step_步骤
+Switch to upgrade mode_切换升级模式
+Switch to upgrade mode failed_切换升级模式失败
+Update program failed_升级程序失败
+Save_保存修改
+Query program information_查询程序信息
+Unknown_未知
+Port_网口
+Connect_连接
+Version_版本
+Subnet Mask_子网掩码
+Control_发送卡
+Control IP_发送卡 IP
+IP Address_IP 地址
+Gateway_网关
+Sensor_传感器
+Sensor option_传感器设置
+Reset Time Interval_定时复位阈值
+Sensitivity_灵敏度
+Temp Change Over_温度复位阈值
+MCU_单片机
+Update Bin file_发送升级文件
+Select_选择
+Update hardware program_更新硬件程序
+Query MCU program information_查询单片机程序信息
+MCU information_单片机信息
+Scanner versions_接收卡版本
+4.4.0.0 And above_4.4.0.0 及其以上
+Under 4.4.0.0_低于 4.4.0.0
+HardwareSettingsForm_硬件设置
 OK_确定
-Update_升级
-PowerUser_高级用户
+ScreenIDSelectForm_选择屏幕
+Name_名称
+Offset_坐标
+property_属性
+Magnificine_缩放系数
+Layout Preview_布局
+Add screen_添加屏幕
+Empty_清空
+Remove_移除
+Add Play Window_添加播放窗口
+Window_窗口
+Window count cannot be 0_窗口数不能为0
+Window name cannot be empty_窗口名称不能为空
+Screen cannot be empty_窗口内屏幕不能为空
+PlayWindowSettingsForm_播放窗口设置
+SerialPortSelectForm_选择串口
+Connect to Control_连接发送卡
+Serial Port_串口号
+Waiting..._等待…
+File name_文件名
+Path_路径
+Play Time_播放时长
+EditPlayFileForm_编辑播放文件
+Interactive material list_互动素材列表
+Add file_添加文件
+Play the current program_播放当前列表
+Stop play_停止播放
+Play_播放
+Edit_编辑
+Dispose screen information_处理屏幕信息
+Reading screen information_读取屏幕信息
+No Screen found_未找到屏幕
+No Sender found_未找到发送卡
+Failed to reading screen information_读取屏幕信息失败
+Clear old screen information_清理旧数据
+Setup failed_设置失败
+Restart the program to enable the language changes to take effect_重启程序以应用修改
+Change language_更改语言
+Hide windows_隐藏播放窗口
 Interact_互动
 Test_测试
 Black_黑屏
 Debug_调试
-Connect_连接
-Disconnect_断开
-New_新建
-Open_打开
-Save_保存
-Save As_另存为
-User Manual_用户手册
-About_关于
-Ligature_走线
-Controls_控制器
-Old ScanBoard Version_旧版接收卡程序
-IP Address_IP 地址
-Gateway_网关
-Subnet Mask_子网掩码
-Delete Media_删除素材
-Delete Program_删除节目
-Delete Screen_删除屏幕
-Delete Window_删除窗口
-Edit Window_编辑窗口
-Control Network_控制器网络参数
-Media List_素材列表
-ScanBoard List_接收卡列表
-Screen List_屏幕列表
-MCU_单片机程序
-Media Setting_素材设置
-Screen Setting_屏幕设置
-ScanBoard Version_接收卡版本
-Window Setting_窗口设置
-Remark_备注
-X_X
-Location_位置
-0%_0%
-Copyright_版权
-CompanyName_公司
-Play Time_播放时长
-Y_Y
-s_s
-Actual Pixels_实际像素
-Zoom Pixels_缩放像素
-Language_语言
-Anti-interference_抗干扰等级
-Touch Sensitivity_触摸灵敏度
-Temp Change Over_温度复位幅度
-Reset Time Interval_时间复位间隔
-TouchMode_触摸模式
-WebUrl_主页
-Play_播放
-Control_控制器
-Display Mode_显示模式
-Reaction_感应
-Reset_复位
-General_一般
-Screen Configuration_屏幕配置
-Device_设备
-Interactivity_互动
+Read screen information_读取屏幕信息
+Play window settings_播放窗口设置
+Language_界面语言
+Auto run_开机自启
+AutoRun_自动运行
+Accuracy settings_精度设置
+Hardware settings_硬件设置
+Start_开始
 Settings_设置
-Help_帮助
-Not saved_未保存
-Screen Ligature_屏幕走线
-Select Screen_选择屏幕
-ToolStrip1_ToolStrip1
-Add Media_添加素材
-Add Window_添加窗口
-Get MCU Version_查询单片机程序版本
-Zoom In_放大
-Add Program_添加节目
-Zoom Out_缩小
-Add Screen_添加屏幕
-Clear_清空
-Zoom 100%_缩放 100%
-Start ..._启动 …
-not found_未找到
-Modified Control IP successfully_修改IP成功
-Please reconnect the control or restart the control_请重新连接控制器或重启控制器
-Failed to connect_未能连通
-Invalid Argument_非法参数
-Program upgrade completed_程序升级完毕
-Upgrade command failed to send_升级指令发送失败
-Upgrade data failed to send_升级数据发送失败
-Do you want to save the changes of Schedule_是否保存对播放方案的修改
-Failed to Connect Nova Serve_连接Nova服务失败
-Failed to Reading display screen information_读显示屏信息失败
-Failed to set IP data!Please check the equipment and reset it_修改IP数据失败!请检查设备后重新设置
-Failed to get IP data!Please check the equipment and reset it_获取IP数据失败!请检查设备后重新设置
-No control system found_未找到控制系统
-No controller found_未找到控制器
-No display screen found_未找到屏幕
-Start Nova Serve_启动Nova服务
-Connect Nova Serve ..._连接Nova服务
-Loading Completed_加载完成
-Loading screen information_载入屏幕信息
-Reading display screen information_读取显示屏信息
-Searching Control System_查找控制系统
-Connect Exception_连接异常
-Connected Exception_通信异常
-Control connection exception_控制器连接异常
-Play Program_播放节目
-Test Connect_测试连接
-Old MCU Version_旧版MCU程序
-Input Password_输入密码
-Played Time_已播放时间
-Play File ID_播放文件序号
-No window added in Schedule_播放方案未添加窗口
-No screen added in window_播放窗口未添加屏幕
-Hide Windows_隐藏播放窗体
-Restart the program to enable the language changes to take effect_重启程序以使语言更改生效
-Change language_更改语言
-SensorAngle_传感器角度
-Box Rotation_箱体旋转
+Connection abnormality_连接异常
+Normal Connection_正常连接

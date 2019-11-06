@@ -1,23 +1,59 @@
-﻿Imports System.Runtime.InteropServices
-Imports Newtonsoft.Json
+﻿Imports Newtonsoft.Json
 ''' <summary>
 ''' 全局配置辅助类
 ''' </summary>
-Public Class AppSettingHelper
+Public NotInheritable Class AppSettingHelper
     Private Sub New()
     End Sub
 
+#Region "程序标志"
+    Private Shared _GUID As String
+    ''' <summary>
+    ''' 程序标志
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared ReadOnly Property GUID As String
+        Get
+            If String.IsNullOrEmpty(_GUID) Then
+                Dim guid_attr As Attribute = Attribute.GetCustomAttribute(Reflection.Assembly.GetExecutingAssembly(), GetType(Runtime.InteropServices.GuidAttribute))
+                _GUID = CType(guid_attr, Runtime.InteropServices.GuidAttribute).Value
+            End If
+
+            Return _GUID
+        End Get
+    End Property
+#End Region
+
+#Region "程序版本"
+    Private Shared _ProductVersion As String
+    ''' <summary>
+    ''' 程序版本
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared ReadOnly Property ProductVersion As String
+        Get
+            If String.IsNullOrEmpty(_ProductVersion) Then
+                Dim assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location
+                _ProductVersion = System.Diagnostics.FileVersionInfo.GetVersionInfo(assemblyLocation).ProductVersion
+            End If
+
+            Return _ProductVersion
+        End Get
+    End Property
+#End Region
+
+#Region "配置参数"
     ''' <summary>
     ''' 实例
     ''' </summary>
     Private Shared instance As AppSetting
-
     ''' <summary>
     ''' 参数
     ''' </summary>
     Public Shared ReadOnly Property Settings As AppSetting
         Get
             If instance Is Nothing Then
+
                 LoadFromLocaltion()
 
                 '初始化
@@ -34,6 +70,7 @@ Public Class AppSettingHelper
             Return instance
         End Get
     End Property
+#End Region
 
 #Region "从本地读取配置"
     ''' <summary>
@@ -52,6 +89,7 @@ Public Class AppSettingHelper
                 System.IO.File.ReadAllText($"{Path}\Hunan Yestech\{My.Application.Info.ProductName}\Data\Setting.json",
                                            System.Text.Encoding.UTF8))
 
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
             '使用默认参数
             instance = New AppSetting
@@ -68,6 +106,7 @@ Public Class AppSettingHelper
                 End With
 
             End With
+#Enable Warning CA1031 ' Do not catch general exception types
 
         End Try
 
@@ -97,37 +136,14 @@ Public Class AppSettingHelper
                 t.Write(JsonConvert.SerializeObject(instance))
             End Using
 
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Information, My.Application.Info.ProductName)
+#Enable Warning CA1031 ' Do not catch general exception types
 
         End Try
 
     End Sub
-#End Region
-
-#Region "控制台窗口"
-    '''' <summary>
-    '''' 调用控制台窗口
-    '''' </summary>
-    '<DllImport(”kernel32.dll”)>
-    'Public Shared Function AllocConsole() As Boolean
-    'End Function
-    '''' <summary>
-    '''' 调用控制台窗口
-    '''' </summary>
-    Public Declare Function AllocConsole Lib "kernel32" Alias "AllocConsole" () As Boolean
-
-    '''' <summary>
-    '''' 释放控制台窗口
-    '''' </summary>
-    '<DllImport(”kernel32.dll”)>
-    'Public Shared Function FreeConsole() As Boolean
-    'End Function
-    ''' <summary>
-    ''' 释放控制台窗口
-    ''' </summary>
-    Public Declare Function FreeConsole Lib "kernel32" Alias "FreeConsole" () As Boolean
-
 #End Region
 
 End Class

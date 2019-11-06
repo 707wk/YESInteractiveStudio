@@ -2,20 +2,21 @@
 ''' Windows热键处理辅助类
 ''' </summary>
 Public NotInheritable Class WindowsHotKeyHelper
+
     Private Sub New()
     End Sub
 
     ''' <summary>
     ''' 注册热键
     ''' </summary>
-    Public Declare Function RegisterHotKey Lib "user32" (ByVal hWnd As Integer,
+    Friend Declare Function RegisterHotKey Lib "user32" (ByVal hWnd As Integer,
                                                          ByVal id As Integer,
                                                          ByVal fsModifiers As Integer,
                                                          ByVal vk As Integer) As Integer
     ''' <summary>
     ''' 注销热键
     ''' </summary>
-    Public Declare Function UnregisterHotKey Lib "user32" (ByVal hWnd As Integer,
+    Friend Declare Function UnregisterHotKey Lib "user32" (ByVal hWnd As Integer,
                                                            ByVal id As Integer) As Integer
 
     ''' <summary>

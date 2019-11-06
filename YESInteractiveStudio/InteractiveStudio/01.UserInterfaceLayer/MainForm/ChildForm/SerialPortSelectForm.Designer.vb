@@ -102,7 +102,6 @@ Partial Class SerialPortSelectForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(375, 106)
-        Me.ControlBox = False
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.ConnectButton)

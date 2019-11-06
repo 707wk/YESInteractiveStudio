@@ -89,19 +89,6 @@ Public Class UnityControl
         Me_Resize(Nothing, Nothing)
     End Sub
 
-    'Public Sub ParentFormClosed()
-    '    Try
-    '        UnityProcess.CloseMainWindow()
-
-    '        While UnityProcess.HasExited = False
-    '            UnityProcess.Kill()
-    '        End While
-
-    '    Catch ex As Exception
-
-    '    End Try
-    'End Sub
-
     Public Sub ParentFormActivated()
         ActivateUnityWindow()
     End Sub

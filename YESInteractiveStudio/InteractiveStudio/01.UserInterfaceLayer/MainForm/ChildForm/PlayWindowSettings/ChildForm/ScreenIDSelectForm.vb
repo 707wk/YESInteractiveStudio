@@ -1,4 +1,6 @@
-﻿Public Class ScreenIDSelectForm
+﻿Imports Wangk.Resource
+
+Public Class ScreenIDSelectForm
 
     Public SelectScreenIDItems As New List(Of Integer)
 
@@ -31,5 +33,21 @@
 
         CheckedListBox1.CheckOnClick = True
 
+        ChangeControlsLanguage()
+
     End Sub
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With MultiLanguageHelper.Lang
+            Me.Button1.Text = .GetS("OK")
+            Me.Button2.Text = .GetS("Cancel")
+            Me.Text = .GetS("ScreenIDSelectForm")
+        End With
+    End Sub
+#End Region
+
 End Class

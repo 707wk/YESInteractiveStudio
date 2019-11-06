@@ -1,4 +1,6 @@
-﻿Public Class WindowProgramControl
+﻿Imports Wangk.Resource
+
+Public Class WindowProgramControl
 
     ''' <summary>
     ''' 播放窗口信息
@@ -25,6 +27,8 @@
             ToolStripButton2.Enabled = True
 
         End If
+
+        ChangeControlsLanguage()
 
     End Sub
 
@@ -157,4 +161,25 @@
 
     End Sub
 #End Region
+
+#Region "切换控件语言"
+    ''' <summary>
+    ''' 切换控件语言
+    ''' </summary>
+    Public Sub ChangeControlsLanguage()
+        With MultiLanguageHelper.Lang
+            Me.ColumnHeader2.Text = .GetS("Path")
+            Me.GroupBox2.Text = .GetS("Interactive material list")
+            Me.ColumnHeader1.Text = .GetS("File name")
+            Me.ColumnHeader3.Text = .GetS("Play Time")
+            Me.ToolStripButton3.Text = .GetS("Add file")
+            Me.ToolStripButton1.Text = .GetS("Play the current program")
+            Me.ToolStripButton2.Text = .GetS("Stop play")
+            Me.PlayToolStripMenuItem.Text = .GetS("Play")
+            Me.EditToolStripMenuItem.Text = .GetS("Edit")
+            Me.RemoveToolStripMenuItem.Text = .GetS("Remove")
+        End With
+    End Sub
+#End Region
+
 End Class

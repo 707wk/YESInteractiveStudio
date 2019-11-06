@@ -207,7 +207,7 @@ Public Class PlayWindow
     ''' <summary>
     ''' 合并点列表
     ''' </summary>
-    Dim PointInfoItems As New List(Of PointInfo)
+    Private PointInfoItems As New List(Of PointInfo)
 
 #Region "数据处理主函数"
     ''' <summary>

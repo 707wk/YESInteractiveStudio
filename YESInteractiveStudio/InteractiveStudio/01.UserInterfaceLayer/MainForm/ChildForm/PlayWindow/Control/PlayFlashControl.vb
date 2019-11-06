@@ -54,7 +54,7 @@ Public Class PlayFlashControl
     ''' <summary>
     ''' 捕获鼠标
     ''' </summary>
-    Dim SetCaptureFlage As Boolean = False
+    Private SetCaptureFlage As Boolean = False
 
 #Region "发送消息"
     Private Declare Function PostMessage Lib "user32" Alias _
@@ -91,14 +91,6 @@ Public Class PlayFlashControl
 
         Return True
     End Function
-
-    'Public Function Remove(controls As Control.ControlCollection) As Boolean Implements IPlayBaseControl.Remove
-    '    controls.Remove(FlashControl)
-    '    FlashControl.Dispose()
-    '    FlashControl = Nothing
-
-    '    Return True
-    'End Function
 
     Public Function PointActive(values As List(Of PointInfo)) As Boolean Implements IPlayBaseControl.PointActive
 

@@ -7,21 +7,6 @@ Imports InteractiveStudio.InteractiveOptions
 ''' </summary>
 Public Class NovaStarSender
 
-    '''' <summary>
-    '''' 发送卡索引
-    '''' </summary>
-    'Public ID As Integer
-
-    '''' <summary>
-    '''' 是否需要连接
-    '''' </summary>
-    'Public IsNeedToConnection As Boolean
-
-    '''' <summary>
-    '''' 是否能互动
-    '''' </summary>
-    'Public IsCanInteractive As Boolean
-
     ''' <summary>
     ''' IP信息
     ''' </summary>
@@ -40,20 +25,7 @@ Public Class NovaStarSender
                 Return ""
             End Try
         End Get
-        'Set(value As String)
 
-        '    If Not System.Net.IPAddress.TryParse(value, Nothing) OrElse
-        '        value.Split(".").Count <> 4 Then
-        '        Throw New Exception("IP address formal error")
-        '    End If
-
-        '    Dim tmpIPStr = value.Split(".")
-        '    IpData(3) = Val(tmpIPStr(0))
-        '    IpData(2) = Val(tmpIPStr(1))
-        '    IpData(1) = Val(tmpIPStr(2))
-        '    IpData(0) = Val(tmpIPStr(3))
-
-        'End Set
     End Property
 #End Region
 
@@ -70,18 +42,7 @@ Public Class NovaStarSender
                 Return ""
             End Try
         End Get
-        'Set(value As String)
-        '    If Not System.Net.IPAddress.TryParse(value, Nothing) OrElse
-        '        value.Split(".").Count <> 4 Then
-        '        Throw New Exception("IP subnet mask formal error")
-        '    End If
 
-        '    Dim tmpIPStr = value.Split(".")
-        '    IpData(7) = Val(tmpIPStr(0))
-        '    IpData(6) = Val(tmpIPStr(1))
-        '    IpData(5) = Val(tmpIPStr(2))
-        '    IpData(4) = Val(tmpIPStr(3))
-        'End Set
     End Property
 #End Region
 
@@ -98,18 +59,7 @@ Public Class NovaStarSender
                 Return ""
             End Try
         End Get
-        'Set(value As String)
-        '    If Not System.Net.IPAddress.TryParse(value, Nothing) OrElse
-        '        value.Split(".").Count <> 4 Then
-        '        Throw New Exception("IP gateway formal error")
-        '    End If
 
-        '    Dim tmpIPStr = value.Split(".")
-        '    IpData(11) = Val(tmpIPStr(0))
-        '    IpData(10) = Val(tmpIPStr(1))
-        '    IpData(9) = Val(tmpIPStr(2))
-        '    IpData(8) = Val(tmpIPStr(3))
-        'End Set
     End Property
 #End Region
 
@@ -221,7 +171,7 @@ Public Class NovaStarSender
     ''' </summary>
     Private Sub GetSensorData()
 
-        'todo:socket超时时间
+        ''todo:socket超时时间
         Using socket = New Socket(AddressFamily.InterNetwork,
                                   SocketType.Stream,
                                   ProtocolType.Tcp) With {
