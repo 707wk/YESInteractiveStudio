@@ -93,6 +93,10 @@ Public Class WindowProgramControl
             Exit Sub
         End If
 
+        If AppSettingHelper.Settings.DisplayMode <> InteractiveOptions.DISPLAYMODE.INTERACT Then
+            Exit Sub
+        End If
+
         ToolStripButton1.Enabled = False
         ContextMenuStrip1.Enabled = False
         ToolStripButton2.Enabled = True
@@ -106,8 +110,12 @@ Public Class WindowProgramControl
 #End Region
 
 #Region "从选中文件开始播放"
-    Private Sub PlayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlayToolStripMenuItem.Click
+    Friend Sub PlayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlayToolStripMenuItem.Click
         If DisplayingWindow.PlayFileItems.Count = 0 Then
+            Exit Sub
+        End If
+
+        If AppSettingHelper.Settings.DisplayMode <> InteractiveOptions.DISPLAYMODE.INTERACT Then
             Exit Sub
         End If
 
@@ -128,7 +136,7 @@ Public Class WindowProgramControl
 #End Region
 
 #Region "停止播放"
-    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+    Friend Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
         ToolStripButton1.Enabled = True
         ContextMenuStrip1.Enabled = True
         ToolStripButton2.Enabled = False

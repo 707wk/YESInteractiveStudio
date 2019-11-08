@@ -42,3 +42,5 @@ T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.Scan
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.ScreenIDSelectForm.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\Interop.IWshRuntimeLibrary.dll
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.vbprojAssemblyReference.cache
+T:\YESInteractiveStudio\InteractiveStudio\bin\QRCoder.dll
+T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Release\InteractiveStudio.MobileControlForm.resources

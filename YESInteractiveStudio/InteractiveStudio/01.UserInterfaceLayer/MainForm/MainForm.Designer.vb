@@ -40,6 +40,7 @@ Partial Class MainForm
         Me.RibbonBar2 = New DevComponents.DotNetBar.RibbonBar()
         Me.ReadScreenInformationButton = New DevComponents.DotNetBar.ButtonItem()
         Me.PlayWindowSettingsButton = New DevComponents.DotNetBar.ButtonItem()
+        Me.MobileControlButton = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar5 = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer4 = New DevComponents.DotNetBar.ItemContainer()
@@ -147,7 +148,7 @@ Partial Class MainForm
         Me.RibbonBar3.DragDropSupport = True
         Me.RibbonBar3.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer1})
         Me.RibbonBar3.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar3.Location = New System.Drawing.Point(483, 0)
+        Me.RibbonBar3.Location = New System.Drawing.Point(558, 0)
         Me.RibbonBar3.Name = "RibbonBar3"
         Me.RibbonBar3.Size = New System.Drawing.Size(134, 75)
         Me.RibbonBar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -225,7 +226,7 @@ Partial Class MainForm
         Me.RibbonBar1.DragDropSupport = True
         Me.RibbonBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.InteractCheckBox, Me.TestCheckBox, Me.BlackCheckBox, Me.DebugCheckBox})
         Me.RibbonBar1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar1.Location = New System.Drawing.Point(188, 0)
+        Me.RibbonBar1.Location = New System.Drawing.Point(263, 0)
         Me.RibbonBar1.Name = "RibbonBar1"
         Me.RibbonBar1.Size = New System.Drawing.Size(295, 75)
         Me.RibbonBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -291,11 +292,11 @@ Partial Class MainForm
         Me.RibbonBar2.ContainerControlProcessDialogKey = True
         Me.RibbonBar2.Dock = System.Windows.Forms.DockStyle.Left
         Me.RibbonBar2.DragDropSupport = True
-        Me.RibbonBar2.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ReadScreenInformationButton, Me.PlayWindowSettingsButton})
+        Me.RibbonBar2.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ReadScreenInformationButton, Me.PlayWindowSettingsButton, Me.MobileControlButton})
         Me.RibbonBar2.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar2.Location = New System.Drawing.Point(3, 0)
         Me.RibbonBar2.Name = "RibbonBar2"
-        Me.RibbonBar2.Size = New System.Drawing.Size(185, 75)
+        Me.RibbonBar2.Size = New System.Drawing.Size(260, 75)
         Me.RibbonBar2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar2.TabIndex = 5
         Me.RibbonBar2.Text = "RibbonBar2"
@@ -326,6 +327,15 @@ Partial Class MainForm
         Me.PlayWindowSettingsButton.Name = "PlayWindowSettingsButton"
         Me.PlayWindowSettingsButton.SubItemsExpandWidth = 14
         Me.PlayWindowSettingsButton.Text = "Play window settings"
+        '
+        'MobileControlButton
+        '
+        Me.MobileControlButton.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.MobileControlButton.Image = Global.InteractiveStudio.My.Resources.Resources.mobile_32px
+        Me.MobileControlButton.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.MobileControlButton.Name = "MobileControlButton"
+        Me.MobileControlButton.SubItemsExpandWidth = 14
+        Me.MobileControlButton.Text = "Mobile control"
         '
         'RibbonPanel2
         '
@@ -368,7 +378,7 @@ Partial Class MainForm
         Me.RibbonBar5.DragDropSupport = True
         Me.RibbonBar5.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer4})
         Me.RibbonBar5.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar5.Location = New System.Drawing.Point(182, 0)
+        Me.RibbonBar5.Location = New System.Drawing.Point(170, 0)
         Me.RibbonBar5.Name = "RibbonBar5"
         Me.RibbonBar5.Size = New System.Drawing.Size(183, 75)
         Me.RibbonBar5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -477,7 +487,7 @@ Partial Class MainForm
         Me.RibbonBar4.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar4.Location = New System.Drawing.Point(3, 0)
         Me.RibbonBar4.Name = "RibbonBar4"
-        Me.RibbonBar4.Size = New System.Drawing.Size(179, 75)
+        Me.RibbonBar4.Size = New System.Drawing.Size(167, 75)
         Me.RibbonBar4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar4.TabIndex = 0
         Me.RibbonBar4.Text = "RibbonBar4"
@@ -613,4 +623,5 @@ Partial Class MainForm
     Friend WithEvents RibbonBar2 As DevComponents.DotNetBar.RibbonBar
     Friend WithEvents PlayWindowSettingsButton As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents ReadScreenInformationButton As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents MobileControlButton As DevComponents.DotNetBar.ButtonItem
 End Class

@@ -87,6 +87,11 @@ InteractiveStudio
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
+<member name="P:InteractiveStudio.My.Resources.Resources.mobile_32px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
 <member name="P:InteractiveStudio.My.Resources.Resources.play_24px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
@@ -206,6 +211,11 @@ InteractiveStudio
  </summary>
 </member>
 <member name="M:InteractiveStudio.HardwareSettingsForm.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MobileControlForm.ChangeControlsLanguage">
  <summary>
  切换控件语言
  </summary>
@@ -383,6 +393,77 @@ InteractiveStudio
 <member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.ChangeDisplayModeForALLDisplayingWindow">
  <summary>
  切换所有窗口显示模式
+ </summary>
+</member>
+<member name="T:InteractiveStudio.HttpServerHelper">
+ <summary>
+ 简易的HTTP及WebApi服务
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HttpServerHelper.WorkThread">
+ <summary>
+ 数据处理线程
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HttpServerHelper.ConnectMaximumSemaphoreSlim">
+ <summary>
+ 并行数控制信号量
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HttpServerHelper.PortNumber">
+ <summary>
+ 端口号
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HttpServerHelper.UIMainForm">
+ <summary>
+ 主窗体
+ </summary>
+</member>
+<member name="P:InteractiveStudio.HttpServerHelper.IsRunning">
+ <summary>
+ 是否运行
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.StartServer">
+ <summary>
+ 开始服务
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.StopServer">
+ <summary>
+ 停止服务
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.WorkMainFunction">
+ <summary>
+ 工作主函数
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HttpServerHelper.FileMIMETypeTable">
+ <summary>
+ MIME查找表
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.InitFileMIMETypeTable">
+ <summary>
+ 初始化MIME查找表
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.GetFileMIMEHeader(System.String)">
+ <summary>
+ 获取文件对应MIME标识
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.ClientDisposeFunction(System.Net.Sockets.TcpClient)">
+ <summary>
+ 处理客户端请求
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.SendHeader(System.String,System.String,System.String,System.Net.Sockets.NetworkStream)">
+ <summary>
+ 发送头部标识
  </summary>
 </member>
 <member name="T:InteractiveStudio.SensorDataProcessingHelper">
@@ -888,6 +969,21 @@ InteractiveStudio
  显示尺寸(缩放后显示尺寸)
  </summary>
 </member>
+<member name="T:InteractiveStudio.WebScheme">
+ <summary>
+ Web端节目数据
+ </summary>
+</member>
+<member name="F:InteractiveStudio.WebScheme.Name">
+ <summary>
+ 窗口名称
+ </summary>
+</member>
+<member name="F:InteractiveStudio.WebScheme.FileItems">
+ <summary>
+ 文件列表
+ </summary>
+</member>
 <member name="T:InteractiveStudio.YesTechBaseBox">
  <summary>
  基础箱体
@@ -1058,6 +1154,11 @@ InteractiveStudio
 <member name="M:InteractiveStudio.MainForm.Timer1_Tick(System.Object,System.EventArgs)">
  <summary>
  显示接收卡状态
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MainForm.RemotePlayFile(System.Int32,System.Int32)">
+ <summary>
+ 远程播放文件
  </summary>
 </member>
 <member name="F:InteractiveStudio.WindowProgramControl.DisplayingWindow">

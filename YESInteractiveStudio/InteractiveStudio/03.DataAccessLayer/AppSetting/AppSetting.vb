@@ -67,4 +67,9 @@ Public Class AppSetting
     ''' </summary>
     Public IsAutoRun As Boolean
 
+    '''' <summary>
+    '''' 是否运行手机控制
+    '''' </summary>
+    'Public IsRunMobileControl As Boolean
+
 End Class

@@ -10,6 +10,7 @@ Public Class MainForm
 
         '初始化配置
         AppSettingHelper.Settings.ToString()
+        HttpServerHelper.UIMainForm = Me
 
 #Region "样式设置"
         StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.VisualStudio2012Light
@@ -30,6 +31,7 @@ Public Class MainForm
         ChangeControlsLanguage()
 
         RibbonBar2.Width = 256
+        RibbonBar1.Width = 256
 #End Region
 
 #Region "显示模式切换"
@@ -607,6 +609,7 @@ Public Class MainForm
             Me.AutoRunCheckBox.Text = .GetS("AutoRun")
             Me.AccuracyButton.Text = .GetS("Accuracy settings")
             Me.HardwareButton.Text = .GetS("Hardware settings")
+            Me.MobileControlButton.Text = .GetS("Mobile control")
             Me.StartTab.Text = .GetS("Start")
             Me.SettingsTab.Text = .GetS("Settings")
             Me.ToolStripDropDownButton1.Text = .GetS("Connection abnormality")
@@ -679,5 +682,47 @@ Public Class MainForm
 
     End Sub
 
+#End Region
+
+#Region "手机控制"
+    Private Sub MobileControlButton_Click(sender As Object, e As EventArgs) Handles MobileControlButton.Click
+        Dim tmpDialog As New MobileControlForm
+        tmpDialog.ShowDialog()
+    End Sub
+
+#Region "远程播放文件"
+    Public Delegate Sub RemotePlayFileCallback(windowID As Integer, fileID As Integer)
+    ''' <summary>
+    ''' 远程播放文件
+    ''' </summary>
+    Friend Sub RemotePlayFile(windowID As Integer, fileID As Integer)
+        If Me.InvokeRequired Then
+            Me.Invoke(New RemotePlayFileCallback(AddressOf RemotePlayFile), New Object() {windowID, fileID})
+            Exit Sub
+        End If
+
+        If AppSettingHelper.Settings.DisplayMode <> InteractiveOptions.DISPLAYMODE.INTERACT Then
+            Exit Sub
+        End If
+
+        With AppSettingHelper.Settings.DisplayingScheme
+            If windowID >= .DisplayingWindowItems.Count Then
+                Exit Sub
+            End If
+            If fileID >= .DisplayingWindowItems(windowID).PlayFileItems.Count Then
+                Exit Sub
+            End If
+
+            Dim tmpWindowProgramControl = CType(TabControl1.TabPages(windowID).Controls(0), WindowProgramControl)
+            With tmpWindowProgramControl
+                .ToolStripButton2_Click(Nothing, Nothing)
+                .ListView1.Items(fileID).Selected = True
+                .PlayToolStripMenuItem_Click(Nothing, Nothing)
+            End With
+        End With
+
+    End Sub
+
+#End Region
 #End Region
 End Class

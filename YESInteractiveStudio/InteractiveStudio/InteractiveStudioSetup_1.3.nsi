@@ -64,6 +64,8 @@ Section "MainSection" SEC01
   File /r "bin\Lang\*.*"
   SetOutPath "$INSTDIR\Nova"
   File /r "bin\Nova\*.*"
+  SetOutPath "$INSTDIR\Web"
+  File /r "bin\Web\*.*"
 SectionEnd
 
 Section -AdditionalIcons
@@ -102,6 +104,7 @@ Section Uninstall
 
   RMDir "$SMPROGRAMS\Interactive Studio"
 
+  RMDir /r "$INSTDIR\Web"
   RMDir /r "$INSTDIR\Nova"
   RMDir /r "$INSTDIR\Lang"
   RMDir /r "$INSTDIR\DLL"
