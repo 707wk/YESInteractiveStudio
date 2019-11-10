@@ -405,11 +405,6 @@ InteractiveStudio
  数据处理线程
  </summary>
 </member>
-<member name="F:InteractiveStudio.HttpServerHelper.ConnectMaximumSemaphoreSlim">
- <summary>
- 并行数控制信号量
- </summary>
-</member>
 <member name="F:InteractiveStudio.HttpServerHelper.PortNumber">
  <summary>
  端口号

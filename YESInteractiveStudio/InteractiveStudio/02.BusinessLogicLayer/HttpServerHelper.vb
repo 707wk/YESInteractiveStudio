@@ -14,10 +14,10 @@ Public NotInheritable Class HttpServerHelper
     ''' </summary>
     Private Shared WorkThread As Thread
 
-    ''' <summary>
-    ''' 并行数控制信号量
-    ''' </summary>
-    Private Shared ConnectMaximumSemaphoreSlim As SemaphoreSlim
+    '''' <summary>
+    '''' 并行数控制信号量
+    '''' </summary>
+    'Private Shared ConnectMaximumSemaphoreSlim As SemaphoreSlim
 
     '''' <summary>
     '''' 服务套接字
@@ -84,7 +84,7 @@ Public NotInheritable Class HttpServerHelper
     ''' </summary>
     Private Shared Sub WorkMainFunction()
 
-        ConnectMaximumSemaphoreSlim = New SemaphoreSlim(4)
+        'ConnectMaximumSemaphoreSlim = New SemaphoreSlim(4)
         '服务套接字
         Dim httpServer = New TcpListener(Net.IPAddress.Any, PortNumber)
         httpServer.Start()
@@ -97,11 +97,12 @@ Public NotInheritable Class HttpServerHelper
                     Continue Do
                 End If
 
-                ConnectMaximumSemaphoreSlim.Wait()
+                'ConnectMaximumSemaphoreSlim.Wait()
 
                 Dim tmpTcpClient = httpServer.AcceptTcpClient()
 
-                ThreadPool.QueueUserWorkItem(New WaitCallback(AddressOf ClientDisposeFunction), tmpTcpClient)
+                'ThreadPool.QueueUserWorkItem(New WaitCallback(AddressOf ClientDisposeFunction), tmpTcpClient)
+                ClientDisposeFunction(tmpTcpClient)
 
             Loop
         Catch ex As Exception
@@ -239,7 +240,7 @@ Public NotInheritable Class HttpServerHelper
 
         client.Close()
 
-        ConnectMaximumSemaphoreSlim.Release()
+        'ConnectMaximumSemaphoreSlim.Release()
     End Sub
 
 #Region "发送头部标识"
