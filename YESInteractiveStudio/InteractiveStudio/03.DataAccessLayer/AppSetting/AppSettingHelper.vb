@@ -94,7 +94,7 @@ Public NotInheritable Class AppSettingHelper
             '使用默认参数
             instance = New AppSetting
             With instance
-                .PositionaIAccuracy = 50
+                .PositionaIAccuracy = 64
                 .ValidSensorMinimum = 2
                 .SensorTouchSensitivity = 5
                 .SensorResetTemp = 5
