@@ -132,10 +132,6 @@ Public NotInheritable Class SensorDataProcessingHelper
             Dim ValidSensorMinimum = AppSettingHelper.Settings.ValidSensorMinimum
 
             PointOfMergeItems.Clear()
-            PointOfMergeItems.Add(New PointOfMerge() With {
-                              .X = -1000,
-                              .Y = -1000,
-                              .SensorCount = 1})
             For Each sensorItem In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItem.ActiveSensorItems
 
                 Dim isInclude As Boolean = False
@@ -165,7 +161,9 @@ Public NotInheritable Class SensorDataProcessingHelper
                               .Y = sensorItem.LocationOfCenter.Y,
                               .XSum = .X,
                               .YSum = .Y,
-                              .SensorCount = 1})
+                              .SensorCount = 1,
+                              .IsNew = (sensorItem.State = InteractiveOptions.SensorState.DOWN)
+                                          })
                 End If
 
             Next

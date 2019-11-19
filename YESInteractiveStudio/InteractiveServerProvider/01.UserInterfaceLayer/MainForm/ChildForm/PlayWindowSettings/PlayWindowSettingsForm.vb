@@ -31,8 +31,7 @@ Public Class PlayWindowSettingsForm
     End Sub
 
     Private Sub PlayWindowSettingsForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        If Not IsWindowSettingDataCheckoutOk() OrElse
-            (IsMustSave AndAlso Not IsSave) Then
+        If IsMustSave AndAlso Not IsSave Then
 
             e.Cancel = True
             Exit Sub

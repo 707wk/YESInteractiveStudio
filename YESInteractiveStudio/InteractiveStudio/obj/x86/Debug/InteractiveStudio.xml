@@ -27,11 +27,6 @@ InteractiveStudio
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
-<member name="P:InteractiveStudio.My.Resources.Resources.addBlack_24px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
 <member name="P:InteractiveStudio.My.Resources.Resources.control_32px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
@@ -92,12 +87,7 @@ InteractiveStudio
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
-<member name="P:InteractiveStudio.My.Resources.Resources.invertSelect_24px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
-<member name="P:InteractiveStudio.My.Resources.Resources.MCU_32px">
+<member name="P:InteractiveStudio.My.Resources.Resources.mobile_32px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
@@ -108,21 +98,6 @@ InteractiveStudio
 </summary>
 </member>
 <member name="P:InteractiveStudio.My.Resources.Resources.refresh_24px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
-<member name="P:InteractiveStudio.My.Resources.Resources.screenLayout_32px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
-<member name="P:InteractiveStudio.My.Resources.Resources.selectAll_24px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
-<member name="P:InteractiveStudio.My.Resources.Resources.sensor_24px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
@@ -147,15 +122,10 @@ InteractiveStudio
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
-<member name="P:InteractiveStudio.My.Resources.Resources.zoomIn_24px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
-<member name="P:InteractiveStudio.My.Resources.Resources.zoomOut_24px">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
+<member name="M:InteractiveStudio.ScanBoardSelectForm.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
 </member>
 <member name="F:InteractiveStudio.HardwareSettingsForm.NovaMarsControl">
  <summary>
@@ -238,6 +208,21 @@ InteractiveStudio
 <member name="M:InteractiveStudio.HardwareSettingsForm.SetScanBoardData(System.Byte,System.Byte,System.UInt16,System.Byte[])">
  <summary>
  发送数据给接收卡
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HardwareSettingsForm.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
+<member name="M:InteractiveStudio.MobileControlForm.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
+<member name="M:InteractiveStudio.ScreenIDSelectForm.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
  </summary>
 </member>
 <member name="F:InteractiveStudio.ScreenButton.ScreenId">
@@ -360,6 +345,11 @@ InteractiveStudio
  播放文件信息
  </summary>
 </member>
+<member name="M:InteractiveStudio.EditPlayFileForm.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
 <member name="T:InteractiveStudio.DisplayingSchemeProcessingHelper">
  <summary>
  播放方案处理辅助类
@@ -403,6 +393,72 @@ InteractiveStudio
 <member name="M:InteractiveStudio.DisplayingSchemeProcessingHelper.ChangeDisplayModeForALLDisplayingWindow">
  <summary>
  切换所有窗口显示模式
+ </summary>
+</member>
+<member name="T:InteractiveStudio.HttpServerHelper">
+ <summary>
+ 简易的HTTP及WebApi服务
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HttpServerHelper.WorkThread">
+ <summary>
+ 数据处理线程
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HttpServerHelper.PortNumber">
+ <summary>
+ 端口号
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HttpServerHelper.UIMainForm">
+ <summary>
+ 主窗体
+ </summary>
+</member>
+<member name="P:InteractiveStudio.HttpServerHelper.IsRunning">
+ <summary>
+ 是否运行
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.StartServer">
+ <summary>
+ 开始服务
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.StopServer">
+ <summary>
+ 停止服务
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.WorkMainFunction">
+ <summary>
+ 工作主函数
+ </summary>
+</member>
+<member name="F:InteractiveStudio.HttpServerHelper.FileMIMETypeTable">
+ <summary>
+ MIME查找表
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.InitFileMIMETypeTable">
+ <summary>
+ 初始化MIME查找表
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.GetFileMIMEHeader(System.String)">
+ <summary>
+ 获取文件对应MIME标识
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.ClientDisposeFunction(System.Net.Sockets.TcpClient)">
+ <summary>
+ 处理客户端请求
+ </summary>
+</member>
+<member name="M:InteractiveStudio.HttpServerHelper.SendHeader(System.String,System.String,System.String,System.Net.Sockets.NetworkStream)">
+ <summary>
+ 发送头部标识
  </summary>
 </member>
 <member name="T:InteractiveStudio.SensorDataProcessingHelper">
@@ -486,6 +542,18 @@ InteractiveStudio
  全局配置辅助类
  </summary>
 </member>
+<member name="P:InteractiveStudio.AppSettingHelper.GUID">
+ <summary>
+ 程序标志
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:InteractiveStudio.AppSettingHelper.ProductVersion">
+ <summary>
+ 程序版本
+ </summary>
+ <returns></returns>
+</member>
 <member name="F:InteractiveStudio.AppSettingHelper.instance">
  <summary>
  实例
@@ -504,11 +572,6 @@ InteractiveStudio
 <member name="M:InteractiveStudio.AppSettingHelper.SaveToLocaltion">
  <summary>
  保存配置到本地
- </summary>
-</member>
-<member name="M:InteractiveStudio.AppSettingHelper.FreeConsole">
- <summary>
- 释放控制台窗口
  </summary>
 </member>
 <member name="T:InteractiveStudio.AppSetting">
@@ -534,6 +597,11 @@ InteractiveStudio
 <member name="F:InteractiveStudio.AppSetting.PositionaIAccuracy">
  <summary>
  定位精度(点合并范围) 默认50像素
+ </summary>
+</member>
+<member name="F:InteractiveStudio.AppSetting.ValidSensorMinimum">
+ <summary>
+ 有效最小感应点数
  </summary>
 </member>
 <member name="F:InteractiveStudio.AppSetting.SensorTouchSensitivity">
@@ -574,21 +642,6 @@ InteractiveStudio
 <member name="F:InteractiveStudio.DisplayingFile.PlaySecond">
  <summary>
  播放时长(s)
- </summary>
-</member>
-<member name="T:InteractiveStudio.DisplayingProgram">
- <summary>
- 播放节目
- </summary>
-</member>
-<member name="F:InteractiveStudio.DisplayingProgram.Name">
- <summary>
- 名称
- </summary>
-</member>
-<member name="F:InteractiveStudio.DisplayingProgram.FileItems">
- <summary>
- 播放文件列表
  </summary>
 </member>
 <member name="T:InteractiveStudio.DisplayingScheme">
@@ -911,6 +964,21 @@ InteractiveStudio
  显示尺寸(缩放后显示尺寸)
  </summary>
 </member>
+<member name="T:InteractiveStudio.WebScheme">
+ <summary>
+ Web端节目数据
+ </summary>
+</member>
+<member name="F:InteractiveStudio.WebScheme.Name">
+ <summary>
+ 窗口名称
+ </summary>
+</member>
+<member name="F:InteractiveStudio.WebScheme.FileItems">
+ <summary>
+ 文件列表
+ </summary>
+</member>
 <member name="T:InteractiveStudio.YesTechBaseBox">
  <summary>
  基础箱体
@@ -1023,6 +1091,11 @@ InteractiveStudio
  在线
  </summary>
 </member>
+<member name="M:InteractiveStudio.AccuracySettingsForm.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
 <member name="F:InteractiveStudio.SerialPortSelectForm.NovaMarsHardware">
  <summary>
  Nova连接变量
@@ -1036,6 +1109,11 @@ InteractiveStudio
 <member name="F:InteractiveStudio.SerialPortSelectForm.selectedSerialPort">
  <summary>
  选择的串口号
+ </summary>
+</member>
+<member name="M:InteractiveStudio.SerialPortSelectForm.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
  </summary>
 </member>
 <member name="M:InteractiveStudio.MainForm.ShowDisplayingProgram">
@@ -1073,6 +1151,11 @@ InteractiveStudio
  显示接收卡状态
  </summary>
 </member>
+<member name="M:InteractiveStudio.MainForm.RemotePlayFile(System.Int32,System.Int32)">
+ <summary>
+ 远程播放文件
+ </summary>
+</member>
 <member name="F:InteractiveStudio.WindowProgramControl.DisplayingWindow">
  <summary>
  播放窗口信息
@@ -1081,6 +1164,11 @@ InteractiveStudio
 <member name="M:InteractiveStudio.WindowProgramControl.ShowFileItems">
  <summary>
  显示文件列表
+ </summary>
+</member>
+<member name="M:InteractiveStudio.WindowProgramControl.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
  </summary>
 </member>
 <member name="F:InteractiveStudio.PlayWindowSettingsForm.AddWindowButton">
@@ -1103,6 +1191,11 @@ InteractiveStudio
  窗口设置数据校验
  </summary>
 </member>
+<member name="M:InteractiveStudio.PlayWindowSettingsForm.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
+ </summary>
+</member>
 <member name="F:InteractiveStudio.PlayWindowSettingControl.DisplayingWindow">
  <summary>
  播放窗口信息
@@ -1111,6 +1204,11 @@ InteractiveStudio
 <member name="F:InteractiveStudio.PlayWindowSettingControl.PlayFileItems">
  <summary>
  播放文件列表
+ </summary>
+</member>
+<member name="M:InteractiveStudio.PlayWindowSettingControl.ChangeControlsLanguage">
+ <summary>
+ 切换控件语言
  </summary>
 </member>
 </members>

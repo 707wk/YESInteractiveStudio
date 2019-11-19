@@ -16,10 +16,7 @@ T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.vbproj
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.exe
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.xml
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.pdb
-T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.MCUSettingsForm.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.SerialPortSelectForm.resources
-T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.ControlSettingsForm.resources
-T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.SensorSettingsForm.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.AccuracySettingsForm.resources
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.vbprojAssemblyReference.cache
 T:\YESInteractiveStudio\InteractiveStudio\bin\Wangk.Resource.dll
@@ -45,3 +42,5 @@ T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\Interop.ShockwaveFlashOb
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\AxInterop.ShockwaveFlashObjects.dll
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.vbproj.ResolveComReference.cache
 T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\Interop.IWshRuntimeLibrary.dll
+T:\YESInteractiveStudio\InteractiveStudio\bin\QRCoder.dll
+T:\YESInteractiveStudio\InteractiveStudio\obj\x86\Debug\InteractiveStudio.MobileControlForm.resources

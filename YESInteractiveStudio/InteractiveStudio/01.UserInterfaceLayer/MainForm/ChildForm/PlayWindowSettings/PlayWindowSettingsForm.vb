@@ -82,8 +82,7 @@ Public Class PlayWindowSettingsForm
     End Sub
 
     Private Sub PlayWindowSettingsForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        If (IsMustSave AndAlso Not IsSave) AndAlso
-            Not IsWindowSettingDataCheckoutOk() Then
+        If IsMustSave AndAlso Not IsSave Then
 
             e.Cancel = True
             Exit Sub
@@ -150,7 +149,7 @@ Public Class PlayWindowSettingsForm
                 End If
 
                 If tmpPlayWindowSettingControl.Panel2.Controls.Count = 0 Then
-                    Throw New Exception($"{MultiLanguageHelper.Lang.GetS("Window")} {tmpPlayWindowSettingControl} {MultiLanguageHelper.Lang.GetS("Screen cannot be empty")}")
+                    Throw New Exception($"{MultiLanguageHelper.Lang.GetS("Window")} {SuperTabControl1.Tabs.IndexOf(tmpSuperTabItem) + 1} {MultiLanguageHelper.Lang.GetS("Screen cannot be empty")}")
                 End If
 
             Next

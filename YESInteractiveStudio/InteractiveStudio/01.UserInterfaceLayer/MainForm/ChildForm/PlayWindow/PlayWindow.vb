@@ -1,4 +1,5 @@
-﻿Imports YESInteractiveSDK
+﻿Imports Newtonsoft.Json
+Imports YESInteractiveSDK
 
 Public Class PlayWindow
     ''' <summary>
@@ -252,10 +253,6 @@ Public Class PlayWindow
         Dim ValidSensorMinimum = AppSettingHelper.Settings.ValidSensorMinimum
 
         PointOfMergeItems.Clear()
-        PointOfMergeItems.Add(New PointOfMerge() With {
-                              .X = -1000,
-                              .Y = -1000,
-                              .SensorCount = 1})
         For Each sensorItem In DisplayingWindow.ActiveSensorItems
 
             Dim isInclude As Boolean = False
@@ -280,12 +277,18 @@ Public Class PlayWindow
 
             '没有被合并则添加为新聚合点
             If Not isInclude Then
-                PointOfMergeItems.Add(New PointOfMerge() With {
-                              .X = sensorItem.LocationOfCenter.X,
-                              .Y = sensorItem.LocationOfCenter.Y,
-                              .XSum = .X,
-                              .YSum = .Y,
-                              .SensorCount = 1})
+                Dim addPointOfMerge = New PointOfMerge
+                With addPointOfMerge
+                    .X = sensorItem.LocationOfCenter.X
+                    .Y = sensorItem.LocationOfCenter.Y
+                    .XSum = .X
+                    .YSum = .Y
+                    .SensorCount = 1
+
+                    .IsNew = (sensorItem.State = InteractiveOptions.SensorState.DOWN)
+                End With
+
+                PointOfMergeItems.Add(addPointOfMerge)
             End If
 
         Next
@@ -309,6 +312,8 @@ Public Class PlayWindow
 
         Next
 
+        'Console.WriteLine(JsonConvert.SerializeObject(DisplayingWindow.ActiveSensorItems))
+        'Console.WriteLine(JsonConvert.SerializeObject(PointInfoItems))
         PointActive(PointInfoItems)
 
     End Sub
