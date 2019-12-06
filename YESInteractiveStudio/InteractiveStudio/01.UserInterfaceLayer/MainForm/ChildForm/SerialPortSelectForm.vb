@@ -17,6 +17,7 @@ Public Class SerialPortSelectForm
     Public selectedSerialPort As String
 
     Private Sub SerialPortSelectForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         With ComboBox1
             .DropDownStyle = ComboBoxStyle.DropDownList
             .Sorted = True
@@ -50,16 +51,15 @@ Public Class SerialPortSelectForm
 
         Label2.Refresh()
 
-        RefreshButton_Click()
+        RefreshButton_MouseUp(Nothing, Nothing)
 
         Label2.Hide()
     End Sub
 
-    Private Sub RefreshButton_Click(Optional sender As Object = Nothing, Optional e As EventArgs = Nothing) Handles RefreshButton.Click
-
+    Private Sub RefreshButton_MouseUp(sender As Object, e As MouseEventArgs) Handles RefreshButton.MouseUp
         ComboBox1.Items.Clear()
         ConnectButton.Enabled = False
-
+        RefreshButton.Enabled = False
         Try
             NovaMarsHardware?.UnInitialize()
             NovaMarsHardware?.Initialize()
@@ -75,7 +75,31 @@ Public Class SerialPortSelectForm
             ComboBox1.SelectedIndex = 0
             ConnectButton.Enabled = True
         End If
+
+        RefreshButton.Enabled = True
     End Sub
+
+    'Private Sub RefreshButton_Click(Optional sender As Object = Nothing, Optional e As EventArgs = Nothing) Handles RefreshButton.Click
+
+    '    ComboBox1.Items.Clear()
+    '    ConnectButton.Enabled = False
+
+    '    Try
+    '        NovaMarsHardware?.UnInitialize()
+    '        NovaMarsHardware?.Initialize()
+
+    '    Catch ex As Exception
+    '    End Try
+
+    '    For Each i001 As String In NovaMarsHardware.CommPortListOfCtrlSystem
+    '        ComboBox1.Items.Add(i001)
+    '    Next
+
+    '    If ComboBox1.Items.Count > 0 Then
+    '        ComboBox1.SelectedIndex = 0
+    '        ConnectButton.Enabled = True
+    '    End If
+    'End Sub
 
     Private Sub ConnectButton_Click(sender As Object, e As EventArgs) Handles ConnectButton.Click
 
@@ -100,6 +124,7 @@ Public Class SerialPortSelectForm
             Me.Label2.Text = .GetS("Waiting...")
         End With
     End Sub
+
 #End Region
 
 End Class

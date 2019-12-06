@@ -1,0 +1,185 @@
+2019/12/07 00:00:17.718> 程序启动
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:19.882
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:21.050
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:22.256
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:23.438
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:24.608
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:25.790
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:26.965
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:28.153
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:29.349
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:30.529
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:31.705
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:32.875
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+------------------------------------------------------------------------------
+Times  :  2019/12/07 00:00:34.045
+level  :  Level_WARN
+Context:  工作线程
+Message:  System.Net.NetworkInformation.PingException: Ping 请求期间发生异常。 ---> System.ComponentModel.Win32Exception: Unknown error (0x2b2a)
+   在 System.Net.NetworkInformation.Ping.InternalSend(IPAddress address, Byte[] buffer, Int32 timeout, PingOptions options, Boolean async)
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.NetworkInformation.Ping.Send(IPAddress address, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer, PingOptions options)
+   在 System.Net.NetworkInformation.Ping.Send(String hostNameOrAddress, Int32 timeout, Byte[] buffer)
+   在 Microsoft.VisualBasic.Devices.Network.Ping(String hostNameOrAddress, Int32 timeout)
+   在 InteractiveStudio.NovaStarSender.WorkFunction()
+
+2019/12/07 01:22:25.231> 程序启动
+2019/12/07 01:23:38.799> 程序启动

@@ -109,3 +109,5 @@ Open_开启
 Close_关闭
 ● Or scan QR code_● 或者扫描二维码
 MobileControlForm_手机控制
+Fail to Get HotBackUp_获取热备份失败
+The Slave Sender must be the same as the Master Sender in HotBackUp_热备份的主从发送卡需要为同一发送卡

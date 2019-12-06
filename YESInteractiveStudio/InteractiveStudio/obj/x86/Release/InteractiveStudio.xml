@@ -749,7 +749,7 @@ InteractiveStudio
  网口索引
  </summary>
 </member>
-<member name="F:InteractiveStudio.NovaStarScanBoard.ScannerID">
+<member name="F:InteractiveStudio.NovaStarScanBoard.ConnectID">
  <summary>
  接收卡索引
  </summary>
@@ -837,6 +837,16 @@ InteractiveStudio
 <member name="P:InteractiveStudio.NovaStarSender.IPGateway">
  <summary>
  获取字符串形式的网关地址
+ </summary>
+</member>
+<member name="F:InteractiveStudio.NovaStarSender.HotBackUpPortItems">
+ <summary>
+ 发送卡内热备份端口查找表
+ </summary>
+</member>
+<member name="F:InteractiveStudio.NovaStarSender.MaximumConnectID">
+ <summary>
+ 4个网口分别最大的接收卡ID
  </summary>
 </member>
 <member name="F:InteractiveStudio.NovaStarSender.SensorItems">
@@ -989,7 +999,7 @@ InteractiveStudio
  接收卡信息
  </summary>
 </member>
-<member name="F:InteractiveStudio.YesTechBaseBox.SensorItems">
+<member name="F:InteractiveStudio.YesTechBaseBox.SensorList">
  <summary>
  传感器集合
  </summary>

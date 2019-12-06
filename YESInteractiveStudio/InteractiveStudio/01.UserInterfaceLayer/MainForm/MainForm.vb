@@ -1,7 +1,8 @@
 ﻿Imports System.ComponentModel
 Imports System.Threading
 Imports DevComponents.DotNetBar
-Imports Microsoft.Win32
+Imports Nova.LCT.GigabitSystem.Common
+Imports Nova.Mars.SDK
 Imports Wangk.Resource
 
 Public Class MainForm
@@ -220,17 +221,64 @@ Public Class MainForm
 
                                                   If screenCount = 0 Then Throw New Exception(MultiLanguageHelper.Lang.GetS("No Screen found"))
                                                   If senderCount = 0 Then Throw New Exception(MultiLanguageHelper.Lang.GetS("No Sender found"))
+
+                                                  ReDim tmpNovaStarScreenItems(screenCount - 1)
+                                                  ReDim tmpNovaStarSenderItems(senderCount - 1)
+                                                  For itemID = 0 To tmpNovaStarSenderItems.Count - 1
+                                                      tmpNovaStarSenderItems(itemID) = New NovaStarSender
+                                                  Next
 #End Region
 
 #Region "读取屏幕信息"
-                                                  ReDim tmpNovaStarScreenItems(screenCount - 1)
-                                                  ReDim tmpNovaStarSenderItems(senderCount - 1)
-
+                                                  '读取屏幕信息
                                                   Dim tmpLEDScreenInfoList As List(Of Nova.Mars.SDK.LEDScreenInfo) = Nothing
                                                   If tmpNovaMarsControl.ReadLEDScreenInfo(tmpLEDScreenInfoList) <>
                                                   Nova.Mars.SDK.OperateResult.OK Then
-
                                                       Throw New Exception(MultiLanguageHelper.Lang.GetS("Failed to reading screen information"))
+                                                  End If
+#End Region
+
+#Region "读取热备份信息"
+                                                  Dim hotBackUpItems As List(Of SenderRedundancyInfo) = Nothing
+                                                  '读取热备份信息
+                                                  Using GetHotBackUpEvent As New AutoResetEvent(False)
+                                                      tmpNovaMarsControl.GetHotBackUp(Sub(res As HotBackUpState, info As List(Of SenderRedundancyInfo))
+                                                                                          If res = HotBackUpState.Successful Then
+                                                                                              hotBackUpItems = info
+                                                                                              'Throw New Exception($"{MultiLanguageHelper.Lang.GetS("Fail to Get HotBackUp")}")
+                                                                                          End If
+
+                                                                                          GetHotBackUpEvent.Set()
+                                                                                      End Sub)
+                                                      GetHotBackUpEvent.WaitOne()
+                                                  End Using
+
+                                                  If hotBackUpItems IsNot Nothing Then
+                                                      '只支持发送卡内备份
+                                                      For Each item In hotBackUpItems
+                                                          If item.MasterSenderIndex <> item.SlaveSenderIndex Then
+                                                              Throw New Exception(MultiLanguageHelper.Lang.GetS("The Slave Sender must be the same as the Master Sender in HotBackUp"))
+                                                          End If
+                                                      Next
+
+                                                      '记录主从网口号
+                                                      For Each item In hotBackUpItems
+                                                          tmpNovaStarSenderItems(item.MasterSenderIndex).HotBackUpPortItems.Add(item.MasterPortIndex, item.SlavePortIndex)
+                                                      Next
+
+                                                      '统计网口下接收卡ID最大数
+                                                      For Each screenItem In tmpLEDScreenInfoList
+                                                          For Each scanBoardItem In screenItem.ScanBoardInfoList
+                                                              If scanBoardItem.SenderIndex = &HFF Then Continue For
+
+                                                              With scanBoardItem
+                                                                  If .ConnectIndex > tmpNovaStarSenderItems(.SenderIndex).MaximumConnectID(.PortIndex) Then
+                                                                      tmpNovaStarSenderItems(.SenderIndex).MaximumConnectID(.PortIndex) = .ConnectIndex
+                                                                  End If
+                                                              End With
+                                                          Next
+                                                      Next
+
                                                   End If
 
 #End Region
@@ -257,7 +305,7 @@ Public Class MainForm
                                                               With tmpNovaStarScanBoard
                                                                   .SenderID = tmpScanBoard.SenderIndex
                                                                   .PortID = tmpScanBoard.PortIndex
-                                                                  .ScannerID = tmpScanBoard.ConnectIndex
+                                                                  .ConnectID = tmpScanBoard.ConnectIndex
                                                                   .LocationOfOriginal.X = tmpScanBoard.X
                                                                   .LocationOfOriginal.Y = tmpScanBoard.Y
                                                                   .SizeOfOriginal.Width = tmpScanBoard.Width
@@ -267,7 +315,7 @@ Public Class MainForm
                                                               '箱体旋转角度
                                                               tmpNovaMarsControl.ReadCabinetRotateAngle(tmpNovaStarScanBoard.SenderID,
                                                                                                         tmpNovaStarScanBoard.PortID,
-                                                                                                        tmpNovaStarScanBoard.ScannerID,
+                                                                                                        tmpNovaStarScanBoard.ConnectID,
                                                                                                         tmpNovaStarScanBoard.BoxRotateAngle)
 
                                                               .NovaStarScanBoardItems.Add(tmpNovaStarScanBoard)
@@ -284,14 +332,16 @@ Public Class MainForm
                                                   AddHandler tmpNovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
 
                                                   For itemID = 0 To tmpNovaStarSenderItems.Count - 1
-                                                      tmpNovaStarSenderItems(itemID) = New NovaStarSender
+                                                      'tmpNovaStarSenderItems(itemID) = New NovaStarSender
 
                                                       SenderIPData = Nothing
 
                                                       tmpNovaMarsControl.GetEquipmentIP(itemID)
                                                       GetEquipmentIPDataEvent.WaitOne()
 
-                                                      If SenderIPData Is Nothing Then Throw New Exception($"{MultiLanguageHelper.Lang.GetS("Sender")} {itemID} {MultiLanguageHelper.Lang.GetS("no support for interactive")}")
+                                                      If SenderIPData Is Nothing Then
+                                                          Throw New Exception($"{MultiLanguageHelper.Lang.GetS("Sender")} {itemID} {MultiLanguageHelper.Lang.GetS("no support for interactive")}")
+                                                      End If
 
                                                       tmpNovaStarSenderItems(itemID).IpData = SenderIPData
 
