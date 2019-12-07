@@ -30,7 +30,7 @@ Public Class YesTechMG7
 
                 Dim addSensor As New Sensor
                 With addSensor
-                    .Key = ScanBoard.PortID * 100000 + ScanBoard.ScannerID * 100 + sensorKeyArray(rowID * 4 + columnID)
+                    .Key = sensorKeyArray(rowID * 4 + columnID)
                     .Size = sensorWidth
                     .Location = New Point(ScanBoard.LocationInDisplayingWindow.X + columnID * sensorWidth,
                                           ScanBoard.LocationInDisplayingWindow.Y + rowID * sensorWidth)
@@ -38,7 +38,7 @@ Public Class YesTechMG7
                                                   .Location.Y + sensorWidth \ 2)
                 End With
 
-                SensorItems.Add(addSensor)
+                SensorList.Add(addSensor)
             Next
         Next
     End Sub
@@ -57,7 +57,7 @@ Public Class YesTechMG7
 
                 Dim addSensor As New Sensor
                 With addSensor
-                    .Key = ScanBoard.PortID * 100000 + ScanBoard.ScannerID * 100 + sensorKeyArray(rowID * 4 + columnID)
+                    .Key = sensorKeyArray(rowID * 4 + columnID)
                     .Size = sensorWidth
                     .Location = New Point(ScanBoard.LocationInDisplayingWindow.X + columnID * sensorWidth,
                                           ScanBoard.LocationInDisplayingWindow.Y + rowID * sensorWidth)
@@ -65,7 +65,7 @@ Public Class YesTechMG7
                                                   .Location.Y + sensorWidth \ 2)
                 End With
 
-                SensorItems.Add(addSensor)
+                SensorList.Add(addSensor)
             Next
         Next
     End Sub
@@ -84,7 +84,7 @@ Public Class YesTechMG7
 
                 Dim addSensor As New Sensor
                 With addSensor
-                    .Key = ScanBoard.PortID * 100000 + ScanBoard.ScannerID * 100 + sensorKeyArray(rowID * 4 + columnID)
+                    .Key = sensorKeyArray(rowID * 4 + columnID)
                     .Size = sensorWidth
                     .Location = New Point(ScanBoard.LocationInDisplayingWindow.X + columnID * sensorWidth,
                                           ScanBoard.LocationInDisplayingWindow.Y + rowID * sensorWidth)
@@ -92,7 +92,7 @@ Public Class YesTechMG7
                                                   .Location.Y + sensorWidth \ 2)
                 End With
 
-                SensorItems.Add(addSensor)
+                SensorList.Add(addSensor)
             Next
         Next
     End Sub
@@ -111,7 +111,7 @@ Public Class YesTechMG7
 
                 Dim addSensor As New Sensor
                 With addSensor
-                    .Key = ScanBoard.PortID * 100000 + ScanBoard.ScannerID * 100 + sensorKeyArray(rowID * 4 + columnID)
+                    .Key = sensorKeyArray(rowID * 4 + columnID)
                     .Size = sensorWidth
                     .Location = New Point(ScanBoard.LocationInDisplayingWindow.X + columnID * sensorWidth,
                                           ScanBoard.LocationInDisplayingWindow.Y + rowID * sensorWidth)
@@ -119,7 +119,7 @@ Public Class YesTechMG7
                                                   .Location.Y + sensorWidth \ 2)
                 End With
 
-                SensorItems.Add(addSensor)
+                SensorList.Add(addSensor)
             Next
         Next
     End Sub

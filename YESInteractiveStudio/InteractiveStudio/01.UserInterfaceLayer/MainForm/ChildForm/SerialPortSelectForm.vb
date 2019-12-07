@@ -16,6 +16,11 @@ Public Class SerialPortSelectForm
     ''' </summary>
     Public selectedSerialPort As String
 
+    ''' <summary>
+    ''' 是否第一次启动
+    ''' </summary>
+    Private Shared IsFirstRunMarsServerProvider As Boolean = True
+
     Private Sub SerialPortSelectForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         With ComboBox1
@@ -31,9 +36,16 @@ Public Class SerialPortSelectForm
             ''todo:重新启动Nova服务
             Dim tmpProcess = System.Diagnostics.Process.GetProcessesByName("MarsServerProvider")
             If tmpProcess.Length > 0 Then
-                tmpProcess(0).Kill()
+                If IsFirstRunMarsServerProvider Then
+                    tmpProcess(0).Kill()
+                    Process.Start($".\Nova\Server\MarsServerProvider.exe")
+                End If
+            Else
+                Process.Start($".\Nova\Server\MarsServerProvider.exe")
             End If
-            Process.Start($".\Nova\Server\MarsServerProvider.exe")
+
+            IsFirstRunMarsServerProvider = False
+
         Catch ex As Exception
         End Try
 #End Region

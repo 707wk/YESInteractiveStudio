@@ -43,9 +43,9 @@ Public MustInherit Class YesTechBaseBox
                 '是否有热备份
                 If .HotBackUpPortItems.ContainsKey(ScanBoard.PortID) Then
                     Dim hotBackUpPortID = .HotBackUpPortItems(ScanBoard.PortID)
-                    Dim hotBackUpScannerID = .MaximumConnectID(ScanBoard.PortID) - ScanBoard.ConnectID
+                    'Dim hotBackUpScannerID = .MaximumConnectID(ScanBoard.PortID) - ScanBoard.ConnectID
 
-                    .SensorItems.Add(hotBackUpPortID * 100000 + hotBackUpScannerID * 100 + tmpSensor.Key, tmpSensor)
+                    .SensorItems.Add(hotBackUpPortID * 100000 + ScanBoard.ConnectID * 100 + tmpSensor.Key, tmpSensor)
                 End If
             End With
         Next

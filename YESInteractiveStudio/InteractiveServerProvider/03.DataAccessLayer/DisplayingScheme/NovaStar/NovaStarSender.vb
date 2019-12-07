@@ -114,7 +114,11 @@ Public Class NovaStarSender
 #End Region
 
     ''' <summary>
-    ''' 传感器查找表
+    ''' 发送卡内热备份端口查找表
+    ''' </summary>
+    Public HotBackUpPortItems As New Dictionary(Of Integer, Integer)
+    ''' <summary>
+    ''' 传感器查找表(网口ID * 100000 + 连接ID * 100 + 传感器Key)
     ''' </summary>
     Public SensorItems As New Dictionary(Of Integer, Sensor)
 

@@ -67,13 +67,13 @@ Public Class NovaStarSender
     ''' 发送卡内热备份端口查找表
     ''' </summary>
     Public HotBackUpPortItems As New Dictionary(Of Integer, Integer)
-    ''' <summary>
-    ''' 4个网口分别最大的接收卡ID
-    ''' </summary>
-    Public MaximumConnectID() As Integer = {-1, -1, -1, -1}
+    '''' <summary>
+    '''' 4个网口分别最大的接收卡ID
+    '''' </summary>
+    'Public MaximumConnectID() As Integer = {-1, -1, -1, -1}
 
     ''' <summary>
-    ''' 传感器查找表
+    ''' 传感器查找表(网口ID * 100000 + 连接ID * 100 + 传感器Key)
     ''' </summary>
     Public SensorItems As New Dictionary(Of Integer, Sensor)
 

@@ -9,7 +9,7 @@ Public Class Sensor
     Public DisplayingWindowID As Integer
 
     ''' <summary>
-    ''' 索引(网口*100000+接收卡*100+传感器)
+    ''' 索引(传感器ID)
     ''' </summary>
     Public Key As Integer
 

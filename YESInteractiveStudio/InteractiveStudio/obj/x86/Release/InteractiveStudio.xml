@@ -844,14 +844,9 @@ InteractiveStudio
  发送卡内热备份端口查找表
  </summary>
 </member>
-<member name="F:InteractiveStudio.NovaStarSender.MaximumConnectID">
- <summary>
- 4个网口分别最大的接收卡ID
- </summary>
-</member>
 <member name="F:InteractiveStudio.NovaStarSender.SensorItems">
  <summary>
- 传感器查找表
+ 传感器查找表(网口ID * 100000 + 连接ID * 100 + 传感器Key)
  </summary>
 </member>
 <member name="F:InteractiveStudio.NovaStarSender.ActiveSensorItems">
@@ -946,7 +941,7 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.Sensor.Key">
  <summary>
- 索引(网口*100000+接收卡*100+传感器)
+ 索引(传感器ID)
  </summary>
 </member>
 <member name="F:InteractiveStudio.Sensor.State">
@@ -1119,6 +1114,11 @@ InteractiveStudio
 <member name="F:InteractiveStudio.SerialPortSelectForm.selectedSerialPort">
  <summary>
  选择的串口号
+ </summary>
+</member>
+<member name="F:InteractiveStudio.SerialPortSelectForm.IsFirstRunMarsServerProvider">
+ <summary>
+ 是否第一次启动
  </summary>
 </member>
 <member name="M:InteractiveStudio.SerialPortSelectForm.ChangeControlsLanguage">

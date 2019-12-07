@@ -396,7 +396,7 @@ InteractiveServerProvider
  网口索引
  </summary>
 </member>
-<member name="F:InteractiveServerProvider.NovaStarScanBoard.ScannerID">
+<member name="F:InteractiveServerProvider.NovaStarScanBoard.ConnectID">
  <summary>
  接收卡索引
  </summary>
@@ -486,9 +486,14 @@ InteractiveServerProvider
  获取字符串形式的网关地址
  </summary>
 </member>
+<member name="F:InteractiveServerProvider.NovaStarSender.HotBackUpPortItems">
+ <summary>
+ 发送卡内热备份端口查找表
+ </summary>
+</member>
 <member name="F:InteractiveServerProvider.NovaStarSender.SensorItems">
  <summary>
- 传感器查找表
+ 传感器查找表(网口ID * 100000 + 连接ID * 100 + 传感器Key)
  </summary>
 </member>
 <member name="F:InteractiveServerProvider.NovaStarSender.ActiveSensorItems">
@@ -616,7 +621,7 @@ InteractiveServerProvider
  接收卡信息
  </summary>
 </member>
-<member name="F:InteractiveServerProvider.YesTechBaseBox.SensorItems">
+<member name="F:InteractiveServerProvider.YesTechBaseBox.SensorList">
  <summary>
  传感器集合
  </summary>

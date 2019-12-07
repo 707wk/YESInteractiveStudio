@@ -33,3 +33,4 @@ T:\YESInteractiveStudio\InteractiveServerProvider\bin\Wangk.Tools.pdb
 T:\YESInteractiveStudio\InteractiveServerProvider\bin\Wangk.Tools.xml
 T:\YESInteractiveStudio\InteractiveServerProvider\bin\YESInteractiveSDK.pdb
 T:\YESInteractiveStudio\InteractiveServerProvider\bin\YESInteractiveSDK.xml
+T:\YESInteractiveStudio\InteractiveServerProvider\bin\Nova.LCT.GigabitSystem.DataClass.dll

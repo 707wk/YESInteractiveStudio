@@ -10,7 +10,7 @@ Public MustInherit Class YesTechBaseBox
     ''' <summary>
     ''' 传感器集合
     ''' </summary>
-    Friend SensorItems As New List(Of Sensor)
+    Friend SensorList As New List(Of Sensor)
 
     Public Sub New(value As NovaStarScanBoard)
         ScanBoard = value
@@ -35,8 +35,19 @@ Public MustInherit Class YesTechBaseBox
 
         End Select
 
-        For Each tmpSensor In SensorItems
-            AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(ScanBoard.SenderID).SensorItems.Add(tmpSensor.Key, tmpSensor)
+        For Each tmpSensor In SensorList
+            With AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(ScanBoard.SenderID)
+
+                .SensorItems.Add(ScanBoard.PortID * 100000 + ScanBoard.ConnectID * 100 + tmpSensor.Key, tmpSensor)
+
+                '是否有热备份
+                If .HotBackUpPortItems.ContainsKey(ScanBoard.PortID) Then
+                    Dim hotBackUpPortID = .HotBackUpPortItems(ScanBoard.PortID)
+                    'Dim hotBackUpScannerID = .MaximumConnectID(ScanBoard.PortID) - ScanBoard.ConnectID
+
+                    .SensorItems.Add(hotBackUpPortID * 100000 + ScanBoard.ConnectID * 100 + tmpSensor.Key, tmpSensor)
+                End If
+            End With
         Next
 
     End Sub

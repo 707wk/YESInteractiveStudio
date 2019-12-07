@@ -14,7 +14,7 @@ Public Class NovaStarScanBoard
     ''' <summary>
     ''' 接收卡索引
     ''' </summary>
-    Public ScannerID As Integer
+    Public ConnectID As Integer
 
     ''' <summary>
     ''' 原始坐标

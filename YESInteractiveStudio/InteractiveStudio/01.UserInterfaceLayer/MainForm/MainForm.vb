@@ -9,6 +9,19 @@ Public Class MainForm
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Wangk.Tools.LoggerHelper.Log.LogThis("程序启动")
 
+#Region "重新启动Nova服务"
+        'Try
+        '    ''todo:重新启动Nova服务
+        '    Dim tmpProcess = System.Diagnostics.Process.GetProcessesByName("MarsServerProvider")
+        '    If tmpProcess.Length > 0 Then
+        '        tmpProcess(0).Kill()
+        '    End If
+        '    Process.Start($".\Nova\Server\MarsServerProvider.exe")
+
+        'Catch ex As Exception
+        'End Try
+#End Region
+
         '初始化配置
         AppSettingHelper.Settings.ToString()
         HttpServerHelper.UIMainForm = Me
@@ -266,18 +279,18 @@ Public Class MainForm
                                                           tmpNovaStarSenderItems(item.MasterSenderIndex).HotBackUpPortItems.Add(item.MasterPortIndex, item.SlavePortIndex)
                                                       Next
 
-                                                      '统计网口下接收卡ID最大数
-                                                      For Each screenItem In tmpLEDScreenInfoList
-                                                          For Each scanBoardItem In screenItem.ScanBoardInfoList
-                                                              If scanBoardItem.SenderIndex = &HFF Then Continue For
+                                                      ''统计网口下接收卡ID最大数
+                                                      'For Each screenItem In tmpLEDScreenInfoList
+                                                      '    For Each scanBoardItem In screenItem.ScanBoardInfoList
+                                                      '        If scanBoardItem.SenderIndex = &HFF Then Continue For
 
-                                                              With scanBoardItem
-                                                                  If .ConnectIndex > tmpNovaStarSenderItems(.SenderIndex).MaximumConnectID(.PortIndex) Then
-                                                                      tmpNovaStarSenderItems(.SenderIndex).MaximumConnectID(.PortIndex) = .ConnectIndex
-                                                                  End If
-                                                              End With
-                                                          Next
-                                                      Next
+                                                      '        With scanBoardItem
+                                                      '            If .ConnectIndex > tmpNovaStarSenderItems(.SenderIndex).MaximumConnectID(.PortIndex) Then
+                                                      '                tmpNovaStarSenderItems(.SenderIndex).MaximumConnectID(.PortIndex) = .ConnectIndex
+                                                      '            End If
+                                                      '        End With
+                                                      '    Next
+                                                      'Next
 
                                                   End If
 
