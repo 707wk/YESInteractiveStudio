@@ -60,9 +60,9 @@ Public Class PlayWindow
         Static LastDisplayMode As InteractiveOptions.DISPLAYMODE = InteractiveOptions.DISPLAYMODE.DEBUG
 
         ''todo:切换显示模式
-        Select Case AppSettingHelper.Settings.DisplayMode
+        Select Case AppSettingHelper.GetInstance.DisplayMode
             Case InteractiveOptions.DISPLAYMODE.INTERACT
-                If AppSettingHelper.Settings.DisplayMode = LastDisplayMode Then
+                If AppSettingHelper.GetInstance.DisplayMode = LastDisplayMode Then
                     Exit Sub
                 End If
                 StartPlay(DisplayingWindow.IsAutoPlay)
@@ -84,7 +84,7 @@ Public Class PlayWindow
 
         End Select
 
-        LastDisplayMode = AppSettingHelper.Settings.DisplayMode
+        LastDisplayMode = AppSettingHelper.GetInstance.DisplayMode
 
     End Sub
 
@@ -130,7 +130,7 @@ Public Class PlayWindow
             Dim tmpGraphics = Me.CreateGraphics
 
             For Each screenID In DisplayingWindow.ScreenIDItems
-                For Each scanBoardItem In AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(screenID).NovaStarScanBoardItems
+                For Each scanBoardItem In AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(screenID).NovaStarScanBoardItems
                     tmpGraphics.DrawRectangle(tmpPen,
                                           scanBoardItem.LocationInDisplayingWindow.X,
                                           scanBoardItem.LocationInDisplayingWindow.Y,
@@ -220,7 +220,7 @@ Public Class PlayWindow
             DisplayingWindow.StartOfCompletedSensorDataEvent.WaitOne()
             If IsClose Then Exit Do
 
-            Select Case AppSettingHelper.Settings.DisplayMode
+            Select Case AppSettingHelper.GetInstance.DisplayMode
                 Case InteractiveOptions.DISPLAYMODE.INTERACT
                     WorkFunctionInInteractMode()
 
@@ -249,8 +249,8 @@ Public Class PlayWindow
     Private Sub WorkFunctionInInteractMode()
         '网格距离法
         'https://www.cnblogs.com/LBSer/p/4417127.html
-        Dim distance2Pow = Math.Pow(AppSettingHelper.Settings.PositionaIAccuracy, 2)
-        Dim ValidSensorMinimum = AppSettingHelper.Settings.ValidSensorMinimum
+        Dim distance2Pow = Math.Pow(AppSettingHelper.GetInstance.PositionaIAccuracy, 2)
+        Dim ValidSensorMinimum = AppSettingHelper.GetInstance.ValidSensorMinimum
 
         PointOfMergeItems.Clear()
         For Each sensorItem In DisplayingWindow.ActiveSensorItems

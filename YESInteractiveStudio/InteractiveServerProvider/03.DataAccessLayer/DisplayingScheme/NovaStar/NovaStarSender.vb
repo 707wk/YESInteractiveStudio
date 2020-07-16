@@ -209,9 +209,9 @@ Public Class NovaStarSender
                 GetSensorData()
 
             Catch ex As Exception
-                Wangk.Tools.LoggerHelper.Log.LogThis("工作线程",
-                                                      ex.ToString,
-                                                      Wangk.Tools.Logger.LogLevel.Level_WARN)
+                'Wangk.Tools.LoggerHelper.Log.LogThis("工作线程",
+                'ex.ToString,
+                '                                      Wangk.Tools.Logger.LogLevel.Level_WARN)
                 _state = SenderConnectState.OffLine
             End Try
 
@@ -335,9 +335,9 @@ Public Class NovaStarSender
 
                     exceptionStr = ex.ToString
 
-                    Wangk.Tools.LoggerHelper.Log.LogThis("通信异常",
-                                                          exceptionStr,
-                                                          Wangk.Tools.Logger.LogLevel.Level_WARN)
+                    'Wangk.Tools.LoggerHelper.Log.LogThis("通信异常",
+                    '                                      exceptionStr,
+                    '                                      Wangk.Tools.Logger.LogLevel.Level_WARN)
 
                     exceptionCount += 1
 

@@ -46,14 +46,14 @@ Public NotInheritable Class SensorDataProcessingHelper
         End If
         _IsRunning = True
 
-        If AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Count = 0 Then
+        If AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems.Count = 0 Then
             Exit Sub
         End If
 
-        EndOfReadSensorDataEvent = New CountdownEvent(AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems.Count)
-        EndOfCompletedSensorDataEvent = New CountdownEvent(AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Count)
+        EndOfReadSensorDataEvent = New CountdownEvent(AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems.Count)
+        EndOfCompletedSensorDataEvent = New CountdownEvent(AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems.Count)
 
-        For Each tmpNovaStarSender As NovaStarSender In AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems
+        For Each tmpNovaStarSender As NovaStarSender In AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems
             tmpNovaStarSender.Connect()
         Next
 
@@ -76,7 +76,7 @@ Public NotInheritable Class SensorDataProcessingHelper
         End If
         _IsRunning = False
 
-        If AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Count = 0 Then
+        If AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems.Count = 0 Then
             Exit Sub
         End If
 
@@ -84,7 +84,7 @@ Public NotInheritable Class SensorDataProcessingHelper
         WorkThread = Nothing
 
         '停止读取传感器数据
-        For Each tmpNovaStarSender As NovaStarSender In AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems
+        For Each tmpNovaStarSender As NovaStarSender In AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems
             tmpNovaStarSender.DisConnect()
         Next
 
@@ -103,7 +103,7 @@ Public NotInheritable Class SensorDataProcessingHelper
         Do While _IsRunning
 
             '读取传感器数据
-            For Each tmpNovaStarSender As NovaStarSender In AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems
+            For Each tmpNovaStarSender As NovaStarSender In AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems
                 tmpNovaStarSender.StartOfReadSensorDataEvent.Set()
             Next
 
@@ -112,24 +112,24 @@ Public NotInheritable Class SensorDataProcessingHelper
             EndOfReadSensorDataEvent.Reset()
 
             '数据分发
-            For Each tmpNovaStarSender As NovaStarSender In AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems
+            For Each tmpNovaStarSender As NovaStarSender In AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems
                 For Each tmpSensor As Sensor In tmpNovaStarSender.ActiveSensorItems
 
-                    AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems(tmpSensor.DisplayingWindowID).ActiveSensorItems.Add(tmpSensor)
+                    AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems(tmpSensor.DisplayingWindowID).ActiveSensorItems.Add(tmpSensor)
 
                 Next
             Next
 
             EndOfCompletedSensorDataEvent.Reset()
             '开始处理
-            For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+            For Each tmpDisplayingWindow In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
                 tmpDisplayingWindow.StartOfCompletedSensorDataEvent.Set()
             Next
             '等待处理完毕
             EndOfCompletedSensorDataEvent.Wait()
 
             '清除旧数据
-            For Each item In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+            For Each item In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
                 item.ActiveSensorItems.Clear()
             Next
 

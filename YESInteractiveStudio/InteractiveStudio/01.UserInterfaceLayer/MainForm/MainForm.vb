@@ -7,7 +7,7 @@ Imports Wangk.Resource
 
 Public Class MainForm
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Wangk.Tools.LoggerHelper.Log.LogThis("程序启动")
+        'AppSettingHelper.GetInstance.Logger.Info("程序启动")
 
 #Region "重新启动Nova服务"
         'Try
@@ -23,14 +23,14 @@ Public Class MainForm
 #End Region
 
         '初始化配置
-        AppSettingHelper.Settings.ToString()
+        AppSettingHelper.GetInstance.ToString()
         HttpServerHelper.UIMainForm = Me
 
 #Region "样式设置"
         StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.VisualStudio2012Light
 
         '产品版本号
-        Me.Text = $"{My.Application.Info.ProductName} V{AppSettingHelper.ProductVersion}"
+        Me.Text = $"{My.Application.Info.ProductName} V{AppSettingHelper.GetInstance.ProductVersion}"
 
         Me.KeyPreview = True
 
@@ -40,7 +40,7 @@ Public Class MainForm
         For Each LANGStr In [Enum].GetNames(GetType(Wangk.Resource.MultiLanguage.LANG))
             LanguageComboBox.Items.Add(LANGStr)
         Next
-        LanguageComboBox.SelectedIndex = AppSettingHelper.Settings.SelectLang
+        LanguageComboBox.SelectedIndex = AppSettingHelper.GetInstance.SelectLang
 
         ChangeControlsLanguage()
 
@@ -67,7 +67,7 @@ Public Class MainForm
         WindowsHotKeyHelper.RegisterHotKey(Me.Handle.ToInt32, 4, 0, Keys.F4)
 #End Region
 
-        AutoRunCheckBox.Checked = AppSettingHelper.Settings.IsAutoRun
+        AutoRunCheckBox.Checked = AppSettingHelper.GetInstance.IsAutoRun
 
         'Wangk.Tools.ConsoleDebug.Open()
     End Sub
@@ -83,9 +83,14 @@ Public Class MainForm
                 }
 
             tmpBackgroundWorkDialog.Start(Sub()
+                                              '计算传感器位置
+                                              'DisplayingSchemeProcessingHelper.ComputeSizeAndLocationForALLScreenAndScanBoard()
+                                              DisplayingSchemeProcessingHelper.ComputeSizeAndLocationForALLSensor()
+                                              'DisplayingSchemeProcessingHelper.ComputeSizeForALLDisplayingWindow()
+
                                               DisplayingSchemeProcessingHelper.ShowFormForALLDisplayingWindow()
-                                              'Thread.Sleep(2000)
                                               SensorDataProcessingHelper.StartAsync()
+
                                           End Sub)
 
         End Using
@@ -102,7 +107,7 @@ Public Class MainForm
         Timer1.Start()
 
         '自启后最小化
-        If AppSettingHelper.Settings.IsAutoRun Then
+        If AppSettingHelper.GetInstance.IsAutoRun Then
             Me.WindowState = FormWindowState.Minimized
         End If
 
@@ -116,7 +121,7 @@ Public Class MainForm
         TabControl1.TabPages.Clear()
 
         Try
-            For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+            For Each tmpDisplayingWindow In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
                 Dim addTabPage = New TabPage(tmpDisplayingWindow.Name)
                 addTabPage.Controls.Add(New WindowProgramControl With {
                                         .Visible = True,
@@ -154,7 +159,7 @@ Public Class MainForm
             Exit Sub
         End If
 
-        AppSettingHelper.Settings.DisplayMode = tmpCheckBoxItem.Tag
+        AppSettingHelper.GetInstance.DisplayMode = tmpCheckBoxItem.Tag
         DisplayingSchemeProcessingHelper.ChangeDisplayModeForALLDisplayingWindow()
 
     End Sub
@@ -212,7 +217,6 @@ Public Class MainForm
         Dim tmpNovaStarScreenItems() As NovaStarScreen = Nothing
         Dim tmpNovaStarSenderItems() As NovaStarSender = Nothing
 
-        ''todo:选择串口
         Using tmpSerialPortSelectForm As New SerialPortSelectForm
             If tmpSerialPortSelectForm.ShowDialog() <> DialogResult.OK Then
                 Exit Sub
@@ -267,30 +271,17 @@ Public Class MainForm
                                                   End Using
 
                                                   If hotBackUpItems IsNot Nothing Then
-                                                      '只支持发送卡内备份
+
+                                                      '记录冗余信息
                                                       For Each item In hotBackUpItems
-                                                          If item.MasterSenderIndex <> item.SlaveSenderIndex Then
-                                                              Throw New Exception(MultiLanguageHelper.Lang.GetS("The Slave Sender must be the same as the Master Sender in HotBackUp"))
-                                                          End If
+                                                          tmpNovaStarSenderItems(item.MasterSenderIndex).
+                                                          HotBackUpSenderPortItems.
+                                                          Add(item.MasterPortIndex,
+                                                              New NovaStartSenderRedundancyInfo(item.MasterSenderIndex,
+                                                                                                item.MasterPortIndex,
+                                                                                                item.SlaveSenderIndex,
+                                                                                                item.SlavePortIndex))
                                                       Next
-
-                                                      '记录主从网口号
-                                                      For Each item In hotBackUpItems
-                                                          tmpNovaStarSenderItems(item.MasterSenderIndex).HotBackUpPortItems.Add(item.MasterPortIndex, item.SlavePortIndex)
-                                                      Next
-
-                                                      ''统计网口下接收卡ID最大数
-                                                      'For Each screenItem In tmpLEDScreenInfoList
-                                                      '    For Each scanBoardItem In screenItem.ScanBoardInfoList
-                                                      '        If scanBoardItem.SenderIndex = &HFF Then Continue For
-
-                                                      '        With scanBoardItem
-                                                      '            If .ConnectIndex > tmpNovaStarSenderItems(.SenderIndex).MaximumConnectID(.PortIndex) Then
-                                                      '                tmpNovaStarSenderItems(.SenderIndex).MaximumConnectID(.PortIndex) = .ConnectIndex
-                                                      '            End If
-                                                      '        End With
-                                                      '    Next
-                                                      'Next
 
                                                   End If
 
@@ -384,15 +375,15 @@ Public Class MainForm
             tmpBackgroundWorkDialog.Start(Sub()
                                               SensorDataProcessingHelper.StopAsync()
                                               DisplayingSchemeProcessingHelper.CloseFormForALLDisplayingWindow()
-                                              AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Clear()
+                                              AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems.Clear()
                                           End Sub)
 
         End Using
 #End Region
 
         '复制新配置
-        AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems = tmpNovaStarScreenItems
-        AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems = tmpNovaStarSenderItems
+        AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems = tmpNovaStarScreenItems
+        AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems = tmpNovaStarSenderItems
 
         ''显示硬件设置窗体
         'Using tmpHardwareSettingsForm As New HardwareSettingsForm With {
@@ -464,7 +455,7 @@ Public Class MainForm
 
 #Region "播放窗口设置"
     Private Sub PlayWindowSettingsButton_Click(sender As Object, e As EventArgs) Handles PlayWindowSettingsButton.Click
-        If AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems Is Nothing Then
+        If AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems Is Nothing Then
             Exit Sub
         End If
 
@@ -598,7 +589,7 @@ Public Class MainForm
 #Region "开机自启"
     Private Sub AutoRunCheckBox_CheckedChanged(sender As Object, e As CheckBoxChangeEventArgs) Handles AutoRunCheckBox.CheckedChanged
 
-        If AppSettingHelper.Settings.IsAutoRun = AutoRunCheckBox.Checked Then
+        If AppSettingHelper.GetInstance.IsAutoRun = AutoRunCheckBox.Checked Then
             Exit Sub
         End If
 
@@ -626,7 +617,7 @@ Public Class MainForm
 
             End If
 
-            AppSettingHelper.Settings.IsAutoRun = AutoRunCheckBox.Checked
+            AppSettingHelper.GetInstance.IsAutoRun = AutoRunCheckBox.Checked
             AppSettingHelper.SaveToLocaltion()
 
         Catch ex As Exception
@@ -640,11 +631,11 @@ Public Class MainForm
 
 #Region "切换语言"
     Private Sub LanguageComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LanguageComboBox.SelectedIndexChanged
-        Static oldValue = AppSettingHelper.Settings.SelectLang
+        Static oldValue = AppSettingHelper.GetInstance.SelectLang
 
-        AppSettingHelper.Settings.SelectLang = LanguageComboBox.SelectedIndex
+        AppSettingHelper.GetInstance.SelectLang = LanguageComboBox.SelectedIndex
 
-        If oldValue <> AppSettingHelper.Settings.SelectLang Then
+        If oldValue <> AppSettingHelper.GetInstance.SelectLang Then
             MsgBox(MultiLanguageHelper.Lang.GetS("Restart the program to enable the language changes to take effect"),
                    MsgBoxStyle.Information,
                    MultiLanguageHelper.Lang.GetS("Change language"))
@@ -694,11 +685,11 @@ Public Class MainForm
     Private Sub ShowNovaStarSenderList()
         ToolStripDropDownButton1.DropDownItems.Clear()
 
-        If AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems Is Nothing Then
+        If AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems Is Nothing Then
             Exit Sub
         End If
 
-        For Each tmpNovaStarSender In AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems
+        For Each tmpNovaStarSender In AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems
             ToolStripDropDownButton1.DropDownItems.Add(New ToolStripMenuItem(
                                                        $"{MultiLanguageHelper.Lang.GetS("Sender")}:{tmpNovaStarSender.IPAddress}",
                                                        My.Resources.usb_disconnect_32px)
@@ -714,12 +705,12 @@ Public Class MainForm
         Dim stateOfOK As Boolean = True
 
         Try
-            If AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems Is Nothing Then
+            If AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems Is Nothing Then
                 Exit Sub
             End If
 
-            For NovaStarSenderID = 0 To AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems.Count - 1
-                Dim tmpNovaStarSender = AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(NovaStarSenderID)
+            For NovaStarSenderID = 0 To AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems.Count - 1
+                Dim tmpNovaStarSender = AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems(NovaStarSenderID)
                 If tmpNovaStarSender.State = InteractiveOptions.SenderConnectState.OffLine Then
                     stateOfOK = False
                     ToolStripDropDownButton1.DropDownItems(NovaStarSenderID).Image = My.Resources.usb_disconnect_32px
@@ -765,11 +756,11 @@ Public Class MainForm
             Exit Sub
         End If
 
-        If AppSettingHelper.Settings.DisplayMode <> InteractiveOptions.DISPLAYMODE.INTERACT Then
+        If AppSettingHelper.GetInstance.DisplayMode <> InteractiveOptions.DISPLAYMODE.INTERACT Then
             Exit Sub
         End If
 
-        With AppSettingHelper.Settings.DisplayingScheme
+        With AppSettingHelper.GetInstance.DisplayingScheme
             If windowID >= .DisplayingWindowItems.Count Then
                 Exit Sub
             End If

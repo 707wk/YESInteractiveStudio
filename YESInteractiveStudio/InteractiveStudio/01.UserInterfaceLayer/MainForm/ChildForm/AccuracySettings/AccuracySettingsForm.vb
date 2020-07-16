@@ -3,16 +3,16 @@ Imports Wangk.Resource
 
 Public Class AccuracySettingsForm
     Private Sub AccuracySettingsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        TrackBar2.Value = AppSettingHelper.Settings.PositionaIAccuracy
-        NumericUpDown1.Value = AppSettingHelper.Settings.ValidSensorMinimum
+        TrackBar2.Value = AppSettingHelper.GetInstance.PositionaIAccuracy
+        NumericUpDown1.Value = AppSettingHelper.GetInstance.ValidSensorMinimum
 
         ChangeControlsLanguage()
 
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        AppSettingHelper.Settings.PositionaIAccuracy = TrackBar2.Value
-        AppSettingHelper.Settings.ValidSensorMinimum = NumericUpDown1.Value
+        AppSettingHelper.GetInstance.PositionaIAccuracy = TrackBar2.Value
+        AppSettingHelper.GetInstance.ValidSensorMinimum = NumericUpDown1.Value
 
         Me.DialogResult = DialogResult.OK
         Me.Close()

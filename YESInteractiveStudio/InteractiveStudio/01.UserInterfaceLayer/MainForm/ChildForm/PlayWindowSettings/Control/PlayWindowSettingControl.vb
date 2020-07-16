@@ -21,7 +21,7 @@ Public Class PlayWindowSettingControl
         ComboBox1.Text = DisplayingWindow.Magnificine
 
         For Each itemID In DisplayingWindow.ScreenIDItems
-            With AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(itemID)
+            With AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(itemID)
 
                 Dim tmpButton As New ScreenButton(itemID) With {
                     .ContextMenuStrip = ContextMenuStrip1
@@ -45,7 +45,7 @@ Public Class PlayWindowSettingControl
 
             Dim tmpScreenButton = CType(tmpActiveControl, ScreenButton)
 
-            AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(tmpScreenButton.ScreenId).IsUsed = False
+            AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(tmpScreenButton.ScreenId).IsUsed = False
 
             Me.ActiveControl.Dispose()
         End If
@@ -73,7 +73,7 @@ Public Class PlayWindowSettingControl
         For Each item In Panel2.Controls
             Dim tmpScreenButton = CType(item, ScreenButton)
 
-            AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(tmpScreenButton.ScreenId).IsUsed = False
+            AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(tmpScreenButton.ScreenId).IsUsed = False
 
         Next
 

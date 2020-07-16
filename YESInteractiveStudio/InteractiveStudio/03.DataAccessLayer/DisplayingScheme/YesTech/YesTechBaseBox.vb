@@ -36,16 +36,25 @@ Public MustInherit Class YesTechBaseBox
         End Select
 
         For Each tmpSensor In SensorList
-            With AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(ScanBoard.SenderID)
+            With AppSettingHelper.
+                GetInstance.
+                DisplayingScheme.
+                NovaStarSenderItems(ScanBoard.SenderID)
 
-                .SensorItems.Add(ScanBoard.PortID * 100000 + ScanBoard.ConnectID * 100 + tmpSensor.Key, tmpSensor)
+                .SensorItems.Add(ScanBoard.PortID * 100000 + ScanBoard.ConnectID * 100 + tmpSensor.Key,
+                                 tmpSensor)
 
                 '是否有热备份
-                If .HotBackUpPortItems.ContainsKey(ScanBoard.PortID) Then
-                    Dim hotBackUpPortID = .HotBackUpPortItems(ScanBoard.PortID)
-                    'Dim hotBackUpScannerID = .MaximumConnectID(ScanBoard.PortID) - ScanBoard.ConnectID
+                If .HotBackUpSenderPortItems.ContainsKey(ScanBoard.PortID) Then
+                    Dim redundancyInfo = .HotBackUpSenderPortItems(ScanBoard.PortID)
 
-                    .SensorItems.Add(hotBackUpPortID * 100000 + ScanBoard.ConnectID * 100 + tmpSensor.Key, tmpSensor)
+                    AppSettingHelper.
+                        GetInstance.
+                        DisplayingScheme.
+                        NovaStarSenderItems(redundancyInfo.SlaveSenderID).
+                        SensorItems.
+                        Add(redundancyInfo.SlavePortID * 100000 + ScanBoard.ConnectID * 100 + tmpSensor.Key,
+                            tmpSensor)
                 End If
             End With
         Next

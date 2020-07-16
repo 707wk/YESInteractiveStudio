@@ -105,21 +105,21 @@ Public Class HardwareSettingsForm
             End If
 
         End Using
-        'For Each item In AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems
+        'For Each item In AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems
         '    DataGridView1.Rows.Add({item.IPAddress, item.IPSubnetMask, item.IPGateway, "Apply"})
         'Next
 #End Region
 
-        If AppSettingHelper.Settings.OldScanBoardBin Then
+        If AppSettingHelper.GetInstance.OldScanBoardBin Then
             RadioButton1.Checked = True
         Else
             RadioButton2.Checked = True
         End If
 
 #Region "传感器"
-        TrackBar1.Value = AppSettingHelper.Settings.SensorTouchSensitivity
-        ComboBox1.Text = AppSettingHelper.Settings.SensorResetTemp
-        ComboBox2.Text = AppSettingHelper.Settings.SensorResetSec
+        TrackBar1.Value = AppSettingHelper.GetInstance.SensorTouchSensitivity
+        ComboBox1.Text = AppSettingHelper.GetInstance.SensorResetTemp
+        ComboBox2.Text = AppSettingHelper.GetInstance.SensorResetSec
 #End Region
 
 #Region "单片机"
@@ -129,11 +129,11 @@ Public Class HardwareSettingsForm
     End Sub
 
     Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
-        AppSettingHelper.Settings.OldScanBoardBin = True
+        AppSettingHelper.GetInstance.OldScanBoardBin = True
     End Sub
 
     Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton2.CheckedChanged
-        AppSettingHelper.Settings.OldScanBoardBin = False
+        AppSettingHelper.GetInstance.OldScanBoardBin = False
     End Sub
 
 #Region "修改IP信息"
@@ -197,7 +197,7 @@ Public Class HardwareSettingsForm
         End Using
 
         If SetEquipmentIPDataResult Then
-            'AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(e.RowIndex).IpData = TmpIpData
+            'AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems(e.RowIndex).IpData = TmpIpData
             MsgBox(MultiLanguageHelper.Lang.GetS("IP modify successfully"))
         Else
             MsgBox(MultiLanguageHelper.Lang.GetS("Fail to modify IP"))
@@ -255,7 +255,7 @@ Public Class HardwareSettingsForm
         sendByte(3) = TrackBar1.Value
 
         If SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
-            AppSettingHelper.Settings.SensorTouchSensitivity = TrackBar1.Value
+            AppSettingHelper.GetInstance.SensorTouchSensitivity = TrackBar1.Value
             MsgBox(MultiLanguageHelper.Lang.GetS("Updated successfully"), MsgBoxStyle.Information, Me.Text)
         Else
             MsgBox(MultiLanguageHelper.Lang.GetS("Fail to modify"))
@@ -270,7 +270,7 @@ Public Class HardwareSettingsForm
         sendByte(4) = Val(ComboBox1.Text)
 
         If SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
-            AppSettingHelper.Settings.SensorResetTemp = Val(ComboBox1.Text)
+            AppSettingHelper.GetInstance.SensorResetTemp = Val(ComboBox1.Text)
             MsgBox(MultiLanguageHelper.Lang.GetS("Updated successfully"), MsgBoxStyle.Information, Me.Text)
         Else
             MsgBox(MultiLanguageHelper.Lang.GetS("Fail to modify"))
@@ -285,7 +285,7 @@ Public Class HardwareSettingsForm
         sendByte(4) = Val(ComboBox2.Text)
 
         If SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
-            AppSettingHelper.Settings.SensorResetSec = Val(ComboBox2.Text)
+            AppSettingHelper.GetInstance.SensorResetSec = Val(ComboBox2.Text)
             MsgBox(MultiLanguageHelper.Lang.GetS("Updated successfully"), MsgBoxStyle.Information, Me.Text)
         Else
             MsgBox(MultiLanguageHelper.Lang.GetS("Fail to modify"))
@@ -345,7 +345,7 @@ Public Class HardwareSettingsForm
             '    With UpdateMCUSocket
             '        .SendTimeout = 500
             '        .ReceiveTimeout = 500
-            '        .Connect(AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems(CByte(tmpScanBoardSelectForm.Value.Split(",")(0))).IPAddress, 6000)
+            '        .Connect(AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems(CByte(tmpScanBoardSelectForm.Value.Split(",")(0))).IPAddress, 6000)
             '    End With
 
             Using tmpDialog As New BackgroundWorkDialog With {
@@ -836,7 +836,7 @@ Public Class HardwareSettingsForm
                                       scanIndex As UShort,
                                       data() As Byte) As Boolean
 
-        If AppSettingHelper.Settings.OldScanBoardBin Then
+        If AppSettingHelper.GetInstance.OldScanBoardBin Then
             Return NovaMarsControl.SetOldScanBoardData(senderIndex, portIndex, scanIndex, data)
         Else
             Return NovaMarsControl.SetNewScanBoardData(senderIndex, portIndex, scanIndex, data)

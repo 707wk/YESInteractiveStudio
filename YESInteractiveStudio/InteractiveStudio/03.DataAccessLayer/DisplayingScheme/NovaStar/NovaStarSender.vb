@@ -1,4 +1,5 @@
-﻿Imports System.Net.Sockets
+﻿Imports System.Collections.Concurrent
+Imports System.Net.Sockets
 Imports System.Threading
 Imports InteractiveStudio
 Imports InteractiveStudio.InteractiveOptions
@@ -64,17 +65,20 @@ Public Class NovaStarSender
 #End Region
 
     ''' <summary>
-    ''' 发送卡内热备份端口查找表
+    ''' 发送卡内热备份端口查找表 key:主备端口号 value:冗余端口号
     ''' </summary>
+    <Obsolete>
     Public HotBackUpPortItems As New Dictionary(Of Integer, Integer)
-    '''' <summary>
-    '''' 4个网口分别最大的接收卡ID
-    '''' </summary>
-    'Public MaximumConnectID() As Integer = {-1, -1, -1, -1}
+
+    ''' <summary>
+    ''' 发送卡备份端口查找表 key:主备端口号 value:冗余信息
+    ''' </summary>
+    Public HotBackUpSenderPortItems As New Dictionary(Of Integer, NovaStartSenderRedundancyInfo)
 
     ''' <summary>
     ''' 传感器查找表(网口ID * 100000 + 连接ID * 100 + 传感器Key)
     ''' </summary>
+    <Newtonsoft.Json.JsonIgnore>
     Public SensorItems As New Dictionary(Of Integer, Sensor)
 
     ''' <summary>
@@ -164,9 +168,9 @@ Public Class NovaStarSender
                 GetSensorData()
 
             Catch ex As Exception
-                Wangk.Tools.LoggerHelper.Log.LogThis("工作线程",
-                                                      ex.ToString,
-                                                      Wangk.Tools.Logger.LogLevel.Level_WARN)
+                'AppSettingHelper.GetInstance.Logger.Error("工作线程",
+                '                                      ex.ToString,
+                '                                      Wangk.Tools.Logger.LogLevel.Level_WARN)
                 _state = SenderConnectState.OffLine
             End Try
 
@@ -249,7 +253,7 @@ Public Class NovaStarSender
 
 #Region "采集数据时的模式切换"
                                 ''todo:采集数据时的模式切换
-                                Select Case AppSettingHelper.Settings.DisplayMode
+                                Select Case AppSettingHelper.GetInstance.DisplayMode
                                     Case InteractiveOptions.DISPLAYMODE.INTERACT
 #Region "互动"
                                         '未感应
@@ -314,9 +318,9 @@ Public Class NovaStarSender
 
                     exceptionStr = ex.ToString
 
-                    Wangk.Tools.LoggerHelper.Log.LogThis("通信异常",
-                                                          exceptionStr,
-                                                          Wangk.Tools.Logger.LogLevel.Level_WARN)
+                    'AppSettingHelper.GetInstance.Logger.Error("通信异常",
+                    '                                      exceptionStr,
+                    '                                      Wangk.Tools.Logger.LogLevel.Level_WARN)
 
                     exceptionCount += 1
 

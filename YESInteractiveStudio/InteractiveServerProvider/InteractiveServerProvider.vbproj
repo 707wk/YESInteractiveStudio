@@ -85,9 +85,6 @@
     <Reference Include="Wangk.Resource">
       <HintPath>..\..\WangkNamespace\DLL\Wangk.Resource.dll</HintPath>
     </Reference>
-    <Reference Include="Wangk.Tools">
-      <HintPath>..\..\WangkNamespace\DLL\Wangk.Tools.dll</HintPath>
-    </Reference>
     <Reference Include="YESInteractiveSDK">
       <HintPath>..\YESInteractiveSDK\bin\YESInteractiveSDK.dll</HintPath>
     </Reference>

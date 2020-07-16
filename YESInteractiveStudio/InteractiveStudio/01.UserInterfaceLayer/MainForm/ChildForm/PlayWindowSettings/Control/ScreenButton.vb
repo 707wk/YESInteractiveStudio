@@ -15,8 +15,8 @@
         ForeColor = Color.LightGreen
         Font = New Font("微软雅黑", 9)
 
-        Size = AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(ScreenId).SizeOfOriginal
-        Location = AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(ScreenId).LocationOfOriginal
+        Size = AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(ScreenId).SizeOfOriginal
+        Location = AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(ScreenId).LocationOfOriginal
 
         ScreenButton_Move()
     End Sub

@@ -23,7 +23,7 @@ Public Class AppSettingHelper
                 '初始化
                 With instance
                     '日志
-                    Wangk.Tools.LoggerHelper.Init(saveDaysMax:=90)
+                    'Wangk.Tools.LoggerHelper.Init(saveDaysMax:=90)
                 End With
 
             End If

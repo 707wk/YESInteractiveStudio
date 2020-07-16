@@ -8,7 +8,7 @@ Imports Wangk.Resource
 
 Public Class MainForm
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Wangk.Tools.LoggerHelper.Log.LogThis("程序启动")
+        'Wangk.Tools.LoggerHelper.Log.LogThis("程序启动")
 
         '初始化配置
         AppSettingHelper.Settings.ToString()

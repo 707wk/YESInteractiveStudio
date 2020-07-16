@@ -10,7 +10,7 @@ Public Class ScreenIDSelectForm
             Dim screenID As Integer = Val(item.ToString.Split(" ")(1)) - 1
 
             SelectScreenIDItems.Add(screenID)
-            AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(screenID).IsUsed = True
+            AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(screenID).IsUsed = True
         Next
 
         Me.DialogResult = DialogResult.OK
@@ -22,9 +22,9 @@ Public Class ScreenIDSelectForm
     End Sub
 
     Private Sub ScreenIDSelectForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        For itemID = 0 To AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems.Count - 1
+        For itemID = 0 To AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems.Count - 1
 
-            If AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(itemID).IsUsed Then
+            If AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(itemID).IsUsed Then
                 Continue For
             End If
 

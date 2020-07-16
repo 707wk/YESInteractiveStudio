@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("Hunan Yestech Optoelectronic Co., LTD.")>
 <Assembly: AssemblyProduct("InteractiveStudio")>
-<Assembly: AssemblyCopyright("Copyright ©  2019 Yestech All Rights Reserved")>
+<Assembly: AssemblyCopyright("Copyright ©  2020 Yestech All Rights Reserved")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -32,4 +32,4 @@ Imports System.Runtime.InteropServices
 ' <Assembly: AssemblyVersion("1.0.*")>
 
 <Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.3.1207.2019")>
+<Assembly: AssemblyFileVersion("1.3.2020.0716")>

@@ -93,7 +93,7 @@ Public Class WindowProgramControl
             Exit Sub
         End If
 
-        If AppSettingHelper.Settings.DisplayMode <> InteractiveOptions.DISPLAYMODE.INTERACT Then
+        If AppSettingHelper.GetInstance.DisplayMode <> InteractiveOptions.DISPLAYMODE.INTERACT Then
             Exit Sub
         End If
 
@@ -115,7 +115,7 @@ Public Class WindowProgramControl
             Exit Sub
         End If
 
-        If AppSettingHelper.Settings.DisplayMode <> InteractiveOptions.DISPLAYMODE.INTERACT Then
+        If AppSettingHelper.GetInstance.DisplayMode <> InteractiveOptions.DISPLAYMODE.INTERACT Then
             Exit Sub
         End If
 

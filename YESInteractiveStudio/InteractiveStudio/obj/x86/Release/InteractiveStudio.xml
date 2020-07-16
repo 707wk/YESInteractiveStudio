@@ -544,24 +544,22 @@ InteractiveStudio
 </member>
 <member name="P:InteractiveStudio.AppSettingHelper.GUID">
  <summary>
- 程序标志
+ 程序集GUID
  </summary>
- <returns></returns>
 </member>
 <member name="P:InteractiveStudio.AppSettingHelper.ProductVersion">
  <summary>
- 程序版本
+ 程序集文件版本
  </summary>
- <returns></returns>
 </member>
 <member name="F:InteractiveStudio.AppSettingHelper.instance">
  <summary>
  实例
  </summary>
 </member>
-<member name="P:InteractiveStudio.AppSettingHelper.Settings">
+<member name="P:InteractiveStudio.AppSettingHelper.GetInstance">
  <summary>
- 参数
+ 获取实例
  </summary>
 </member>
 <member name="M:InteractiveStudio.AppSettingHelper.LoadFromLocaltion">
@@ -574,57 +572,62 @@ InteractiveStudio
  保存配置到本地
  </summary>
 </member>
-<member name="T:InteractiveStudio.AppSetting">
+<member name="F:InteractiveStudio.AppSettingHelper.Logger">
  <summary>
- 全局配置类
+ 日志记录
  </summary>
 </member>
-<member name="F:InteractiveStudio.AppSetting.SelectLang">
+<member name="F:InteractiveStudio.AppSettingHelper.AppUpdateInfoPath">
+ <summary>
+ 更新检测地址
+ </summary>
+</member>
+<member name="F:InteractiveStudio.AppSettingHelper.SelectLang">
  <summary>
  语言类型
  </summary>
 </member>
-<member name="F:InteractiveStudio.AppSetting.DisplayingScheme">
+<member name="F:InteractiveStudio.AppSettingHelper.DisplayingScheme">
  <summary>
  播放方案
  </summary>
 </member>
-<member name="F:InteractiveStudio.AppSetting.DisplayMode">
+<member name="F:InteractiveStudio.AppSettingHelper.DisplayMode">
  <summary>
  显示模式
  </summary>
 </member>
-<member name="F:InteractiveStudio.AppSetting.PositionaIAccuracy">
+<member name="F:InteractiveStudio.AppSettingHelper.PositionaIAccuracy">
  <summary>
  定位精度(点合并范围) 默认50像素
  </summary>
 </member>
-<member name="F:InteractiveStudio.AppSetting.ValidSensorMinimum">
+<member name="F:InteractiveStudio.AppSettingHelper.ValidSensorMinimum">
  <summary>
  有效最小感应点数
  </summary>
 </member>
-<member name="F:InteractiveStudio.AppSetting.SensorTouchSensitivity">
+<member name="F:InteractiveStudio.AppSettingHelper.SensorTouchSensitivity">
  <summary>
  传感器触摸灵敏度 范围 低 1-9 高
  </summary>
 </member>
-<member name="F:InteractiveStudio.AppSetting.SensorResetTemp">
+<member name="F:InteractiveStudio.AppSettingHelper.SensorResetTemp">
  <summary>
  传感器定时复位温度阈值° 范围 0-255
  </summary>
 </member>
-<member name="F:InteractiveStudio.AppSetting.SensorResetSec">
+<member name="F:InteractiveStudio.AppSettingHelper.SensorResetSec">
  <summary>
  传感器定时复位时间阈值 范围 0-255
  </summary>
 </member>
-<member name="F:InteractiveStudio.AppSetting.OldScanBoardBin">
+<member name="F:InteractiveStudio.AppSettingHelper.OldScanBoardBin">
  <summary>
  接收卡程序版本标志
  </summary>
 </member>
-<member name="F:InteractiveStudio.AppSetting.IsAutoRun">
+<member name="F:InteractiveStudio.AppSettingHelper.IsAutoRun">
  <summary>
  是否自启
  </summary>
@@ -841,7 +844,12 @@ InteractiveStudio
 </member>
 <member name="F:InteractiveStudio.NovaStarSender.HotBackUpPortItems">
  <summary>
- 发送卡内热备份端口查找表
+ 发送卡内热备份端口查找表 key:主备端口号 value:冗余端口号
+ </summary>
+</member>
+<member name="F:InteractiveStudio.NovaStarSender.HotBackUpSenderPortItems">
+ <summary>
+ 发送卡备份端口查找表 key:主备端口号 value:冗余信息
  </summary>
 </member>
 <member name="F:InteractiveStudio.NovaStarSender.SensorItems">
@@ -892,6 +900,31 @@ InteractiveStudio
 <member name="M:InteractiveStudio.NovaStarSender.GetSensorData">
  <summary>
  获取传感器数据
+ </summary>
+</member>
+<member name="T:InteractiveStudio.NovaStartSenderRedundancyInfo">
+ <summary>
+ 发送卡冗余信息
+ </summary>
+</member>
+<member name="F:InteractiveStudio.NovaStartSenderRedundancyInfo.MasterSenderID">
+ <summary>
+ 主发送卡
+ </summary>
+</member>
+<member name="F:InteractiveStudio.NovaStartSenderRedundancyInfo.MasterPortID">
+ <summary>
+ 主端口
+ </summary>
+</member>
+<member name="F:InteractiveStudio.NovaStartSenderRedundancyInfo.SlaveSenderID">
+ <summary>
+ 冗余发送卡
+ </summary>
+</member>
+<member name="F:InteractiveStudio.NovaStartSenderRedundancyInfo.SlavePortID">
+ <summary>
+ 冗余端口
  </summary>
 </member>
 <member name="T:InteractiveStudio.PointOfMerge">

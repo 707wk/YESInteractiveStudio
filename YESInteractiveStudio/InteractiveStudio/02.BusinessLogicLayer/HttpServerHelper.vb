@@ -200,7 +200,7 @@ Public NotInheritable Class HttpServerHelper
 
 #Region "生成临时数据"
                             Dim tmpList As New List(Of WebScheme)
-                            For Each i001 In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+                            For Each i001 In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
                                 Dim tmp = New WebScheme With {
                                     .Name = i001.Name
                                 }

@@ -22,7 +22,7 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
         IsShowWindow = True
 
 
-        For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+        For Each tmpDisplayingWindow In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
 
             tmpDisplayingWindow.PlayWindowForm = New PlayWindow With {
                 .DisplayingWindow = tmpDisplayingWindow
@@ -54,14 +54,14 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
     Public Shared Sub ComputeSizeAndLocationForALLScreenAndScanBoard()
 
         Try
-            For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
-                Dim DisplayingWindowID = AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.IndexOf(tmpDisplayingWindow)
+            For Each tmpDisplayingWindow In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
+                Dim DisplayingWindowID = AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems.IndexOf(tmpDisplayingWindow)
                 Dim Magnificine = tmpDisplayingWindow.Magnificine
 
                 For Each ScreenID In tmpDisplayingWindow.ScreenIDItems
 
                     '屏幕尺寸及坐标
-                    Dim NovaStarScreen = AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(ScreenID)
+                    Dim NovaStarScreen = AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(ScreenID)
                     With NovaStarScreen
                         .LocationOfZoom.X = .LocationOfOriginal.X * Magnificine
                         .LocationOfZoom.Y = .LocationOfOriginal.Y * Magnificine
@@ -102,18 +102,45 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
 
         Try
 
-            If AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Count = 0 Then
+            If AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems.Count = 0 Then
                 Exit Sub
             End If
 
-            For Each tmpNovaStarSender In AppSettingHelper.Settings.DisplayingScheme.NovaStarSenderItems
+#Region "旧配置转移成新配置"
+            For senderID = 0 To AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems.Count - 1
+                'For Each item In AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems
+                Dim item = AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems(senderID)
+
+#Disable Warning BC40008 ' 类型或成员已过时
+
+                If item.HotBackUpPortItems.Count = 0 Then
+
+                    Continue For
+                End If
+
+                For Each hotBackUpPort In item.HotBackUpPortItems
+                    item.HotBackUpSenderPortItems.Add(hotBackUpPort.Key,
+                                                      New NovaStartSenderRedundancyInfo(senderID,
+                                                                                        hotBackUpPort.Key,
+                                                                                        senderID,
+                                                                                        hotBackUpPort.Value))
+                Next
+
+                item.HotBackUpPortItems.Clear()
+
+#Enable Warning BC40008 ' 类型或成员已过时
+
+            Next
+#End Region
+
+            For Each tmpNovaStarSender In AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems
                 tmpNovaStarSender.SensorItems.Clear()
             Next
 
-            For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+            For Each tmpDisplayingWindow In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
                 For Each ScreenID In tmpDisplayingWindow.ScreenIDItems
                     '屏幕尺寸及坐标
-                    Dim tmpNovaStarScreen = AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(ScreenID)
+                    Dim tmpNovaStarScreen = AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(ScreenID)
 
                     '接收卡尺寸及坐标
                     For Each tmpNovaStarScanBoard In tmpNovaStarScreen.NovaStarScanBoardItems
@@ -140,12 +167,12 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
     Public Shared Sub ComputeSizeForALLDisplayingWindow()
 
         Try
-            For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+            For Each tmpDisplayingWindow In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
                 tmpDisplayingWindow.SizeOfZoom.Width = 0
                 tmpDisplayingWindow.SizeOfZoom.Height = 0
 
                 For Each ScreenID In tmpDisplayingWindow.ScreenIDItems
-                    With AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(ScreenID)
+                    With AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(ScreenID)
                         '宽度
                         If .LocationOfZoom.X + .SizeOfZoom.Width > tmpDisplayingWindow.SizeOfZoom.Width Then
                             tmpDisplayingWindow.SizeOfZoom.Width = .LocationOfZoom.X + .SizeOfZoom.Width
@@ -178,7 +205,7 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
         End If
         IsShowWindow = False
 
-        For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+        For Each tmpDisplayingWindow In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
             tmpDisplayingWindow?.PlayWindowForm?.CloseForm()
         Next
 
@@ -191,7 +218,7 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
     ''' </summary>
     Public Shared Sub HideFormForALLDisplayingWindow(value As Boolean)
 
-        For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+        For Each tmpDisplayingWindow In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
             tmpDisplayingWindow.PlayWindowForm?.HideForm(value)
         Next
 
@@ -204,7 +231,7 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
     ''' </summary>
     Public Shared Sub ChangeDisplayModeForALLDisplayingWindow()
 
-        For Each tmpDisplayingWindow In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+        For Each tmpDisplayingWindow In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
             tmpDisplayingWindow?.PlayWindowForm?.DisplayModeChange()
         Next
 

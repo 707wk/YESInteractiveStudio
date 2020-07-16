@@ -33,17 +33,17 @@ Public Class PlayWindowSettingsForm
         SuperTabControl1.ControlBox.SubItems.Add(AddWindowButton)
 #End Region
 
-        If AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Count = 0 Then
+        If AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems.Count = 0 Then
             AddTabClick(Nothing, Nothing)
         End If
 
         '设置使用标志
-        For Each item In AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems
+        For Each item In AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems
             item.IsUsed = False
         Next
-        For Each item In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+        For Each item In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
             For Each screenID In item.ScreenIDItems
-                AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(screenID).IsUsed = True
+                AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(screenID).IsUsed = True
             Next
         Next
 
@@ -66,7 +66,7 @@ Public Class PlayWindowSettingsForm
 
     Private Sub PlayWindowSettingsForm_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
-        For Each item In AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems
+        For Each item In AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems
             Dim tab As SuperTabItem = SuperTabControl1.CreateTab(item.Name)
 
             tab.AttachedControl.Controls.Add(New PlayWindowSettingControl With {
@@ -98,7 +98,7 @@ Public Class PlayWindowSettingsForm
         End If
 
         '替换旧数据
-        AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Clear()
+        AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems.Clear()
 
         For Each tmpSuperTabItem As SuperTabItem In SuperTabControl1.Tabs
             Dim tmpPlayWindowSettingControl = CType(tmpSuperTabItem.AttachedControl.Controls.Item(0), PlayWindowSettingControl)
@@ -113,7 +113,7 @@ Public Class PlayWindowSettingsForm
                 For Each tmpScreenButton As ScreenButton In tmpPlayWindowSettingControl.Panel2.Controls
                     .ScreenIDItems.Add(tmpScreenButton.ScreenId)
 
-                    AppSettingHelper.Settings.DisplayingScheme.NovaStarScreenItems(tmpScreenButton.ScreenId).LocationOfOriginal =
+                    AppSettingHelper.GetInstance.DisplayingScheme.NovaStarScreenItems(tmpScreenButton.ScreenId).LocationOfOriginal =
                         tmpScreenButton.Location
                 Next
 
@@ -121,7 +121,7 @@ Public Class PlayWindowSettingsForm
 
             End With
 
-            AppSettingHelper.Settings.DisplayingScheme.DisplayingWindowItems.Add(tmpDisplayingWindow)
+            AppSettingHelper.GetInstance.DisplayingScheme.DisplayingWindowItems.Add(tmpDisplayingWindow)
 
         Next
 
