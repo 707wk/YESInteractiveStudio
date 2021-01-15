@@ -185,6 +185,7 @@
     <Compile Include="02.BusinessLogicLayer\DisplayingSchemeProcessingHelper.vb" />
     <Compile Include="02.BusinessLogicLayer\HttpServerHelper.vb" />
     <Compile Include="02.BusinessLogicLayer\SensorDataProcessingHelper.vb" />
+    <Compile Include="02.BusinessLogicLayer\UIFormHelper.vb" />
     <Compile Include="02.BusinessLogicLayer\WindowsHotKeyHelper.vb" />
     <Compile Include="03.DataAccessLayer\AppSettingHelper.vb" />
     <Compile Include="03.DataAccessLayer\DisplayingScheme\DisplayingWindow\DisplayingFile.vb" />
@@ -315,6 +316,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo_32px.ico" />
+    <None Include="res\stop_20px.png" />
+    <None Include="res\toastSuccess_32px.png" />
+    <None Include="res\toastInfo_32px.png" />
+    <None Include="res\toastFail_32px.png" />
     <None Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

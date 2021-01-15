@@ -25,6 +25,7 @@ Public Class MainForm
         '初始化配置
         AppSettingHelper.GetInstance.ToString()
         HttpServerHelper.UIMainForm = Me
+        UIFormHelper.UIForm = Me
 
 #Region "样式设置"
         StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.VisualStudio2012Light
@@ -763,8 +764,7 @@ Public Class MainForm
             Dim tmpWindowProgramControl = CType(TabControl1.TabPages(windowID).Controls(0), WindowProgramControl)
             With tmpWindowProgramControl
                 .ToolStripButton2_Click(Nothing, Nothing)
-                .ListView1.Items(fileID).Selected = True
-                .PlayToolStripMenuItem_Click(Nothing, Nothing)
+                .RemotePlayFile(fileID)
             End With
         End With
 
