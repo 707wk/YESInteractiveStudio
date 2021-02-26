@@ -1,4 +1,5 @@
-﻿Imports Nova.Mars.SDK
+﻿Imports System.ComponentModel
+Imports Nova.Mars.SDK
 Imports Wangk.Resource
 
 Public Class SerialPortSelectForm
@@ -6,7 +7,7 @@ Public Class SerialPortSelectForm
     ''' <summary>
     ''' Nova连接变量
     ''' </summary>
-    Private NovaMarsHardware As New MarsHardwareEnumerator
+    Private ReadOnly NovaMarsHardware As New MarsHardwareEnumerator
     ''' <summary>
     ''' Nova配置变量
     ''' </summary>
@@ -14,12 +15,7 @@ Public Class SerialPortSelectForm
     ''' <summary>
     ''' 选择的串口号
     ''' </summary>
-    Public selectedSerialPort As String
-
-    ''' <summary>
-    ''' 是否第一次启动
-    ''' </summary>
-    Private Shared IsFirstRunMarsServerProvider As Boolean = True
+    Public SelectedSerialPort As String
 
     Private Sub SerialPortSelectForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -31,34 +27,17 @@ Public Class SerialPortSelectForm
         ConnectButton.Enabled = False
         Label2.BringToFront()
 
-#Region "重新启动Nova服务"
-        'Try
-        '    ''todo:重新启动Nova服务
-        '    Dim tmpProcess = System.Diagnostics.Process.GetProcessesByName("MarsServerProvider")
-        '    If tmpProcess.Length > 0 Then
-        '        If IsFirstRunMarsServerProvider Then
-        '            tmpProcess(0).Kill()
-        '            Process.Start($".\Server\MarsServerProvider.exe")
-        '        End If
-        '    Else
-        '        Process.Start($".\Server\MarsServerProvider.exe")
-        '    End If
-
-        '    IsFirstRunMarsServerProvider = False
-
-        'Catch ex As Exception
-        'End Try
-#End Region
-
         ChangeControlsLanguage()
 
-        Timer1.Interval = 1000
+        Timer1.Interval = 2000
 
     End Sub
 
     Private Sub SerialPortSelectForm_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
+
         NovaMarsControl?.UnInitialize()
         NovaMarsHardware?.UnInitialize()
+
     End Sub
 
     Private Sub SerialPortSelectForm_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -68,6 +47,18 @@ Public Class SerialPortSelectForm
         Timer1.Start()
 
         Label2.Hide()
+
+    End Sub
+
+    Private Async Sub SerialPortSelectForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Timer1.Stop()
+
+        Await Task.Run(Sub()
+                           Do While RefreshButton.Enabled <> True
+                               Threading.Thread.Sleep(100)
+                           Loop
+                       End Sub)
+
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
@@ -87,7 +78,9 @@ Public Class SerialPortSelectForm
             NovaMarsHardware?.UnInitialize()
             NovaMarsHardware?.Initialize()
 
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
+#Enable Warning CA1031 ' Do not catch general exception types
         End Try
 
         For Each i001 As String In NovaMarsHardware.CommPortListOfCtrlSystem
@@ -102,33 +95,11 @@ Public Class SerialPortSelectForm
         RefreshButton.Enabled = True
     End Sub
 
-    'Private Sub RefreshButton_Click(Optional sender As Object = Nothing, Optional e As EventArgs = Nothing) Handles RefreshButton.Click
-
-    '    ComboBox1.Items.Clear()
-    '    ConnectButton.Enabled = False
-
-    '    Try
-    '        NovaMarsHardware?.UnInitialize()
-    '        NovaMarsHardware?.Initialize()
-
-    '    Catch ex As Exception
-    '    End Try
-
-    '    For Each i001 As String In NovaMarsHardware.CommPortListOfCtrlSystem
-    '        ComboBox1.Items.Add(i001)
-    '    Next
-
-    '    If ComboBox1.Items.Count > 0 Then
-    '        ComboBox1.SelectedIndex = 0
-    '        ConnectButton.Enabled = True
-    '    End If
-    'End Sub
-
     Private Sub ConnectButton_Click(sender As Object, e As EventArgs) Handles ConnectButton.Click
 
         '初始化控制系统
         NovaMarsControl = New MarsControlSystem(NovaMarsHardware)
-        selectedSerialPort = ComboBox1.Text
+        SelectedSerialPort = ComboBox1.Text
 
         Me.DialogResult = DialogResult.OK
 

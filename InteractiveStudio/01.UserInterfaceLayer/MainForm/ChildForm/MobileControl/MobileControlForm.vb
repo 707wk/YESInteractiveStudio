@@ -24,7 +24,7 @@ Public Class MobileControlForm
         Dim IPItems = Net.Dns.GetHostAddresses(Net.Dns.GetHostName())
         For Each item In IPItems
             If item.AddressFamily = AddressFamily.InterNetwork Then
-                Dim urlStr = $"http://{item.ToString}:8080"
+                Dim urlStr = $"http://{item}:8080"
 
                 TextBox1.AppendText(urlStr & vbCrLf)
 

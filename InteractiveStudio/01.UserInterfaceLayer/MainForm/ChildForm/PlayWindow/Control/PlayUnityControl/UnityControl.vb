@@ -4,13 +4,18 @@ Public Class UnityControl
     Inherits Panel
 
 #Region "消息结构"
+#Disable Warning CA1034 ' Nested types should not be visible
+#Disable Warning CA1815 ' Override equals and operator equals on value types
     Public Structure COPYDATASTRUCT
+#Enable Warning CA1815 ' Override equals and operator equals on value types
+#Enable Warning CA1034 ' Nested types should not be visible
         Public dwData As IntPtr
 
         Public cbData As Integer
 
         <MarshalAs(UnmanagedType.LPStr)>
         Public lpData As String
+
     End Structure
 #End Region
 
@@ -105,7 +110,9 @@ Public Class UnityControl
                 UnityProcess.Kill()
             End While
 
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
+#Enable Warning CA1031 ' Do not catch general exception types
 
         End Try
     End Sub

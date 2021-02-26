@@ -27,7 +27,7 @@ Public NotInheritable Class HttpServerHelper
     ''' <summary>
     ''' 端口号
     ''' </summary>
-    Private Shared PortNumber As Integer = 8080
+    Private Const PortNumber As Integer = 8080
 
     ''' <summary>
     ''' 主窗体
@@ -105,7 +105,9 @@ Public NotInheritable Class HttpServerHelper
                 ClientDisposeFunction(tmpTcpClient)
 
             Loop
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
+#Enable Warning CA1031 ' Do not catch general exception types
         Finally
             httpServer.Stop()
         End Try
@@ -233,7 +235,9 @@ Public NotInheritable Class HttpServerHelper
                     '不存在
                     'Console.WriteLine($"{filePath} 路径错误")
                 End If
+#Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
+#Enable Warning CA1031 ' Do not catch general exception types
             End Try
 
         End Using

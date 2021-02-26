@@ -85,6 +85,7 @@ Public Class AppSettingHelper
                 System.IO.File.ReadAllText($"{Path}\Hunan Yestech\{My.Application.Info.ProductName}\Data\Setting.json",
                                            System.Text.Encoding.UTF8))
 
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
             '使用默认参数
             instance = New AppSettingHelper
@@ -102,6 +103,7 @@ Public Class AppSettingHelper
                 End With
 
             End With
+#Enable Warning CA1031 ' Do not catch general exception types
 
         End Try
 
@@ -131,8 +133,10 @@ Public Class AppSettingHelper
                 t.Write(JsonConvert.SerializeObject(instance))
             End Using
 
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Information, My.Application.Info.Title)
+#Enable Warning CA1031 ' Do not catch general exception types
 
         End Try
 

@@ -882,4 +882,10 @@ Public Class HardwareSettingsForm
     End Sub
 #End Region
 
+    Private Sub HardwareSettingsForm_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
+        SetEquipmentIPDataEvent.Dispose()
+        GetEquipmentIPDataEvent.Dispose()
+
+    End Sub
+
 End Class

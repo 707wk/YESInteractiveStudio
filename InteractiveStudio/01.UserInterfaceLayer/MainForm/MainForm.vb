@@ -128,7 +128,9 @@ Public Class MainForm
                 TabControl1.TabPages.Add(addTabPage)
             Next
 
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
+#Enable Warning CA1031 ' Do not catch general exception types
 
         End Try
 
@@ -231,7 +233,7 @@ Public Class MainForm
 #Region "初始化"
                                                   Dim screenCount As Integer
                                                   Dim senderCount As Integer
-                                                  tmpNovaMarsControl.Initialize(tmpSerialPortSelectForm.selectedSerialPort, screenCount, senderCount)
+                                                  tmpNovaMarsControl.Initialize(tmpSerialPortSelectForm.SelectedSerialPort, screenCount, senderCount)
 
                                                   If screenCount = 0 Then Throw New Exception(MultiLanguageHelper.Lang.GetS("No Screen found"))
                                                   If senderCount = 0 Then Throw New Exception(MultiLanguageHelper.Lang.GetS("No Sender found"))
@@ -426,7 +428,7 @@ Public Class MainForm
     ''' <summary>
     ''' 读取到IP标志
     ''' </summary>
-    Private GetEquipmentIPDataEvent As New AutoResetEvent(False)
+    Private ReadOnly GetEquipmentIPDataEvent As New AutoResetEvent(False)
     ''' <summary>
     ''' 读到的发送卡IP
     ''' </summary>
@@ -532,7 +534,7 @@ Public Class MainForm
 
                 tmpBackgroundWorkDialog.Start(Sub(uie As Wangk.Resource.BackgroundWorkEventArgs)
 #Region "初始化"
-                                                  tmpNovaMarsControl.Initialize(tmpSerialPortSelectForm.selectedSerialPort, screenCount, senderCount)
+                                                  tmpNovaMarsControl.Initialize(tmpSerialPortSelectForm.SelectedSerialPort, screenCount, senderCount)
 
                                                   If screenCount = 0 Then Throw New Exception(MultiLanguageHelper.Lang.GetS("No Screen found"))
                                                   If senderCount = 0 Then Throw New Exception(MultiLanguageHelper.Lang.GetS("No Sender found"))
@@ -565,7 +567,9 @@ Public Class MainForm
             tmpDialog.Start(Sub()
                                 Try
                                     tmpSerialPortSelectForm.Dispose()
+#Disable Warning CA1031 ' Do not catch general exception types
                                 Catch ex As Exception
+#Enable Warning CA1031 ' Do not catch general exception types
                                 End Try
 
                                 SensorDataProcessingHelper.StartAsync()
@@ -603,7 +607,9 @@ Public Class MainForm
                 Dim shortcutPath As String = $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Startup) }\{My.Application.Info.ProductName}.lnk"
                 Try
                     IO.File.Delete(shortcutPath)
+#Disable Warning CA1031 ' Do not catch general exception types
                 Catch ex As Exception
+#Enable Warning CA1031 ' Do not catch general exception types
                 End Try
 
             End If
@@ -611,10 +617,12 @@ Public Class MainForm
             AppSettingHelper.GetInstance.IsAutoRun = AutoRunCheckBox.Checked
             AppSettingHelper.SaveToLocaltion()
 
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
             MsgBox(ex.ToString,
                    MsgBoxStyle.Information,
                    MultiLanguageHelper.Lang.GetS("Setup failed"))
+#Enable Warning CA1031 ' Do not catch general exception types
         End Try
 
     End Sub
@@ -723,8 +731,9 @@ Public Class MainForm
 
             End If
 
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
-
+#Enable Warning CA1031 ' Do not catch general exception types
         End Try
 
     End Sub
@@ -776,4 +785,7 @@ Public Class MainForm
         Process.Start("https://support.qq.com/products/285331")
     End Sub
 
+    Private Sub MainForm_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
+        GetEquipmentIPDataEvent.Dispose()
+    End Sub
 End Class

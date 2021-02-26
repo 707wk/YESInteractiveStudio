@@ -87,8 +87,9 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
                 Next
             Next
 
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
-
+#Enable Warning CA1031 ' Do not catch general exception types
         End Try
 
     End Sub
@@ -152,8 +153,9 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
                 Next
             Next
 
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
-
+#Enable Warning CA1031 ' Do not catch general exception types
         End Try
 
     End Sub
@@ -186,8 +188,9 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
                 Next
             Next
 
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
-
+#Enable Warning CA1031 ' Do not catch general exception types
         End Try
 
     End Sub

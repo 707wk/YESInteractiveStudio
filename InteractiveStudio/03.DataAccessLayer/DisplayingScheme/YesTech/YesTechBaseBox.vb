@@ -12,7 +12,7 @@ Public MustInherit Class YesTechBaseBox
     ''' </summary>
     Friend SensorList As New List(Of Sensor)
 
-    Public Sub New(value As NovaStarScanBoard)
+    Protected Sub New(value As NovaStarScanBoard)
         ScanBoard = value
     End Sub
 

@@ -144,7 +144,7 @@ Public Class PlayWindowSettingsForm
             For Each tmpSuperTabItem As SuperTabItem In SuperTabControl1.Tabs
                 Dim tmpPlayWindowSettingControl = CType(tmpSuperTabItem.AttachedControl.Controls.Item(0), PlayWindowSettingControl)
 
-                If tmpPlayWindowSettingControl.TextBox1.Text = "" Then
+                If String.IsNullOrWhiteSpace(tmpPlayWindowSettingControl.TextBox1.Text) Then
                     Throw New Exception(MultiLanguageHelper.Lang.GetS("Window name cannot be empty"))
                 End If
 
@@ -153,11 +153,13 @@ Public Class PlayWindowSettingsForm
                 End If
 
             Next
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
             MsgBox(ex.Message,
                    MsgBoxStyle.Information,
                    Button1.Text)
             Return False
+#Enable Warning CA1031 ' Do not catch general exception types
         End Try
 
         Return True

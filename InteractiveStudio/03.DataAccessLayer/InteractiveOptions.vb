@@ -1,7 +1,7 @@
 ﻿''' <summary>
 ''' 互动模式
 ''' </summary>
-Public Class InteractiveOptions
+Public NotInheritable Class InteractiveOptions
     ''' <summary>
     ''' 显示模式
     ''' </summary>
