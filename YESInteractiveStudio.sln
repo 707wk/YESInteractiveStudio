@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "YESInteractiveSDK", "YESInteractiveSDK\YESInteractiveSDK.vbproj", "{428BC1BB-BC3F-4D04-AC36-85DF1EA25285}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E99A6682-91B1-4AC6-8A3C-F775E12CD1B9}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "InteractiveStudio", "InteractiveStudio\InteractiveStudio.vbproj", "{0F524E2A-3E82-4C92-B4CA-9AB263C8D3AD}"
 EndProject
 Global

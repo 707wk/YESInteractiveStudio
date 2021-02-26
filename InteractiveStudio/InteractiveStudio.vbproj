@@ -76,8 +76,8 @@
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.0, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.7.2\lib\net45\NLog.dll</HintPath>
@@ -117,9 +117,6 @@
     </Reference>
     <Reference Include="Wangk.Resource">
       <HintPath>..\..\WangkNamespace\DLL\Wangk.Resource.dll</HintPath>
-    </Reference>
-    <Reference Include="Wangk.Tools">
-      <HintPath>..\..\WangkNamespace\DLL\Wangk.Tools.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +162,6 @@
     </Compile>
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\IPlayBaseControl.vb" />
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\PlayDllControl.vb" />
-    <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\PlayFlashControl.vb" />
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\PlayUnityControl.vb" />
     <Compile Include="01.UserInterfaceLayer\MainForm\ChildForm\PlayWindow\Control\PlayUnityControl\UnityControl.vb">
       <SubType>Component</SubType>
@@ -302,7 +298,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -316,6 +311,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo_32px.ico" />
+    <None Include="res\message_32px.png" />
     <None Include="res\stop_20px.png" />
     <None Include="res\toastSuccess_32px.png" />
     <None Include="res\toastInfo_32px.png" />
@@ -346,25 +342,8 @@
     <None Include="res\control_32px.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AxShockwaveFlashObjects">
-      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="IWshRuntimeLibrary">
       <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="ShockwaveFlashObjects">
-      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
       <VersionMajor>1</VersionMajor>
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
@@ -384,11 +363,11 @@
     <PostBuildEvent>%25删除临时文件%25
 DEL *.xml
 DEL *.pdb
-DEL *.dll.config
+%25DEL *.dll.config%25
 
 %25移动DLL文件到DLL文件夹%25
-MKDIR .\DLL
-FOR /f "delims=" %25%25i IN ('dir /b "*.dll"') DO MOVE %25%25i "./DLL"
+%25MKDIR .\DLL%25
+%25FOR /f "delims=" %25%25i IN ('dir /b "*.dll"') DO MOVE %25%25i "./DLL"%25
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -14,9 +14,10 @@ Namespace My
 
             AppSettingHelper.GetInstance.Logger.Error(e.Exception)
 
-            MsgBox("应用程序中发生了无法处理的异常，点击""确定""，应用程序将立即关闭
+            MsgBox($"应用程序中发生了未处理的异常 :
+{e.Exception.Message}
 
-具体异常信息可在 \Logs\Error 文件夹内查看",
+点击""确定"", 应用程序将立即关闭, 具体异常信息可在 \Logs\Error 文件夹内查看",
                    MsgBoxStyle.Critical)
 
         End Sub

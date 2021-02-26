@@ -92,7 +92,9 @@ Public Class WindowProgramControl
                                                MultiLanguageHelper.Lang.GetS("Remove")
                                                })
             Next
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
+#Enable Warning CA1031 ' Do not catch general exception types
 
         End Try
 
@@ -101,7 +103,7 @@ Public Class WindowProgramControl
 #Region "添加文件"
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
         Dim TmpDialog As New OpenFileDialog With {
-            .Filter = "Flash or DLL or Unity|*.swf;*.dll;*.exe",
+            .Filter = "DLL or Unity|*.dll;*.exe",
             .Multiselect = True
         }
         If TmpDialog.ShowDialog() <> DialogResult.OK Then

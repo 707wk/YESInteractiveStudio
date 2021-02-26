@@ -32,25 +32,27 @@ Public Class SerialPortSelectForm
         Label2.BringToFront()
 
 #Region "重新启动Nova服务"
-        Try
-            ''todo:重新启动Nova服务
-            Dim tmpProcess = System.Diagnostics.Process.GetProcessesByName("MarsServerProvider")
-            If tmpProcess.Length > 0 Then
-                If IsFirstRunMarsServerProvider Then
-                    tmpProcess(0).Kill()
-                    Process.Start($".\Nova\Server\MarsServerProvider.exe")
-                End If
-            Else
-                Process.Start($".\Nova\Server\MarsServerProvider.exe")
-            End If
+        'Try
+        '    ''todo:重新启动Nova服务
+        '    Dim tmpProcess = System.Diagnostics.Process.GetProcessesByName("MarsServerProvider")
+        '    If tmpProcess.Length > 0 Then
+        '        If IsFirstRunMarsServerProvider Then
+        '            tmpProcess(0).Kill()
+        '            Process.Start($".\Server\MarsServerProvider.exe")
+        '        End If
+        '    Else
+        '        Process.Start($".\Server\MarsServerProvider.exe")
+        '    End If
 
-            IsFirstRunMarsServerProvider = False
+        '    IsFirstRunMarsServerProvider = False
 
-        Catch ex As Exception
-        End Try
+        'Catch ex As Exception
+        'End Try
 #End Region
 
         ChangeControlsLanguage()
+
+        Timer1.Interval = 1000
 
     End Sub
 
@@ -63,9 +65,18 @@ Public Class SerialPortSelectForm
 
         Label2.Refresh()
 
-        RefreshButton_MouseUp(Nothing, Nothing)
+        Timer1.Start()
 
         Label2.Hide()
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        RefreshButton_MouseUp(Nothing, Nothing)
+
+        If ComboBox1.Items.Count > 0 Then
+            Timer1.Stop()
+        End If
+
     End Sub
 
     Private Sub RefreshButton_MouseUp(sender As Object, e As MouseEventArgs) Handles RefreshButton.MouseUp
@@ -136,7 +147,6 @@ Public Class SerialPortSelectForm
             Me.Label2.Text = .GetS("Waiting...")
         End With
     End Sub
-
 #End Region
 
 End Class

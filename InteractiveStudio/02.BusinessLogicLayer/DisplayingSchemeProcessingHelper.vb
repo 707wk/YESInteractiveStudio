@@ -108,7 +108,6 @@ Public NotInheritable Class DisplayingSchemeProcessingHelper
 
 #Region "旧配置转移成新配置"
             For senderID = 0 To AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems.Count - 1
-                'For Each item In AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems
                 Dim item = AppSettingHelper.GetInstance.DisplayingScheme.NovaStarSenderItems(senderID)
 
 #Disable Warning BC40008 ' 类型或成员已过时

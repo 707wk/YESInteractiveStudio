@@ -22,8 +22,10 @@ Public Class NovaStarSender
         Get
             Try
                 Return $"{ IpData(3)}.{ IpData(2)}.{ IpData(1)}.{ IpData(0)}"
+#Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
                 Return ""
+#Enable Warning CA1031 ' Do not catch general exception types
             End Try
         End Get
 
@@ -39,8 +41,10 @@ Public Class NovaStarSender
         Get
             Try
                 Return $"{ IpData(7)}.{ IpData(6)}.{ IpData(5)}.{ IpData(4)}"
+#Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
                 Return ""
+#Enable Warning CA1031 ' Do not catch general exception types
             End Try
         End Get
 
@@ -56,8 +60,10 @@ Public Class NovaStarSender
         Get
             Try
                 Return $"{ IpData(11)}.{ IpData(10)}.{ IpData(9)}.{ IpData(8)}"
+#Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
                 Return ""
+#Enable Warning CA1031 ' Do not catch general exception types
             End Try
         End Get
 
@@ -167,11 +173,10 @@ Public Class NovaStarSender
 
                 GetSensorData()
 
+#Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
-                'AppSettingHelper.GetInstance.Logger.Error("工作线程",
-                '                                      ex.ToString,
-                '                                      Wangk.Tools.Logger.LogLevel.Level_WARN)
                 _state = SenderConnectState.OffLine
+#Enable Warning CA1031 ' Do not catch general exception types
             End Try
 
             Thread.Sleep(1000)
@@ -215,11 +220,11 @@ Public Class NovaStarSender
                     Dim ReceiveData(1028 - 1) As Byte
 
                     '控制器接收数据
-                    socket.Send(Wangk.Hash.Hex2Bin("55D50902"))
+                    socket.Send(Wangk.Hash.BINHelper.Hex2Bin("55D50902"))
                     socket.Receive(ReceiveData)
 
                     '控制器上传数据
-                    socket.Send(Wangk.Hash.Hex2Bin("55D50905000000000400"))
+                    socket.Send(Wangk.Hash.BINHelper.Hex2Bin("55D50905000000000400"))
 
                     ActiveSensorItems.Clear()
 

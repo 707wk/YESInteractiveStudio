@@ -45,8 +45,8 @@ Public Class MainForm
 
         ChangeControlsLanguage()
 
-        RibbonBar2.Width = 256
         RibbonBar1.Width = 256
+        RibbonBar3.Width = 256
 #End Region
 
 #Region "显示模式切换"
@@ -84,9 +84,7 @@ Public Class MainForm
 
             tmpBackgroundWorkDialog.Start(Sub()
                                               '计算传感器位置
-                                              'DisplayingSchemeProcessingHelper.ComputeSizeAndLocationForALLScreenAndScanBoard()
                                               DisplayingSchemeProcessingHelper.ComputeSizeAndLocationForALLSensor()
-                                              'DisplayingSchemeProcessingHelper.ComputeSizeForALLDisplayingWindow()
 
                                               DisplayingSchemeProcessingHelper.ShowFormForALLDisplayingWindow()
                                               SensorDataProcessingHelper.StartAsync()
@@ -661,6 +659,7 @@ Public Class MainForm
             Me.StartTab.Text = .GetS("Start")
             Me.SettingsTab.Text = .GetS("Settings")
             Me.ToolStripDropDownButton1.Text = .GetS("Connection abnormality")
+            Me.FeedbackButton.Text = .GetS("Feedback")
         End With
     End Sub
 #End Region
@@ -772,4 +771,9 @@ Public Class MainForm
 
 #End Region
 #End Region
+
+    Private Sub FeedbackButton_Click(sender As Object, e As EventArgs) Handles FeedbackButton.Click
+        Process.Start("https://support.qq.com/products/285331")
+    End Sub
+
 End Class

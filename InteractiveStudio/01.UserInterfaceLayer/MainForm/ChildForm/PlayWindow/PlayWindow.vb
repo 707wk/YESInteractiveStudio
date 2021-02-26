@@ -204,11 +204,11 @@ Public Class PlayWindow
     ''' <summary>
     ''' 活动点列表
     ''' </summary>
-    Private PointOfMergeItems As New List(Of PointOfMerge)
+    Private ReadOnly PointOfMergeItems As New List(Of PointOfMerge)
     ''' <summary>
     ''' 合并点列表
     ''' </summary>
-    Private PointInfoItems As New List(Of PointInfo)
+    Private ReadOnly PointInfoItems As New List(Of PointInfo)
 
 #Region "数据处理主函数"
     ''' <summary>
@@ -414,8 +414,6 @@ Public Class PlayWindow
         Dim path = DisplayingWindow.PlayFileItems(DisplayingWindow.PlayFileID).Path
 
         Select Case System.IO.Path.GetExtension(path).ToLower()
-            Case ".swf"
-                PlayControl = New PlayFlashControl()
             Case ".dll"
                 PlayControl = New PlayDllControl()
             Case ".exe"
@@ -424,7 +422,9 @@ Public Class PlayWindow
 
         Try
             PlayControl.Init(Me.Controls, path)
+#Disable Warning CA1031 ' Do not catch general exception types
         Catch ex As Exception
+#Enable Warning CA1031 ' Do not catch general exception types
         End Try
 
     End Sub

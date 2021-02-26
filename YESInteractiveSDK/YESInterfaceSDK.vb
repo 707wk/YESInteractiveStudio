@@ -11,19 +11,10 @@ Public Interface IYESInterfaceSDK
     ''' </summary>
     ''' <param name="controls">父控件</param>
     Sub InitAddonFunc(controls As Control.ControlCollection)
-    '''' <summary>
-    '''' 卸载插件
-    '''' </summary>
-    '''' <param name="controls">父控件</param>
-    'Sub FinalizeAddonFunc(controls As Control.ControlCollection)
-
-    '''' <summary>
-    '''' 点活动事件
-    '''' </summary>
-    'Sub PointActive(ByVal Point As PointInfo)
 
     ''' <summary>
     ''' 点活动事件
     ''' </summary>
     Sub PointActive(pointItems As List(Of PointInfo))
+
 End Interface

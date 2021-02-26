@@ -22,12 +22,14 @@ Partial Class SerialPortSelectForm
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.ConnectButton = New System.Windows.Forms.Button()
         Me.RefreshButton = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -97,6 +99,9 @@ Partial Class SerialPortSelectForm
         Me.Label2.Text = "Waiting..."
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Timer1
+        '
+        '
         'SerialPortSelectForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -125,4 +130,5 @@ Partial Class SerialPortSelectForm
     Friend WithEvents Label1 As Label
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents Label2 As Label
+    Friend WithEvents Timer1 As Timer
 End Class

@@ -147,14 +147,6 @@ Public Class AppSettingHelper
     Public Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
 #End Region
 
-#Region "更新检测地址"
-    ''' <summary>
-    ''' 更新检测地址
-    ''' </summary>
-    <Newtonsoft.Json.JsonIgnore>
-    Public AppUpdateInfoPath As String
-#End Region
-
 #Region "工具"
     ''' <summary>
     ''' 语言类型

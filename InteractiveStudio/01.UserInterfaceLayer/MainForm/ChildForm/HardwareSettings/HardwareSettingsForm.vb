@@ -67,7 +67,10 @@ Public Class HardwareSettingsForm
 
     Private Sub HardwareSettingsForm_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 #Region "控制器"
-        Using tmpDialog As New Wangk.Resource.BackgroundWorkDialog
+        Using tmpDialog As New Wangk.Resource.BackgroundWorkDialog With {
+            .Text = MultiLanguageHelper.Lang.GetS("Reading screen information")
+        }
+
             tmpDialog.Start(Sub()
 #Region "读取接收卡IP"
                                 AddHandler NovaMarsControl.GetEquipmentIPDataEvent, AddressOf GetEquipmentIPData
@@ -137,12 +140,10 @@ Public Class HardwareSettingsForm
     End Sub
 
 #Region "修改IP信息"
-#Disable Warning IDE0069 ' 应释放可释放的字段
     ''' <summary>
     ''' 写入IP标志
     ''' </summary>
     Private ReadOnly SetEquipmentIPDataEvent As New Threading.AutoResetEvent(False)
-#Enable Warning IDE0069 ' 应释放可释放的字段
     ''' <summary>
     ''' 写入结果
     ''' </summary>
@@ -205,12 +206,10 @@ Public Class HardwareSettingsForm
     End Sub
 
 #Region "获取发送卡IP"
-#Disable Warning IDE0069 ' 应释放可释放的字段
     ''' <summary>
     ''' 读取到IP标志
     ''' </summary>
     Private ReadOnly GetEquipmentIPDataEvent As New AutoResetEvent(False)
-#Enable Warning IDE0069 ' 应释放可释放的字段
     ''' <summary>
     ''' 读到的发送卡IP
     ''' </summary>
@@ -250,7 +249,7 @@ Public Class HardwareSettingsForm
 #Region "修改传感器参数"
     '灵敏度
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb0305")
+        Dim sendByte As Byte() = Wangk.Hash.BINHelper.Hex2Bin("aadb0305")
         sendByte(3) = TrackBar1.Value
 
         If SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
@@ -265,7 +264,7 @@ Public Class HardwareSettingsForm
 
     '温度复位幅度
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb010300")
+        Dim sendByte As Byte() = Wangk.Hash.BINHelper.Hex2Bin("aadb010300")
         sendByte(4) = Val(ComboBox1.Text)
 
         If SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
@@ -280,7 +279,7 @@ Public Class HardwareSettingsForm
 
     '时间复位幅度
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb010200")
+        Dim sendByte As Byte() = Wangk.Hash.BINHelper.Hex2Bin("aadb010200")
         sendByte(4) = Val(ComboBox2.Text)
 
         If SetScanBoardData(&HFF, &HFF, &HFFFF, sendByte) Then
@@ -400,7 +399,7 @@ Public Class HardwareSettingsForm
         Dim binLength = infoReader.Length
 
         '发送升级指令
-        Dim sendByte As Byte() = Wangk.Hash.Hex2Bin("aadb09030000")
+        Dim sendByte As Byte() = Wangk.Hash.BINHelper.Hex2Bin("aadb09030000")
         sendByte(4) = binLength \ 256
         sendByte(5) = binLength Mod 256
 
@@ -409,7 +408,7 @@ Public Class HardwareSettingsForm
         '等待下位机返回数据
         Threading.Thread.Sleep(60)
         '读取
-        If Not CheckScanBoardData(senderID, portID, scannerID, Wangk.Hash.Hex2Bin("1a1b"), 2) Then
+        If Not CheckScanBoardData(senderID, portID, scannerID, Wangk.Hash.BINHelper.Hex2Bin("1a1b"), 2) Then
             '失败
             Throw New Exception(MultiLanguageHelper.Lang.GetS("Switch to upgrade mode failed"))
         End If
@@ -504,7 +503,7 @@ Public Class HardwareSettingsForm
             e.Write(i001 * 100 \ 7)
 
             '下发
-            SetScanBoardData(senderID, portID, scannerID, Wangk.Hash.Hex2Bin("aadb0909"))
+            SetScanBoardData(senderID, portID, scannerID, Wangk.Hash.BINHelper.Hex2Bin("aadb0909"))
             Thread.Sleep(200)
         Next
 #End Region
@@ -598,8 +597,8 @@ Public Class HardwareSettingsForm
     ''' <param name="portIndex"></param>
     ''' <param name="scanIndex"></param>
     Public Function GetScanBoardData(senderIndex As Byte,
-                                      portIndex As Byte,
-                                      scanIndex As UShort) As Byte()
+                                     portIndex As Byte,
+                                     scanIndex As UShort) As Byte()
 
         Dim tmpData(24 - 1) As Byte
         'Dim testTime As New Stopwatch
@@ -614,11 +613,11 @@ Public Class HardwareSettingsForm
             Try
                 Dim tmpReceiveBytes(1028 - 1) As Byte
                 '上传指令
-                tmpSocket.Send(Wangk.Hash.Hex2Bin("55d50902"))
+                tmpSocket.Send(Wangk.Hash.BINHelper.Hex2Bin("55d50902"))
                 tmpSocket.Receive(tmpReceiveBytes)
 
                 '上传数据
-                tmpSocket.Send(Wangk.Hash.Hex2Bin("55d50905000000000400"))
+                tmpSocket.Send(Wangk.Hash.BINHelper.Hex2Bin("55d50905000000000400"))
                 For receiveID = 0 To 16 - 1
                     tmpSocket.Receive(tmpReceiveBytes)
 
@@ -706,8 +705,8 @@ Public Class HardwareSettingsForm
 
                                         Dim tmpAddNode As New TreeNode(
                                         MultiLanguageHelper.Lang.GetS("Sender") & senderID.ToString.PadLeft(2) &
-                                        $" -{MultiLanguageHelper.Lang.GetS("Port")}{portID.ToString.PadLeft(2) } " &
-                                        $" -{MultiLanguageHelper.Lang.GetS("Connect")}{scannerID.ToString.PadLeft(3)}") With {
+                                        $" -{MultiLanguageHelper.Lang.GetS("Port")}{portID,2} " &
+                                        $" -{MultiLanguageHelper.Lang.GetS("Connect")}{scannerID,3}") With {
                                         .Tag = $"{senderID},{portID},{scannerID}",
                                         .ImageIndex = 3,
                                         .SelectedImageIndex = 3
@@ -745,7 +744,11 @@ Public Class HardwareSettingsForm
                                         rootNode As TreeNode,
                                         sacnnerItemsInVirtual As HashSet(Of Integer))
 
-        NovaMarsControl.SetNewScanBoardData(senderID, &HFF, &HFFFF, Wangk.Hash.Hex2Bin("aadb0901"))
+        If AppSettingHelper.GetInstance.OldScanBoardBin Then
+            NovaMarsControl.SetOldScanBoardData(senderID, &HFF, &HFFFF, Wangk.Hash.BINHelper.Hex2Bin("aadb0901"))
+        Else
+            NovaMarsControl.SetNewScanBoardData(senderID, &HFF, &HFFFF, Wangk.Hash.BINHelper.Hex2Bin("aadb0901"))
+        End If
 
         Threading.Thread.Sleep(200)
 
@@ -758,11 +761,11 @@ Public Class HardwareSettingsForm
 
             Dim tmpReceiveBytes(1028 - 1) As Byte
             '上传指令
-            tmpSocket.Send(Wangk.Hash.Hex2Bin("55d50902"))
+            tmpSocket.Send(Wangk.Hash.BINHelper.Hex2Bin("55d50902"))
             tmpSocket.Receive(tmpReceiveBytes)
 
             '上传数据
-            tmpSocket.Send(Wangk.Hash.Hex2Bin("55d50905000000000400"))
+            tmpSocket.Send(Wangk.Hash.BINHelper.Hex2Bin("55d50905000000000400"))
             For receiveID = 0 To 16 - 1
                 tmpSocket.Receive(tmpReceiveBytes)
 
@@ -779,8 +782,8 @@ Public Class HardwareSettingsForm
 
                     Dim tmpAddNode As New TreeNode(
                         MultiLanguageHelper.Lang.GetS("Sender") & (senderID + 1).ToString.PadLeft(2) &
-                        $" -{MultiLanguageHelper.Lang.GetS("Port")}{(portID + 1).ToString.PadLeft(2) } " &
-                        $" -{MultiLanguageHelper.Lang.GetS("Connect")}{(scannerID + 1).ToString.PadLeft(3)}") With {
+                        $" -{MultiLanguageHelper.Lang.GetS("Port")}{(portID + 1),2} " &
+                        $" -{MultiLanguageHelper.Lang.GetS("Connect")}{(scannerID + 1),3}") With {
                         .Tag = $"{senderID},{portID},{scannerID}",
                         .ImageIndex = 3,
                         .SelectedImageIndex = 3
