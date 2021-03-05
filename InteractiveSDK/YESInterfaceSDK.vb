@@ -3,7 +3,7 @@
 ''' <summary>
 ''' YESInteractive插件需要实现的接口
 ''' </summary>
-Public Interface IYESInterfaceSDK
+Public Interface IInterfaceSDK
     Inherits IDisposable
 
     ''' <summary>

@@ -1,5 +1,4 @@
-﻿Imports Newtonsoft.Json
-Imports YESInteractiveSDK
+﻿Imports InteractiveSDK
 
 Public Class PlayWindow
     ''' <summary>

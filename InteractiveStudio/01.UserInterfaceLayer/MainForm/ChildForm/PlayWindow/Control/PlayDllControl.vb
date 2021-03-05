@@ -1,6 +1,6 @@
 ﻿Imports System.Reflection
 Imports InteractiveStudio
-Imports YESInteractiveSDK
+Imports InteractiveSDK
 
 Public Class PlayDllControl
     Implements IPlayBaseControl
@@ -51,13 +51,13 @@ Public Class PlayDllControl
     ''' <summary>
     ''' DLL播放器控件
     ''' </summary>
-    Private DllControl As YESInteractiveSDK.IYESInterfaceSDK
+    Private DllControl As InteractiveSDK.IInterfaceSDK
 
     Public Function Init(controls As Control.ControlCollection, path As String) As Boolean Implements IPlayBaseControl.Init
         Dim ass = Assembly.LoadFrom(path)
         Dim tp = ass.GetType($"{IO.Path.GetFileNameWithoutExtension(path)}.{IO.Path.GetFileNameWithoutExtension(path)}")
         Dim obj = System.Activator.CreateInstance(tp)
-        DllControl = CType(obj, YESInteractiveSDK.IYESInterfaceSDK)
+        DllControl = CType(obj, InteractiveSDK.IInterfaceSDK)
         DllControl.InitAddonFunc(controls)
 
         Return True

@@ -1,6 +1,6 @@
 ﻿Imports InteractiveStudio
 Imports Newtonsoft.Json
-Imports YESInteractiveSDK
+Imports InteractiveSDK
 
 Public Class PlayUnityControl
     Implements IPlayBaseControl

@@ -7,7 +7,7 @@ Public Interface IPlayBaseControl
 
     Function Init(controls As ControlCollection, path As String) As Boolean
 
-    Function PointActive(values As List(Of YESInteractiveSDK.PointInfo)) As Boolean
+    Function PointActive(values As List(Of InteractiveSDK.PointInfo)) As Boolean
 
     Sub FormActivated()
     Sub FormDeactivate()

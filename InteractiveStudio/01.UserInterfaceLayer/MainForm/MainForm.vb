@@ -667,7 +667,6 @@ Public Class MainForm
             Me.StartTab.Text = .GetS("Start")
             Me.SettingsTab.Text = .GetS("Settings")
             Me.ToolStripDropDownButton1.Text = .GetS("Connection abnormality")
-            Me.FeedbackButton.Text = .GetS("Feedback")
         End With
     End Sub
 #End Region
@@ -780,10 +779,6 @@ Public Class MainForm
 
 #End Region
 #End Region
-
-    Private Sub FeedbackButton_Click(sender As Object, e As EventArgs) Handles FeedbackButton.Click
-        Process.Start("https://support.qq.com/products/285331")
-    End Sub
 
     Private Sub MainForm_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
         GetEquipmentIPDataEvent.Dispose()
