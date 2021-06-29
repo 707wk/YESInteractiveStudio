@@ -32,7 +32,7 @@ Public Class WindowProgramControl
             .Columns.Add(New DataGridViewTextBoxColumn With {
                          .HeaderText = MultiLanguageHelper.Lang.GetS("Path"),
                          .AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                         .MinimumWidth = 300,
+                         .MinimumWidth = 160,
                          .SortMode = DataGridViewColumnSortMode.NotSortable
                          })
             .Columns.Add(New DataGridViewTextBoxColumn With {
