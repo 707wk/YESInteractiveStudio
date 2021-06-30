@@ -70,7 +70,7 @@ Public Class MainForm
 
         AutoRunCheckBox.Checked = AppSettingHelper.GetInstance.IsAutoRun
 
-        'Wangk.Tools.ConsoleDebug.Open()
+        'Wangk.Resource.ConsoleDebug.Open()
     End Sub
 
     Private Sub MainForm_Shown(sender As Object, e As EventArgs) Handles Me.Shown

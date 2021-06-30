@@ -383,9 +383,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\InteractiveSDK\InteractiveSDK.vbproj">
       <Project>{749b3410-a52b-457e-b6c2-908af854b167}</Project>
       <Name>InteractiveSDK</Name>

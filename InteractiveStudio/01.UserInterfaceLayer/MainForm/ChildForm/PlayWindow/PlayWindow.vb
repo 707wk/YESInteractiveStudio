@@ -216,6 +216,8 @@ Public Class PlayWindow
     Public Sub WorkFunction()
         Do
 
+            'Console.WriteLine($"{Now:G} 0")
+
             DisplayingWindow.StartOfCompletedSensorDataEvent.WaitOne()
             If IsClose Then Exit Do
 

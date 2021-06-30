@@ -208,7 +208,7 @@ Public Class NovaStarSender
 
             Do While IsConnect
 
-                StartOfReadSensorDataEvent.WaitOne()
+                StartOfReadSensorDataEvent.WaitOne(50)
 
                 If Not IsConnect Then
                     Exit Do
@@ -323,10 +323,6 @@ Public Class NovaStarSender
 
                     exceptionStr = ex.ToString
 
-                    'AppSettingHelper.GetInstance.Logger.Error("通信异常",
-                    '                                      exceptionStr,
-                    '                                      Wangk.Tools.Logger.LogLevel.Level_WARN)
-
                     exceptionCount += 1
 
                     If exceptionCount > 3 Then
@@ -335,7 +331,11 @@ Public Class NovaStarSender
 
                 End Try
 
-                SensorDataProcessingHelper.EndOfReadSensorDataEvent.Signal()
+                Try
+                    SensorDataProcessingHelper.EndOfReadSensorDataEvent.Signal()
+                Catch ex As Exception
+
+                End Try
 
             Loop
 

@@ -108,7 +108,7 @@ Public NotInheritable Class SensorDataProcessingHelper
             Next
 
             '等待读取完毕
-            EndOfReadSensorDataEvent.Wait(50)
+            EndOfReadSensorDataEvent.Wait(20)
             EndOfReadSensorDataEvent.Reset()
 
             '数据分发
